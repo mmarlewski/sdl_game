@@ -19,6 +19,7 @@ typedef struct _Object Object;
 struct _Object
 {
     Object* next;
+    int is_visible;
     int type;
     vec2i tilemap_pos;
 

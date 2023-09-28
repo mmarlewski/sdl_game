@@ -5,6 +5,7 @@ Object* new_object(int type)
     Object* object = malloc(sizeof(*object));
 
     object->next = 0;
+    object->is_visible = 1;
     object->type = type;
     object->tilemap_pos = make_vec2i(0,0);
 

@@ -426,6 +426,76 @@ void remove_all_sprites_from_gamemap_sprites(State* state)
     state->gamemap.sprite_tail = 0;
 }
 
+void add_animation_to_gamemap_animations(State* state, Animation* new_animation)
+{
+    if(state->gamemap.animation_head)
+    {
+        state->gamemap.animation_tail->next = new_animation;
+    }
+    else
+    {
+        state->gamemap.animation_head = new_animation;
+    }
+
+    state->gamemap.animation_tail = new_animation;
+    new_animation->next = 0;
+}
+
+void remove_animation_from_gamemap_animations(State* state, Animation* animation)
+{
+    Animation* prev_animation = 0;
+    Animation* curr_animation = state->gamemap.animation_head;
+    Animation* next_animation = (curr_animation) ? (curr_animation->next) : (0);
+
+    while(curr_animation)
+    {
+        if(curr_animation == animation)
+        {
+            destroy_animation(curr_animation);
+
+            if(curr_animation == state->gamemap.animation_head)
+            {
+                state->gamemap.animation_head = next_animation;
+            }
+
+            if(curr_animation == state->gamemap.animation_tail)
+            {
+                state->gamemap.animation_tail = prev_animation;
+            }
+
+            if(prev_animation)
+            {
+                prev_animation->next = next_animation;
+            }
+
+            return;
+        }
+        else
+        {
+            prev_animation = curr_animation;
+            curr_animation = curr_animation->next;
+            next_animation = (curr_animation) ? (curr_animation->next) : (0);
+        }
+    }
+
+    return;
+}
+
+void remove_all_animations_from_gamemap_animations(State* state)
+{
+    Animation* curr_animation = state->gamemap.animation_head;
+    Animation* next_animation = (curr_animation) ? (curr_animation->next) : (0);
+    while(curr_animation)
+    {
+        next_animation = (curr_animation) ? (curr_animation->next) : (0);
+        destroy_animation(curr_animation);
+        curr_animation = next_animation;
+    }
+
+    state->gamemap.animation_head = 0;
+    state->gamemap.animation_tail = 0;
+}
+
 // action
 
 void add_action_to_end_actions(State* state, Action* new_action)

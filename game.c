@@ -76,15 +76,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 {
     State_Gamemap* gamemap = &state->gamemap;
 
-    // floor
+    // floors, highlights and dangers
 
     for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
     {
         for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
         {
-            Tile* tile = gamemap->tilemap[i][j];
-            Texture* tile_floor_texture = get_texture_from_floor_type(tile->floor, textures);
-
             vec2i tilemap_pos;
             vec2f gamemap_pos;
             vec2f world_cart_pos;
@@ -95,56 +92,88 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
+            Tile* tile = gamemap->tilemap[i][j];
+            Texture* tile_floor_texture = get_texture_from_floor_type(tile->floor, textures);
+
             draw_texture_at_world_pos(
                 renderer,
                 tile_floor_texture,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom);
+            
+            if(gamemap->highlight_tilemap_pos.x == j && gamemap->highlight_tilemap_pos.y == i)
+            {
+                draw_texture_at_world_pos(
+                    renderer,
+                    textures->highlight.yellow,
+                    world_iso_pos,
+                    state->camera.world_pos,
+                    state->camera.zoom);
+            }
+            
+            for(vec2i* curr_pos = gamemap->danger_tilemap_pos_head; curr_pos != 0; curr_pos = curr_pos->next)
+            {
+                if(curr_pos->x == j && curr_pos->y == i)
+                {
+                    draw_texture_at_world_pos(
+                        renderer,
+                        textures->danger.frame_1,
+                        world_iso_pos,
+                        state->camera.world_pos,
+                        state->camera.zoom);
+                }
+            }
         }
     }
 
-    // highlight
+    // objects and sprites
 
-    draw_texture_at_world_pos(
-        renderer,
-        textures->highlight.yellow,
-        cart_pos_to_iso_pos(gamemap_pos_to_world_pos(tilemap_pos_to_gamemap_pos(gamemap->highlight_tilemap_pos))),
-        state->camera.world_pos,
-        state->camera.zoom);
-
-    // danger
-
-    for(vec2i* curr_pos = gamemap->danger_tilemap_pos_head; curr_pos != 0; curr_pos = curr_pos->next)
+    for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
     {
-        draw_texture_at_world_pos(
-            renderer,
-            textures->danger.frame_1,
-            cart_pos_to_iso_pos(gamemap_pos_to_world_pos(tilemap_pos_to_gamemap_pos(*curr_pos))),
-            state->camera.world_pos,
-            state->camera.zoom);
-    }
+        for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
+        {
+            vec2i tilemap_pos;
+            vec2f gamemap_pos;
+            vec2f world_cart_pos;
+            vec2f world_iso_pos;
 
-    // objects
+            tilemap_pos = make_vec2i(j,i);
+            gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
+            world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+            world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+            
+            for(Object* curr_object = gamemap->object_head; curr_object != 0; curr_object = curr_object->next)
+            {
+                if(curr_object->is_visible && curr_object->tilemap_pos.x == j && curr_object->tilemap_pos.y == i)
+                {
+                    draw_texture_at_world_pos(
+                        renderer,
+                        get_texture_from_object_type(curr_object->type, textures),
+                        world_iso_pos,
+                        state->camera.world_pos,
+                        state->camera.zoom);
+                }
+            }
 
-    for(Object* curr_object = gamemap->object_head; curr_object != 0; curr_object = curr_object->next)
-    {
-        draw_texture_at_world_pos(
-            renderer,
-            get_texture_from_object_type(curr_object->type, textures),
-            cart_pos_to_iso_pos(gamemap_pos_to_world_pos(tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos))),
-            state->camera.world_pos,
-            state->camera.zoom);
-    }
+            for(Sprite* curr_sprite = gamemap->sprite_head; curr_sprite != 0; curr_sprite = curr_sprite->next)
+            {
+                vec2i curr_sprite_tilemap_pos = make_vec2i(
+                    floor(curr_sprite->gamemap_pos.x + 0.4f),
+                    floor(curr_sprite->gamemap_pos.y + 0.4f)
+                    );
 
-    for(Sprite* curr_sprite = gamemap->sprite_head; curr_sprite != 0; curr_sprite = curr_sprite->next)
-    {
-        draw_texture_at_world_pos(
-            renderer,
-            curr_sprite->texture,
-            cart_pos_to_iso_pos(gamemap_pos_to_world_pos(curr_sprite->gamemap_pos)),
-            state->camera.world_pos,
-            state->camera.zoom);
+                if(curr_sprite_tilemap_pos.x == tilemap_pos.x && curr_sprite_tilemap_pos.y == tilemap_pos.y)
+                {
+                    draw_texture_at_world_pos(
+                        renderer,
+                        curr_sprite->texture,
+                        cart_pos_to_iso_pos(gamemap_pos_to_world_pos(curr_sprite->gamemap_pos)),
+                        state->camera.world_pos,
+                        state->camera.zoom);
+                }
+            }
+        }
     }
 }
 

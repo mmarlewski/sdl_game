@@ -9,6 +9,7 @@
 #include "floor.h"
 #include "object.h"
 #include "sprite.h"
+#include "animation.h"
 #include "action.h"
 #include "texture.h"
 #include "textures.h"
@@ -58,6 +59,9 @@ typedef struct
     Sprite* sprite_head;
     Sprite* sprite_tail;
 
+    Animation* animation_head;
+    Animation* animation_tail;
+
 } State_Gamemap;
 
 typedef struct
@@ -99,6 +103,14 @@ void remove_all_pos_from_gamemap_danger_pos(State* state);
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 void remove_all_sprites_from_gamemap_sprites(State* state);
+
+void add_animation_to_gamemap_animations(State* state, Animation* new_animation);
+void remove_sprite_from_gamemap_animations(State* state, Animation* animation);
+void remove_all_animations_from_gamemap_animations(State* state);
+
+void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
+void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
+void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
 
 void add_action_to_end_actions(State* state, Action* new_action);
 void add_action_after_curr_action(State* state, Action* new_action);

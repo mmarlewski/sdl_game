@@ -11,6 +11,7 @@
 #include "floor.h"
 #include "object.h"
 #include "sprite.h"
+#include "animation.h"
 #include "texture.h"
 #include "sound.h"
 #include "music.h"
