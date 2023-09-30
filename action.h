@@ -19,7 +19,7 @@ enum ACTION_TYPE
     ACTION_TYPE__PUSH,
     ACTION_TYPE__CRASH,
 
-    ACTION_TYPE__DROP,
+    ACTION_TYPE__FALL,
     ACTION_TYPE__DEATH,
 
     ACTION_TYPE__COUNT
@@ -35,13 +35,11 @@ typedef struct
 {
     Action* curr_action;
     Action* action_head;
-    Action* action_tail;
 
 } Action_Sequence;
 
 typedef struct
 {
-    int are_all_actions_finished;
     Action* action_head;
     Action* action_tail;
 
@@ -49,7 +47,6 @@ typedef struct
 
 typedef struct
 {
-    Animation* animation_move_sprite_in_gamemap;
     int is_move_blocked;
     
     Object* object;
@@ -59,7 +56,6 @@ typedef struct
 
 typedef struct
 {
-    Animation* animation_move_sprite_in_gamemap;
     int is_move_blocked;
 
     Object* object;
@@ -69,8 +65,6 @@ typedef struct
 
 typedef struct
 {
-    Animation* animation_sequence;
-
     Object* object;
     int dir4;
 
@@ -78,11 +72,9 @@ typedef struct
 
 typedef struct
 {
-    Animation* animation_drop_sprite_in_tilemap;
-
     Object* object;
 
-} Action_Drop;
+} Action_Fall;
 
 typedef struct
 {
@@ -93,6 +85,7 @@ typedef struct
 struct _Action
 {
     Action* next;
+    Animation* animation;
     int is_finished;
     int type;
 
@@ -107,7 +100,7 @@ struct _Action
         Action_Push push;
         Action_Crash crash;
 
-        Action_Drop drop;
+        Action_Fall fall;
         Action_Death death;
     };
 
@@ -116,15 +109,24 @@ struct _Action
 Action* new_action_none();
 
 Action* new_action_sequence();
-void add_action_to_end_action_sequence(Action* action_sequence, Action* new_action);
+Action* new_action_sequence_of_1(Action* action_1);
+Action* new_action_sequence_of_2(Action* action_1, Action* action_2);
+Action* new_action_sequence_of_3(Action* action_1, Action* action_2, Action* action_3);
+void add_action_after_action(Action* action, Action* new_action);
+void add_action_to_end_after_action(Action* action, Action* new_action);
+void remove_all_actions_after_action(Action* action);
+
 Action* new_action_simultaneous();
-void add_action_to_end_action_simultaneous(Action* action_simultaneous, Action* new_action);
+Action* new_action_simultaneous_of_1(Action* action_1);
+Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
+Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
+void add_action_sequence_to_action_simultaneous(Action* action_simultaneous, Action* new_action_sequence);
 
 Action* new_action_move(Object* object, int dir4);
 Action* new_action_push(Object* object, int dir4);
 Action* new_action_crash(Object* object, int dir4);
 
-Action* new_action_drop(Object* object);
+Action* new_action_fall(Object* object);
 Action* new_action_death(Object* object);
 
 void destroy_action(Action* action);

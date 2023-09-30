@@ -2,50 +2,45 @@
 
 void update_action(State* state, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
 {
-    printf("update  action:     %s \n", get_action_name_from_type(action->type));
+    // printf("update action:      %s \n", get_action_name_from_type(action->type));
 
     switch(action->type)
     {
         case ACTION_TYPE__NONE:
         {
-            //
+            action->is_finished = 1;
         }
         break;
         case ACTION_TYPE__SEQUENCE:
         {
-            Action_Sequence action_action = action->sequence;
-
-            if(action_action.curr_action)
+            if(action->sequence.curr_action->is_finished)
             {
-                update_action(state, action_action.curr_action, delta_time, textures, sounds, musics);
-                
-                if(action_action.curr_action->is_finished)
-                {
-                    Action* next_action = action_action.curr_action->next;
-                    end_action(state, action_action.curr_action, textures, sounds, musics);
-                    destroy_action(action_action.curr_action);
-                    action_action.curr_action = next_action;
+                end_action(state, action->sequence.curr_action, textures, sounds, musics);
+                Action* next_action = action->sequence.curr_action->next;
+                destroy_action(action->sequence.curr_action);
+                action->sequence.curr_action = next_action;
 
-                    if(action_action.curr_action)
-                    {
-                        start_action(state, action_action.curr_action, textures, sounds, musics);
-                    }
+                if(action->sequence.curr_action)
+                {
+                    start_action(state, action->sequence.curr_action, textures, sounds, musics);
                 }
             }
+            else
+            {
+                update_action(state, action->sequence.curr_action, delta_time, textures, sounds, musics);
+            }
 
-            action->sequence = action_action;
+            action->sequence = action->sequence;
 
             action->is_finished = (!action->sequence.curr_action);
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
-            Action_Simultaneous action_action = action->simultaneous;
-
             int is_any_action_not_finished = 0;
             Action* prev_action = 0;
-            Action* curr_action = action_action.action_head;
-            Action* next_action = (action_action.action_head) ? (action_action.action_head->next) : (0);
+            Action* curr_action = action->simultaneous.action_head;
+            Action* next_action = (curr_action) ? (curr_action->next) : (0);
             while(curr_action)
             {
                 if(curr_action->is_finished)
@@ -60,10 +55,19 @@ void update_action(State* state, Action* action, float delta_time, Textures* tex
                     }
                     else
                     {
-                        action_action.action_head = next_action;
+                        action->simultaneous.action_head = next_action;
                     }
+
                     curr_action = next_action;
-                    next_action = (next_action) ? (next_action->next) : (0);
+
+                    if(curr_action)
+                    {
+                        next_action = curr_action->next;
+                    }
+                    else
+                    {
+                        action->simultaneous.action_tail = prev_action;
+                    }
                 }
                 else
                 {
@@ -72,66 +76,46 @@ void update_action(State* state, Action* action, float delta_time, Textures* tex
 
                     prev_action = curr_action;
                     curr_action = next_action;
-                    next_action = (next_action) ? (next_action->next) : (0);
+                    next_action = (curr_action) ? (curr_action->next) : (0);
                 }
             }
-            if(!is_any_action_not_finished)
-            {
-                action_action.are_all_actions_finished = 1;
-            }
 
-            action->simultaneous = action_action;
-
-            action->is_finished = (action->simultaneous.are_all_actions_finished);
+            action->is_finished = (!is_any_action_not_finished);
         }
         break;
         case ACTION_TYPE__MOVE:
         {
-            Action_Move action_action = action->move;
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
 
-            update_animation(state, action_action.animation_move_sprite_in_gamemap, delta_time, textures, sounds, musics);
-
-            action->move = action_action;
-
-            action->is_finished = (action->move.animation_move_sprite_in_gamemap->is_finished);
+            action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__PUSH:
         {
-            Action_Push action_action = action->push;
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
 
-            update_animation(state, action_action.animation_move_sprite_in_gamemap, delta_time, textures, sounds, musics);
-
-            action->push = action_action;
-
-            action->is_finished = (action->push.animation_move_sprite_in_gamemap->is_finished);
+            action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__CRASH:
         {
-            Action_Crash action_action = action->crash;
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
 
-            update_animation(state, action_action.animation_sequence, delta_time, textures, sounds, musics);
-
-            action->crash = action_action;
-
-            action->is_finished = (action->crash.animation_sequence->is_finished);
+            action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION_TYPE__FALL:
         {
-            Action_Drop action_action = action->drop;
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
 
-            update_animation(state, action_action.animation_drop_sprite_in_tilemap, delta_time, textures, sounds, musics);
-
-            action->drop = action_action;
-
-            action->is_finished = (action->drop.animation_drop_sprite_in_tilemap->is_finished);
+            action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__DEATH:
         {
-            action->is_finished = 1;
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
+
+            action->is_finished = (action->animation->is_finished);
         }
         break;
         default:

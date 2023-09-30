@@ -6,7 +6,20 @@
 
 typedef struct
 {
-    Sound* ting;
+    Sound* none;
+
+    Sound* move;
+    Sound* push;
+    Sound* crash;
+
+    Sound* throw;
+    Sound* drop;
+
+    Sound* fall;
+    Sound* death;
+    Sound* blow_up;
+
+    Sound* floor_trap;
     
 } Sounds;
 

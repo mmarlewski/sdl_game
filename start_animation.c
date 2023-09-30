@@ -2,7 +2,7 @@
 
 void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics)
 {
-    printf("start   animation:  %s \n", get_animation_name_from_type(animation->type));
+    // printf("start animation:    %s \n", get_animation_name_from_type(animation->type));
 
     switch(animation->type)
     {
@@ -84,13 +84,13 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__DROP_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP:
         {
-            animation->drop_sprite_in_tilemap.time = 0.0f;
+            animation->fall_sprite_in_tilemap.time = 0.0f;
 
-            Sprite* sprite = new_sprite(animation->drop_sprite_in_tilemap.texture);
-            sprite->gamemap_pos = tilemap_pos_to_gamemap_pos(animation->drop_sprite_in_tilemap.tilemap_pos);
-            animation->drop_sprite_in_tilemap.sprite = sprite;
+            Sprite* sprite = new_sprite(animation->fall_sprite_in_tilemap.texture);
+            sprite->gamemap_pos = tilemap_pos_to_gamemap_pos(animation->fall_sprite_in_tilemap.tilemap_pos);
+            animation->fall_sprite_in_tilemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
@@ -134,7 +134,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
         break;
         case ANIMATION_TYPE__PLAY_SOUND:
         {
-            //
+            play_sound(animation->play_sound.sound);
         }
         break;
     }

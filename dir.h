@@ -6,6 +6,8 @@
 
 enum DIR4
 {
+    DIR4__NONE,
+
     DIR4__UP,
     DIR4__RIGHT,
     DIR4__DOWN,

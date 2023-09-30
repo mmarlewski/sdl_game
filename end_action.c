@@ -2,7 +2,7 @@
 
 void end_action(State* state, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
 {
-    printf("end     action:     %s \n", get_action_name_from_type(action->type));
+    // printf("end action:         %s \n", get_action_name_from_type(action->type));
 
     switch(action->type)
     {
@@ -28,12 +28,11 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             if(!action->move.is_move_blocked)
             {
                 action->move.object->tilemap_pos = move_vec2i_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
-                end_animation(state, action->move.animation_move_sprite_in_gamemap, textures, sounds, musics);
+                end_animation(state, action->animation, textures, sounds, musics);
             }
 
             int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
-            Action* action_result = get_action_from_floor_on_action(action, floor);
-            add_action_after_curr_action(state, action_result);
+            floor_on_move_end(action, floor);
         }
         break;
         case ACTION_TYPE__PUSH:
@@ -43,30 +42,37 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             if(!action->push.is_move_blocked)
             {
                 action->push.object->tilemap_pos = move_vec2i_in_dir4_by(action->push.object->tilemap_pos,action->push.dir4,1);
-                end_animation(state, action->push.animation_move_sprite_in_gamemap, textures, sounds, musics);
+                end_animation(state, action->animation, textures, sounds, musics);
             }
+
+            int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
+            floor_on_push_end(action, floor);
         }
         break;
         case ACTION_TYPE__CRASH:
         {
             action->crash.object->is_visible = 1;
 
-            end_animation(state, action->crash.animation_sequence, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics);
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION_TYPE__FALL:
         {
-            action->drop.object->is_visible = 1;
+            action->fall.object->is_visible = 1;
 
-            end_animation(state, action->drop.animation_drop_sprite_in_tilemap, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics);
         }
         break;
         case ACTION_TYPE__DEATH:
         {
+            end_animation(state, action->animation, textures, sounds, musics);
+            
             remove_object_from_gamemap_objects(state, action->death.object);
         }
         break;
         default:
         break;
     }
+
+    print_action(state->action.action_sequence, 0);
 }

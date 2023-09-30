@@ -43,147 +43,13 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.sprite_head = 0;
     state->gamemap.sprite_tail = 0;
 
+    state->gamemap.animation_head = 0;
+    state->gamemap.animation_tail = 0;
+
     // action
 
     state->action.is_executing_actions = 0;
-    state->action.curr_action = 0;
-    state->action.action_head = 0;
-    state->action.action_tail = 0;
-}
-
-void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
-{
-    if (input->is_quit || input->was_esc)
-    {
-        state->is_game_running = 0;
-    }
-
-    // camera
-
-    if(input->is_mouse_scrolling)
-    {
-        float change_camera_zoom_by = input->mouse_scrolled * state->camera.zoom * delta_time * 10.0f;
-        state->camera.zoom += change_camera_zoom_by;
-    }
-
-    // mouse
-
-    vec2i mouse_screen_pos;
-    vec2f mouse_world_pos;
-    vec2f mouse_gamemap_pos;
-    vec2i mouse_tilemap_pos;
-
-    mouse_screen_pos = make_vec2i(input->mouse_x, input->mouse_y);
-    mouse_world_pos = screen_pos_to_world_pos(mouse_screen_pos, state->camera.world_pos, state->camera.zoom);
-    mouse_gamemap_pos = world_pos_to_gamemap_pos(iso_pos_to_cart_pos(mouse_world_pos));
-    mouse_tilemap_pos = gamemap_pos_to_tilemap_pos(mouse_gamemap_pos);
-
-    state->mouse.screen_pos = mouse_screen_pos;
-    state->mouse.world_pos = mouse_world_pos;
-    state->mouse.gamemap_pos = mouse_gamemap_pos;
-    state->mouse.tilemap_pos = mouse_tilemap_pos;
-
-    // drag
-
-    if(!input->was_mouse_left && input->is_mouse_left)
-    {
-        state->mouse.is_dragging = 1;
-        state->mouse.drag_origin_world_pos = state->mouse.world_pos;
-    }
-    else if(input->was_mouse_left && !input->is_mouse_left)
-    {
-        state->mouse.is_dragging = 0;
-    }
-    else if(input->is_mouse_left)
-    {
-        vec2f drag_world_diff;
-        vec2f new_camera_world_pos;
-
-        drag_world_diff.x = state->mouse.world_pos.x - state->camera.world_pos.x;
-        drag_world_diff.y = state->mouse.world_pos.y - state->camera.world_pos.y;
-
-        new_camera_world_pos.x = state->mouse.drag_origin_world_pos.x - drag_world_diff.x;
-        new_camera_world_pos.y = state->mouse.drag_origin_world_pos.y - drag_world_diff.y;
-
-        state->camera.world_pos = new_camera_world_pos;
-    }
-
-    // gamemap
-
-    // action
-
-    if(state->action.is_executing_actions)
-    {
-        if(state->action.curr_action)
-        {
-            if(state->action.curr_action->is_finished)
-            {
-                end_action(state, state->action.curr_action, textures, sounds, musics);
-                Action* next_action = state->action.curr_action->next;
-                destroy_action(state->action.curr_action);
-                state->action.curr_action = next_action;
-
-                if(state->action.curr_action)
-                {
-                    start_action(state, state->action.curr_action, textures, sounds, musics);
-                }
-            }
-            else
-            {
-                update_action(state, state->action.curr_action, delta_time, textures, sounds, musics);
-            }
-        }
-        else
-        {
-            state->action.is_executing_actions = 0;
-        }
-    }
-    else
-    {
-        if (input->was_up && !input->is_up)
-        {
-            Object* object_acting = state->gamemap.object_acting;
-
-            if(object_acting)
-            {
-                add_action_to_end_actions(state, new_action_move(object_acting, DIR4__UP));
-                execute_actions(state, textures, sounds, musics);
-            }
-        }
-
-        if (input->was_right && !input->is_right)
-        {
-            Object* object_acting = state->gamemap.object_acting;
-
-            if(object_acting)
-            {
-                add_action_to_end_actions(state, new_action_move(object_acting, DIR4__RIGHT));
-                execute_actions(state, textures, sounds, musics);
-            }
-        }
-
-        if (input->was_down && !input->is_down)
-        {
-            Object* object_acting = state->gamemap.object_acting;
-
-            if(object_acting)
-            {
-                add_action_to_end_actions(state, new_action_move(object_acting, DIR4__DOWN));
-                execute_actions(state, textures, sounds, musics);
-            }
-        }
-
-        if (input->was_left && !input->is_left)
-        {
-            Object* object_acting = state->gamemap.object_acting;
-
-            if(object_acting)
-            {
-                add_action_to_end_actions(state, new_action_move(object_acting, DIR4__LEFT));
-                execute_actions(state, textures, sounds, musics);
-            }
-        }
-    }
+    state->action.action_sequence = new_action_sequence();
 }
 
 // gamemap
@@ -426,188 +292,145 @@ void remove_all_sprites_from_gamemap_sprites(State* state)
     state->gamemap.sprite_tail = 0;
 }
 
-void add_animation_to_gamemap_animations(State* state, Animation* new_animation)
-{
-    if(state->gamemap.animation_head)
-    {
-        state->gamemap.animation_tail->next = new_animation;
-    }
-    else
-    {
-        state->gamemap.animation_head = new_animation;
-    }
-
-    state->gamemap.animation_tail = new_animation;
-    new_animation->next = 0;
-}
-
-void remove_animation_from_gamemap_animations(State* state, Animation* animation)
-{
-    Animation* prev_animation = 0;
-    Animation* curr_animation = state->gamemap.animation_head;
-    Animation* next_animation = (curr_animation) ? (curr_animation->next) : (0);
-
-    while(curr_animation)
-    {
-        if(curr_animation == animation)
-        {
-            destroy_animation(curr_animation);
-
-            if(curr_animation == state->gamemap.animation_head)
-            {
-                state->gamemap.animation_head = next_animation;
-            }
-
-            if(curr_animation == state->gamemap.animation_tail)
-            {
-                state->gamemap.animation_tail = prev_animation;
-            }
-
-            if(prev_animation)
-            {
-                prev_animation->next = next_animation;
-            }
-
-            return;
-        }
-        else
-        {
-            prev_animation = curr_animation;
-            curr_animation = curr_animation->next;
-            next_animation = (curr_animation) ? (curr_animation->next) : (0);
-        }
-    }
-
-    return;
-}
-
-void remove_all_animations_from_gamemap_animations(State* state)
-{
-    Animation* curr_animation = state->gamemap.animation_head;
-    Animation* next_animation = (curr_animation) ? (curr_animation->next) : (0);
-    while(curr_animation)
-    {
-        next_animation = (curr_animation) ? (curr_animation->next) : (0);
-        destroy_animation(curr_animation);
-        curr_animation = next_animation;
-    }
-
-    state->gamemap.animation_head = 0;
-    state->gamemap.animation_tail = 0;
-}
-
 // action
-
-void add_action_to_end_actions(State* state, Action* new_action)
-{
-    if(state->action.action_head)
-    {
-        state->action.action_tail->next = new_action;
-    }
-    else
-    {
-        state->action.action_head = new_action;
-    }
-
-    state->action.action_tail = new_action;
-    new_action->next = 0;
-}
-
-void add_action_after_curr_action(State* state, Action* new_action)
-{
-    if(state->action.curr_action)
-    {
-        new_action->next = state->action.curr_action->next;
-        state->action.curr_action->next = new_action;
-    }
-}
-
-void remove_all_actions_after_curr_action(State* state)
-{
-    Action* curr_action = state->action.curr_action->next;
-    Action* next_action = (curr_action) ? (curr_action->next) : 0;
-    while(curr_action)
-    {
-        destroy_action(curr_action);
-        curr_action = next_action;
-        next_action = (curr_action) ? (curr_action->next) : 0;
-    }
-    state->action.curr_action->next = 0;
-}
 
 void execute_actions(State* state, Textures* textures, Sounds* sounds, Musics* musics)
 {
     state->action.is_executing_actions = 1;
-    state->action.curr_action = state->action.action_head;
-    state->action.action_head = 0;
-    state->action.action_tail = 0;
+    state->action.action_sequence->is_finished = 0;
 
-    if(state->action.curr_action)
+    start_action(state, state->action.action_sequence, textures, sounds, musics);
+}
+
+void print_action(Action* action, int depth)
+{
+    char* action_type = get_action_name_from_type(action->type);
+    for(int i = 0; i < depth; i++) printf("  ");
+    printf("action: %i (%s) \n", action, action_type);
+
+    if(action->type == ACTION_TYPE__SEQUENCE)
     {
-        start_action(state, state->action.curr_action, textures, sounds, musics);
+        for(int i = 0; i < depth; i++) printf("  ");
+        printf("[ \n");
+        for(Action* curr_action = action->sequence.curr_action; curr_action; curr_action = curr_action->next)
+        {
+            print_action(curr_action, depth + 1);
+        }
+        for(int i = 0; i < depth; i++) printf("  ");
+        printf("] \n");
+    }
+
+    if(action->type == ACTION_TYPE__SIMULTANEOUS)
+    {
+        for(int i = 0; i < depth; i++) printf("  ");
+        printf("{ \n");
+        for(Action* curr_action = action->simultaneous.action_head; curr_action; curr_action = curr_action->next)
+        {
+            print_action(curr_action, depth + 1);
+        }
+        for(int i = 0; i < depth; i++) printf("  ");
+        printf("} \n");
     }
 }
 
-Action* get_action_from_floor_on_action(Action* action_trigger, int floor)
+void floor_on_move_end(Action* action, int floor)
 {
-    Action* action_result = new_action_sequence();
-
-    switch(action_trigger->type)
+    switch(floor)
     {
-        case ACTION_TYPE__MOVE:
+        case FLOOR_TYPE__ROCK:
         {
-            switch(floor)
-            {
-                case FLOOR_TYPE__ROCK:
-                {
-                    //
-                }
-                break;
-                case FLOOR_TYPE__STONE:
-                {
-                    //
-                }
-                break;
-                case FLOOR_TYPE__METAL:
-                {
-                    //
-                }
-                break;
-                case FLOOR_TYPE__GRASS:
-                {
-                    //
-                }
-                break;
-                case FLOOR_TYPE__WATER:
-                {
-                    printf("dropped into water ! \n");
+            //
+        }
+        break;
+        case FLOOR_TYPE__STONE:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__GRASS:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        {
+            remove_all_actions_after_action(action);
 
-                    Action* drop = new_action_drop(action_trigger->move.object);
-                    Action* death = new_action_death(action_trigger->move.object);
+            Action* fall = new_action_fall(action->move.object);
+            Action* death = new_action_death(action->move.object);
 
-                    add_action_to_end_action_sequence(action_result, drop);
-                    add_action_to_end_action_sequence(action_result, death);
-                }
-                break;
-                case FLOOR_TYPE__LAVA:
-                {
-                    printf("dropped into lava ! \n");
+            add_action_to_end_after_action(action, fall);
+            add_action_to_end_after_action(action, death);
+        }
+        break;
+        case FLOOR_TYPE__LAVA:
+        {
+            remove_all_actions_after_action(action);
 
-                    Action* drop = new_action_drop(action_trigger->move.object);
-                    Action* death = new_action_death(action_trigger->move.object);
+            Action* fall = new_action_fall(action->move.object);
+            Action* death = new_action_death(action->move.object);
 
-                    add_action_to_end_action_sequence(action_result, drop);
-                    add_action_to_end_action_sequence(action_result, death);
-                }
-                break;
-                default:
-                break;
-            }
+            add_action_to_end_after_action(action, fall);
+            add_action_to_end_after_action(action, death);
         }
         break;
         default:
         break;
     }
+}
 
-    return action_result;
+void floor_on_push_end(Action* action, int floor)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__ROCK:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__STONE:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__GRASS:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        {
+            remove_all_actions_after_action(action);
+
+            Action* fall = new_action_fall(action->move.object);
+            Action* death = new_action_death(action->move.object);
+
+            add_action_to_end_after_action(action, fall);
+            add_action_to_end_after_action(action, death);
+        }
+        break;
+        case FLOOR_TYPE__LAVA:
+        {
+            remove_all_actions_after_action(action);
+
+            Action* fall = new_action_fall(action->move.object);
+            Action* death = new_action_death(action->move.object);
+
+            add_action_to_end_after_action(action, fall);
+            add_action_to_end_after_action(action, death);
+        }
+        break;
+        default:
+        break;
+    }
 }

@@ -206,7 +206,7 @@ int main (int argc, char* argv[])
     vec2f middle_gamemap_pos = make_vec2f(TILEMAP_WIDTH * 0.5f,TILEMAP_HEIGHT * 0.5f);
     state.camera.world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(middle_gamemap_pos));
 
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(7,7));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(7,8));
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_1->tilemap_pos = make_vec2i(5,5);

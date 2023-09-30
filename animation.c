@@ -26,6 +26,30 @@ Animation* new_animation_sequence()
     return animation;
 }
 
+Animation* new_animation_sequence_of_1(Animation* animation_1)
+{
+    Animation* sequence = new_animation_sequence();
+    add_animation_to_end_animation_sequence(sequence, animation_1);
+    return sequence;
+}
+
+Animation* new_animation_sequence_of_2(Animation* animation_1, Animation* animation_2)
+{
+    Animation* sequence = new_animation_sequence();
+    add_animation_to_end_animation_sequence(sequence, animation_1);
+    add_animation_to_end_animation_sequence(sequence, animation_2);
+    return sequence;
+}
+
+Animation* new_animation_sequence_of_3(Animation* animation_1, Animation* animation_2, Animation* animation_3)
+{
+    Animation* sequence = new_animation_sequence();
+    add_animation_to_end_animation_sequence(sequence, animation_1);
+    add_animation_to_end_animation_sequence(sequence, animation_2);
+    add_animation_to_end_animation_sequence(sequence, animation_3);
+    return sequence;
+}
+
 void add_animation_to_end_animation_sequence(Animation* animation_sequence, Animation* new_animation)
 {
     if(animation_sequence->sequence.animation_head)
@@ -54,6 +78,30 @@ Animation* new_animation_simultaneous()
     animation->simultaneous.animation_tail = 0;
 
     return animation;
+}
+
+Animation* new_animation_simultaneous_of_1(Animation* animation_1)
+{
+    Animation* simultaneous = new_animation_simultaneous();
+    add_animation_to_end_animation_simultaneous(simultaneous, animation_1);
+    return simultaneous;
+}
+
+Animation* new_animation_simultaneous_of_2(Animation* animation_1, Animation* animation_2)
+{
+    Animation* simultaneous = new_animation_simultaneous();
+    add_animation_to_end_animation_simultaneous(simultaneous, animation_1);
+    add_animation_to_end_animation_simultaneous(simultaneous, animation_2);
+    return simultaneous;
+}
+
+Animation* new_animation_simultaneous_of_3(Animation* animation_1, Animation* animation_2, Animation* animation_3)
+{
+    Animation* simultaneous = new_animation_simultaneous();
+    add_animation_to_end_animation_simultaneous(simultaneous, animation_1);
+    add_animation_to_end_animation_simultaneous(simultaneous, animation_2);
+    add_animation_to_end_animation_simultaneous(simultaneous, animation_3);
+    return simultaneous;
 }
 
 void add_animation_to_end_animation_simultaneous(Animation* animation_simultaneous, Animation* new_animation)
@@ -165,21 +213,21 @@ Animation* new_animation_descend_sprite_in_tilemap(Texture* texture, vec2i tilem
     return animation;
 }
 
-Animation* new_animation_drop_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds)
+Animation* new_animation_fall_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds)
 {
     Animation* animation = malloc(sizeof(* animation));
 
     animation->next = 0;
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__DROP_SPRITE_IN_TILEMAP;
+    animation->type = ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP;
 
-    animation->drop_sprite_in_tilemap.time = 0.0f;
-    animation->drop_sprite_in_tilemap.sprite = 0;
+    animation->fall_sprite_in_tilemap.time = 0.0f;
+    animation->fall_sprite_in_tilemap.sprite = 0;
 
-    animation->drop_sprite_in_tilemap.texture = texture;
-    animation->drop_sprite_in_tilemap.tilemap_pos = tilemap_pos;
-    animation->drop_sprite_in_tilemap.length = length;
-    animation->drop_sprite_in_tilemap.seconds = seconds;
+    animation->fall_sprite_in_tilemap.texture = texture;
+    animation->fall_sprite_in_tilemap.tilemap_pos = tilemap_pos;
+    animation->fall_sprite_in_tilemap.length = length;
+    animation->fall_sprite_in_tilemap.seconds = seconds;
 
     return animation;
 }
@@ -267,7 +315,7 @@ Animation* new_animation_camera_shake(int times, float distance, float seconds)
 {
     Animation* camera_shake = new_animation_sequence();
 
-    float seconds_quarter = seconds * 0.25f;
+    float seconds_quarter = seconds * 0.25f * (1.0f / times);
     vec2f to_left_world_pos = make_vec2f(-distance, 0.0f);
     vec2f to_right_world_pos = make_vec2f(distance, 0.0f);
 
@@ -301,12 +349,12 @@ char* get_animation_name_from_type(int animation_type)
         case ANIMATION_TYPE__NONE:                             name = "none";                              break;
         case ANIMATION_TYPE__SEQUENCE:                         name = "sequence";                          break;
         case ANIMATION_TYPE__SIMULTANEOUS:                     name = "simultaneous";                      break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:   name = "move sprite in gamemap_in_line";    break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:   name = "move sprite in gamemap_in_arch";    break;
+        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:   name = "move sprite in gamemap in line";    break;
+        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:   name = "move sprite in gamemap in arch";    break;
         case ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP:           name = "show sprite in tilemap";            break;
         case ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP:         name = "ascend sprite in tilemap";          break;
         case ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP:        name = "descend sprite in tilemap";         break;
-        case ANIMATION_TYPE__DROP_SPRITE_IN_TILEMAP:           name = "drop sprite in tilemap";            break;
+        case ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP:           name = "fall sprite in tilemap";            break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE:     name = "move camera in world in line";      break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH:     name = "move camera in world in arch";      break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:   name = "move camera in gamemap in line";    break;
