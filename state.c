@@ -3,6 +3,7 @@
 void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics)
 {
     state->is_game_running = 1;
+    state->gamestate = GAMESTATE__NONE;
 
     // camera
 
@@ -31,25 +32,38 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->gamemap.object_head = 0;
     state->gamemap.object_tail = 0;
-
     state->gamemap.object_hero = 0;
-    state->gamemap.object_acting = 0;
-
-    state->gamemap.danger_tilemap_pos_head = 0;
-    state->gamemap.danger_tilemap_pos_tail = 0;
-
-    state->gamemap.highlight_tilemap_pos = make_vec2i(1,1);
 
     state->gamemap.sprite_head = 0;
     state->gamemap.sprite_tail = 0;
 
-    state->gamemap.animation_head = 0;
-    state->gamemap.animation_tail = 0;
+    state->gamemap.selected_tilemap_pos = make_vec2i(0, 0);
+
+    state->gamemap.curr_skill = 0;
+    state->gamemap.is_skill_two_target = 0;
+
+    for(int i = 0 ; i < 100 ; i++)
+    {
+        state->gamemap.possible_target_1_tilemap_pos[i] = 0;
+    }
+    for(int i = 0 ; i < 100 ; i++)
+    {
+        state->gamemap.possible_target_2_tilemap_pos[i] = 0;
+    }
+
+    state->gamemap.target_1_tilemap_pos = make_vec2i(0, 0);
+    state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
 
     // action
 
     state->action.is_executing_actions = 0;
     state->action.action_sequence = new_action_sequence();
+}
+
+void change_gamestate(State* state, int new_gamestate)
+{
+    state->gamestate = new_gamestate;
+    printf("gamestate: %s \n", get_gamestate_name(new_gamestate));
 }
 
 // gamemap
@@ -109,9 +123,9 @@ void add_object_to_gamemap_objects(State* state, Object* new_object)
 
 void remove_object_from_gamemap_objects(State* state, Object* object)
 {
-    if(state->gamemap.object_acting == object)
+    if(state->gamemap.object_hero == object)
     {
-        state->gamemap.object_acting = 0;
+        state->gamemap.object_hero = 0;
     }
 
     Object* prev_object = 0;
@@ -150,76 +164,6 @@ void remove_object_from_gamemap_objects(State* state, Object* object)
     }
 
     return;
-}
-
-void add_pos_to_gamemap_danger_pos(State* state, vec2i* new_pos)
-{
-    if(state->gamemap.danger_tilemap_pos_head)
-    {
-        state->gamemap.danger_tilemap_pos_tail->next = new_pos;
-    }
-    else
-    {
-        state->gamemap.danger_tilemap_pos_head = new_pos;
-    }
-
-    state->gamemap.danger_tilemap_pos_tail = new_pos;
-    new_pos->next = 0;
-}
-
-void remove_pos_from_gamemap_danger_pos(State* state, vec2i* pos)
-{
-    vec2i* prev_pos = 0;
-    vec2i* curr_pos = state->gamemap.danger_tilemap_pos_head;
-    vec2i* next_pos = (curr_pos) ? (curr_pos->next) : (0);
-
-    while(curr_pos)
-    {
-        if(curr_pos == pos)
-        {
-            destroy_vec2i(curr_pos);
-
-            if(curr_pos == state->gamemap.danger_tilemap_pos_head)
-            {
-                state->gamemap.danger_tilemap_pos_head = next_pos;
-            }
-
-            if(curr_pos == state->gamemap.danger_tilemap_pos_tail)
-            {
-                state->gamemap.danger_tilemap_pos_tail = prev_pos;
-            }
-
-            if(prev_pos)
-            {
-                prev_pos->next = next_pos;
-            }
-
-            return;
-        }
-        else
-        {
-            prev_pos = curr_pos;
-            curr_pos = curr_pos->next;
-            next_pos = (curr_pos) ? (curr_pos->next) : (0);
-        }
-    }
-
-    return;
-}
-
-void remove_all_pos_from_gamemap_danger_pos(State* state)
-{
-    vec2i* curr_pos = state->gamemap.danger_tilemap_pos_head;
-    vec2i* next_pos = (curr_pos) ? (curr_pos->next) : (0);
-    while(curr_pos)
-    {
-        next_pos = (curr_pos) ? (curr_pos->next) : (0);
-        destroy_vec2i(curr_pos);
-        curr_pos = next_pos;
-    }
-
-    state->gamemap.danger_tilemap_pos_head = 0;
-    state->gamemap.danger_tilemap_pos_tail = 0;
 }
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite)
@@ -277,19 +221,82 @@ void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite)
     return;
 }
 
-void remove_all_sprites_from_gamemap_sprites(State* state)
+void add_pos_to_possible_target_1_tilemap_pos(State* state, vec2i* new_pos)
 {
-    Sprite* curr_sprite = state->gamemap.sprite_head;
-    Sprite* next_sprite = (curr_sprite) ? (curr_sprite->next) : (0);
-    while(curr_sprite)
+    for(int i = 0; i < 100; i++)
     {
-        next_sprite = (curr_sprite) ? (curr_sprite->next) : (0);
-        destroy_sprite(curr_sprite);
-        curr_sprite = next_sprite;
+        if(state->gamemap.possible_target_1_tilemap_pos[i] == 0)
+        {
+            state->gamemap.possible_target_1_tilemap_pos[i] = new_pos;
+            break;
+        }
+    }
+}
+
+void remove_all_pos_from_possible_target_1_tilemap_pos(State* state)
+{
+    for(int i = 0; i < 100; i++)
+    {
+        if(state->gamemap.possible_target_1_tilemap_pos[i] != 0)
+        {
+            destroy_vec2i(state->gamemap.possible_target_1_tilemap_pos[i]);
+            state->gamemap.possible_target_1_tilemap_pos[i] = 0;
+        }
+    }
+}
+
+int is_tilemap_pos_in_possible_target_1_tilemap_pos(State* state, vec2i pos)
+{
+    for(int i = 0; i < 100; i++)
+    {
+        vec2i* target_1_pos = state->gamemap.possible_target_1_tilemap_pos[i];
+
+        if(target_1_pos != 0 && target_1_pos->x == pos.x && target_1_pos->y == pos.y)
+        {
+            return 1;
+        }
     }
 
-    state->gamemap.sprite_head = 0;
-    state->gamemap.sprite_tail = 0;
+    return 0;
+}
+
+void add_pos_to_possible_target_2_tilemap_pos(State* state, vec2i* new_pos)
+{
+    for(int i = 0; i < 100; i++)
+    {
+        if(state->gamemap.possible_target_2_tilemap_pos[i] == 0)
+        {
+            state->gamemap.possible_target_2_tilemap_pos[i] = new_pos;
+            break;
+        }
+    }
+}
+
+void remove_all_pos_from_possible_target_2_tilemap_pos(State* state)
+{
+    for(int i = 0; i < 100; i++)
+    {
+        if(state->gamemap.possible_target_2_tilemap_pos[i] != 0)
+        {
+            destroy_vec2i(state->gamemap.possible_target_2_tilemap_pos[i]);
+            state->gamemap.possible_target_2_tilemap_pos[i] = 0;
+        }
+    }
+}
+
+int is_tilemap_pos_in_possible_target_2_tilemap_pos(State* state, vec2i pos)
+{
+    for(int i = 0; i < 100; i++)
+    {
+        vec2i* target_2_pos = state->gamemap.possible_target_2_tilemap_pos[i];
+
+        if(target_2_pos != 0 && target_2_pos->x == pos.x && target_2_pos->y == pos.y)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 // action
@@ -433,4 +440,21 @@ void floor_on_push_end(Action* action, int floor)
         default:
         break;
     }
+}
+
+char* get_gamestate_name(int gamestate)
+{
+    char* name = "";
+
+    switch(gamestate)
+    {
+        case GAMESTATE__NONE:               name = "none";              break;
+        case GAMESTATE__CHOOSING_SKILL:     name = "choosing skill";    break;
+        case GAMESTATE__CHOOSING_TARGET_1:  name = "choosing target 1"; break;
+        case GAMESTATE__CHOOSING_TARGET_2:  name = "choosing target 2"; break;
+        case GAMESTATE__SKILL_EXECUTING:    name = "skill executing";   break;
+        default: break;
+    }
+
+    return name;
 }

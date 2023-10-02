@@ -110,15 +110,15 @@ void destroy_textures_crash (Textures_Crash* crash)
 
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
+    object->hero = load_texture_from_filepath (renderer, "./object/hero.png");
     object->pillar = load_texture_from_filepath (renderer, "./object/pillar.png");
-
     object->goat = load_texture_from_filepath (renderer, "./object/goat.png");
     object->spider = load_texture_from_filepath (renderer, "./object/spider.png");
 }
 void destroy_textures_object (Textures_Object* object)
 {
     destroy_texture(object->pillar);
-
+    destroy_texture(object->hero);
     destroy_texture(object->goat);
     destroy_texture(object->spider);
 }

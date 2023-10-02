@@ -88,7 +88,7 @@ void destroy_textures_crash (Textures_Crash* crash);
 typedef struct
 {
     Texture* pillar;
-
+    Texture* hero;
     Texture* goat;
     Texture* spider;
 

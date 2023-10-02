@@ -34,7 +34,7 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
             action->move.object->is_visible = 0;
 
             vec2i curr_tilemap_pos = action->move.object->tilemap_pos;
-            vec2i next_tilemap_pos = move_vec2i_in_dir4_by(curr_tilemap_pos,action->move.dir4,1);
+            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->move.dir4,1);
             Object* object_on_next_tilemap_pos = get_object_on_tilemap_pos(state, next_tilemap_pos);
 
             if(object_on_next_tilemap_pos)
@@ -64,7 +64,7 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
             action->push.object->is_visible = 0;
 
             vec2i curr_tilemap_pos = action->push.object->tilemap_pos;
-            vec2i next_tilemap_pos = move_vec2i_in_dir4_by(curr_tilemap_pos,action->push.dir4,1);
+            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->push.dir4,1);
             Object* object_on_next_tilemap_pos = get_object_on_tilemap_pos(state, next_tilemap_pos);
 
             if(object_on_next_tilemap_pos)
@@ -96,7 +96,7 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
 
             Texture* object_texture = get_texture_from_object_type(action->crash.object->type, textures);
             vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object->tilemap_pos);
-            vec2f next_object_gamemap_pos = move_vec2f_in_dir4_by(curr_object_gamemap_pos,action->crash.dir4,1.0f);
+            vec2f next_object_gamemap_pos = make_vec2f_move_in_dir4_by(curr_object_gamemap_pos,action->crash.dir4,1.0f);
             next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
             next_object_gamemap_pos.y = curr_object_gamemap_pos.y + (next_object_gamemap_pos.y - curr_object_gamemap_pos.y) * 0.5f;
 

@@ -20,6 +20,10 @@ vec2i* new_vec2i (int x, int y)
 
     return vec;
 }
+vec2i* new_vec2i_from_vec2i (vec2i vec)
+{
+    return new_vec2i(vec.x, vec.y);
+}
 void destroy_vec2i (vec2i* vec)
 {
     free(vec);
@@ -44,6 +48,10 @@ vec2f* new_vec2f (float x, float y)
     vec->y = y;
 
     return vec;
+}
+vec2f* new_vec2f_from_vec2f (vec2f vec)
+{
+    return new_vec2f(vec.x, vec.y);
 }
 void destroy_vec2f (vec2f* vec)
 {
@@ -72,6 +80,10 @@ vec3i* new_vec3i (int x, int y, int z)
 
     return vec;
 }
+vec3i* new_vec3i_from_vec3i (vec3i vec)
+{
+    return new_vec3i(vec.x, vec.y, vec.z);
+}
 void destroy_vec3i (vec3i* vec)
 {
     free(vec);
@@ -98,6 +110,10 @@ vec3f* new_vec3f (float x, float y, float z)
     vec->z = z;
 
     return vec;
+}
+vec3f* new_vec3f_from_vec3f (vec3f vec)
+{
+    return new_vec3f(vec.x, vec.y, vec.z);
 }
 void destroy_vec3f (vec3f* vec)
 {
@@ -128,6 +144,10 @@ vec4i* new_vec4i (int x, int y, int z, int w)
 
     return vec;
 }
+vec4i* new_vec4i_from_vec4i (vec4i vec)
+{
+    return new_vec4i(vec.x, vec.y, vec.z, vec.w);
+}
 void destroy_vec4i (vec4i* vec)
 {
     free(vec);
@@ -156,6 +176,10 @@ vec4f* new_vec4f (float x, float y, float z, float w)
     vec->w = w;
 
     return vec;
+}
+vec4f* new_vec4f_from_vec4f (vec4f vec)
+{
+    return new_vec4f(vec.x, vec.y, vec.z, vec.w);
 }
 void destroy_vec4f (vec4f* vec)
 {

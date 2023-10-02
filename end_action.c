@@ -27,7 +27,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
 
             if(!action->move.is_move_blocked)
             {
-                action->move.object->tilemap_pos = move_vec2i_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
+                action->move.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
                 end_animation(state, action->animation, textures, sounds, musics);
             }
 
@@ -41,7 +41,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
 
             if(!action->push.is_move_blocked)
             {
-                action->push.object->tilemap_pos = move_vec2i_in_dir4_by(action->push.object->tilemap_pos,action->push.dir4,1);
+                action->push.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->push.object->tilemap_pos,action->push.dir4,1);
                 end_animation(state, action->animation, textures, sounds, musics);
             }
 

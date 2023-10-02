@@ -2,7 +2,9 @@
 
 void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
 {
-    if (input->is_quit || input->was_esc)
+    // quit
+
+    if(input->is_quit)
     {
         state->is_game_running = 0;
     }
@@ -57,117 +59,142 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->camera.world_pos = new_camera_world_pos;
     }
 
-    // gamemap
+    // gamestate
 
-    // action
-
-    if(state->action.is_executing_actions)
+    switch(state->gamestate)
     {
-        if(state->action.action_sequence->is_finished)
+        case GAMESTATE__NONE:
         {
-            state->action.is_executing_actions = 0;
+            //
         }
-        else
+        break;
+        case GAMESTATE__CHOOSING_SKILL:
         {
-            update_action(state, state->action.action_sequence, delta_time, textures, sounds, musics);
-        }
-    }
-    else
-    {
-        int dir = DIR4__NONE;
-        int dir_opp = DIR4__NONE;
-        int is_move_with_push = 0;
-
-        if(input->is_mouse_left)
-        {
-            is_move_with_push = 1;
-        }
-
-        if (input->was_up && !input->is_up)
-        {
-            dir = DIR4__UP;
-            dir_opp = DIR4__DOWN;
-        }
-
-        if (input->was_right && !input->is_right)
-        {
-            dir = DIR4__RIGHT;
-            dir_opp = DIR4__LEFT;
-        }
-
-        if (input->was_down && !input->is_down)
-        {
-            dir = DIR4__DOWN;
-            dir_opp = DIR4__UP;
-        }
-
-        if (input->was_left && !input->is_left)
-        {
-            dir = DIR4__LEFT;
-            dir_opp = DIR4__RIGHT;
-        }
-
-        if(dir != DIR4__NONE && !is_move_with_push)
-        {
-            Object* object_acting = state->gamemap.object_acting;
-
-            if(object_acting)
+            if (input->was_esc && !input->is_esc)
             {
-                add_action_to_end_after_action(state->action.action_sequence->sequence.action_head, new_action_move(object_acting, dir));
-                execute_actions(state, textures, sounds, musics);
+                // state->is_game_running = 0;
             }
-        }
 
-        if(dir != DIR4__NONE && is_move_with_push)
-        {
-            Object* object_acting = state->gamemap.object_acting;
-            Object* object_pushed = 0;
+            int skill = SKILL__NONE;
 
-            if(object_acting)
+            if(input->was_up && !input->is_up) skill = SKILL__MOVE;
+            if(input->was_right && !input->is_right) skill = SKILL__CHARGE;
+            if(input->was_down && !input->is_down) skill = SKILL__PUSH;
+            if(input->was_left && !input->is_left) skill = SKILL__PULL;
+
+            state->gamemap.curr_skill = skill;
+            state->gamemap.is_skill_two_target = is_skill_two_target(skill);
+            
+            if(skill != SKILL__NONE)
             {
-                vec2i object_acting_tilemap_pos = object_acting->tilemap_pos;
-                vec2i object_pushed_tilemap_pos = move_vec2i_in_dir4_by(object_acting_tilemap_pos, dir, 1);
+                remove_all_pos_from_possible_target_1_tilemap_pos(state);
 
-                object_pushed = get_object_on_tilemap_pos(state, object_pushed_tilemap_pos);
-                if(object_pushed)
+                skill_add_pos_to_possible_target_1_tilemap_pos(
+                        state,
+                        state->gamemap.curr_skill,
+                        state->gamemap.object_hero->tilemap_pos
+                        );
+
+                change_gamestate(state, GAMESTATE__CHOOSING_TARGET_1);
+            }
+
+        }
+        break;
+        case GAMESTATE__CHOOSING_TARGET_1:
+        {
+            if (input->was_esc && !input->is_esc)
+            {
+                change_gamestate(state, GAMESTATE__CHOOSING_SKILL);
+            }
+
+            vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
+            state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
+
+            if(is_tilemap_pos_in_possible_target_1_tilemap_pos(state, selected_tilemap_pos))
+            {
+                if(input->was_mouse_left && !input->is_mouse_left)
                 {
-                    Action* push_pushed = new_action_sequence();
-                    add_action_to_end_after_action(push_pushed->sequence.action_head, new_action_push(object_pushed, dir));
-                    add_action_to_end_after_action(push_pushed->sequence.action_head, new_action_push(object_pushed, dir));
-                    add_action_to_end_after_action(push_pushed->sequence.action_head, new_action_push(object_pushed, dir));
+                    state->gamemap.target_1_tilemap_pos = selected_tilemap_pos;
 
-                    Action* move_acting = new_action_sequence();
-                    add_action_to_end_after_action(move_acting->sequence.action_head, new_action_move(object_acting, dir_opp));
-                    add_action_to_end_after_action(move_acting->sequence.action_head, new_action_move(object_acting, dir_opp));
-                    add_action_to_end_after_action(move_acting->sequence.action_head, new_action_move(object_acting, dir_opp));
-
-                    Action* push_and_move = new_action_simultaneous();
-                    add_action_sequence_to_action_simultaneous(push_and_move, push_pushed);
-                    add_action_sequence_to_action_simultaneous(push_and_move, move_acting);
-                    add_action_to_end_after_action(state->action.action_sequence->sequence.action_head, push_and_move);
-                }
-                else
-                {
-                    for(int i = 0; i < 3; i++)
+                    if(state->gamemap.is_skill_two_target)
                     {
-                        add_action_to_end_after_action(state->action.action_sequence->sequence.action_head, new_action_move(object_acting, dir));
-                        
-                        object_acting_tilemap_pos = move_vec2i_in_dir4_by(object_acting_tilemap_pos, dir, 1);
-                        object_pushed_tilemap_pos = move_vec2i_in_dir4_by(object_pushed_tilemap_pos, dir, 1);
+                        remove_all_pos_from_possible_target_2_tilemap_pos(state);
 
-                        object_pushed = get_object_on_tilemap_pos(state, object_pushed_tilemap_pos);
-                        if(object_pushed)
-                        {
-                            add_action_to_end_after_action(state->action.action_sequence->sequence.action_head, new_action_push(object_pushed, dir));
-                            add_action_to_end_after_action(state->action.action_sequence->sequence.action_head, new_action_push(object_pushed, dir));
-                            add_action_to_end_after_action(state->action.action_sequence->sequence.action_head, new_action_push(object_pushed, dir));
-                            break;
-                        }
+                        skill_add_pos_to_possible_target_2_tilemap_pos(
+                            state,
+                            state->gamemap.curr_skill,
+                            state->gamemap.object_hero->tilemap_pos,
+                            state->gamemap.target_1_tilemap_pos
+                            );
+
+                        change_gamestate(state, GAMESTATE__CHOOSING_TARGET_2);
+                    }
+                    else
+                    {
+                        state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
+
+                        skill_get_actions_to_execute(
+                            state,
+                            state->action.action_sequence->sequence.action_head,
+                            state->gamemap.curr_skill,
+                            state->gamemap.object_hero->tilemap_pos,
+                            state->gamemap.target_1_tilemap_pos,
+                            state->gamemap.target_2_tilemap_pos
+                            );
+
+                        execute_actions(state, textures, sounds, musics);
+
+                        change_gamestate(state, GAMESTATE__SKILL_EXECUTING);
                     }
                 }
-
-                execute_actions(state, textures, sounds, musics);
             }
         }
+        break;
+        case GAMESTATE__CHOOSING_TARGET_2:
+        {
+            if (input->was_esc && !input->is_esc)
+            {
+                change_gamestate(state, GAMESTATE__CHOOSING_TARGET_1);
+            }
+            
+            vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
+            state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
+
+            if(is_tilemap_pos_in_possible_target_2_tilemap_pos(state, selected_tilemap_pos))
+            {
+                if(input->was_mouse_left && !input->is_mouse_left)
+                {
+                    state->gamemap.target_2_tilemap_pos = selected_tilemap_pos;
+
+                    skill_get_actions_to_execute(
+                        state,
+                        state->action.action_sequence->sequence.action_head,
+                        state->gamemap.curr_skill,
+                        state->gamemap.object_hero->tilemap_pos,
+                        state->gamemap.target_1_tilemap_pos,
+                        state->gamemap.target_2_tilemap_pos
+                        );
+
+                    execute_actions(state, textures, sounds, musics);
+
+                    change_gamestate(state, GAMESTATE__SKILL_EXECUTING);
+                }
+            }
+        }
+        break;
+        case GAMESTATE__SKILL_EXECUTING:
+        {
+            if(state->action.action_sequence->is_finished)
+            {
+                change_gamestate(state, GAMESTATE__CHOOSING_SKILL);
+            }
+            else
+            {
+                update_action(state, state->action.action_sequence, delta_time, textures, sounds, musics);
+            }
+        }
+        break;
+        default:
+        break;
     }
 }

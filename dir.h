@@ -16,7 +16,14 @@ enum DIR4
     DIR4__COUNT
 };
 
-vec2i move_vec2i_in_dir4_by(vec2i pos, int dir4, int by);
-vec2f move_vec2f_in_dir4_by(vec2f pos, int dir4, float by);
+vec2i make_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by);
+vec2f make_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by);
+
+vec2i* new_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by);
+vec2f* new_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by);
+
+int get_x_diff_from_vec2i_to_vec2i(vec2i from, vec2i to);
+int get_y_diff_from_vec2i_to_vec2i(vec2i from, vec2i to);
+int get_dir4_from_vec2i_to_vec2i(vec2i from, vec2i to);
 
 #endif

@@ -74,9 +74,7 @@ void draw_rectangle (Renderer* renderer, vec2f start, vec2f dims)
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 {
-    State_Gamemap* gamemap = &state->gamemap;
-
-    // floors, highlights and dangers
+    // floors, highlights
 
     for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
     {
@@ -92,36 +90,64 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
-            Tile* tile = gamemap->tilemap[i][j];
+            Tile* tile = state->gamemap.tilemap[i][j];
             Texture* tile_floor_texture = get_texture_from_floor_type(tile->floor, textures);
+
+            // tile
 
             draw_texture_at_world_pos(
                 renderer,
                 tile_floor_texture,
                 world_iso_pos,
                 state->camera.world_pos,
-                state->camera.zoom);
-            
-            if(gamemap->highlight_tilemap_pos.x == j && gamemap->highlight_tilemap_pos.y == i)
+                state->camera.zoom
+                );
+
+            // possible target 1
+
+            if(state->gamestate == GAMESTATE__CHOOSING_TARGET_1)
             {
-                draw_texture_at_world_pos(
-                    renderer,
-                    textures->highlight.yellow,
-                    world_iso_pos,
-                    state->camera.world_pos,
-                    state->camera.zoom);
-            }
-            
-            for(vec2i* curr_pos = gamemap->danger_tilemap_pos_head; curr_pos != 0; curr_pos = curr_pos->next)
-            {
-                if(curr_pos->x == j && curr_pos->y == i)
+                if(is_tilemap_pos_in_possible_target_1_tilemap_pos(state, tilemap_pos))
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->danger.frame_1,
+                        textures->highlight.green,
                         world_iso_pos,
                         state->camera.world_pos,
-                        state->camera.zoom);
+                        state->camera.zoom
+                        );
+                }
+            }
+
+            // possible target 2
+
+            if(state->gamestate == GAMESTATE__CHOOSING_TARGET_2)
+            {
+                if(is_tilemap_pos_in_possible_target_2_tilemap_pos(state, tilemap_pos))
+                {
+                    draw_texture_at_world_pos(
+                        renderer,
+                        textures->highlight.teal,
+                        world_iso_pos,
+                        state->camera.world_pos,
+                        state->camera.zoom
+                        );
+                }
+            }
+
+            // selected
+
+            if(state->gamestate == GAMESTATE__CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__CHOOSING_TARGET_2)
+            {
+                if(state->gamemap.selected_tilemap_pos.x == j && state->gamemap.selected_tilemap_pos.y == i)
+                {
+                    draw_texture_at_world_pos(
+                        renderer,
+                        textures->highlight.yellow,
+                        world_iso_pos,
+                        state->camera.world_pos,
+                        state->camera.zoom
+                        );
                 }
             }
         }
@@ -143,7 +169,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
             
-            for(Object* curr_object = gamemap->object_head; curr_object != 0; curr_object = curr_object->next)
+            for(Object* curr_object = state->gamemap.object_head; curr_object != 0; curr_object = curr_object->next)
             {
                 if(curr_object->is_visible && curr_object->tilemap_pos.x == j && curr_object->tilemap_pos.y == i)
                 {
@@ -156,7 +182,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 }
             }
 
-            for(Sprite* curr_sprite = gamemap->sprite_head; curr_sprite != 0; curr_sprite = curr_sprite->next)
+            for(Sprite* curr_sprite = state->gamemap.sprite_head; curr_sprite != 0; curr_sprite = curr_sprite->next)
             {
                 vec2i curr_sprite_tilemap_pos = make_vec2i(
                     floor(curr_sprite->gamemap_pos.x + 0.4f),
@@ -201,6 +227,8 @@ int main (int argc, char* argv[])
 
     init_state (&state, &textures, &sounds, &musics);
 
+    state.gamestate = GAMESTATE__CHOOSING_SKILL;
+
     state.camera.zoom = 5.0f;
 
     vec2f middle_gamemap_pos = make_vec2f(TILEMAP_WIDTH * 0.5f,TILEMAP_HEIGHT * 0.5f);
@@ -208,32 +236,23 @@ int main (int argc, char* argv[])
 
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(7,8));
 
-    Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_1->tilemap_pos = make_vec2i(5,5);
-    Object* object_pillar_2 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_2->tilemap_pos = make_vec2i(8,8);
+    Object* object_pillar = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar->tilemap_pos = make_vec2i(5,5);
+    add_object_to_gamemap_objects(&state, object_pillar);
+
+    Object* object_hero = new_object(OBJECT_TYPE__HERO);
+    object_hero->tilemap_pos = make_vec2i(8,8);
+    add_object_to_gamemap_objects(&state, object_hero);
+
     Object* object_goat = new_object(OBJECT_TYPE__GOAT);
     object_goat->tilemap_pos = make_vec2i(8,5);
+    add_object_to_gamemap_objects(&state, object_goat);
+
     Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
     object_spider->tilemap_pos = make_vec2i(5,8);
-    add_object_to_gamemap_objects(&state, object_pillar_1);
-    add_object_to_gamemap_objects(&state, object_goat);
     add_object_to_gamemap_objects(&state, object_spider);
-    add_object_to_gamemap_objects(&state, object_pillar_2);
 
-    vec2i* pos_1 = new_vec2i(3,3);
-    vec2i* pos_2 = new_vec2i(3,4);
-    vec2i* pos_3 = new_vec2i(4,4);
-    vec2i* pos_4 = new_vec2i(4,5);
-    vec2i* pos_5 = new_vec2i(5,5);
-    add_pos_to_gamemap_danger_pos(&state, pos_1);
-    add_pos_to_gamemap_danger_pos(&state, pos_2);
-    add_pos_to_gamemap_danger_pos(&state, pos_3);
-    add_pos_to_gamemap_danger_pos(&state, pos_4);
-    remove_all_pos_from_gamemap_danger_pos(&state);
-    add_pos_to_gamemap_danger_pos(&state, pos_5);
-
-    state.gamemap.object_acting = object_goat;
+    state.gamemap.object_hero = object_hero;
 
     while (state.is_game_running)
     {
