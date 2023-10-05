@@ -340,7 +340,7 @@ void print_action(Action* action, int depth)
     }
 }
 
-void floor_on_move_end(Action* action, int floor)
+void floor_on_move_end(State* state, Action* action, int floor)
 {
     switch(floor)
     {
@@ -359,6 +359,13 @@ void floor_on_move_end(Action* action, int floor)
             //
         }
         break;
+        case FLOOR_TYPE__METAL_SPIKES:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_to_end_after_action(action, new_action_death(action->move.object));
+        }
+        break;
         case FLOOR_TYPE__GRASS:
         {
             //
@@ -368,22 +375,14 @@ void floor_on_move_end(Action* action, int floor)
         {
             remove_all_actions_after_action(action);
 
-            Action* fall = new_action_fall(action->move.object);
-            Action* death = new_action_death(action->move.object);
-
-            add_action_to_end_after_action(action, fall);
-            add_action_to_end_after_action(action, death);
+            add_action_to_end_after_action(action, new_action_fall(action->move.object));
         }
         break;
         case FLOOR_TYPE__LAVA:
         {
             remove_all_actions_after_action(action);
 
-            Action* fall = new_action_fall(action->move.object);
-            Action* death = new_action_death(action->move.object);
-
-            add_action_to_end_after_action(action, fall);
-            add_action_to_end_after_action(action, death);
+            add_action_to_end_after_action(action, new_action_fall(action->move.object));
         }
         break;
         default:
@@ -391,7 +390,7 @@ void floor_on_move_end(Action* action, int floor)
     }
 }
 
-void floor_on_push_end(Action* action, int floor)
+void floor_on_push_end(State* state, Action* action, int floor)
 {
     switch(floor)
     {
@@ -410,6 +409,13 @@ void floor_on_push_end(Action* action, int floor)
             //
         }
         break;
+        case FLOOR_TYPE__METAL_SPIKES:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_to_end_after_action(action, new_action_death(action->push.object));
+        }
+        break;
         case FLOOR_TYPE__GRASS:
         {
             //
@@ -419,23 +425,45 @@ void floor_on_push_end(Action* action, int floor)
         {
             remove_all_actions_after_action(action);
 
-            Action* fall = new_action_fall(action->move.object);
-            Action* death = new_action_death(action->move.object);
-
-            add_action_to_end_after_action(action, fall);
-            add_action_to_end_after_action(action, death);
+            add_action_to_end_after_action(action, new_action_fall(action->push.object));
         }
         break;
         case FLOOR_TYPE__LAVA:
         {
             remove_all_actions_after_action(action);
 
-            Action* fall = new_action_fall(action->move.object);
-            Action* death = new_action_death(action->move.object);
-
-            add_action_to_end_after_action(action, fall);
-            add_action_to_end_after_action(action, death);
+            add_action_to_end_after_action(action, new_action_fall(action->push.object));
         }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_death(State* state, Action* action, int object_type)
+{
+    switch(object_type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            add_action_to_end_after_action(action, new_action_blow_up(action->death.object->tilemap_pos));
+        }
+        break;
         break;
         default:
         break;

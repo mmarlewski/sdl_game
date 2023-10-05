@@ -131,8 +131,9 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
 void update_action(State* state, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
 void end_action(State* state, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
 
-void floor_on_move_end(Action* action_sequence, int floor);
-void floor_on_push_end(Action* action_sequence, int floor);
+void floor_on_move_end(State* state, Action* action_sequence, int floor);
+void floor_on_push_end(State* state, Action* action_sequence, int floor);
+void object_on_death(State* state, Action* action_sequence, int object_type);
 
 void skill_add_pos_to_possible_target_1_tilemap_pos(State* state, int skill, vec2i source_tilemap_pos);
 void skill_add_pos_to_possible_target_2_tilemap_pos(State* state, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos);

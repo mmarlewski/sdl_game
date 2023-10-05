@@ -234,23 +234,52 @@ int main (int argc, char* argv[])
     vec2f middle_gamemap_pos = make_vec2f(TILEMAP_WIDTH * 0.5f,TILEMAP_HEIGHT * 0.5f);
     state.camera.world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(middle_gamemap_pos));
 
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(7,8));
-
-    Object* object_pillar = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar->tilemap_pos = make_vec2i(5,5);
-    add_object_to_gamemap_objects(&state, object_pillar);
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(5,5));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_SPIKES, make_vec2i(8,7));
 
     Object* object_hero = new_object(OBJECT_TYPE__HERO);
-    object_hero->tilemap_pos = make_vec2i(8,8);
+    object_hero->tilemap_pos = make_vec2i(10,5);
     add_object_to_gamemap_objects(&state, object_hero);
 
-    Object* object_goat = new_object(OBJECT_TYPE__GOAT);
-    object_goat->tilemap_pos = make_vec2i(8,5);
-    add_object_to_gamemap_objects(&state, object_goat);
+    Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_1->tilemap_pos = make_vec2i(4,5);
+    add_object_to_gamemap_objects(&state, object_pillar_1);
 
-    Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
-    object_spider->tilemap_pos = make_vec2i(5,8);
-    add_object_to_gamemap_objects(&state, object_spider);
+    Object* object_pillar_2 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_2->tilemap_pos = make_vec2i(5,4);
+    add_object_to_gamemap_objects(&state, object_pillar_2);
+
+    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_3->tilemap_pos = make_vec2i(5,6);
+    add_object_to_gamemap_objects(&state, object_pillar_3);
+
+    Object* object_pillar_4 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_4->tilemap_pos = make_vec2i(3,5);
+    add_object_to_gamemap_objects(&state, object_pillar_4);
+
+    Object* object_pillar_5 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_5->tilemap_pos = make_vec2i(7,7);
+    add_object_to_gamemap_objects(&state, object_pillar_5);
+
+    Object* object_pillar_6 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_6->tilemap_pos = make_vec2i(6,7);
+    add_object_to_gamemap_objects(&state, object_pillar_6);
+
+    Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_7->tilemap_pos = make_vec2i(9,7);
+    add_object_to_gamemap_objects(&state, object_pillar_7);
+
+    Object* object_pillar_8 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_8->tilemap_pos = make_vec2i(10,7);
+    add_object_to_gamemap_objects(&state, object_pillar_8);
+
+    Object* object_spider_1 = new_object(OBJECT_TYPE__SPIDER);
+    object_spider_1->tilemap_pos = make_vec2i(7,5);
+    add_object_to_gamemap_objects(&state, object_spider_1);
+
+    Object* object_spider_2 = new_object(OBJECT_TYPE__SPIDER);
+    object_spider_2->tilemap_pos = make_vec2i(8,5);
+    add_object_to_gamemap_objects(&state, object_spider_2);
 
     state.gamemap.object_hero = object_hero;
 

@@ -12,6 +12,7 @@ typedef struct
     Texture* rock;
     Texture* stone;
     Texture* metal;
+    Texture* metal_spikes;
 
 } Textures_Floor;
 
@@ -87,6 +88,15 @@ void destroy_textures_crash (Textures_Crash* crash);
 
 typedef struct
 {
+    Texture* explosion;
+
+} Textures_BlowUp;
+
+void load_textures_blow_up (Renderer* renderer, Textures_BlowUp* blow_up);
+void destroy_textures_blow_up (Textures_BlowUp* blow_up);
+
+typedef struct
+{
     Texture* pillar;
     Texture* hero;
     Texture* goat;
@@ -107,6 +117,7 @@ typedef struct
     Textures_Move move;
     Textures_Push push;
     Textures_Crash crash;
+    Textures_BlowUp blow_up;
 
     Textures_Object object;
     

@@ -211,6 +211,20 @@ Action* new_action_death(Object* object)
     return action;
 }
 
+Action* new_action_blow_up(vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->next = 0;
+    action->animation = 0;
+    action->is_finished = 0;
+    action->type = ACTION_TYPE__BLOW_UP;
+
+    action->blow_up.tilemap_pos = tilemap_pos;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     free(action);
@@ -222,15 +236,16 @@ char* get_action_name_from_type(int action_type)
 
     switch(action_type)
     {
-        case ACTION_TYPE__NONE:                             name = "none";                              break;
-        case ACTION_TYPE__SEQUENCE:                         name = "sequence";                          break;
-        case ACTION_TYPE__SIMULTANEOUS:                     name = "simultaneous";                      break;
-        case ACTION_TYPE__MOVE:                             name = "move";                              break;
-        case ACTION_TYPE__PUSH:                             name = "push";                              break;
-        case ACTION_TYPE__CRASH:                            name = "crash";                             break;
-        case ACTION_TYPE__FALL:                             name = "fall";                              break;
-        case ACTION_TYPE__DEATH:                            name = "death";                             break;
-        case ACTION_TYPE__COUNT:                            name = "count";                             break;
+        case ACTION_TYPE__NONE:         name = "none";          break;
+        case ACTION_TYPE__SEQUENCE:     name = "sequence";      break;
+        case ACTION_TYPE__SIMULTANEOUS: name = "simultaneous";  break;
+        case ACTION_TYPE__MOVE:         name = "move";          break;
+        case ACTION_TYPE__PUSH:         name = "push";          break;
+        case ACTION_TYPE__CRASH:        name = "crash";         break;
+        case ACTION_TYPE__FALL:         name = "fall";          break;
+        case ACTION_TYPE__DEATH:        name = "death";         break;
+        case ACTION_TYPE__BLOW_UP:      name = "blow up";       break;
+        case ACTION_TYPE__COUNT:        name = "count";         break;
         default: break;
     }
 

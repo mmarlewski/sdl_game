@@ -101,12 +101,12 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
             next_object_gamemap_pos.y = curr_object_gamemap_pos.y + (next_object_gamemap_pos.y - curr_object_gamemap_pos.y) * 0.5f;
 
             Animation* animation = new_animation_sequence_of_2(
-                new_animation_move_sprite_in_gamemap_in_line(
-                object_texture,
-                curr_object_gamemap_pos,
-                next_object_gamemap_pos,
-                0.1f
-                ),
+                    new_animation_move_sprite_in_gamemap_in_line(
+                    object_texture,
+                    curr_object_gamemap_pos,
+                    next_object_gamemap_pos,
+                    0.1f
+                    ),
                 new_animation_simultaneous_of_2(
                     new_animation_camera_shake(1, 5.0f, 0.1f),
                     new_animation_move_sprite_in_gamemap_in_line(
@@ -131,7 +131,7 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
                 get_texture_from_object_type(action->fall.object->type, textures),
                 action->fall.object->tilemap_pos,
                 0.1f,
-                0.1f
+                0.2f
                 );
                 
             action->animation = animation;
@@ -141,6 +141,19 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
         case ACTION_TYPE__DEATH:
         {
             Animation* animation = new_animation_none();
+
+            action->animation = animation;
+
+            start_animation(state, action->animation, textures, sounds, musics);
+        }
+        break;
+        case ACTION_TYPE__BLOW_UP:
+        {
+            Animation* animation = new_animation_show_sprite_in_tilemap(
+                textures->blow_up.explosion,
+                action->blow_up.tilemap_pos,
+                0.2f
+                );
 
             action->animation = animation;
 

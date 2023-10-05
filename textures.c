@@ -8,6 +8,7 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->rock = load_texture_from_filepath (renderer, "./floor/rock.png");
     floor->stone = load_texture_from_filepath (renderer, "./floor/stone.png");
     floor->metal = load_texture_from_filepath (renderer, "./floor/metal.png");
+    floor->metal_spikes = load_texture_from_filepath (renderer, "./floor/metal_spikes.png");
 }
 void destroy_textures_floor (Textures_Floor* floor)
 {
@@ -17,6 +18,7 @@ void destroy_textures_floor (Textures_Floor* floor)
     destroy_texture(floor->rock);
     destroy_texture(floor->stone);
     destroy_texture(floor->metal);
+    destroy_texture(floor->metal_spikes);
 }
 
 void load_textures_highlight (Renderer* renderer, Textures_Highlight* highlight)
@@ -108,6 +110,15 @@ void destroy_textures_crash (Textures_Crash* crash)
     destroy_texture(crash->left);
 }
 
+void load_textures_blow_up (Renderer* renderer, Textures_BlowUp* blow_up)
+{
+    blow_up->explosion = load_texture_from_filepath (renderer, "./blow_up/explosion.png");
+}
+void destroy_textures_blow_up (Textures_BlowUp* blow_up)
+{
+    destroy_texture(blow_up->explosion);
+}
+
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
     object->hero = load_texture_from_filepath (renderer, "./object/hero.png");
@@ -133,6 +144,7 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_move(renderer,&textures->move);
     load_textures_push(renderer,&textures->push);
     load_textures_crash(renderer,&textures->crash);
+    load_textures_blow_up(renderer,&textures->blow_up);
 
     load_textures_object(renderer,&textures->object);
 }
@@ -147,6 +159,7 @@ void destroy_textures (Textures* textures)
     destroy_textures_move (&textures->move);
     destroy_textures_push (&textures->push);
     destroy_textures_crash (&textures->crash);
+    destroy_textures_blow_up (&textures->blow_up);
 
     destroy_textures_object (&textures->object);
 }
