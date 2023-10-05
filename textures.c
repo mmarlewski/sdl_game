@@ -2,23 +2,23 @@
 
 void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
 {
-    floor->grass = load_texture_from_filepath (renderer, "./floor/grass.png");
-    floor->lava = load_texture_from_filepath (renderer, "./floor/lava.png");
-    floor->water = load_texture_from_filepath (renderer, "./floor/water.png");
-    floor->rock = load_texture_from_filepath (renderer, "./floor/rock.png");
-    floor->stone = load_texture_from_filepath (renderer, "./floor/stone.png");
     floor->metal = load_texture_from_filepath (renderer, "./floor/metal.png");
     floor->metal_spikes = load_texture_from_filepath (renderer, "./floor/metal_spikes.png");
+    floor->metal_lava_crack = load_texture_from_filepath (renderer, "./floor/metal_lava_crack.png");
+    floor->lava = load_texture_from_filepath (renderer, "./floor/lava.png");
+    floor->ice = load_texture_from_filepath (renderer, "./floor/ice.png");
+    floor->ice_water_crack = load_texture_from_filepath (renderer, "./floor/ice_water_crack.png");
+    floor->water = load_texture_from_filepath (renderer, "./floor/water.png");
 }
 void destroy_textures_floor (Textures_Floor* floor)
 {
-    destroy_texture(floor->grass);
-    destroy_texture(floor->lava);
-    destroy_texture(floor->water);
-    destroy_texture(floor->rock);
-    destroy_texture(floor->stone);
     destroy_texture(floor->metal);
     destroy_texture(floor->metal_spikes);
+    destroy_texture(floor->metal_lava_crack);
+    destroy_texture(floor->lava);
+    destroy_texture(floor->ice);
+    destroy_texture(floor->ice_water_crack);
+    destroy_texture(floor->water);
 }
 
 void load_textures_highlight (Renderer* renderer, Textures_Highlight* highlight)
@@ -121,14 +121,18 @@ void destroy_textures_blow_up (Textures_BlowUp* blow_up)
 
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
-    object->hero = load_texture_from_filepath (renderer, "./object/hero.png");
     object->pillar = load_texture_from_filepath (renderer, "./object/pillar.png");
+    object->barrel = load_texture_from_filepath (renderer, "./object/barrel.png");
+    object->spring = load_texture_from_filepath (renderer, "./object/spring.png");
+    object->hero = load_texture_from_filepath (renderer, "./object/hero.png");
     object->goat = load_texture_from_filepath (renderer, "./object/goat.png");
     object->spider = load_texture_from_filepath (renderer, "./object/spider.png");
 }
 void destroy_textures_object (Textures_Object* object)
 {
     destroy_texture(object->pillar);
+    destroy_texture(object->barrel);
+    destroy_texture(object->spring);
     destroy_texture(object->hero);
     destroy_texture(object->goat);
     destroy_texture(object->spider);

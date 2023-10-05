@@ -17,13 +17,35 @@ void destroy_object(Object* object)
     free(object);
 }
 
-Texture* get_texture_from_object_type(int type, Textures* textures)
+char* get_name_from_object_type(int object_type)
+{
+    char* name = "";
+
+    switch(object_type)
+    {
+        case OBJECT_TYPE__NONE: name = "none"; break;
+        case OBJECT_TYPE__PILLAR: name = "pillar"; break;
+        case OBJECT_TYPE__BARREL: name = "barrel"; break;
+        case OBJECT_TYPE__SPRING: name = "spring"; break;
+        case OBJECT_TYPE__HERO: name = "hero"; break;
+        case OBJECT_TYPE__GOAT: name = "goat"; break;
+        case OBJECT_TYPE__SPIDER: name = "spider"; break;
+        default: break;
+    }
+
+    return name;
+}
+
+Texture* get_texture_from_object_type(int object_type, Textures* textures)
 {
     Texture* texture = 0;
 
-    switch(type)
+    switch(object_type)
     {
+        case OBJECT_TYPE__NONE: texture = 0; break;
         case OBJECT_TYPE__PILLAR: texture = textures->object.pillar; break;
+        case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
+        case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
         case OBJECT_TYPE__HERO: texture = textures->object.hero; break;
         case OBJECT_TYPE__GOAT: texture = textures->object.goat; break;
         case OBJECT_TYPE__SPIDER: texture = textures->object.spider; break;

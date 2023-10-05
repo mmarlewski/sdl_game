@@ -56,6 +56,9 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
                 );
                 action->animation = animation;
                 start_animation(state, action->animation, textures, sounds, musics);
+
+                int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
+                floor_on_move_start(state, action, floor);
             }
         }
         break;
@@ -87,6 +90,9 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
                 
                 action->animation = animation;
                 start_animation(state, action->animation, textures, sounds, musics);
+
+                int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
+                floor_on_push_start(state, action, floor);
             }
         }
         break;

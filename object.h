@@ -10,6 +10,8 @@ enum OBJECT_TYPE
     OBJECT_TYPE__NONE,
 
     OBJECT_TYPE__PILLAR,
+    OBJECT_TYPE__BARREL,
+    OBJECT_TYPE__SPRING,
     OBJECT_TYPE__HERO,
     OBJECT_TYPE__GOAT,
     OBJECT_TYPE__SPIDER,
@@ -31,6 +33,7 @@ struct _Object
 Object* new_object(int type);
 void destroy_object(Object* object);
 
+char* get_name_from_object_type(int object_type);
 Texture* get_texture_from_object_type(int type, Textures* textures);
 
 #endif

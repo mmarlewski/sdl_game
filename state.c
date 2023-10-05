@@ -344,16 +344,6 @@ void floor_on_move_end(State* state, Action* action, int floor)
 {
     switch(floor)
     {
-        case FLOOR_TYPE__ROCK:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__STONE:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__METAL:
         {
             //
@@ -366,19 +356,33 @@ void floor_on_move_end(State* state, Action* action, int floor)
             add_action_to_end_after_action(action, new_action_death(action->move.object));
         }
         break;
-        case FLOOR_TYPE__GRASS:
+        case FLOOR_TYPE__METAL_LAVA_CRACK:
         {
             //
         }
         break;
-        case FLOOR_TYPE__WATER:
+        case FLOOR_TYPE__LAVA:
         {
             remove_all_actions_after_action(action);
 
             add_action_to_end_after_action(action, new_action_fall(action->move.object));
         }
         break;
-        case FLOOR_TYPE__LAVA:
+        case FLOOR_TYPE__ICE:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_after_action(action, new_action_push(action->move.object, action->move.dir4));
+        }
+        break;
+        case FLOOR_TYPE__ICE_WATER_CRACK:
+        {
+            remove_all_actions_after_action(action);
+            
+            add_action_after_action(action, new_action_push(action->move.object, action->move.dir4));
+        }
+        break;
+        case FLOOR_TYPE__WATER:
         {
             remove_all_actions_after_action(action);
 
@@ -394,16 +398,6 @@ void floor_on_push_end(State* state, Action* action, int floor)
 {
     switch(floor)
     {
-        case FLOOR_TYPE__ROCK:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__STONE:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__METAL:
         {
             //
@@ -416,19 +410,33 @@ void floor_on_push_end(State* state, Action* action, int floor)
             add_action_to_end_after_action(action, new_action_death(action->push.object));
         }
         break;
-        case FLOOR_TYPE__GRASS:
+        case FLOOR_TYPE__METAL_LAVA_CRACK:
         {
             //
         }
         break;
-        case FLOOR_TYPE__WATER:
+        case FLOOR_TYPE__LAVA:
         {
             remove_all_actions_after_action(action);
 
             add_action_to_end_after_action(action, new_action_fall(action->push.object));
         }
         break;
-        case FLOOR_TYPE__LAVA:
+        case FLOOR_TYPE__ICE:
+        {
+            remove_all_actions_after_action(action);
+            
+            add_action_after_action(action, new_action_push(action->push.object, action->push.dir4));
+        }
+        break;
+        case FLOOR_TYPE__ICE_WATER_CRACK:
+        {
+            remove_all_actions_after_action(action);
+            
+            add_action_after_action(action, new_action_push(action->push.object, action->push.dir4));
+        }
+        break;
+        case FLOOR_TYPE__WATER:
         {
             remove_all_actions_after_action(action);
 
@@ -440,11 +448,111 @@ void floor_on_push_end(State* state, Action* action, int floor)
     }
 }
 
-void object_on_death(State* state, Action* action, int object_type)
+
+
+void floor_on_move_start(State* state, Action* action, int floor)
 {
-    switch(object_type)
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL_SPIKES:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        {
+            change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__LAVA:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__ICE:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__ICE_WATER_CRACK:
+        {
+            change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        {
+            //
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void floor_on_push_start(State* state, Action* action, int floor)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL_SPIKES:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        {
+            change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->push.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__LAVA:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__ICE:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__ICE_WATER_CRACK:
+        {
+            change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->push.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        {
+            //
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_crashing(State* state, Action* action, Object* object)
+{
+    switch(object->type)
     {
         case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_after_action(action, new_action_death(object));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
         {
             //
         }
@@ -461,7 +569,87 @@ void object_on_death(State* state, Action* action, int object_type)
         break;
         case OBJECT_TYPE__SPIDER:
         {
-            add_action_to_end_after_action(action, new_action_blow_up(action->death.object->tilemap_pos));
+            //
+        }
+        break;
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_crashed(State* state, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_after_action(action, new_action_death(object));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
+        {
+            add_action_after_action(action, new_action_push(object, action->crash.dir4));
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            //
+        }
+        break;
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_death(State* state, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_after_action(action, new_action_blow_up(object->tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            //
         }
         break;
         break;

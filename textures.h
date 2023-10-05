@@ -6,13 +6,13 @@
 
 typedef struct
 {
-    Texture* grass;
-    Texture* lava;
-    Texture* water;
-    Texture* rock;
-    Texture* stone;
     Texture* metal;
     Texture* metal_spikes;
+    Texture* metal_lava_crack;
+    Texture* lava;
+    Texture* ice;
+    Texture* ice_water_crack;
+    Texture* water;
 
 } Textures_Floor;
 
@@ -98,6 +98,8 @@ void destroy_textures_blow_up (Textures_BlowUp* blow_up);
 typedef struct
 {
     Texture* pillar;
+    Texture* barrel;
+    Texture* spring;
     Texture* hero;
     Texture* goat;
     Texture* spider;

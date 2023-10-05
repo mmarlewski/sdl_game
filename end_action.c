@@ -54,6 +54,28 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             action->crash.object->is_visible = 1;
 
             end_animation(state, action->animation, textures, sounds, musics);
+
+            Action* crushed_action = new_action_crash(action->crash.object, action->crash.dir4);
+            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash.object->tilemap_pos, action->crash.dir4, 1));
+            object_on_crashed(state, crushed_action, crushed_object);
+
+            Action* crushing_action = new_action_crash(action->crash.object, action->crash.dir4);
+            Object* crushing_object = action->crash.object;
+            object_on_crashing(state, crushing_action, crushing_object);
+
+            Action* action_1 = new_action_none();
+            Action* action_2 = new_action_none();
+            if(crushing_action->next)
+            {
+                destroy_action(action_1);
+                action_1 = crushing_action->next;
+            }
+            if(crushed_action->next)
+            {
+                destroy_action(action_2);
+                action_2 = crushed_action->next;
+            }
+            add_action_after_action(action, new_action_simultaneous_of_2(action_1, action_2));
         }
         break;
         case ACTION_TYPE__FALL:
@@ -69,8 +91,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            int object_type = action->death.object->type;
-            object_on_death(state, action, object_type);
+            object_on_death(state, action, action->death.object);
             
             remove_object_from_gamemap_objects(state, action->death.object);
         }

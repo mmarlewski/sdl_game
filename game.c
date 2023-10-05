@@ -236,6 +236,11 @@ int main (int argc, char* argv[])
 
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(5,5));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_SPIKES, make_vec2i(8,7));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_LAVA_CRACK, make_vec2i(8,3));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__WATER, make_vec2i(4,2));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE_WATER_CRACK, make_vec2i(5,2));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(6,2));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(7,2));
 
     Object* object_hero = new_object(OBJECT_TYPE__HERO);
     object_hero->tilemap_pos = make_vec2i(10,5);
@@ -273,13 +278,29 @@ int main (int argc, char* argv[])
     object_pillar_8->tilemap_pos = make_vec2i(10,7);
     add_object_to_gamemap_objects(&state, object_pillar_8);
 
-    Object* object_spider_1 = new_object(OBJECT_TYPE__SPIDER);
-    object_spider_1->tilemap_pos = make_vec2i(7,5);
-    add_object_to_gamemap_objects(&state, object_spider_1);
+    Object* object_spring_1 = new_object(OBJECT_TYPE__SPRING);
+    object_spring_1->tilemap_pos = make_vec2i(8,2);
+    add_object_to_gamemap_objects(&state, object_spring_1);
 
-    Object* object_spider_2 = new_object(OBJECT_TYPE__SPIDER);
-    object_spider_2->tilemap_pos = make_vec2i(8,5);
-    add_object_to_gamemap_objects(&state, object_spider_2);
+    Object* object_spring_2 = new_object(OBJECT_TYPE__SPRING);
+    object_spring_2->tilemap_pos = make_vec2i(9,2);
+    add_object_to_gamemap_objects(&state, object_spring_2);
+
+    Object* object_spring_3 = new_object(OBJECT_TYPE__SPRING);
+    object_spring_3->tilemap_pos = make_vec2i(10,2);
+    add_object_to_gamemap_objects(&state, object_spring_3);
+
+    Object* object_spring_4 = new_object(OBJECT_TYPE__SPRING);
+    object_spring_4->tilemap_pos = make_vec2i(11,2);
+    add_object_to_gamemap_objects(&state, object_spring_4);
+
+    Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
+    object_barrel_1->tilemap_pos = make_vec2i(7,5);
+    add_object_to_gamemap_objects(&state, object_barrel_1);
+
+    Object* object_barrel_2 = new_object(OBJECT_TYPE__BARREL);
+    object_barrel_2->tilemap_pos = make_vec2i(8,5);
+    add_object_to_gamemap_objects(&state, object_barrel_2);
 
     state.gamemap.object_hero = object_hero;
 
