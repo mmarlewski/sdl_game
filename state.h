@@ -135,9 +135,12 @@ void floor_on_move_end(State* state, Action* action_sequence, int floor);
 void floor_on_push_end(State* state, Action* action_sequence, int floor);
 void floor_on_move_start(State* state, Action* action_sequence, int floor);
 void floor_on_push_start(State* state, Action* action_sequence, int floor);
+void floor_on_drop(State* state, Action* action_sequence, int floor);
+
 void object_on_crashing(State* state, Action* action_sequence, Object* object);
 void object_on_crashed(State* state, Action* action_sequence, Object* object);
 void object_on_death(State* state, Action* action_sequence, Object* object);
+void object_on_drop(State* state, Action* action_sequence, Object* object);
 
 void skill_add_pos_to_possible_target_1_tilemap_pos(State* state, int skill, vec2i source_tilemap_pos);
 void skill_add_pos_to_possible_target_2_tilemap_pos(State* state, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos);

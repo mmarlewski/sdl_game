@@ -225,6 +225,39 @@ Action* new_action_blow_up(vec2i tilemap_pos)
     return action;
 }
 
+Action* new_action_throw(Object* object, vec2i tilemap_pos, int dir4, int distance)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->next = 0;
+    action->animation = 0;
+    action->is_finished = 0;
+    action->type = ACTION_TYPE__THROW;
+
+    action->throw.object = object;
+    action->throw.tilemap_pos = tilemap_pos;
+    action->throw.dir4 = dir4;
+    action->throw.distance = distance;
+
+    return action;
+}
+
+Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->next = 0;
+    action->animation = 0;
+    action->is_finished = 0;
+    action->type = ACTION_TYPE__DROP;
+
+    action->drop.object = object;
+    action->drop.tilemap_pos = tilemap_pos;
+    action->drop.dir4 = dir4;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     free(action);
@@ -245,6 +278,8 @@ char* get_action_name_from_type(int action_type)
         case ACTION_TYPE__FALL:         name = "fall";          break;
         case ACTION_TYPE__DEATH:        name = "death";         break;
         case ACTION_TYPE__BLOW_UP:      name = "blow up";       break;
+        case ACTION_TYPE__THROW:        name = "throw";         break;
+        case ACTION_TYPE__DROP:         name = "drop";          break;
         case ACTION_TYPE__COUNT:        name = "count";         break;
         default: break;
     }

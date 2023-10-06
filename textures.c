@@ -119,6 +119,15 @@ void destroy_textures_blow_up (Textures_BlowUp* blow_up)
     destroy_texture(blow_up->explosion);
 }
 
+void load_textures_drop (Renderer* renderer, Textures_Drop* drop)
+{
+    drop->thump = load_texture_from_filepath (renderer, "./drop/thump.png");
+}
+void destroy_textures_drop (Textures_Drop* drop)
+{
+    destroy_texture(drop->thump);
+}
+
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
     object->pillar = load_texture_from_filepath (renderer, "./object/pillar.png");
@@ -149,6 +158,7 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_push(renderer,&textures->push);
     load_textures_crash(renderer,&textures->crash);
     load_textures_blow_up(renderer,&textures->blow_up);
+    load_textures_drop(renderer,&textures->drop);
 
     load_textures_object(renderer,&textures->object);
 }
@@ -164,6 +174,7 @@ void destroy_textures (Textures* textures)
     destroy_textures_push (&textures->push);
     destroy_textures_crash (&textures->crash);
     destroy_textures_blow_up (&textures->blow_up);
+    destroy_textures_drop (&textures->drop);
 
     destroy_textures_object (&textures->object);
 }

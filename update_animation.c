@@ -111,7 +111,10 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             vec2f sprite_gamemap_pos;
             sprite_gamemap_pos.x = animation_animation.from_gamemap_pos.x + gamemap_diff.x * time_ratio;
             sprite_gamemap_pos.y = animation_animation.from_gamemap_pos.y + gamemap_diff.y * time_ratio;
-            animation_animation.sprite->gamemap_pos = sprite_gamemap_pos;
+            vec2f sprite_world_pos;
+            sprite_world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(sprite_gamemap_pos));
+            sprite_world_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
+            animation_animation.sprite->gamemap_pos = world_pos_to_gamemap_pos(iso_pos_to_cart_pos(sprite_world_pos));
             animation_animation.time += delta_time;
 
             animation->move_sprite_in_gamemap_in_arch = animation_animation;
@@ -138,7 +141,6 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             vec2f origin_gamemap_pos = tilemap_pos_to_gamemap_pos(animation_animation.tilemap_pos);
             vec2f origin_world_pos = gamemap_pos_to_world_pos(origin_gamemap_pos);
             vec2f origin_iso_pos = cart_pos_to_iso_pos(origin_world_pos);
-            origin_iso_pos.x += TILE_LENGTH * 0.5f;
             vec2f new_iso_pos = origin_iso_pos;
             new_iso_pos.y -= TILE_LENGTH * animation_animation.length * time_ratio;
             vec2f new_world_pos = iso_pos_to_cart_pos(new_iso_pos);
@@ -159,7 +161,6 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             vec2f origin_gamemap_pos = tilemap_pos_to_gamemap_pos(animation_animation.tilemap_pos);
             vec2f origin_world_pos = gamemap_pos_to_world_pos(origin_gamemap_pos);
             vec2f origin_iso_pos = cart_pos_to_iso_pos(origin_world_pos);
-            origin_iso_pos.x += TILE_LENGTH * 0.5f;
             origin_iso_pos.y -= TILE_LENGTH * animation_animation.length;
             vec2f new_iso_pos = origin_iso_pos;
             new_iso_pos.y += TILE_LENGTH * animation_animation.length * time_ratio;
@@ -182,7 +183,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             vec2f origin_world_pos = gamemap_pos_to_world_pos(origin_gamemap_pos);
             vec2f origin_iso_pos = cart_pos_to_iso_pos(origin_world_pos);
             vec2f new_iso_pos;
-            new_iso_pos.x = origin_iso_pos.x + TILE_LENGTH * 0.5f;
+            new_iso_pos.x = origin_iso_pos.x;
             new_iso_pos.y = origin_iso_pos.y + TILE_LENGTH * animation_animation.length * time_ratio;
             vec2f new_world_pos = iso_pos_to_cart_pos(new_iso_pos);
             vec2f new_gamemap_pos = world_pos_to_gamemap_pos(new_world_pos);
@@ -263,10 +264,10 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             vec2f camera_gamemap_pos;
             camera_gamemap_pos.x = animation_animation.from_gamemap_pos.x + gamemap_diff.x * time_ratio;
             camera_gamemap_pos.y = animation_animation.from_gamemap_pos.y + gamemap_diff.y * time_ratio;
-            vec2f camera_cart_pos;
-            camera_cart_pos = gamemap_pos_to_world_pos(camera_gamemap_pos);
-            camera_cart_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
-            state->camera.world_pos = camera_cart_pos;
+            vec2f camera_world_pos;
+            camera_world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(camera_gamemap_pos));
+            camera_world_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
+            state->camera.world_pos = camera_world_pos;
             animation_animation.time += delta_time;
 
             animation->move_camera_in_gamemap_in_arch = animation_animation;

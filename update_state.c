@@ -26,6 +26,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     mouse_screen_pos = make_vec2i(input->mouse_x, input->mouse_y);
     mouse_world_pos = screen_pos_to_world_pos(mouse_screen_pos, state->camera.world_pos, state->camera.zoom);
+    mouse_world_pos.x -= TILE_LENGTH * 0.5f;
     mouse_gamemap_pos = world_pos_to_gamemap_pos(iso_pos_to_cart_pos(mouse_world_pos));
     mouse_tilemap_pos = gamemap_pos_to_tilemap_pos(mouse_gamemap_pos);
 
@@ -78,8 +79,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             int skill = SKILL__NONE;
 
             if(input->was_up && !input->is_up) skill = SKILL__MOVE;
-            if(input->was_right && !input->is_right) skill = SKILL__CHARGE;
-            if(input->was_down && !input->is_down) skill = SKILL__PUSH;
+            if(input->was_right && !input->is_right) skill = SKILL__PUSH;
+            if(input->was_down && !input->is_down) skill = SKILL__THROW;
             if(input->was_left && !input->is_left) skill = SKILL__PULL;
 
             state->gamemap.curr_skill = skill;

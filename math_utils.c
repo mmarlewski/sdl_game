@@ -25,7 +25,6 @@ vec2f cart_pos_to_iso_pos(vec2f cart_pos)
 
     iso_pos.x = cart_pos.x - cart_pos.y;
     iso_pos.y = cart_pos.x * 0.5f + cart_pos.y * 0.5f;
-    iso_pos.x -= TILE_LENGTH * 0.5f;
 
     return iso_pos;
 }

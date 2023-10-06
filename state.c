@@ -538,6 +538,66 @@ void floor_on_push_start(State* state, Action* action, int floor)
     }
 }
 
+void floor_on_drop(State* state, Action* action, int floor)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL_SPIKES:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_to_end_after_action(action, new_action_death(action->drop.object));
+        }
+        break;
+        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        {
+            remove_all_actions_after_action(action);
+
+            change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->drop.tilemap_pos);
+
+            add_action_after_action(action, new_action_fall(action->drop.object));
+        }
+        break;
+        case FLOOR_TYPE__LAVA:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_after_action(action, new_action_fall(action->drop.object));
+        }
+        break;
+        case FLOOR_TYPE__ICE:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_after_action(action, new_action_push(action->drop.object, action->drop.dir4));
+        }
+        break;
+        case FLOOR_TYPE__ICE_WATER_CRACK:
+        {
+            remove_all_actions_after_action(action);
+
+            change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->drop.tilemap_pos);
+
+            add_action_after_action(action, new_action_fall(action->drop.object));
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        {
+            remove_all_actions_after_action(action);
+
+            add_action_after_action(action, new_action_fall(action->drop.object));
+        }
+        break;
+        default:
+        break;
+    }
+}
+
 void object_on_crashing(State* state, Action* action, Object* object)
 {
     switch(object->type)
@@ -635,6 +695,46 @@ void object_on_death(State* state, Action* action, Object* object)
         case OBJECT_TYPE__SPRING:
         {
             //
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            //
+        }
+        break;
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_drop(State* state, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_after_action(action, new_action_death(object));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
+        {
+            add_action_after_action(action, new_action_push(action->drop.object, action->drop.dir4));
         }
         break;
         case OBJECT_TYPE__HERO:

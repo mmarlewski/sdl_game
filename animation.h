@@ -72,6 +72,7 @@ typedef struct
     vec2f from_gamemap_pos;
     vec2f to_gamemap_pos;
     float seconds;
+    float sin_mul;
 
 } Animation_MoveSpriteInGamemapInArch;
 
@@ -218,7 +219,7 @@ Animation* new_animation_simultaneous_of_3(Animation* animation_1, Animation* an
 void add_animation_to_end_animation_simultaneous(Animation* animation_simultaneous, Animation* new_animation);
 
 Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds);
-Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds);
+Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds, float sin_mul);
 
 Animation* new_animation_show_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float seconds);
 Animation* new_animation_ascend_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds);

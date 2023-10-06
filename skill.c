@@ -10,6 +10,7 @@ int is_skill_two_target(int skill)
         case SKILL__CHARGE: is = 1; break;
         case SKILL__PUSH: is = 1; break;
         case SKILL__PULL: is = 1; break;
+        case SKILL__THROW: is = 1; break;
         default: break;
     }
 
@@ -75,6 +76,14 @@ void skill_add_pos_to_possible_target_1_tilemap_pos(State* state, int skill, vec
                         add_pos_to_possible_target_1_tilemap_pos(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
                     }
                     break;
+                        case SKILL__THROW:
+                        {
+                            add_pos_to_possible_target_1_tilemap_pos(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1));
+                            add_pos_to_possible_target_1_tilemap_pos(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1));
+                            add_pos_to_possible_target_1_tilemap_pos(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1));
+                            add_pos_to_possible_target_1_tilemap_pos(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1));
+                        }
+                        break;
                     default:
                     break;
                 }
@@ -155,6 +164,28 @@ void skill_add_pos_to_possible_target_2_tilemap_pos(State* state, int skill, vec
                             for(int i = 1; i < diff; i++)
                             {
                                 add_pos_to_possible_target_2_tilemap_pos(state, new_vec2i_move_in_dir4_by(target_1_tilemap_pos, dir4, -i));
+                            }
+                        }
+                        break;
+                        case SKILL__THROW:
+                        {
+                            int x_diff = get_x_diff_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
+                            int y_diff = get_y_diff_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
+                            int dir4 = get_dir4_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
+
+                            int diff = 0;
+                            switch(dir4)
+                            {
+                                case DIR4__UP: diff = -y_diff; break;
+                                case DIR4__RIGHT: diff = x_diff; break;
+                                case DIR4__DOWN: diff = y_diff; break;
+                                case DIR4__LEFT: diff = -x_diff; break;
+                                default: break;
+                            }
+                            
+                            for(int i = 0; i < 5; i++)
+                            {
+                                add_pos_to_possible_target_2_tilemap_pos(state, new_vec2i_move_in_dir4_by(target_1_tilemap_pos, dir4, i+1));
                             }
                         }
                         break;
@@ -287,6 +318,28 @@ void skill_get_actions_to_execute(State* state, Action* action, int skill, vec2i
                             }
                         }
                         break;
+                        case SKILL__THROW:
+                        {
+                            if(target_1_object && !target_2_object)
+                            {
+                                int x_diff = get_x_diff_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
+                                int y_diff = get_y_diff_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
+                                int dir4 = get_dir4_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
+
+                                int diff = 0;
+                                switch(dir4)
+                                {
+                                    case DIR4__UP: diff = -y_diff; break;
+                                    case DIR4__RIGHT: diff = x_diff; break;
+                                    case DIR4__DOWN: diff = y_diff; break;
+                                    case DIR4__LEFT: diff = -x_diff; break;
+                                    default: break;
+                                }
+
+                                add_action_to_end_after_action(action, new_action_throw(target_1_object, target_1_tilemap_pos, dir4, diff));
+                            }
+                        }
+                        break;
                         default:
                         break;
                     }
@@ -303,6 +356,7 @@ char* get_skill_name(int skill)
         case SKILL__CHARGE: name = "charge";    break;
         case SKILL__PUSH:   name = "push";      break;
         case SKILL__PULL:   name = "pull";      break;
+        case SKILL__THROW:   name = "throw";      break;
         default: break;
     }
 

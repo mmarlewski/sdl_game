@@ -125,6 +125,20 @@ void update_action(State* state, Action* action, float delta_time, Textures* tex
             action->is_finished = (action->animation->is_finished);
         }
         break;
+        case ACTION_TYPE__THROW:
+        {
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
+
+            action->is_finished = (action->animation->is_finished);
+        }
+        break;
+        case ACTION_TYPE__DROP:
+        {
+            update_animation(state, action->animation, delta_time, textures, sounds, musics);
+
+            action->is_finished = (action->animation->is_finished);
+        }
+        break;
         default:
         break;
     }

@@ -72,12 +72,12 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
 
             if(object_on_next_tilemap_pos)
             {
-                Action* crash = new_action_crash(action->push.object, action->push.dir4);
                 remove_all_actions_after_action(action);
-                add_action_after_action(action, crash);
+                add_action_after_action(action, new_action_crash(action->push.object, action->push.dir4));
 
                 action->is_finished = 1;
                 action->push.is_move_blocked = 1;
+                printf("-- CRASH -- \n");
             }
             else
             {
@@ -158,6 +158,39 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
             Animation* animation = new_animation_show_sprite_in_tilemap(
                 textures->blow_up.explosion,
                 action->blow_up.tilemap_pos,
+                0.2f
+                );
+
+            action->animation = animation;
+
+            start_animation(state, action->animation, textures, sounds, musics);
+        }
+        break;
+        case ACTION_TYPE__THROW:
+        {
+            action->throw.object->is_visible = 0;
+
+            vec2i curr_tilemap_pos = action->throw.object->tilemap_pos;
+            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->throw.dir4,action->throw.distance);
+
+            Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
+                get_texture_from_object_type(action->throw.object->type, textures),
+                tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
+                tilemap_pos_to_gamemap_pos(next_tilemap_pos),
+                1.0f,
+                2.0f
+                );
+
+            action->animation = animation;
+
+            start_animation(state, action->animation, textures, sounds, musics);
+        }
+        break;
+        case ACTION_TYPE__DROP:
+        {
+            Animation* animation = new_animation_show_sprite_in_tilemap(
+                textures->drop.thump,
+                action->drop.tilemap_pos,
                 0.2f
                 );
 

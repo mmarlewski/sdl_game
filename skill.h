@@ -12,6 +12,7 @@ enum SKILL
     SKILL__CHARGE,
     SKILL__PUSH,
     SKILL__PULL,
+    SKILL__THROW,
 
     SKILL__COUNT
 };

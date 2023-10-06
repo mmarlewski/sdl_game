@@ -29,10 +29,10 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             {
                 action->move.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
                 end_animation(state, action->animation, textures, sounds, musics);
-            }
 
-            int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
-            floor_on_move_end(state, action, floor);
+                int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
+                floor_on_move_end(state, action, floor);
+            }
         }
         break;
         case ACTION_TYPE__PUSH:
@@ -43,10 +43,10 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             {
                 action->push.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->push.object->tilemap_pos,action->push.dir4,1);
                 end_animation(state, action->animation, textures, sounds, musics);
-            }
 
-            int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
-            floor_on_push_end(state, action, floor);
+                int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
+                floor_on_push_end(state, action, floor);
+            }
         }
         break;
         case ACTION_TYPE__CRASH:
@@ -124,6 +124,29 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
                 add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_push(object_left, DIR4__LEFT)));
             }
             add_action_after_action(action, push_around);
+        }
+        break;
+        case ACTION_TYPE__THROW:
+        {
+            end_animation(state, action->animation, textures, sounds, musics);
+
+            vec2i curr_tilemap_pos = action->throw.object->tilemap_pos;
+            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
+
+            action->throw.object->is_visible = 1;
+            action->throw.object->tilemap_pos = next_tilemap_pos;
+
+            add_action_after_action(action, new_action_drop(action->throw.object, next_tilemap_pos, action->throw.dir4));
+        }
+        break;
+        case ACTION_TYPE__DROP:
+        {
+            object_on_drop(state, action, action->drop.object);
+
+            end_animation(state, action->animation, textures, sounds, musics);
+
+            int floor = get_floor_on_tilemap_pos(state, action->drop.object->tilemap_pos);
+            floor_on_drop(state, action, floor);
         }
         break;
         default:

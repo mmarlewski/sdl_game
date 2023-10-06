@@ -138,7 +138,7 @@ Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, vec2f 
     return animation;
 }
 
-Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds)
+Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds, float sin_mul)
 {
     Animation* animation = malloc(sizeof(* animation));
 
@@ -153,6 +153,7 @@ Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f 
     animation->move_sprite_in_gamemap_in_arch.from_gamemap_pos = from_gamemap_pos;
     animation->move_sprite_in_gamemap_in_arch.to_gamemap_pos = to_gamemap_pos;
     animation->move_sprite_in_gamemap_in_arch.seconds = seconds;
+    animation->move_sprite_in_gamemap_in_arch.sin_mul = sin_mul;
 
     return animation;
 }

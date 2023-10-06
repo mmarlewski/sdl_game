@@ -97,6 +97,15 @@ void destroy_textures_blow_up (Textures_BlowUp* blow_up);
 
 typedef struct
 {
+    Texture* thump;
+
+} Textures_Drop;
+
+void load_textures_drop (Renderer* renderer, Textures_Drop* drop);
+void destroy_textures_drop (Textures_Drop* drop);
+
+typedef struct
+{
     Texture* pillar;
     Texture* barrel;
     Texture* spring;
@@ -120,6 +129,7 @@ typedef struct
     Textures_Push push;
     Textures_Crash crash;
     Textures_BlowUp blow_up;
+    Textures_Drop drop;
 
     Textures_Object object;
     
