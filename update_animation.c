@@ -122,23 +122,23 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:
         {
-            Animation_ShowSpriteInTilemap animation_animation = animation->show_sprite_in_tilemap;
+            Animation_ShowSpriteInGamemap animation_animation = animation->show_sprite_in_gamemap;
 
             animation_animation.time += delta_time;
 
-            animation->show_sprite_in_tilemap = animation_animation;
+            animation->show_sprite_in_gamemap = animation_animation;
 
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:
         {
-            Animation_AscendSpriteInTilemap animation_animation = animation->ascend_sprite_in_tilemap;
+            Animation_AscendSpriteInGamemap animation_animation = animation->ascend_sprite_in_gamemap;
 
             float time_ratio = animation_animation.time / animation_animation.seconds;
-            vec2f origin_gamemap_pos = tilemap_pos_to_gamemap_pos(animation_animation.tilemap_pos);
+            vec2f origin_gamemap_pos = animation_animation.gamemap_pos;
             vec2f origin_world_pos = gamemap_pos_to_world_pos(origin_gamemap_pos);
             vec2f origin_iso_pos = cart_pos_to_iso_pos(origin_world_pos);
             vec2f new_iso_pos = origin_iso_pos;
@@ -148,17 +148,17 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation_animation.sprite->gamemap_pos = new_gamemap_pos;
             animation_animation.time += delta_time;
 
-            animation->ascend_sprite_in_tilemap = animation_animation;
+            animation->ascend_sprite_in_gamemap = animation_animation;
 
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:
         {
-            Animation_DescendSpriteInTilemap animation_animation = animation->descend_sprite_in_tilemap;
+            Animation_DescendSpriteInGamemap animation_animation = animation->descend_sprite_in_gamemap;
 
             float time_ratio = animation_animation.time / animation_animation.seconds;
-            vec2f origin_gamemap_pos = tilemap_pos_to_gamemap_pos(animation_animation.tilemap_pos);
+            vec2f origin_gamemap_pos = animation_animation.gamemap_pos;
             vec2f origin_world_pos = gamemap_pos_to_world_pos(origin_gamemap_pos);
             vec2f origin_iso_pos = cart_pos_to_iso_pos(origin_world_pos);
             origin_iso_pos.y -= TILE_LENGTH * animation_animation.length;
@@ -169,17 +169,17 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation_animation.sprite->gamemap_pos = new_gamemap_pos;
             animation_animation.time += delta_time;
 
-            animation->descend_sprite_in_tilemap = animation_animation;
+            animation->descend_sprite_in_gamemap = animation_animation;
 
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:
         {
-            Animation_FallSpriteInTilemap animation_animation = animation->fall_sprite_in_tilemap;
+            Animation_FallSpriteInGamemap animation_animation = animation->fall_sprite_in_gamemap;
 
             float time_ratio = animation_animation.time / animation_animation.seconds;
-            vec2f origin_gamemap_pos = tilemap_pos_to_gamemap_pos(animation_animation.tilemap_pos);
+            vec2f origin_gamemap_pos = animation_animation.gamemap_pos;
             vec2f origin_world_pos = gamemap_pos_to_world_pos(origin_gamemap_pos);
             vec2f origin_iso_pos = cart_pos_to_iso_pos(origin_world_pos);
             vec2f new_iso_pos;
@@ -190,7 +190,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation_animation.sprite->gamemap_pos = new_gamemap_pos;
             animation_animation.time += delta_time;
 
-            animation->fall_sprite_in_tilemap = animation_animation;
+            animation->fall_sprite_in_gamemap = animation_animation;
 
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }

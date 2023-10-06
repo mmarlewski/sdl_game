@@ -30,24 +30,24 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
             remove_sprite_from_gamemap_sprites(state, animation->move_sprite_in_gamemap_in_arch.sprite);
         }
         break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:
         {
-            remove_sprite_from_gamemap_sprites(state, animation->show_sprite_in_tilemap.sprite);
+            remove_sprite_from_gamemap_sprites(state, animation->show_sprite_in_gamemap.sprite);
         }
         break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:
         {
-            remove_sprite_from_gamemap_sprites(state, animation->ascend_sprite_in_tilemap.sprite);
+            remove_sprite_from_gamemap_sprites(state, animation->ascend_sprite_in_gamemap.sprite);
         }
         break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:
         {
-            remove_sprite_from_gamemap_sprites(state, animation->descend_sprite_in_tilemap.sprite);
+            remove_sprite_from_gamemap_sprites(state, animation->descend_sprite_in_gamemap.sprite);
         }
         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:
         {
-            remove_sprite_from_gamemap_sprites(state, animation->fall_sprite_in_tilemap.sprite);
+            remove_sprite_from_gamemap_sprites(state, animation->fall_sprite_in_gamemap.sprite);
         }
         break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE:

@@ -38,6 +38,8 @@ void init_sdl (Window** window, Renderer** renderer)
         exit(1);
     }
 
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+
     // audio
 
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048);

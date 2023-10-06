@@ -23,8 +23,6 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
         break;
         case ACTION_TYPE__MOVE:
         {
-            action->move.object->is_visible = 1;
-
             if(!action->move.is_move_blocked)
             {
                 action->move.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
@@ -33,12 +31,12 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
                 int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
                 floor_on_move_end(state, action, floor);
             }
+
+            action->move.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__PUSH:
         {
-            action->push.object->is_visible = 1;
-
             if(!action->push.is_move_blocked)
             {
                 action->push.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->push.object->tilemap_pos,action->push.dir4,1);
@@ -47,12 +45,12 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
                 int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
                 floor_on_push_end(state, action, floor);
             }
+
+            action->push.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__CRASH:
         {
-            action->crash.object->is_visible = 1;
-
             end_animation(state, action->animation, textures, sounds, musics);
 
             Action* crushed_action = new_action_crash(action->crash.object, action->crash.dir4);
@@ -76,15 +74,17 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
                 action_2 = crushed_action->next;
             }
             add_action_after_action(action, new_action_simultaneous_of_2(action_1, action_2));
+
+            action->crash.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__FALL:
         {
-            action->fall.object->is_visible = 1;
-
             end_animation(state, action->animation, textures, sounds, musics);
 
             add_action_after_action(action, new_action_death(action->fall.object));
+
+            action->fall.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__DEATH:
@@ -133,10 +133,11 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             vec2i curr_tilemap_pos = action->throw.object->tilemap_pos;
             vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
 
-            action->throw.object->is_visible = 1;
             action->throw.object->tilemap_pos = next_tilemap_pos;
 
             add_action_after_action(action, new_action_drop(action->throw.object, next_tilemap_pos, action->throw.dir4));
+            
+            action->throw.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__DROP:

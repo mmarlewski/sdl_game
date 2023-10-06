@@ -158,77 +158,77 @@ Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f 
     return animation;
 }
 
-Animation* new_animation_show_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float seconds)
+Animation* new_animation_show_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float seconds)
 {
     Animation* animation = malloc(sizeof(* animation));
 
     animation->next = 0;
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP;
+    animation->type = ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP;
 
-    animation->show_sprite_in_tilemap.time = 0.0f;
-    animation->show_sprite_in_tilemap.sprite = 0;
+    animation->show_sprite_in_gamemap.time = 0.0f;
+    animation->show_sprite_in_gamemap.sprite = 0;
 
-    animation->show_sprite_in_tilemap.texture = texture;
-    animation->show_sprite_in_tilemap.tilemap_pos = tilemap_pos;
-    animation->show_sprite_in_tilemap.seconds = seconds;
+    animation->show_sprite_in_gamemap.texture = texture;
+    animation->show_sprite_in_gamemap.gamemap_pos = gamemap_pos;
+    animation->show_sprite_in_gamemap.seconds = seconds;
 
     return animation;
 }
 
-Animation* new_animation_ascend_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds)
+Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds)
 {
     Animation* animation = malloc(sizeof(* animation));
 
     animation->next = 0;
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP;
+    animation->type = ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP;
 
-    animation->ascend_sprite_in_tilemap.time = 0.0f;
-    animation->ascend_sprite_in_tilemap.sprite = 0;
+    animation->ascend_sprite_in_gamemap.time = 0.0f;
+    animation->ascend_sprite_in_gamemap.sprite = 0;
 
-    animation->ascend_sprite_in_tilemap.texture = texture;
-    animation->ascend_sprite_in_tilemap.tilemap_pos = tilemap_pos;
-    animation->ascend_sprite_in_tilemap.length = length;
-    animation->ascend_sprite_in_tilemap.seconds = seconds;
+    animation->ascend_sprite_in_gamemap.texture = texture;
+    animation->ascend_sprite_in_gamemap.gamemap_pos = gamemap_pos;
+    animation->ascend_sprite_in_gamemap.length = length;
+    animation->ascend_sprite_in_gamemap.seconds = seconds;
 
     return animation;
 }
 
-Animation* new_animation_descend_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds)
+Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds)
 {
     Animation* animation = malloc(sizeof(* animation));
 
     animation->next = 0;
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP;
+    animation->type = ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP;
 
-    animation->descend_sprite_in_tilemap.time = 0.0f;
-    animation->descend_sprite_in_tilemap.sprite = 0;
+    animation->descend_sprite_in_gamemap.time = 0.0f;
+    animation->descend_sprite_in_gamemap.sprite = 0;
 
-    animation->descend_sprite_in_tilemap.texture = texture;
-    animation->descend_sprite_in_tilemap.tilemap_pos = tilemap_pos;
-    animation->descend_sprite_in_tilemap.length = length;
-    animation->descend_sprite_in_tilemap.seconds = seconds;
+    animation->descend_sprite_in_gamemap.texture = texture;
+    animation->descend_sprite_in_gamemap.gamemap_pos = gamemap_pos;
+    animation->descend_sprite_in_gamemap.length = length;
+    animation->descend_sprite_in_gamemap.seconds = seconds;
 
     return animation;
 }
 
-Animation* new_animation_fall_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds)
+Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds)
 {
     Animation* animation = malloc(sizeof(* animation));
 
     animation->next = 0;
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP;
+    animation->type = ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP;
 
-    animation->fall_sprite_in_tilemap.time = 0.0f;
-    animation->fall_sprite_in_tilemap.sprite = 0;
+    animation->fall_sprite_in_gamemap.time = 0.0f;
+    animation->fall_sprite_in_gamemap.sprite = 0;
 
-    animation->fall_sprite_in_tilemap.texture = texture;
-    animation->fall_sprite_in_tilemap.tilemap_pos = tilemap_pos;
-    animation->fall_sprite_in_tilemap.length = length;
-    animation->fall_sprite_in_tilemap.seconds = seconds;
+    animation->fall_sprite_in_gamemap.texture = texture;
+    animation->fall_sprite_in_gamemap.gamemap_pos = gamemap_pos;
+    animation->fall_sprite_in_gamemap.length = length;
+    animation->fall_sprite_in_gamemap.seconds = seconds;
 
     return animation;
 }
@@ -352,10 +352,10 @@ char* get_animation_name_from_type(int animation_type)
         case ANIMATION_TYPE__SIMULTANEOUS:                     name = "simultaneous";                      break;
         case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:   name = "move sprite in gamemap in line";    break;
         case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:   name = "move sprite in gamemap in arch";    break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP:           name = "show sprite in tilemap";            break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP:         name = "ascend sprite in tilemap";          break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP:        name = "descend sprite in tilemap";         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP:           name = "fall sprite in tilemap";            break;
+        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:           name = "show sprite in gamemap";            break;
+        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:         name = "ascend sprite in gamemap";          break;
+        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:        name = "descend sprite in gamemap";         break;
+        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:           name = "fall sprite in gamemap";            break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE:     name = "move camera in world in line";      break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH:     name = "move camera in world in arch";      break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:   name = "move camera in gamemap in line";    break;

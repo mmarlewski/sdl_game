@@ -53,44 +53,44 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:
         {
-            animation->show_sprite_in_tilemap.time = 0.0f;
+            animation->show_sprite_in_gamemap.time = 0.0f;
 
-            Sprite* sprite = new_sprite(animation->show_sprite_in_tilemap.texture);
-            sprite->gamemap_pos = tilemap_pos_to_gamemap_pos(animation->show_sprite_in_tilemap.tilemap_pos);
-            animation->show_sprite_in_tilemap.sprite = sprite;
+            Sprite* sprite = new_sprite(animation->show_sprite_in_gamemap.texture);
+            sprite->gamemap_pos = animation->show_sprite_in_gamemap.gamemap_pos;
+            animation->show_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:
         {
-            animation->ascend_sprite_in_tilemap.time = 0.0f;
+            animation->ascend_sprite_in_gamemap.time = 0.0f;
 
-            Sprite* sprite = new_sprite(animation->ascend_sprite_in_tilemap.texture);
-            sprite->gamemap_pos = tilemap_pos_to_gamemap_pos(animation->ascend_sprite_in_tilemap.tilemap_pos);
-            animation->ascend_sprite_in_tilemap.sprite = sprite;
+            Sprite* sprite = new_sprite(animation->ascend_sprite_in_gamemap.texture);
+            sprite->gamemap_pos = animation->ascend_sprite_in_gamemap.gamemap_pos;
+            animation->ascend_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:
         {
             
-            animation->descend_sprite_in_tilemap.time = 0.0f;
+            animation->descend_sprite_in_gamemap.time = 0.0f;
 
-            Sprite* sprite = new_sprite(animation->descend_sprite_in_tilemap.texture);
-            sprite->gamemap_pos = tilemap_pos_to_gamemap_pos(animation->descend_sprite_in_tilemap.tilemap_pos);
-            animation->descend_sprite_in_tilemap.sprite = sprite;
+            Sprite* sprite = new_sprite(animation->descend_sprite_in_gamemap.texture);
+            sprite->gamemap_pos = animation->descend_sprite_in_gamemap.gamemap_pos;
+            animation->descend_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP:
+        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:
         {
-            animation->fall_sprite_in_tilemap.time = 0.0f;
+            animation->fall_sprite_in_gamemap.time = 0.0f;
 
-            Sprite* sprite = new_sprite(animation->fall_sprite_in_tilemap.texture);
-            sprite->gamemap_pos = tilemap_pos_to_gamemap_pos(animation->fall_sprite_in_tilemap.tilemap_pos);
-            animation->fall_sprite_in_tilemap.sprite = sprite;
+            Sprite* sprite = new_sprite(animation->fall_sprite_in_gamemap.texture);
+            sprite->gamemap_pos = animation->fall_sprite_in_gamemap.gamemap_pos;
+            animation->fall_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;

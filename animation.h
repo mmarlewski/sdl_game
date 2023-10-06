@@ -15,10 +15,10 @@ enum ANIMATION_TYPE
     ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE,
     ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH,
 
-    ANIMATION_TYPE__SHOW_SPRITE_IN_TILEMAP,
-    ANIMATION_TYPE__ASCEND_SPRITE_IN_TILEMAP,
-    ANIMATION_TYPE__DESCEND_SPRITE_IN_TILEMAP,
-    ANIMATION_TYPE__FALL_SPRITE_IN_TILEMAP,
+    ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP,
+    ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP,
+    ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP,
+    ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP,
 
     ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE,
     ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH,
@@ -82,10 +82,10 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2i tilemap_pos;
+    vec2f gamemap_pos;
     float seconds;
 
-} Animation_ShowSpriteInTilemap;
+} Animation_ShowSpriteInGamemap;
 
 typedef struct
 {
@@ -93,11 +93,11 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2i tilemap_pos;
+    vec2f gamemap_pos;
     float length;
     float seconds;
 
-} Animation_AscendSpriteInTilemap;
+} Animation_AscendSpriteInGamemap;
 
 typedef struct
 {
@@ -105,11 +105,11 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2i tilemap_pos;
+    vec2f gamemap_pos;
     float length;
     float seconds;
 
-} Animation_DescendSpriteInTilemap;
+} Animation_DescendSpriteInGamemap;
 
 typedef struct
 {
@@ -117,11 +117,11 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2i tilemap_pos;
+    vec2f gamemap_pos;
     float length;
     float seconds;
 
-} Animation_FallSpriteInTilemap;
+} Animation_FallSpriteInGamemap;
 
 typedef struct
 {
@@ -189,10 +189,10 @@ struct _Animation
         Animation_MoveSpriteInGamemapInLine move_sprite_in_gamemap_in_line;
         Animation_MoveSpriteInGamemapInArch move_sprite_in_gamemap_in_arch;
 
-        Animation_ShowSpriteInTilemap show_sprite_in_tilemap;
-        Animation_AscendSpriteInTilemap ascend_sprite_in_tilemap;
-        Animation_DescendSpriteInTilemap descend_sprite_in_tilemap;
-        Animation_FallSpriteInTilemap fall_sprite_in_tilemap;
+        Animation_ShowSpriteInGamemap show_sprite_in_gamemap;
+        Animation_AscendSpriteInGamemap ascend_sprite_in_gamemap;
+        Animation_DescendSpriteInGamemap descend_sprite_in_gamemap;
+        Animation_FallSpriteInGamemap fall_sprite_in_gamemap;
 
         Animation_MoveCameraInWorldInLine move_camera_in_world_in_line;
         Animation_MoveCameraInWorldInArch move_camera_in_world_in_arch;
@@ -221,10 +221,10 @@ void add_animation_to_end_animation_simultaneous(Animation* animation_simultaneo
 Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds);
 Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds, float sin_mul);
 
-Animation* new_animation_show_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float seconds);
-Animation* new_animation_ascend_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds);
-Animation* new_animation_descend_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds);
-Animation* new_animation_fall_sprite_in_tilemap(Texture* texture, vec2i tilemap_pos, float length, float seconds);
+Animation* new_animation_show_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float seconds);
+Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds);
+Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds);
+Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds);
 
 Animation* new_animation_move_camera_in_world_in_line(vec2f from_world_pos, vec2f to_world_pos, float seconds, int start_from_curr);
 Animation* new_animation_move_camera_in_world_in_arch(vec2f from_world_pos, vec2f to_world_pos, float seconds, float sin_mul, int start_from_curr);
