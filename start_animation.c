@@ -13,21 +13,27 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
         break;
         case ANIMATION_TYPE__SEQUENCE:
         {
-            animation->sequence.curr_animation = animation->sequence.animation_head;
-            if(animation->sequence.curr_animation)
+            animation->sequence.curr_animation_list_elem = animation->sequence.animation_list->head;
+            ListElem* curr_elem = animation->sequence.curr_animation_list_elem;
+
+            if(curr_elem)
             {
-                start_animation(state, animation->sequence.curr_animation, textures, sounds, musics);
+                Animation* curr_animation = (Animation*)curr_elem->data;
+                start_animation(state, curr_animation, textures, sounds, musics);
+            }
+            else
+            {
+                animation->is_finished = 1;
             }
         }
         break;
         case ANIMATION_TYPE__SIMULTANEOUS:
         {
-            animation->simultaneous.are_all_animations_finished = 0;
-            Animation* curr_animation;
-            for(curr_animation = animation->simultaneous.animation_head; curr_animation; curr_animation = curr_animation->next)
+            for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
-                if(curr_animation)
+                if(curr_elem)
                 {
+                    Animation* curr_animation = (Animation*)curr_elem->data;
                     start_animation(state, curr_animation, textures, sounds, musics);
                 }
             }

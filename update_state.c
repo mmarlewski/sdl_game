@@ -88,9 +88,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             
             if(skill != SKILL__NONE)
             {
-                remove_all_pos_from_possible_target_1_tilemap_pos(state);
+                remove_all_pos_from_possible_target_1_tilemap_pos_list(state);
 
-                skill_add_pos_to_possible_target_1_tilemap_pos(
+                skill_add_pos_to_possible_target_1_tilemap_pos_list(
                         state,
                         state->gamemap.curr_skill,
                         state->gamemap.object_hero->tilemap_pos
@@ -111,7 +111,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
             state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
 
-            if(is_tilemap_pos_in_possible_target_1_tilemap_pos(state, selected_tilemap_pos))
+            if(is_tilemap_pos_in_possible_target_1_tilemap_pos_list(state, selected_tilemap_pos))
             {
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
@@ -119,9 +119,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     if(state->gamemap.is_skill_two_target)
                     {
-                        remove_all_pos_from_possible_target_2_tilemap_pos(state);
+                        remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
 
-                        skill_add_pos_to_possible_target_2_tilemap_pos(
+                        skill_add_pos_to_possible_target_2_tilemap_pos_list(
                             state,
                             state->gamemap.curr_skill,
                             state->gamemap.object_hero->tilemap_pos,
@@ -136,7 +136,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                         skill_get_actions_to_execute(
                             state,
-                            state->action.action_sequence->sequence.action_head,
+                            state->action.main_action_sequence,
                             state->gamemap.curr_skill,
                             state->gamemap.object_hero->tilemap_pos,
                             state->gamemap.target_1_tilemap_pos,
@@ -161,7 +161,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
             state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
 
-            if(is_tilemap_pos_in_possible_target_2_tilemap_pos(state, selected_tilemap_pos))
+            if(is_tilemap_pos_in_possible_target_2_tilemap_pos_list(state, selected_tilemap_pos))
             {
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
@@ -169,7 +169,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     skill_get_actions_to_execute(
                         state,
-                        state->action.action_sequence->sequence.action_head,
+                        state->action.main_action_sequence,
                         state->gamemap.curr_skill,
                         state->gamemap.object_hero->tilemap_pos,
                         state->gamemap.target_1_tilemap_pos,
@@ -185,13 +185,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__SKILL_EXECUTING:
         {
-            if(state->action.action_sequence->is_finished)
+            if(state->action.main_action_sequence->is_finished)
             {
+                end_action(state, state->action.main_action_sequence, state->action.main_action_sequence, textures, sounds, musics);
                 change_gamestate(state, GAMESTATE__CHOOSING_SKILL);
             }
             else
             {
-                update_action(state, state->action.action_sequence, delta_time, textures, sounds, musics);
+                update_action(state, state->action.main_action_sequence, state->action.main_action_sequence, delta_time, textures, sounds, musics);
             }
         }
         break;

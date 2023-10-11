@@ -13,12 +13,13 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
         break;
         case ANIMATION_TYPE__SEQUENCE:
         {
-            //
+            remove_all_list_elements(animation->sequence.animation_list, 1);
+            animation->sequence.curr_animation_list_elem = 0;
         }
         break;
         case ANIMATION_TYPE__SIMULTANEOUS:
         {
-            //
+            remove_all_list_elements(animation->simultaneous.animation_list, 1);
         }
         break;
         case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:

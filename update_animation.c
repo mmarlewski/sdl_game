@@ -13,72 +13,58 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
         break;
         case ANIMATION_TYPE__SEQUENCE:
         {
-            if(animation->sequence.curr_animation->is_finished)
-            {
-                end_animation(state, animation->sequence.curr_animation, textures, sounds, musics);
-                Animation* next_animation = animation->sequence.curr_animation->next;
-                destroy_animation(animation->sequence.curr_animation);
-                animation->sequence.curr_animation = next_animation;
+            ListElem* curr_elem = animation->sequence.curr_animation_list_elem;
+            Animation* curr_animation = (Animation*)curr_elem->data;
 
-                if(animation->sequence.curr_animation)
+            if(curr_animation->is_finished)
+            {
+                end_animation(state, curr_animation, textures, sounds, musics);
+                ListElem* next_elem = curr_elem->next;
+                remove_list_element(animation->sequence.animation_list, curr_elem, 1);
+                animation->sequence.curr_animation_list_elem = next_elem;
+
+                if(next_elem != 0)
                 {
-                    start_animation(state, animation->sequence.curr_animation, textures, sounds, musics);
+                    Animation* next_animation = (Animation*)next_elem->data;
+                    start_animation(state, next_animation, textures, sounds, musics);
                 }
             }
             else
             {
-                update_animation(state, animation->sequence.curr_animation, delta_time, textures, sounds, musics);
+                update_animation(state, curr_animation, delta_time, textures, sounds, musics);
             }
 
-            animation->is_finished = (!animation->sequence.curr_animation);
+            animation->is_finished = (!animation->sequence.curr_animation_list_elem);
         }
         break;
         case ANIMATION_TYPE__SIMULTANEOUS:
         {
-            int is_any_animation_not_finished = 0;
-            Animation* prev_animation = 0;
-            Animation* curr_animation = animation->simultaneous.animation_head;
-            Animation* next_animation = (curr_animation) ? (curr_animation->next) : (0);
-            while(curr_animation)
+            int are_all_animations_finished = 1;
+            List* animation_to_be_removed_list = new_list(0);
+
+            for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem; curr_elem = curr_elem->next)
             {
+                Animation* curr_animation = (Animation*)curr_elem->data;
                 if(curr_animation->is_finished)
                 {
                     end_animation(state, curr_animation, textures, sounds, musics);
-                    next_animation = curr_animation->next;
-                    destroy_animation(curr_animation);
-                    
-                    if(prev_animation)
-                    {
-                        prev_animation->next = next_animation;
-                    }
-                    else
-                    {
-                        animation->simultaneous.animation_head = next_animation;
-                    }
-
-                    curr_animation = next_animation;
-
-                    if(curr_animation)
-                    {
-                        next_animation = curr_animation->next;
-                    }
-                    else
-                    {
-                        animation->simultaneous.animation_tail = prev_animation;
-                    }
+                    add_new_list_element_to_list_end(animation_to_be_removed_list, curr_animation);
                 }
                 else
                 {
-                    is_any_animation_not_finished = 1;
                     update_animation(state, curr_animation, delta_time, textures, sounds, musics);
-
-                    prev_animation = curr_animation;
-                    curr_animation = next_animation;
-                    next_animation = (curr_animation) ? (curr_animation->next) : (0);
+                    are_all_animations_finished = 0;
                 }
             }
 
-            animation->is_finished = (!is_any_animation_not_finished);
+            for(ListElem* curr_elem = animation_to_be_removed_list->head; curr_elem; curr_elem = curr_elem->next)
+            {
+                remove_list_element_of_data(animation->simultaneous.animation_list, curr_elem->data, 1);
+            }
+
+            destroy_list(animation_to_be_removed_list);
+
+            animation->is_finished = (are_all_animations_finished);
         }
         break;
         case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:

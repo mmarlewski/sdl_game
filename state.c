@@ -42,14 +42,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.curr_skill = 0;
     state->gamemap.is_skill_two_target = 0;
 
-    for(int i = 0 ; i < 100 ; i++)
-    {
-        state->gamemap.possible_target_1_tilemap_pos[i] = 0;
-    }
-    for(int i = 0 ; i < 100 ; i++)
-    {
-        state->gamemap.possible_target_2_tilemap_pos[i] = 0;
-    }
+    state->gamemap.possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
+    state->gamemap.possible_target_2_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
 
     state->gamemap.target_1_tilemap_pos = make_vec2i(0, 0);
     state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
@@ -57,12 +51,13 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     // action
 
     state->action.is_executing_actions = 0;
-    state->action.action_sequence = new_action_sequence();
+    state->action.main_action_sequence = new_action_sequence();
 }
 
 void change_gamestate(State* state, int new_gamestate)
 {
     state->gamestate = new_gamestate;
+    printf("\n");
     printf("gamestate: %s \n", get_gamestate_name(new_gamestate));
 }
 
@@ -221,79 +216,43 @@ void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite)
     return;
 }
 
-void add_pos_to_possible_target_1_tilemap_pos(State* state, vec2i* new_pos)
+void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i* new_pos)
 {
-    for(int i = 0; i < 100; i++)
-    {
-        if(state->gamemap.possible_target_1_tilemap_pos[i] == 0)
-        {
-            state->gamemap.possible_target_1_tilemap_pos[i] = new_pos;
-            break;
-        }
-    }
+    add_new_list_element_to_list_end(state->gamemap.possible_target_1_tilemap_pos_list, new_pos);
 }
 
-void remove_all_pos_from_possible_target_1_tilemap_pos(State* state)
+void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state)
 {
-    for(int i = 0; i < 100; i++)
-    {
-        if(state->gamemap.possible_target_1_tilemap_pos[i] != 0)
-        {
-            destroy_vec2i(state->gamemap.possible_target_1_tilemap_pos[i]);
-            state->gamemap.possible_target_1_tilemap_pos[i] = 0;
-        }
-    }
+    remove_all_list_elements(state->gamemap.possible_target_1_tilemap_pos_list, 1);
 }
 
-int is_tilemap_pos_in_possible_target_1_tilemap_pos(State* state, vec2i pos)
+int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, vec2i pos)
 {
-    for(int i = 0; i < 100; i++)
+    for(ListElem* curr_elem = state->gamemap.possible_target_1_tilemap_pos_list->head; curr_elem; curr_elem = curr_elem->next )
     {
-        vec2i* target_1_pos = state->gamemap.possible_target_1_tilemap_pos[i];
-
-        if(target_1_pos != 0 && target_1_pos->x == pos.x && target_1_pos->y == pos.y)
-        {
-            return 1;
-        }
+        vec2i* curr_vec = (vec2i*)curr_elem->data;
+        if(curr_vec->x == pos.x && curr_vec->y == pos.y) return 1;
     }
 
     return 0;
 }
 
-void add_pos_to_possible_target_2_tilemap_pos(State* state, vec2i* new_pos)
+void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i* new_pos)
 {
-    for(int i = 0; i < 100; i++)
-    {
-        if(state->gamemap.possible_target_2_tilemap_pos[i] == 0)
-        {
-            state->gamemap.possible_target_2_tilemap_pos[i] = new_pos;
-            break;
-        }
-    }
+    add_new_list_element_to_list_end(state->gamemap.possible_target_2_tilemap_pos_list, new_pos);
 }
 
-void remove_all_pos_from_possible_target_2_tilemap_pos(State* state)
+void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state)
 {
-    for(int i = 0; i < 100; i++)
-    {
-        if(state->gamemap.possible_target_2_tilemap_pos[i] != 0)
-        {
-            destroy_vec2i(state->gamemap.possible_target_2_tilemap_pos[i]);
-            state->gamemap.possible_target_2_tilemap_pos[i] = 0;
-        }
-    }
+    remove_all_list_elements(state->gamemap.possible_target_2_tilemap_pos_list, 1);
 }
 
-int is_tilemap_pos_in_possible_target_2_tilemap_pos(State* state, vec2i pos)
+int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos)
 {
-    for(int i = 0; i < 100; i++)
+    for(ListElem* curr_elem = state->gamemap.possible_target_2_tilemap_pos_list->head; curr_elem; curr_elem = curr_elem->next )
     {
-        vec2i* target_2_pos = state->gamemap.possible_target_2_tilemap_pos[i];
-
-        if(target_2_pos != 0 && target_2_pos->x == pos.x && target_2_pos->y == pos.y)
-        {
-            return 1;
-        }
+        vec2i* curr_vec = (vec2i*)curr_elem->data;
+        if(curr_vec->x == pos.x && curr_vec->y == pos.y) return 1;
     }
 
     return 0;
@@ -304,9 +263,9 @@ int is_tilemap_pos_in_possible_target_2_tilemap_pos(State* state, vec2i pos)
 void execute_actions(State* state, Textures* textures, Sounds* sounds, Musics* musics)
 {
     state->action.is_executing_actions = 1;
-    state->action.action_sequence->is_finished = 0;
+    state->action.main_action_sequence->is_finished = 0;
 
-    start_action(state, state->action.action_sequence, textures, sounds, musics);
+    start_action(state, state->action.main_action_sequence, state->action.main_action_sequence, textures, sounds, musics);
 }
 
 void print_action(Action* action, int depth)
@@ -319,9 +278,9 @@ void print_action(Action* action, int depth)
     {
         for(int i = 0; i < depth; i++) printf("  ");
         printf("[ \n");
-        for(Action* curr_action = action->sequence.curr_action; curr_action; curr_action = curr_action->next)
+        for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
         {
-            print_action(curr_action, depth + 1);
+            print_action(curr_elem->data, depth + 1);
         }
         for(int i = 0; i < depth; i++) printf("  ");
         printf("] \n");
@@ -331,16 +290,16 @@ void print_action(Action* action, int depth)
     {
         for(int i = 0; i < depth; i++) printf("  ");
         printf("{ \n");
-        for(Action* curr_action = action->simultaneous.action_head; curr_action; curr_action = curr_action->next)
+        for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
         {
-            print_action(curr_action, depth + 1);
+            print_action(curr_elem->data, depth + 1);
         }
         for(int i = 0; i < depth; i++) printf("  ");
         printf("} \n");
     }
 }
 
-void floor_on_move_end(State* state, Action* action, int floor)
+void floor_on_move_end(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -351,9 +310,9 @@ void floor_on_move_end(State* state, Action* action, int floor)
         break;
         case FLOOR_TYPE__METAL_SPIKES:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_death(action->move.object));
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object));
         }
         break;
         case FLOOR_TYPE__METAL_LAVA_CRACK:
@@ -363,30 +322,30 @@ void floor_on_move_end(State* state, Action* action, int floor)
         break;
         case FLOOR_TYPE__LAVA:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_fall(action->move.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object));
         }
         break;
         case FLOOR_TYPE__ICE:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_after_action(action, new_action_push(action->move.object, action->move.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(action->move.object, action->move.dir4));
         }
         break;
         case FLOOR_TYPE__ICE_WATER_CRACK:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
             
-            add_action_after_action(action, new_action_push(action->move.object, action->move.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(action->move.object, action->move.dir4));
         }
         break;
         case FLOOR_TYPE__WATER:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_fall(action->move.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object));
         }
         break;
         default:
@@ -394,7 +353,7 @@ void floor_on_move_end(State* state, Action* action, int floor)
     }
 }
 
-void floor_on_push_end(State* state, Action* action, int floor)
+void floor_on_push_end(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -405,9 +364,9 @@ void floor_on_push_end(State* state, Action* action, int floor)
         break;
         case FLOOR_TYPE__METAL_SPIKES:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_death(action->push.object));
+            add_action_to_end_action_sequence(sequence, new_action_death(action->push.object));
         }
         break;
         case FLOOR_TYPE__METAL_LAVA_CRACK:
@@ -417,30 +376,30 @@ void floor_on_push_end(State* state, Action* action, int floor)
         break;
         case FLOOR_TYPE__LAVA:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_fall(action->push.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->push.object));
         }
         break;
         case FLOOR_TYPE__ICE:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
             
-            add_action_after_action(action, new_action_push(action->push.object, action->push.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(action->push.object, action->push.dir4));
         }
         break;
         case FLOOR_TYPE__ICE_WATER_CRACK:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
             
-            add_action_after_action(action, new_action_push(action->push.object, action->push.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(action->push.object, action->push.dir4));
         }
         break;
         case FLOOR_TYPE__WATER:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_fall(action->push.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->push.object));
         }
         break;
         default:
@@ -450,7 +409,7 @@ void floor_on_push_end(State* state, Action* action, int floor)
 
 
 
-void floor_on_move_start(State* state, Action* action, int floor)
+void floor_on_move_start(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -494,7 +453,7 @@ void floor_on_move_start(State* state, Action* action, int floor)
     }
 }
 
-void floor_on_push_start(State* state, Action* action, int floor)
+void floor_on_push_start(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -538,7 +497,7 @@ void floor_on_push_start(State* state, Action* action, int floor)
     }
 }
 
-void floor_on_drop(State* state, Action* action, int floor)
+void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -549,48 +508,48 @@ void floor_on_drop(State* state, Action* action, int floor)
         break;
         case FLOOR_TYPE__METAL_SPIKES:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_to_end_after_action(action, new_action_death(action->drop.object));
+            add_action_to_end_action_sequence(sequence, new_action_death(action->drop.object));
         }
         break;
         case FLOOR_TYPE__METAL_LAVA_CRACK:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
             change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->drop.tilemap_pos);
 
-            add_action_after_action(action, new_action_fall(action->drop.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object));
         }
         break;
         case FLOOR_TYPE__LAVA:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_after_action(action, new_action_fall(action->drop.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object));
         }
         break;
         case FLOOR_TYPE__ICE:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_after_action(action, new_action_push(action->drop.object, action->drop.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(action->drop.object, action->drop.dir4));
         }
         break;
         case FLOOR_TYPE__ICE_WATER_CRACK:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
             change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->drop.tilemap_pos);
 
-            add_action_after_action(action, new_action_fall(action->drop.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object));
         }
         break;
         case FLOOR_TYPE__WATER:
         {
-            remove_all_actions_after_action(action);
+            remove_all_actions_after_curr_action_action_sequence(sequence);
 
-            add_action_after_action(action, new_action_fall(action->drop.object));
+            add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object));
         }
         break;
         default:
@@ -598,7 +557,7 @@ void floor_on_drop(State* state, Action* action, int floor)
     }
 }
 
-void object_on_crashing(State* state, Action* action, Object* object)
+void object_on_crashing(State* state, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -609,7 +568,7 @@ void object_on_crashing(State* state, Action* action, Object* object)
         break;
         case OBJECT_TYPE__BARREL:
         {
-            add_action_to_end_after_action(action, new_action_death(object));
+            add_action_to_end_action_sequence(sequence, new_action_death(object));
         }
         break;
         case OBJECT_TYPE__SPRING:
@@ -632,13 +591,12 @@ void object_on_crashing(State* state, Action* action, Object* object)
             //
         }
         break;
-        break;
         default:
         break;
     }
 }
 
-void object_on_crashed(State* state, Action* action, Object* object)
+void object_on_crashed(State* state, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -649,12 +607,12 @@ void object_on_crashed(State* state, Action* action, Object* object)
         break;
         case OBJECT_TYPE__BARREL:
         {
-            add_action_to_end_after_action(action, new_action_death(object));
+            add_action_to_end_action_sequence(sequence, new_action_death(object));
         }
         break;
         case OBJECT_TYPE__SPRING:
         {
-            add_action_after_action(action, new_action_push(object, action->crash.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(object, action->crash.dir4));
         }
         break;
         case OBJECT_TYPE__HERO:
@@ -672,13 +630,12 @@ void object_on_crashed(State* state, Action* action, Object* object)
             //
         }
         break;
-        break;
         default:
         break;
     }
 }
 
-void object_on_death(State* state, Action* action, Object* object)
+void object_on_death(State* state, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -689,7 +646,7 @@ void object_on_death(State* state, Action* action, Object* object)
         break;
         case OBJECT_TYPE__BARREL:
         {
-            add_action_to_end_after_action(action, new_action_blow_up(object->tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_blow_up(object->tilemap_pos));
         }
         break;
         case OBJECT_TYPE__SPRING:
@@ -712,13 +669,12 @@ void object_on_death(State* state, Action* action, Object* object)
             //
         }
         break;
-        break;
         default:
         break;
     }
 }
 
-void object_on_drop(State* state, Action* action, Object* object)
+void object_on_drop(State* state, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -729,12 +685,12 @@ void object_on_drop(State* state, Action* action, Object* object)
         break;
         case OBJECT_TYPE__BARREL:
         {
-            add_action_to_end_after_action(action, new_action_death(object));
+            add_action_to_end_action_sequence(sequence, new_action_death(object));
         }
         break;
         case OBJECT_TYPE__SPRING:
         {
-            add_action_after_action(action, new_action_push(action->drop.object, action->drop.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_push(action->drop.object, action->drop.dir4));
         }
         break;
         case OBJECT_TYPE__HERO:
@@ -751,7 +707,6 @@ void object_on_drop(State* state, Action* action, Object* object)
         {
             //
         }
-        break;
         break;
         default:
         break;

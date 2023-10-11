@@ -3,6 +3,8 @@
 
 #include "common.h"
 #include "vec.h"
+#include "vec.h"
+#include "list.h"
 #include "sprite.h"
 
 enum ANIMATION_TYPE
@@ -37,17 +39,14 @@ typedef struct
 
 typedef struct
 {
-    Animation* curr_animation;
-    Animation* animation_head;
-    Animation* animation_tail;
+    List* animation_list;
+    ListElem* curr_animation_list_elem;
 
 } Animation_Sequence;
 
 typedef struct
 {
-    int are_all_animations_finished;
-    Animation* animation_head;
-    Animation* animation_tail;
+    List* animation_list;
 
 } Animation_Simultaneous;
 
@@ -175,7 +174,6 @@ typedef struct
 
 struct _Animation
 {
-    Animation* next;
     int is_finished;
     int type;
 

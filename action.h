@@ -4,6 +4,7 @@
 #include "common.h"
 #include "vec.h"
 #include "dir.h"
+#include "list.h"
 #include "animation.h"
 #include "floor.h"
 #include "object.h"
@@ -37,15 +38,14 @@ typedef struct
 
 typedef struct
 {
-    Action* curr_action;
-    Action* action_head;
+    List* action_list;
+    ListElem* curr_action_list_elem;
 
 } Action_Sequence;
 
 typedef struct
 {
-    Action* action_head;
-    Action* action_tail;
+    List* action_list;
 
 } Action_Simultaneous;
 
@@ -111,7 +111,6 @@ typedef struct
 
 struct _Action
 {
-    Action* next;
     Animation* animation;
     int is_finished;
     int type;
@@ -143,15 +142,15 @@ Action* new_action_sequence();
 Action* new_action_sequence_of_1(Action* action_1);
 Action* new_action_sequence_of_2(Action* action_1, Action* action_2);
 Action* new_action_sequence_of_3(Action* action_1, Action* action_2, Action* action_3);
-void add_action_after_action(Action* action, Action* new_action);
-void add_action_to_end_after_action(Action* action, Action* new_action);
-void remove_all_actions_after_action(Action* action);
+void add_action_to_end_action_sequence(Action* sequence, Action* new_action);
+void add_action_after_curr_action_action_sequence(Action* sequence, Action* new_action);
+void remove_all_actions_after_curr_action_action_sequence(Action* sequence);
 
 Action* new_action_simultaneous();
 Action* new_action_simultaneous_of_1(Action* action_1);
 Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
-void add_action_sequence_to_action_simultaneous(Action* action_simultaneous, Action* new_action_sequence);
+void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
 Action* new_action_move(Object* object, int dir4);
 Action* new_action_push(Object* object, int dir4);

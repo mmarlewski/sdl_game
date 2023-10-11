@@ -4,7 +4,6 @@ Action* new_action_none()
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__NONE;
@@ -16,13 +15,12 @@ Action* new_action_sequence()
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__SEQUENCE;
 
-    action->sequence.curr_action = 0;
-    action->sequence.action_head = new_action_none();
+    action->sequence.action_list = new_list((void(*)(void*))&destroy_action);
+    action->sequence.curr_action_list_elem = 0;
 
     return action;
 }
@@ -30,67 +28,51 @@ Action* new_action_sequence()
 Action* new_action_sequence_of_1(Action* action_1)
 {
     Action* sequence = new_action_sequence();
-    add_action_to_end_after_action(sequence->sequence.action_head, action_1);
+    add_action_to_end_action_sequence(sequence, action_1);
     return sequence;
 }
 
 Action* new_action_sequence_of_2(Action* action_1, Action* action_2)
 {
     Action* sequence = new_action_sequence();
-    add_action_to_end_after_action(sequence->sequence.action_head, action_1);
-    add_action_to_end_after_action(sequence->sequence.action_head, action_2);
+    add_action_to_end_action_sequence(sequence, action_1);
+    add_action_to_end_action_sequence(sequence, action_2);
     return sequence;
 }
 
 Action* new_action_sequence_of_3(Action* action_1, Action* action_2, Action* action_3)
 {
     Action* sequence = new_action_sequence();
-    add_action_to_end_after_action(sequence->sequence.action_head, action_1);
-    add_action_to_end_after_action(sequence->sequence.action_head, action_2);
-    add_action_to_end_after_action(sequence->sequence.action_head, action_3);
+    add_action_to_end_action_sequence(sequence, action_1);
+    add_action_to_end_action_sequence(sequence, action_2);
+    add_action_to_end_action_sequence(sequence, action_3);
     return sequence;
 }
 
-void add_action_after_action(Action* action, Action* new_action)
+void add_action_to_end_action_sequence(Action* sequence, Action* new_action)
 {
-    new_action->next = action->next;
-    action->next = new_action;
+    add_new_list_element_to_list_end(sequence->sequence.action_list, new_action);
 }
 
-void add_action_to_end_after_action(Action* action, Action* new_action)
+void add_action_after_curr_action_action_sequence(Action* sequence, Action* new_action)
 {
-    Action* curr_action = action;
-    while(curr_action->next)
-    {
-        curr_action = curr_action->next;
-    }
-    add_action_after_action(curr_action, new_action);
+    add_new_list_element_after_element(sequence->sequence.action_list, sequence->sequence.curr_action_list_elem, new_action);
 }
 
-void remove_all_actions_after_action(Action* action)
+void remove_all_actions_after_curr_action_action_sequence(Action* sequence)
 {
-    Action* curr_action = action->next;
-    Action* next_action = (curr_action) ? (curr_action->next) : 0;
-    while(curr_action)
-    {
-        destroy_action(curr_action);
-        curr_action = next_action;
-        next_action = (curr_action) ? (curr_action->next) : 0;
-    }
-    action->next = 0;
+    remove_all_list_elements_after_element(sequence->sequence.action_list, sequence->sequence.curr_action_list_elem, 1);
 }
 
 Action* new_action_simultaneous()
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__SIMULTANEOUS;
 
-    action->simultaneous.action_head = 0;
-    action->simultaneous.action_tail = 0;
+    action->simultaneous.action_list = new_list((void(*)(void*))&destroy_action);
 
     return action;
 }
@@ -98,47 +80,36 @@ Action* new_action_simultaneous()
 Action* new_action_simultaneous_of_1(Action* action_1)
 {
     Action* simultaneous = new_action_simultaneous();
-    add_action_sequence_to_action_simultaneous(simultaneous, new_action_sequence_of_1(action_1));
+    add_action_sequence_to_action_simultaneous(simultaneous, action_1);
     return simultaneous;
 }
 
 Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2)
 {
     Action* simultaneous = new_action_simultaneous();
-    add_action_sequence_to_action_simultaneous(simultaneous, new_action_sequence_of_1(action_1));
-    add_action_sequence_to_action_simultaneous(simultaneous, new_action_sequence_of_1(action_2));
+    add_action_sequence_to_action_simultaneous(simultaneous, action_1);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_2);
     return simultaneous;
 }
 
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3)
 {
     Action* simultaneous = new_action_simultaneous();
-    add_action_sequence_to_action_simultaneous(simultaneous, new_action_sequence_of_1(action_1));
-    add_action_sequence_to_action_simultaneous(simultaneous, new_action_sequence_of_1(action_2));
-    add_action_sequence_to_action_simultaneous(simultaneous, new_action_sequence_of_1(action_3));
+    add_action_sequence_to_action_simultaneous(simultaneous, action_1);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_2);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_3);
     return simultaneous;
 }
 
-void add_action_sequence_to_action_simultaneous(Action* action_simultaneous, Action* new_action_sequence)
+void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence)
 {
-    if(action_simultaneous->simultaneous.action_head)
-    {
-        action_simultaneous->simultaneous.action_tail->next = new_action_sequence;
-    }
-    else
-    {
-        action_simultaneous->simultaneous.action_head = new_action_sequence;
-    }
-
-    action_simultaneous->simultaneous.action_tail = new_action_sequence;
-    new_action_sequence->next = 0;
+    add_new_list_element_to_list_end(simultaneous->simultaneous.action_list, new_sequence);
 }
 
 Action* new_action_move(Object* object, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__MOVE;
@@ -155,7 +126,6 @@ Action* new_action_push(Object* object, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__PUSH;
@@ -172,7 +142,6 @@ Action* new_action_crash(Object* object, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__CRASH;
@@ -187,7 +156,6 @@ Action* new_action_fall(Object* object)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__FALL;
@@ -201,7 +169,6 @@ Action* new_action_death(Object* object)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__DEATH;
@@ -215,7 +182,6 @@ Action* new_action_blow_up(vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__BLOW_UP;
@@ -229,7 +195,6 @@ Action* new_action_throw(Object* object, vec2i tilemap_pos, int dir4, int distan
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__THROW;
@@ -246,7 +211,6 @@ Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
-    action->next = 0;
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__DROP;
@@ -260,6 +224,16 @@ Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4)
 
 void destroy_action(Action* action)
 {
+    if(action->type == ACTION_TYPE__SEQUENCE)
+    {
+        destroy_list(action->sequence.action_list);
+    }
+
+    if(action->type == ACTION_TYPE__SIMULTANEOUS)
+    {
+        destroy_list(action->simultaneous.action_list);
+    }
+
     free(action);
 }
 

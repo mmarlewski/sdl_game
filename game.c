@@ -109,7 +109,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             if(state->gamestate == GAMESTATE__CHOOSING_TARGET_1)
             {
-                if(is_tilemap_pos_in_possible_target_1_tilemap_pos(state, tilemap_pos))
+                if(is_tilemap_pos_in_possible_target_1_tilemap_pos_list(state, tilemap_pos))
                 {
                     draw_texture_at_world_pos(
                         renderer,
@@ -125,7 +125,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             if(state->gamestate == GAMESTATE__CHOOSING_TARGET_2)
             {
-                if(is_tilemap_pos_in_possible_target_2_tilemap_pos(state, tilemap_pos))
+                if(is_tilemap_pos_in_possible_target_2_tilemap_pos_list(state, tilemap_pos))
                 {
                     draw_texture_at_world_pos(
                         renderer,
@@ -303,6 +303,38 @@ int main (int argc, char* argv[])
     Object* object_barrel_2 = new_object(OBJECT_TYPE__BARREL);
     object_barrel_2->tilemap_pos = make_vec2i(8,5);
     add_object_to_gamemap_objects(&state, object_barrel_2);
+
+    int n = 8;
+    for(int i = 0; i < n; i++)
+    {
+        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
+        object_barrel->tilemap_pos = make_vec2i(10-i,10);
+        add_object_to_gamemap_objects(&state, object_barrel);
+    }
+    for(int i = 0; i < n; i++)
+    {
+        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
+        object_barrel->tilemap_pos = make_vec2i(10-n,10+i);
+        add_object_to_gamemap_objects(&state, object_barrel);
+    }
+    for(int i = 0; i < n; i++)
+    {
+        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
+        object_barrel->tilemap_pos = make_vec2i(10-n+i,10+n);
+        add_object_to_gamemap_objects(&state, object_barrel);
+    }
+    for(int i = 0; i < n; i++)
+    {
+        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
+        object_barrel->tilemap_pos = make_vec2i(10,10+n-i);
+        add_object_to_gamemap_objects(&state, object_barrel);
+    }
+    Object* object_barrel_3 = new_object(OBJECT_TYPE__BARREL);
+    object_barrel_3->tilemap_pos = make_vec2i(10-(n/2),10-1);
+    add_object_to_gamemap_objects(&state, object_barrel_3);
+    Object* object_barrel_4 = new_object(OBJECT_TYPE__BARREL);
+    object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
+    add_object_to_gamemap_objects(&state, object_barrel_4);
 
     state.gamemap.object_hero = object_hero;
 

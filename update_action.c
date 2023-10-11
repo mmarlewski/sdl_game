@@ -1,6 +1,6 @@
 #include "state.h"
 
-void update_action(State* state, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
+void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
 {
     // printf("update action:      %s \n", get_action_name_from_type(action->type));
 
@@ -13,74 +13,58 @@ void update_action(State* state, Action* action, float delta_time, Textures* tex
         break;
         case ACTION_TYPE__SEQUENCE:
         {
-            if(action->sequence.curr_action->is_finished)
-            {
-                end_action(state, action->sequence.curr_action, textures, sounds, musics);
-                Action* next_action = action->sequence.curr_action->next;
-                destroy_action(action->sequence.curr_action);
-                action->sequence.curr_action = next_action;
+            ListElem* curr_elem = action->sequence.curr_action_list_elem;
+            Action* curr_action = (Action*)curr_elem->data;
 
-                if(action->sequence.curr_action)
+            if(curr_action->is_finished)
+            {
+                end_action(state, action, curr_action, textures, sounds, musics);
+                ListElem* next_elem = curr_elem->next;
+                remove_list_element(action->sequence.action_list, curr_elem, 1);
+                action->sequence.curr_action_list_elem = next_elem;
+
+                if(next_elem != 0)
                 {
-                    start_action(state, action->sequence.curr_action, textures, sounds, musics);
+                    Action* next_action = (Action*)next_elem->data;
+                    start_action(state, action, next_action, textures, sounds, musics);
                 }
             }
             else
             {
-                update_action(state, action->sequence.curr_action, delta_time, textures, sounds, musics);
+                update_action(state, action, curr_action, delta_time, textures, sounds, musics);
             }
 
-            action->sequence = action->sequence;
-
-            action->is_finished = (!action->sequence.curr_action);
+            action->is_finished = (!action->sequence.curr_action_list_elem);
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
-            int is_any_action_not_finished = 0;
-            Action* prev_action = 0;
-            Action* curr_action = action->simultaneous.action_head;
-            Action* next_action = (curr_action) ? (curr_action->next) : (0);
-            while(curr_action)
+            int are_all_actions_finished = 1;
+            List* action_to_be_removed_list = new_list(0);
+
+            for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
+                Action* curr_action = (Action*)curr_elem->data;
                 if(curr_action->is_finished)
                 {
-                    end_action(state, curr_action, textures, sounds, musics);
-                    next_action = curr_action->next;
-                    destroy_action(curr_action);
-                    
-                    if(prev_action)
-                    {
-                        prev_action->next = next_action;
-                    }
-                    else
-                    {
-                        action->simultaneous.action_head = next_action;
-                    }
-
-                    curr_action = next_action;
-
-                    if(curr_action)
-                    {
-                        next_action = curr_action->next;
-                    }
-                    else
-                    {
-                        action->simultaneous.action_tail = prev_action;
-                    }
+                    end_action(state, curr_action, curr_action, textures, sounds, musics);
+                    add_new_list_element_to_list_end(action_to_be_removed_list, curr_action);
                 }
                 else
                 {
-                    is_any_action_not_finished = 1;
-                    update_action(state, curr_action, delta_time, textures, sounds, musics);
-
-                    prev_action = curr_action;
-                    curr_action = next_action;
-                    next_action = (curr_action) ? (curr_action->next) : (0);
+                    update_action(state, curr_action, curr_action, delta_time, textures, sounds, musics);
+                    are_all_actions_finished = 0;
                 }
             }
 
-            action->is_finished = (!is_any_action_not_finished);
+            for(ListElem* curr_elem = action_to_be_removed_list->head; curr_elem; curr_elem = curr_elem->next)
+            {
+                remove_list_element_of_data(action->simultaneous.action_list, curr_elem->data, 1);
+            }
+
+            destroy_list(action_to_be_removed_list);
+
+            action->is_finished = (are_all_actions_finished);
         }
         break;
         case ACTION_TYPE__MOVE:

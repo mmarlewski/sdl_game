@@ -1,6 +1,6 @@
 #include "state.h"
 
-void start_action(State* state, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
+void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
 {
     // printf("start action:       %s \n", get_action_name_from_type(action->type));
 
@@ -13,18 +13,28 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
         break;
         case ACTION_TYPE__SEQUENCE:
         {
-            action->sequence.curr_action = action->sequence.action_head;
-            start_action(state, action->sequence.curr_action, textures, sounds, musics);
-            action->sequence.action_head = new_action_none();
+            action->sequence.curr_action_list_elem = action->sequence.action_list->head;
+            ListElem* curr_elem = action->sequence.curr_action_list_elem;
+            
+            if(curr_elem != 0)
+            {
+                Action* curr_action = (Action*)curr_elem->data;
+                start_action(state, sequence, curr_action, textures, sounds, musics);
+            }
+            else
+            {
+                action->is_finished = 1;
+            }
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
-            for(Action* curr_action = action->simultaneous.action_head; curr_action; curr_action = curr_action->next)
+            for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                if(curr_action)
+                if(curr_elem)
                 {
-                    start_action(state, curr_action, textures, sounds, musics);
+                    Action* curr_action = (Action*)curr_elem->data;
+                    start_action(state, curr_action, curr_action, textures, sounds, musics);
                 }
             }
         }
@@ -38,8 +48,8 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
             if(object_on_next_tilemap_pos)
             {
                 Action* crash = new_action_crash(action->move.object, action->move.dir4);
-                remove_all_actions_after_action(action);
-                add_action_after_action(action, crash);
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_after_curr_action_action_sequence(sequence, crash);
 
                 action->is_finished = 1;
                 action->move.is_move_blocked = 1;
@@ -56,7 +66,7 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
                 start_animation(state, action->animation, textures, sounds, musics);
 
                 int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
-                floor_on_move_start(state, action, floor);
+                floor_on_move_start(state, sequence, action, floor);
             }
 
             action->move.object->is_visible = 0;
@@ -70,8 +80,8 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
 
             if(object_on_next_tilemap_pos)
             {
-                remove_all_actions_after_action(action);
-                add_action_after_action(action, new_action_crash(action->push.object, action->push.dir4));
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_after_curr_action_action_sequence(sequence, new_action_crash(action->push.object, action->push.dir4));
 
                 action->is_finished = 1;
                 action->push.is_move_blocked = 1;
@@ -89,7 +99,7 @@ void start_action(State* state, Action* action, Textures* textures, Sounds* soun
                 start_animation(state, action->animation, textures, sounds, musics);
 
                 int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
-                floor_on_push_start(state, action, floor);
+                floor_on_push_start(state, sequence, action, floor);
             }
 
             action->push.object->is_visible = 0;

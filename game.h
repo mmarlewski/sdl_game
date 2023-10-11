@@ -6,6 +6,7 @@
 #include "input.h"
 #include "vec.h"
 #include "dir.h"
+#include "list.h"
 #include "math_utils.h"
 #include "floor.h"
 #include "object.h"

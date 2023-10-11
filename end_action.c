@@ -1,6 +1,6 @@
 #include "state.h"
 
-void end_action(State* state, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
+void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
 {
     // printf("end action:         %s \n", get_action_name_from_type(action->type));
 
@@ -13,12 +13,13 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
         break;
         case ACTION_TYPE__SEQUENCE:
         {
-            //
+            remove_all_list_elements(action->sequence.action_list, 1);
+            action->sequence.curr_action_list_elem = 0;
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
-            //
+            remove_all_list_elements(action->simultaneous.action_list, 1);
         }
         break;
         case ACTION_TYPE__MOVE:
@@ -29,7 +30,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
                 end_animation(state, action->animation, textures, sounds, musics);
 
                 int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
-                floor_on_move_end(state, action, floor);
+                floor_on_move_end(state, sequence, action, floor);
             }
 
             action->move.object->is_visible = 1;
@@ -43,7 +44,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
                 end_animation(state, action->animation, textures, sounds, musics);
 
                 int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
-                floor_on_push_end(state, action, floor);
+                floor_on_push_end(state, sequence, action, floor);
             }
 
             action->push.object->is_visible = 1;
@@ -53,27 +54,15 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            Action* crushed_action = new_action_crash(action->crash.object, action->crash.dir4);
+            Action* crushed_action_sequence = new_action_sequence();
             Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash.object->tilemap_pos, action->crash.dir4, 1));
-            object_on_crashed(state, crushed_action, crushed_object);
+            object_on_crashed(state, crushed_action_sequence, action, crushed_object);
 
-            Action* crushing_action = new_action_crash(action->crash.object, action->crash.dir4);
+            Action* crushing_action_sequence = new_action_sequence();
             Object* crushing_object = action->crash.object;
-            object_on_crashing(state, crushing_action, crushing_object);
+            object_on_crashing(state, crushing_action_sequence, action, crushing_object);
 
-            Action* action_1 = new_action_none();
-            Action* action_2 = new_action_none();
-            if(crushing_action->next)
-            {
-                destroy_action(action_1);
-                action_1 = crushing_action->next;
-            }
-            if(crushed_action->next)
-            {
-                destroy_action(action_2);
-                action_2 = crushed_action->next;
-            }
-            add_action_after_action(action, new_action_simultaneous_of_2(action_1, action_2));
+            add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
 
             action->crash.object->is_visible = 1;
         }
@@ -82,7 +71,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            add_action_after_action(action, new_action_death(action->fall.object));
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object));
 
             action->fall.object->is_visible = 1;
         }
@@ -91,7 +80,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            object_on_death(state, action, action->death.object);
+            object_on_death(state, sequence, action, action->death.object);
             
             remove_object_from_gamemap_objects(state, action->death.object);
         }
@@ -105,6 +94,11 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             Object* object_right = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1));
             Object* object_down = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1));
             Object* object_left = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1));
+
+            printf("object_up: %i \n", object_up);
+            printf("object_right: %i \n", object_right);
+            printf("object_down: %i \n", object_down);
+            printf("object_left: %i \n", object_left);
 
             Action* push_around = new_action_simultaneous();
             if(object_up)
@@ -123,7 +117,7 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
             {
                 add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_push(object_left, DIR4__LEFT)));
             }
-            add_action_after_action(action, push_around);
+            add_action_after_curr_action_action_sequence(sequence, push_around);
         }
         break;
         case ACTION_TYPE__THROW:
@@ -135,24 +129,25 @@ void end_action(State* state, Action* action, Textures* textures, Sounds* sounds
 
             action->throw.object->tilemap_pos = next_tilemap_pos;
 
-            add_action_after_action(action, new_action_drop(action->throw.object, next_tilemap_pos, action->throw.dir4));
+            add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object, next_tilemap_pos, action->throw.dir4));
             
             action->throw.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__DROP:
         {
-            object_on_drop(state, action, action->drop.object);
+            object_on_drop(state, sequence, action, action->drop.object);
 
             end_animation(state, action->animation, textures, sounds, musics);
 
             int floor = get_floor_on_tilemap_pos(state, action->drop.object->tilemap_pos);
-            floor_on_drop(state, action, floor);
+            floor_on_drop(state, sequence, action, floor);
         }
         break;
         default:
         break;
     }
 
-    print_action(state->action.action_sequence, 0);
+    printf("\n");
+    print_action(state->action.main_action_sequence, 0);
 }

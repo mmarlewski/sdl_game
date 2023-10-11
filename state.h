@@ -5,6 +5,7 @@
 #include "input.h"
 #include "vec.h"
 #include "dir.h"
+#include "list.h"
 #include "math_utils.h"
 #include "floor.h"
 #include "object.h"
@@ -72,15 +73,15 @@ typedef struct
     vec2i target_1_tilemap_pos;
     vec2i target_2_tilemap_pos;
 
-    vec2i* possible_target_1_tilemap_pos[100];
-    vec2i* possible_target_2_tilemap_pos[100];
+    List* possible_target_1_tilemap_pos_list;
+    List* possible_target_2_tilemap_pos_list;
 
 } State_Gamemap;
 
 typedef struct
 {
     int is_executing_actions;
-    Action* action_sequence;
+    Action* main_action_sequence;
 
 } State_Action;
 
@@ -112,13 +113,13 @@ void remove_object_from_gamemap_objects(State* state, Object* object);
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 
-void add_pos_to_possible_target_1_tilemap_pos(State* state, vec2i* new_pos);
-void remove_all_pos_from_possible_target_1_tilemap_pos(State* state);
-int is_tilemap_pos_in_possible_target_1_tilemap_pos(State* state, vec2i pos);
+void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i* new_pos);
+void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state);
+int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, vec2i pos);
 
-void add_pos_to_possible_target_2_tilemap_pos(State* state, vec2i* new_pos);
-void remove_all_pos_from_possible_target_2_tilemap_pos(State* state);
-int is_tilemap_pos_in_possible_target_2_tilemap_pos(State* state, vec2i pos);
+void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i* new_pos);
+void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
+int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos);
 
 void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
 void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
@@ -127,23 +128,23 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
 void execute_actions(State* state, Textures* textures, Sounds* sounds, Musics* musics);
 void print_action(Action* action, int depth);
 
-void start_action(State* state, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
-void update_action(State* state, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
-void end_action(State* state, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
+void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
+void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
+void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
 
-void floor_on_move_end(State* state, Action* action_sequence, int floor);
-void floor_on_push_end(State* state, Action* action_sequence, int floor);
-void floor_on_move_start(State* state, Action* action_sequence, int floor);
-void floor_on_push_start(State* state, Action* action_sequence, int floor);
-void floor_on_drop(State* state, Action* action_sequence, int floor);
+void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
+void floor_on_push_end(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_push_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 
-void object_on_crashing(State* state, Action* action_sequence, Object* object);
-void object_on_crashed(State* state, Action* action_sequence, Object* object);
-void object_on_death(State* state, Action* action_sequence, Object* object);
-void object_on_drop(State* state, Action* action_sequence, Object* object);
+void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
+void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
+void object_on_death(State* state, Action* sequence, Action* action, Object* object);
+void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
 
-void skill_add_pos_to_possible_target_1_tilemap_pos(State* state, int skill, vec2i source_tilemap_pos);
-void skill_add_pos_to_possible_target_2_tilemap_pos(State* state, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos);
+void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos);
+void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos);
 void skill_get_actions_to_execute(State* state, Action* action, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos, vec2i target_2_tilemap_pos);
 
 char* get_gamestate_name(int gamestate);

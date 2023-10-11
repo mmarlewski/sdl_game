@@ -4,7 +4,6 @@ Animation* new_animation_none()
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__NONE;
 
@@ -15,13 +14,11 @@ Animation* new_animation_sequence()
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__SEQUENCE;
 
-    animation->sequence.curr_animation = 0;
-    animation->sequence.animation_head = 0;
-    animation->sequence.animation_tail = 0;
+    animation->sequence.animation_list = new_list((void(*)(void*))&destroy_animation);
+    animation->sequence.curr_animation_list_elem = 0;
 
     return animation;
 }
@@ -52,30 +49,17 @@ Animation* new_animation_sequence_of_3(Animation* animation_1, Animation* animat
 
 void add_animation_to_end_animation_sequence(Animation* animation_sequence, Animation* new_animation)
 {
-    if(animation_sequence->sequence.animation_head)
-    {
-        animation_sequence->sequence.animation_tail->next = new_animation;
-    }
-    else
-    {
-        animation_sequence->sequence.animation_head = new_animation;
-    }
-
-    animation_sequence->sequence.animation_tail = new_animation;
-    new_animation->next = 0;
+    add_new_list_element_to_list_end(animation_sequence->sequence.animation_list, new_animation);
 }
 
 Animation* new_animation_simultaneous()
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__SIMULTANEOUS;
 
-    animation->simultaneous.are_all_animations_finished = 0;
-    animation->simultaneous.animation_head = 0;
-    animation->simultaneous.animation_tail = 0;
+    animation->simultaneous.animation_list = new_list((void(*)(void*))&destroy_animation);
 
     return animation;
 }
@@ -106,24 +90,13 @@ Animation* new_animation_simultaneous_of_3(Animation* animation_1, Animation* an
 
 void add_animation_to_end_animation_simultaneous(Animation* animation_simultaneous, Animation* new_animation)
 {
-    if(animation_simultaneous->simultaneous.animation_head)
-    {
-        animation_simultaneous->simultaneous.animation_tail->next = new_animation;
-    }
-    else
-    {
-        animation_simultaneous->simultaneous.animation_head = new_animation;
-    }
-
-    animation_simultaneous->simultaneous.animation_tail = new_animation;
-    new_animation->next = 0;
+    add_new_list_element_to_list_end(animation_simultaneous->simultaneous.animation_list, new_animation);
 }
 
 Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds)
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE;
 
@@ -142,7 +115,6 @@ Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f 
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH;
 
@@ -162,7 +134,6 @@ Animation* new_animation_show_sprite_in_gamemap(Texture* texture, vec2f gamemap_
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP;
 
@@ -180,7 +151,6 @@ Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, vec2f gamema
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP;
 
@@ -199,7 +169,6 @@ Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, vec2f gamem
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP;
 
@@ -218,7 +187,6 @@ Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, vec2f gamemap_
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP;
 
@@ -237,7 +205,6 @@ Animation* new_animation_move_camera_in_world_in_line(vec2f from_world_pos, vec2
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE;
 
@@ -254,7 +221,6 @@ Animation* new_animation_move_camera_in_world_in_arch(vec2f from_world_pos, vec2
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH;
 
@@ -271,7 +237,6 @@ Animation* new_animation_move_camera_in_gamemap_in_line(vec2f from_gamemap_pos, 
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE;
 
@@ -287,7 +252,6 @@ Animation* new_animation_move_camera_in_gamemap_in_arch(vec2f from_gamemap_pos, 
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH;
 
@@ -304,7 +268,6 @@ Animation* new_animation_play_sound(Sound* sound)
 {
     Animation* animation = malloc(sizeof(* animation));
 
-    animation->next = 0;
     animation->is_finished = 0;
     animation->type = ANIMATION_TYPE__PLAY_SOUND;
     animation->play_sound.sound = sound;
@@ -338,6 +301,16 @@ Animation* new_animation_camera_shake(int times, float distance, float seconds)
 
 void destroy_animation(Animation* animation)
 {
+    if(animation->type == ANIMATION_TYPE__SEQUENCE)
+    {
+        destroy_list(animation->sequence.animation_list);
+    }
+
+    if(animation->type == ANIMATION_TYPE__SIMULTANEOUS)
+    {
+        destroy_list(animation->simultaneous.animation_list);
+    }
+
     free(animation);
 }
 
