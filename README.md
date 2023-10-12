@@ -1,5 +1,5 @@
 
-![](./recordings/1.gif)
-![](./recordings/2.gif)
-![](./recordings/3.gif)
-![](./recordings/4.gif)
+![](./doc/recordings/1.gif)
+![](./doc/recordings/2.gif)
+![](./doc/recordings/3.gif)
+![](./doc/recordings/4.gif)
