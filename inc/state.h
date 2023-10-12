@@ -132,10 +132,10 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
 
-void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
-void floor_on_push_end(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
-void floor_on_push_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_ground_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_ground_end(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_air_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_air_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 
 void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);

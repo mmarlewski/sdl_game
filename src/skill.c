@@ -220,7 +220,7 @@ void skill_get_actions_to_execute(State* state, Action* sequence, int skill, vec
 
                             for(int i = 0; i < diff; i++)
                             {
-                                add_action_to_end_action_sequence(sequence, new_action_move(source_object,dir4));
+                                add_action_to_end_action_sequence(sequence, new_action_move_ground(source_object,dir4));
                             }
                         }
                         break;
@@ -244,7 +244,7 @@ void skill_get_actions_to_execute(State* state, Action* sequence, int skill, vec
 
                                 for(int i = 0; i < move_diff-1; i++)
                                 {
-                                    add_action_to_end_action_sequence(sequence, new_action_move(source_object,move_dir4));
+                                    add_action_to_end_action_sequence(sequence, new_action_move_ground(source_object,move_dir4));
                                 }
                             
                                 int push_x_diff = get_x_diff_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
@@ -261,9 +261,19 @@ void skill_get_actions_to_execute(State* state, Action* sequence, int skill, vec
                                     default: break;
                                 }
 
-                                for(int i = 0; i < push_diff; i++)
+                                if(is_object_flying(target_1_object->type))
                                 {
-                                    add_action_to_end_action_sequence(sequence, new_action_push(target_1_object,push_dir4));
+                                    for(int i = 0; i < push_diff; i++)
+                                    {
+                                        add_action_to_end_action_sequence(sequence, new_action_move_air(target_1_object,push_dir4));
+                                    }
+                                }
+                                else
+                                {
+                                    for(int i = 0; i < push_diff; i++)
+                                    {
+                                        add_action_to_end_action_sequence(sequence, new_action_move_ground(target_1_object,push_dir4));
+                                    }
                                 }
                             }
                         }
@@ -286,9 +296,19 @@ void skill_get_actions_to_execute(State* state, Action* sequence, int skill, vec
                                     default: break;
                                 }
 
-                                for(int i = 0; i < diff; i++)
+                                if(is_object_flying(target_1_object->type))
                                 {
-                                    add_action_to_end_action_sequence(sequence, new_action_push(target_1_object,dir4));
+                                    for(int i = 0; i < diff; i++)
+                                    {
+                                        add_action_to_end_action_sequence(sequence, new_action_move_air(target_1_object,dir4));
+                                    }
+                                }
+                                else
+                                {
+                                    for(int i = 0; i < diff; i++)
+                                    {
+                                        add_action_to_end_action_sequence(sequence, new_action_move_ground(target_1_object,dir4));
+                                    }
                                 }
                             }
                         }
@@ -311,9 +331,19 @@ void skill_get_actions_to_execute(State* state, Action* sequence, int skill, vec
                                     default: break;
                                 }
 
-                                for(int i = 0; i < diff; i++)
+                                if(is_object_flying(target_1_object->type))
                                 {
-                                    add_action_to_end_action_sequence(sequence, new_action_push(target_1_object,dir4));
+                                    for(int i = 0; i < diff; i++)
+                                    {
+                                        add_action_to_end_action_sequence(sequence, new_action_move_air(target_1_object,dir4));
+                                    }
+                                }
+                                else
+                                {
+                                    for(int i = 0; i < diff; i++)
+                                    {
+                                        add_action_to_end_action_sequence(sequence, new_action_move_ground(target_1_object,dir4));
+                                    }
                                 }
                             }
                         }

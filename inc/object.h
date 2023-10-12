@@ -15,6 +15,9 @@ enum OBJECT_TYPE
     OBJECT_TYPE__HERO,
     OBJECT_TYPE__GOAT,
     OBJECT_TYPE__SPIDER,
+    OBJECT_TYPE__BULL,
+    OBJECT_TYPE__FLY,
+    OBJECT_TYPE__CHAMELEON,
 
     OBJECT_TYPE__COUNT
 };
@@ -32,6 +35,8 @@ struct _Object
 
 Object* new_object(int type);
 void destroy_object(Object* object);
+
+int is_object_flying(int object_type);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_from_object_type(int type, Textures* textures);

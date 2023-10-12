@@ -17,6 +17,28 @@ void destroy_object(Object* object)
     free(object);
 }
 
+int is_object_flying(int object_type)
+{
+    int is = 0;
+
+    switch(object_type)
+    {
+        case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__PILLAR: is = 0; break;
+        case OBJECT_TYPE__BARREL: is = 0; break;
+        case OBJECT_TYPE__SPRING: is = 0; break;
+        case OBJECT_TYPE__HERO: is = 0; break;
+        case OBJECT_TYPE__GOAT: is = 0; break;
+        case OBJECT_TYPE__SPIDER: is = 0; break;
+        case OBJECT_TYPE__BULL: is = 0; break;
+        case OBJECT_TYPE__FLY: is = 1; break;
+        case OBJECT_TYPE__CHAMELEON: is = 0; break;
+        default: break;
+    }
+
+    return is;
+}
+
 char* get_name_from_object_type(int object_type)
 {
     char* name = "";
@@ -30,6 +52,9 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__HERO: name = "hero"; break;
         case OBJECT_TYPE__GOAT: name = "goat"; break;
         case OBJECT_TYPE__SPIDER: name = "spider"; break;
+        case OBJECT_TYPE__BULL: name = "bull"; break;
+        case OBJECT_TYPE__FLY: name = "fly"; break;
+        case OBJECT_TYPE__CHAMELEON: name = "chameleon"; break;
         default: break;
     }
 
@@ -49,6 +74,9 @@ Texture* get_texture_from_object_type(int object_type, Textures* textures)
         case OBJECT_TYPE__HERO: texture = textures->object.hero; break;
         case OBJECT_TYPE__GOAT: texture = textures->object.goat; break;
         case OBJECT_TYPE__SPIDER: texture = textures->object.spider; break;
+        case OBJECT_TYPE__BULL: texture = textures->object.bull; break;
+        case OBJECT_TYPE__FLY: texture = textures->object.fly; break;
+        case OBJECT_TYPE__CHAMELEON: texture = textures->object.chameleon; break;
         default: break;
     }
 

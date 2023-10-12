@@ -39,25 +39,25 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
-        case ACTION_TYPE__MOVE:
+        case ACTION_TYPE__MOVE_GROUND:
         {
-            vec2i curr_tilemap_pos = action->move.object->tilemap_pos;
-            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->move.dir4,1);
+            vec2i curr_tilemap_pos = action->move_ground.object->tilemap_pos;
+            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->move_ground.dir4,1);
             Object* object_on_next_tilemap_pos = get_object_on_tilemap_pos(state, next_tilemap_pos);
 
             if(object_on_next_tilemap_pos)
             {
-                Action* crash = new_action_crash(action->move.object, action->move.dir4);
+                Action* crash = new_action_crash(action->move_ground.object, action->move_ground.dir4);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, crash);
 
                 action->is_finished = 1;
-                action->move.is_move_blocked = 1;
+                action->move_ground.is_move_blocked = 1;
             }
             else
             {
                 Animation* animation = new_animation_move_sprite_in_gamemap_in_line(
-                    get_texture_from_object_type(action->move.object->type, textures),
+                    get_texture_from_object_type(action->move_ground.object->type, textures),
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                     0.2f
@@ -65,31 +65,31 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 action->animation = animation;
                 start_animation(state, action->animation, textures, sounds, musics);
 
-                int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
-                floor_on_move_start(state, sequence, action, floor);
+                int floor = get_floor_on_tilemap_pos(state, action->move_ground.object->tilemap_pos);
+                floor_on_move_ground_start(state, sequence, action, floor);
             }
 
-            action->move.object->is_visible = 0;
+            action->move_ground.object->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__PUSH:
+        case ACTION_TYPE__MOVE_AIR:
         {
-            vec2i curr_tilemap_pos = action->push.object->tilemap_pos;
-            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->push.dir4,1);
+            vec2i curr_tilemap_pos = action->move_air.object->tilemap_pos;
+            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->move_air.dir4,1);
             Object* object_on_next_tilemap_pos = get_object_on_tilemap_pos(state, next_tilemap_pos);
 
             if(object_on_next_tilemap_pos)
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(sequence, new_action_crash(action->push.object, action->push.dir4));
+                add_action_after_curr_action_action_sequence(sequence, new_action_crash(action->move_air.object, action->move_air.dir4));
 
                 action->is_finished = 1;
-                action->push.is_move_blocked = 1;
+                action->move_air.is_move_blocked = 1;
             }
             else
             {
                 Animation* animation = new_animation_move_sprite_in_gamemap_in_line(
-                    get_texture_from_object_type(action->push.object->type, textures),
+                    get_texture_from_object_type(action->move_air.object->type, textures),
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                     0.2f
@@ -98,11 +98,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 action->animation = animation;
                 start_animation(state, action->animation, textures, sounds, musics);
 
-                int floor = get_floor_on_tilemap_pos(state, action->push.object->tilemap_pos);
-                floor_on_push_start(state, sequence, action, floor);
+                int floor = get_floor_on_tilemap_pos(state, action->move_air.object->tilemap_pos);
+                floor_on_move_air_start(state, sequence, action, floor);
             }
 
-            action->push.object->is_visible = 0;
+            action->move_air.object->is_visible = 0;
         }
         break;
         case ACTION_TYPE__CRASH:

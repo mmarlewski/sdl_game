@@ -136,6 +136,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->hero = load_texture_from_filepath (renderer, "./res/object/hero.png");
     object->goat = load_texture_from_filepath (renderer, "./res/object/goat.png");
     object->spider = load_texture_from_filepath (renderer, "./res/object/spider.png");
+    object->bull = load_texture_from_filepath (renderer, "./res/object/bull.png");
+    object->fly = load_texture_from_filepath (renderer, "./res/object/fly.png");
+    object->chameleon = load_texture_from_filepath (renderer, "./res/object/chameleon.png");
 }
 void destroy_textures_object (Textures_Object* object)
 {
@@ -145,6 +148,9 @@ void destroy_textures_object (Textures_Object* object)
     destroy_texture(object->hero);
     destroy_texture(object->goat);
     destroy_texture(object->spider);
+    destroy_texture(object->bull);
+    destroy_texture(object->fly);
+    destroy_texture(object->chameleon);
 }
 
 void load_textures (Renderer* renderer, Textures* textures)

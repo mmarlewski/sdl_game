@@ -106,34 +106,34 @@ void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* ne
     add_new_list_element_to_list_end(simultaneous->simultaneous.action_list, new_sequence);
 }
 
-Action* new_action_move(Object* object, int dir4)
+Action* new_action_move_ground(Object* object, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
     action->is_finished = 0;
-    action->type = ACTION_TYPE__MOVE;
+    action->type = ACTION_TYPE__MOVE_GROUND;
     
-    action->move.is_move_blocked = 0;
+    action->move_ground.is_move_blocked = 0;
 
-    action->move.object = object;
-    action->move.dir4 = dir4;
+    action->move_ground.object = object;
+    action->move_ground.dir4 = dir4;
 
     return action;
 }
 
-Action* new_action_push(Object* object, int dir4)
+Action* new_action_move_air(Object* object, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
     action->is_finished = 0;
-    action->type = ACTION_TYPE__PUSH;
+    action->type = ACTION_TYPE__MOVE_AIR;
 
-    action->push.is_move_blocked = 0;
+    action->move_air.is_move_blocked = 0;
 
-    action->push.object = object;
-    action->push.dir4 = dir4;
+    action->move_air.object = object;
+    action->move_air.dir4 = dir4;
 
     return action;
 }
@@ -246,8 +246,8 @@ char* get_action_name_from_type(int action_type)
         case ACTION_TYPE__NONE:         name = "none";          break;
         case ACTION_TYPE__SEQUENCE:     name = "sequence";      break;
         case ACTION_TYPE__SIMULTANEOUS: name = "simultaneous";  break;
-        case ACTION_TYPE__MOVE:         name = "move";          break;
-        case ACTION_TYPE__PUSH:         name = "push";          break;
+        case ACTION_TYPE__MOVE_GROUND:  name = "move_ground";   break;
+        case ACTION_TYPE__MOVE_AIR:     name = "push_air";      break;
         case ACTION_TYPE__CRASH:        name = "crash";         break;
         case ACTION_TYPE__FALL:         name = "fall";          break;
         case ACTION_TYPE__DEATH:        name = "death";         break;

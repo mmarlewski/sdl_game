@@ -16,8 +16,8 @@ enum ACTION_TYPE
     ACTION_TYPE__SEQUENCE,
     ACTION_TYPE__SIMULTANEOUS,
 
-    ACTION_TYPE__MOVE,
-    ACTION_TYPE__PUSH,
+    ACTION_TYPE__MOVE_GROUND,
+    ACTION_TYPE__MOVE_AIR,
     ACTION_TYPE__CRASH,
 
     ACTION_TYPE__FALL,
@@ -56,7 +56,7 @@ typedef struct
     Object* object;
     int dir4;
 
-} Action_Move;
+} Action_MoveGround;
 
 typedef struct
 {
@@ -65,7 +65,7 @@ typedef struct
     Object* object;
     int dir4;
 
-} Action_Push;
+} Action_MoveAir;
 
 typedef struct
 {
@@ -122,8 +122,8 @@ struct _Action
         Action_Sequence sequence;
         Action_Simultaneous simultaneous;
 
-        Action_Move move;
-        Action_Push push;
+        Action_MoveGround move_ground;
+        Action_MoveAir move_air;
         Action_Crash crash;
 
         Action_Fall fall;
@@ -152,8 +152,8 @@ Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
-Action* new_action_move(Object* object, int dir4);
-Action* new_action_push(Object* object, int dir4);
+Action* new_action_move_ground(Object* object, int dir4);
+Action* new_action_move_air(Object* object, int dir4);
 Action* new_action_crash(Object* object, int dir4);
 
 Action* new_action_fall(Object* object);

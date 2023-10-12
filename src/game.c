@@ -304,6 +304,26 @@ int main (int argc, char* argv[])
     object_barrel_2->tilemap_pos = make_vec2i(8,5);
     add_object_to_gamemap_objects(&state, object_barrel_2);
 
+    Object* object_goat = new_object(OBJECT_TYPE__GOAT);
+    object_goat->tilemap_pos = make_vec2i(2,2);
+    add_object_to_gamemap_objects(&state, object_goat);
+
+    Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
+    object_spider->tilemap_pos = make_vec2i(2,3);
+    add_object_to_gamemap_objects(&state, object_spider);
+
+    Object* object_bull = new_object(OBJECT_TYPE__BULL);
+    object_bull->tilemap_pos = make_vec2i(2,4);
+    add_object_to_gamemap_objects(&state, object_bull);
+
+    Object* object_fly = new_object(OBJECT_TYPE__FLY);
+    object_fly->tilemap_pos = make_vec2i(2,5);
+    add_object_to_gamemap_objects(&state, object_fly);
+
+    Object* object_chameleon = new_object(OBJECT_TYPE__CHAMELEON);
+    object_chameleon->tilemap_pos = make_vec2i(2,6);
+    add_object_to_gamemap_objects(&state, object_chameleon);
+
     int n = 8;
     for(int i = 0; i < n; i++)
     {

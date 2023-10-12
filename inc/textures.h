@@ -112,6 +112,9 @@ typedef struct
     Texture* hero;
     Texture* goat;
     Texture* spider;
+    Texture* bull;
+    Texture* fly;
+    Texture* chameleon;
 
 } Textures_Object;
 
