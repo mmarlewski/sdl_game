@@ -1,3 +1,7 @@
+
+# https://www.youtube.com/watch?v=DtGrdB8wQ_8
+# https://github.com/gwu-cs-os/evening_os_hour/blob/master/f19/10.2-makefiles/03_featureful_makefile/Makefile
+
 BIN_FILE = sdl_game
 SRC_DIR = ./src
 INC_DIR = ./inc
