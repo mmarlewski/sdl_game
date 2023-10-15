@@ -22,10 +22,16 @@ enum GAMESTATE
 {
     GAMESTATE__NONE,
 
-    GAMESTATE__CHOOSING_SKILL,
-    GAMESTATE__CHOOSING_TARGET_1,
-    GAMESTATE__CHOOSING_TARGET_2,
-    GAMESTATE__SKILL_EXECUTING,
+    GAMESTATE__HERO_CHOOSING_SKILL,
+    GAMESTATE__HERO_CHOOSING_TARGET_1,
+    GAMESTATE__HERO_CHOOSING_TARGET_2,
+    GAMESTATE__HERO_EXECUTING_SKILL,
+
+    // GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK,
+    // GAMESTATE__ENEMY_ATTACKING,
+    // GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE,
+    // GAMESTATE__ENEMY_MOVING,
+    // GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET,
 
     GAMESTATE__COUNT
 };
@@ -59,12 +65,16 @@ typedef struct
 {
     Tile* tilemap[TILEMAP_HEIGHT][TILEMAP_WIDTH];
 
-    Object* object_head;
-    Object* object_tail;
-    Object* object_hero;
+    List* possible_target_1_tilemap_pos_list;
+    List* possible_target_2_tilemap_pos_list;
 
-    Sprite* sprite_head;
-    Sprite* sprite_tail;
+    List* enemy_action_sequence_list;
+
+    List* sprite_list;
+
+    List* object_list;
+    List* object_enemy_list;
+    Object* object_hero;
 
     vec2i selected_tilemap_pos;
 
@@ -72,9 +82,6 @@ typedef struct
     int is_skill_two_target;
     vec2i target_1_tilemap_pos;
     vec2i target_2_tilemap_pos;
-
-    List* possible_target_1_tilemap_pos_list;
-    List* possible_target_2_tilemap_pos_list;
 
 } State_Gamemap;
 
@@ -109,6 +116,10 @@ void change_floor_in_tilemap_pos(State* state, int new_floor, vec2i tilemap_pos)
 
 void add_object_to_gamemap_objects(State* state, Object* new_object);
 void remove_object_from_gamemap_objects(State* state, Object* object);
+void remove_all_dead_objects_from_gamemap_objects(State* state);
+
+void add_action_sequence_to_gamemap_action_sequence(State* state, Action* new_action_sequence);
+void remove_action_sequence_from_gamemap_action_sequence(State* state, Action* action_sequence);
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);

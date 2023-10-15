@@ -69,11 +69,11 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             //
         }
         break;
-        case GAMESTATE__CHOOSING_SKILL:
+        case GAMESTATE__HERO_CHOOSING_SKILL:
         {
             if (input->was_esc && !input->is_esc)
             {
-                // state->is_game_running = 0;
+                state->is_game_running = 0;
             }
 
             int skill = SKILL__NONE;
@@ -85,7 +85,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             state->gamemap.curr_skill = skill;
             state->gamemap.is_skill_two_target = is_skill_two_target(skill);
-            
+
             if(skill != SKILL__NONE)
             {
                 remove_all_pos_from_possible_target_1_tilemap_pos_list(state);
@@ -96,16 +96,16 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->gamemap.object_hero->tilemap_pos
                         );
 
-                change_gamestate(state, GAMESTATE__CHOOSING_TARGET_1);
+                change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
             }
 
         }
         break;
-        case GAMESTATE__CHOOSING_TARGET_1:
+        case GAMESTATE__HERO_CHOOSING_TARGET_1:
         {
             if (input->was_esc && !input->is_esc)
             {
-                change_gamestate(state, GAMESTATE__CHOOSING_SKILL);
+                change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
             }
 
             vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
@@ -128,7 +128,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                             state->gamemap.target_1_tilemap_pos
                             );
 
-                        change_gamestate(state, GAMESTATE__CHOOSING_TARGET_2);
+                        change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_2);
                     }
                     else
                     {
@@ -145,19 +145,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                         execute_actions(state, textures, sounds, musics);
 
-                        change_gamestate(state, GAMESTATE__SKILL_EXECUTING);
+                        change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
                     }
                 }
             }
         }
         break;
-        case GAMESTATE__CHOOSING_TARGET_2:
+        case GAMESTATE__HERO_CHOOSING_TARGET_2:
         {
             if (input->was_esc && !input->is_esc)
             {
-                change_gamestate(state, GAMESTATE__CHOOSING_TARGET_1);
+                change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
             }
-            
+
             vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
             state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
 
@@ -178,17 +178,17 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     execute_actions(state, textures, sounds, musics);
 
-                    change_gamestate(state, GAMESTATE__SKILL_EXECUTING);
+                    change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
                 }
             }
         }
         break;
-        case GAMESTATE__SKILL_EXECUTING:
+        case GAMESTATE__HERO_EXECUTING_SKILL:
         {
             if(state->action.main_action_sequence->is_finished)
             {
                 end_action(state, state->action.main_action_sequence, state->action.main_action_sequence, textures, sounds, musics);
-                change_gamestate(state, GAMESTATE__CHOOSING_SKILL);
+                change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
             }
             else
             {

@@ -57,10 +57,10 @@ typedef struct
     Texture* down;
     Texture* left;
 
-} Textures_Move;
+} Textures_MoveGround;
 
-void load_textures_move (Renderer* renderer, Textures_Move* move);
-void destroy_textures_move (Textures_Move* move);
+void load_textures_move_ground (Renderer* renderer, Textures_MoveGround* move_ground);
+void destroy_textures_move_ground (Textures_MoveGround* move_ground);
 
 typedef struct
 {
@@ -69,10 +69,10 @@ typedef struct
     Texture* down;
     Texture* left;
 
-} Textures_Push;
+} Textures_MoveAir;
 
-void load_textures_push (Renderer* renderer, Textures_Push* push);
-void destroy_textures_push (Textures_Push* push);
+void load_textures_move_air (Renderer* renderer, Textures_MoveAir* move_air);
+void destroy_textures_move_air (Textures_MoveAir* move_air);
 
 typedef struct
 {
@@ -94,6 +94,18 @@ typedef struct
 
 void load_textures_blow_up (Renderer* renderer, Textures_BlowUp* blow_up);
 void destroy_textures_blow_up (Textures_BlowUp* blow_up);
+
+typedef struct
+{
+    Texture* up;
+    Texture* right;
+    Texture* down;
+    Texture* left;
+
+} Textures_Throw;
+
+void load_textures_throw (Renderer* renderer, Textures_Throw* throw);
+void destroy_textures_throw (Textures_Throw* throw);
 
 typedef struct
 {
@@ -128,14 +140,14 @@ typedef struct
     Textures_Highlight highlight;
     Textures_Danger danger;
 
-    Textures_Move move;
-    Textures_Push push;
+    Textures_MoveGround move_ground;
+    Textures_MoveAir move_air;
     Textures_Crash crash;
     Textures_BlowUp blow_up;
     Textures_Drop drop;
 
     Textures_Object object;
-    
+
 } Textures;
 
 void load_textures (Renderer* renderer, Textures* textures);

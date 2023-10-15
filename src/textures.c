@@ -65,34 +65,34 @@ void destroy_textures_danger (Textures_Danger* danger)
     destroy_texture(danger->frame_6);
 }
 
-void load_textures_move (Renderer* renderer, Textures_Move* move)
+void load_textures_move_ground (Renderer* renderer, Textures_MoveGround* move_ground)
 {
-    move->up = load_texture_from_filepath (renderer, "./res/move/up.png");
-    move->right = load_texture_from_filepath (renderer, "./res/move/right.png");
-    move->down = load_texture_from_filepath (renderer, "./res/move/down.png");
-    move->left = load_texture_from_filepath (renderer, "./res/move/left.png");
+    move_ground->up = load_texture_from_filepath (renderer, "./res/move_ground/up.png");
+    move_ground->right = load_texture_from_filepath (renderer, "./res/move_ground/right.png");
+    move_ground->down = load_texture_from_filepath (renderer, "./res/move_ground/down.png");
+    move_ground->left = load_texture_from_filepath (renderer, "./res/move_ground/left.png");
 }
-void destroy_textures_move (Textures_Move* move)
+void destroy_textures_move_ground (Textures_MoveGround* move_ground)
 {
-    destroy_texture(move->up);
-    destroy_texture(move->right);
-    destroy_texture(move->down);
-    destroy_texture(move->left);
+    destroy_texture(move_ground->up);
+    destroy_texture(move_ground->right);
+    destroy_texture(move_ground->down);
+    destroy_texture(move_ground->left);
 }
 
-void load_textures_push (Renderer* renderer, Textures_Push* push)
+void load_textures_move_air (Renderer* renderer, Textures_MoveAir* move_air)
 {
-    push->up = load_texture_from_filepath (renderer, "./res/push/up.png");
-    push->right = load_texture_from_filepath (renderer, "./res/push/right.png");
-    push->down = load_texture_from_filepath (renderer, "./res/push/down.png");
-    push->left = load_texture_from_filepath (renderer, "./res/push/left.png");
+    move_air->up = load_texture_from_filepath (renderer, "./res/move_air/up.png");
+    move_air->right = load_texture_from_filepath (renderer, "./res/move_air/right.png");
+    move_air->down = load_texture_from_filepath (renderer, "./res/move_air/down.png");
+    move_air->left = load_texture_from_filepath (renderer, "./res/move_air/left.png");
 }
-void destroy_textures_push (Textures_Push* push)
+void destroy_textures_move_air (Textures_MoveAir* move_air)
 {
-    destroy_texture(push->up);
-    destroy_texture(push->right);
-    destroy_texture(push->down);
-    destroy_texture(push->left);
+    destroy_texture(move_air->up);
+    destroy_texture(move_air->right);
+    destroy_texture(move_air->down);
+    destroy_texture(move_air->left);
 }
 
 void load_textures_crash (Renderer* renderer, Textures_Crash* crash)
@@ -117,6 +117,21 @@ void load_textures_blow_up (Renderer* renderer, Textures_BlowUp* blow_up)
 void destroy_textures_blow_up (Textures_BlowUp* blow_up)
 {
     destroy_texture(blow_up->explosion);
+}
+
+void load_textures_throw (Renderer* renderer, Textures_Throw* throw)
+{
+    throw->up = load_texture_from_filepath (renderer, "./res/throw/up.png");
+    throw->right = load_texture_from_filepath (renderer, "./res/throw/right.png");
+    throw->down = load_texture_from_filepath (renderer, "./res/throw/down.png");
+    throw->left = load_texture_from_filepath (renderer, "./res/throw/left.png");
+}
+void destroy_textures_throw (Textures_Throw* throw)
+{
+    destroy_texture(throw->up);
+    destroy_texture(throw->right);
+    destroy_texture(throw->down);
+    destroy_texture(throw->left);
 }
 
 void load_textures_drop (Renderer* renderer, Textures_Drop* drop)
@@ -160,8 +175,8 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_highlight(renderer,&textures->highlight);
     load_textures_danger(renderer,&textures->danger);
 
-    load_textures_move(renderer,&textures->move);
-    load_textures_push(renderer,&textures->push);
+    load_textures_move_ground(renderer,&textures->move_ground);
+    load_textures_move_air(renderer,&textures->move_air);
     load_textures_crash(renderer,&textures->crash);
     load_textures_blow_up(renderer,&textures->blow_up);
     load_textures_drop(renderer,&textures->drop);
@@ -176,8 +191,8 @@ void destroy_textures (Textures* textures)
     destroy_textures_highlight (&textures->highlight);
     destroy_textures_danger (&textures->danger);
 
-    destroy_textures_move (&textures->move);
-    destroy_textures_push (&textures->push);
+    destroy_textures_move_ground (&textures->move_ground);
+    destroy_textures_move_air (&textures->move_air);
     destroy_textures_crash (&textures->crash);
     destroy_textures_blow_up (&textures->blow_up);
     destroy_textures_drop (&textures->drop);

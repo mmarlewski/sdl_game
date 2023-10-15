@@ -107,7 +107,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             // possible target 1
 
-            if(state->gamestate == GAMESTATE__CHOOSING_TARGET_1)
+            if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1)
             {
                 if(is_tilemap_pos_in_possible_target_1_tilemap_pos_list(state, tilemap_pos))
                 {
@@ -123,7 +123,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             // possible target 2
 
-            if(state->gamestate == GAMESTATE__CHOOSING_TARGET_2)
+            if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
             {
                 if(is_tilemap_pos_in_possible_target_2_tilemap_pos_list(state, tilemap_pos))
                 {
@@ -139,7 +139,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             // selected
 
-            if(state->gamestate == GAMESTATE__CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__CHOOSING_TARGET_2)
+            if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
             {
                 if(state->gamemap.selected_tilemap_pos.x == j && state->gamemap.selected_tilemap_pos.y == i)
                 {
@@ -170,9 +170,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
             world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
-            
-            for(Object* curr_object = state->gamemap.object_head; curr_object != 0; curr_object = curr_object->next)
+
+            for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
+                Object* curr_object = (Object*)curr_elem->data;
                 if(curr_object->is_visible && curr_object->tilemap_pos.x == j && curr_object->tilemap_pos.y == i)
                 {
                     draw_texture_at_world_pos(
@@ -184,8 +185,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 }
             }
 
-            for(Sprite* curr_sprite = state->gamemap.sprite_head; curr_sprite != 0; curr_sprite = curr_sprite->next)
+            for(ListElem* curr_elem = state->gamemap.sprite_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
+                Sprite* curr_sprite = (Sprite*)curr_elem->data;
                 vec2i curr_sprite_tilemap_pos = make_vec2i(
                     floor(curr_sprite->gamemap_pos.x + 0.4f),
                     floor(curr_sprite->gamemap_pos.y + 0.4f)
@@ -229,7 +231,7 @@ int main (int argc, char* argv[])
 
     init_state (&state, &textures, &sounds, &musics);
 
-    state.gamestate = GAMESTATE__CHOOSING_SKILL;
+    state.gamestate = GAMESTATE__HERO_CHOOSING_SKILL;
 
     state.camera.zoom = 5.0f;
 
@@ -243,10 +245,6 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE_WATER_CRACK, make_vec2i(5,2));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(6,2));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(7,2));
-
-    Object* object_hero = new_object(OBJECT_TYPE__HERO);
-    object_hero->tilemap_pos = make_vec2i(10,5);
-    add_object_to_gamemap_objects(&state, object_hero);
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_1->tilemap_pos = make_vec2i(4,5);
@@ -356,7 +354,16 @@ int main (int argc, char* argv[])
     object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
     add_object_to_gamemap_objects(&state, object_barrel_4);
 
-    state.gamemap.object_hero = object_hero;
+    // add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
+    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
+    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
+    //     new_action_fall(state.gamemap.object_hero)
+    // ));
+    // add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
+    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
+    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
+    //     new_action_fall(state.gamemap.object_hero)
+    // ));
 
     while (state.is_game_running)
     {

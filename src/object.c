@@ -4,8 +4,8 @@ Object* new_object(int type)
 {
     Object* object = malloc(sizeof(*object));
 
-    object->next = 0;
     object->is_visible = 1;
+    object->is_dead = 0;
     object->type = type;
     object->tilemap_pos = make_vec2i(0,0);
 
@@ -33,6 +33,28 @@ int is_object_flying(int object_type)
         case OBJECT_TYPE__BULL: is = 0; break;
         case OBJECT_TYPE__FLY: is = 1; break;
         case OBJECT_TYPE__CHAMELEON: is = 0; break;
+        default: break;
+    }
+
+    return is;
+}
+
+int is_object_enemy(int object_type)
+{
+    int is = 0;
+
+    switch(object_type)
+    {
+        case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__PILLAR: is = 0; break;
+        case OBJECT_TYPE__BARREL: is = 0; break;
+        case OBJECT_TYPE__SPRING: is = 0; break;
+        case OBJECT_TYPE__HERO: is = 0; break;
+        case OBJECT_TYPE__GOAT: is = 1; break;
+        case OBJECT_TYPE__SPIDER: is = 1; break;
+        case OBJECT_TYPE__BULL: is = 1; break;
+        case OBJECT_TYPE__FLY: is = 1; break;
+        case OBJECT_TYPE__CHAMELEON: is = 1; break;
         default: break;
     }
 

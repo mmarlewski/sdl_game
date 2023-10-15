@@ -30,12 +30,13 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         }
     }
 
-    state->gamemap.object_head = 0;
-    state->gamemap.object_tail = 0;
-    state->gamemap.object_hero = 0;
+    state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
+    state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
+    state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
+    state->gamemap.object_hero->tilemap_pos = make_vec2i(11,5);
+    add_object_to_gamemap_objects(state, state->gamemap.object_hero);
 
-    state->gamemap.sprite_head = 0;
-    state->gamemap.sprite_tail = 0;
+    state->gamemap.sprite_list = new_list((void (*)(void *))&destroy_sprite);
 
     state->gamemap.selected_tilemap_pos = make_vec2i(0, 0);
 
@@ -44,6 +45,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->gamemap.possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
     state->gamemap.possible_target_2_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
+
+    state->gamemap.enemy_action_sequence_list = new_list((void(*)(void*))&destroy_action);
 
     state->gamemap.target_1_tilemap_pos = make_vec2i(0, 0);
     state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
@@ -72,8 +75,9 @@ Object* get_object_on_tilemap_pos(State* state, vec2i tilemap_pos)
 {
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
 
-    for(Object* curr_object = state->gamemap.object_head; curr_object; curr_object = curr_object->next)
+    for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem; curr_elem = curr_elem->next)
     {
+        Object* curr_object = (Object*)curr_elem->data;
         if(curr_object->tilemap_pos.x == tilemap_pos.x && curr_object->tilemap_pos.y == tilemap_pos.y)
         {
             return curr_object;
@@ -88,7 +92,7 @@ int get_floor_on_tilemap_pos(State* state, vec2i tilemap_pos)
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
 
     Tile* tile = state->gamemap.tilemap[tilemap_pos.y][tilemap_pos.x];
-    
+
     return (tile) ? (tile->floor) : (0);
 }
 
@@ -103,117 +107,55 @@ void change_floor_in_tilemap_pos(State* state, int new_floor, vec2i tilemap_pos)
 
 void add_object_to_gamemap_objects(State* state, Object* new_object)
 {
-    if(state->gamemap.object_head)
-    {
-        state->gamemap.object_tail->next = new_object;
-    }
-    else
-    {
-        state->gamemap.object_head = new_object;
-    }
+    add_new_list_element_to_list_end(state->gamemap.object_list, new_object);
 
-    state->gamemap.object_tail = new_object;
-    new_object->next = 0;
+    if(is_object_enemy(new_object->type))
+    {
+        add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
+    }
 }
 
 void remove_object_from_gamemap_objects(State* state, Object* object)
 {
-    if(state->gamemap.object_hero == object)
+    if(is_object_enemy(object->type))
     {
-        state->gamemap.object_hero = 0;
+        remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
     }
 
-    Object* prev_object = 0;
-    Object* curr_object = state->gamemap.object_head;
-    Object* next_object = (curr_object) ? (curr_object->next) : (0);
+    remove_list_element_of_data(state->gamemap.object_list, object, 1);
+}
 
-    while(curr_object)
+void remove_all_dead_objects_from_gamemap_objects(State* state)
+{
+    for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem; curr_elem = curr_elem->next)
     {
-        if(curr_object == object)
+        Object* curr_object = (Object*)curr_elem->data;
+
+        if(curr_object->is_dead)
         {
-            destroy_object(curr_object);
-
-            if(curr_object == state->gamemap.object_head)
-            {
-                state->gamemap.object_head = next_object;
-            }
-
-            if(curr_object == state->gamemap.object_tail)
-            {
-                state->gamemap.object_tail = prev_object;
-            }
-
-            if(prev_object)
-            {
-                prev_object->next = next_object;
-            }
-
-            return;
-        }
-        else
-        {
-            prev_object = curr_object;
-            curr_object = curr_object->next;
-            next_object = (curr_object) ? (curr_object->next) : (0);
+            remove_object_from_gamemap_objects(state, curr_object);
         }
     }
+}
 
-    return;
+void add_action_sequence_to_gamemap_action_sequence(State* state, Action* new_action_sequence)
+{
+    add_new_list_element_to_list_end(state->gamemap.enemy_action_sequence_list, new_action_sequence);
+}
+
+void remove_action_sequence_from_gamemap_action_sequence(State* state, Action* action_sequence)
+{
+    remove_list_element_of_data(state->gamemap.enemy_action_sequence_list, action_sequence, 1);
 }
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite)
 {
-    if(state->gamemap.sprite_head)
-    {
-        state->gamemap.sprite_tail->next = new_sprite;
-    }
-    else
-    {
-        state->gamemap.sprite_head = new_sprite;
-    }
-
-    state->gamemap.sprite_tail = new_sprite;
-    new_sprite->next = 0;
+    add_new_list_element_to_list_end(state->gamemap.sprite_list, new_sprite);
 }
 
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite)
 {
-    Sprite* prev_sprite = 0;
-    Sprite* curr_sprite = state->gamemap.sprite_head;
-    Sprite* next_sprite = (curr_sprite) ? (curr_sprite->next) : (0);
-
-    while(curr_sprite)
-    {
-        if(curr_sprite == sprite)
-        {
-            destroy_sprite(curr_sprite);
-
-            if(curr_sprite == state->gamemap.sprite_head)
-            {
-                state->gamemap.sprite_head = next_sprite;
-            }
-
-            if(curr_sprite == state->gamemap.sprite_tail)
-            {
-                state->gamemap.sprite_tail = prev_sprite;
-            }
-
-            if(prev_sprite)
-            {
-                prev_sprite->next = next_sprite;
-            }
-
-            return;
-        }
-        else
-        {
-            prev_sprite = curr_sprite;
-            curr_sprite = curr_sprite->next;
-            next_sprite = (curr_sprite) ? (curr_sprite->next) : (0);
-        }
-    }
-
-    return;
+    remove_list_element_of_data(state->gamemap.sprite_list, sprite, 1);
 }
 
 void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i* new_pos)
@@ -305,11 +247,11 @@ char* get_gamestate_name(int gamestate)
 
     switch(gamestate)
     {
-        case GAMESTATE__NONE:               name = "none";              break;
-        case GAMESTATE__CHOOSING_SKILL:     name = "choosing skill";    break;
-        case GAMESTATE__CHOOSING_TARGET_1:  name = "choosing target 1"; break;
-        case GAMESTATE__CHOOSING_TARGET_2:  name = "choosing target 2"; break;
-        case GAMESTATE__SKILL_EXECUTING:    name = "skill executing";   break;
+        case GAMESTATE__NONE:                   name = "none";                      break;
+        case GAMESTATE__HERO_CHOOSING_SKILL:    name = "hero choosing skill";       break;
+        case GAMESTATE__HERO_CHOOSING_TARGET_1: name = "hero choosing target 1";    break;
+        case GAMESTATE__HERO_CHOOSING_TARGET_2: name = "hero choosing target 2";    break;
+        case GAMESTATE__HERO_EXECUTING_SKILL:   name = "hero skill executing";      break;
         default: break;
     }
 

@@ -8,7 +8,6 @@ typedef struct _Sprite Sprite;
 
 struct _Sprite
 {
-    Sprite* next;
     Texture* texture;
     vec2f gamemap_pos;
 };

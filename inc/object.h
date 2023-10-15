@@ -26,17 +26,17 @@ typedef struct _Object Object;
 
 struct _Object
 {
-    Object* next;
     int is_visible;
+    int is_dead;
     int type;
     vec2i tilemap_pos;
-
 };
 
 Object* new_object(int type);
 void destroy_object(Object* object);
 
 int is_object_flying(int object_type);
+int is_object_enemy(int object_type);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_from_object_type(int type, Textures* textures);
