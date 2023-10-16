@@ -274,10 +274,6 @@ int main (int argc, char* argv[])
     object_pillar_7->tilemap_pos = make_vec2i(9,7);
     add_object_to_gamemap_objects(&state, object_pillar_7);
 
-    Object* object_pillar_8 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_8->tilemap_pos = make_vec2i(10,7);
-    add_object_to_gamemap_objects(&state, object_pillar_8);
-
     Object* object_spring_1 = new_object(OBJECT_TYPE__SPRING);
     object_spring_1->tilemap_pos = make_vec2i(8,2);
     add_object_to_gamemap_objects(&state, object_spring_1);
@@ -289,10 +285,6 @@ int main (int argc, char* argv[])
     Object* object_spring_3 = new_object(OBJECT_TYPE__SPRING);
     object_spring_3->tilemap_pos = make_vec2i(10,2);
     add_object_to_gamemap_objects(&state, object_spring_3);
-
-    Object* object_spring_4 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_4->tilemap_pos = make_vec2i(11,2);
-    add_object_to_gamemap_objects(&state, object_spring_4);
 
     Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
     object_barrel_1->tilemap_pos = make_vec2i(7,5);

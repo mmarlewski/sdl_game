@@ -214,30 +214,156 @@ void print_action(Action* action, int depth)
 {
     char* action_type = get_action_name_from_type(action->type);
     for(int i = 0; i < depth; i++) printf("  ");
-    printf("action: %i (%s) \n", action, action_type);
+    printf("%s \n", action_type);
 
-    if(action->type == ACTION_TYPE__SEQUENCE)
+    if(action->type != ACTION_TYPE__SEQUENCE && action->type != ACTION_TYPE__SIMULTANEOUS)
     {
-        for(int i = 0; i < depth; i++) printf("  ");
-        printf("[ \n");
-        for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
-        {
-            print_action(curr_elem->data, depth + 1);
-        }
-        for(int i = 0; i < depth; i++) printf("  ");
-        printf("] \n");
+        // comment this line if you need to look closely at each single action
+        return;
     }
 
-    if(action->type == ACTION_TYPE__SIMULTANEOUS)
+    switch(action->type)
     {
-        for(int i = 0; i < depth; i++) printf("  ");
-        printf("{ \n");
-        for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
+        case ACTION_TYPE__NONE:
         {
-            print_action(curr_elem->data, depth + 1);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
         }
-        for(int i = 0; i < depth; i++) printf("  ");
-        printf("} \n");
+        break;
+        case ACTION_TYPE__SEQUENCE:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("[ \n");
+            for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
+            {
+                print_action(curr_elem->data, depth + 1);
+            }
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("] \n");
+        }
+        break;
+        case ACTION_TYPE__SIMULTANEOUS:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("{ \n");
+            for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
+            {
+                print_action(curr_elem->data, depth + 1);
+            }
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("} \n");
+        }
+        break;
+        case ACTION_TYPE__MOVE_GROUND:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("( \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->move_ground.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->move_ground.tilemap_pos.x, action->move_ground.tilemap_pos.y);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->move_ground.dir4);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf(") \n");
+        }
+        break;
+        case ACTION_TYPE__MOVE_AIR:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->move_air.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->move_air.tilemap_pos.x, action->move_air.tilemap_pos.y);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->move_air.dir4);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__CRASH:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->crash.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->crash.tilemap_pos.x, action->crash.tilemap_pos.y);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->crash.dir4);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__FALL:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->fall.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->fall.tilemap_pos.x, action->fall.tilemap_pos.y);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__DEATH:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->death.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->death.tilemap_pos.x, action->death.tilemap_pos.y);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__BLOW_UP:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->blow_up.tilemap_pos.x, action->blow_up.tilemap_pos.y);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__THROW:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->throw.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->throw.tilemap_pos.x, action->throw.tilemap_pos.y);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->throw.dir4);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("distance:       %i \n", action->throw.distance);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__DROP:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->drop.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("tilemap_pos:    %i, %i \n", action->drop.tilemap_pos.x, action->drop.tilemap_pos.y);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->drop.dir4);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        default:
+        break;
     }
 }
 

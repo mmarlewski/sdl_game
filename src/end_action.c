@@ -2,6 +2,9 @@
 
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
 {
+    printf("\n");
+    print_action(state->action.main_action_sequence, 0);
+
     // printf("end action:         %s \n", get_action_name_from_type(action->type));
 
     switch(action->type)
@@ -71,7 +74,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object));
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->fall.tilemap_pos));
 
             action->fall.object->is_visible = 1;
         }
@@ -81,7 +84,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             end_animation(state, action->animation, textures, sounds, musics);
 
             object_on_death(state, sequence, action, action->death.object);
-            
+
             remove_object_from_gamemap_objects(state, action->death.object);
         }
         break;
@@ -100,44 +103,44 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             {
                 if(is_object_flying(object_up->type))
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_up, DIR4__UP)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_up, object_up->tilemap_pos, DIR4__UP)));
                 }
                 else
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_up, DIR4__UP)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_up, object_up->tilemap_pos, DIR4__UP)));
                 }
             }
             if(object_right)
             {
                 if(is_object_flying(object_right->type))
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_right, DIR4__RIGHT)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_right, object_right->tilemap_pos, DIR4__RIGHT)));
                 }
                 else
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_right, DIR4__RIGHT)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_right, object_right->tilemap_pos, DIR4__RIGHT)));
                 }
             }
             if(object_down)
             {
                 if(is_object_flying(object_down->type))
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_down, DIR4__DOWN)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_down, object_down->tilemap_pos, DIR4__DOWN)));
                 }
                 else
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_down, DIR4__DOWN)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_down, object_down->tilemap_pos, DIR4__DOWN)));
                 }
             }
             if(object_left)
             {
                 if(is_object_flying(object_left->type))
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_left, DIR4__LEFT)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_left, object_left->tilemap_pos, DIR4__LEFT)));
                 }
                 else
                 {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_left, DIR4__LEFT)));
+                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_left, object_left->tilemap_pos, DIR4__LEFT)));
                 }
             }
             add_action_after_curr_action_action_sequence(sequence, push_around);
@@ -153,7 +156,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             action->throw.object->tilemap_pos = next_tilemap_pos;
 
             add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object, next_tilemap_pos, action->throw.dir4));
-            
+
             action->throw.object->is_visible = 1;
         }
         break;
@@ -170,7 +173,4 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         default:
         break;
     }
-
-    printf("\n");
-    print_action(state->action.main_action_sequence, 0);
 }

@@ -26,4 +26,20 @@ int get_x_diff_from_vec2i_to_vec2i(vec2i from, vec2i to);
 int get_y_diff_from_vec2i_to_vec2i(vec2i from, vec2i to);
 int get_dir4_from_vec2i_to_vec2i(vec2i from, vec2i to);
 
+typedef struct
+{
+    int dir4;
+
+    int x_diff;
+    int y_diff;
+    int diff;
+
+    int abs_x_diff;
+    int abs_y_diff;
+    int abs_diff;
+
+} DistanceInfo;
+
+DistanceInfo get_distance_info_from_vec2i_to_vec2i(vec2i from, vec2i to);
+
 #endif

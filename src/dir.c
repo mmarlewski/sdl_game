@@ -80,3 +80,50 @@ int get_dir4_from_vec2i_to_vec2i(vec2i from, vec2i to)
 
     return dir4;
 }
+
+
+DistanceInfo get_distance_info_from_vec2i_to_vec2i(vec2i from, vec2i to)
+{
+    int dir4 = DIR4__NONE;
+    int diff = 0;
+
+    int x_diff = get_x_diff_from_vec2i_to_vec2i(from, to);
+    int y_diff = get_y_diff_from_vec2i_to_vec2i(from, to);
+
+    if(x_diff > 0 && y_diff == 0)
+    {
+        dir4 = DIR4__RIGHT;
+        diff = x_diff;
+    }
+    if(x_diff < 0 && y_diff == 0)
+    {
+        dir4 = DIR4__LEFT;
+        diff = x_diff;
+    }
+    if(x_diff == 0 && y_diff > 0)
+    {
+        dir4 = DIR4__DOWN;
+        diff = y_diff;
+    }
+    if(x_diff == 0 && y_diff < 0)
+    {
+        dir4 = DIR4__UP;
+        diff = y_diff;
+    }
+
+    int abs_x_diff = abs(x_diff);
+    int abs_y_diff = abs(y_diff);
+    int abs_diff = abs(diff);
+
+    DistanceInfo distance_info;
+
+    distance_info.dir4 = dir4;
+    distance_info.x_diff = x_diff;
+    distance_info.y_diff = y_diff;
+    distance_info.diff = diff;
+    distance_info.abs_x_diff = abs_x_diff;
+    distance_info.abs_y_diff = abs_y_diff;
+    distance_info.abs_diff = abs_diff;
+
+    return distance_info;
+}

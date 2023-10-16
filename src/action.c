@@ -106,23 +106,24 @@ void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* ne
     add_new_list_element_to_list_end(simultaneous->simultaneous.action_list, new_sequence);
 }
 
-Action* new_action_move_ground(Object* object, int dir4)
+Action* new_action_move_ground(Object* object, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
     action->is_finished = 0;
     action->type = ACTION_TYPE__MOVE_GROUND;
-    
+
     action->move_ground.is_move_blocked = 0;
 
     action->move_ground.object = object;
+    action->move_ground.tilemap_pos = tilemap_pos;
     action->move_ground.dir4 = dir4;
 
     return action;
 }
 
-Action* new_action_move_air(Object* object, int dir4)
+Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -133,12 +134,13 @@ Action* new_action_move_air(Object* object, int dir4)
     action->move_air.is_move_blocked = 0;
 
     action->move_air.object = object;
+    action->move_air.tilemap_pos = tilemap_pos;
     action->move_air.dir4 = dir4;
 
     return action;
 }
 
-Action* new_action_crash(Object* object, int dir4)
+Action* new_action_crash(Object* object, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -147,12 +149,13 @@ Action* new_action_crash(Object* object, int dir4)
     action->type = ACTION_TYPE__CRASH;
 
     action->crash.object = object;
+    action->crash.tilemap_pos = tilemap_pos;
     action->crash.dir4 = dir4;
 
     return action;
 }
 
-Action* new_action_fall(Object* object)
+Action* new_action_fall(Object* object, vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -161,11 +164,12 @@ Action* new_action_fall(Object* object)
     action->type = ACTION_TYPE__FALL;
 
     action->fall.object = object;
+    action->fall.tilemap_pos = tilemap_pos;
 
     return action;
 }
 
-Action* new_action_death(Object* object)
+Action* new_action_death(Object* object, vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -174,6 +178,7 @@ Action* new_action_death(Object* object)
     action->type = ACTION_TYPE__DEATH;
 
     action->death.object = object;
+    action->death.tilemap_pos = tilemap_pos;
 
     return action;
 }

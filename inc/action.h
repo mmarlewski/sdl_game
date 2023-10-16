@@ -52,8 +52,9 @@ typedef struct
 typedef struct
 {
     int is_move_blocked;
-    
+
     Object* object;
+    vec2i tilemap_pos;
     int dir4;
 
 } Action_MoveGround;
@@ -63,6 +64,7 @@ typedef struct
     int is_move_blocked;
 
     Object* object;
+    vec2i tilemap_pos;
     int dir4;
 
 } Action_MoveAir;
@@ -70,6 +72,7 @@ typedef struct
 typedef struct
 {
     Object* object;
+    vec2i tilemap_pos;
     int dir4;
 
 } Action_Crash;
@@ -77,12 +80,14 @@ typedef struct
 typedef struct
 {
     Object* object;
+    vec2i tilemap_pos;
 
 } Action_Fall;
 
 typedef struct
 {
     Object* object;
+    vec2i tilemap_pos;
 
 } Action_Death;
 
@@ -152,12 +157,12 @@ Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
-Action* new_action_move_ground(Object* object, int dir4);
-Action* new_action_move_air(Object* object, int dir4);
-Action* new_action_crash(Object* object, int dir4);
+Action* new_action_move_ground(Object* object, vec2i tilemap_pos, int dir4);
+Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4);
+Action* new_action_crash(Object* object, vec2i tilemap_pos, int dir4);
 
-Action* new_action_fall(Object* object);
-Action* new_action_death(Object* object);
+Action* new_action_fall(Object* object, vec2i tilemap_pos);
+Action* new_action_death(Object* object, vec2i tilemap_pos);
 Action* new_action_blow_up(vec2i tilemap_pos);
 
 Action* new_action_throw(Object* object, vec2i tilemap_pos, int dir4, int distance);
