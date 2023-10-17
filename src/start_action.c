@@ -52,7 +52,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             if(object_on_next_tilemap_pos)
             {
-                Action* crash = new_action_crash(action->move_ground.object, action->tilemap_pos, action->move_ground.dir4);
+                Action* crash = new_action_crash_ground(action->move_ground.object, action->tilemap_pos, action->move_ground.dir4);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, crash);
 
@@ -88,7 +88,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             if(object_on_next_tilemap_pos)
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(sequence, new_action_crash(action->move_air.object, action->tilemap_pos, action->move_air.dir4));
+                add_action_after_curr_action_action_sequence(sequence, new_action_crash_air(action->move_air.object, action->tilemap_pos, action->move_air.dir4));
 
                 action->is_finished = 1;
                 action->move_air.is_move_blocked = 1;
@@ -112,13 +112,13 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->move_air.object->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION_TYPE__CRASH_GROUND:
         {
-            action->crash.object->tilemap_pos = action->tilemap_pos;
+            action->crash_ground.object->tilemap_pos = action->tilemap_pos;
 
-            Texture* object_texture = get_texture_from_object_type(action->crash.object->type, textures);
-            vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object->tilemap_pos);
-            vec2f next_object_gamemap_pos = make_vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash.dir4, 1.0f);
+            Texture* object_texture = get_texture_from_object_type(action->crash_ground.object->type, textures);
+            vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash_ground.object->tilemap_pos);
+            vec2f next_object_gamemap_pos = make_vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash_ground.dir4, 1.0f);
             next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
             next_object_gamemap_pos.y = curr_object_gamemap_pos.y + (next_object_gamemap_pos.y - curr_object_gamemap_pos.y) * 0.5f;
 
@@ -137,7 +137,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                         )
                     ),
                 new_animation_simultaneous_of_1(
-                    // new_animation_camera_shake(1, 5.0f, 0.1f),
                     new_animation_move_sprite_in_gamemap_in_line(
                         object_texture,
                         next_object_gamemap_pos,
@@ -156,7 +155,53 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             start_animation(state, action->animation, textures, sounds, musics);
 
-            action->crash.object->is_visible = 0;
+            action->crash_ground.object->is_visible = 0;
+        }
+        break;
+        case ACTION_TYPE__CRASH_AIR:
+        {
+            action->crash_air.object->tilemap_pos = action->tilemap_pos;
+
+            Texture* object_texture = get_texture_from_object_type(action->crash_air.object->type, textures);
+            vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash_air.object->tilemap_pos);
+            vec2f next_object_gamemap_pos = make_vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash_air.dir4, 1.0f);
+            next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
+            next_object_gamemap_pos.y = curr_object_gamemap_pos.y + (next_object_gamemap_pos.y - curr_object_gamemap_pos.y) * 0.5f;
+
+            Animation* animation = new_animation_sequence_of_3(
+                new_animation_sequence_of_2(
+                    new_animation_move_sprite_in_gamemap_in_line(
+                        object_texture,
+                        curr_object_gamemap_pos,
+                        next_object_gamemap_pos,
+                        0.1f
+                        ),
+                    new_animation_show_sprite_in_gamemap(
+                        object_texture,
+                        next_object_gamemap_pos,
+                        .01f
+                        )
+                    ),
+                new_animation_simultaneous_of_1(
+                    new_animation_move_sprite_in_gamemap_in_line(
+                        object_texture,
+                        next_object_gamemap_pos,
+                        curr_object_gamemap_pos,
+                        0.1f
+                        )
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    object_texture,
+                    curr_object_gamemap_pos,
+                    .01f
+                    )
+                );
+
+            action->animation = animation;
+
+            start_animation(state, action->animation, textures, sounds, musics);
+
+            action->crash_air.object->is_visible = 0;
         }
         break;
         case ACTION_TYPE__FALL:

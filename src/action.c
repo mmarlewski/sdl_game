@@ -143,17 +143,32 @@ Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_crash(Object* object, vec2i tilemap_pos, int dir4)
+Action* new_action_crash_ground(Object* object, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
-    action->type = ACTION_TYPE__CRASH;
+    action->type = ACTION_TYPE__CRASH_GROUND;
 
-    action->crash.object = object;
-    action->crash.dir4 = dir4;
+    action->crash_ground.object = object;
+    action->crash_ground.dir4 = dir4;
+
+    return action;
+}
+
+Action* new_action_crash_air(Object* object, vec2i tilemap_pos, int dir4)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->type = ACTION_TYPE__CRASH_AIR;
+
+    action->crash_air.object = object;
+    action->crash_air.dir4 = dir4;
 
     return action;
 }
@@ -254,8 +269,9 @@ char* get_action_name_from_type(int action_type)
         case ACTION_TYPE__SEQUENCE:     name = "sequence";      break;
         case ACTION_TYPE__SIMULTANEOUS: name = "simultaneous";  break;
         case ACTION_TYPE__MOVE_GROUND:  name = "move_ground";   break;
-        case ACTION_TYPE__MOVE_AIR:     name = "push_air";      break;
-        case ACTION_TYPE__CRASH:        name = "crash";         break;
+        case ACTION_TYPE__MOVE_AIR:     name = "move_air";      break;
+        case ACTION_TYPE__CRASH_GROUND: name = "crash_ground";  break;
+        case ACTION_TYPE__CRASH_AIR:    name = "crash_air";     break;
         case ACTION_TYPE__FALL:         name = "fall";          break;
         case ACTION_TYPE__DEATH:        name = "death";         break;
         case ACTION_TYPE__BLOW_UP:      name = "blow up";       break;

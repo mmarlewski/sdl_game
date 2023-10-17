@@ -286,14 +286,26 @@ void print_action(Action* action, int depth)
             printf("> \n");
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION_TYPE__CRASH_GROUND:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->crash.object);
+            printf("object:         %p \n", action->crash_ground.object);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->crash.dir4);
+            printf("dir4:           %i \n", action->crash_ground.dir4);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("> \n");
+        }
+        break;
+        case ACTION_TYPE__CRASH_AIR:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("< \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->crash_air.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->crash_air.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
             printf("> \n");
         }

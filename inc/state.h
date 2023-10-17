@@ -146,13 +146,19 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
 
 void floor_on_move_ground_start(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_ground_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_move_air_start(State* state, Action* sequence, Action* action, int floor);
+
+void floor_on_move_ground_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_move_air_end(State* state, Action* sequence, Action* action, int floor);
+
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 
-void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
-void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
+void object_on_crashing_ground(State* state, Action* sequence, Action* action, Object* object);
+void object_on_crashing_air(State* state, Action* sequence, Action* action, Object* object);
+
+void object_on_crashed_ground(State* state, Action* sequence, Action* action, Object* object);
+void object_on_crashed_air(State* state, Action* sequence, Action* action, Object* object);
+
 void object_on_death(State* state, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
 

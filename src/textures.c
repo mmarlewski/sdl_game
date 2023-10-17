@@ -95,19 +95,34 @@ void destroy_textures_move_air (Textures_MoveAir* move_air)
     destroy_texture(move_air->left);
 }
 
-void load_textures_crash (Renderer* renderer, Textures_Crash* crash)
+void load_textures_crash_ground (Renderer* renderer, Textures_CrashGround* crash_ground)
 {
-    crash->up = load_texture_from_filepath (renderer, "./res/crash/up.png");
-    crash->right = load_texture_from_filepath (renderer, "./res/crash/right.png");
-    crash->down = load_texture_from_filepath (renderer, "./res/crash/down.png");
-    crash->left = load_texture_from_filepath (renderer, "./res/crash/left.png");
+    crash_ground->up = load_texture_from_filepath (renderer, "./res/crash_ground/up.png");
+    crash_ground->right = load_texture_from_filepath (renderer, "./res/crash_ground/right.png");
+    crash_ground->down = load_texture_from_filepath (renderer, "./res/crash_ground/down.png");
+    crash_ground->left = load_texture_from_filepath (renderer, "./res/crash_ground/left.png");
 }
-void destroy_textures_crash (Textures_Crash* crash)
+void destroy_textures_crash_ground (Textures_CrashGround* crash_ground)
 {
-    destroy_texture(crash->up);
-    destroy_texture(crash->right);
-    destroy_texture(crash->down);
-    destroy_texture(crash->left);
+    destroy_texture(crash_ground->up);
+    destroy_texture(crash_ground->right);
+    destroy_texture(crash_ground->down);
+    destroy_texture(crash_ground->left);
+}
+
+void load_textures_crash_air (Renderer* renderer, Textures_CrashAir* crash_air)
+{
+    crash_air->up = load_texture_from_filepath (renderer, "./res/crash_air/up.png");
+    crash_air->right = load_texture_from_filepath (renderer, "./res/crash_air/right.png");
+    crash_air->down = load_texture_from_filepath (renderer, "./res/crash_air/down.png");
+    crash_air->left = load_texture_from_filepath (renderer, "./res/crash_air/left.png");
+}
+void destroy_textures_crash_air (Textures_CrashAir* crash_air)
+{
+    destroy_texture(crash_air->up);
+    destroy_texture(crash_air->right);
+    destroy_texture(crash_air->down);
+    destroy_texture(crash_air->left);
 }
 
 void load_textures_fall (Renderer* renderer, Textures_Fall* fall)
@@ -201,7 +216,9 @@ void load_textures (Renderer* renderer, Textures* textures)
 
     load_textures_move_ground(renderer,&textures->move_ground);
     load_textures_move_air(renderer,&textures->move_air);
-    load_textures_crash(renderer,&textures->crash);
+
+    load_textures_crash_ground(renderer,&textures->crash_ground);
+    load_textures_crash_air(renderer,&textures->crash_air);
 
     load_textures_fall(renderer,&textures->fall);
     load_textures_death(renderer,&textures->death);
@@ -222,7 +239,9 @@ void destroy_textures (Textures* textures)
 
     destroy_textures_move_ground (&textures->move_ground);
     destroy_textures_move_air (&textures->move_air);
-    destroy_textures_crash (&textures->crash);
+
+    destroy_textures_crash_ground (&textures->crash_ground);
+    destroy_textures_crash_air (&textures->crash_air);
 
     destroy_textures_fall (&textures->fall);
     destroy_textures_death (&textures->death);
@@ -266,16 +285,32 @@ Texture* get_texture_move_air(Textures* textures, int dir4)
     return texture;
 }
 
-Texture* get_texture_crash(Textures* textures, int dir4)
+Texture* get_texture_crash_ground(Textures* textures, int dir4)
 {
     Texture* texture = 0;
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->crash.up; break;
-        case DIR4__RIGHT: texture = textures->crash.right; break;
-        case DIR4__DOWN: texture = textures->crash.down; break;
-        case DIR4__LEFT: texture = textures->crash.left; break;
+        case DIR4__UP: texture = textures->crash_ground.up; break;
+        case DIR4__RIGHT: texture = textures->crash_ground.right; break;
+        case DIR4__DOWN: texture = textures->crash_ground.down; break;
+        case DIR4__LEFT: texture = textures->crash_ground.left; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_crash_air(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->crash_air.up; break;
+        case DIR4__RIGHT: texture = textures->crash_air.right; break;
+        case DIR4__DOWN: texture = textures->crash_air.down; break;
+        case DIR4__LEFT: texture = textures->crash_air.left; break;
         default: break;
     }
 

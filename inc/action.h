@@ -18,7 +18,9 @@ enum ACTION_TYPE
 
     ACTION_TYPE__MOVE_GROUND,
     ACTION_TYPE__MOVE_AIR,
-    ACTION_TYPE__CRASH,
+
+    ACTION_TYPE__CRASH_GROUND,
+    ACTION_TYPE__CRASH_AIR,
 
     ACTION_TYPE__FALL,
     ACTION_TYPE__DEATH,
@@ -72,7 +74,14 @@ typedef struct
     Object* object;
     int dir4;
 
-} Action_Crash;
+} Action_CrashGround;
+
+typedef struct
+{
+    Object* object;
+    int dir4;
+
+} Action_CrashAir;
 
 typedef struct
 {
@@ -122,7 +131,9 @@ struct _Action
 
         Action_MoveGround move_ground;
         Action_MoveAir move_air;
-        Action_Crash crash;
+
+        Action_CrashGround crash_ground;
+        Action_CrashAir crash_air;
 
         Action_Fall fall;
         Action_Death death;
@@ -152,7 +163,9 @@ void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* ne
 
 Action* new_action_move_ground(Object* object, vec2i tilemap_pos, int dir4);
 Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4);
-Action* new_action_crash(Object* object, vec2i tilemap_pos, int dir4);
+
+Action* new_action_crash_ground(Object* object, vec2i tilemap_pos, int dir4);
+Action* new_action_crash_air(Object* object, vec2i tilemap_pos, int dir4);
 
 Action* new_action_fall(Object* object, vec2i tilemap_pos);
 Action* new_action_death(Object* object, vec2i tilemap_pos);

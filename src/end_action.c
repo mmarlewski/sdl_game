@@ -53,21 +53,38 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             action->move_air.object->is_visible = 1;
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION_TYPE__CRASH_GROUND:
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
             Action* crushed_action_sequence = new_action_sequence();
-            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash.object->tilemap_pos, action->crash.dir4, 1));
-            object_on_crashed(state, crushed_action_sequence, action, crushed_object);
+            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash_ground.object->tilemap_pos, action->crash_ground.dir4, 1));
+            object_on_crashed_ground(state, crushed_action_sequence, action, crushed_object);
 
             Action* crushing_action_sequence = new_action_sequence();
-            Object* crushing_object = action->crash.object;
-            object_on_crashing(state, crushing_action_sequence, action, crushing_object);
+            Object* crushing_object = action->crash_ground.object;
+            object_on_crashing_ground(state, crushing_action_sequence, action, crushing_object);
 
             add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
 
-            action->crash.object->is_visible = 1;
+            action->crash_ground.object->is_visible = 1;
+        }
+        break;
+        case ACTION_TYPE__CRASH_AIR:
+        {
+            end_animation(state, action->animation, textures, sounds, musics);
+
+            Action* crushed_action_sequence = new_action_sequence();
+            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash_air.object->tilemap_pos, action->crash_air.dir4, 1));
+            object_on_crashed_air(state, crushed_action_sequence, action, crushed_object);
+
+            Action* crushing_action_sequence = new_action_sequence();
+            Object* crushing_object = action->crash_air.object;
+            object_on_crashing_air(state, crushing_action_sequence, action, crushing_object);
+
+            add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
+
+            action->crash_air.object->is_visible = 1;
         }
         break;
         case ACTION_TYPE__FALL:

@@ -82,10 +82,22 @@ typedef struct
     Texture* down;
     Texture* left;
 
-} Textures_Crash;
+} Textures_CrashGround;
 
-void load_textures_crash (Renderer* renderer, Textures_Crash* crash);
-void destroy_textures_crash (Textures_Crash* crash);
+void load_textures_crash_ground (Renderer* renderer, Textures_CrashGround* crash_ground);
+void destroy_textures_crash (Textures_CrashGround* crash_ground);
+
+typedef struct
+{
+    Texture* up;
+    Texture* right;
+    Texture* down;
+    Texture* left;
+
+} Textures_CrashAir;
+
+void load_textures_crash (Renderer* renderer, Textures_CrashAir* crash_air);
+void destroy_textures_crash_air (Textures_CrashAir* crash_air);
 
 typedef struct
 {
@@ -164,7 +176,9 @@ typedef struct
 
     Textures_MoveGround move_ground;
     Textures_MoveAir move_air;
-    Textures_Crash crash;
+
+    Textures_CrashGround crash_ground;
+    Textures_CrashAir crash_air;
 
     Textures_Fall fall;
     Textures_Death death;
@@ -182,7 +196,8 @@ void destroy_textures (Textures* textures);
 
 Texture* get_texture_move_ground(Textures* textures, int dir4);
 Texture* get_texture_move_air(Textures* textures, int dir4);
-Texture* get_texture_crash(Textures* textures, int dir4);
+Texture* get_texture_crash_ground(Textures* textures, int dir4);
+Texture* get_texture_crash_air(Textures* textures, int dir4);
 Texture* get_texture_throw(Textures* textures, int dir4);
 
 #endif

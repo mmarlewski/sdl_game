@@ -259,11 +259,22 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
                 );
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION_TYPE__CRASH_GROUND:
         {
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_crash(textures, action->crash.dir4),
+                get_texture_crash_ground(textures, action->crash_ground.dir4),
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__CRASH_AIR:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_crash_air(textures, action->crash_air.dir4),
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -307,7 +318,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
         {
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_throw(textures, action->crash.dir4),
+                get_texture_throw(textures, action->throw.dir4),
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom

@@ -257,7 +257,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
     }
 }
 
-void object_on_crashing(State* state, Action* sequence, Action* action, Object* object)
+void object_on_crashing_ground(State* state, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -311,7 +311,7 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
     }
 }
 
-void object_on_crashed(State* state, Action* sequence, Action* action, Object* object)
+void object_on_crashing_air(State* state, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -327,7 +327,115 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         break;
         case OBJECT_TYPE__SPRING:
         {
-            add_action_to_end_action_sequence(sequence, new_action_move_ground(object, object->tilemap_pos, action->crash.dir4));
+            //
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BULL:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__FLY:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__CHAMELEON:
+        {
+            //
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_crashed_ground(State* state, Action* sequence, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_move_ground(object, object->tilemap_pos, action->crash_ground.dir4));
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BULL:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__FLY:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__CHAMELEON:
+        {
+            //
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_crashed_air(State* state, Action* sequence, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_move_ground(object, object->tilemap_pos, action->crash_air.dir4));
         }
         break;
         case OBJECT_TYPE__HERO:
