@@ -74,6 +74,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             if (input->was_esc && !input->is_esc)
             {
                 state->is_game_running = 0;
+
+                break;
             }
 
             int skill = SKILL__NONE;
@@ -88,15 +90,37 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             if(skill != SKILL__NONE)
             {
-                remove_all_pos_from_possible_target_1_tilemap_pos_list(state);
+                if(is_skill_two_target(skill))
+                {
+                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
 
-                skill_add_pos_to_possible_target_1_tilemap_pos_list(
-                        state,
-                        state->gamemap.curr_skill,
-                        state->gamemap.object_hero->tilemap_pos
-                        );
+                    remove_all_pos_from_possible_target_1_tilemap_pos_list(state);
 
-                change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
+                    skill_add_pos_to_possible_target_1_tilemap_pos_list(
+                            state,
+                            state->gamemap.curr_skill,
+                            state->gamemap.object_hero->tilemap_pos
+                            );
+
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
+                }
+                else
+                {
+                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+
+                    remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
+
+                    skill_add_pos_to_possible_target_2_tilemap_pos_list(
+                            state,
+                            state->gamemap.curr_skill,
+                            state->gamemap.object_hero->tilemap_pos,
+                            state->gamemap.target_1_tilemap_pos
+                            );
+
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_2);
+                }
             }
 
         }
@@ -105,48 +129,34 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             if (input->was_esc && !input->is_esc)
             {
+                remove_all_actions_from_main_action_sequence(state);
+
                 change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
+
+                break;
             }
 
-            vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
-            state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
+            state->gamemap.curr_selected_tilemap_pos = state->mouse.tilemap_pos;
 
-            if(is_tilemap_pos_in_possible_target_1_tilemap_pos_list(state, selected_tilemap_pos))
+            if(is_tilemap_pos_in_possible_target_1_tilemap_pos_list(state, state->gamemap.curr_selected_tilemap_pos))
             {
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
-                    state->gamemap.target_1_tilemap_pos = selected_tilemap_pos;
+                    state->gamemap.target_1_tilemap_pos = state->gamemap.curr_selected_tilemap_pos;
 
-                    if(state->gamemap.is_skill_two_target)
-                    {
-                        remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
+                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
 
-                        skill_add_pos_to_possible_target_2_tilemap_pos_list(
-                            state,
-                            state->gamemap.curr_skill,
-                            state->gamemap.object_hero->tilemap_pos,
-                            state->gamemap.target_1_tilemap_pos
-                            );
+                    remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
 
-                        change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_2);
-                    }
-                    else
-                    {
-                        state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
+                    skill_add_pos_to_possible_target_2_tilemap_pos_list(
+                        state,
+                        state->gamemap.curr_skill,
+                        state->gamemap.object_hero->tilemap_pos,
+                        state->gamemap.target_1_tilemap_pos
+                        );
 
-                        skill_get_actions_to_execute(
-                            state,
-                            state->action.main_action_sequence,
-                            state->gamemap.curr_skill,
-                            state->gamemap.object_hero->tilemap_pos,
-                            state->gamemap.target_1_tilemap_pos,
-                            state->gamemap.target_2_tilemap_pos
-                            );
-
-                        execute_actions(state, textures, sounds, musics);
-
-                        change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
-                    }
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_2);
                 }
             }
         }
@@ -155,26 +165,44 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             if (input->was_esc && !input->is_esc)
             {
-                change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
+                state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
+                state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+
+                remove_all_actions_from_main_action_sequence(state);
+
+                if(is_skill_two_target(state->gamemap.curr_skill))
+                {
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
+                }
+                else
+                {
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
+                }
+
+                break;
             }
 
-            vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
-            state->gamemap.selected_tilemap_pos = selected_tilemap_pos;
+            state->gamemap.curr_selected_tilemap_pos = state->mouse.tilemap_pos;
 
-            if(is_tilemap_pos_in_possible_target_2_tilemap_pos_list(state, selected_tilemap_pos))
+            if(is_tilemap_pos_in_possible_target_2_tilemap_pos_list(state, state->gamemap.curr_selected_tilemap_pos))
             {
+                remove_all_actions_from_main_action_sequence(state);
+
+                state->gamemap.target_2_tilemap_pos = state->gamemap.curr_selected_tilemap_pos;
+
+                skill_get_actions_to_execute(
+                    state,
+                    state->action.main_action_sequence,
+                    state->gamemap.curr_skill,
+                    state->gamemap.object_hero->tilemap_pos,
+                    state->gamemap.target_1_tilemap_pos,
+                    state->gamemap.target_2_tilemap_pos
+                    );
+
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
-                    state->gamemap.target_2_tilemap_pos = selected_tilemap_pos;
-
-                    skill_get_actions_to_execute(
-                        state,
-                        state->action.main_action_sequence,
-                        state->gamemap.curr_skill,
-                        state->gamemap.object_hero->tilemap_pos,
-                        state->gamemap.target_1_tilemap_pos,
-                        state->gamemap.target_2_tilemap_pos
-                        );
+                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
 
                     execute_actions(state, textures, sounds, musics);
 

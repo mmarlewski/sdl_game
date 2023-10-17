@@ -25,17 +25,7 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
     {
         case SKILL__MOVE:
         {
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_1_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i+1));
-
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_1_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i+1));
-
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_1_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i+1));
-
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_1_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
+            //
         }
         break;
         case SKILL__CHARGE:
@@ -98,7 +88,17 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
     {
         case SKILL__MOVE:
         {
-            //
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
         }
         break;
         case SKILL__CHARGE:
@@ -204,7 +204,7 @@ void skill_get_actions_to_execute(State* state, Action* sequence, int skill, vec
     {
         case SKILL__MOVE:
         {
-            DistanceInfo move_distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
+            DistanceInfo move_distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
 
             vec2i source_object_tilemap_pos = source_object->tilemap_pos;
             for(int i = 0; i < move_distance_info.abs_diff; i++)

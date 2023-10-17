@@ -20,7 +20,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             {
                 end_action(state, action, curr_action, textures, sounds, musics);
                 ListElem* next_elem = curr_elem->next;
-                remove_list_element(action->sequence.action_list, curr_elem, 1);
+                // remove_list_element(action->sequence.action_list, curr_elem, 1);
                 action->sequence.curr_action_list_elem = next_elem;
 
                 if(next_elem != 0)
@@ -59,7 +59,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 
             for(ListElem* curr_elem = action_to_be_removed_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                remove_list_element_of_data(action->simultaneous.action_list, curr_elem->data, 1);
+                // remove_list_element_of_data(action->simultaneous.action_list, curr_elem->data, 1);
             }
 
             destroy_list(action_to_be_removed_list);

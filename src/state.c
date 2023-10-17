@@ -38,7 +38,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->gamemap.sprite_list = new_list((void (*)(void *))&destroy_sprite);
 
-    state->gamemap.selected_tilemap_pos = make_vec2i(0, 0);
+    state->gamemap.prev_selected_tilemap_pos = make_vec2i(0, 0);
+    state->gamemap.curr_selected_tilemap_pos = make_vec2i(0, 0);
 
     state->gamemap.curr_skill = 0;
     state->gamemap.is_skill_two_target = 0;
@@ -202,6 +203,11 @@ int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos
 
 // action
 
+void remove_all_actions_from_main_action_sequence(State* state)
+{
+    remove_all_list_elements(state->action.main_action_sequence->sequence.action_list,1);
+}
+
 void execute_actions(State* state, Textures* textures, Sounds* sounds, Musics* musics)
 {
     state->action.is_executing_actions = 1;
@@ -263,8 +269,6 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->move_ground.object);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->move_ground.tilemap_pos.x, action->move_ground.tilemap_pos.y);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->move_ground.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
@@ -276,8 +280,6 @@ void print_action(Action* action, int depth)
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->move_air.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->move_air.tilemap_pos.x, action->move_air.tilemap_pos.y);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->move_air.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
@@ -291,8 +293,6 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->crash.object);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->crash.tilemap_pos.x, action->crash.tilemap_pos.y);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->crash.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
             printf("> \n");
@@ -304,8 +304,6 @@ void print_action(Action* action, int depth)
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->fall.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->fall.tilemap_pos.x, action->fall.tilemap_pos.y);
             for(int i = 0; i < depth; i++) printf("  ");
             printf("> \n");
         }
@@ -316,8 +314,6 @@ void print_action(Action* action, int depth)
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->death.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->death.tilemap_pos.x, action->death.tilemap_pos.y);
             for(int i = 0; i < depth; i++) printf("  ");
             printf("> \n");
         }
@@ -326,8 +322,6 @@ void print_action(Action* action, int depth)
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("< \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->blow_up.tilemap_pos.x, action->blow_up.tilemap_pos.y);
             for(int i = 0; i < depth; i++) printf("  ");
             printf("> \n");
         }
@@ -338,8 +332,6 @@ void print_action(Action* action, int depth)
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->throw.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->throw.tilemap_pos.x, action->throw.tilemap_pos.y);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->throw.dir4);
             for(int i = 0; i < depth + 1; i++) printf("  ");
@@ -354,8 +346,6 @@ void print_action(Action* action, int depth)
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->drop.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("tilemap_pos:    %i, %i \n", action->drop.tilemap_pos.x, action->drop.tilemap_pos.y);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->drop.dir4);
             for(int i = 0; i < depth; i++) printf("  ");

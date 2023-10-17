@@ -3,6 +3,7 @@
 
 #include "../inc/common.h"
 #include "../inc/texture.h"
+#include "../inc/dir.h"
 
 typedef struct
 {
@@ -88,6 +89,26 @@ void destroy_textures_crash (Textures_Crash* crash);
 
 typedef struct
 {
+    Texture* fall;
+
+} Textures_Fall;
+
+void load_textures_fall (Renderer* renderer, Textures_Fall* fall);
+void destroy_textures_fall (Textures_Fall* fall);
+
+typedef struct
+{
+    Texture* death;
+    Texture* skull;
+
+} Textures_Death;
+
+void load_textures_death (Renderer* renderer, Textures_Death* death);
+void destroy_textures_death (Textures_Death* death);
+
+typedef struct
+{
+    Texture* blow_up;
     Texture* explosion;
 
 } Textures_BlowUp;
@@ -109,6 +130,7 @@ void destroy_textures_throw (Textures_Throw* throw);
 
 typedef struct
 {
+    Texture* drop;
     Texture* thump;
 
 } Textures_Drop;
@@ -143,7 +165,12 @@ typedef struct
     Textures_MoveGround move_ground;
     Textures_MoveAir move_air;
     Textures_Crash crash;
+
+    Textures_Fall fall;
+    Textures_Death death;
     Textures_BlowUp blow_up;
+
+    Textures_Throw throw;
     Textures_Drop drop;
 
     Textures_Object object;
@@ -152,5 +179,10 @@ typedef struct
 
 void load_textures (Renderer* renderer, Textures* textures);
 void destroy_textures (Textures* textures);
+
+Texture* get_texture_move_ground(Textures* textures, int dir4);
+Texture* get_texture_move_air(Textures* textures, int dir4);
+Texture* get_texture_crash(Textures* textures, int dir4);
+Texture* get_texture_throw(Textures* textures, int dir4);
 
 #endif

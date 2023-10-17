@@ -82,15 +82,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
     {
         for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
         {
-            vec2i tilemap_pos;
-            vec2f gamemap_pos;
-            vec2f world_cart_pos;
-            vec2f world_iso_pos;
-
-            tilemap_pos = make_vec2i(j,i);
-            gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
-            world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
-            world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+            vec2i tilemap_pos = make_vec2i(j,i);
+            vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
+            vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+            vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
             Tile* tile = state->gamemap.tilemap[i][j];
             Texture* tile_floor_texture = get_texture_from_floor_type(tile->floor, textures);
@@ -141,7 +136,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
             {
-                if(state->gamemap.selected_tilemap_pos.x == j && state->gamemap.selected_tilemap_pos.y == i)
+                if(state->gamemap.curr_selected_tilemap_pos.x == j && state->gamemap.curr_selected_tilemap_pos.y == i)
                 {
                     draw_texture_at_world_pos(
                         renderer,
@@ -155,21 +150,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
         }
     }
 
-    // objects and sprites
+    // objects, sprites
 
     for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
     {
         for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
         {
-            vec2i tilemap_pos;
-            vec2f gamemap_pos;
-            vec2f world_cart_pos;
-            vec2f world_iso_pos;
+            vec2i tilemap_pos = make_vec2i(j,i);
+            vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
+            vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+            vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
-            tilemap_pos = make_vec2i(j,i);
-            gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
-            world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
-            world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+            // objects
 
             for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
@@ -184,6 +176,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                         state->camera.zoom);
                 }
             }
+
+            // sprites
 
             for(ListElem* curr_elem = state->gamemap.sprite_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
@@ -205,6 +199,136 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             }
         }
     }
+
+    // main_action_sequence
+
+    draw_action(renderer, state, state->action.main_action_sequence, textures);
+}
+
+void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures)
+{
+    vec2i tilemap_pos = action->tilemap_pos;
+    vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
+    vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+    vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+
+    switch(action->type)
+    {
+        case ACTION_TYPE__NONE:
+        {
+            //
+        }
+        break;
+        case ACTION_TYPE__SEQUENCE:
+        {
+            for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
+            {
+                Action* curr_action = (Action*)curr_elem->data;
+                draw_action(renderer, state, curr_action, textures);
+            }
+        }
+        break;
+        case ACTION_TYPE__SIMULTANEOUS:
+        {
+            for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
+            {
+                Action* curr_action = (Action*)curr_elem->data;
+                draw_action(renderer, state, curr_action, textures);
+            }
+        }
+        break;
+        case ACTION_TYPE__MOVE_GROUND:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_move_ground(textures, action->move_ground.dir4),
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__MOVE_AIR:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_move_air(textures, action->move_air.dir4),
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__CRASH:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_crash(textures, action->crash.dir4),
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__FALL:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->fall.fall,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__DEATH:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->death.death,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__BLOW_UP:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->blow_up.blow_up,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__THROW:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_throw(textures, action->crash.dir4),
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__DROP:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->drop.drop,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        default:
+        break;
+    }
+
 }
 
 int main (int argc, char* argv[])
@@ -235,8 +359,11 @@ int main (int argc, char* argv[])
 
     state.camera.zoom = 5.0f;
 
-    vec2f middle_gamemap_pos = make_vec2f(TILEMAP_WIDTH * 0.5f,TILEMAP_HEIGHT * 0.5f);
-    state.camera.world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(middle_gamemap_pos));
+    vec2f middle_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(make_vec2f(TILEMAP_WIDTH * 0.5f,TILEMAP_HEIGHT * 0.5f)));
+    vec2f hero_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(tilemap_pos_to_gamemap_pos(state.gamemap.object_hero->tilemap_pos)));
+    hero_world_iso_pos.x += TILE_LENGTH * 0.5f;
+    hero_world_iso_pos.y += TILE_LENGTH * 0.5f;
+    state.camera.world_pos = hero_world_iso_pos;
 
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(5,5));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_SPIKES, make_vec2i(8,7));
@@ -346,16 +473,16 @@ int main (int argc, char* argv[])
     object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
     add_object_to_gamemap_objects(&state, object_barrel_4);
 
-    // add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
-    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
-    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
-    //     new_action_fall(state.gamemap.object_hero)
-    // ));
-    // add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
-    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
-    //     new_action_move_ground(state.gamemap.object_hero, DIR4__UP),
-    //     new_action_fall(state.gamemap.object_hero)
-    // ));
+    add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
+        new_action_move_ground(state.gamemap.object_hero, make_vec2i(5,5), DIR4__UP),
+        new_action_move_ground(state.gamemap.object_hero, make_vec2i(5,4), DIR4__UP),
+        new_action_fall(state.gamemap.object_hero, make_vec2i(5,3))
+    ));
+    add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
+        new_action_move_ground(state.gamemap.object_hero, make_vec2i(7,7), DIR4__UP),
+        new_action_move_ground(state.gamemap.object_hero, make_vec2i(7,6), DIR4__UP),
+        new_action_fall(state.gamemap.object_hero, make_vec2i(7,5))
+    ));
 
     while (state.is_game_running)
     {

@@ -76,7 +76,8 @@ typedef struct
     List* object_enemy_list;
     Object* object_hero;
 
-    vec2i selected_tilemap_pos;
+    vec2i prev_selected_tilemap_pos;
+    vec2i curr_selected_tilemap_pos;
 
     int curr_skill;
     int is_skill_two_target;
@@ -136,6 +137,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
 void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
 void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
 
+void remove_all_actions_from_main_action_sequence(State* state);
 void execute_actions(State* state, Textures* textures, Sounds* sounds, Musics* musics);
 void print_action(Action* action, int depth);
 

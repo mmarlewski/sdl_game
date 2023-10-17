@@ -74,7 +74,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->fall.tilemap_pos));
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->tilemap_pos));
 
             action->fall.object->is_visible = 1;
         }
@@ -92,7 +92,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            vec2i tilemap_pos = action->blow_up.tilemap_pos;
+            vec2i tilemap_pos = action->tilemap_pos;
             Object* object_up = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1));
             Object* object_right = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1));
             Object* object_down = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1));

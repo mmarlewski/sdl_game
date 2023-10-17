@@ -5,6 +5,7 @@ Action* new_action_none()
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = make_vec2i(-1, -1);
     action->is_finished = 0;
     action->type = ACTION_TYPE__NONE;
 
@@ -16,6 +17,7 @@ Action* new_action_sequence()
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = make_vec2i(-1, -1);
     action->is_finished = 0;
     action->type = ACTION_TYPE__SEQUENCE;
 
@@ -69,6 +71,7 @@ Action* new_action_simultaneous()
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = make_vec2i(-1, -1);
     action->is_finished = 0;
     action->type = ACTION_TYPE__SIMULTANEOUS;
 
@@ -111,13 +114,13 @@ Action* new_action_move_ground(Object* object, vec2i tilemap_pos, int dir4)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__MOVE_GROUND;
 
     action->move_ground.is_move_blocked = 0;
 
     action->move_ground.object = object;
-    action->move_ground.tilemap_pos = tilemap_pos;
     action->move_ground.dir4 = dir4;
 
     return action;
@@ -128,13 +131,13 @@ Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__MOVE_AIR;
 
     action->move_air.is_move_blocked = 0;
 
     action->move_air.object = object;
-    action->move_air.tilemap_pos = tilemap_pos;
     action->move_air.dir4 = dir4;
 
     return action;
@@ -145,11 +148,11 @@ Action* new_action_crash(Object* object, vec2i tilemap_pos, int dir4)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__CRASH;
 
     action->crash.object = object;
-    action->crash.tilemap_pos = tilemap_pos;
     action->crash.dir4 = dir4;
 
     return action;
@@ -160,11 +163,11 @@ Action* new_action_fall(Object* object, vec2i tilemap_pos)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__FALL;
 
     action->fall.object = object;
-    action->fall.tilemap_pos = tilemap_pos;
 
     return action;
 }
@@ -174,11 +177,11 @@ Action* new_action_death(Object* object, vec2i tilemap_pos)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__DEATH;
 
     action->death.object = object;
-    action->death.tilemap_pos = tilemap_pos;
 
     return action;
 }
@@ -188,10 +191,9 @@ Action* new_action_blow_up(vec2i tilemap_pos)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__BLOW_UP;
-
-    action->blow_up.tilemap_pos = tilemap_pos;
 
     return action;
 }
@@ -201,11 +203,11 @@ Action* new_action_throw(Object* object, vec2i tilemap_pos, int dir4, int distan
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__THROW;
 
     action->throw.object = object;
-    action->throw.tilemap_pos = tilemap_pos;
     action->throw.dir4 = dir4;
     action->throw.distance = distance;
 
@@ -217,11 +219,11 @@ Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4)
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->type = ACTION_TYPE__DROP;
 
     action->drop.object = object;
-    action->drop.tilemap_pos = tilemap_pos;
     action->drop.dir4 = dir4;
 
     return action;

@@ -54,7 +54,6 @@ typedef struct
     int is_move_blocked;
 
     Object* object;
-    vec2i tilemap_pos;
     int dir4;
 
 } Action_MoveGround;
@@ -64,7 +63,6 @@ typedef struct
     int is_move_blocked;
 
     Object* object;
-    vec2i tilemap_pos;
     int dir4;
 
 } Action_MoveAir;
@@ -72,7 +70,6 @@ typedef struct
 typedef struct
 {
     Object* object;
-    vec2i tilemap_pos;
     int dir4;
 
 } Action_Crash;
@@ -80,27 +77,23 @@ typedef struct
 typedef struct
 {
     Object* object;
-    vec2i tilemap_pos;
 
 } Action_Fall;
 
 typedef struct
 {
     Object* object;
-    vec2i tilemap_pos;
 
 } Action_Death;
 
 typedef struct
 {
-    vec2i tilemap_pos;
 
 } Action_BlowUP;
 
 typedef struct
 {
     Object* object;
-    vec2i tilemap_pos;
     int dir4;
     int distance;
 
@@ -109,7 +102,6 @@ typedef struct
 typedef struct
 {
     Object* object;
-    vec2i tilemap_pos;
     int dir4;
 
 } Action_Drop;
@@ -117,6 +109,7 @@ typedef struct
 struct _Action
 {
     Animation* animation;
+    vec2i tilemap_pos;
     int is_finished;
     int type;
 
