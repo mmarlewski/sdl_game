@@ -71,14 +71,16 @@ typedef struct
 
 typedef struct
 {
-    Object* object;
+    Object* object_crushing;
+    Object* object_crushed;
     int dir4;
 
 } Action_CrashGround;
 
 typedef struct
 {
-    Object* object;
+    Object* object_crushing;
+    Object* object_crushed;
     int dir4;
 
 } Action_CrashAir;
@@ -164,8 +166,8 @@ void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* ne
 Action* new_action_move_ground(Object* object, vec2i tilemap_pos, int dir4);
 Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4);
 
-Action* new_action_crash_ground(Object* object, vec2i tilemap_pos, int dir4);
-Action* new_action_crash_air(Object* object, vec2i tilemap_pos, int dir4);
+Action* new_action_crash_ground(Object* object_crushing, Object* object_crushed, vec2i tilemap_pos, int dir4);
+Action* new_action_crash_air(Object* object_crushing, Object* object_crushed, vec2i tilemap_pos, int dir4);
 
 Action* new_action_fall(Object* object, vec2i tilemap_pos);
 Action* new_action_death(Object* object, vec2i tilemap_pos);

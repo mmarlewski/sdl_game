@@ -69,6 +69,7 @@ char* get_name_from_object_type(int object_type)
     {
         case OBJECT_TYPE__NONE: name = "none"; break;
         case OBJECT_TYPE__PILLAR: name = "pillar"; break;
+        case OBJECT_TYPE__PILLAR_SPIKES: name = "pillar_spikes"; break;
         case OBJECT_TYPE__BARREL: name = "barrel"; break;
         case OBJECT_TYPE__SPRING: name = "spring"; break;
         case OBJECT_TYPE__HERO: name = "hero"; break;
@@ -91,6 +92,7 @@ Texture* get_texture_from_object_type(int object_type, Textures* textures)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
         case OBJECT_TYPE__PILLAR: texture = textures->object.pillar; break;
+        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
         case OBJECT_TYPE__HERO: texture = textures->object.hero; break;

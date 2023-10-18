@@ -151,6 +151,8 @@ void remove_list_element_of_data(List* list, void* data, int destroy_data)
 
 void remove_all_list_elements_after_element(List* list, ListElem* element, int destroy_data)
 {
+    if(element == 0) return;
+
     ListElem* curr_element = element->next;
 
     if(curr_element != 0)
@@ -186,7 +188,7 @@ void remove_all_list_elements(List* list, int destroy_data)
         free(curr_element);
         curr_element = next_element;
     }
-    
+
     list->size = 0;
     list->head = 0;
     list->tail = 0;

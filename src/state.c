@@ -295,7 +295,9 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->crash_ground.object);
+            printf("object_crushing:%p \n", action->crash_ground.object_crushing);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object_crushed: %p \n", action->crash_ground.object_crushed);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->crash_ground.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
@@ -307,7 +309,9 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->crash_air.object);
+            printf("object_crushing:%p \n", action->crash_air.object_crushing);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object_crushed: %p \n", action->crash_air.object_crushed);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->crash_air.dir4);
             for(int i = 0; i < depth; i++) printf("  ");

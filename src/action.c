@@ -143,7 +143,7 @@ Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_crash_ground(Object* object, vec2i tilemap_pos, int dir4)
+Action* new_action_crash_ground(Object* object_crushing, Object* object_crushed, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -152,13 +152,14 @@ Action* new_action_crash_ground(Object* object, vec2i tilemap_pos, int dir4)
     action->is_finished = 0;
     action->type = ACTION_TYPE__CRASH_GROUND;
 
-    action->crash_ground.object = object;
+    action->crash_ground.object_crushing = object_crushing;
+    action->crash_ground.object_crushed = object_crushed;
     action->crash_ground.dir4 = dir4;
 
     return action;
 }
 
-Action* new_action_crash_air(Object* object, vec2i tilemap_pos, int dir4)
+Action* new_action_crash_air(Object* object_crushing, Object* object_crushed, vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -167,7 +168,8 @@ Action* new_action_crash_air(Object* object, vec2i tilemap_pos, int dir4)
     action->is_finished = 0;
     action->type = ACTION_TYPE__CRASH_AIR;
 
-    action->crash_air.object = object;
+    action->crash_air.object_crushing = object_crushing;
+    action->crash_air.object_crushed = object_crushed;
     action->crash_air.dir4 = dir4;
 
     return action;

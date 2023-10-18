@@ -185,6 +185,7 @@ void destroy_textures_drop (Textures_Drop* drop)
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
     object->pillar = load_texture_from_filepath (renderer, "./res/object/pillar.png");
+    object->pillar_spikes = load_texture_from_filepath (renderer, "./res/object/pillar_spikes.png");
     object->barrel = load_texture_from_filepath (renderer, "./res/object/barrel.png");
     object->spring = load_texture_from_filepath (renderer, "./res/object/spring.png");
     object->hero = load_texture_from_filepath (renderer, "./res/object/hero.png");
@@ -197,6 +198,7 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 void destroy_textures_object (Textures_Object* object)
 {
     destroy_texture(object->pillar);
+    destroy_texture(object->pillar_spikes);
     destroy_texture(object->barrel);
     destroy_texture(object->spring);
     destroy_texture(object->hero);

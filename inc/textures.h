@@ -153,6 +153,7 @@ void destroy_textures_drop (Textures_Drop* drop);
 typedef struct
 {
     Texture* pillar;
+    Texture* pillar_spikes;
     Texture* barrel;
     Texture* spring;
     Texture* hero;

@@ -81,13 +81,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             int skill = SKILL__NONE;
 
             if(input->was_1 && !input->is_1) skill = SKILL__CHARGE;
-            if(input->was_2 && !input->is_2) skill = SKILL__CHARGE_AND_PUSH;
-            if(input->was_3 && !input->is_3) skill = SKILL__CHARGE_AND_THROW;
-            if(input->was_4 && !input->is_4) skill = SKILL__JUMP;
-            if(input->was_5 && !input->is_5) skill = SKILL__PUSH;
-            if(input->was_6 && !input->is_6) skill = SKILL__PULL;
-            if(input->was_7 && !input->is_7) skill = SKILL__PULL_AND_THROW;
-            if(input->was_8 && !input->is_8) skill = SKILL__THROW;
+            if(input->was_2 && !input->is_2) skill = SKILL__FLY;
+            if(input->was_3 && !input->is_3) skill = SKILL__JUMP;
+            if(input->was_4 && !input->is_4) skill = SKILL__CHARGE_AND_PUSH;
+            if(input->was_5 && !input->is_5) skill = SKILL__CHARGE_AND_THROW;
+            if(input->was_6 && !input->is_6) skill = SKILL__PUSH;
+            if(input->was_7 && !input->is_7) skill = SKILL__PULL;
+            if(input->was_8 && !input->is_8) skill = SKILL__PULL_AND_THROW;
+            if(input->was_9 && !input->is_9) skill = SKILL__THROW;
 
             state->gamemap.curr_skill = skill;
             state->gamemap.is_skill_two_target = is_skill_two_target(skill);

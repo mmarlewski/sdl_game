@@ -31,6 +31,16 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             //
         }
         break;
+        case SKILL__FLY:
+        {
+            //
+        }
+        break;
+        case SKILL__JUMP:
+        {
+            //
+        }
+        break;
         case SKILL__CHARGE_AND_PUSH:
         {
             for(int i = 0; i < 5; i++)
@@ -59,11 +69,6 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
 
             for(int i = 0; i < 5; i++)
             add_pos_to_possible_target_1_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
-        }
-        break;
-        case SKILL__JUMP:
-        {
-            //
         }
         break;
         case SKILL__PUSH:
@@ -139,6 +144,36 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
         }
         break;
+        case SKILL__FLY:
+        {
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
+        }
+        break;
+        case SKILL__JUMP:
+        {
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i+1));
+
+            for(int i = 0; i < 5; i++)
+            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
+        }
+        break;
         case SKILL__CHARGE_AND_PUSH:
         {
             DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
@@ -157,21 +192,6 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             {
                 add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(target_1_tilemap_pos, distance_info.dir4, i+1));
             }
-        }
-        break;
-        case SKILL__JUMP:
-        {
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i+1));
-
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i+1));
-
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i+1));
-
-            for(int i = 0; i < 5; i++)
-            add_pos_to_possible_target_2_tilemap_pos_list(state, new_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i+1));
         }
         break;
         case SKILL__PUSH:
@@ -239,6 +259,28 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
+        case SKILL__FLY:
+        {
+            DistanceInfo move_distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
+
+            vec2i source_object_tilemap_pos = source_object->tilemap_pos;
+            for(int i = 0; i < move_distance_info.abs_diff; i++)
+            {
+                add_action_to_end_action_sequence(action_sequence, new_action_move_air(source_object,source_object_tilemap_pos,move_distance_info.dir4));
+                source_object_tilemap_pos = make_vec2i_move_in_dir4_by(source_object_tilemap_pos, move_distance_info.dir4, 1);
+            }
+        }
+        break;
+        case SKILL__JUMP:
+        {
+            if(!target_2_object)
+            {
+                DistanceInfo throw_distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
+
+                add_action_to_end_action_sequence(action_sequence, new_action_throw(source_object, source_tilemap_pos, throw_distance_info.dir4, throw_distance_info.abs_diff));
+            }
+        }
+        break;
         case SKILL__CHARGE_AND_PUSH:
         {
             if(target_1_object)
@@ -296,16 +338,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
 
                     add_action_to_end_action_sequence(action_sequence, new_action_throw(target_1_object, target_1_tilemap_pos, throw_distance_info.dir4, throw_distance_info.abs_diff));
                 }
-            }
-        }
-        break;
-        case SKILL__JUMP:
-        {
-            if(!target_2_object)
-            {
-                DistanceInfo throw_distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
-
-                add_action_to_end_action_sequence(action_sequence, new_action_throw(source_object, source_tilemap_pos, throw_distance_info.dir4, throw_distance_info.abs_diff));
             }
         }
         break;
@@ -421,10 +453,11 @@ char* get_skill_name(int skill)
     switch(skill)
     {
         case SKILL__NONE:               name = "none";              break;
+        case SKILL__FLY:                name = "fly";               break;
+        case SKILL__JUMP:               name = "jump";              break;
         case SKILL__CHARGE:             name = "charge";            break;
         case SKILL__CHARGE_AND_PUSH:    name = "charge_and_push";   break;
         case SKILL__CHARGE_AND_THROW:   name = "charge_and_throw";  break;
-        case SKILL__JUMP:               name = "jump";              break;
         case SKILL__PUSH:               name = "push";              break;
         case SKILL__PULL:               name = "pull";              break;
         case SKILL__PULL_AND_THROW:     name = "pull_and_throw";    break;

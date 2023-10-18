@@ -21,6 +21,8 @@
 #include "../inc/sounds.h"
 #include "../inc/musics.h"
 
+// printf("here ok \n");
+
 void init_sdl (Window** window, Renderer** renderer);
 void destroy_sdl (Window* window, Renderer* renderer);
 

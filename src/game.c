@@ -202,15 +202,21 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
     // enemy_action_sequence_list
 
-    for(ListElem* curr_elem = state->action.enemy_action_sequence_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    if(state->gamestate == GAMESTATE__NONE)
     {
-        Action* curr_action = (Action*)curr_elem->data;
-        draw_action(renderer, state, curr_action, textures);
+        for(ListElem* curr_elem = state->action.enemy_action_sequence_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Action* curr_action = (Action*)curr_elem->data;
+            draw_action(renderer, state, curr_action, textures);
+        }
     }
 
     // main_action_sequence
 
-    draw_action(renderer, state, state->action.main_action_sequence, textures);
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    {
+        draw_action(renderer, state, state->action.main_action_sequence, textures);
+    }
 }
 
 void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures)
@@ -416,7 +422,7 @@ int main (int argc, char* argv[])
     object_pillar_6->tilemap_pos = make_vec2i(6,7);
     add_object_to_gamemap_objects(&state, object_pillar_6);
 
-    Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR);
+    Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR_SPIKES);
     object_pillar_7->tilemap_pos = make_vec2i(9,7);
     add_object_to_gamemap_objects(&state, object_pillar_7);
 

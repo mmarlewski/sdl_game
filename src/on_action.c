@@ -266,6 +266,12 @@ void object_on_crashing_ground(State* state, Action* sequence, Action* action, O
             //
         }
         break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_death(action->crash_ground.object_crushed, action->crash_ground.object_crushed->tilemap_pos));
+        }
+        break;
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
@@ -318,6 +324,12 @@ void object_on_crashing_air(State* state, Action* sequence, Action* action, Obje
         case OBJECT_TYPE__PILLAR:
         {
             //
+        }
+        break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_death(action->crash_air.object_crushed, action->crash_air.object_crushed->tilemap_pos));
         }
         break;
         case OBJECT_TYPE__BARREL:
@@ -374,6 +386,11 @@ void object_on_crashed_ground(State* state, Action* sequence, Action* action, Ob
             //
         }
         break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
+        {
+            //
+        }
+        break;
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
@@ -424,6 +441,11 @@ void object_on_crashed_air(State* state, Action* sequence, Action* action, Objec
     switch(object->type)
     {
         case OBJECT_TYPE__PILLAR:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
         {
             //
         }
