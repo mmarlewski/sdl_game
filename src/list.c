@@ -196,11 +196,11 @@ void remove_all_list_elements(List* list, int destroy_data)
 
 void print_list(List* list)
 {
-    printf("printing list: %i of size: %i \n", list, list->size);
+    printf("printing list: %p of size: %i \n", list, list->size);
 
     for(ListElem* element = list->head; element != 0; element = element->next)
     {
-        printf("data: %i \n", element->data);
+        printf("data: %p \n", element->data);
     }
 }
 

@@ -4,6 +4,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 {
     state->is_game_running = 1;
     state->gamestate = GAMESTATE__NONE;
+    state->timer = 0.0f;
+    state->background_color = make_vec3i(100, 160, 220);
 
     // camera
 
@@ -35,6 +37,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
     state->gamemap.object_hero->tilemap_pos = make_vec2i(11,5);
     add_object_to_gamemap_objects(state, state->gamemap.object_hero);
+    state->gamemap.curr_object_enemy = 0;
 
     state->gamemap.sprite_list = new_list((void (*)(void *))&destroy_sprite);
 
@@ -54,19 +57,35 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->action.is_executing_actions = 0;
     state->action.main_action_sequence = new_action_sequence();
-
+    state->action.enemy_action_sequence = 0;
     state->action.enemy_action_sequence_list = new_list((void(*)(void*))&destroy_action);
 }
 
 void change_gamestate(State* state, int new_gamestate)
 {
     state->gamestate = new_gamestate;
+
     printf("\n");
     printf("gamestate: %s \n", get_gamestate_name(state->gamestate));
+
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 || state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
     {
         printf("curr_skill: %s \n", get_skill_name(state->gamemap.curr_skill));
     }
+
+    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
+    state->gamestate == GAMESTATE__ENEMY_ATTACKING ||
+    state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE ||
+    state->gamestate == GAMESTATE__ENEMY_MOVING ||
+    state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
+    {
+        printf("curr_enemy: %s \n", get_name_from_object_type(state->gamemap.curr_object_enemy->type));
+    }
+}
+
+void change_background_color(State* state, vec3i new_background_color)
+{
+    state->background_color = new_background_color;
 }
 
 // gamemap
@@ -117,6 +136,8 @@ void add_object_to_gamemap_objects(State* state, Object* new_object)
     if(is_object_enemy(new_object->type))
     {
         add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
+
+        add_new_list_element_to_list_end(state->action.enemy_action_sequence_list, new_action_sequence());
     }
 }
 
@@ -125,6 +146,8 @@ void remove_object_from_gamemap_objects(State* state, Object* object)
     if(is_object_enemy(object->type))
     {
         remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
+
+        // todo
     }
 
     remove_list_element_of_data(state->gamemap.object_list, object, 1);
@@ -212,12 +235,12 @@ void remove_all_actions_from_main_action_sequence(State* state)
     remove_all_list_elements(state->action.main_action_sequence->sequence.action_list,1);
 }
 
-void execute_actions(State* state, Textures* textures, Sounds* sounds, Musics* musics)
+void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics)
 {
     state->action.is_executing_actions = 1;
-    state->action.main_action_sequence->is_finished = 0;
+    action_sequence->is_finished = 0;
 
-    start_action(state, state->action.main_action_sequence, state->action.main_action_sequence, textures, sounds, musics);
+    start_action(state, action_sequence, action_sequence, textures, sounds, musics);
 }
 
 void print_action(Action* action, int depth)
@@ -383,11 +406,16 @@ char* get_gamestate_name(int gamestate)
 
     switch(gamestate)
     {
-        case GAMESTATE__NONE:                   name = "none";                      break;
-        case GAMESTATE__HERO_CHOOSING_SKILL:    name = "hero choosing skill";       break;
-        case GAMESTATE__HERO_CHOOSING_TARGET_1: name = "hero choosing target 1";    break;
-        case GAMESTATE__HERO_CHOOSING_TARGET_2: name = "hero choosing target 2";    break;
-        case GAMESTATE__HERO_EXECUTING_SKILL:   name = "hero skill executing";      break;
+        case GAMESTATE__NONE:                       name = "none";                      break;
+        case GAMESTATE__HERO_CHOOSING_SKILL:        name = "hero choosing skill";       break;
+        case GAMESTATE__HERO_CHOOSING_TARGET_1:     name = "hero choosing target 1";    break;
+        case GAMESTATE__HERO_CHOOSING_TARGET_2:     name = "hero choosing target 2";    break;
+        case GAMESTATE__HERO_EXECUTING_SKILL:       name = "hero skill executing";      break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:  name = "enemy pause before attack"; break;
+        case GAMESTATE__ENEMY_ATTACKING:            name = "enemy attacking";           break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "enemy pause before move";   break;
+        case GAMESTATE__ENEMY_MOVING:               name = "enemy moving";              break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "enemy pause before target"; break;
         default: break;
     }
 

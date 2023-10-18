@@ -55,7 +55,7 @@ void destroy_sdl (Window* window, Renderer* renderer)
 
 void render (Renderer* renderer, State* state, Input* input, Textures* textures)
 {
-    SDL_SetRenderDrawColor (renderer, 90, 140, 170, 255);
+    SDL_SetRenderDrawColor (renderer, state->background_color.x,state->background_color.y,state->background_color.z, 255);
 	SDL_RenderClear (renderer);
 
     draw_gamemap(renderer, state, textures);
@@ -202,7 +202,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
     // enemy_action_sequence_list
 
-    if(state->gamestate == GAMESTATE__NONE)
+    if(state->gamestate != GAMESTATE__NONE)
     {
         for(ListElem* curr_elem = state->action.enemy_action_sequence_list->head; curr_elem != 0; curr_elem = curr_elem->next)
         {
@@ -399,15 +399,15 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(7,2));
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_1->tilemap_pos = make_vec2i(4,5);
+    object_pillar_1->tilemap_pos = make_vec2i(3,2);
     add_object_to_gamemap_objects(&state, object_pillar_1);
 
     Object* object_pillar_2 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_2->tilemap_pos = make_vec2i(5,4);
+    object_pillar_2->tilemap_pos = make_vec2i(3,3);
     add_object_to_gamemap_objects(&state, object_pillar_2);
 
     Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_3->tilemap_pos = make_vec2i(5,6);
+    object_pillar_3->tilemap_pos = make_vec2i(3,4);
     add_object_to_gamemap_objects(&state, object_pillar_3);
 
     Object* object_pillar_4 = new_object(OBJECT_TYPE__PILLAR);
@@ -415,7 +415,7 @@ int main (int argc, char* argv[])
     add_object_to_gamemap_objects(&state, object_pillar_4);
 
     Object* object_pillar_5 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_5->tilemap_pos = make_vec2i(7,7);
+    object_pillar_5->tilemap_pos = make_vec2i(3,6);
     add_object_to_gamemap_objects(&state, object_pillar_5);
 
     Object* object_pillar_6 = new_object(OBJECT_TYPE__PILLAR);
@@ -498,25 +498,8 @@ int main (int argc, char* argv[])
     object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
     add_object_to_gamemap_objects(&state, object_barrel_4);
 
-    add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
-        new_action_move_ground(state.gamemap.object_hero, make_vec2i(5,5), DIR4__UP),
-        new_action_move_ground(state.gamemap.object_hero, make_vec2i(5,4), DIR4__UP),
-        new_action_fall(state.gamemap.object_hero, make_vec2i(5,3))
-    ));
-    add_action_sequence_to_gamemap_action_sequence(&state, new_action_sequence_of_3(
-        new_action_move_ground(state.gamemap.object_hero, make_vec2i(7,7), DIR4__UP),
-        new_action_move_ground(state.gamemap.object_hero, make_vec2i(7,6), DIR4__UP),
-        new_action_fall(state.gamemap.object_hero, make_vec2i(7,5))
-    ));
-
     while (state.is_game_running)
     {
-        // printf
-
-        // printf("is: %i \n", state.is_executing_actions);
-
-        // delta time
-
         prev_time = curr_time;
         curr_time = SDL_GetPerformanceCounter ();
         delta_time = (float)(curr_time - prev_time) / SDL_GetPerformanceFrequency ();

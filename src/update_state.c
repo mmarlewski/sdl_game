@@ -209,7 +209,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
                     state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
 
-                    execute_actions(state, textures, sounds, musics);
+                    execute_action_sequence(state, state->action.main_action_sequence, textures, sounds, musics);
 
                     change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
                 }
@@ -221,11 +221,162 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             if(state->action.main_action_sequence->is_finished)
             {
                 end_action(state, state->action.main_action_sequence, state->action.main_action_sequence, textures, sounds, musics);
-                change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
+
+                if(state->gamemap.object_enemy_list->size == 0)
+                {
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
+                }
+                else
+                {
+                    state->gamemap.curr_object_enemy_list_elem =
+                    state->gamemap.object_enemy_list->head;
+
+                    state->gamemap.curr_object_enemy =
+                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+
+                    state->action.curr_enemy_action_sequence_list_elem =
+                    state->action.enemy_action_sequence_list->head;
+
+                    state->action.enemy_action_sequence =
+                    (Action*)state->action.curr_enemy_action_sequence_list_elem->data;
+
+                    change_background_color(state, make_vec3i(200, 50, 50));
+
+                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
+                    state->timer = 0.0f;
+                }
             }
             else
             {
                 update_action(state, state->action.main_action_sequence, state->action.main_action_sequence, delta_time, textures, sounds, musics);
+            }
+        }
+        break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:
+        {
+            state->timer += delta_time;
+
+            if(state->timer > 0.5f)
+            {
+                state->timer = 0.0f;
+
+                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics);
+
+                change_gamestate(state, GAMESTATE__ENEMY_ATTACKING);
+            }
+        }
+        break;
+        case GAMESTATE__ENEMY_ATTACKING:
+        {
+            if(state->action.enemy_action_sequence->is_finished)
+            {
+                end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics);
+
+                if(state->gamemap.curr_object_enemy_list_elem->next == 0)
+                {
+                    state->gamemap.curr_object_enemy_list_elem =
+                    state->gamemap.object_enemy_list->head;
+
+                    state->gamemap.curr_object_enemy =
+                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+
+                    state->action.curr_enemy_action_sequence_list_elem =
+                    state->action.enemy_action_sequence_list->head;
+
+                    state->action.enemy_action_sequence =
+                    (Action*)state->action.curr_enemy_action_sequence_list_elem->data;
+
+                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
+                    state->timer = 0.0f;
+                }
+                else
+                {
+                    state->gamemap.curr_object_enemy_list_elem =
+                    state->gamemap.curr_object_enemy_list_elem->next;
+
+                    state->gamemap.curr_object_enemy =
+                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+
+                    state->action.curr_enemy_action_sequence_list_elem =
+                    state->action.curr_enemy_action_sequence_list_elem->next;
+
+                    state->action.enemy_action_sequence =
+                    (Action*)state->action.curr_enemy_action_sequence_list_elem->data;
+
+                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
+                    state->timer = 0.0f;
+                }
+            }
+            else
+            {
+                update_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, delta_time, textures, sounds, musics);
+            }
+        }
+        break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:
+        {
+            state->timer += delta_time;
+
+            if(state->timer > 0.5f)
+            {
+                state->timer = 0.0f;
+
+                object_enemy_add_actions_to_action_sequence_move(state, state->action.enemy_action_sequence, state->gamemap.curr_object_enemy);
+
+                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics);
+
+                change_gamestate(state, GAMESTATE__ENEMY_MOVING);
+            }
+        }
+        break;
+        case GAMESTATE__ENEMY_MOVING:
+        {
+            if(state->action.enemy_action_sequence->is_finished)
+            {
+                end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics);
+
+                change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET);
+                state->timer = 0.0f;
+            }
+            else
+            {
+                update_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, delta_time, textures, sounds, musics);
+            }
+        }
+        break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:
+        {
+            state->timer += delta_time;
+
+            if(state->timer > 0.5f)
+            {
+                state->timer = 0.0f;
+
+                object_enemy_add_actions_to_action_sequence_attack(state, state->action.enemy_action_sequence, state->gamemap.curr_object_enemy);
+
+                if(state->gamemap.curr_object_enemy_list_elem->next == 0)
+                {
+                    change_background_color(state, make_vec3i(100, 160, 220));
+
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
+                }
+                else
+                {
+                    state->gamemap.curr_object_enemy_list_elem =
+                    state->gamemap.curr_object_enemy_list_elem->next;
+
+                    state->gamemap.curr_object_enemy =
+                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+
+                    state->action.curr_enemy_action_sequence_list_elem =
+                    state->action.curr_enemy_action_sequence_list_elem->next;
+
+                    state->action.enemy_action_sequence =
+                    (Action*)state->action.curr_enemy_action_sequence_list_elem->data;
+
+                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
+                    state->timer = 0.0f;
+                }
             }
         }
         break;

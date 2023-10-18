@@ -3,7 +3,7 @@
 void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
 {
     printf("\n");
-    print_action(state->action.main_action_sequence, 0);
+    print_action(sequence, 0);
 
     // printf("start action:       %s \n", get_action_name_from_type(action->type));
 
