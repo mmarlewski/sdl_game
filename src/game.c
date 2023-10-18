@@ -200,6 +200,14 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
         }
     }
 
+    // enemy_action_sequence_list
+
+    for(ListElem* curr_elem = state->action.enemy_action_sequence_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Action* curr_action = (Action*)curr_elem->data;
+        draw_action(renderer, state, curr_action, textures);
+    }
+
     // main_action_sequence
 
     draw_action(renderer, state, state->action.main_action_sequence, textures);

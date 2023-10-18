@@ -16,6 +16,8 @@ enum DIR4
     DIR4__COUNT
 };
 
+int get_opposite_dir4(int dir4);
+
 vec2i make_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by);
 vec2f make_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by);
 

@@ -68,8 +68,6 @@ typedef struct
     List* possible_target_1_tilemap_pos_list;
     List* possible_target_2_tilemap_pos_list;
 
-    List* enemy_action_sequence_list;
-
     List* sprite_list;
 
     List* object_list;
@@ -90,6 +88,8 @@ typedef struct
 {
     int is_executing_actions;
     Action* main_action_sequence;
+
+    List* enemy_action_sequence_list;
 
 } State_Action;
 
@@ -164,7 +164,7 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
 
 void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos);
 void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos);
-void skill_get_actions_to_execute(State* state, Action* action, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos, vec2i target_2_tilemap_pos);
+void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos, vec2i target_2_tilemap_pos);
 
 char* get_gamestate_name(int gamestate);
 

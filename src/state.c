@@ -47,8 +47,6 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
     state->gamemap.possible_target_2_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
 
-    state->gamemap.enemy_action_sequence_list = new_list((void(*)(void*))&destroy_action);
-
     state->gamemap.target_1_tilemap_pos = make_vec2i(0, 0);
     state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
 
@@ -56,13 +54,19 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->action.is_executing_actions = 0;
     state->action.main_action_sequence = new_action_sequence();
+
+    state->action.enemy_action_sequence_list = new_list((void(*)(void*))&destroy_action);
 }
 
 void change_gamestate(State* state, int new_gamestate)
 {
     state->gamestate = new_gamestate;
     printf("\n");
-    printf("gamestate: %s \n", get_gamestate_name(new_gamestate));
+    printf("gamestate: %s \n", get_gamestate_name(state->gamestate));
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 || state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
+    {
+        printf("curr_skill: %s \n", get_skill_name(state->gamemap.curr_skill));
+    }
 }
 
 // gamemap
@@ -141,12 +145,12 @@ void remove_all_dead_objects_from_gamemap_objects(State* state)
 
 void add_action_sequence_to_gamemap_action_sequence(State* state, Action* new_action_sequence)
 {
-    add_new_list_element_to_list_end(state->gamemap.enemy_action_sequence_list, new_action_sequence);
+    add_new_list_element_to_list_end(state->action.enemy_action_sequence_list, new_action_sequence);
 }
 
 void remove_action_sequence_from_gamemap_action_sequence(State* state, Action* action_sequence)
 {
-    remove_list_element_of_data(state->gamemap.enemy_action_sequence_list, action_sequence, 1);
+    remove_list_element_of_data(state->action.enemy_action_sequence_list, action_sequence, 1);
 }
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite)

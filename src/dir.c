@@ -1,5 +1,21 @@
 #include "../inc/dir.h"
 
+int get_opposite_dir4(int dir4)
+{
+    int opposite_dir4 = DIR4__NONE;
+
+    switch(dir4)
+    {
+        case DIR4__UP: opposite_dir4 = DIR4__DOWN; break;
+        case DIR4__RIGHT: opposite_dir4 = DIR4__LEFT; break;
+        case DIR4__DOWN: opposite_dir4 = DIR4__UP; break;
+        case DIR4__LEFT: opposite_dir4 = DIR4__LEFT; break;
+        default: break;
+    }
+
+    return opposite_dir4;
+}
+
 vec2i make_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by)
 {
     switch(dir4)
