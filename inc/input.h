@@ -9,6 +9,8 @@ typedef struct
 
     int is_esc;
     int was_esc;
+    int is_enter;
+    int was_enter;
 
     int is_up;
     int was_up;

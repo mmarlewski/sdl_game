@@ -34,4 +34,6 @@ typedef Mix_Music Music;
 
 #define TILE_LENGTH 64
 
+#define HERO_MAX_AP 10
+
 #endif

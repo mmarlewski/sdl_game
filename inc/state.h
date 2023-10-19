@@ -76,6 +76,8 @@ typedef struct
     Object* curr_object_enemy;
     Object* object_hero;
 
+    int hero_ap;
+
     vec2i prev_selected_tilemap_pos;
     vec2i curr_selected_tilemap_pos;
 
@@ -163,5 +165,9 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
 void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* action_sequence, Object* object);
 
 char* get_gamestate_name(int gamestate);
+
+int get_hero_ap(State* state);
+void modify_hero_ap(State* state, int by);
+void restore_hero_ap(State* state);
 
 #endif

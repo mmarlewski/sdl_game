@@ -83,6 +83,34 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 break;
             }
 
+            if(input->was_enter && !input->is_enter)
+            {
+                restore_hero_ap(state);
+
+                if(state->gamemap.object_enemy_list->size > 0)
+                {
+                    state->gamemap.curr_object_enemy_list_elem =
+                    state->gamemap.object_enemy_list->head;
+
+                    state->gamemap.curr_object_enemy =
+                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+
+                    state->action.enemy_action_sequence =
+                    (Action*)state->gamemap.curr_object_enemy->enemy_action_sequence;
+
+                    change_background_color(state, make_vec3i(200, 50, 50));
+
+                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
+                    state->timer = 0.0f;
+                }
+                else
+                {
+                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
+                }
+
+                break;
+            }
+
             int skill = SKILL__NONE;
 
             if(input->was_1 && !input->is_1) skill = SKILL__CHARGE;
@@ -108,7 +136,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             state->gamemap.curr_skill = skill;
             state->gamemap.is_skill_two_target = is_skill_two_target(skill);
 
-            if(skill != SKILL__NONE)
+            if(get_hero_ap(state) > 0 && skill != SKILL__NONE)
             {
                 if(is_skill_two_target(skill))
                 {
@@ -248,28 +276,11 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
 
-                if(state->gamemap.object_enemy_list->size == 0)
-                {
-                    change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
-                }
-                else
-                {
-                    remove_all_dead_objects_from_gamemap_objects(state);
+                remove_all_dead_objects_from_gamemap_objects(state);
 
-                    state->gamemap.curr_object_enemy_list_elem =
-                    state->gamemap.object_enemy_list->head;
+                modify_hero_ap(state, -1);
 
-                    state->gamemap.curr_object_enemy =
-                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
-
-                    state->action.enemy_action_sequence =
-                    (Action*)state->gamemap.curr_object_enemy->enemy_action_sequence;
-
-                    change_background_color(state, make_vec3i(200, 50, 50));
-
-                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
-                    state->timer = 0.0f;
-                }
+                change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
             }
             else
             {

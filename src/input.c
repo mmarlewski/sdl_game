@@ -1,4 +1,5 @@
 #include "../inc/input.h"
+#include <SDL2/SDL_scancode.h>
 
 void init_input (Input* input)
 {
@@ -62,6 +63,7 @@ void update_input (Input* input)
     // update 'was' from 'is'
 
     input->was_esc = input->is_esc;
+    input->was_enter = input->is_enter;
 
     input->was_up = input->is_up;
     input->was_down = input->is_down;
@@ -104,6 +106,7 @@ void update_input (Input* input)
             switch (keyboard_event.keysym.scancode)
             {
                 case SDL_SCANCODE_ESCAPE: input->is_esc = 1;   break;
+                case SDL_SCANCODE_RETURN: input->is_enter = 1;   break;
 
                 case SDL_SCANCODE_UP:     input->is_up = 1;    break;
                 case SDL_SCANCODE_DOWN:   input->is_down = 1;  break;
@@ -130,6 +133,7 @@ void update_input (Input* input)
             switch (keyboard_event.keysym.scancode)
             {
                 case SDL_SCANCODE_ESCAPE: input->is_esc = 0;   break;
+                case SDL_SCANCODE_RETURN: input->is_enter = 0;   break;
 
                 case SDL_SCANCODE_UP:     input->is_up = 0;    break;
                 case SDL_SCANCODE_DOWN:   input->is_down = 0;  break;

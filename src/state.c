@@ -53,6 +53,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.target_1_tilemap_pos = make_vec2i(0, 0);
     state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
 
+    state->gamemap.hero_ap = HERO_MAX_AP;
+
     // action
 
     state->action.is_executing_actions = 0;
@@ -67,7 +69,25 @@ void change_gamestate(State* state, int new_gamestate)
     printf("\n");
     printf("gamestate: %s \n", get_gamestate_name(state->gamestate));
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 || state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL ||
+    state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 ||
+    state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
+    {
+        int hero_ap = get_hero_ap(state);
+        char hero_ap_bar[HERO_MAX_AP + 2];
+        hero_ap_bar[0] = '[';
+        for(int i = 0; i < HERO_MAX_AP; i ++)
+        {
+            hero_ap_bar[i + 1] = (i + 1 <= hero_ap) ? '#' : '.';
+        }
+        hero_ap_bar[HERO_MAX_AP + 1] = ']';
+        printf("hero_ap: %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);
+    }
+
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 ||
+    state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
     {
         printf("curr_skill: %s \n", get_skill_name(state->gamemap.curr_skill));
     }
@@ -392,4 +412,22 @@ char* get_gamestate_name(int gamestate)
     }
 
     return name;
+}
+
+int get_hero_ap(State* state)
+{
+    return state->gamemap.hero_ap;
+}
+
+void modify_hero_ap(State* state, int by)
+{
+    state->gamemap.hero_ap += by;
+
+    if(state->gamemap.hero_ap < 0) state->gamemap.hero_ap = 0;
+    if(state->gamemap.hero_ap > HERO_MAX_AP) state->gamemap.hero_ap = HERO_MAX_AP;
+}
+
+void restore_hero_ap(State* state)
+{
+    state->gamemap.hero_ap = HERO_MAX_AP;
 }
