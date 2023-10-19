@@ -35,6 +35,7 @@ struct _Object
     vec2i tilemap_pos;
 
     struct _Action* enemy_action_sequence;
+    int enemy_performed_attack;
 };
 
 Object* new_object(int type);

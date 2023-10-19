@@ -207,16 +207,20 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
     if(state->gamestate != GAMESTATE__NONE)
     {
-        for(ListElem* curr_elem = state->action.enemy_action_sequence_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+        for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
         {
-            Action* curr_action = (Action*)curr_elem->data;
+            Object* curr_object = (Object*)curr_elem->data;
+            Action* curr_action = curr_object->enemy_action_sequence;
 
-            if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
-            state->action.enemy_action_sequence == curr_action) &&
-            !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-            state->action.enemy_action_sequence == curr_action))
+            if(!curr_object->enemy_performed_attack)
             {
-                draw_action(renderer, state, curr_action, textures);
+                if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
+                state->action.enemy_action_sequence == curr_action) &&
+                !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
+                state->action.enemy_action_sequence == curr_action))
+                {
+                    draw_action(renderer, state, curr_action, textures);
+                }
             }
         }
     }
@@ -261,44 +265,22 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             }
         }
         break;
-        case ACTION_TYPE__MOVE_GROUND:
+        case ACTION_TYPE__MOVE:
         {
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_move_ground(textures, action->move_ground.dir4),
+                get_texture_move_ground(textures, action->move.dir4),
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
                 );
         }
         break;
-        case ACTION_TYPE__MOVE_AIR:
+        case ACTION_TYPE__CRASH:
         {
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_move_air(textures, action->move_air.dir4),
-                world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
-                );
-        }
-        break;
-        case ACTION_TYPE__CRASH_GROUND:
-        {
-            draw_texture_at_world_pos(
-                renderer,
-                get_texture_crash_ground(textures, action->crash_ground.dir4),
-                world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
-                );
-        }
-        break;
-        case ACTION_TYPE__CRASH_AIR:
-        {
-            draw_texture_at_world_pos(
-                renderer,
-                get_texture_crash_air(textures, action->crash_air.dir4),
+                get_texture_crash_ground(textures, action->crash.dir4),
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -415,7 +397,7 @@ int main (int argc, char* argv[])
 
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(5,5));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_SPIKES, make_vec2i(8,7));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_LAVA_CRACK, make_vec2i(8,3));
+    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_LAVA_CRACK, make_vec2i(3,3));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__WATER, make_vec2i(4,2));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE_WATER_CRACK, make_vec2i(5,2));
     change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(6,2));

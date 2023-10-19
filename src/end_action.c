@@ -7,6 +7,8 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 
     // printf("end action:         %s \n", get_action_name_from_type(action->type));
 
+    if(action->is_finished_at_start) return;
+
     switch(action->type)
     {
         case ACTION_TYPE__NONE:
@@ -25,66 +27,32 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             remove_all_list_elements(action->simultaneous.action_list, 1);
         }
         break;
-        case ACTION_TYPE__MOVE_GROUND:
+        case ACTION_TYPE__MOVE:
         {
-            if(!action->move_ground.is_move_blocked)
-            {
-                action->move_ground.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move_ground.object->tilemap_pos,action->move_ground.dir4,1);
-                end_animation(state, action->animation, textures, sounds, musics);
+            action->move.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
+            end_animation(state, action->animation, textures, sounds, musics);
 
-                int floor = get_floor_on_tilemap_pos(state, action->move_ground.object->tilemap_pos);
-                floor_on_move_ground_end(state, sequence, action, floor);
-            }
+            int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
+            floor_on_move_end(state, sequence, action, floor);
 
-            action->move_ground.object->is_visible = 1;
+            action->move.object->is_visible = 1;
         }
         break;
-        case ACTION_TYPE__MOVE_AIR:
-        {
-            if(!action->move_air.is_move_blocked)
-            {
-                action->move_air.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move_air.object->tilemap_pos,action->move_air.dir4,1);
-                end_animation(state, action->animation, textures, sounds, musics);
-
-                int floor = get_floor_on_tilemap_pos(state, action->move_air.object->tilemap_pos);
-                floor_on_move_air_end(state, sequence, action, floor);
-            }
-
-            action->move_air.object->is_visible = 1;
-        }
-        break;
-        case ACTION_TYPE__CRASH_GROUND:
+        case ACTION_TYPE__CRASH:
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
             Action* crushed_action_sequence = new_action_sequence();
-            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash_ground.object_crushing->tilemap_pos, action->crash_ground.dir4, 1));
-            object_on_crashed_ground(state, crushed_action_sequence, action, crushed_object);
+            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
+            object_on_crashed(state, crushed_action_sequence, action, crushed_object);
 
             Action* crushing_action_sequence = new_action_sequence();
-            Object* crushing_object = action->crash_ground.object_crushing;
-            object_on_crashing_ground(state, crushing_action_sequence, action, crushing_object);
+            Object* crushing_object = action->crash.object_crushing;
+            object_on_crashing(state, crushing_action_sequence, action, crushing_object);
 
             add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
 
-            action->crash_ground.object_crushing->is_visible = 1;
-        }
-        break;
-        case ACTION_TYPE__CRASH_AIR:
-        {
-            end_animation(state, action->animation, textures, sounds, musics);
-
-            Action* crushed_action_sequence = new_action_sequence();
-            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash_air.object_crushing->tilemap_pos, action->crash_air.dir4, 1));
-            object_on_crashed_air(state, crushed_action_sequence, action, crushed_object);
-
-            Action* crushing_action_sequence = new_action_sequence();
-            Object* crushing_object = action->crash_air.object_crushing;
-            object_on_crashing_air(state, crushing_action_sequence, action, crushing_object);
-
-            add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
-
-            action->crash_air.object_crushing->is_visible = 1;
+            action->crash.object_crushing->is_visible = 1;
         }
         break;
         case ACTION_TYPE__FALL:
@@ -109,57 +77,16 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            vec2i tilemap_pos = action->tilemap_pos;
-            Object* object_up = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1));
-            Object* object_right = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1));
-            Object* object_down = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1));
-            Object* object_left = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1));
-
             Action* push_around = new_action_simultaneous();
-            if(object_up)
-            {
-                if(is_object_flying(object_up->type))
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_up, object_up->tilemap_pos, DIR4__UP)));
-                }
-                else
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_up, object_up->tilemap_pos, DIR4__UP)));
-                }
-            }
-            if(object_right)
-            {
-                if(is_object_flying(object_right->type))
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_right, object_right->tilemap_pos, DIR4__RIGHT)));
-                }
-                else
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_right, object_right->tilemap_pos, DIR4__RIGHT)));
-                }
-            }
-            if(object_down)
-            {
-                if(is_object_flying(object_down->type))
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_down, object_down->tilemap_pos, DIR4__DOWN)));
-                }
-                else
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_down, object_down->tilemap_pos, DIR4__DOWN)));
-                }
-            }
-            if(object_left)
-            {
-                if(is_object_flying(object_left->type))
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_air(object_left, object_left->tilemap_pos, DIR4__LEFT)));
-                }
-                else
-                {
-                    add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move_ground(object_left, object_left->tilemap_pos, DIR4__LEFT)));
-                }
-            }
+
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1), DIR4__UP)));
+
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1), DIR4__RIGHT)));
+
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1), DIR4__DOWN)));
+
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1), DIR4__LEFT)));
+
             add_action_after_curr_action_action_sequence(sequence, push_around);
         }
         break;
@@ -167,14 +94,14 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             end_animation(state, action->animation, textures, sounds, musics);
 
-            vec2i curr_tilemap_pos = action->throw.object->tilemap_pos;
+            vec2i curr_tilemap_pos = action->throw.object_thrown->tilemap_pos;
             vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
 
-            action->throw.object->tilemap_pos = next_tilemap_pos;
+            action->throw.object_thrown->tilemap_pos = next_tilemap_pos;
 
-            add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object, next_tilemap_pos, action->throw.dir4));
+            add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object_thrown, next_tilemap_pos, action->throw.dir4));
 
-            action->throw.object->is_visible = 1;
+            action->throw.object_thrown->is_visible = 1;
         }
         break;
         case ACTION_TYPE__DROP:

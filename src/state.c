@@ -58,7 +58,6 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->action.is_executing_actions = 0;
     state->action.hero_action_sequence = new_action_sequence();
     state->action.enemy_action_sequence = 0;
-    state->action.enemy_action_sequence_list = new_list((void(*)(void*))&destroy_action);
 }
 
 void change_gamestate(State* state, int new_gamestate)
@@ -138,8 +137,6 @@ void add_object_to_gamemap_objects(State* state, Object* new_object)
     if(is_object_enemy(new_object->type))
     {
         add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
-
-        add_new_list_element_to_list_end(state->action.enemy_action_sequence_list, new_object->enemy_action_sequence);
     }
 }
 
@@ -152,8 +149,6 @@ void remove_object_from_gamemap_objects(State* state, Object* object)
 
     if(is_object_enemy(object->type))
     {
-        remove_list_element_of_data(state->action.enemy_action_sequence_list, object->enemy_action_sequence, 0);
-
         remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
     }
 
@@ -175,16 +170,6 @@ void remove_all_dead_objects_from_gamemap_objects(State* state)
 
         curr_elem = next_elem;
     }
-}
-
-void add_action_sequence_to_gamemap_action_sequence(State* state, Action* new_action_sequence)
-{
-    add_new_list_element_to_list_end(state->action.enemy_action_sequence_list, new_action_sequence);
-}
-
-void remove_action_sequence_from_gamemap_action_sequence(State* state, Action* action_sequence)
-{
-    remove_list_element_of_data(state->action.enemy_action_sequence_list, action_sequence, 1);
 }
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite)
@@ -300,54 +285,28 @@ void print_action(Action* action, int depth)
             printf("} \n");
         }
         break;
-        case ACTION_TYPE__MOVE_GROUND:
+        case ACTION_TYPE__MOVE:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->move_ground.object);
+            printf("object:         %p \n", action->move.object);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->move_ground.dir4);
+            printf("dir4:           %i \n", action->move.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__MOVE_AIR:
+        case ACTION_TYPE__CRASH:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->move_air.object);
+            printf("object_crushing:%p \n", action->crash.object_crushing);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->move_air.dir4);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
-        }
-        break;
-        case ACTION_TYPE__CRASH_GROUND:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("object_crushed: %p \n", action->crash.object_crushed);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_crushing:%p \n", action->crash_ground.object_crushing);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_crushed: %p \n", action->crash_ground.object_crushed);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->crash_ground.dir4);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
-        }
-        break;
-        case ACTION_TYPE__CRASH_AIR:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_crushing:%p \n", action->crash_air.object_crushing);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_crushed: %p \n", action->crash_air.object_crushed);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->crash_air.dir4);
+            printf("dir4:           %i \n", action->crash.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
             printf("> \n");
         }
@@ -385,7 +344,9 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("< \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->throw.object);
+            printf("object_thrown:  %p \n", action->throw.object_thrown);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object_on_t.:   %p \n", action->throw.object_on_target);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->throw.dir4);
             for(int i = 0; i < depth + 1; i++) printf("  ");

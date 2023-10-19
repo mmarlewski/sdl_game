@@ -91,8 +91,6 @@ typedef struct
     int is_executing_actions;
     Action* hero_action_sequence;
     Action* enemy_action_sequence;
-    List* enemy_action_sequence_list;
-    ListElem* curr_enemy_action_sequence_list_elem;
 
 } State_Action;
 
@@ -125,9 +123,6 @@ void add_object_to_gamemap_objects(State* state, Object* new_object);
 void remove_object_from_gamemap_objects(State* state, Object* object);
 void remove_all_dead_objects_from_gamemap_objects(State* state);
 
-void add_action_sequence_to_gamemap_action_sequence(State* state, Action* new_action_sequence);
-void remove_action_sequence_from_gamemap_action_sequence(State* state, Action* action_sequence);
-
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 
@@ -151,20 +146,12 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
 
-void floor_on_move_ground_start(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_air_start(State* state, Action* sequence, Action* action, int floor);
-
-void floor_on_move_ground_end(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_air_end(State* state, Action* sequence, Action* action, int floor);
-
+void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 
-void object_on_crashing_ground(State* state, Action* sequence, Action* action, Object* object);
-void object_on_crashing_air(State* state, Action* sequence, Action* action, Object* object);
-
-void object_on_crashed_ground(State* state, Action* sequence, Action* action, Object* object);
-void object_on_crashed_air(State* state, Action* sequence, Action* action, Object* object);
-
+void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
+void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
 void object_on_death(State* state, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
 

@@ -67,28 +67,14 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = (are_all_actions_finished);
         }
         break;
-        case ACTION_TYPE__MOVE_GROUND:
+        case ACTION_TYPE__MOVE:
         {
             update_animation(state, action->animation, delta_time, textures, sounds, musics);
 
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__MOVE_AIR:
-        {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics);
-
-            action->is_finished = (action->animation->is_finished);
-        }
-        break;
-        case ACTION_TYPE__CRASH_GROUND:
-        {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics);
-
-            action->is_finished = (action->animation->is_finished);
-        }
-        break;
-        case ACTION_TYPE__CRASH_AIR:
+        case ACTION_TYPE__CRASH:
         {
             update_animation(state, action->animation, delta_time, textures, sounds, musics);
 

@@ -12,6 +12,7 @@ Object* new_object(int type)
     object->tilemap_pos = make_vec2i(0,0);
 
     object->enemy_action_sequence = new_action_sequence();
+    object->enemy_performed_attack = 0;
 
     return object;
 }

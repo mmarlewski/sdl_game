@@ -16,11 +16,8 @@ enum ACTION_TYPE
     ACTION_TYPE__SEQUENCE,
     ACTION_TYPE__SIMULTANEOUS,
 
-    ACTION_TYPE__MOVE_GROUND,
-    ACTION_TYPE__MOVE_AIR,
-
-    ACTION_TYPE__CRASH_GROUND,
-    ACTION_TYPE__CRASH_AIR,
+    ACTION_TYPE__MOVE,
+    ACTION_TYPE__CRASH,
 
     ACTION_TYPE__FALL,
     ACTION_TYPE__DEATH,
@@ -53,37 +50,20 @@ typedef struct
 
 typedef struct
 {
-    int is_move_blocked;
+    int dir4;
 
     Object* object;
-    int dir4;
 
-} Action_MoveGround;
-
-typedef struct
-{
-    int is_move_blocked;
-
-    Object* object;
-    int dir4;
-
-} Action_MoveAir;
+} Action_Move;
 
 typedef struct
 {
+    int dir4;
+
     Object* object_crushing;
     Object* object_crushed;
-    int dir4;
 
-} Action_CrashGround;
-
-typedef struct
-{
-    Object* object_crushing;
-    Object* object_crushed;
-    int dir4;
-
-} Action_CrashAir;
+} Action_Crash;
 
 typedef struct
 {
@@ -104,16 +84,18 @@ typedef struct
 
 typedef struct
 {
-    Object* object;
     int dir4;
     int distance;
+
+    Object* object_thrown;
+    Object* object_on_target;
 
 } Action_Throw;
 
 typedef struct
 {
-    Object* object;
     int dir4;
+    Object* object;
 
 } Action_Drop;
 
@@ -122,6 +104,7 @@ struct _Action
     Animation* animation;
     vec2i tilemap_pos;
     int is_finished;
+    int is_finished_at_start;
     int type;
 
     union
@@ -131,11 +114,8 @@ struct _Action
         Action_Sequence sequence;
         Action_Simultaneous simultaneous;
 
-        Action_MoveGround move_ground;
-        Action_MoveAir move_air;
-
-        Action_CrashGround crash_ground;
-        Action_CrashAir crash_air;
+        Action_Move move;
+        Action_Crash crash;
 
         Action_Fall fall;
         Action_Death death;
@@ -163,17 +143,14 @@ Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
-Action* new_action_move_ground(Object* object, vec2i tilemap_pos, int dir4);
-Action* new_action_move_air(Object* object, vec2i tilemap_pos, int dir4);
-
-Action* new_action_crash_ground(Object* object_crushing, Object* object_crushed, vec2i tilemap_pos, int dir4);
-Action* new_action_crash_air(Object* object_crushing, Object* object_crushed, vec2i tilemap_pos, int dir4);
+Action* new_action_move( vec2i tilemap_pos, int dir4);
+Action* new_action_crash( vec2i tilemap_pos, int dir4);
 
 Action* new_action_fall(Object* object, vec2i tilemap_pos);
 Action* new_action_death(Object* object, vec2i tilemap_pos);
 Action* new_action_blow_up(vec2i tilemap_pos);
 
-Action* new_action_throw(Object* object, vec2i tilemap_pos, int dir4, int distance);
+Action* new_action_throw(vec2i tilemap_pos, int dir4, int distance);
 Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4);
 
 void destroy_action(Action* action);
