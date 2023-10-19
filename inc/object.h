@@ -23,6 +23,8 @@ enum OBJECT_TYPE
     OBJECT_TYPE__COUNT
 };
 
+struct _Action;
+
 typedef struct _Object Object;
 
 struct _Object
@@ -31,6 +33,8 @@ struct _Object
     int is_dead;
     int type;
     vec2i tilemap_pos;
+
+    struct _Action* enemy_action_sequence;
 };
 
 Object* new_object(int type);

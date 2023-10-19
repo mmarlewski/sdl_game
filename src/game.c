@@ -166,7 +166,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*)curr_elem->data;
-                if(curr_object->is_visible && curr_object->tilemap_pos.x == j && curr_object->tilemap_pos.y == i)
+                if(!curr_object->is_dead &&
+                curr_object->is_visible &&
+                curr_object->tilemap_pos.x == j &&
+                curr_object->tilemap_pos.y == i)
                 {
                     draw_texture_at_world_pos(
                         renderer,
@@ -207,7 +210,14 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
         for(ListElem* curr_elem = state->action.enemy_action_sequence_list->head; curr_elem != 0; curr_elem = curr_elem->next)
         {
             Action* curr_action = (Action*)curr_elem->data;
-            draw_action(renderer, state, curr_action, textures);
+
+            if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
+            state->action.enemy_action_sequence == curr_action) &&
+            !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
+            state->action.enemy_action_sequence == curr_action))
+            {
+                draw_action(renderer, state, curr_action, textures);
+            }
         }
     }
 
@@ -215,7 +225,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        draw_action(renderer, state, state->action.main_action_sequence, textures);
+        draw_action(renderer, state, state->action.hero_action_sequence, textures);
     }
 }
 
@@ -330,10 +340,23 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
         break;
         case ACTION_TYPE__THROW:
         {
+            vec2i target_tilemap_pos = make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
+            vec2f target_gamemap_pos = tilemap_pos_to_gamemap_pos(target_tilemap_pos);
+            vec2f target_world_cart_pos = gamemap_pos_to_world_pos(target_gamemap_pos);
+            vec2f target_world_iso_pos = cart_pos_to_iso_pos(target_world_cart_pos);
+
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_throw(textures, action->throw.dir4),
                 world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+
+            draw_texture_at_world_pos(
+                renderer,
+                textures->drop.drop,
+                target_world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
                 );
@@ -433,10 +456,6 @@ int main (int argc, char* argv[])
     Object* object_spring_2 = new_object(OBJECT_TYPE__SPRING);
     object_spring_2->tilemap_pos = make_vec2i(9,2);
     add_object_to_gamemap_objects(&state, object_spring_2);
-
-    Object* object_spring_3 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_3->tilemap_pos = make_vec2i(10,2);
-    add_object_to_gamemap_objects(&state, object_spring_3);
 
     Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
     object_barrel_1->tilemap_pos = make_vec2i(7,5);

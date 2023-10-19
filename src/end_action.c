@@ -102,7 +102,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 
             object_on_death(state, sequence, action, action->death.object);
 
-            remove_object_from_gamemap_objects(state, action->death.object);
+            action->death.object->is_dead = 1;
         }
         break;
         case ACTION_TYPE__BLOW_UP:

@@ -89,7 +89,7 @@ typedef struct
 typedef struct
 {
     int is_executing_actions;
-    Action* main_action_sequence;
+    Action* hero_action_sequence;
     Action* enemy_action_sequence;
     List* enemy_action_sequence_list;
     ListElem* curr_enemy_action_sequence_list_elem;
@@ -143,7 +143,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
 void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
 void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
 
-void remove_all_actions_from_main_action_sequence(State* state);
+void remove_all_actions_from_action_sequence(Action* action_sequence);
 void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics);
 void print_action(Action* action, int depth);
 

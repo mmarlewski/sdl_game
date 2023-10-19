@@ -35,7 +35,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.object_hero->tilemap_pos = make_vec2i(11,5);
+    state->gamemap.object_hero->tilemap_pos = make_vec2i(10,5);
     add_object_to_gamemap_objects(state, state->gamemap.object_hero);
     state->gamemap.curr_object_enemy = 0;
 
@@ -56,7 +56,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     // action
 
     state->action.is_executing_actions = 0;
-    state->action.main_action_sequence = new_action_sequence();
+    state->action.hero_action_sequence = new_action_sequence();
     state->action.enemy_action_sequence = 0;
     state->action.enemy_action_sequence_list = new_list((void(*)(void*))&destroy_action);
 }
@@ -102,7 +102,9 @@ Object* get_object_on_tilemap_pos(State* state, vec2i tilemap_pos)
     for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem; curr_elem = curr_elem->next)
     {
         Object* curr_object = (Object*)curr_elem->data;
-        if(curr_object->tilemap_pos.x == tilemap_pos.x && curr_object->tilemap_pos.y == tilemap_pos.y)
+        if(!curr_object->is_dead &&
+        curr_object->tilemap_pos.x == tilemap_pos.x &&
+        curr_object->tilemap_pos.y == tilemap_pos.y)
         {
             return curr_object;
         }
@@ -137,17 +139,22 @@ void add_object_to_gamemap_objects(State* state, Object* new_object)
     {
         add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
 
-        add_new_list_element_to_list_end(state->action.enemy_action_sequence_list, new_action_sequence());
+        add_new_list_element_to_list_end(state->action.enemy_action_sequence_list, new_object->enemy_action_sequence);
     }
 }
 
 void remove_object_from_gamemap_objects(State* state, Object* object)
 {
+    if(object == state->gamemap.object_hero)
+    {
+        state->gamemap.object_hero = 0;
+    }
+
     if(is_object_enemy(object->type))
     {
-        remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
+        remove_list_element_of_data(state->action.enemy_action_sequence_list, object->enemy_action_sequence, 0);
 
-        // todo
+        remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
     }
 
     remove_list_element_of_data(state->gamemap.object_list, object, 1);
@@ -155,14 +162,18 @@ void remove_object_from_gamemap_objects(State* state, Object* object)
 
 void remove_all_dead_objects_from_gamemap_objects(State* state)
 {
-    for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem; curr_elem = curr_elem->next)
+    ListElem* curr_elem = state->gamemap.object_list->head;
+    while(curr_elem != 0)
     {
-        Object* curr_object = (Object*)curr_elem->data;
+        ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
 
+        Object* curr_object = (Object*)curr_elem->data;
         if(curr_object->is_dead)
         {
             remove_object_from_gamemap_objects(state, curr_object);
         }
+
+        curr_elem = next_elem;
     }
 }
 
@@ -230,9 +241,9 @@ int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos
 
 // action
 
-void remove_all_actions_from_main_action_sequence(State* state)
+void remove_all_actions_from_action_sequence(Action* action_sequence)
 {
-    remove_all_list_elements(state->action.main_action_sequence->sequence.action_list,1);
+    remove_all_list_elements(action_sequence->sequence.action_list,1);
 }
 
 void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics)
