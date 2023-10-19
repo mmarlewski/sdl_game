@@ -111,3 +111,49 @@ Texture* get_texture_from_object_type(int object_type, Textures* textures)
 
     return texture;
 }
+
+Texture* get_texture_outline_yellow_from_object_type(int object_type, Textures* textures)
+{
+    Texture* texture = 0;
+
+    switch(object_type)
+    {
+        case OBJECT_TYPE__NONE: texture = 0; break;
+        case OBJECT_TYPE__PILLAR: texture = textures->object.pillar_outline_yellow; break;
+        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes_outline_yellow; break;
+        case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline_yellow; break;
+        case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline_yellow; break;
+        case OBJECT_TYPE__HERO: texture = textures->object.hero_outline_yellow; break;
+        case OBJECT_TYPE__GOAT: texture = textures->object.goat_outline_yellow; break;
+        case OBJECT_TYPE__SPIDER: texture = textures->object.spider_outline_yellow; break;
+        case OBJECT_TYPE__BULL: texture = textures->object.bull_outline_yellow; break;
+        case OBJECT_TYPE__FLY: texture = textures->object.fly_outline_yellow; break;
+        case OBJECT_TYPE__CHAMELEON: texture = textures->object.chameleon_outline_yellow; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_outline_red_from_object_type(int object_type, Textures* textures)
+{
+    Texture* texture = 0;
+
+    switch(object_type)
+    {
+        case OBJECT_TYPE__NONE: texture = 0; break;
+        case OBJECT_TYPE__PILLAR: texture = textures->object.pillar_outline_red; break;
+        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes_outline_red; break;
+        case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline_red; break;
+        case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline_red; break;
+        case OBJECT_TYPE__HERO: texture = textures->object.hero_outline_red; break;
+        case OBJECT_TYPE__GOAT: texture = textures->object.goat_outline_red; break;
+        case OBJECT_TYPE__SPIDER: texture = textures->object.spider_outline_red; break;
+        case OBJECT_TYPE__BULL: texture = textures->object.bull_outline_red; break;
+        case OBJECT_TYPE__FLY: texture = textures->object.fly_outline_red; break;
+        case OBJECT_TYPE__CHAMELEON: texture = textures->object.chameleon_outline_red; break;
+        default: break;
+    }
+
+    return texture;
+}

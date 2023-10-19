@@ -65,64 +65,34 @@ void destroy_textures_danger (Textures_Danger* danger)
     destroy_texture(danger->frame_6);
 }
 
-void load_textures_move_ground (Renderer* renderer, Textures_MoveGround* move_ground)
+void load_textures_move (Renderer* renderer, Textures_Move* move)
 {
-    move_ground->up = load_texture_from_filepath (renderer, "./res/move_ground/up.png");
-    move_ground->right = load_texture_from_filepath (renderer, "./res/move_ground/right.png");
-    move_ground->down = load_texture_from_filepath (renderer, "./res/move_ground/down.png");
-    move_ground->left = load_texture_from_filepath (renderer, "./res/move_ground/left.png");
+    move->up = load_texture_from_filepath (renderer, "./res/move/up.png");
+    move->right = load_texture_from_filepath (renderer, "./res/move/right.png");
+    move->down = load_texture_from_filepath (renderer, "./res/move/down.png");
+    move->left = load_texture_from_filepath (renderer, "./res/move/left.png");
 }
-void destroy_textures_move_ground (Textures_MoveGround* move_ground)
+void destroy_textures_move (Textures_Move* move)
 {
-    destroy_texture(move_ground->up);
-    destroy_texture(move_ground->right);
-    destroy_texture(move_ground->down);
-    destroy_texture(move_ground->left);
-}
-
-void load_textures_move_air (Renderer* renderer, Textures_MoveAir* move_air)
-{
-    move_air->up = load_texture_from_filepath (renderer, "./res/move_air/up.png");
-    move_air->right = load_texture_from_filepath (renderer, "./res/move_air/right.png");
-    move_air->down = load_texture_from_filepath (renderer, "./res/move_air/down.png");
-    move_air->left = load_texture_from_filepath (renderer, "./res/move_air/left.png");
-}
-void destroy_textures_move_air (Textures_MoveAir* move_air)
-{
-    destroy_texture(move_air->up);
-    destroy_texture(move_air->right);
-    destroy_texture(move_air->down);
-    destroy_texture(move_air->left);
+    destroy_texture(move->up);
+    destroy_texture(move->right);
+    destroy_texture(move->down);
+    destroy_texture(move->left);
 }
 
-void load_textures_crash_ground (Renderer* renderer, Textures_CrashGround* crash_ground)
+void load_textures_crash (Renderer* renderer, Textures_Crash* crash)
 {
-    crash_ground->up = load_texture_from_filepath (renderer, "./res/crash_ground/up.png");
-    crash_ground->right = load_texture_from_filepath (renderer, "./res/crash_ground/right.png");
-    crash_ground->down = load_texture_from_filepath (renderer, "./res/crash_ground/down.png");
-    crash_ground->left = load_texture_from_filepath (renderer, "./res/crash_ground/left.png");
+    crash->up = load_texture_from_filepath (renderer, "./res/crash/up.png");
+    crash->right = load_texture_from_filepath (renderer, "./res/crash/right.png");
+    crash->down = load_texture_from_filepath (renderer, "./res/crash/down.png");
+    crash->left = load_texture_from_filepath (renderer, "./res/crash/left.png");
 }
-void destroy_textures_crash_ground (Textures_CrashGround* crash_ground)
+void destroy_textures_crash (Textures_Crash* crash)
 {
-    destroy_texture(crash_ground->up);
-    destroy_texture(crash_ground->right);
-    destroy_texture(crash_ground->down);
-    destroy_texture(crash_ground->left);
-}
-
-void load_textures_crash_air (Renderer* renderer, Textures_CrashAir* crash_air)
-{
-    crash_air->up = load_texture_from_filepath (renderer, "./res/crash_air/up.png");
-    crash_air->right = load_texture_from_filepath (renderer, "./res/crash_air/right.png");
-    crash_air->down = load_texture_from_filepath (renderer, "./res/crash_air/down.png");
-    crash_air->left = load_texture_from_filepath (renderer, "./res/crash_air/left.png");
-}
-void destroy_textures_crash_air (Textures_CrashAir* crash_air)
-{
-    destroy_texture(crash_air->up);
-    destroy_texture(crash_air->right);
-    destroy_texture(crash_air->down);
-    destroy_texture(crash_air->left);
+    destroy_texture(crash->up);
+    destroy_texture(crash->right);
+    destroy_texture(crash->down);
+    destroy_texture(crash->left);
 }
 
 void load_textures_fall (Renderer* renderer, Textures_Fall* fall)
@@ -184,29 +154,117 @@ void destroy_textures_drop (Textures_Drop* drop)
 
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
-    object->pillar = load_texture_from_filepath (renderer, "./res/object/pillar.png");
-    object->pillar_spikes = load_texture_from_filepath (renderer, "./res/object/pillar_spikes.png");
-    object->barrel = load_texture_from_filepath (renderer, "./res/object/barrel.png");
-    object->spring = load_texture_from_filepath (renderer, "./res/object/spring.png");
-    object->hero = load_texture_from_filepath (renderer, "./res/object/hero.png");
-    object->goat = load_texture_from_filepath (renderer, "./res/object/goat.png");
-    object->spider = load_texture_from_filepath (renderer, "./res/object/spider.png");
-    object->bull = load_texture_from_filepath (renderer, "./res/object/bull.png");
-    object->fly = load_texture_from_filepath (renderer, "./res/object/fly.png");
-    object->chameleon = load_texture_from_filepath (renderer, "./res/object/chameleon.png");
+    object->pillar = load_texture_from_filepath
+    (renderer, "./res/object/pillar/pillar.png");
+    object->pillar_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/pillar/pillar_outline_yellow.png");
+    object->pillar_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/pillar/pillar_outline_red.png");
+
+    object->pillar_spikes = load_texture_from_filepath
+    (renderer, "./res/object/pillar_spikes/pillar_spikes.png");
+    object->pillar_spikes_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/pillar_spikes/pillar_spikes_outline_yellow.png");
+    object->pillar_spikes_outline_red = load_texture_from_filepath
+     (renderer, "./res/object/pillar_spikes/pillar_spikes_outline_red.png");
+
+    object->barrel = load_texture_from_filepath
+    (renderer, "./res/object/barrel/barrel.png");
+    object->barrel_outline_yellow = load_texture_from_filepath
+     (renderer, "./res/object/barrel/barrel_outline_yellow.png");
+    object->barrel_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/barrel/barrel_outline_red.png");
+
+    object->spring = load_texture_from_filepath
+    (renderer, "./res/object/spring/spring.png");
+    object->spring_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/spring/spring_outline_yellow.png");
+    object->spring_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/spring/spring_outline_red.png");
+
+    object->hero = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero.png");
+    object->hero_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_outline_yellow.png");
+    object->hero_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_outline_red.png");
+
+    object->goat = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat.png");
+    object->goat_outline_yellow = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat_outline_yellow.png");
+    object->goat_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/goat/goat_outline_red.png");
+
+    object->spider = load_texture_from_filepath
+    (renderer, "./res/object/spider/spider.png");
+    object->spider_outline_yellow = load_texture_from_filepath
+     (renderer, "./res/object/spider/spider_outline_yellow.png");
+    object->spider_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/spider/spider_outline_red.png");
+
+    object->bull = load_texture_from_filepath
+    (renderer, "./res/object/bull/bull.png");
+    object->bull_outline_yellow = load_texture_from_filepath
+     (renderer, "./res/object/bull/bull_outline_yellow.png");
+    object->bull_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/bull/bull_outline_red.png");
+
+    object->fly = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly.png");
+    object->fly_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_outline_yellow.png");
+    object->fly_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_outline_red.png");
+
+    object->chameleon = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon.png");
+    object->chameleon_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon_outline_yellow.png");
+    object->chameleon_outline_red = load_texture_from_filepath
+     (renderer, "./res/object/chameleon/chameleon_outline_red.png");
 }
 void destroy_textures_object (Textures_Object* object)
 {
     destroy_texture(object->pillar);
+    destroy_texture(object->pillar_outline_yellow);
+    destroy_texture(object->pillar_outline_red);
+
     destroy_texture(object->pillar_spikes);
+    destroy_texture(object->pillar_spikes_outline_yellow);
+    destroy_texture(object->pillar_spikes_outline_red);
+
     destroy_texture(object->barrel);
+    destroy_texture(object->barrel_outline_yellow);
+    destroy_texture(object->barrel_outline_red);
+
     destroy_texture(object->spring);
+    destroy_texture(object->spring_outline_yellow);
+    destroy_texture(object->spring_outline_red);
+
     destroy_texture(object->hero);
+    destroy_texture(object->hero_outline_yellow);
+    destroy_texture(object->hero_outline_red);
+
     destroy_texture(object->goat);
+    destroy_texture(object->goat_outline_yellow);
+    destroy_texture(object->goat_outline_red);
+
     destroy_texture(object->spider);
+    destroy_texture(object->spider_outline_yellow);
+    destroy_texture(object->spider_outline_red);
+
     destroy_texture(object->bull);
+    destroy_texture(object->bull_outline_yellow);
+    destroy_texture(object->bull_outline_red);
+
     destroy_texture(object->fly);
+    destroy_texture(object->fly_outline_yellow);
+    destroy_texture(object->fly_outline_red);
+
     destroy_texture(object->chameleon);
+    destroy_texture(object->chameleon_outline_yellow);
+    destroy_texture(object->chameleon_outline_red);
 }
 
 void load_textures (Renderer* renderer, Textures* textures)
@@ -216,11 +274,8 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_highlight(renderer,&textures->highlight);
     load_textures_danger(renderer,&textures->danger);
 
-    load_textures_move_ground(renderer,&textures->move_ground);
-    load_textures_move_air(renderer,&textures->move_air);
-
-    load_textures_crash_ground(renderer,&textures->crash_ground);
-    load_textures_crash_air(renderer,&textures->crash_air);
+    load_textures_move(renderer,&textures->move);
+    load_textures_crash(renderer,&textures->crash);
 
     load_textures_fall(renderer,&textures->fall);
     load_textures_death(renderer,&textures->death);
@@ -239,11 +294,8 @@ void destroy_textures (Textures* textures)
     destroy_textures_highlight (&textures->highlight);
     destroy_textures_danger (&textures->danger);
 
-    destroy_textures_move_ground (&textures->move_ground);
-    destroy_textures_move_air (&textures->move_air);
-
-    destroy_textures_crash_ground (&textures->crash_ground);
-    destroy_textures_crash_air (&textures->crash_air);
+    destroy_textures_move (&textures->move);
+    destroy_textures_crash (&textures->crash);
 
     destroy_textures_fall (&textures->fall);
     destroy_textures_death (&textures->death);
@@ -255,64 +307,32 @@ void destroy_textures (Textures* textures)
     destroy_textures_object (&textures->object);
 }
 
-Texture* get_texture_move_ground(Textures* textures, int dir4)
+Texture* get_texture_move(Textures* textures, int dir4)
 {
     Texture* texture = 0;
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->move_ground.up; break;
-        case DIR4__RIGHT: texture = textures->move_ground.right; break;
-        case DIR4__DOWN: texture = textures->move_ground.down; break;
-        case DIR4__LEFT: texture = textures->move_ground.left; break;
+        case DIR4__UP: texture = textures->move.up; break;
+        case DIR4__RIGHT: texture = textures->move.right; break;
+        case DIR4__DOWN: texture = textures->move.down; break;
+        case DIR4__LEFT: texture = textures->move.left; break;
         default: break;
     }
 
     return texture;
 }
 
-Texture* get_texture_move_air(Textures* textures, int dir4)
+Texture* get_texture_crash(Textures* textures, int dir4)
 {
     Texture* texture = 0;
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->move_air.up; break;
-        case DIR4__RIGHT: texture = textures->move_air.right; break;
-        case DIR4__DOWN: texture = textures->move_air.down; break;
-        case DIR4__LEFT: texture = textures->move_air.left; break;
-        default: break;
-    }
-
-    return texture;
-}
-
-Texture* get_texture_crash_ground(Textures* textures, int dir4)
-{
-    Texture* texture = 0;
-
-    switch(dir4)
-    {
-        case DIR4__UP: texture = textures->crash_ground.up; break;
-        case DIR4__RIGHT: texture = textures->crash_ground.right; break;
-        case DIR4__DOWN: texture = textures->crash_ground.down; break;
-        case DIR4__LEFT: texture = textures->crash_ground.left; break;
-        default: break;
-    }
-
-    return texture;
-}
-
-Texture* get_texture_crash_air(Textures* textures, int dir4)
-{
-    Texture* texture = 0;
-
-    switch(dir4)
-    {
-        case DIR4__UP: texture = textures->crash_air.up; break;
-        case DIR4__RIGHT: texture = textures->crash_air.right; break;
-        case DIR4__DOWN: texture = textures->crash_air.down; break;
-        case DIR4__LEFT: texture = textures->crash_air.left; break;
+        case DIR4__UP: texture = textures->crash.up; break;
+        case DIR4__RIGHT: texture = textures->crash.right; break;
+        case DIR4__DOWN: texture = textures->crash.down; break;
+        case DIR4__LEFT: texture = textures->crash.left; break;
         default: break;
     }
 

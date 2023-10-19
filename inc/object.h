@@ -46,5 +46,7 @@ int is_object_enemy(int object_type);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_from_object_type(int type, Textures* textures);
+Texture* get_texture_outline_yellow_from_object_type(int type, Textures* textures);
+Texture* get_texture_outline_red_from_object_type(int type, Textures* textures);
 
 #endif

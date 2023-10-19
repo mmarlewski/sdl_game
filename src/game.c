@@ -203,23 +203,37 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
         }
     }
 
-    // enemy_action_sequence_list
+    // enemy action sequence
 
-    if(state->gamestate != GAMESTATE__NONE)
+    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
+    state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
-        {
-            Object* curr_object = (Object*)curr_elem->data;
-            Action* curr_action = curr_object->enemy_action_sequence;
+        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
 
-            if(!curr_object->enemy_performed_attack)
+        if(hover_object != 0 &&
+        is_object_enemy(hover_object->type) &&
+        !hover_object->is_dead &&
+        hover_object->is_visible)
+        {
+            draw_action(renderer, state, hover_object->enemy_action_sequence, textures);
+        }
+        else
+        {
+            for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
-                if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
-                state->action.enemy_action_sequence == curr_action) &&
-                !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-                state->action.enemy_action_sequence == curr_action))
+                Object* curr_object = (Object*)curr_elem->data;
+                Action* curr_action = curr_object->enemy_action_sequence;
+
+                if(!curr_object->enemy_performed_attack)
                 {
-                    draw_action(renderer, state, curr_action, textures);
+                    if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
+                    state->action.enemy_action_sequence == curr_action) &&
+                    !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
+                    state->action.enemy_action_sequence == curr_action))
+                    {
+                        draw_action(renderer, state, curr_action, textures);
+                    }
                 }
             }
         }
@@ -230,6 +244,57 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
         draw_action(renderer, state, state->action.hero_action_sequence, textures);
+    }
+
+    // yellow outline
+
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL)
+    {
+        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+
+        if(hover_object != 0 &&
+         !hover_object->is_dead &&
+        hover_object->is_visible)
+        {
+            vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
+            vec2f selected_gamemap_pos = tilemap_pos_to_gamemap_pos(selected_tilemap_pos);
+            vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
+            vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
+
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_outline_yellow_from_object_type(hover_object->type, textures),
+                selected_world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+    }
+
+    // red outline
+
+    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
+    state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE)
+    {
+        Object* enemy_object = state->gamemap.curr_object_enemy;
+
+        if(enemy_object != 0 &&
+         !enemy_object->is_dead &&
+        enemy_object->is_visible)
+        {
+            vec2i selected_tilemap_pos = enemy_object->tilemap_pos;
+            vec2f selected_gamemap_pos = tilemap_pos_to_gamemap_pos(selected_tilemap_pos);
+            vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
+            vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
+
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_outline_red_from_object_type(enemy_object->type, textures),
+                selected_world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
     }
 }
 
@@ -269,7 +334,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
         {
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_move_ground(textures, action->move.dir4),
+                get_texture_move(textures, action->move.dir4),
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -280,7 +345,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
         {
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_crash_ground(textures, action->crash.dir4),
+                get_texture_crash(textures, action->crash.dir4),
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom

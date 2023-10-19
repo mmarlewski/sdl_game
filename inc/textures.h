@@ -58,22 +58,10 @@ typedef struct
     Texture* down;
     Texture* left;
 
-} Textures_MoveGround;
+} Textures_Move;
 
-void load_textures_move_ground (Renderer* renderer, Textures_MoveGround* move_ground);
-void destroy_textures_move_ground (Textures_MoveGround* move_ground);
-
-typedef struct
-{
-    Texture* up;
-    Texture* right;
-    Texture* down;
-    Texture* left;
-
-} Textures_MoveAir;
-
-void load_textures_move_air (Renderer* renderer, Textures_MoveAir* move_air);
-void destroy_textures_move_air (Textures_MoveAir* move_air);
+void load_textures_move (Renderer* renderer, Textures_Move* move);
+void destroy_textures_move (Textures_Move* move);
 
 typedef struct
 {
@@ -82,22 +70,10 @@ typedef struct
     Texture* down;
     Texture* left;
 
-} Textures_CrashGround;
+} Textures_Crash;
 
-void load_textures_crash_ground (Renderer* renderer, Textures_CrashGround* crash_ground);
-void destroy_textures_crash (Textures_CrashGround* crash_ground);
-
-typedef struct
-{
-    Texture* up;
-    Texture* right;
-    Texture* down;
-    Texture* left;
-
-} Textures_CrashAir;
-
-void load_textures_crash (Renderer* renderer, Textures_CrashAir* crash_air);
-void destroy_textures_crash_air (Textures_CrashAir* crash_air);
+void load_textures_crash (Renderer* renderer, Textures_Crash* crash);
+void destroy_textures_crash (Textures_Crash* crash);
 
 typedef struct
 {
@@ -153,15 +129,44 @@ void destroy_textures_drop (Textures_Drop* drop);
 typedef struct
 {
     Texture* pillar;
+    Texture* pillar_outline_yellow;
+    Texture* pillar_outline_red;
+
     Texture* pillar_spikes;
+    Texture* pillar_spikes_outline_yellow;
+    Texture* pillar_spikes_outline_red;
+
     Texture* barrel;
+    Texture* barrel_outline_yellow;
+    Texture* barrel_outline_red;
+
     Texture* spring;
+    Texture* spring_outline_yellow;
+    Texture* spring_outline_red;
+
     Texture* hero;
+    Texture* hero_outline_yellow;
+    Texture* hero_outline_red;
+
     Texture* goat;
+    Texture* goat_outline_yellow;
+    Texture* goat_outline_red;
+
     Texture* spider;
+    Texture* spider_outline_yellow;
+    Texture* spider_outline_red;
+
+
     Texture* bull;
+    Texture* bull_outline_yellow;
+    Texture* bull_outline_red;
     Texture* fly;
+    Texture* fly_outline_yellow;
+    Texture* fly_outline_red;
+
     Texture* chameleon;
+    Texture* chameleon_outline_yellow;
+    Texture* chameleon_outline_red;
 
 } Textures_Object;
 
@@ -175,11 +180,8 @@ typedef struct
     Textures_Highlight highlight;
     Textures_Danger danger;
 
-    Textures_MoveGround move_ground;
-    Textures_MoveAir move_air;
-
-    Textures_CrashGround crash_ground;
-    Textures_CrashAir crash_air;
+    Textures_Move move;
+    Textures_Crash crash;
 
     Textures_Fall fall;
     Textures_Death death;
@@ -195,10 +197,8 @@ typedef struct
 void load_textures (Renderer* renderer, Textures* textures);
 void destroy_textures (Textures* textures);
 
-Texture* get_texture_move_ground(Textures* textures, int dir4);
-Texture* get_texture_move_air(Textures* textures, int dir4);
-Texture* get_texture_crash_ground(Textures* textures, int dir4);
-Texture* get_texture_crash_air(Textures* textures, int dir4);
+Texture* get_texture_move(Textures* textures, int dir4);
+Texture* get_texture_crash(Textures* textures, int dir4);
 Texture* get_texture_throw(Textures* textures, int dir4);
 
 #endif
