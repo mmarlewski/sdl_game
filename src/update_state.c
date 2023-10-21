@@ -64,7 +64,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     // gamestate
 
-    if(state->gamemap.object_hero == 0)
+    if(state->gamestate != GAMESTATE__NONE &&
+     state->gamemap.object_hero == 0)
     {
         change_gamestate(state, GAMESTATE__NONE);
     }

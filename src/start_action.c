@@ -46,7 +46,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             action->move.object = get_object_on_tilemap_pos(state, action->tilemap_pos);
 
-            if(action->move.object == 0)
+            if(action->move.object == 0 ||
+            !is_tilemap_pos_in_tilemap(make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)))
             {
                 action->is_finished = 1;
                 action->is_finished_at_start = 1;
@@ -208,7 +209,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->throw.object_on_target = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance));
 
             if(action->throw.object_thrown == 0 ||
-            action->throw.object_on_target != 0)
+            action->throw.object_on_target != 0 ||
+            !is_tilemap_pos_in_tilemap(make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance)))
             {
                 action->is_finished = 1;
                 action->is_finished_at_start = 1;
