@@ -42,6 +42,9 @@ typedef struct
     int is_0;
     int was_0;
 
+    int is_q;
+    int was_q;
+
     int is_mouse_left;
     int was_mouse_left;
     int is_mouse_middle;

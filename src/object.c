@@ -13,6 +13,7 @@ Object* new_object(int type)
 
     object->enemy_action_sequence = new_action_sequence();
     object->enemy_performed_attack = 0;
+    object->enemy_order_number = 0;
 
     return object;
 }

@@ -36,6 +36,7 @@ struct _Object
 
     struct _Action* enemy_action_sequence;
     int enemy_performed_attack;
+    int enemy_order_number;
 };
 
 Object* new_object(int type);

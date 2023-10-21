@@ -249,7 +249,8 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         break;
         case OBJECT_TYPE__PILLAR_SPIKES:
         {
-            //
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushing, action->crash.object_crushing->tilemap_pos));
         }
         break;
         case OBJECT_TYPE__BARREL:

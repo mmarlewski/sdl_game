@@ -267,6 +267,43 @@ void destroy_textures_object (Textures_Object* object)
     destroy_texture(object->chameleon_outline_red);
 }
 
+void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order_number)
+{
+    order_number->num_1 = load_texture_from_filepath
+     (renderer, "./res/order_number/num_1.png");
+    order_number->num_2 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_2.png");
+    order_number->num_3 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_3.png");
+    order_number->num_4 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_4.png");
+    order_number->num_5 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_5.png");
+    order_number->num_6 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_6.png");
+    order_number->num_7= load_texture_from_filepath
+    (renderer, "./res/order_number/num_7.png");
+    order_number->num_8 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_8.png");
+    order_number->num_9 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_9.png");
+    order_number->num_0 = load_texture_from_filepath
+    (renderer, "./res/order_number/num_0.png");
+}
+void destroy_textures_order_number (Textures_OrderNumber* order_number)
+{
+    destroy_texture(order_number->num_1);
+    destroy_texture(order_number->num_2);
+    destroy_texture(order_number->num_3);
+    destroy_texture(order_number->num_4);
+    destroy_texture(order_number->num_5);
+    destroy_texture(order_number->num_6);
+    destroy_texture(order_number->num_7);
+    destroy_texture(order_number->num_8);
+    destroy_texture(order_number->num_9);
+    destroy_texture(order_number->num_0);
+}
+
 void load_textures (Renderer* renderer, Textures* textures)
 {
     load_textures_floor(renderer,&textures->floor);
@@ -285,6 +322,7 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_drop(renderer,&textures->drop);
 
     load_textures_object(renderer,&textures->object);
+    load_textures_order_number(renderer,&textures->order_number);
 }
 
 void destroy_textures (Textures* textures)
@@ -305,6 +343,7 @@ void destroy_textures (Textures* textures)
     destroy_textures_drop (&textures->drop);
 
     destroy_textures_object (&textures->object);
+    destroy_textures_order_number (&textures->order_number);
 }
 
 Texture* get_texture_move(Textures* textures, int dir4)
@@ -349,6 +388,27 @@ Texture* get_texture_throw(Textures* textures, int dir4)
         case DIR4__RIGHT: texture = textures->throw.right; break;
         case DIR4__DOWN: texture = textures->throw.down; break;
         case DIR4__LEFT: texture = textures->throw.left; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_order_number(Textures* textures, int num)
+{
+    Texture* texture = textures->order_number.num_0;
+
+    switch(num)
+    {
+        case 1: texture = textures->order_number.num_1; break;
+        case 2: texture = textures->order_number.num_2; break;
+        case 3: texture = textures->order_number.num_3; break;
+        case 4: texture = textures->order_number.num_4; break;
+        case 5: texture = textures->order_number.num_5; break;
+        case 6: texture = textures->order_number.num_6; break;
+        case 7: texture = textures->order_number.num_7; break;
+        case 8: texture = textures->order_number.num_8; break;
+        case 9: texture = textures->order_number.num_9; break;
         default: break;
     }
 

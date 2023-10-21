@@ -108,7 +108,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.green,
+                        textures->highlight.orange,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -177,6 +177,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom);
+
+                    if(is_object_enemy(curr_object->type) &&
+                    state->gamemap.show_all_order_numbers)
+                    {
+                        draw_texture_at_world_pos(
+                            renderer,
+                            get_texture_order_number(textures, curr_object->enemy_order_number),
+                            world_iso_pos,
+                            state->camera.world_pos,
+                            state->camera.zoom
+                            );
+                    }
                 }
             }
 
@@ -246,7 +258,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
         draw_action(renderer, state, state->action.hero_action_sequence, textures);
     }
 
-    // yellow outline
+    // yellow outline, order number
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL)
     {
@@ -268,6 +280,17 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 state->camera.world_pos,
                 state->camera.zoom
                 );
+
+            if(is_object_enemy(hover_object->type))
+            {
+                draw_texture_at_world_pos(
+                    renderer,
+                    get_texture_order_number(textures, hover_object->enemy_order_number),
+                    selected_world_iso_pos,
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
         }
     }
 
@@ -294,6 +317,17 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 state->camera.world_pos,
                 state->camera.zoom
                 );
+
+            if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
+            {
+                draw_texture_at_world_pos(
+                    renderer,
+                    get_texture_order_number(textures, enemy_object->enemy_order_number),
+                    selected_world_iso_pos,
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
         }
     }
 }
@@ -518,19 +552,19 @@ int main (int argc, char* argv[])
 
     Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
     object_spider->tilemap_pos = make_vec2i(2,3);
-    //add_object_to_gamemap_objects(&state, object_spider);
+    add_object_to_gamemap_objects(&state, object_spider);
 
     Object* object_bull = new_object(OBJECT_TYPE__BULL);
     object_bull->tilemap_pos = make_vec2i(2,4);
-    //add_object_to_gamemap_objects(&state, object_bull);
+    add_object_to_gamemap_objects(&state, object_bull);
 
     Object* object_fly = new_object(OBJECT_TYPE__FLY);
     object_fly->tilemap_pos = make_vec2i(2,5);
-    //add_object_to_gamemap_objects(&state, object_fly);
+    add_object_to_gamemap_objects(&state, object_fly);
 
     Object* object_chameleon = new_object(OBJECT_TYPE__CHAMELEON);
     object_chameleon->tilemap_pos = make_vec2i(2,6);
-    //add_object_to_gamemap_objects(&state, object_chameleon);
+    add_object_to_gamemap_objects(&state, object_chameleon);
 
     int n = 8;
     for(int i = 0; i < n; i++)
@@ -563,6 +597,8 @@ int main (int argc, char* argv[])
     Object* object_barrel_4 = new_object(OBJECT_TYPE__BARREL);
     object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
     add_object_to_gamemap_objects(&state, object_barrel_4);
+
+    determine_enemy_order(&state);
 
     while (state.is_game_running)
     {

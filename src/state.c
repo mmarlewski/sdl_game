@@ -55,6 +55,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->gamemap.hero_ap = HERO_MAX_AP;
 
+    state->gamemap.show_all_order_numbers = 0;
+
     // action
 
     state->action.is_executing_actions = 0;
@@ -430,4 +432,15 @@ void modify_hero_ap(State* state, int by)
 void restore_hero_ap(State* state)
 {
     state->gamemap.hero_ap = HERO_MAX_AP;
+}
+
+void determine_enemy_order(State* state)
+{
+    int order_number = 1;
+    for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Object* curr_object = (Object*)curr_elem->data;
+        curr_object->enemy_order_number = order_number;
+        order_number++;
+    }
 }

@@ -86,6 +86,8 @@ typedef struct
     vec2i target_1_tilemap_pos;
     vec2i target_2_tilemap_pos;
 
+    int show_all_order_numbers;
+
 } State_Gamemap;
 
 typedef struct
@@ -169,5 +171,7 @@ char* get_gamestate_name(int gamestate);
 int get_hero_ap(State* state);
 void modify_hero_ap(State* state, int by);
 void restore_hero_ap(State* state);
+
+void determine_enemy_order(State* state);
 
 #endif

@@ -60,6 +60,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->camera.world_pos = new_camera_world_pos;
     }
 
+    state->gamemap.show_all_order_numbers = input->is_q;
+
     // gamestate
 
     if(state->gamemap.object_hero == 0)
@@ -71,7 +73,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
     {
         case GAMESTATE__NONE:
         {
-            //
+            if (input->was_esc && !input->is_esc)
+            {
+                state->is_game_running = 0;
+
+                break;
+            }
         }
         break;
         case GAMESTATE__HERO_CHOOSING_SKILL:
@@ -278,6 +285,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                 remove_all_dead_objects_from_gamemap_objects(state);
 
+                determine_enemy_order(state);
+
                 modify_hero_ap(state, -1);
 
                 change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
@@ -442,6 +451,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 if(state->gamemap.curr_object_enemy_list_elem->next == 0)
                 {
                     remove_all_dead_objects_from_gamemap_objects(state);
+
+                    determine_enemy_order(state);
 
                     change_background_color(state, make_vec3i(100, 160, 220));
 

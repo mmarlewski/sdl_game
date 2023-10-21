@@ -175,6 +175,24 @@ void destroy_textures_object (Textures_Object* object);
 
 typedef struct
 {
+    Texture* num_1;
+    Texture* num_2;
+    Texture* num_3;
+    Texture* num_4;
+    Texture* num_5;
+    Texture* num_6;
+    Texture* num_7;
+    Texture* num_8;
+    Texture* num_9;
+    Texture* num_0;
+
+} Textures_OrderNumber;
+
+void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order_number);
+void destroy_textures_order_number (Textures_OrderNumber* order_number);
+
+typedef struct
+{
     Textures_Floor floor;
 
     Textures_Highlight highlight;
@@ -192,6 +210,8 @@ typedef struct
 
     Textures_Object object;
 
+    Textures_OrderNumber order_number;
+
 } Textures;
 
 void load_textures (Renderer* renderer, Textures* textures);
@@ -200,5 +220,7 @@ void destroy_textures (Textures* textures);
 Texture* get_texture_move(Textures* textures, int dir4);
 Texture* get_texture_crash(Textures* textures, int dir4);
 Texture* get_texture_throw(Textures* textures, int dir4);
+
+Texture* get_texture_order_number(Textures* textures, int num);
 
 #endif
