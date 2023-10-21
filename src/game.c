@@ -204,12 +204,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
                 if(curr_sprite_tilemap_pos.x == tilemap_pos.x && curr_sprite_tilemap_pos.y == tilemap_pos.y)
                 {
+                    vec2f gamemap_pos = make_vec2f(curr_sprite->gamemap_pos.x,curr_sprite->gamemap_pos.y);
+                    vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                    vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                    world_iso_pos.y += curr_sprite->gamemap_pos.z * (TILE_LENGTH * 0.5f);
+
                     draw_texture_at_world_pos(
                         renderer,
                         curr_sprite->texture,
-                        cart_pos_to_iso_pos(gamemap_pos_to_world_pos(curr_sprite->gamemap_pos)),
+                        world_iso_pos,
                         state->camera.world_pos,
-                        state->camera.zoom);
+                        state->camera.zoom
+                        );
                 }
             }
         }

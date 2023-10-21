@@ -157,7 +157,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Animation* animation = new_animation_fall_sprite_in_gamemap(
                 get_texture_from_object_type(action->fall.object->type, textures),
                 tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
-                0.1f,
+                0.2f,
                 0.2f
                 );
 
@@ -260,4 +260,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         default:
         break;
     }
+
+    printf("\n");
+    print_action(sequence, 0);
 }

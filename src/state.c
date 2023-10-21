@@ -278,9 +278,9 @@ void print_action(Action* action, int depth)
         case ACTION_TYPE__NONE:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         case ACTION_TYPE__SEQUENCE:
@@ -322,49 +322,49 @@ void print_action(Action* action, int depth)
         case ACTION_TYPE__CRASH:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_crushing:%p \n", action->crash.object_crushing);
+            printf("object_c..ing:  %p \n", action->crash.object_crushing);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_crushed: %p \n", action->crash.object_crushed);
+            printf("object_c..ed:   %p \n", action->crash.object_crushed);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->crash.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         case ACTION_TYPE__FALL:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->fall.object);
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         case ACTION_TYPE__DEATH:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->death.object);
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         case ACTION_TYPE__BLOW_UP:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         case ACTION_TYPE__THROW:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object_thrown:  %p \n", action->throw.object_thrown);
             for(int i = 0; i < depth + 1; i++) printf("  ");
@@ -374,19 +374,19 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("distance:       %i \n", action->throw.distance);
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         case ACTION_TYPE__DROP:
         {
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("< \n");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("object:         %p \n", action->drop.object);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->drop.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
-            printf("> \n");
+            printf(") \n");
         }
         break;
         default:

@@ -44,7 +44,9 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             animation->move_sprite_in_gamemap_in_line.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->move_sprite_in_gamemap_in_line.texture);
-            sprite->gamemap_pos = animation->move_sprite_in_gamemap_in_line.from_gamemap_pos;
+            sprite->gamemap_pos.x = animation->move_sprite_in_gamemap_in_line.from_gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->move_sprite_in_gamemap_in_line.from_gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
             animation->move_sprite_in_gamemap_in_line.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
@@ -54,7 +56,9 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             animation->move_sprite_in_gamemap_in_arch.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->move_sprite_in_gamemap_in_arch.texture);
-            sprite->gamemap_pos = animation->move_sprite_in_gamemap_in_arch.from_gamemap_pos;
+            sprite->gamemap_pos.x = animation->move_sprite_in_gamemap_in_arch.from_gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->move_sprite_in_gamemap_in_arch.from_gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
             animation->move_sprite_in_gamemap_in_arch.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
@@ -64,7 +68,9 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             animation->show_sprite_in_gamemap.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->show_sprite_in_gamemap.texture);
-            sprite->gamemap_pos = animation->show_sprite_in_gamemap.gamemap_pos;
+            sprite->gamemap_pos.x = animation->show_sprite_in_gamemap.gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->show_sprite_in_gamemap.gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
             animation->show_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
@@ -74,18 +80,22 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             animation->ascend_sprite_in_gamemap.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->ascend_sprite_in_gamemap.texture);
-            sprite->gamemap_pos = animation->ascend_sprite_in_gamemap.gamemap_pos;
+            sprite->gamemap_pos.x = animation->ascend_sprite_in_gamemap.gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->ascend_sprite_in_gamemap.gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
             animation->ascend_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
         case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:
         {
-            
+
             animation->descend_sprite_in_gamemap.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->descend_sprite_in_gamemap.texture);
-            sprite->gamemap_pos = animation->descend_sprite_in_gamemap.gamemap_pos;
+            sprite->gamemap_pos.x = animation->descend_sprite_in_gamemap.gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->descend_sprite_in_gamemap.gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
             animation->descend_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }
@@ -95,7 +105,9 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             animation->fall_sprite_in_gamemap.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->fall_sprite_in_gamemap.texture);
-            sprite->gamemap_pos = animation->fall_sprite_in_gamemap.gamemap_pos;
+            sprite->gamemap_pos.x = animation->fall_sprite_in_gamemap.gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->fall_sprite_in_gamemap.gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
             animation->fall_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }

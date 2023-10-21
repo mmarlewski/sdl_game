@@ -117,4 +117,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         default:
         break;
     }
+
+    printf("\n");
+    print_action(sequence, 0);
 }
