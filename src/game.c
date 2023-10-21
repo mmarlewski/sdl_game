@@ -604,6 +604,19 @@ int main (int argc, char* argv[])
     object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
     add_object_to_gamemap_objects(&state, object_barrel_4);
 
+    for(ListElem* curr_elem = state.gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Object* curr_object = (Object*)curr_elem->data;
+
+        if(is_object_enemy(curr_object->type))
+        {
+            curr_object->enemy_attack_dir4 = rand() % 4 + 1;
+            remove_all_actions_from_action_sequence(curr_object->enemy_action_sequence);
+            object_enemy_add_actions_to_action_sequence_attack(&state, curr_object->enemy_action_sequence, curr_object);
+            curr_object->enemy_performed_attack = 0;
+        }
+    }
+
     determine_enemy_order(&state);
 
     while (state.is_game_running)

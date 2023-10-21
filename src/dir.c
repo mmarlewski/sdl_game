@@ -9,7 +9,7 @@ int get_opposite_dir4(int dir4)
         case DIR4__UP: opposite_dir4 = DIR4__DOWN; break;
         case DIR4__RIGHT: opposite_dir4 = DIR4__LEFT; break;
         case DIR4__DOWN: opposite_dir4 = DIR4__UP; break;
-        case DIR4__LEFT: opposite_dir4 = DIR4__LEFT; break;
+        case DIR4__LEFT: opposite_dir4 = DIR4__RIGHT; break;
         default: break;
     }
 
