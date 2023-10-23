@@ -46,10 +46,7 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                         SKILL__PULL,
                         object->tilemap_pos,
                         target_1_tilemap_pos,
-                        make_vec2i_move_in_dir4_by(
-                            object->tilemap_pos,
-                            object->enemy_attack_dir4, 1
-                            )
+                        object->tilemap_pos
                         );
                     break;
                 }
@@ -114,7 +111,7 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
             vec2i target_1_tilemap_pos = object->tilemap_pos;
             for(int i = 0; i < 10; i++)
             {
-                target_1_tilemap_pos = make_vec2i_move_in_dir4_by(target_1_tilemap_pos, object->enemy_attack_dir4,1);
+                target_1_tilemap_pos = make_vec2i_move_in_dir4_by(target_1_tilemap_pos, object->enemy_attack_dir4, 1);
                 target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {

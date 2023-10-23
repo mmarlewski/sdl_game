@@ -500,32 +500,47 @@ int main (int argc, char* argv[])
     hero_world_iso_pos.y += TILE_LENGTH * 0.5f;
     state.camera.world_pos = hero_world_iso_pos;
 
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__LAVA, make_vec2i(5,5));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_SPIKES, make_vec2i(8,7));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__METAL_LAVA_CRACK, make_vec2i(3,3));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__WATER, make_vec2i(4,2));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE_WATER_CRACK, make_vec2i(5,2));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(6,2));
-    change_floor_in_tilemap_pos(&state, FLOOR_TYPE__ICE, make_vec2i(7,2));
+    change_floor_in_tilemap_pos(&state,
+     FLOOR_TYPE__LAVA, make_vec2i(9,9));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__LAVA, make_vec2i(8,3));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__LAVA, make_vec2i(5,5));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__METAL_SPIKES, make_vec2i(2,6));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__METAL_SPIKES, make_vec2i(8,7));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__METAL_LAVA_CRACK, make_vec2i(3,3));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__METAL_LAVA_CRACK, make_vec2i(3,7));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__WATER, make_vec2i(4,2));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__ICE_WATER_CRACK, make_vec2i(5,2));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__ICE, make_vec2i(6,2));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__ICE, make_vec2i(7,2));
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_1->tilemap_pos = make_vec2i(3,2);
     add_object_to_gamemap_objects(&state, object_pillar_1);
 
     Object* object_pillar_2 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_2->tilemap_pos = make_vec2i(3,3);
+    object_pillar_2->tilemap_pos = make_vec2i(7,3);
     add_object_to_gamemap_objects(&state, object_pillar_2);
 
-    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_3->tilemap_pos = make_vec2i(3,4);
+    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR_SPIKES);
+    object_pillar_3->tilemap_pos = make_vec2i(5,4);
     add_object_to_gamemap_objects(&state, object_pillar_3);
 
     Object* object_pillar_4 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_4->tilemap_pos = make_vec2i(3,5);
+    object_pillar_4->tilemap_pos = make_vec2i(1,4);
     add_object_to_gamemap_objects(&state, object_pillar_4);
 
     Object* object_pillar_5 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_5->tilemap_pos = make_vec2i(3,6);
+    object_pillar_5->tilemap_pos = make_vec2i(3,8);
     add_object_to_gamemap_objects(&state, object_pillar_5);
 
     Object* object_pillar_6 = new_object(OBJECT_TYPE__PILLAR);
@@ -553,23 +568,23 @@ int main (int argc, char* argv[])
     add_object_to_gamemap_objects(&state, object_barrel_2);
 
     Object* object_goat = new_object(OBJECT_TYPE__GOAT);
-    object_goat->tilemap_pos = make_vec2i(2,2);
+    object_goat->tilemap_pos = make_vec2i(1,2);
     add_object_to_gamemap_objects(&state, object_goat);
 
     Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
-    object_spider->tilemap_pos = make_vec2i(2,3);
+    object_spider->tilemap_pos = make_vec2i(4,5);
     add_object_to_gamemap_objects(&state, object_spider);
 
     Object* object_bull = new_object(OBJECT_TYPE__BULL);
-    object_bull->tilemap_pos = make_vec2i(2,4);
+    object_bull->tilemap_pos = make_vec2i(6,5);
     add_object_to_gamemap_objects(&state, object_bull);
 
     Object* object_fly = new_object(OBJECT_TYPE__FLY);
-    object_fly->tilemap_pos = make_vec2i(2,5);
+    object_fly->tilemap_pos = make_vec2i(4,4);
     add_object_to_gamemap_objects(&state, object_fly);
 
     Object* object_chameleon = new_object(OBJECT_TYPE__CHAMELEON);
-    object_chameleon->tilemap_pos = make_vec2i(2,6);
+    object_chameleon->tilemap_pos = make_vec2i(4,8);
     add_object_to_gamemap_objects(&state, object_chameleon);
 
     int n = 8;
@@ -597,12 +612,6 @@ int main (int argc, char* argv[])
         object_barrel->tilemap_pos = make_vec2i(10,10+n-i);
         add_object_to_gamemap_objects(&state, object_barrel);
     }
-    Object* object_barrel_3 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_3->tilemap_pos = make_vec2i(10-(n/2),10-1);
-    add_object_to_gamemap_objects(&state, object_barrel_3);
-    Object* object_barrel_4 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_4->tilemap_pos = make_vec2i(10-(n/2),10-2);
-    add_object_to_gamemap_objects(&state, object_barrel_4);
 
     for(ListElem* curr_elem = state.gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
     {

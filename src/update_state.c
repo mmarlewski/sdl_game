@@ -444,8 +444,6 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 state->timer = 0.0f;
 
-                state->gamemap.curr_object_enemy->enemy_attack_dir4 = rand() % 4 + 1;
-
                 remove_all_actions_from_action_sequence(state->action.enemy_action_sequence);
                 object_enemy_add_actions_to_action_sequence_attack(state, state->action.enemy_action_sequence, state->gamemap.curr_object_enemy);
 
