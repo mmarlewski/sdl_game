@@ -104,11 +104,20 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             action->throw.object_thrown->is_visible = 1;
         }
         break;
+        case ACTION_TYPE__LIFT:
+        {
+            end_animation(state, action->animation, textures, sounds, musics);
+
+            add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object_thrown, action->tilemap_pos, action->throw.dir4));
+
+            action->throw.object_thrown->is_visible = 1;
+        }
+        break;
         case ACTION_TYPE__DROP:
         {
-            object_on_drop(state, sequence, action, action->drop.object);
-
             end_animation(state, action->animation, textures, sounds, musics);
+
+            object_on_drop(state, sequence, action, action->drop.object);
 
             int floor = get_floor_on_tilemap_pos(state, action->drop.object->tilemap_pos);
             floor_on_drop(state, sequence, action, floor);

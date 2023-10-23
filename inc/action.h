@@ -24,6 +24,7 @@ enum ACTION_TYPE
     ACTION_TYPE__BLOW_UP,
 
     ACTION_TYPE__THROW,
+    ACTION_TYPE__LIFT,
     ACTION_TYPE__DROP,
 
     ACTION_TYPE__COUNT
@@ -95,6 +96,14 @@ typedef struct
 typedef struct
 {
     int dir4;
+
+    Object* object;
+
+} Action_Lift;
+
+typedef struct
+{
+    int dir4;
     Object* object;
 
 } Action_Drop;
@@ -122,6 +131,7 @@ struct _Action
         Action_BlowUP blow_up;
 
         Action_Throw throw;
+        Action_Lift lift;
         Action_Drop drop;
     };
 
@@ -151,6 +161,7 @@ Action* new_action_death(Object* object, vec2i tilemap_pos);
 Action* new_action_blow_up(vec2i tilemap_pos);
 
 Action* new_action_throw(vec2i tilemap_pos, int dir4, int distance);
+Action* new_action_lift(vec2i tilemap_pos, int dir4);
 Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4);
 
 void destroy_action(Action* action);

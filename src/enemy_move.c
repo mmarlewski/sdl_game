@@ -18,7 +18,7 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
     Object* object_left = 0;
     int distance_left = 0;
 
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 10; i++)
     {
         if(object_up == 0)
         {
@@ -85,6 +85,8 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
             if(new_dir4 == DIR4__LEFT && object_left != 0)
             { dir4 = new_dir4; distance = distance_left; break; }
         }
+
+        distance = fmin(distance, 5);
     }
     else
     {

@@ -35,7 +35,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.object_hero->tilemap_pos = make_vec2i(10,5);
+    state->gamemap.object_hero->tilemap_pos = make_vec2i(10,6);
     add_object_to_gamemap_objects(state, state->gamemap.object_hero);
     state->gamemap.curr_object_enemy = 0;
 
@@ -373,6 +373,18 @@ void print_action(Action* action, int depth)
             printf("dir4:           %i \n", action->throw.dir4);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("distance:       %i \n", action->throw.distance);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf(") \n");
+        }
+        break;
+        case ACTION_TYPE__LIFT:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("( \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object:         %p \n", action->lift.object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("dir4:           %i \n", action->lift.dir4);
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }

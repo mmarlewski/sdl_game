@@ -34,6 +34,7 @@ int is_object_flying(int object_type)
         case OBJECT_TYPE__PILLAR: is = 0; break;
         case OBJECT_TYPE__BARREL: is = 0; break;
         case OBJECT_TYPE__SPRING: is = 0; break;
+        case OBJECT_TYPE__WEIGHT: is = 0; break;
         case OBJECT_TYPE__HERO: is = 0; break;
         case OBJECT_TYPE__GOAT: is = 0; break;
         case OBJECT_TYPE__SPIDER: is = 0; break;
@@ -56,6 +57,7 @@ int is_object_enemy(int object_type)
         case OBJECT_TYPE__PILLAR: is = 0; break;
         case OBJECT_TYPE__BARREL: is = 0; break;
         case OBJECT_TYPE__SPRING: is = 0; break;
+        case OBJECT_TYPE__WEIGHT: is = 0; break;
         case OBJECT_TYPE__HERO: is = 0; break;
         case OBJECT_TYPE__GOAT: is = 1; break;
         case OBJECT_TYPE__SPIDER: is = 1; break;
@@ -79,6 +81,7 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__PILLAR_SPIKES: name = "pillar_spikes"; break;
         case OBJECT_TYPE__BARREL: name = "barrel"; break;
         case OBJECT_TYPE__SPRING: name = "spring"; break;
+        case OBJECT_TYPE__WEIGHT: name = "weight"; break;
         case OBJECT_TYPE__HERO: name = "hero"; break;
         case OBJECT_TYPE__GOAT: name = "goat"; break;
         case OBJECT_TYPE__SPIDER: name = "spider"; break;
@@ -102,6 +105,7 @@ Texture* get_texture_from_object_type(int object_type, Textures* textures)
         case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
+        case OBJECT_TYPE__WEIGHT: texture = textures->object.weight; break;
         case OBJECT_TYPE__HERO: texture = textures->object.hero; break;
         case OBJECT_TYPE__GOAT: texture = textures->object.goat; break;
         case OBJECT_TYPE__SPIDER: texture = textures->object.spider; break;
@@ -125,6 +129,7 @@ Texture* get_texture_outline_yellow_from_object_type(int object_type, Textures* 
         case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes_outline_yellow; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline_yellow; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline_yellow; break;
+        case OBJECT_TYPE__WEIGHT: texture = textures->object.weight_outline_yellow; break;
         case OBJECT_TYPE__HERO: texture = textures->object.hero_outline_yellow; break;
         case OBJECT_TYPE__GOAT: texture = textures->object.goat_outline_yellow; break;
         case OBJECT_TYPE__SPIDER: texture = textures->object.spider_outline_yellow; break;
@@ -148,6 +153,7 @@ Texture* get_texture_outline_red_from_object_type(int object_type, Textures* tex
         case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes_outline_red; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline_red; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline_red; break;
+        case OBJECT_TYPE__WEIGHT: texture = textures->object.weight_outline_red; break;
         case OBJECT_TYPE__HERO: texture = textures->object.hero_outline_red; break;
         case OBJECT_TYPE__GOAT: texture = textures->object.goat_outline_red; break;
         case OBJECT_TYPE__SPIDER: texture = textures->object.spider_outline_red; break;

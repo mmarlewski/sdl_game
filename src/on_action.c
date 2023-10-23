@@ -114,31 +114,30 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
     {
         case FLOOR_TYPE__METAL:
         {
-            //
+            if(action->drop.object->type == OBJECT_TYPE__WEIGHT)
+            {
+                change_floor_in_tilemap_pos(state, FLOOR_TYPE__METAL_LAVA_CRACK, action->tilemap_pos);
+            }
         }
         break;
         case FLOOR_TYPE__METAL_SPIKES:
         {
-            if(!is_object_flying(action->move.object->type))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_death(action->drop.object, action->tilemap_pos));
-            }
+            //
         }
         break;
         case FLOOR_TYPE__METAL_LAVA_CRACK:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->drop.object->type))
             {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
                 change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->tilemap_pos);
+                remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
             }
         }
         break;
         case FLOOR_TYPE__LAVA:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->drop.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
@@ -147,8 +146,12 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__ICE:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->drop.object->type))
             {
+                if(action->drop.object->type == OBJECT_TYPE__WEIGHT)
+                {
+                    change_floor_in_tilemap_pos(state, FLOOR_TYPE__ICE_WATER_CRACK, action->tilemap_pos);
+                }
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_move(action->tilemap_pos, action->drop.dir4));
             }
@@ -156,17 +159,17 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__ICE_WATER_CRACK:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->drop.object->type))
             {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
                 change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->tilemap_pos);
+                remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
             }
         }
         break;
         case FLOOR_TYPE__WATER:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->drop.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
@@ -201,6 +204,11 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
         }
         break;
         case OBJECT_TYPE__SPRING:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__WEIGHT:
         {
             //
         }
@@ -267,6 +275,11 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
             add_action_to_end_action_sequence(sequence, new_action_move(object->tilemap_pos, action->crash.dir4));
         }
         break;
+        case OBJECT_TYPE__WEIGHT:
+        {
+            //
+        }
+        break;
         case OBJECT_TYPE__HERO:
         {
             //
@@ -317,6 +330,11 @@ void object_on_death(State* state, Action* sequence, Action* action, Object* obj
         }
         break;
         case OBJECT_TYPE__SPRING:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__WEIGHT:
         {
             //
         }
@@ -373,6 +391,11 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
         case OBJECT_TYPE__SPRING:
         {
             add_action_to_end_action_sequence(sequence, new_action_move( action->tilemap_pos, action->drop.dir4));
+        }
+        break;
+        case OBJECT_TYPE__WEIGHT:
+        {
+            //
         }
         break;
         case OBJECT_TYPE__HERO:

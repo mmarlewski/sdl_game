@@ -118,6 +118,18 @@ void destroy_textures_throw (Textures_Throw* throw);
 
 typedef struct
 {
+    Texture* up;
+    Texture* right;
+    Texture* down;
+    Texture* left;
+
+} Textures_Lift;
+
+void load_textures_lift (Renderer* renderer, Textures_Lift* lift);
+void destroy_textures_lift (Textures_Lift* lift);
+
+typedef struct
+{
     Texture* drop;
     Texture* thump;
 
@@ -143,6 +155,10 @@ typedef struct
     Texture* spring;
     Texture* spring_outline_yellow;
     Texture* spring_outline_red;
+
+    Texture* weight;
+    Texture* weight_outline_yellow;
+    Texture* weight_outline_red;
 
     Texture* hero;
     Texture* hero_outline_yellow;
@@ -206,6 +222,7 @@ typedef struct
     Textures_BlowUp blow_up;
 
     Textures_Throw throw;
+    Textures_Lift lift;
     Textures_Drop drop;
 
     Textures_Object object;
@@ -219,7 +236,9 @@ void destroy_textures (Textures* textures);
 
 Texture* get_texture_move(Textures* textures, int dir4);
 Texture* get_texture_crash(Textures* textures, int dir4);
+
 Texture* get_texture_throw(Textures* textures, int dir4);
+Texture* get_texture_lift(Textures* textures, int dir4);
 
 Texture* get_texture_order_number(Textures* textures, int num);
 

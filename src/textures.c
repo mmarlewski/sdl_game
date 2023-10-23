@@ -141,6 +141,21 @@ void destroy_textures_throw (Textures_Throw* throw)
     destroy_texture(throw->left);
 }
 
+void load_textures_lift (Renderer* renderer, Textures_Lift* lift)
+{
+    lift->up = load_texture_from_filepath (renderer, "./res/lift/up.png");
+    lift->right = load_texture_from_filepath (renderer, "./res/lift/right.png");
+    lift->down = load_texture_from_filepath (renderer, "./res/lift/down.png");
+    lift->left = load_texture_from_filepath (renderer, "./res/lift/left.png");
+}
+void destroy_textures_lift (Textures_Lift* lift)
+{
+    destroy_texture(lift->up);
+    destroy_texture(lift->right);
+    destroy_texture(lift->down);
+    destroy_texture(lift->left);
+}
+
 void load_textures_drop (Renderer* renderer, Textures_Drop* drop)
 {
     drop->drop = load_texture_from_filepath (renderer, "./res/drop/drop.png");
@@ -181,6 +196,13 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     (renderer, "./res/object/spring/spring_outline_yellow.png");
     object->spring_outline_red = load_texture_from_filepath
     (renderer, "./res/object/spring/spring_outline_red.png");
+
+    object->weight = load_texture_from_filepath
+    (renderer, "./res/object/weight/weight.png");
+    object->weight_outline_yellow = load_texture_from_filepath
+    (renderer, "./res/object/weight/weight_outline_yellow.png");
+    object->weight_outline_red = load_texture_from_filepath
+    (renderer, "./res/object/weight/weight_outline_red.png");
 
     object->hero = load_texture_from_filepath
     (renderer, "./res/object/hero/hero.png");
@@ -319,6 +341,7 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_blow_up(renderer,&textures->blow_up);
 
     load_textures_throw(renderer,&textures->throw);
+    load_textures_lift(renderer,&textures->lift);
     load_textures_drop(renderer,&textures->drop);
 
     load_textures_object(renderer,&textures->object);
@@ -340,6 +363,7 @@ void destroy_textures (Textures* textures)
     destroy_textures_blow_up (&textures->blow_up);
 
     destroy_textures_throw (&textures->throw);
+    destroy_textures_lift (&textures->lift);
     destroy_textures_drop (&textures->drop);
 
     destroy_textures_object (&textures->object);
@@ -388,6 +412,22 @@ Texture* get_texture_throw(Textures* textures, int dir4)
         case DIR4__RIGHT: texture = textures->throw.right; break;
         case DIR4__DOWN: texture = textures->throw.down; break;
         case DIR4__LEFT: texture = textures->throw.left; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_lift(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->lift.up; break;
+        case DIR4__RIGHT: texture = textures->lift.right; break;
+        case DIR4__DOWN: texture = textures->lift.down; break;
+        case DIR4__LEFT: texture = textures->lift.left; break;
         default: break;
     }
 

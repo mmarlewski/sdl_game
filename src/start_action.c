@@ -205,12 +205,23 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__THROW:
         {
+            vec2i target_tilemap_pos = make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
             action->throw.object_thrown = get_object_on_tilemap_pos(state, action->tilemap_pos);
-            action->throw.object_on_target = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance));
+            action->throw.object_on_target = get_object_on_tilemap_pos(state, target_tilemap_pos);
 
-            if(action->throw.object_thrown == 0 ||
-            action->throw.object_on_target != 0 ||
-            !is_tilemap_pos_in_tilemap(make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance)))
+            if(action->throw.object_on_target != 0 ||
+            !is_tilemap_pos_in_tilemap(target_tilemap_pos))
+            {
+                Action* lift = new_action_lift(action->tilemap_pos, action->throw.dir4);
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_after_curr_action_action_sequence(sequence, lift);
+
+                action->is_finished = 1;
+                action->is_finished_at_start = 1;
+                break;
+            }
+
+            if(action->throw.object_thrown == 0)
             {
                 action->is_finished = 1;
                 action->is_finished_at_start = 1;
@@ -235,6 +246,34 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             start_animation(state, action->animation, textures, sounds, musics);
 
             action->throw.object_thrown->is_visible = 0;
+        }
+        break;
+        case ACTION_TYPE__LIFT:
+        {
+            action->lift.object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+
+            if(action->lift.object == 0)
+            {
+                action->is_finished = 1;
+                action->is_finished_at_start = 1;
+                break;
+            }
+
+            action->lift.object->tilemap_pos = action->tilemap_pos;
+
+            Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
+                get_texture_from_object_type(action->lift.object->type, textures),
+                tilemap_pos_to_gamemap_pos(action->tilemap_pos),
+                tilemap_pos_to_gamemap_pos(action->tilemap_pos),
+                1.0f,
+                2.0f
+                );
+
+            action->animation = animation;
+
+            start_animation(state, action->animation, textures, sounds, musics);
+
+            action->lift.object->is_visible = 0;
         }
         break;
         case ACTION_TYPE__DROP:

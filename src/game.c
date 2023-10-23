@@ -449,6 +449,17 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
                 );
         }
         break;
+        case ACTION_TYPE__LIFT:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                get_texture_lift(textures, action->lift.dir4),
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
         case ACTION_TYPE__DROP:
         {
             draw_texture_at_world_pos(
@@ -543,7 +554,7 @@ int main (int argc, char* argv[])
     object_pillar_5->tilemap_pos = make_vec2i(3,8);
     add_object_to_gamemap_objects(&state, object_pillar_5);
 
-    Object* object_pillar_6 = new_object(OBJECT_TYPE__PILLAR);
+    Object* object_pillar_6 = new_object(OBJECT_TYPE__WEIGHT);
     object_pillar_6->tilemap_pos = make_vec2i(6,7);
     add_object_to_gamemap_objects(&state, object_pillar_6);
 
