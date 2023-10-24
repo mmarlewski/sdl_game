@@ -17,6 +17,7 @@
 #include "../inc/textures.h"
 #include "../inc/sounds.h"
 #include "../inc/musics.h"
+#include "../inc/colors.h"
 
 enum GAMESTATE
 {
@@ -112,8 +113,8 @@ typedef struct
 
 } State;
 
-void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics);
-void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
+void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void change_gamestate(State* state, int new_gamestate);
 void change_background_color(State* state, vec3i new_background_color);
@@ -138,17 +139,17 @@ void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i* new_pos)
 void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
 int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos);
 
-void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
-void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
-void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics);
+void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void remove_all_actions_from_action_sequence(Action* action_sequence);
-void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics);
+void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void print_action(Action* action, int depth);
 
-void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
-void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics);
-void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics);
+void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
 void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);

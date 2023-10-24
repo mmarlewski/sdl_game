@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
+void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     // printf("update animation:   %s \n", get_animation_name_from_type(animation->type));
 
@@ -18,7 +18,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
 
             if(curr_animation->is_finished)
             {
-                end_animation(state, curr_animation, textures, sounds, musics);
+                end_animation(state, curr_animation, textures, sounds, musics, colors);
                 ListElem* next_elem = curr_elem->next;
                 remove_list_element(animation->sequence.animation_list, curr_elem, 1);
                 animation->sequence.curr_animation_list_elem = next_elem;
@@ -26,12 +26,12 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
                 if(next_elem != 0)
                 {
                     Animation* next_animation = (Animation*)next_elem->data;
-                    start_animation(state, next_animation, textures, sounds, musics);
+                    start_animation(state, next_animation, textures, sounds, musics, colors);
                 }
             }
             else
             {
-                update_animation(state, curr_animation, delta_time, textures, sounds, musics);
+                update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
             }
 
             animation->is_finished = (!animation->sequence.curr_animation_list_elem);
@@ -47,12 +47,12 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
                 Animation* curr_animation = (Animation*)curr_elem->data;
                 if(curr_animation->is_finished)
                 {
-                    end_animation(state, curr_animation, textures, sounds, musics);
+                    end_animation(state, curr_animation, textures, sounds, musics, colors);
                     add_new_list_element_to_list_end(animation_to_be_removed_list, curr_animation);
                 }
                 else
                 {
-                    update_animation(state, curr_animation, delta_time, textures, sounds, musics);
+                    update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
                     are_all_animations_finished = 0;
                 }
             }

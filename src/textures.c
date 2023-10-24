@@ -23,27 +23,11 @@ void destroy_textures_floor (Textures_Floor* floor)
 
 void load_textures_highlight (Renderer* renderer, Textures_Highlight* highlight)
 {
-    highlight->red = load_texture_from_filepath (renderer, "./res/highlight/red.png");
-    highlight->orange = load_texture_from_filepath (renderer, "./res/highlight/orange.png");
-    highlight->yellow = load_texture_from_filepath (renderer, "./res/highlight/yellow.png");
-    highlight->green = load_texture_from_filepath (renderer, "./res/highlight/green.png");
-    highlight->teal = load_texture_from_filepath (renderer, "./res/highlight/teal.png");
-    highlight->blue = load_texture_from_filepath (renderer, "./res/highlight/blue.png");
-    highlight->purple = load_texture_from_filepath (renderer, "./res/highlight/purple.png");
-    highlight->pink = load_texture_from_filepath (renderer, "./res/highlight/pink.png");
-    highlight->grey = load_texture_from_filepath (renderer, "./res/highlight/grey.png");
+    highlight->highlight = load_texture_from_filepath (renderer, "./res/highlight/highlight.png");
 }
 void destroy_textures_highlight (Textures_Highlight* highlight)
 {
-    destroy_texture(highlight->red);
-    destroy_texture(highlight->orange);
-    destroy_texture(highlight->yellow);
-    destroy_texture(highlight->green);
-    destroy_texture(highlight->teal);
-    destroy_texture(highlight->blue);
-    destroy_texture(highlight->purple);
-    destroy_texture(highlight->pink);
-    destroy_texture(highlight->grey);
+    destroy_texture(highlight->highlight);
 }
 
 void load_textures_danger (Renderer* renderer, Textures_Danger* danger)
@@ -171,122 +155,90 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
     object->pillar = load_texture_from_filepath
     (renderer, "./res/object/pillar/pillar.png");
-    object->pillar_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/pillar/pillar_outline_yellow.png");
-    object->pillar_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/pillar/pillar_outline_red.png");
+    object->pillar_outline = load_texture_from_filepath
+    (renderer, "./res/object/pillar/pillar_outline.png");
 
     object->pillar_spikes = load_texture_from_filepath
     (renderer, "./res/object/pillar_spikes/pillar_spikes.png");
-    object->pillar_spikes_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/pillar_spikes/pillar_spikes_outline_yellow.png");
-    object->pillar_spikes_outline_red = load_texture_from_filepath
-     (renderer, "./res/object/pillar_spikes/pillar_spikes_outline_red.png");
+    object->pillar_spikes_outline = load_texture_from_filepath
+    (renderer, "./res/object/pillar_spikes/pillar_spikes_outline.png");
 
     object->barrel = load_texture_from_filepath
     (renderer, "./res/object/barrel/barrel.png");
-    object->barrel_outline_yellow = load_texture_from_filepath
-     (renderer, "./res/object/barrel/barrel_outline_yellow.png");
-    object->barrel_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/barrel/barrel_outline_red.png");
+    object->barrel_outline = load_texture_from_filepath
+     (renderer, "./res/object/barrel/barrel_outline.png");
 
     object->spring = load_texture_from_filepath
     (renderer, "./res/object/spring/spring.png");
-    object->spring_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/spring/spring_outline_yellow.png");
-    object->spring_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/spring/spring_outline_red.png");
+    object->spring_outline = load_texture_from_filepath
+    (renderer, "./res/object/spring/spring_outline.png");
 
     object->weight = load_texture_from_filepath
     (renderer, "./res/object/weight/weight.png");
-    object->weight_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/weight/weight_outline_yellow.png");
-    object->weight_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/weight/weight_outline_red.png");
+    object->weight_outline = load_texture_from_filepath
+    (renderer, "./res/object/weight/weight_outline.png");
 
     object->hero = load_texture_from_filepath
     (renderer, "./res/object/hero/hero.png");
-    object->hero_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/hero/hero_outline_yellow.png");
-    object->hero_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/hero/hero_outline_red.png");
+    object->hero_outline = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_outline.png");
 
     object->goat = load_texture_from_filepath
      (renderer, "./res/object/goat/goat.png");
-    object->goat_outline_yellow = load_texture_from_filepath
-     (renderer, "./res/object/goat/goat_outline_yellow.png");
-    object->goat_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/goat/goat_outline_red.png");
+    object->goat_outline = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat_outline.png");
 
     object->spider = load_texture_from_filepath
     (renderer, "./res/object/spider/spider.png");
-    object->spider_outline_yellow = load_texture_from_filepath
-     (renderer, "./res/object/spider/spider_outline_yellow.png");
-    object->spider_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/spider/spider_outline_red.png");
+    object->spider_outline = load_texture_from_filepath
+     (renderer, "./res/object/spider/spider_outline.png");
 
     object->bull = load_texture_from_filepath
     (renderer, "./res/object/bull/bull.png");
-    object->bull_outline_yellow = load_texture_from_filepath
-     (renderer, "./res/object/bull/bull_outline_yellow.png");
-    object->bull_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/bull/bull_outline_red.png");
+    object->bull_outline = load_texture_from_filepath
+     (renderer, "./res/object/bull/bull_outline.png");
 
     object->fly = load_texture_from_filepath
     (renderer, "./res/object/fly/fly.png");
-    object->fly_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/fly/fly_outline_yellow.png");
-    object->fly_outline_red = load_texture_from_filepath
-    (renderer, "./res/object/fly/fly_outline_red.png");
+    object->fly_outline = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_outline.png");
 
     object->chameleon = load_texture_from_filepath
     (renderer, "./res/object/chameleon/chameleon.png");
-    object->chameleon_outline_yellow = load_texture_from_filepath
-    (renderer, "./res/object/chameleon/chameleon_outline_yellow.png");
-    object->chameleon_outline_red = load_texture_from_filepath
-     (renderer, "./res/object/chameleon/chameleon_outline_red.png");
+    object->chameleon_outline = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon_outline.png");
 }
 void destroy_textures_object (Textures_Object* object)
 {
     destroy_texture(object->pillar);
-    destroy_texture(object->pillar_outline_yellow);
-    destroy_texture(object->pillar_outline_red);
+    destroy_texture(object->pillar_outline);
 
     destroy_texture(object->pillar_spikes);
-    destroy_texture(object->pillar_spikes_outline_yellow);
-    destroy_texture(object->pillar_spikes_outline_red);
+    destroy_texture(object->pillar_spikes_outline);
 
     destroy_texture(object->barrel);
-    destroy_texture(object->barrel_outline_yellow);
-    destroy_texture(object->barrel_outline_red);
+    destroy_texture(object->barrel_outline);
 
     destroy_texture(object->spring);
-    destroy_texture(object->spring_outline_yellow);
-    destroy_texture(object->spring_outline_red);
+    destroy_texture(object->spring_outline);
 
     destroy_texture(object->hero);
-    destroy_texture(object->hero_outline_yellow);
-    destroy_texture(object->hero_outline_red);
+    destroy_texture(object->hero_outline);
 
     destroy_texture(object->goat);
-    destroy_texture(object->goat_outline_yellow);
-    destroy_texture(object->goat_outline_red);
+    destroy_texture(object->goat_outline);
 
     destroy_texture(object->spider);
-    destroy_texture(object->spider_outline_yellow);
-    destroy_texture(object->spider_outline_red);
+    destroy_texture(object->spider_outline);
 
     destroy_texture(object->bull);
-    destroy_texture(object->bull_outline_yellow);
-    destroy_texture(object->bull_outline_red);
+    destroy_texture(object->bull_outline);
 
     destroy_texture(object->fly);
-    destroy_texture(object->fly_outline_yellow);
-    destroy_texture(object->fly_outline_red);
+    destroy_texture(object->fly_outline);
 
     destroy_texture(object->chameleon);
-    destroy_texture(object->chameleon_outline_yellow);
-    destroy_texture(object->chameleon_outline_red);
+    destroy_texture(object->chameleon_outline);
 }
 
 void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order_number)

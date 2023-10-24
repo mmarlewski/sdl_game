@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics)
+void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     // printf("start animation:    %s \n", get_animation_name_from_type(animation->type));
 
@@ -19,7 +19,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             if(curr_elem)
             {
                 Animation* curr_animation = (Animation*)curr_elem->data;
-                start_animation(state, curr_animation, textures, sounds, musics);
+                start_animation(state, curr_animation, textures, sounds, musics, colors);
             }
             else
             {
@@ -34,7 +34,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
                 if(curr_elem)
                 {
                     Animation* curr_animation = (Animation*)curr_elem->data;
-                    start_animation(state, curr_animation, textures, sounds, musics);
+                    start_animation(state, curr_animation, textures, sounds, musics, colors);
                 }
             }
         }

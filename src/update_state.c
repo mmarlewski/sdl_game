@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics)
+void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     // quit
 
@@ -136,7 +136,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
                 state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
 
-                execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics);
+                execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics, colors);
 
                 change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
             }
@@ -259,7 +259,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
                     state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
 
-                    execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics);
+                    execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics, colors);
 
                     change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
                 }
@@ -270,7 +270,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             if(state->action.hero_action_sequence->is_finished)
             {
-                end_action(state, state->action.hero_action_sequence, state->action.hero_action_sequence, textures, sounds, musics);
+                end_action(state, state->action.hero_action_sequence, state->action.hero_action_sequence, textures, sounds, musics, colors);
 
                 for(ListElem* curr_elem = state->gamemap.object_enemy_list->head;
                 curr_elem != 0; curr_elem = curr_elem->next)
@@ -294,7 +294,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             }
             else
             {
-                update_action(state, state->action.hero_action_sequence, state->action.hero_action_sequence, delta_time, textures, sounds, musics);
+                update_action(state, state->action.hero_action_sequence, state->action.hero_action_sequence, delta_time, textures, sounds, musics, colors);
             }
         }
         break;
@@ -306,7 +306,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 state->timer = 0.0f;
 
-                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics);
+                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
                 change_gamestate(state, GAMESTATE__ENEMY_ATTACKING);
             }
@@ -318,7 +318,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 state->gamemap.curr_object_enemy->enemy_performed_attack = 1;
 
-                end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics);
+                end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
                 for(ListElem* curr_elem = state->gamemap.object_enemy_list->head;
                 curr_elem != 0; curr_elem = curr_elem->next)
@@ -362,7 +362,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             }
             else
             {
-                update_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, delta_time, textures, sounds, musics);
+                update_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, delta_time, textures, sounds, musics, colors);
             }
         }
         break;
@@ -376,7 +376,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                 object_enemy_add_actions_to_action_sequence_move(state, state->action.enemy_action_sequence, state->gamemap.curr_object_enemy);
 
-                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics);
+                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
                 change_gamestate(state, GAMESTATE__ENEMY_MOVING);
             }
@@ -386,7 +386,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             if(state->action.enemy_action_sequence->is_finished)
             {
-                end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics);
+                end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
                 for(ListElem* curr_elem = state->gamemap.object_enemy_list->head;
                 curr_elem != 0; curr_elem = curr_elem->next)
@@ -432,7 +432,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             }
             else
             {
-                update_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, delta_time, textures, sounds, musics);
+                update_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, delta_time, textures, sounds, musics, colors);
             }
         }
         break;

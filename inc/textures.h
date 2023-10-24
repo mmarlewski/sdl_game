@@ -22,15 +22,7 @@ void destroy_textures_floor (Textures_Floor* floor);
 
 typedef struct
 {
-    Texture* red;
-    Texture* orange;
-    Texture* yellow;
-    Texture* green;
-    Texture* teal;
-    Texture* blue;
-    Texture* purple;
-    Texture* pink;
-    Texture* grey;
+    Texture* highlight;
 
 } Textures_Highlight;
 
@@ -141,48 +133,37 @@ void destroy_textures_drop (Textures_Drop* drop);
 typedef struct
 {
     Texture* pillar;
-    Texture* pillar_outline_yellow;
-    Texture* pillar_outline_red;
+    Texture* pillar_outline;
 
     Texture* pillar_spikes;
-    Texture* pillar_spikes_outline_yellow;
-    Texture* pillar_spikes_outline_red;
+    Texture* pillar_spikes_outline;
 
     Texture* barrel;
-    Texture* barrel_outline_yellow;
-    Texture* barrel_outline_red;
+    Texture* barrel_outline;
 
     Texture* spring;
-    Texture* spring_outline_yellow;
-    Texture* spring_outline_red;
+    Texture* spring_outline;
 
     Texture* weight;
-    Texture* weight_outline_yellow;
-    Texture* weight_outline_red;
+    Texture* weight_outline;
 
     Texture* hero;
-    Texture* hero_outline_yellow;
-    Texture* hero_outline_red;
+    Texture* hero_outline;
 
     Texture* goat;
-    Texture* goat_outline_yellow;
-    Texture* goat_outline_red;
+    Texture* goat_outline;
 
     Texture* spider;
-    Texture* spider_outline_yellow;
-    Texture* spider_outline_red;
-
+    Texture* spider_outline;
 
     Texture* bull;
-    Texture* bull_outline_yellow;
-    Texture* bull_outline_red;
+    Texture* bull_outline;
+
     Texture* fly;
-    Texture* fly_outline_yellow;
-    Texture* fly_outline_red;
+    Texture* fly_outline;
 
     Texture* chameleon;
-    Texture* chameleon_outline_yellow;
-    Texture* chameleon_outline_red;
+    Texture* chameleon_outline;
 
 } Textures_Object;
 

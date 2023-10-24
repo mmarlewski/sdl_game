@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
+void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     printf("\n");
     print_action(sequence, 0);
@@ -30,7 +30,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         case ACTION_TYPE__MOVE:
         {
             action->move.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
             floor_on_move_end(state, sequence, action, floor);
@@ -40,7 +40,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__CRASH:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             Action* crushed_action_sequence = new_action_sequence();
             Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
@@ -57,7 +57,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__FALL:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->tilemap_pos));
 
@@ -66,7 +66,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__DEATH:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             object_on_death(state, sequence, action, action->death.object);
 
@@ -75,7 +75,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__BLOW_UP:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             Action* push_around = new_action_simultaneous();
 
@@ -92,7 +92,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__THROW:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             vec2i curr_tilemap_pos = action->throw.object_thrown->tilemap_pos;
             vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
@@ -106,7 +106,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__LIFT:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object_thrown, action->tilemap_pos, action->throw.dir4));
 
@@ -115,7 +115,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__DROP:
         {
-            end_animation(state, action->animation, textures, sounds, musics);
+            end_animation(state, action->animation, textures, sounds, musics, colors);
 
             object_on_drop(state, sequence, action, action->drop.object);
 

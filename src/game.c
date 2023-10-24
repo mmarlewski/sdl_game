@@ -53,12 +53,12 @@ void destroy_sdl (Window* window, Renderer* renderer)
     SDL_Quit();
 }
 
-void render (Renderer* renderer, State* state, Input* input, Textures* textures)
+void render (Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors)
 {
     SDL_SetRenderDrawColor (renderer, state->background_color.x,state->background_color.y,state->background_color.z, 255);
 	SDL_RenderClear (renderer);
 
-    draw_gamemap(renderer, state, textures);
+    draw_gamemap(renderer, state, textures, colors);
 
     SDL_RenderPresent (renderer);
 }
@@ -74,7 +74,7 @@ void draw_rectangle (Renderer* renderer, vec2f start, vec2f dims)
     SDL_RenderDrawRectF (renderer, &rect);
 }
 
-void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
+void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors)
 {
     // floors, highlights
 
@@ -95,6 +95,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
             draw_texture_at_world_pos(
                 renderer,
                 tile_floor_texture,
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -108,7 +109,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.orange,
+                        textures->highlight.highlight,
+                colors->orange,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -124,7 +126,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.teal,
+                        textures->highlight.highlight,
+                colors->pink,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -140,7 +143,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.yellow,
+                        textures->highlight.highlight,
+                colors->yellow,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -174,6 +178,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                     draw_texture_at_world_pos(
                         renderer,
                         get_texture_from_object_type(curr_object->type, textures),
+                colors->none,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom);
@@ -184,6 +189,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                         draw_texture_at_world_pos(
                             renderer,
                             get_texture_order_number(textures, curr_object->enemy_order_number),
+                colors->none,
                             world_iso_pos,
                             state->camera.world_pos,
                             state->camera.zoom
@@ -212,6 +218,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                     draw_texture_at_world_pos(
                         renderer,
                         curr_sprite->texture,
+                colors->none,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -234,7 +241,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            draw_action(renderer, state, hover_object->enemy_action_sequence, textures);
+            draw_action(renderer, state, hover_object->enemy_action_sequence, textures, colors);
         }
         else
         {
@@ -250,7 +257,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                     !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                     state->action.enemy_action_sequence == curr_action))
                     {
-                        draw_action(renderer, state, curr_action, textures);
+                        draw_action(renderer, state, curr_action, textures, colors);
                     }
                 }
             }
@@ -261,7 +268,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        draw_action(renderer, state, state->action.hero_action_sequence, textures);
+        draw_action(renderer, state, state->action.hero_action_sequence, textures, colors);
     }
 
     // yellow outline, order number
@@ -281,7 +288,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_outline_yellow_from_object_type(hover_object->type, textures),
+                get_texture_outline_from_object_type(hover_object->type, textures),
+                colors->yellow,
                 selected_world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -292,6 +300,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 draw_texture_at_world_pos(
                     renderer,
                     get_texture_order_number(textures, hover_object->enemy_order_number),
+                    colors->none,
                     selected_world_iso_pos,
                     state->camera.world_pos,
                     state->camera.zoom
@@ -318,7 +327,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
 
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_outline_red_from_object_type(enemy_object->type, textures),
+                get_texture_outline_from_object_type(enemy_object->type, textures),
+                colors->red,
                 selected_world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -329,6 +339,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
                 draw_texture_at_world_pos(
                     renderer,
                     get_texture_order_number(textures, enemy_object->enemy_order_number),
+                colors->none,
                     selected_world_iso_pos,
                     state->camera.world_pos,
                     state->camera.zoom
@@ -338,7 +349,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures)
     }
 }
 
-void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures)
+void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures, Colors* colors)
 {
     vec2i tilemap_pos = action->tilemap_pos;
     vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
@@ -357,7 +368,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
                 Action* curr_action = (Action*)curr_elem->data;
-                draw_action(renderer, state, curr_action, textures);
+                draw_action(renderer, state, curr_action, textures, colors);
             }
         }
         break;
@@ -366,7 +377,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
                 Action* curr_action = (Action*)curr_elem->data;
-                draw_action(renderer, state, curr_action, textures);
+                draw_action(renderer, state, curr_action, textures, colors);
             }
         }
         break;
@@ -375,6 +386,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_move(textures, action->move.dir4),
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -386,6 +398,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_crash(textures, action->crash.dir4),
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -397,6 +410,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->fall.fall,
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -408,6 +422,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->death.death,
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -419,6 +434,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->blow_up.blow_up,
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -435,6 +451,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_throw(textures, action->throw.dir4),
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -443,6 +460,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->drop.drop,
+                colors->none,
                 target_world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -454,6 +472,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_lift(textures, action->lift.dir4),
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -465,6 +484,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->drop.drop,
+                colors->none,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -487,6 +507,7 @@ int main (int argc, char* argv[])
     Textures textures;
     Sounds sounds;
     Musics musics;
+    Colors colors;
 
     int prev_time = 0;
     int curr_time = 0;
@@ -498,8 +519,9 @@ int main (int argc, char* argv[])
     load_textures (renderer, &textures);
     load_sounds (&sounds);
     load_musics (&musics);
+    load_colors (&colors);
 
-    init_state (&state, &textures, &sounds, &musics);
+    init_state (&state, &textures, &sounds, &musics, &colors);
 
     state.gamestate = GAMESTATE__HERO_CHOOSING_SKILL;
 
@@ -653,13 +675,14 @@ int main (int argc, char* argv[])
         // game loop
 
         update_input (&input);
-        update_state (&input, &state, delta_time, &textures, &sounds, &musics);
-        render (renderer, &state, &input, &textures);
+        update_state (&input, &state, delta_time, &textures, &sounds, &musics, &colors);
+        render (renderer, &state, &input, &textures, &colors);
     }
 
     destroy_textures(&textures);
     destroy_sounds(&sounds);
     destroy_musics(&musics);
+    destroy_colors(&colors);
 
     destroy_sdl (window, renderer);
 

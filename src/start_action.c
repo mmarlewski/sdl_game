@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics)
+void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     printf("\n");
     print_action(sequence, 0);
@@ -22,7 +22,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             if(curr_elem != 0)
             {
                 Action* curr_action = (Action*)curr_elem->data;
-                start_action(state, sequence, curr_action, textures, sounds, musics);
+                start_action(state, sequence, curr_action, textures, sounds, musics, colors);
             }
             else
             {
@@ -37,7 +37,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 if(curr_elem)
                 {
                     Action* curr_action = (Action*)curr_elem->data;
-                    start_action(state, curr_action, curr_action, textures, sounds, musics);
+                    start_action(state, curr_action, curr_action, textures, sounds, musics, colors);
                 }
             }
         }
@@ -78,7 +78,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     0.2f
                 );
                 action->animation = animation;
-                start_animation(state, action->animation, textures, sounds, musics);
+                start_animation(state, action->animation, textures, sounds, musics, colors);
 
                 int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
                 floor_on_move_start(state, sequence, action, floor);
@@ -139,7 +139,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
 
             action->crash.object_crushing->is_visible = 0;
         }
@@ -163,7 +163,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 );
 
             action->animation = animation;
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
 
             action->fall.object->is_visible = 0;
         }
@@ -187,7 +187,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
         }
         break;
         case ACTION_TYPE__BLOW_UP:
@@ -200,7 +200,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
         }
         break;
         case ACTION_TYPE__THROW:
@@ -243,7 +243,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
 
             action->throw.object_thrown->is_visible = 0;
         }
@@ -271,7 +271,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
 
             action->lift.object->is_visible = 0;
         }
@@ -295,7 +295,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics);
+            start_animation(state, action->animation, textures, sounds, musics, colors);
         }
         break;
         default:

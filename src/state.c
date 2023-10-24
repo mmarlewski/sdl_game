@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics)
+void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     state->is_game_running = 1;
     state->gamestate = GAMESTATE__NONE;
@@ -253,12 +253,12 @@ void remove_all_actions_from_action_sequence(Action* action_sequence)
     remove_all_list_elements(action_sequence->sequence.action_list,1);
 }
 
-void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics)
+void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     state->action.is_executing_actions = 1;
     action_sequence->is_finished = 0;
 
-    start_action(state, action_sequence, action_sequence, textures, sounds, musics);
+    start_action(state, action_sequence, action_sequence, textures, sounds, musics, colors);
 }
 
 void print_action(Action* action, int depth)

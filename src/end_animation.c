@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics)
+void end_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     // printf("end animation:      %s \n", get_animation_name_from_type(animation->type));
 
