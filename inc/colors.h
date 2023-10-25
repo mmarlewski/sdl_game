@@ -14,9 +14,14 @@ typedef struct
     vec3i blue;
     vec3i purple;
     vec3i pink;
+
+    vec3i hero_background;
+    vec3i enemy_background;
+
     vec3i grey;
     vec3i black;
     vec3i white;
+
     vec3i none;
 
 } Colors;

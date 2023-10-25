@@ -2,9 +2,6 @@
 
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
-    printf("\n");
-    print_action(sequence, 0);
-
     // printf("end action:         %s \n", get_action_name_from_type(action->type));
 
     if(action->is_finished_at_start) return;
@@ -126,7 +123,4 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         default:
         break;
     }
-
-    printf("\n");
-    print_action(sequence, 0);
 }

@@ -6,10 +6,11 @@ int is_skill_two_target(int skill)
 
     switch(skill)
     {
+        case SKILL__NONE: is = 0; break;
         case SKILL__CHARGE: is = 0; break;
+        case SKILL__JUMP: is = 0; break;
         case SKILL__CHARGE_AND_PUSH: is = 1; break;
         case SKILL__CHARGE_AND_THROW: is = 1; break;
-        case SKILL__JUMP: is = 0; break;
         case SKILL__PUSH: is = 1; break;
         case SKILL__PULL: is = 1; break;
         case SKILL__PULL_AND_THROW: is = 1; break;
@@ -27,7 +28,6 @@ char* get_skill_name(int skill)
     switch(skill)
     {
         case SKILL__NONE:               name = "none";              break;
-        case SKILL__FLY:                name = "fly";               break;
         case SKILL__JUMP:               name = "jump";              break;
         case SKILL__CHARGE:             name = "charge";            break;
         case SKILL__CHARGE_AND_PUSH:    name = "charge_and_push";   break;

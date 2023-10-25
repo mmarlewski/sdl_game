@@ -106,7 +106,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->action.enemy_action_sequence =
                     (Action*)state->gamemap.curr_object_enemy->enemy_action_sequence;
 
-                    change_background_color(state, make_vec3i(200, 50, 50));
+                    change_background_color(state, colors->enemy_background);
 
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
                     state->timer = 0.0f;
@@ -122,7 +122,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             int skill = SKILL__NONE;
 
             if(input->was_1 && !input->is_1) skill = SKILL__CHARGE;
-            if(input->was_2 && !input->is_2) skill = SKILL__FLY;
+            if(input->was_2 && !input->is_2) skill = SKILL__CHARGE;
             if(input->was_3 && !input->is_3) skill = SKILL__JUMP;
             if(input->was_4 && !input->is_4) skill = SKILL__CHARGE_AND_PUSH;
             if(input->was_5 && !input->is_5) skill = SKILL__CHARGE_AND_THROW;
@@ -405,7 +405,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     {
                         remove_all_dead_objects_from_gamemap_objects(state);
 
-                        change_background_color(state, make_vec3i(100, 160, 220));
+                        change_background_color(state, colors->hero_background);
 
                         change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
                     }
@@ -455,7 +455,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     determine_enemy_order(state);
 
-                    change_background_color(state, make_vec3i(100, 160, 220));
+                    change_background_color(state, colors->hero_background);
 
                     change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
                 }

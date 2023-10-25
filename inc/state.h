@@ -131,11 +131,11 @@ void remove_all_dead_objects_from_gamemap_objects(State* state);
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 
-void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i* new_pos);
+void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i new_pos);
 void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state);
 int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, vec2i pos);
 
-void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i* new_pos);
+void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i new_pos);
 void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
 int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos);
 

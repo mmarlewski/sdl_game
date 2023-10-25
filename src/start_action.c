@@ -2,9 +2,6 @@
 
 void start_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
-    printf("\n");
-    print_action(sequence, 0);
-
     // printf("start action:       %s \n", get_action_name_from_type(action->type));
 
     switch(action->type)
@@ -301,7 +298,4 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         default:
         break;
     }
-
-    printf("\n");
-    print_action(sequence, 0);
 }

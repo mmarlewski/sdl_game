@@ -5,7 +5,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->is_game_running = 1;
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
-    state->background_color = make_vec3i(100, 160, 220);
+    state->background_color = colors->hero_background;
 
     // camera
 
@@ -204,9 +204,9 @@ void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite)
     remove_list_element_of_data(state->gamemap.sprite_list, sprite, 1);
 }
 
-void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i* new_pos)
+void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i new_pos)
 {
-    add_new_list_element_to_list_end(state->gamemap.possible_target_1_tilemap_pos_list, new_pos);
+    add_new_list_element_to_list_end(state->gamemap.possible_target_1_tilemap_pos_list, new_vec2i(new_pos.x, new_pos.y));
 }
 
 void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state)
@@ -225,9 +225,9 @@ int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, vec2i pos
     return 0;
 }
 
-void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i* new_pos)
+void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i new_pos)
 {
-    add_new_list_element_to_list_end(state->gamemap.possible_target_2_tilemap_pos_list, new_pos);
+    add_new_list_element_to_list_end(state->gamemap.possible_target_2_tilemap_pos_list, new_vec2i(new_pos.x, new_pos.y));
 }
 
 void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state)
