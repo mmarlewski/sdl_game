@@ -121,7 +121,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             int skill = SKILL__NONE;
 
-            if(input->was_1 && !input->is_1) skill = SKILL__CHARGE;
+            if(input->was_1 && !input->is_1) skill = SKILL__MOVE;
             if(input->was_2 && !input->is_2) skill = SKILL__CHARGE;
             if(input->was_3 && !input->is_3) skill = SKILL__JUMP;
             if(input->was_4 && !input->is_4) skill = SKILL__CHARGE_AND_PUSH;

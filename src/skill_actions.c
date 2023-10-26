@@ -8,6 +8,37 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
 
     switch(skill)
     {
+        case SKILL__MOVE:
+        {
+            List* path_pos = new_list((void(*)(void*))destroy_vec2i);
+            find_path(state, source_tilemap_pos, target_2_tilemap_pos, path_pos);
+
+            if(path_pos->size > 0)
+            {
+                ListElem* curr_elem = path_pos->head;
+                ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
+
+                vec2i* curr_tilemap_pos = (curr_elem) ? ((vec2i*)curr_elem->data) : (0);
+                vec2i* next_tilemap_pos = (next_elem) ? ((vec2i*)next_elem->data) : (0);
+
+                while(curr_elem != 0 && next_elem != 0)
+                {
+                    DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(*curr_tilemap_pos, *next_tilemap_pos);
+
+                    add_action_to_end_action_sequence(action_sequence, new_action_move(*curr_tilemap_pos, distance_info.dir4));
+
+                    curr_elem = next_elem;
+                    next_elem = (curr_elem) ? (curr_elem->next) : (0);
+
+                    curr_tilemap_pos = (curr_elem) ? ((vec2i*)curr_elem->data) : (0);
+                    next_tilemap_pos = (next_elem) ? ((vec2i*)next_elem->data) : (0);
+                }
+            }
+
+            remove_all_list_elements(path_pos, 1);
+            destroy_list(path_pos);
+        }
+        break;
         case SKILL__CHARGE:
         {
             DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);

@@ -175,4 +175,6 @@ void restore_hero_ap(State* state);
 
 void determine_enemy_order(State* state);
 
+void find_path(State* state, vec2i start_tilemap_pos, vec2i end_tilemap_pos, List* path);
+
 #endif

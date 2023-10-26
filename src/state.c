@@ -81,7 +81,7 @@ void change_gamestate(State* state, int new_gamestate)
         hero_ap_bar[0] = '[';
         for(int i = 0; i < HERO_MAX_AP; i ++)
         {
-            hero_ap_bar[i + 1] = (i + 1 <= hero_ap) ? '#' : '.';
+            hero_ap_bar[i + 1] = (i + 1 <= hero_ap) ? '#' : '-';
         }
         hero_ap_bar[HERO_MAX_AP + 1] = ']';
         printf("hero_ap: %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);

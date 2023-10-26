@@ -3,6 +3,7 @@
 
 #include "../inc/common.h"
 #include "../inc/vec.h"
+#include "../inc/list.h"
 
 enum DIR4
 {
@@ -43,5 +44,10 @@ typedef struct
 } DistanceInfo;
 
 DistanceInfo get_distance_info_from_vec2i_to_vec2i(vec2i from, vec2i to);
+
+
+void get_line_from_tilemap_pos_in_dir4(vec2i from_tilemap_pos, int dir4, int length, List* list);
+void get_square_perimeter_tilemap_pos(vec2i center_tilemap_pos, int radius, List* list);
+void get_square_area_tilemap_pos(vec2i center_tilemap_pos, int radius, List* list);
 
 #endif

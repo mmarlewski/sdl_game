@@ -8,6 +8,7 @@ enum SKILL
 {
     SKILL__NONE,
 
+    SKILL__MOVE,
     SKILL__CHARGE,
     SKILL__JUMP,
     SKILL__CHARGE_AND_PUSH,

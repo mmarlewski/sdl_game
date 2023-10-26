@@ -6,6 +6,11 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
 
     switch(skill)
     {
+        case SKILL__MOVE:
+        {
+            //
+        }
+        break;
         case SKILL__CHARGE:
         {
             //

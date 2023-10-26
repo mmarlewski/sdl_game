@@ -194,6 +194,47 @@ void remove_all_list_elements(List* list, int destroy_data)
     list->tail = 0;
 }
 
+int is_element_in_list(List* list, ListElem* element)
+{
+    for(ListElem* elem = list->head; elem != 0; elem = elem->next)
+    {
+        if(elem == element) return 1;
+    }
+    return 0;
+}
+
+int is_data_in_list(List* list, void* data)
+{
+    for(ListElem* elem = list->head; elem != 0; elem = elem->next)
+    {
+        if(elem->data == data) return 1;
+    }
+    return 0;
+}
+
+void reverse_list(List* list)
+{
+    if(list->size <= 1) return;
+
+    ListElem* prev_elem = 0;
+    ListElem* curr_elem = list->head;
+    ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
+
+    while(curr_elem != 0)
+    {
+        curr_elem->prev = next_elem;
+        curr_elem->next = prev_elem;
+
+        prev_elem = curr_elem;
+        curr_elem = next_elem;
+        next_elem = (curr_elem) ? (curr_elem->next) : (0);
+    }
+
+    ListElem* temp = list->head;
+    list->head = list->tail;
+    list->tail = temp;
+}
+
 void print_list(List* list)
 {
     printf("printing list: %p of size: %i \n", list, list->size);

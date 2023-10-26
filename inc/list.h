@@ -33,6 +33,11 @@ void remove_list_element_of_data(List* list, void* data, int destroy_data);
 void remove_all_list_elements_after_element(List* list, ListElem* element, int destroy_data);
 void remove_all_list_elements(List* list, int destroy_data);
 
+int is_element_in_list(List* list, ListElem* element);
+int is_data_in_list(List* list, void* data);
+
+void reverse_list(List* list);
+
 void print_list(List* list);
 
 #endif
