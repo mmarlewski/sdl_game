@@ -20,7 +20,7 @@ char* get_name_from_floor(int floor)
     return name;
 }
 
-Texture* get_texture_from_floor_type(int type, Textures* textures)
+Texture* get_texture_1_from_floor_type(int type, Textures* textures)
 {
     Texture* texture = 0;
 
@@ -30,10 +30,30 @@ Texture* get_texture_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__METAL: texture = textures->floor.metal; break;
         case FLOOR_TYPE__METAL_SPIKES: texture = textures->floor.metal_spikes; break;
         case FLOOR_TYPE__METAL_LAVA_CRACK: texture = textures->floor.metal_lava_crack; break;
-        case FLOOR_TYPE__LAVA: texture = textures->floor.lava; break;
+        case FLOOR_TYPE__LAVA: texture = textures->floor.lava_1; break;
         case FLOOR_TYPE__ICE: texture = textures->floor.ice; break;
         case FLOOR_TYPE__ICE_WATER_CRACK: texture = textures->floor.ice_water_crack; break;
-        case FLOOR_TYPE__WATER: texture = textures->floor.water; break;
+        case FLOOR_TYPE__WATER: texture = textures->floor.water_1; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_2_from_floor_type(int type, Textures* textures)
+{
+    Texture* texture = 0;
+
+    switch(type)
+    {
+        case FLOOR_TYPE__NONE: texture = 0; break;
+        case FLOOR_TYPE__METAL: texture = textures->floor.metal; break;
+        case FLOOR_TYPE__METAL_SPIKES: texture = textures->floor.metal_spikes; break;
+        case FLOOR_TYPE__METAL_LAVA_CRACK: texture = textures->floor.metal_lava_crack; break;
+        case FLOOR_TYPE__LAVA: texture = textures->floor.lava_2; break;
+        case FLOOR_TYPE__ICE: texture = textures->floor.ice; break;
+        case FLOOR_TYPE__ICE_WATER_CRACK: texture = textures->floor.ice_water_crack; break;
+        case FLOOR_TYPE__WATER: texture = textures->floor.water_2; break;
         default: break;
     }
 

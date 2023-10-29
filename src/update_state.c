@@ -9,6 +9,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->is_game_running = 0;
     }
 
+    // time
+
+    state->time += delta_time;
+
     // camera
 
     if(input->is_mouse_scrolling)
@@ -62,6 +66,31 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     state->gamemap.show_all_order_numbers = input->is_q;
 
+    // animations
+
+    List* animation_to_be_removed_list = new_list(0);
+
+    for(ListElem* curr_elem = state->gamemap.animation_list->head; curr_elem; curr_elem = curr_elem->next)
+    {
+        Animation* curr_animation = (Animation*)curr_elem->data;
+        if(curr_animation->is_finished)
+        {
+            end_animation(state, curr_animation, textures, sounds, musics, colors);
+            add_new_list_element_to_list_end(animation_to_be_removed_list, curr_animation);
+        }
+        else
+        {
+            update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
+        }
+    }
+
+    for(ListElem* curr_elem = animation_to_be_removed_list->head; curr_elem; curr_elem = curr_elem->next)
+    {
+        remove_list_element_of_data(state->gamemap.animation_list, curr_elem->data, 1);
+    }
+
+    destroy_list(animation_to_be_removed_list);
+
     // gamestate
 
     if(state->gamestate != GAMESTATE__NONE &&
@@ -106,7 +135,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->action.enemy_action_sequence =
                     (Action*)state->gamemap.curr_object_enemy->enemy_action_sequence;
 
-                    change_background_color(state, colors->enemy_background);
+                    add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->enemy_background, 0.25f), textures, sounds, musics, colors);
 
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
                     state->timer = 0.0f;
@@ -405,7 +434,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     {
                         remove_all_dead_objects_from_gamemap_objects(state);
 
-                        change_background_color(state, colors->hero_background);
+                        add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->hero_background, 0.25f), textures, sounds, musics, colors);
 
                         change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
                     }
@@ -455,7 +484,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     determine_enemy_order(state);
 
-                    change_background_color(state, colors->hero_background);
+                    add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->hero_background, 0.25f), textures, sounds, musics, colors);
 
                     change_gamestate(state, GAMESTATE__HERO_CHOOSING_SKILL);
                 }

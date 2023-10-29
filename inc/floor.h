@@ -20,6 +20,7 @@ enum FLOOR_TYPE
 };
 
 char* get_name_from_floor(int floor);
-Texture* get_texture_from_floor_type(int type, Textures* textures);
+Texture* get_texture_1_from_floor_type(int type, Textures* textures);
+Texture* get_texture_2_from_floor_type(int type, Textures* textures);
 
 #endif

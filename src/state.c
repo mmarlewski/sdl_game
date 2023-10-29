@@ -3,6 +3,7 @@
 void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     state->is_game_running = 1;
+    state->time = 0.0f;
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
     state->background_color = colors->hero_background;
@@ -56,6 +57,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.hero_ap = HERO_MAX_AP;
 
     state->gamemap.show_all_order_numbers = 0;
+
+    state->gamemap.animation_list = new_list((void (*)(void *))&destroy_animation);
 
     // action
 
@@ -223,6 +226,12 @@ int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i pos
     }
 
     return 0;
+}
+
+void add_animation_to_animation_list(State* state, Animation* animation, Textures *textures, Sounds *sounds, Musics *musics, Colors *colors)
+{
+    add_new_list_element_to_list_end(state->gamemap.animation_list, animation);
+    start_animation(state, animation, textures, sounds, musics, colors);
 }
 
 void add_pos_to_possible_target_2_tilemap_pos_list(State* state, Vec2i new_pos)

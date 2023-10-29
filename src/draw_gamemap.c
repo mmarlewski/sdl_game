@@ -14,7 +14,15 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
             Tile* tile = state->gamemap.tilemap[i][j];
-            Texture* tile_floor_texture = get_texture_from_floor_type(tile->floor, textures);
+            Texture* tile_floor_texture = 0;
+            if(sin(state->time * 3) > 0)
+            {
+                tile_floor_texture = get_texture_1_from_floor_type(tile->floor, textures);
+            }
+            else
+            {
+                tile_floor_texture = get_texture_2_from_floor_type(tile->floor, textures);
+            }
 
             // tile
 
@@ -101,9 +109,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 curr_object->tilemap_pos.x == j &&
                 curr_object->tilemap_pos.y == i)
                 {
+                    Texture* texture = 0;
+                    if(sin(state->time * 3) > 0)
+                    {
+                        texture = get_texture_1_from_object_type(curr_object->type, textures);
+                    }
+                    else
+                    {
+                        texture = get_texture_2_from_object_type(curr_object->type, textures);
+                    }
                     draw_texture_at_world_pos(
                         renderer,
-                        get_texture_from_object_type(curr_object->type, textures),
+                        texture,
                 colors->none,
                         world_iso_pos,
                         state->camera.world_pos,
@@ -212,9 +229,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
             Vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
 
+            Texture* texture_outline = 0;
+            if(sin(state->time * 3) > 0)
+            {
+                texture_outline = get_texture_1_outline_from_object_type(hover_object->type, textures);
+            }
+            else
+            {
+                texture_outline = get_texture_2_outline_from_object_type(hover_object->type, textures);
+            }
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_outline_from_object_type(hover_object->type, textures),
+                texture_outline,
                 colors->yellow,
                 selected_world_iso_pos,
                 state->camera.world_pos,
@@ -251,9 +277,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
             Vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
 
+            Texture* texture_outline = 0;
+            if(sin(state->time * 3) > 0)
+            {
+                texture_outline = get_texture_1_outline_from_object_type(enemy_object->type, textures);
+            }
+            else
+            {
+                texture_outline = get_texture_2_outline_from_object_type(enemy_object->type, textures);
+            }
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_outline_from_object_type(enemy_object->type, textures),
+                texture_outline,
                 colors->red,
                 selected_world_iso_pos,
                 state->camera.world_pos,

@@ -155,5 +155,11 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             play_sound(animation->play_sound.sound);
         }
         break;
+        case ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR:
+        {
+            animation->change_background_color.from_color = state->background_color;
+            change_background_color(state, animation->change_background_color.from_color);
+        }
+        break;
     }
 }

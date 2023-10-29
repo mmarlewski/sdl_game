@@ -89,6 +89,8 @@ typedef struct
 
     int show_all_order_numbers;
 
+    List* animation_list;
+
 } State_Gamemap;
 
 typedef struct
@@ -102,6 +104,7 @@ typedef struct
 typedef struct
 {
     int is_game_running;
+    float time;
     int gamestate;
     float timer;
     Vec3i background_color;
@@ -138,6 +141,8 @@ int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i pos
 void add_pos_to_possible_target_2_tilemap_pos_list(State* state, Vec2i new_pos);
 void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
 int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i pos);
+
+void add_animation_to_animation_list(State* state, Animation* animation, Textures *textures, Sounds *sounds, Musics *musics, Colors *colors);
 
 void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);

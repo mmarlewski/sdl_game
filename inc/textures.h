@@ -10,10 +10,12 @@ typedef struct
     Texture* metal;
     Texture* metal_spikes;
     Texture* metal_lava_crack;
-    Texture* lava;
+    Texture* lava_1;
+    Texture* lava_2;
     Texture* ice;
     Texture* ice_water_crack;
-    Texture* water;
+    Texture* water_1;
+    Texture* water_2;
 
 } Textures_Floor;
 
@@ -147,23 +149,35 @@ typedef struct
     Texture* weight;
     Texture* weight_outline;
 
-    Texture* hero;
-    Texture* hero_outline;
+    Texture* hero_1;
+    Texture* hero_2;
+    Texture* hero_outline_1;
+    Texture* hero_outline_2;
 
-    Texture* goat;
-    Texture* goat_outline;
+    Texture* goat_1;
+    Texture* goat_2;
+    Texture* goat_outline_1;
+    Texture* goat_outline_2;
 
-    Texture* spider;
-    Texture* spider_outline;
+    Texture* spider_1;
+    Texture* spider_2;
+    Texture* spider_outline_1;
+    Texture* spider_outline_2;
 
-    Texture* bull;
-    Texture* bull_outline;
+    Texture* bull_1;
+    Texture* bull_2;
+    Texture* bull_outline_1;
+    Texture* bull_outline_2;
 
-    Texture* fly;
-    Texture* fly_outline;
+    Texture* fly_1;
+    Texture* fly_2;
+    Texture* fly_outline_1;
+    Texture* fly_outline_2;
 
-    Texture* chameleon;
-    Texture* chameleon_outline;
+    Texture* chameleon_1;
+    Texture* chameleon_2;
+    Texture* chameleon_outline_1;
+    Texture* chameleon_outline_2;
 
 } Textures_Object;
 

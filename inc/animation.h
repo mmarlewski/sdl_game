@@ -28,7 +28,9 @@ enum ANIMATION_TYPE
     ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE,
     ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH,
 
-    ANIMATION_TYPE__PLAY_SOUND
+    ANIMATION_TYPE__PLAY_SOUND,
+
+    ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR
 };
 
 typedef struct _Animation Animation;
@@ -172,6 +174,16 @@ typedef struct
 
 } Animation_PlaySound;
 
+typedef struct
+{
+    float time;
+
+    Vec3i from_color;
+    Vec3i to_color;
+    float seconds;
+
+} Animation_ChangeBackgroundColor;
+
 struct _Animation
 {
     int is_finished;
@@ -199,6 +211,8 @@ struct _Animation
         Animation_MoveCameraInGamemapInArch move_camera_in_gamemap_in_arch;
 
         Animation_PlaySound play_sound;
+
+        Animation_ChangeBackgroundColor change_background_color;
     };
 };
 
@@ -232,7 +246,10 @@ Animation* new_animation_move_camera_in_gamemap_in_arch(Vec2f from_gamemap_pos, 
 
 Animation* new_animation_play_sound(Sound* sound);
 
+Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_color, float seconds);
+
 Animation* new_animation_camera_shake(int times, float distance, float seconds);
+Animation* new_animation_background_flash(Vec3i from_color, Vec3i to_color, float seconds_in, float seconds_out);
 
 void destroy_animation(Animation* animation);
 

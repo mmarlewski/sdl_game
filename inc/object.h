@@ -48,6 +48,8 @@ int is_object_flying(int object_type);
 int is_object_enemy(int object_type);
 
 char* get_name_from_object_type(int object_type);
-Texture* get_texture_from_object_type(int type, Textures* textures);
-Texture* get_texture_outline_from_object_type(int type, Textures* textures);
+Texture* get_texture_1_from_object_type(int type, Textures* textures);
+Texture* get_texture_2_from_object_type(int type, Textures* textures);
+Texture* get_texture_1_outline_from_object_type(int type, Textures* textures);
+Texture* get_texture_2_outline_from_object_type(int type, Textures* textures);
 #endif

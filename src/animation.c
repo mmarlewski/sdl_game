@@ -275,6 +275,19 @@ Animation* new_animation_play_sound(Sound* sound)
     return animation;
 }
 
+Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_color, float seconds)
+{
+    Animation* animation = malloc(sizeof(* animation));
+
+    animation->is_finished = 0;
+    animation->type = ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR;
+    animation->change_background_color.from_color = from_color;
+    animation->change_background_color.to_color = to_color;
+    animation->change_background_color.seconds = seconds;
+
+    return animation;
+}
+
 Animation* new_animation_camera_shake(int times, float distance, float seconds)
 {
     Animation* camera_shake = new_animation_sequence();
@@ -297,6 +310,16 @@ Animation* new_animation_camera_shake(int times, float distance, float seconds)
     }
 
     return camera_shake;
+}
+
+Animation* new_animation_background_flash(Vec3i from_color, Vec3i to_color, float seconds_in, float seconds_out)
+{
+    Animation* background_flash = new_animation_sequence();
+
+    add_animation_to_end_animation_sequence(background_flash,new_animation_change_background_color(from_color, to_color, seconds_in));
+    add_animation_to_end_animation_sequence(background_flash,new_animation_change_background_color(to_color, from_color, seconds_out));
+
+    return background_flash;
 }
 
 void destroy_animation(Animation* animation)
@@ -334,6 +357,7 @@ char* get_animation_name_from_type(int animation_type)
         case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:   name = "move camera in gamemap in line";    break;
         case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:   name = "move camera in gamemap in arch";    break;
         case ANIMATION_TYPE__PLAY_SOUND:                       name = "play sound";                        break;
+        case ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR:          name = "change background color";                        break;
         default: break;
     }
 

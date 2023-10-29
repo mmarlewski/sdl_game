@@ -59,7 +59,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 
             for(ListElem* curr_elem = action_to_be_removed_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                // remove_list_element_of_data(action->simultaneous.action_list, curr_elem->data, 1);
+                remove_list_element_of_data(action->simultaneous.action_list, curr_elem->data, 1);
             }
 
             destroy_list(action_to_be_removed_list);
@@ -69,57 +69,41 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
         break;
         case ACTION_TYPE__MOVE:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__CRASH:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__FALL:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__DEATH:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__BLOW_UP:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__THROW:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__LIFT:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;
         case ACTION_TYPE__DROP:
         {
-            update_animation(state, action->animation, delta_time, textures, sounds, musics, colors);
-
             action->is_finished = (action->animation->is_finished);
         }
         break;

@@ -20,7 +20,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             {
                 end_animation(state, curr_animation, textures, sounds, musics, colors);
                 ListElem* next_elem = curr_elem->next;
-                remove_list_element(animation->sequence.animation_list, curr_elem, 1);
+                // remove_list_element(animation->sequence.animation_list, curr_elem, 1);
                 animation->sequence.curr_animation_list_elem = next_elem;
 
                 if(next_elem != 0)
@@ -274,6 +274,25 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
         case ANIMATION_TYPE__PLAY_SOUND:
         {
             animation->is_finished = 1;
+        }
+        break;
+        case ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR:
+        {
+            Animation_ChangeBackgroundColor animation_animation = animation->change_background_color;
+
+            float time_ratio = animation_animation.time / animation_animation.seconds;
+            Vec3i color = vec3i(
+                animation_animation.from_color.x + (animation_animation.to_color.x - animation_animation.from_color.x) * time_ratio,
+                animation_animation.from_color.y + (animation_animation.to_color.y - animation_animation.from_color.y) * time_ratio,
+                animation_animation.from_color.z + (animation_animation.to_color.z - animation_animation.from_color.z) * time_ratio
+            );
+            animation_animation.time += delta_time;
+
+            animation->change_background_color = animation_animation;
+
+            change_background_color(state, color);
+
+            animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
     }

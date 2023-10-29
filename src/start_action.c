@@ -69,13 +69,13 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             else
             {
                 Animation* animation = new_animation_move_sprite_in_gamemap_in_line(
-                    get_texture_from_object_type(action->move.object->type, textures),
+                    get_texture_1_from_object_type(action->move.object->type, textures),
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                     0.2f
                 );
                 action->animation = animation;
-                start_animation(state, action->animation, textures, sounds, musics, colors);
+                add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
                 int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
                 floor_on_move_start(state, sequence, action, floor);
@@ -99,7 +99,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->crash.object_crushing->tilemap_pos = action->tilemap_pos;
 
-            Texture* object_texture = get_texture_from_object_type(action->crash.object_crushing->type, textures);
+            Texture* object_texture = get_texture_1_from_object_type(action->crash.object_crushing->type, textures);
             Vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object_crushing->tilemap_pos);
             Vec2f next_object_gamemap_pos = vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash.dir4, 1.0f);
             next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
@@ -136,7 +136,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
             action->crash.object_crushing->is_visible = 0;
         }
@@ -153,14 +153,14 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->fall.object->tilemap_pos = action->tilemap_pos;
 
             Animation* animation = new_animation_fall_sprite_in_gamemap(
-                get_texture_from_object_type(action->fall.object->type, textures),
+                get_texture_1_from_object_type(action->fall.object->type, textures),
                 tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
                 0.2f,
                 0.2f
                 );
 
             action->animation = animation;
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
             action->fall.object->is_visible = 0;
         }
@@ -176,6 +176,23 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->death.object->tilemap_pos = action->tilemap_pos;
 
+            if(is_object_enemy(action->death.object->type))
+            {
+                add_animation_to_animation_list(
+                    state,
+                    new_animation_background_flash(
+                        state->background_color,
+                        colors->white,
+                        0.05f,
+                        1.0f
+                        ),
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                    );
+            }
+
             Animation* animation = new_animation_show_sprite_in_gamemap(
                 textures->death.skull,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
@@ -184,7 +201,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
         case ACTION_TYPE__BLOW_UP:
@@ -197,7 +214,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
         case ACTION_TYPE__THROW:
@@ -231,7 +248,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos,action->throw.dir4,action->throw.distance);
 
             Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
-                get_texture_from_object_type(action->throw.object_thrown->type, textures),
+                get_texture_1_from_object_type(action->throw.object_thrown->type, textures),
                 tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                 1.0f,
@@ -240,7 +257,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
             action->throw.object_thrown->is_visible = 0;
         }
@@ -259,7 +276,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->lift.object->tilemap_pos = action->tilemap_pos;
 
             Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
-                get_texture_from_object_type(action->lift.object->type, textures),
+                get_texture_1_from_object_type(action->lift.object->type, textures),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 1.0f,
@@ -268,7 +285,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
             action->lift.object->is_visible = 0;
         }
@@ -292,7 +309,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->animation = animation;
 
-            start_animation(state, action->animation, textures, sounds, musics, colors);
+            add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
         default:

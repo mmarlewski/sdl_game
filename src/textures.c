@@ -5,20 +5,24 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal = load_texture_from_filepath (renderer, "./res/floor/metal.png");
     floor->metal_spikes = load_texture_from_filepath (renderer, "./res/floor/metal_spikes.png");
     floor->metal_lava_crack = load_texture_from_filepath (renderer, "./res/floor/metal_lava_crack.png");
-    floor->lava = load_texture_from_filepath (renderer, "./res/floor/lava.png");
+    floor->lava_1 = load_texture_from_filepath (renderer, "./res/floor/lava_1.png");
+    floor->lava_2 = load_texture_from_filepath (renderer, "./res/floor/lava_2.png");
     floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
     floor->ice_water_crack = load_texture_from_filepath (renderer, "./res/floor/ice_water_crack.png");
-    floor->water = load_texture_from_filepath (renderer, "./res/floor/water.png");
+    floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
+    floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
 }
 void destroy_textures_floor (Textures_Floor* floor)
 {
     destroy_texture(floor->metal);
     destroy_texture(floor->metal_spikes);
     destroy_texture(floor->metal_lava_crack);
-    destroy_texture(floor->lava);
+    destroy_texture(floor->lava_1);
+    destroy_texture(floor->lava_2);
     destroy_texture(floor->ice);
     destroy_texture(floor->ice_water_crack);
-    destroy_texture(floor->water);
+    destroy_texture(floor->water_1);
+    destroy_texture(floor->water_2);
 }
 
 void load_textures_highlight (Renderer* renderer, Textures_Highlight* highlight)
@@ -178,35 +182,59 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->weight_outline = load_texture_from_filepath
     (renderer, "./res/object/weight/weight_outline.png");
 
-    object->hero = load_texture_from_filepath
-    (renderer, "./res/object/hero/hero.png");
-    object->hero_outline = load_texture_from_filepath
-    (renderer, "./res/object/hero/hero_outline.png");
+    object->hero_1 = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_1.png");
+    object->hero_2 = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_2.png");
+    object->hero_outline_1 = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_outline_1.png");
+    object->hero_outline_2 = load_texture_from_filepath
+    (renderer, "./res/object/hero/hero_outline_2.png");
 
-    object->goat = load_texture_from_filepath
-     (renderer, "./res/object/goat/goat.png");
-    object->goat_outline = load_texture_from_filepath
-     (renderer, "./res/object/goat/goat_outline.png");
+    object->goat_1 = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat_1.png");
+    object->goat_2 = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat_2.png");
+    object->goat_outline_1 = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat_outline_1.png");
+    object->goat_outline_2 = load_texture_from_filepath
+     (renderer, "./res/object/goat/goat_outline_2.png");
 
-    object->spider = load_texture_from_filepath
-    (renderer, "./res/object/spider/spider.png");
-    object->spider_outline = load_texture_from_filepath
-     (renderer, "./res/object/spider/spider_outline.png");
+    object->spider_1 = load_texture_from_filepath
+    (renderer, "./res/object/spider/spider_1.png");
+    object->spider_2 = load_texture_from_filepath
+    (renderer, "./res/object/spider/spider_2.png");
+    object->spider_outline_1 = load_texture_from_filepath
+     (renderer, "./res/object/spider/spider_outline_1.png");
+    object->spider_outline_2 = load_texture_from_filepath
+     (renderer, "./res/object/spider/spider_outline_2.png");
 
-    object->bull = load_texture_from_filepath
-    (renderer, "./res/object/bull/bull.png");
-    object->bull_outline = load_texture_from_filepath
-     (renderer, "./res/object/bull/bull_outline.png");
+    object->bull_1 = load_texture_from_filepath
+    (renderer, "./res/object/bull/bull_1.png");
+    object->bull_2 = load_texture_from_filepath
+    (renderer, "./res/object/bull/bull_2.png");
+    object->bull_outline_1 = load_texture_from_filepath
+     (renderer, "./res/object/bull/bull_outline_1.png");
+    object->bull_outline_2 = load_texture_from_filepath
+     (renderer, "./res/object/bull/bull_outline_2.png");
 
-    object->fly = load_texture_from_filepath
-    (renderer, "./res/object/fly/fly.png");
-    object->fly_outline = load_texture_from_filepath
-    (renderer, "./res/object/fly/fly_outline.png");
+    object->fly_1 = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_1.png");
+    object->fly_2 = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_2.png");
+    object->fly_outline_1 = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_outline_1.png");
+    object->fly_outline_2 = load_texture_from_filepath
+    (renderer, "./res/object/fly/fly_outline_2.png");
 
-    object->chameleon = load_texture_from_filepath
-    (renderer, "./res/object/chameleon/chameleon.png");
-    object->chameleon_outline = load_texture_from_filepath
-    (renderer, "./res/object/chameleon/chameleon_outline.png");
+    object->chameleon_1 = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon_1.png");
+    object->chameleon_2 = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon_2.png");
+    object->chameleon_outline_1 = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon_outline_1.png");
+    object->chameleon_outline_2 = load_texture_from_filepath
+    (renderer, "./res/object/chameleon/chameleon_outline_2.png");
 }
 void destroy_textures_object (Textures_Object* object)
 {
@@ -222,23 +250,35 @@ void destroy_textures_object (Textures_Object* object)
     destroy_texture(object->spring);
     destroy_texture(object->spring_outline);
 
-    destroy_texture(object->hero);
-    destroy_texture(object->hero_outline);
+    destroy_texture(object->hero_1);
+    destroy_texture(object->hero_2);
+    destroy_texture(object->hero_outline_1);
+    destroy_texture(object->hero_outline_2);
 
-    destroy_texture(object->goat);
-    destroy_texture(object->goat_outline);
+    destroy_texture(object->goat_1);
+    destroy_texture(object->goat_2);
+    destroy_texture(object->goat_outline_1);
+    destroy_texture(object->goat_outline_2);
 
-    destroy_texture(object->spider);
-    destroy_texture(object->spider_outline);
+    destroy_texture(object->spider_1);
+    destroy_texture(object->spider_2);
+    destroy_texture(object->spider_outline_1);
+    destroy_texture(object->spider_outline_2);
 
-    destroy_texture(object->bull);
-    destroy_texture(object->bull_outline);
+    destroy_texture(object->bull_1);
+    destroy_texture(object->bull_2);
+    destroy_texture(object->bull_outline_1);
+    destroy_texture(object->bull_outline_2);
 
-    destroy_texture(object->fly);
-    destroy_texture(object->fly_outline);
+    destroy_texture(object->fly_1);
+    destroy_texture(object->fly_2);
+    destroy_texture(object->fly_outline_1);
+    destroy_texture(object->fly_outline_2);
 
-    destroy_texture(object->chameleon);
-    destroy_texture(object->chameleon_outline);
+    destroy_texture(object->chameleon_1);
+    destroy_texture(object->chameleon_2);
+    destroy_texture(object->chameleon_outline_1);
+    destroy_texture(object->chameleon_outline_2);
 }
 
 void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order_number)
