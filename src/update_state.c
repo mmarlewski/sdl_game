@@ -19,12 +19,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     // mouse
 
-    vec2i mouse_screen_pos;
-    vec2f mouse_world_pos;
-    vec2f mouse_gamemap_pos;
-    vec2i mouse_tilemap_pos;
+    Vec2i mouse_screen_pos;
+    Vec2f mouse_world_pos;
+    Vec2f mouse_gamemap_pos;
+    Vec2i mouse_tilemap_pos;
 
-    mouse_screen_pos = make_vec2i(input->mouse_x, input->mouse_y);
+    mouse_screen_pos = vec2i(input->mouse_x, input->mouse_y);
     mouse_world_pos = screen_pos_to_world_pos(mouse_screen_pos, state->camera.world_pos, state->camera.zoom);
     mouse_world_pos.x -= TILE_LENGTH * 0.5f;
     mouse_gamemap_pos = world_pos_to_gamemap_pos(iso_pos_to_cart_pos(mouse_world_pos));
@@ -48,8 +48,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
     }
     else if(input->is_mouse_left)
     {
-        vec2f drag_world_diff;
-        vec2f new_camera_world_pos;
+        Vec2f drag_world_diff;
+        Vec2f new_camera_world_pos;
 
         drag_world_diff.x = state->mouse.world_pos.x - state->camera.world_pos.x;
         drag_world_diff.y = state->mouse.world_pos.y - state->camera.world_pos.y;
@@ -133,8 +133,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             if(input->was_0 && !input->is_0)
             {
-                state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
-                state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+                state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
+                state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
                 execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics, colors);
 
@@ -148,8 +148,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 if(is_skill_two_target(skill))
                 {
-                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
-                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
                     remove_all_pos_from_possible_target_1_tilemap_pos_list(state);
 
@@ -163,8 +163,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 }
                 else
                 {
-                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
-                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
                     remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
 
@@ -199,8 +199,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     state->gamemap.target_1_tilemap_pos = state->gamemap.curr_selected_tilemap_pos;
 
-                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
-                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
                     remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
 
@@ -220,8 +220,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             if (input->was_esc && !input->is_esc)
             {
-                state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
-                state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+                state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
+                state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
                 remove_all_actions_from_action_sequence(state->action.hero_action_sequence);
 
@@ -256,8 +256,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
-                    state->gamemap.prev_selected_tilemap_pos = make_vec2i(-1, -1);
-                    state->gamemap.curr_selected_tilemap_pos = make_vec2i(-1, -1);
+                    state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
+                    state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
                     execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics, colors);
 

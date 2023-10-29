@@ -16,7 +16,7 @@ int get_opposite_dir4(int dir4)
     return opposite_dir4;
 }
 
-vec2i make_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by)
+Vec2i vec2i_move_in_dir4_by(Vec2i vec, int dir4, int by)
 {
     switch(dir4)
     {
@@ -30,7 +30,7 @@ vec2i make_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by)
     return vec;
 }
 
-vec2f make_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by)
+Vec2f vec2f_move_in_dir4_by(Vec2f vec, int dir4, float by)
 {
     switch(dir4)
     {
@@ -44,45 +44,17 @@ vec2f make_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by)
     return vec;
 }
 
-vec2i* new_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by)
-{
-    switch(dir4)
-    {
-        case DIR4__UP: vec.y -= by; break;
-        case DIR4__RIGHT: vec.x += by; break;
-        case DIR4__DOWN: vec.y += by; break;
-        case DIR4__LEFT: vec.x -= by; break;
-        default: break;
-    }
-
-    return new_vec2i(vec.x, vec.y);
-}
-
-vec2f* new_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by)
-{
-    switch(dir4)
-    {
-        case DIR4__UP: vec.y -= by; break;
-        case DIR4__RIGHT: vec.x += by; break;
-        case DIR4__DOWN: vec.y += by; break;
-        case DIR4__LEFT: vec.x -= by; break;
-        default: break;
-    }
-
-    return new_vec2f(vec.x, vec.y);
-}
-
-int get_x_diff_from_vec2i_to_vec2i(vec2i from, vec2i to)
+int get_x_diff_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 {
     return (to.x - from.x);
 }
 
-int get_y_diff_from_vec2i_to_vec2i(vec2i from, vec2i to)
+int get_y_diff_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 {
     return (to.y - from.y);
 }
 
-int get_dir4_from_vec2i_to_vec2i(vec2i from, vec2i to)
+int get_dir4_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 {
     int dir4 = DIR4__NONE;
 
@@ -98,7 +70,7 @@ int get_dir4_from_vec2i_to_vec2i(vec2i from, vec2i to)
 }
 
 
-DistanceInfo get_distance_info_from_vec2i_to_vec2i(vec2i from, vec2i to)
+DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 {
     int dir4 = DIR4__NONE;
     int diff = 0;
@@ -144,47 +116,47 @@ DistanceInfo get_distance_info_from_vec2i_to_vec2i(vec2i from, vec2i to)
     return distance_info;
 }
 
-void get_line_from_tilemap_pos_in_dir4(vec2i from_tilemap_pos, int dir4, int length, List* list)
+void get_line_from_tilemap_pos_in_dir4(Vec2i from_tilemap_pos, int dir4, int length, List* list)
 {
-    vec2i tilemap_pos = from_tilemap_pos;
+    Vec2i tilemap_pos = from_tilemap_pos;
     for (int i = 0; i < length; i++)
     {
-        tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
 }
 
-void get_square_perimeter_tilemap_pos(vec2i center_tilemap_pos, int radius, List* list)
+void get_square_perimeter_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list)
 {
     if (radius < 0) return;
 
-    vec2i tilemap_pos = center_tilemap_pos;
-    tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, radius);
-    tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, radius);
+    Vec2i tilemap_pos = center_tilemap_pos;
+    tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, radius);
+    tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, radius);
 
     for (int i = 0; i < radius * 2; i++)
     {
-        tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
     for (int i = 0; i < radius * 2; i++)
     {
-        tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
     for (int i = 0; i < radius * 2; i++)
     {
-        tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
     for (int i = 0; i < radius * 2; i++)
     {
-        tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
 }
 
-void get_square_area_tilemap_pos(vec2i center_tilemap_pos, int radius, List* list)
+void get_square_area_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list)
 {
     if (radius < 0) return;
 

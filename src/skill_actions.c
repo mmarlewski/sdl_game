@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos, vec2i target_2_tilemap_pos)
+void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos)
 {
     Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
     Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
@@ -18,8 +18,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 ListElem* curr_elem = path_pos->head;
                 ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
 
-                vec2i* curr_tilemap_pos = (curr_elem) ? ((vec2i*)curr_elem->data) : (0);
-                vec2i* next_tilemap_pos = (next_elem) ? ((vec2i*)next_elem->data) : (0);
+                Vec2i* curr_tilemap_pos = (curr_elem) ? ((Vec2i*)curr_elem->data) : (0);
+                Vec2i* next_tilemap_pos = (next_elem) ? ((Vec2i*)next_elem->data) : (0);
 
                 while(curr_elem != 0 && next_elem != 0)
                 {
@@ -30,8 +30,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     curr_elem = next_elem;
                     next_elem = (curr_elem) ? (curr_elem->next) : (0);
 
-                    curr_tilemap_pos = (curr_elem) ? ((vec2i*)curr_elem->data) : (0);
-                    next_tilemap_pos = (next_elem) ? ((vec2i*)next_elem->data) : (0);
+                    curr_tilemap_pos = (curr_elem) ? ((Vec2i*)curr_elem->data) : (0);
+                    next_tilemap_pos = (next_elem) ? ((Vec2i*)next_elem->data) : (0);
                 }
             }
 
@@ -45,15 +45,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int abs_diff = distance_info.abs_diff;
             int dir4 = distance_info.dir4;
 
-            vec2i old_tilemap_pos = source_object->tilemap_pos;
-            vec2i tilemap_pos = source_object->tilemap_pos;
+            Vec2i old_tilemap_pos = source_object->tilemap_pos;
+            Vec2i tilemap_pos = source_object->tilemap_pos;
             int floor = FLOOR_TYPE__NONE;
             Object* object = 0;
 
             for(int i = 0; i < abs_diff; i++)
             {
                 old_tilemap_pos = tilemap_pos;
-                tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
+                tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
                 floor = get_floor_on_tilemap_pos(state, tilemap_pos);
                 object = get_object_on_tilemap_pos(state, tilemap_pos);
 
@@ -113,15 +113,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int charge_abs_diff = charge_distance_info.abs_diff;
             int charge_dir4 = charge_distance_info.dir4;
 
-            vec2i charge_old_tilemap_pos = source_object->tilemap_pos;
-            vec2i charge_tilemap_pos = source_object->tilemap_pos;
+            Vec2i charge_old_tilemap_pos = source_object->tilemap_pos;
+            Vec2i charge_tilemap_pos = source_object->tilemap_pos;
             int charge_floor = FLOOR_TYPE__NONE;
             Object* charge_object = 0;
 
             for(int i = 0; i < charge_abs_diff - 1; i++)
             {
                 charge_old_tilemap_pos = charge_tilemap_pos;
-                charge_tilemap_pos = make_vec2i_move_in_dir4_by(charge_tilemap_pos, charge_dir4, 1);
+                charge_tilemap_pos = vec2i_move_in_dir4_by(charge_tilemap_pos, charge_dir4, 1);
                 charge_floor = get_floor_on_tilemap_pos(state, charge_tilemap_pos);
                 charge_object = get_object_on_tilemap_pos(state, charge_tilemap_pos);
 
@@ -151,15 +151,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
 
             if(target_1_object == 0) break;
 
-            vec2i push_old_tilemap_pos = target_1_object->tilemap_pos;
-            vec2i push_tilemap_pos = target_1_object->tilemap_pos;
+            Vec2i push_old_tilemap_pos = target_1_object->tilemap_pos;
+            Vec2i push_tilemap_pos = target_1_object->tilemap_pos;
             int push_floor = FLOOR_TYPE__NONE;
             Object* push_object = 0;
 
             for(int i = 0; i < push_abs_diff; i++)
             {
                 push_old_tilemap_pos = push_tilemap_pos;
-                push_tilemap_pos = make_vec2i_move_in_dir4_by(push_tilemap_pos, push_dir4, 1);
+                push_tilemap_pos = vec2i_move_in_dir4_by(push_tilemap_pos, push_dir4, 1);
                 push_floor = get_floor_on_tilemap_pos(state, push_tilemap_pos);
                 push_object = get_object_on_tilemap_pos(state, push_tilemap_pos);
 
@@ -190,15 +190,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int charge_abs_diff = charge_distance_info.abs_diff;
             int charge_dir4 = charge_distance_info.dir4;
 
-            vec2i charge_old_tilemap_pos = source_object->tilemap_pos;
-            vec2i charge_tilemap_pos = source_object->tilemap_pos;
+            Vec2i charge_old_tilemap_pos = source_object->tilemap_pos;
+            Vec2i charge_tilemap_pos = source_object->tilemap_pos;
             int charge_floor = FLOOR_TYPE__NONE;
             Object* charge_object = 0;
 
             for(int i = 0; i < charge_abs_diff - 1; i++)
             {
                 charge_old_tilemap_pos = charge_tilemap_pos;
-                charge_tilemap_pos = make_vec2i_move_in_dir4_by(charge_tilemap_pos, charge_dir4, 1);
+                charge_tilemap_pos = vec2i_move_in_dir4_by(charge_tilemap_pos, charge_dir4, 1);
                 charge_floor = get_floor_on_tilemap_pos(state, charge_tilemap_pos);
                 charge_object = get_object_on_tilemap_pos(state, charge_tilemap_pos);
 
@@ -259,15 +259,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int abs_diff = distance_info.abs_diff;
             int dir4 = distance_info.dir4;
 
-            vec2i old_tilemap_pos = target_1_object->tilemap_pos;
-            vec2i tilemap_pos = target_1_object->tilemap_pos;
+            Vec2i old_tilemap_pos = target_1_object->tilemap_pos;
+            Vec2i tilemap_pos = target_1_object->tilemap_pos;
             int floor = FLOOR_TYPE__NONE;
             Object* object = 0;
 
             for(int i = 0; i < abs_diff; i++)
             {
                 old_tilemap_pos = tilemap_pos;
-                tilemap_pos = make_vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
+                tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
                 floor = get_floor_on_tilemap_pos(state, tilemap_pos);
                 object = get_object_on_tilemap_pos(state, tilemap_pos);
 
@@ -300,15 +300,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int pull_abs_diff = pull_distance_info.abs_diff;
             int pull_dir4 = pull_distance_info.dir4;
 
-            vec2i pull_old_tilemap_pos = target_1_object->tilemap_pos;
-            vec2i pull_tilemap_pos = target_1_object->tilemap_pos;
+            Vec2i pull_old_tilemap_pos = target_1_object->tilemap_pos;
+            Vec2i pull_tilemap_pos = target_1_object->tilemap_pos;
             int pull_floor = FLOOR_TYPE__NONE;
             Object* pull_object = 0;
 
             for(int i = 0; i < pull_abs_diff - 1; i++)
             {
                 pull_old_tilemap_pos = pull_tilemap_pos;
-                pull_tilemap_pos = make_vec2i_move_in_dir4_by(pull_tilemap_pos, pull_dir4, 1);
+                pull_tilemap_pos = vec2i_move_in_dir4_by(pull_tilemap_pos, pull_dir4, 1);
                 pull_floor = get_floor_on_tilemap_pos(state, pull_tilemap_pos);
                 pull_object = get_object_on_tilemap_pos(state, pull_tilemap_pos);
 
@@ -332,7 +332,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 }
             }
 
-            vec2i before_source_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, pull_dir4, -1);
+            Vec2i before_source_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, pull_dir4, -1);
 
             DistanceInfo throw_distance_info = get_distance_info_from_vec2i_to_vec2i(before_source_tilemap_pos, target_2_tilemap_pos);
             int throw_abs_diff = throw_distance_info.abs_diff;

@@ -26,7 +26,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__MOVE:
         {
-            action->move.object->tilemap_pos = make_vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
+            action->move.object->tilemap_pos = vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
             end_animation(state, action->animation, textures, sounds, musics, colors);
 
             int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
@@ -40,7 +40,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             end_animation(state, action->animation, textures, sounds, musics, colors);
 
             Action* crushed_action_sequence = new_action_sequence();
-            Object* crushed_object = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
+            Object* crushed_object = get_object_on_tilemap_pos(state, vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
             object_on_crashed(state, crushed_action_sequence, action, crushed_object);
 
             Action* crushing_action_sequence = new_action_sequence();
@@ -76,13 +76,13 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 
             Action* push_around = new_action_simultaneous();
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1), DIR4__UP)));
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1), DIR4__UP)));
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1), DIR4__RIGHT)));
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1), DIR4__RIGHT)));
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1), DIR4__DOWN)));
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1), DIR4__DOWN)));
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1), DIR4__LEFT)));
+            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1), DIR4__LEFT)));
 
             add_action_after_curr_action_action_sequence(sequence, push_around);
         }
@@ -91,8 +91,8 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             end_animation(state, action->animation, textures, sounds, musics, colors);
 
-            vec2i curr_tilemap_pos = action->throw.object_thrown->tilemap_pos;
-            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
+            Vec2i curr_tilemap_pos = action->throw.object_thrown->tilemap_pos;
+            Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
 
             action->throw.object_thrown->tilemap_pos = next_tilemap_pos;
 

@@ -111,7 +111,7 @@ typedef struct
 struct _Action
 {
     Animation* animation;
-    vec2i tilemap_pos;
+    Vec2i tilemap_pos;
     int is_finished;
     int is_finished_at_start;
     int type;
@@ -153,16 +153,16 @@ Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
-Action* new_action_move( vec2i tilemap_pos, int dir4);
-Action* new_action_crash( vec2i tilemap_pos, int dir4);
+Action* new_action_move( Vec2i tilemap_pos, int dir4);
+Action* new_action_crash( Vec2i tilemap_pos, int dir4);
 
-Action* new_action_fall(Object* object, vec2i tilemap_pos);
-Action* new_action_death(Object* object, vec2i tilemap_pos);
-Action* new_action_blow_up(vec2i tilemap_pos);
+Action* new_action_fall(Object* object, Vec2i tilemap_pos);
+Action* new_action_death(Object* object, Vec2i tilemap_pos);
+Action* new_action_blow_up(Vec2i tilemap_pos);
 
-Action* new_action_throw(vec2i tilemap_pos, int dir4, int distance);
-Action* new_action_lift(vec2i tilemap_pos, int dir4);
-Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4);
+Action* new_action_throw(Vec2i tilemap_pos, int dir4, int distance);
+Action* new_action_lift(Vec2i tilemap_pos, int dir4);
+Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4);
 
 void destroy_action(Action* action);
 

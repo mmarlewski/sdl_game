@@ -3,83 +3,106 @@
 
 #include "../inc/common.h"
 
-typedef struct _vec2i vec2i;
-typedef struct _vec2f vec2f;
-typedef struct _vec3i vec3i;
-typedef struct _vec3f vec3f;
-typedef struct _vec4i vec4i;
-typedef struct _vec4f vec4f;
-
-struct _vec2i
+typedef struct
 {
-    vec2i* next;
     int x,y;
-};
 
-struct _vec2f
+} Vec2i;
+
+typedef struct
 {
-    vec2f* next;
     float x,y;
-};
 
-struct _vec3i
+} Vec2f;
+
+typedef struct
 {
-    vec3i* next;
     int x,y,z;
-};
 
-struct _vec3f
+} Vec3i;
+
+typedef struct
 {
-    vec3f* next;
     float x,y,z;
-};
 
-struct _vec4i
+} Vec3f;
+
+typedef struct
 {
-    vec4i* next;
     int x,y,z,w;
-};
 
-struct _vec4f
+} Vec4i;
+
+typedef struct
 {
-    vec4f* next;
     float x;
     float y;
     float z;
     float w;
-};
 
-vec2i make_vec2i (int x, int y);
-vec2i* new_vec2i (int x, int y);
-vec2i* new_vec2i_from_vec2i (vec2i vec);
-void destroy_vec2i (vec2i* vec);
+} Vec4f;
 
-vec2f make_vec2f (float x, float y);
-vec2f* new_vec2f (float x, float y);
-vec2f* new_vec2f_from_vec2f (vec2f vec);
-void destroy_vec2f (vec2f* vec);
+Vec2i vec2i (int x, int y);
+Vec2i* new_vec2i (int x, int y);
+Vec2i* new_vec2i_from_vec2i (Vec2i vec);
+void destroy_vec2i (Vec2i* vec);
 
-vec3i make_vec3i (int x, int y, int z);
-vec3i* new_vec3i (int x, int y, int z);
-vec3i* new_vec3i_from_vec3i (vec3i vec);
-void destroy_vec3i (vec3i* vec);
+Vec2i vec2i_add(Vec2i vec_1, Vec2i vec_2);
+Vec2i vec2i_sub(Vec2i vec_1, Vec2i vec_2);
+Vec2i vec2i_mul(Vec2i vec_1, int scalar);
+int vec2i_equals(Vec2i vec_1, Vec2i vec_2);
 
-vec3f make_vec3f (float x, float y, float z);
-vec3f* new_vec3f (float x, float y, float z);
-vec3f* new_vec3f_from_vec3f (vec3f vec);
-void destroy_vec3f (vec3f* vec);
+Vec2f vec2f (float x, float y);
+Vec2f* new_vec2f (float x, float y);
+Vec2f* new_vec2f_from_vec2f (Vec2f vec);
+void destroy_vec2f (Vec2f* vec);
 
-vec4i make_vec4i (int x, int y, int z, int w);
-vec4i* new_vec4i (int x, int y, int z, int w);
-vec4i* new_vec4i_from_vec4i (vec4i vec);
-void destroy_vec4i (vec4i* vec);
+Vec2f vec2f_add(Vec2f vec_1, Vec2f vec_2);
+Vec2f vec2f_sub(Vec2f vec_1, Vec2f vec_2);
+Vec2f vec2f_mul(Vec2f vec_1, float scalar);
+int vec2f_equals(Vec2f vec_1, Vec2f vec_2, float epsilon);
 
-vec4f make_vec4f (float x, float y, float z, float w);
-vec4f* new_vec4f (float x, float y, float z, float w);
-vec4f* new_vec4f_from_vec4f (vec4f vec);
-void destroy_vec4f (vec4f* vec);
+Vec3i vec3i (int x, int y, int z);
+Vec3i* new_vec3i (int x, int y, int z);
+Vec3i* new_vec3i_from_vec3i (Vec3i vec);
+void destroy_vec3i (Vec3i* vec);
 
-vec2i floor_vec2f_to_vec2i(vec2f vec_in);
-vec2f vec2i_to_vec2f(vec2i vec_in);
+Vec3i vec3i_add(Vec3i vec_1, Vec3i vec_2);
+Vec3i vec3i_sub(Vec3i vec_1, Vec3i vec_2);
+Vec3i vec3i_mul(Vec3i vec_1, int scalar);
+int vec3i_equals(Vec3i vec_1, Vec3i vec_2);
+
+Vec3f vec3f (float x, float y, float z);
+Vec3f* new_vec3f (float x, float y, float z);
+Vec3f* new_vec3f_from_vec3f (Vec3f vec);
+void destroy_vec3f (Vec3f* vec);
+
+Vec3f vec3f_add(Vec3f vec_1, Vec3f vec_2);
+Vec3f vec3f_sub(Vec3f vec_1, Vec3f vec_2);
+Vec3f vec3f_mul(Vec3f vec_1, float scalar);
+int vec3f_equals(Vec3f vec_1, Vec3f vec_2, float epsilon);
+
+Vec4i vec4i (int x, int y, int z, int w);
+Vec4i* new_vec4i (int x, int y, int z, int w);
+Vec4i* new_vec4i_from_vec4i (Vec4i vec);
+void destroy_vec4i (Vec4i* vec);
+
+Vec4i vec4i_add(Vec4i vec_1, Vec4i vec_2);
+Vec4i vec4i_sub(Vec4i vec_1, Vec4i vec_2);
+Vec4i vec4i_mul(Vec4i vec_1, int scalar);
+int vec4i_equals(Vec4i vec_1, Vec4i vec_2);
+
+Vec4f vec4f (float x, float y, float z, float w);
+Vec4f* new_vec4f (float x, float y, float z, float w);
+Vec4f* new_vec4f_from_vec4f (Vec4f vec);
+void destroy_vec4f (Vec4f* vec);
+
+Vec4f vec4f_add(Vec4f vec_1, Vec4f vec_2);
+Vec4f vec4f_sub(Vec4f vec_1, Vec4f vec_2);
+Vec4f vec4f_mul(Vec4f vec_1, float scalar);
+int vec4f_equals(Vec4f vec_1, Vec4f vec_2, float epsilon);
+
+Vec2i floor_vec2f_to_vec2i(Vec2f vec_in);
+Vec2f vec2i_to_vec2f(Vec2i vec_in);
 
 #endif

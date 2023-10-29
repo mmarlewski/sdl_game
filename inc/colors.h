@@ -6,23 +6,23 @@
 
 typedef struct
 {
-    vec3i red;
-    vec3i orange;
-    vec3i yellow;
-    vec3i green;
-    vec3i teal;
-    vec3i blue;
-    vec3i purple;
-    vec3i pink;
+    Vec3i red;
+    Vec3i orange;
+    Vec3i yellow;
+    Vec3i green;
+    Vec3i teal;
+    Vec3i blue;
+    Vec3i purple;
+    Vec3i pink;
 
-    vec3i hero_background;
-    vec3i enemy_background;
+    Vec3i hero_background;
+    Vec3i enemy_background;
 
-    vec3i grey;
-    vec3i black;
-    vec3i white;
+    Vec3i grey;
+    Vec3i black;
+    Vec3i white;
 
-    vec3i none;
+    Vec3i none;
 
 } Colors;
 

@@ -19,15 +19,12 @@ enum DIR4
 
 int get_opposite_dir4(int dir4);
 
-vec2i make_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by);
-vec2f make_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by);
+Vec2i vec2i_move_in_dir4_by(Vec2i vec, int dir4, int by);
+Vec2f vec2f_move_in_dir4_by(Vec2f vec, int dir4, float by);
 
-vec2i* new_vec2i_move_in_dir4_by(vec2i vec, int dir4, int by);
-vec2f* new_vec2f_move_in_dir4_by(vec2f vec, int dir4, float by);
-
-int get_x_diff_from_vec2i_to_vec2i(vec2i from, vec2i to);
-int get_y_diff_from_vec2i_to_vec2i(vec2i from, vec2i to);
-int get_dir4_from_vec2i_to_vec2i(vec2i from, vec2i to);
+int get_x_diff_from_vec2i_to_vec2i(Vec2i from, Vec2i to);
+int get_y_diff_from_vec2i_to_vec2i(Vec2i from, Vec2i to);
+int get_dir4_from_vec2i_to_vec2i(Vec2i from, Vec2i to);
 
 typedef struct
 {
@@ -43,11 +40,11 @@ typedef struct
 
 } DistanceInfo;
 
-DistanceInfo get_distance_info_from_vec2i_to_vec2i(vec2i from, vec2i to);
+DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to);
 
 
-void get_line_from_tilemap_pos_in_dir4(vec2i from_tilemap_pos, int dir4, int length, List* list);
-void get_square_perimeter_tilemap_pos(vec2i center_tilemap_pos, int radius, List* list);
-void get_square_area_tilemap_pos(vec2i center_tilemap_pos, int radius, List* list);
+void get_line_from_tilemap_pos_in_dir4(Vec2i from_tilemap_pos, int dir4, int length, List* list);
+void get_square_perimeter_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list);
+void get_square_area_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list);
 
 #endif

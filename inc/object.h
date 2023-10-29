@@ -33,7 +33,7 @@ struct _Object
     int is_visible;
     int is_dead;
     int type;
-    vec2i tilemap_pos;
+    Vec2i tilemap_pos;
 
     struct _Action* enemy_action_sequence;
     int enemy_performed_attack;

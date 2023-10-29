@@ -9,17 +9,17 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     // camera
 
-    state->camera.world_pos = make_vec2f(0, 0);
+    state->camera.world_pos = vec2f(0, 0);
     state->camera.zoom = 2.0f;
 
     // mouse
 
-    state->mouse.screen_pos = make_vec2i(0, 0);
-    state->mouse.world_pos = make_vec2f(0, 0);
-    state->mouse.gamemap_pos = make_vec2f(0, 0);
-    state->mouse.tilemap_pos = make_vec2i(0, 0);
+    state->mouse.screen_pos = vec2i(0, 0);
+    state->mouse.world_pos = vec2f(0, 0);
+    state->mouse.gamemap_pos = vec2f(0, 0);
+    state->mouse.tilemap_pos = vec2i(0, 0);
     state->mouse.is_dragging = 0;
-    state->mouse.drag_origin_world_pos = make_vec2f(0, 0);
+    state->mouse.drag_origin_world_pos = vec2f(0, 0);
 
     // gamemap
 
@@ -35,14 +35,14 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.object_hero->tilemap_pos = make_vec2i(10,6);
+    state->gamemap.object_hero->tilemap_pos = vec2i(10,6);
     add_object_to_gamemap_objects(state, state->gamemap.object_hero);
     state->gamemap.curr_object_enemy = 0;
 
     state->gamemap.sprite_list = new_list((void (*)(void *))&destroy_sprite);
 
-    state->gamemap.prev_selected_tilemap_pos = make_vec2i(0, 0);
-    state->gamemap.curr_selected_tilemap_pos = make_vec2i(0, 0);
+    state->gamemap.prev_selected_tilemap_pos = vec2i(0, 0);
+    state->gamemap.curr_selected_tilemap_pos = vec2i(0, 0);
 
     state->gamemap.curr_skill = 0;
     state->gamemap.is_skill_two_target = 0;
@@ -50,8 +50,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
     state->gamemap.possible_target_2_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
 
-    state->gamemap.target_1_tilemap_pos = make_vec2i(0, 0);
-    state->gamemap.target_2_tilemap_pos = make_vec2i(0, 0);
+    state->gamemap.target_1_tilemap_pos = vec2i(0, 0);
+    state->gamemap.target_2_tilemap_pos = vec2i(0, 0);
 
     state->gamemap.hero_ap = HERO_MAX_AP;
 
@@ -104,19 +104,19 @@ void change_gamestate(State* state, int new_gamestate)
     }
 }
 
-void change_background_color(State* state, vec3i new_background_color)
+void change_background_color(State* state, Vec3i new_background_color)
 {
     state->background_color = new_background_color;
 }
 
 // gamemap
 
-int is_tilemap_pos_in_tilemap(vec2i tilemap_pos)
+int is_tilemap_pos_in_tilemap(Vec2i tilemap_pos)
 {
     return (tilemap_pos.x >= 0 && tilemap_pos.x < TILEMAP_WIDTH && tilemap_pos.y >= 0 && tilemap_pos.y < TILEMAP_HEIGHT);
 }
 
-Object* get_object_on_tilemap_pos(State* state, vec2i tilemap_pos)
+Object* get_object_on_tilemap_pos(State* state, Vec2i tilemap_pos)
 {
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
 
@@ -134,7 +134,7 @@ Object* get_object_on_tilemap_pos(State* state, vec2i tilemap_pos)
     return 0;
 }
 
-int get_floor_on_tilemap_pos(State* state, vec2i tilemap_pos)
+int get_floor_on_tilemap_pos(State* state, Vec2i tilemap_pos)
 {
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
 
@@ -143,7 +143,7 @@ int get_floor_on_tilemap_pos(State* state, vec2i tilemap_pos)
     return (tile) ? (tile->floor) : (0);
 }
 
-void change_floor_in_tilemap_pos(State* state, int new_floor, vec2i tilemap_pos)
+void change_floor_in_tilemap_pos(State* state, int new_floor, Vec2i tilemap_pos)
 {
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return;
 
@@ -204,7 +204,7 @@ void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite)
     remove_list_element_of_data(state->gamemap.sprite_list, sprite, 1);
 }
 
-void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i new_pos)
+void add_pos_to_possible_target_1_tilemap_pos_list(State* state, Vec2i new_pos)
 {
     add_new_list_element_to_list_end(state->gamemap.possible_target_1_tilemap_pos_list, new_vec2i(new_pos.x, new_pos.y));
 }
@@ -214,18 +214,18 @@ void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state)
     remove_all_list_elements(state->gamemap.possible_target_1_tilemap_pos_list, 1);
 }
 
-int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, vec2i pos)
+int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i pos)
 {
     for(ListElem* curr_elem = state->gamemap.possible_target_1_tilemap_pos_list->head; curr_elem; curr_elem = curr_elem->next )
     {
-        vec2i* curr_vec = (vec2i*)curr_elem->data;
+        Vec2i* curr_vec = (Vec2i*)curr_elem->data;
         if(curr_vec->x == pos.x && curr_vec->y == pos.y) return 1;
     }
 
     return 0;
 }
 
-void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i new_pos)
+void add_pos_to_possible_target_2_tilemap_pos_list(State* state, Vec2i new_pos)
 {
     add_new_list_element_to_list_end(state->gamemap.possible_target_2_tilemap_pos_list, new_vec2i(new_pos.x, new_pos.y));
 }
@@ -235,11 +235,11 @@ void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state)
     remove_all_list_elements(state->gamemap.possible_target_2_tilemap_pos_list, 1);
 }
 
-int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos)
+int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i pos)
 {
     for(ListElem* curr_elem = state->gamemap.possible_target_2_tilemap_pos_list->head; curr_elem; curr_elem = curr_elem->next )
     {
-        vec2i* curr_vec = (vec2i*)curr_elem->data;
+        Vec2i* curr_vec = (Vec2i*)curr_elem->data;
         if(curr_vec->x == pos.x && curr_vec->y == pos.y) return 1;
     }
 
@@ -259,151 +259,6 @@ void execute_action_sequence(State* state, Action* action_sequence, Textures* te
     action_sequence->is_finished = 0;
 
     start_action(state, action_sequence, action_sequence, textures, sounds, musics, colors);
-}
-
-void print_action(Action* action, int depth)
-{
-    char* action_type = get_action_name_from_type(action->type);
-    for(int i = 0; i < depth; i++) printf("  ");
-    printf("%s \n", action_type);
-
-    if(action->type != ACTION_TYPE__SEQUENCE && action->type != ACTION_TYPE__SIMULTANEOUS)
-    {
-        // comment this line if you need to look closely at each single action
-        return;
-    }
-
-    switch(action->type)
-    {
-        case ACTION_TYPE__NONE:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__SEQUENCE:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("[ \n");
-            for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
-            {
-                print_action(curr_elem->data, depth + 1);
-            }
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("] \n");
-        }
-        break;
-        case ACTION_TYPE__SIMULTANEOUS:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("{ \n");
-            for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
-            {
-                print_action(curr_elem->data, depth + 1);
-            }
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("} \n");
-        }
-        break;
-        case ACTION_TYPE__MOVE:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->move.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->move.dir4);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__CRASH:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_c..ing:  %p \n", action->crash.object_crushing);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_c..ed:   %p \n", action->crash.object_crushed);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->crash.dir4);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__FALL:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->fall.object);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__DEATH:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->death.object);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__BLOW_UP:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__THROW:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_thrown:  %p \n", action->throw.object_thrown);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_on_t.:   %p \n", action->throw.object_on_target);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->throw.dir4);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("distance:       %i \n", action->throw.distance);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__LIFT:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->lift.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->lift.dir4);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        case ACTION_TYPE__DROP:
-        {
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf("( \n");
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object:         %p \n", action->drop.object);
-            for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->drop.dir4);
-            for(int i = 0; i < depth; i++) printf("  ");
-            printf(") \n");
-        }
-        break;
-        default:
-        break;
-    }
 }
 
 char* get_gamestate_name(int gamestate)

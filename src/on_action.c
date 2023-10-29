@@ -58,7 +58,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             if(!is_object_flying(action->move.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+                add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
             }
         }
         break;
@@ -72,7 +72,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             if(!is_object_flying(action->move.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+                add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
             }
         }
         break;
@@ -81,7 +81,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             if(!is_object_flying(action->move.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+                add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
             }
         }
         break;
@@ -90,7 +90,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             if(!is_object_flying(action->move.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_move( make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+                add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
             }
         }
         break;
@@ -99,7 +99,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             if(!is_object_flying(action->move.object->type))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+                add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
             }
         }
         break;

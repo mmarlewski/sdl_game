@@ -14,7 +14,7 @@ void destroy_texture (Texture* texture)
     SDL_DestroyTexture(texture);
 }
 
-void draw_texture_at_screen_pos (Renderer* renderer, Texture* texture, vec3i color, vec2i screen_pos, float camera_zoom)
+void draw_texture_at_screen_pos (Renderer* renderer, Texture* texture, Vec3i color, Vec2i screen_pos, float camera_zoom)
 {
     if(!texture) return;
 
@@ -33,14 +33,14 @@ void draw_texture_at_screen_pos (Renderer* renderer, Texture* texture, vec3i col
 	SDL_RenderCopy(renderer, texture, 0, &dest);
 }
 
-void draw_texture_at_world_pos (Renderer* renderer, Texture* texture, vec3i color, vec2f world_pos, vec2f camera_pos, float camera_zoom)
+void draw_texture_at_world_pos (Renderer* renderer, Texture* texture, Vec3i color, Vec2f world_pos, Vec2f camera_pos, float camera_zoom)
 {
-    vec2i screen_pos = world_pos_to_screen_pos(world_pos, camera_pos, camera_zoom);
+    Vec2i screen_pos = world_pos_to_screen_pos(world_pos, camera_pos, camera_zoom);
     draw_texture_at_screen_pos (renderer, texture, color, screen_pos, camera_zoom);
 }
 
-void draw_texture_at_gamemap_pos (Renderer* renderer, Texture* texture, vec3i color, vec2f gamemap_pos, vec2f camera_pos, float camera_zoom)
+void draw_texture_at_gamemap_pos (Renderer* renderer, Texture* texture, Vec3i color, Vec2f gamemap_pos, Vec2f camera_pos, float camera_zoom)
 {
-    vec2f world_pos = gamemap_pos_to_world_pos(gamemap_pos);
+    Vec2f world_pos = gamemap_pos_to_world_pos(gamemap_pos);
     draw_texture_at_world_pos (renderer, texture, color, world_pos, camera_pos, camera_zoom);
 }

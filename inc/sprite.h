@@ -9,7 +9,7 @@ typedef struct _Sprite Sprite;
 struct _Sprite
 {
     Texture* texture;
-    vec3f gamemap_pos;
+    Vec3f gamemap_pos;
 };
 
 Sprite* new_sprite(Texture* texture);

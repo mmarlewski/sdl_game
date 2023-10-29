@@ -5,7 +5,7 @@ Action* new_action_none()
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
-    action->tilemap_pos = make_vec2i(-1, -1);
+    action->tilemap_pos = vec2i(-1, -1);
     action->is_finished = 0;
     action->is_finished_at_start = 0;
     action->type = ACTION_TYPE__NONE;
@@ -18,7 +18,7 @@ Action* new_action_sequence()
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
-    action->tilemap_pos = make_vec2i(-1, -1);
+    action->tilemap_pos = vec2i(-1, -1);
     action->is_finished = 0;
     action->is_finished_at_start = 0;
     action->type = ACTION_TYPE__SEQUENCE;
@@ -73,7 +73,7 @@ Action* new_action_simultaneous()
     Action* action = malloc(sizeof(* action));
 
     action->animation = 0;
-    action->tilemap_pos = make_vec2i(-1, -1);
+    action->tilemap_pos = vec2i(-1, -1);
     action->is_finished = 0;
     action->is_finished_at_start = 0;
     action->type = ACTION_TYPE__SIMULTANEOUS;
@@ -112,7 +112,7 @@ void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* ne
     add_new_list_element_to_list_end(simultaneous->simultaneous.action_list, new_sequence);
 }
 
-Action* new_action_move(vec2i tilemap_pos, int dir4)
+Action* new_action_move(Vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -128,7 +128,7 @@ Action* new_action_move(vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_crash(vec2i tilemap_pos, int dir4)
+Action* new_action_crash(Vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -145,7 +145,7 @@ Action* new_action_crash(vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_fall(Object* object, vec2i tilemap_pos)
+Action* new_action_fall(Object* object, Vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -160,7 +160,7 @@ Action* new_action_fall(Object* object, vec2i tilemap_pos)
     return action;
 }
 
-Action* new_action_death(Object* object, vec2i tilemap_pos)
+Action* new_action_death(Object* object, Vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -175,7 +175,7 @@ Action* new_action_death(Object* object, vec2i tilemap_pos)
     return action;
 }
 
-Action* new_action_blow_up(vec2i tilemap_pos)
+Action* new_action_blow_up(Vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -188,7 +188,7 @@ Action* new_action_blow_up(vec2i tilemap_pos)
     return action;
 }
 
-Action* new_action_throw( vec2i tilemap_pos, int dir4, int distance)
+Action* new_action_throw( Vec2i tilemap_pos, int dir4, int distance)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -206,7 +206,7 @@ Action* new_action_throw( vec2i tilemap_pos, int dir4, int distance)
     return action;
 }
 
-Action* new_action_lift( vec2i tilemap_pos, int dir4)
+Action* new_action_lift( Vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -222,7 +222,7 @@ Action* new_action_lift( vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_drop(Object* object, vec2i tilemap_pos, int dir4)
+Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
 

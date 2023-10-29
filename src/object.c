@@ -9,7 +9,7 @@ Object* new_object(int type)
     object->is_visible = 1;
     object->is_dead = 0;
     object->type = type;
-    object->tilemap_pos = make_vec2i(0,0);
+    object->tilemap_pos = vec2i(0,0);
 
     object->enemy_action_sequence = new_action_sequence();
     object->enemy_performed_attack = 0;

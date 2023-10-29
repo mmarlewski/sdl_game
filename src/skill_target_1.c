@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos)
+void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos)
 {
     Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
 
@@ -28,10 +28,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             int down_cont = 1;
             int left_cont = 1;
 
-            vec2i up_tilemap_pos = source_tilemap_pos;
-            vec2i right_tilemap_pos = source_tilemap_pos;
-            vec2i down_tilemap_pos = source_tilemap_pos;
-            vec2i left_tilemap_pos = source_tilemap_pos;
+            Vec2i up_tilemap_pos = source_tilemap_pos;
+            Vec2i right_tilemap_pos = source_tilemap_pos;
+            Vec2i down_tilemap_pos = source_tilemap_pos;
+            Vec2i left_tilemap_pos = source_tilemap_pos;
 
             Object* up_object = 0;
             Object* right_object = 0;
@@ -40,10 +40,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
 
             for(int i = 1; i < 10; i++)
             {
-                up_tilemap_pos = make_vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
-                right_tilemap_pos = make_vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
-                down_tilemap_pos = make_vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
-                left_tilemap_pos = make_vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
+                up_tilemap_pos = vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
+                right_tilemap_pos = vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
+                down_tilemap_pos = vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
+                left_tilemap_pos = vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
 
                 up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
                 right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
@@ -81,10 +81,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             int down_cont = 1;
             int left_cont = 1;
 
-            vec2i up_tilemap_pos = source_tilemap_pos;
-            vec2i right_tilemap_pos = source_tilemap_pos;
-            vec2i down_tilemap_pos = source_tilemap_pos;
-            vec2i left_tilemap_pos = source_tilemap_pos;
+            Vec2i up_tilemap_pos = source_tilemap_pos;
+            Vec2i right_tilemap_pos = source_tilemap_pos;
+            Vec2i down_tilemap_pos = source_tilemap_pos;
+            Vec2i left_tilemap_pos = source_tilemap_pos;
 
             Object* up_object = 0;
             Object* right_object = 0;
@@ -93,10 +93,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
 
             for(int i = 1; i < 10; i++)
             {
-                up_tilemap_pos = make_vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
-                right_tilemap_pos = make_vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
-                down_tilemap_pos = make_vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
-                left_tilemap_pos = make_vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
+                up_tilemap_pos = vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
+                right_tilemap_pos = vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
+                down_tilemap_pos = vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
+                left_tilemap_pos = vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
 
                 up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
                 right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
@@ -129,25 +129,25 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
         break;
         case SKILL__PUSH:
         {
-            vec2i up_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
+            Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
             if(get_object_on_tilemap_pos(state, up_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, up_tilemap_pos);
             }
 
-            vec2i right_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
+            Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
             if(get_object_on_tilemap_pos(state, right_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, right_tilemap_pos);
             }
 
-            vec2i down_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
+            Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
             if(get_object_on_tilemap_pos(state, down_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, down_tilemap_pos);
             }
 
-            vec2i left_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
+            Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
             if(get_object_on_tilemap_pos(state, left_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, left_tilemap_pos);
@@ -161,10 +161,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             int down_cont = 1;
             int left_cont = 1;
 
-            vec2i up_tilemap_pos = source_tilemap_pos;
-            vec2i right_tilemap_pos = source_tilemap_pos;
-            vec2i down_tilemap_pos = source_tilemap_pos;
-            vec2i left_tilemap_pos = source_tilemap_pos;
+            Vec2i up_tilemap_pos = source_tilemap_pos;
+            Vec2i right_tilemap_pos = source_tilemap_pos;
+            Vec2i down_tilemap_pos = source_tilemap_pos;
+            Vec2i left_tilemap_pos = source_tilemap_pos;
 
             Object* up_object = 0;
             Object* right_object = 0;
@@ -173,10 +173,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
 
             for(int i = 1; i < 10; i++)
             {
-                up_tilemap_pos = make_vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
-                right_tilemap_pos = make_vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
-                down_tilemap_pos = make_vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
-                left_tilemap_pos = make_vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
+                up_tilemap_pos = vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
+                right_tilemap_pos = vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
+                down_tilemap_pos = vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
+                left_tilemap_pos = vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
 
                 up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
                 right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
@@ -214,10 +214,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             int down_cont = 1;
             int left_cont = 1;
 
-            vec2i up_tilemap_pos = source_tilemap_pos;
-            vec2i right_tilemap_pos = source_tilemap_pos;
-            vec2i down_tilemap_pos = source_tilemap_pos;
-            vec2i left_tilemap_pos = source_tilemap_pos;
+            Vec2i up_tilemap_pos = source_tilemap_pos;
+            Vec2i right_tilemap_pos = source_tilemap_pos;
+            Vec2i down_tilemap_pos = source_tilemap_pos;
+            Vec2i left_tilemap_pos = source_tilemap_pos;
 
             Object* up_object = 0;
             Object* right_object = 0;
@@ -226,10 +226,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
 
             for(int i = 1; i < 10; i++)
             {
-                up_tilemap_pos = make_vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
-                right_tilemap_pos = make_vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
-                down_tilemap_pos = make_vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
-                left_tilemap_pos = make_vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
+                up_tilemap_pos = vec2i_move_in_dir4_by(up_tilemap_pos, DIR4__UP, 1);
+                right_tilemap_pos = vec2i_move_in_dir4_by(right_tilemap_pos, DIR4__RIGHT, 1);
+                down_tilemap_pos = vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
+                left_tilemap_pos = vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
 
                 up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
                 right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
@@ -262,25 +262,25 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
         break;
         case SKILL__THROW:
         {
-            vec2i up_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
+            Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
             if(get_object_on_tilemap_pos(state, up_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, up_tilemap_pos);
             }
 
-            vec2i right_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
+            Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
             if(get_object_on_tilemap_pos(state, right_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, right_tilemap_pos);
             }
 
-            vec2i down_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
+            Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
             if(get_object_on_tilemap_pos(state, down_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, down_tilemap_pos);
             }
 
-            vec2i left_tilemap_pos = make_vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
+            Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
             if(get_object_on_tilemap_pos(state, left_tilemap_pos) != 0)
             {
                 add_pos_to_possible_target_1_tilemap_pos_list(state, left_tilemap_pos);

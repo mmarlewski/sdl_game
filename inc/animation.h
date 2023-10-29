@@ -56,8 +56,8 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2f from_gamemap_pos;
-    vec2f to_gamemap_pos;
+    Vec2f from_gamemap_pos;
+    Vec2f to_gamemap_pos;
     float seconds;
 
 } Animation_MoveSpriteInGamemapInLine;
@@ -68,8 +68,8 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2f from_gamemap_pos;
-    vec2f to_gamemap_pos;
+    Vec2f from_gamemap_pos;
+    Vec2f to_gamemap_pos;
     float seconds;
     float sin_mul;
 
@@ -81,7 +81,7 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2f gamemap_pos;
+    Vec2f gamemap_pos;
     float seconds;
 
 } Animation_ShowSpriteInGamemap;
@@ -92,7 +92,7 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2f gamemap_pos;
+    Vec2f gamemap_pos;
     float length;
     float seconds;
 
@@ -104,7 +104,7 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2f gamemap_pos;
+    Vec2f gamemap_pos;
     float length;
     float seconds;
 
@@ -116,7 +116,7 @@ typedef struct
     Sprite* sprite;
 
     Texture* texture;
-    vec2f gamemap_pos;
+    Vec2f gamemap_pos;
     float length;
     float seconds;
 
@@ -126,8 +126,8 @@ typedef struct
 {
     float time;
 
-    vec2f from_world_pos;
-    vec2f to_world_pos;
+    Vec2f from_world_pos;
+    Vec2f to_world_pos;
     float seconds;
     int start_from_curr;
 
@@ -137,8 +137,8 @@ typedef struct
 {
     float time;
 
-    vec2f from_world_pos;
-    vec2f to_world_pos;
+    Vec2f from_world_pos;
+    Vec2f to_world_pos;
     float seconds;
     float sin_mul;
     int start_from_curr;
@@ -149,8 +149,8 @@ typedef struct
 {
     float time;
 
-    vec2f from_gamemap_pos;
-    vec2f to_gamemap_pos;
+    Vec2f from_gamemap_pos;
+    Vec2f to_gamemap_pos;
     float seconds;
 
 } Animation_MoveCameraInGamemapInLine;
@@ -159,8 +159,8 @@ typedef struct
 {
     float time;
 
-    vec2f from_gamemap_pos;
-    vec2f to_gamemap_pos;
+    Vec2f from_gamemap_pos;
+    Vec2f to_gamemap_pos;
     float seconds;
     float sin_mul;
 
@@ -216,19 +216,19 @@ Animation* new_animation_simultaneous_of_2(Animation* animation_1, Animation* an
 Animation* new_animation_simultaneous_of_3(Animation* animation_1, Animation* animation_2, Animation* animation_3);
 void add_animation_to_end_animation_simultaneous(Animation* animation_simultaneous, Animation* new_animation);
 
-Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds);
-Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds, float sin_mul);
+Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds);
+Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds, float sin_mul);
 
-Animation* new_animation_show_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float seconds);
-Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds);
-Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds);
-Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, vec2f gamemap_pos, float length, float seconds);
+Animation* new_animation_show_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds);
+Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds);
+Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds);
+Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds);
 
-Animation* new_animation_move_camera_in_world_in_line(vec2f from_world_pos, vec2f to_world_pos, float seconds, int start_from_curr);
-Animation* new_animation_move_camera_in_world_in_arch(vec2f from_world_pos, vec2f to_world_pos, float seconds, float sin_mul, int start_from_curr);
+Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, int start_from_curr);
+Animation* new_animation_move_camera_in_world_in_arch(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, float sin_mul, int start_from_curr);
 
-Animation* new_animation_move_camera_in_gamemap_in_line(vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds);
-Animation* new_animation_move_camera_in_gamemap_in_arch(vec2f from_gamemap_pos, vec2f to_gamemap_pos, float seconds, float sin_mul);
+Animation* new_animation_move_camera_in_gamemap_in_line(Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds);
+Animation* new_animation_move_camera_in_gamemap_in_arch(Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds, float sin_mul);
 
 Animation* new_animation_play_sound(Sound* sound);
 

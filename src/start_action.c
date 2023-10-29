@@ -44,7 +44,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->move.object = get_object_on_tilemap_pos(state, action->tilemap_pos);
 
             if(action->move.object == 0 ||
-            !is_tilemap_pos_in_tilemap(make_vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)))
+            !is_tilemap_pos_in_tilemap(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)))
             {
                 action->is_finished = 1;
                 action->is_finished_at_start = 1;
@@ -53,8 +53,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->move.object->tilemap_pos = action->tilemap_pos;
 
-            vec2i curr_tilemap_pos = action->tilemap_pos;
-            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->move.dir4,1);
+            Vec2i curr_tilemap_pos = action->tilemap_pos;
+            Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos,action->move.dir4,1);
             Object* object_on_next_tilemap_pos = get_object_on_tilemap_pos(state, next_tilemap_pos);
 
             if(object_on_next_tilemap_pos)
@@ -87,7 +87,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION_TYPE__CRASH:
         {
             action->crash.object_crushing = get_object_on_tilemap_pos(state, action->tilemap_pos);
-            action->crash.object_crushed = get_object_on_tilemap_pos(state, make_vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
+            action->crash.object_crushed = get_object_on_tilemap_pos(state, vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
 
             if(action->crash.object_crushing == 0 ||
             action->crash.object_crushed == 0)
@@ -100,8 +100,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->crash.object_crushing->tilemap_pos = action->tilemap_pos;
 
             Texture* object_texture = get_texture_from_object_type(action->crash.object_crushing->type, textures);
-            vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object_crushing->tilemap_pos);
-            vec2f next_object_gamemap_pos = make_vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash.dir4, 1.0f);
+            Vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object_crushing->tilemap_pos);
+            Vec2f next_object_gamemap_pos = vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash.dir4, 1.0f);
             next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
             next_object_gamemap_pos.y = curr_object_gamemap_pos.y + (next_object_gamemap_pos.y - curr_object_gamemap_pos.y) * 0.5f;
 
@@ -202,7 +202,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__THROW:
         {
-            vec2i target_tilemap_pos = make_vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
+            Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
             action->throw.object_thrown = get_object_on_tilemap_pos(state, action->tilemap_pos);
             action->throw.object_on_target = get_object_on_tilemap_pos(state, target_tilemap_pos);
 
@@ -227,8 +227,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->throw.object_thrown->tilemap_pos = action->tilemap_pos;
 
-            vec2i curr_tilemap_pos = action->tilemap_pos;
-            vec2i next_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos,action->throw.dir4,action->throw.distance);
+            Vec2i curr_tilemap_pos = action->tilemap_pos;
+            Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos,action->throw.dir4,action->throw.distance);
 
             Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
                 get_texture_from_object_type(action->throw.object_thrown->type, textures),

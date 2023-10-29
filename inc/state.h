@@ -45,20 +45,20 @@ typedef struct
 
 typedef struct
 {
-    vec2f world_pos;
+    Vec2f world_pos;
     float zoom;
 
 } State_Camera;
 
 typedef struct
 {
-    vec2i screen_pos;
-    vec2f world_pos;
-    vec2f gamemap_pos;
-    vec2i tilemap_pos;
+    Vec2i screen_pos;
+    Vec2f world_pos;
+    Vec2f gamemap_pos;
+    Vec2i tilemap_pos;
 
     int is_dragging;
-    vec2f drag_origin_world_pos;
+    Vec2f drag_origin_world_pos;
 
 } State_Mouse;
 
@@ -79,13 +79,13 @@ typedef struct
 
     int hero_ap;
 
-    vec2i prev_selected_tilemap_pos;
-    vec2i curr_selected_tilemap_pos;
+    Vec2i prev_selected_tilemap_pos;
+    Vec2i curr_selected_tilemap_pos;
 
     int curr_skill;
     int is_skill_two_target;
-    vec2i target_1_tilemap_pos;
-    vec2i target_2_tilemap_pos;
+    Vec2i target_1_tilemap_pos;
+    Vec2i target_2_tilemap_pos;
 
     int show_all_order_numbers;
 
@@ -104,7 +104,7 @@ typedef struct
     int is_game_running;
     int gamestate;
     float timer;
-    vec3i background_color;
+    Vec3i background_color;
 
     State_Camera camera;
     State_Mouse mouse;
@@ -117,12 +117,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void change_gamestate(State* state, int new_gamestate);
-void change_background_color(State* state, vec3i new_background_color);
+void change_background_color(State* state, Vec3i new_background_color);
 
-int is_tilemap_pos_in_tilemap(vec2i tilemap_pos);
-Object* get_object_on_tilemap_pos(State* state, vec2i tilemap_pos);
-int get_floor_on_tilemap_pos(State* state, vec2i tilemap_pos);
-void change_floor_in_tilemap_pos(State* state, int new_floor, vec2i tilemap_pos);
+int is_tilemap_pos_in_tilemap(Vec2i tilemap_pos);
+Object* get_object_on_tilemap_pos(State* state, Vec2i tilemap_pos);
+int get_floor_on_tilemap_pos(State* state, Vec2i tilemap_pos);
+void change_floor_in_tilemap_pos(State* state, int new_floor, Vec2i tilemap_pos);
 
 void add_object_to_gamemap_objects(State* state, Object* new_object);
 void remove_object_from_gamemap_objects(State* state, Object* object);
@@ -131,13 +131,13 @@ void remove_all_dead_objects_from_gamemap_objects(State* state);
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 
-void add_pos_to_possible_target_1_tilemap_pos_list(State* state, vec2i new_pos);
+void add_pos_to_possible_target_1_tilemap_pos_list(State* state, Vec2i new_pos);
 void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state);
-int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, vec2i pos);
+int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i pos);
 
-void add_pos_to_possible_target_2_tilemap_pos_list(State* state, vec2i new_pos);
+void add_pos_to_possible_target_2_tilemap_pos_list(State* state, Vec2i new_pos);
 void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
-int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, vec2i pos);
+int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i pos);
 
 void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
@@ -160,9 +160,9 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
 void object_on_death(State* state, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
 
-void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos);
-void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos);
-void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, vec2i source_tilemap_pos, vec2i target_1_tilemap_pos, vec2i target_2_tilemap_pos);
+void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos);
+void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos);
+void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos);
 
 void object_enemy_add_actions_to_action_sequence_move(State* state, Action* action_sequence, Object* object);
 void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* action_sequence, Object* object);
@@ -175,6 +175,6 @@ void restore_hero_ap(State* state);
 
 void determine_enemy_order(State* state);
 
-void find_path(State* state, vec2i start_tilemap_pos, vec2i end_tilemap_pos, List* path);
+void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path);
 
 #endif

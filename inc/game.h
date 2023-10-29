@@ -22,15 +22,10 @@
 #include "../inc/musics.h"
 #include "../inc/colors.h"
 
-// printf("here ok \n");
-
 void init_sdl (Window** window, Renderer** renderer);
 void destroy_sdl (Window* window, Renderer* renderer);
 
 void render (Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors);
-
-void draw_line (Renderer* renderer, vec2f start, vec2f end);
-void draw_rectangle (Renderer* renderer, vec2f start, vec2f dims);
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors);
 void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures, Colors* colors);

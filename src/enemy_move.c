@@ -2,19 +2,19 @@
 
 void object_enemy_add_actions_to_action_sequence_move(State* state, Action* action_sequence, Object* object)
 {
-    vec2i tilemap_pos_up = object->tilemap_pos;
+    Vec2i tilemap_pos_up = object->tilemap_pos;
     Object* object_up = 0;
     int distance_up = 0;
 
-    vec2i tilemap_pos_right = object->tilemap_pos;
+    Vec2i tilemap_pos_right = object->tilemap_pos;
     Object* object_right = 0;
     int distance_right = 0;
 
-    vec2i tilemap_pos_down = object->tilemap_pos;
+    Vec2i tilemap_pos_down = object->tilemap_pos;
     Object* object_down = 0;
     int distance_down = 0;
 
-    vec2i tilemap_pos_left = object->tilemap_pos;
+    Vec2i tilemap_pos_left = object->tilemap_pos;
     Object* object_left = 0;
     int distance_left = 0;
 
@@ -22,28 +22,28 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
     {
         if(object_up == 0)
         {
-            tilemap_pos_up = make_vec2i_move_in_dir4_by(tilemap_pos_up, DIR4__UP, 1);
+            tilemap_pos_up = vec2i_move_in_dir4_by(tilemap_pos_up, DIR4__UP, 1);
             object_up = get_object_on_tilemap_pos(state, tilemap_pos_up);
             if(object_up != 0) distance_up = i;
         }
 
         if(object_right == 0)
         {
-            tilemap_pos_right = make_vec2i_move_in_dir4_by(tilemap_pos_right, DIR4__RIGHT, 1);
+            tilemap_pos_right = vec2i_move_in_dir4_by(tilemap_pos_right, DIR4__RIGHT, 1);
             object_right = get_object_on_tilemap_pos(state, tilemap_pos_right);
             if(object_right != 0) distance_right = i;
         }
 
         if(object_down == 0)
         {
-            tilemap_pos_down = make_vec2i_move_in_dir4_by(tilemap_pos_down, DIR4__DOWN, 1);
+            tilemap_pos_down = vec2i_move_in_dir4_by(tilemap_pos_down, DIR4__DOWN, 1);
             object_down = get_object_on_tilemap_pos(state, tilemap_pos_down);
             if(object_down != 0) distance_down = i;
         }
 
         if(object_left == 0)
         {
-            tilemap_pos_left = make_vec2i_move_in_dir4_by(tilemap_pos_left, DIR4__LEFT, 1);
+            tilemap_pos_left = vec2i_move_in_dir4_by(tilemap_pos_left, DIR4__LEFT, 1);
             object_left = get_object_on_tilemap_pos(state, tilemap_pos_left);
             if(object_left != 0) distance_left = i;
         }
@@ -94,12 +94,12 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
         distance = rand() % 5 + 1;
     }
 
-    vec2i curr_tilemap_pos = object->tilemap_pos;
-    vec2i new_tilemap_pos = object->tilemap_pos;
+    Vec2i curr_tilemap_pos = object->tilemap_pos;
+    Vec2i new_tilemap_pos = object->tilemap_pos;
     Object* new_tilemap_pos_object = 0;
     for(int i = 0; i < distance; i++)
     {
-        new_tilemap_pos = make_vec2i_move_in_dir4_by(curr_tilemap_pos, dir4, 1);
+        new_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, dir4, 1);
         new_tilemap_pos_object = get_object_on_tilemap_pos(state, new_tilemap_pos);
         if(new_tilemap_pos_object == 0)
         {
