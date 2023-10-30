@@ -142,6 +142,18 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
                 );
         }
         break;
+        case ACTION_TYPE__CHANGE:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->change.change,
+                colors->none,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
         default:
         break;
     }

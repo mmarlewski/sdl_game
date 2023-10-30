@@ -8,6 +8,7 @@
 typedef struct
 {
     Texture* metal;
+    Texture* metal_no_spikes;
     Texture* metal_spikes;
     Texture* metal_lava_crack;
     Texture* lava_1;
@@ -16,6 +17,9 @@ typedef struct
     Texture* ice_water_crack;
     Texture* water_1;
     Texture* water_2;
+    Texture* hatch_closed;
+    Texture* hatch_open_1;
+    Texture* hatch_open_2;
 
 } Textures_Floor;
 
@@ -44,6 +48,15 @@ typedef struct
 
 void load_textures_danger (Renderer* renderer, Textures_Danger* danger);
 void destroy_textures_danger (Textures_Danger* danger);
+
+typedef struct
+{
+    Texture* none;
+
+} Textures_None;
+
+void load_textures_none (Renderer* renderer, Textures_None* none);
+void destroy_textures_none (Textures_None* none);
 
 typedef struct
 {
@@ -112,6 +125,7 @@ void destroy_textures_throw (Textures_Throw* throw);
 
 typedef struct
 {
+    Texture* none;
     Texture* up;
     Texture* right;
     Texture* down;
@@ -128,6 +142,15 @@ typedef struct
     Texture* thump;
 
 } Textures_Drop;
+
+typedef struct
+{
+    Texture* change;
+
+} Textures_Change;
+
+void load_textures_change (Renderer* renderer, Textures_Change* change);
+void destroy_textures_change (Textures_Change* change);
 
 void load_textures_drop (Renderer* renderer, Textures_Drop* drop);
 void destroy_textures_drop (Textures_Drop* drop);
@@ -209,6 +232,8 @@ typedef struct
     Textures_Highlight highlight;
     Textures_Danger danger;
 
+    Textures_None none;
+
     Textures_Move move;
     Textures_Crash crash;
 
@@ -219,6 +244,8 @@ typedef struct
     Textures_Throw throw;
     Textures_Lift lift;
     Textures_Drop drop;
+
+    Textures_Change change;
 
     Textures_Object object;
 

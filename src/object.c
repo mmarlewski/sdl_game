@@ -70,6 +70,30 @@ int is_object_enemy(int object_type)
     return is;
 }
 
+int is_object_interactable(int object_type)
+{
+    int is = 0;
+
+    switch(object_type)
+    {
+        case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__PILLAR: is = 1; break;
+        case OBJECT_TYPE__PILLAR_SPIKES: is = 1; break;
+        case OBJECT_TYPE__BARREL: is = 1; break;
+        case OBJECT_TYPE__SPRING: is = 1; break;
+        case OBJECT_TYPE__WEIGHT: is = 0; break;
+        case OBJECT_TYPE__HERO: is = 0; break;
+        case OBJECT_TYPE__GOAT: is = 0; break;
+        case OBJECT_TYPE__SPIDER: is = 0; break;
+        case OBJECT_TYPE__BULL: is = 0; break;
+        case OBJECT_TYPE__FLY: is = 0; break;
+        case OBJECT_TYPE__CHAMELEON: is = 0; break;
+        default: break;
+    }
+
+    return is;
+}
+
 char* get_name_from_object_type(int object_type)
 {
     char* name = "";

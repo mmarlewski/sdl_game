@@ -39,6 +39,16 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
             //
         }
         break;
+        case FLOOR_TYPE__HATCH_CLOSED:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__HATCH_OPEN:
+        {
+            //
+        }
+        break;
         default:
         break;
     }
@@ -95,6 +105,20 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         }
         break;
         case FLOOR_TYPE__WATER:
+        {
+            if(!is_object_flying(action->move.object->type))
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+            }
+        }
+        break;
+        case FLOOR_TYPE__HATCH_CLOSED:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__HATCH_OPEN:
         {
             if(!is_object_flying(action->move.object->type))
             {
@@ -174,6 +198,79 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
             }
+        }
+        break;
+        case FLOOR_TYPE__HATCH_CLOSED:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__HATCH_OPEN:
+        {
+            if(!is_object_flying(action->drop.object->type))
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
+            }
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__METAL_NO_SPIKES:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__METAL_SPIKES, tilemap_pos));
+        }
+        break;
+        case FLOOR_TYPE__METAL_SPIKES:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__METAL_NO_SPIKES, tilemap_pos));
+        }
+        break;
+        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__LAVA:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__ICE:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__ICE_WATER_CRACK:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        {
+            //
+        }
+        break;
+        case FLOOR_TYPE__HATCH_CLOSED:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__HATCH_OPEN, tilemap_pos));
+        }
+        break;
+        case FLOOR_TYPE__HATCH_OPEN:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__HATCH_CLOSED, tilemap_pos));
         }
         break;
         default:
@@ -390,7 +487,74 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
         break;
         case OBJECT_TYPE__SPRING:
         {
-            add_action_to_end_action_sequence(sequence, new_action_move( action->tilemap_pos, action->drop.dir4));
+            if(action->drop.dir4 != DIR4__NONE)
+            {
+                add_action_to_end_action_sequence(sequence, new_action_move( action->tilemap_pos, action->drop.dir4));
+            }
+        }
+        break;
+        case OBJECT_TYPE__WEIGHT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__HERO:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__GOAT:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__SPIDER:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__BULL:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__FLY:
+        {
+            //
+        }
+        break;
+        case OBJECT_TYPE__CHAMELEON:
+        {
+            //
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_interact(State* state, Action* sequence, Object* object, Vec2i tilemap_pos)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_change(1, OBJECT_TYPE__PILLAR_SPIKES, FLOOR_TYPE__NONE, tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_change(1, OBJECT_TYPE__PILLAR, FLOOR_TYPE__NONE, tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__SPRING:
+        {
+            add_action_to_end_action_sequence(sequence, new_action_lift(object->tilemap_pos, DIR4__NONE));
         }
         break;
         case OBJECT_TYPE__WEIGHT:

@@ -7,6 +7,35 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
     switch(skill)
     {
+        case SKILL__NONE:
+        {
+            //
+        }
+        break;
+        case SKILL__INTERACT:
+        {
+            List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
+            get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
+            for(ListElem* curr_elem = square_area_pos->head; curr_elem != 0; curr_elem = curr_elem->next)
+            {
+                Vec2i* curr_tilemap_pos = (Vec2i*)curr_elem->data;
+                if(is_tilemap_pos_in_tilemap(*curr_tilemap_pos))
+                {
+                    int curr_floor = get_floor_on_tilemap_pos(state, *curr_tilemap_pos);
+                    Object* curr_object = get_object_on_tilemap_pos(state, *curr_tilemap_pos);
+
+                    if(is_floor_interactable(curr_floor) ||
+                    (curr_object != 0 &&
+                     is_object_interactable(curr_object->type)))
+                    {
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
+                    }
+                }
+            }
+            remove_all_list_elements(square_area_pos, 1);
+            destroy_list(square_area_pos);
+        }
+        break;
         case SKILL__MOVE:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);

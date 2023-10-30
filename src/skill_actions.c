@@ -8,6 +8,26 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
 
     switch(skill)
     {
+        case SKILL__NONE:
+        {
+            //
+        }
+        break;
+        case SKILL__INTERACT:
+        {
+            Object* object = target_2_object;
+            int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
+            if(object != 0)
+            {
+                object_on_interact(state, action_sequence, object, target_2_tilemap_pos);
+            }
+            else if(floor != FLOOR_TYPE__NONE)
+            {
+                floor_on_interact(state, action_sequence, floor, target_2_tilemap_pos);
+            }
+        }
+        break;
         case SKILL__MOVE:
         {
             List* path_pos = new_list((void(*)(void*))destroy_vec2i);
@@ -65,7 +85,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 else if(!is_object_flying(source_object->type) &&
                 floor == FLOOR_TYPE__WATER ||
                 floor == FLOOR_TYPE__LAVA ||
-                floor == FLOOR_TYPE__METAL_SPIKES)
+                floor == FLOOR_TYPE__METAL_SPIKES ||
+                floor == FLOOR_TYPE__HATCH_OPEN)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(old_tilemap_pos,dir4));
                     add_action_to_end_action_sequence(action_sequence, new_action_death(source_object,tilemap_pos));
@@ -96,7 +117,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             floor == FLOOR_TYPE__ICE_WATER_CRACK ||
             floor == FLOOR_TYPE__LAVA ||
             floor == FLOOR_TYPE__METAL_LAVA_CRACK ||
-            floor == FLOOR_TYPE__METAL_SPIKES)
+            floor == FLOOR_TYPE__METAL_SPIKES ||
+            floor == FLOOR_TYPE__HATCH_OPEN)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_throw( source_tilemap_pos, dir4, abs_diff));
                 add_action_to_end_action_sequence(action_sequence, new_action_death(source_object, target_2_tilemap_pos));
@@ -133,7 +155,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 else if(!is_object_flying(source_object->type) &&
                 charge_floor == FLOOR_TYPE__WATER ||
                 charge_floor == FLOOR_TYPE__LAVA ||
-                charge_floor == FLOOR_TYPE__METAL_SPIKES)
+                charge_floor == FLOOR_TYPE__METAL_SPIKES ||
+                charge_floor == FLOOR_TYPE__HATCH_OPEN)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(charge_old_tilemap_pos,charge_dir4));
                     add_action_to_end_action_sequence(action_sequence, new_action_death(source_object,charge_tilemap_pos));
@@ -171,7 +194,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 else if(!is_object_flying(target_1_object->type) &&
                 push_floor == FLOOR_TYPE__WATER ||
                 push_floor == FLOOR_TYPE__LAVA ||
-                push_floor == FLOOR_TYPE__METAL_SPIKES)
+                push_floor == FLOOR_TYPE__METAL_SPIKES ||
+                push_floor == FLOOR_TYPE__HATCH_OPEN)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(push_old_tilemap_pos,push_dir4));
                     add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object,push_tilemap_pos));
@@ -210,7 +234,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 else if(!is_object_flying(source_object->type) &&
                 charge_floor == FLOOR_TYPE__WATER ||
                 charge_floor == FLOOR_TYPE__LAVA ||
-                charge_floor == FLOOR_TYPE__METAL_SPIKES)
+                charge_floor == FLOOR_TYPE__METAL_SPIKES ||
+                charge_floor == FLOOR_TYPE__HATCH_OPEN)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(charge_old_tilemap_pos,charge_dir4));
                     add_action_to_end_action_sequence(action_sequence, new_action_death(source_object,charge_tilemap_pos));
@@ -240,7 +265,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             throw_floor == FLOOR_TYPE__ICE_WATER_CRACK ||
             throw_floor == FLOOR_TYPE__LAVA ||
             throw_floor == FLOOR_TYPE__METAL_LAVA_CRACK ||
-            throw_floor == FLOOR_TYPE__METAL_SPIKES)
+            throw_floor == FLOOR_TYPE__METAL_SPIKES ||
+            throw_floor == FLOOR_TYPE__HATCH_OPEN)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_throw( target_1_tilemap_pos, throw_dir4, throw_abs_diff));
                 add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object, target_2_tilemap_pos));
@@ -279,7 +305,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 else if(!is_object_flying(target_1_object->type) &&
                 floor == FLOOR_TYPE__WATER ||
                 floor == FLOOR_TYPE__LAVA ||
-                floor == FLOOR_TYPE__METAL_SPIKES)
+                floor == FLOOR_TYPE__METAL_SPIKES ||
+                floor == FLOOR_TYPE__HATCH_OPEN)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(old_tilemap_pos,dir4));
                     add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object,tilemap_pos));
@@ -320,7 +347,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 else if(!is_object_flying(target_1_object->type) &&
                 pull_floor == FLOOR_TYPE__WATER ||
                 pull_floor == FLOOR_TYPE__LAVA ||
-                pull_floor == FLOOR_TYPE__METAL_SPIKES)
+                pull_floor == FLOOR_TYPE__METAL_SPIKES ||
+                pull_floor == FLOOR_TYPE__HATCH_OPEN)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(pull_old_tilemap_pos,pull_dir4));
                     add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object,pull_tilemap_pos));
@@ -350,7 +378,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             throw_floor == FLOOR_TYPE__ICE_WATER_CRACK ||
             throw_floor == FLOOR_TYPE__LAVA ||
             throw_floor == FLOOR_TYPE__METAL_LAVA_CRACK ||
-            throw_floor == FLOOR_TYPE__METAL_SPIKES)
+            throw_floor == FLOOR_TYPE__METAL_SPIKES ||
+            throw_floor == FLOOR_TYPE__HATCH_OPEN)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_throw( before_source_tilemap_pos, throw_dir4, throw_abs_diff));
                 add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object, target_2_tilemap_pos));
@@ -381,7 +410,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             floor == FLOOR_TYPE__ICE_WATER_CRACK ||
             floor == FLOOR_TYPE__LAVA ||
             floor == FLOOR_TYPE__METAL_LAVA_CRACK ||
-            floor == FLOOR_TYPE__METAL_SPIKES)
+            floor == FLOOR_TYPE__METAL_SPIKES ||
+            floor == FLOOR_TYPE__HATCH_OPEN)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_throw( target_1_tilemap_pos, dir4, abs_diff));
                 add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object, target_2_tilemap_pos));

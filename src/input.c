@@ -40,6 +40,10 @@ void init_input (Input* input)
 
     input->is_q = 0;
     input->was_q = 0;
+    input->is_w = 0;
+    input->was_w = 0;
+    input->is_e = 0;
+    input->was_e = 0;
 
     input->is_mouse_left = 0;
     input->was_mouse_left = 0;
@@ -88,6 +92,8 @@ void update_input (Input* input)
     input->was_0 = input->is_0;
 
     input->was_q = input->is_q;
+    input->was_w = input->is_w;
+    input->was_e = input->is_e;
 
     while (SDL_PollEvent(&event))
     {
@@ -130,6 +136,8 @@ void update_input (Input* input)
                 case SDL_SCANCODE_0:  input->is_0 = 1; break;
 
                 case SDL_SCANCODE_Q:  input->is_q = 1; break;
+                case SDL_SCANCODE_W:  input->is_w = 1; break;
+                case SDL_SCANCODE_E:  input->is_e = 1; break;
 
                 default: break;
             }
@@ -159,6 +167,8 @@ void update_input (Input* input)
                 case SDL_SCANCODE_0:  input->is_0 = 0; break;
 
                 case SDL_SCANCODE_Q:  input->is_q = 0; break;
+                case SDL_SCANCODE_W:  input->is_w = 0; break;
+                case SDL_SCANCODE_E:  input->is_e = 0; break;
 
                 default: break;
             }

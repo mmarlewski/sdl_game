@@ -159,11 +159,13 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
 void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
+void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 
 void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
 void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
 void object_on_death(State* state, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
+void object_on_interact(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 
 void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos);
 void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos);

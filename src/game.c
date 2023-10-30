@@ -119,7 +119,7 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__METAL_SPIKES, vec2i(2,6));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_SPIKES, vec2i(8,7));
+    FLOOR_TYPE__METAL_NO_SPIKES, vec2i(8,7));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(3,3));
     change_floor_in_tilemap_pos(&state,
@@ -132,6 +132,8 @@ int main (int argc, char* argv[])
     FLOOR_TYPE__ICE, vec2i(6,2));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__ICE, vec2i(7,2));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__HATCH_CLOSED, vec2i(4,6));
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_1->tilemap_pos = vec2i(3,2);

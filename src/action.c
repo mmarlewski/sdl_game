@@ -238,6 +238,23 @@ Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4)
     return action;
 }
 
+Action* new_action_change(int is_change_object, int new_object_type, int new_floor_type, Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__CHANGE;
+
+    action->change.is_change_object = is_change_object;
+    action->change.new_object_type = new_object_type;
+    action->change.new_floor_type = new_floor_type;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     if(action->type == ACTION_TYPE__SEQUENCE)
@@ -270,6 +287,7 @@ char* get_action_name_from_type(int action_type)
         case ACTION_TYPE__THROW:        name = "throw";         break;
         case ACTION_TYPE__LIFT:         name = "lift";          break;
         case ACTION_TYPE__DROP:         name = "drop";          break;
+        case ACTION_TYPE__CHANGE:       name = "change";        break;
         case ACTION_TYPE__COUNT:        name = "count";         break;
         default: break;
     }

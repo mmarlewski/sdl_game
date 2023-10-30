@@ -64,7 +64,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->camera.world_pos = new_camera_world_pos;
     }
 
-    state->gamemap.show_all_order_numbers = input->is_q;
+    state->gamemap.show_all_order_numbers = input->is_e;
 
     // animations
 
@@ -150,6 +150,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             int skill = SKILL__NONE;
 
+            if(input->was_q && !input->is_q) skill = SKILL__INTERACT;
             if(input->was_1 && !input->is_1) skill = SKILL__MOVE;
             if(input->was_2 && !input->is_2) skill = SKILL__CHARGE;
             if(input->was_3 && !input->is_3) skill = SKILL__JUMP;

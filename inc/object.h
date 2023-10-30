@@ -46,6 +46,7 @@ void destroy_object(Object* object);
 
 int is_object_flying(int object_type);
 int is_object_enemy(int object_type);
+int is_object_interactable(int object_type);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_1_from_object_type(int type, Textures* textures);

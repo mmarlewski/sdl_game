@@ -9,7 +9,7 @@ void print_action(Action* action, int depth)
     if(action->type != ACTION_TYPE__SEQUENCE && action->type != ACTION_TYPE__SIMULTANEOUS)
     {
         // comment this line if you need to look closely at each single action
-        return;
+        // return;
     }
 
     switch(action->type)
@@ -136,6 +136,20 @@ void print_action(Action* action, int depth)
             printf("object:         %p \n", action->drop.object);
             for(int i = 0; i < depth + 1; i++) printf("  ");
             printf("dir4:           %i \n", action->drop.dir4);
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf(") \n");
+        }
+        break;
+        case ACTION_TYPE__CHANGE:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("( \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("is change o.:   %i \n", action->change.is_change_object);
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("new o. type:    %s \n", get_name_from_object_type(action->change.new_object_type));
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("new f. type:    %s \n", get_name_from_floor(action->change.new_floor_type));
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }

@@ -312,6 +312,26 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
+        case ACTION_TYPE__CHANGE:
+        {
+            if(action->change.is_change_object)
+            {
+                Object* object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+                if(object != 0)
+                {
+                    object->type = action->change.new_object_type;
+                }
+            }
+            else
+            {
+                int floor = get_floor_on_tilemap_pos(state, action->tilemap_pos);
+                if(floor != FLOOR_TYPE__NONE)
+                {
+                    change_floor_in_tilemap_pos(state, action->change.new_floor_type, action->tilemap_pos);
+                }
+            }
+        }
+        break;
         default:
         break;
     }

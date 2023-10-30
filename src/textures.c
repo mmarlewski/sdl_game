@@ -3,6 +3,7 @@
 void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
 {
     floor->metal = load_texture_from_filepath (renderer, "./res/floor/metal.png");
+    floor->metal_no_spikes = load_texture_from_filepath (renderer, "./res/floor/metal_no_spikes.png");
     floor->metal_spikes = load_texture_from_filepath (renderer, "./res/floor/metal_spikes.png");
     floor->metal_lava_crack = load_texture_from_filepath (renderer, "./res/floor/metal_lava_crack.png");
     floor->lava_1 = load_texture_from_filepath (renderer, "./res/floor/lava_1.png");
@@ -11,10 +12,14 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->ice_water_crack = load_texture_from_filepath (renderer, "./res/floor/ice_water_crack.png");
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
     floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
+    floor->hatch_closed = load_texture_from_filepath (renderer, "./res/floor/hatch_closed.png");
+    floor->hatch_open_1 = load_texture_from_filepath (renderer, "./res/floor/hatch_open_1.png");
+    floor->hatch_open_2 = load_texture_from_filepath (renderer, "./res/floor/hatch_open_2.png");
 }
 void destroy_textures_floor (Textures_Floor* floor)
 {
     destroy_texture(floor->metal);
+    destroy_texture(floor->metal_no_spikes);
     destroy_texture(floor->metal_spikes);
     destroy_texture(floor->metal_lava_crack);
     destroy_texture(floor->lava_1);
@@ -51,6 +56,15 @@ void destroy_textures_danger (Textures_Danger* danger)
     destroy_texture(danger->frame_4);
     destroy_texture(danger->frame_5);
     destroy_texture(danger->frame_6);
+}
+
+void load_textures_none (Renderer* renderer, Textures_None* none)
+{
+    none->none = load_texture_from_filepath (renderer, "./res/none/none.png");
+}
+void destroy_textures_none (Textures_None* none)
+{
+    destroy_texture(none->none);
 }
 
 void load_textures_move (Renderer* renderer, Textures_Move* move)
@@ -131,6 +145,7 @@ void destroy_textures_throw (Textures_Throw* throw)
 
 void load_textures_lift (Renderer* renderer, Textures_Lift* lift)
 {
+    lift->none = load_texture_from_filepath (renderer, "./res/lift/none.png");
     lift->up = load_texture_from_filepath (renderer, "./res/lift/up.png");
     lift->right = load_texture_from_filepath (renderer, "./res/lift/right.png");
     lift->down = load_texture_from_filepath (renderer, "./res/lift/down.png");
@@ -138,6 +153,7 @@ void load_textures_lift (Renderer* renderer, Textures_Lift* lift)
 }
 void destroy_textures_lift (Textures_Lift* lift)
 {
+    destroy_texture(lift->none);
     destroy_texture(lift->up);
     destroy_texture(lift->right);
     destroy_texture(lift->down);
@@ -153,6 +169,15 @@ void destroy_textures_drop (Textures_Drop* drop)
 {
     destroy_texture(drop->drop);
     destroy_texture(drop->thump);
+}
+
+void load_textures_change (Renderer* renderer, Textures_Change* change)
+{
+    change->change = load_texture_from_filepath (renderer, "./res/change/change.png");
+}
+void destroy_textures_change (Textures_Change* change)
+{
+    destroy_texture(change->change);
 }
 
 void load_textures_object (Renderer* renderer, Textures_Object* object)
@@ -325,6 +350,8 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_highlight(renderer,&textures->highlight);
     load_textures_danger(renderer,&textures->danger);
 
+    load_textures_none(renderer,&textures->none);
+
     load_textures_move(renderer,&textures->move);
     load_textures_crash(renderer,&textures->crash);
 
@@ -335,6 +362,8 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_throw(renderer,&textures->throw);
     load_textures_lift(renderer,&textures->lift);
     load_textures_drop(renderer,&textures->drop);
+
+    load_textures_change(renderer,&textures->change);
 
     load_textures_object(renderer,&textures->object);
     load_textures_order_number(renderer,&textures->order_number);
@@ -347,6 +376,8 @@ void destroy_textures (Textures* textures)
     destroy_textures_highlight (&textures->highlight);
     destroy_textures_danger (&textures->danger);
 
+    destroy_textures_none (&textures->none);
+
     destroy_textures_move (&textures->move);
     destroy_textures_crash (&textures->crash);
 
@@ -357,6 +388,8 @@ void destroy_textures (Textures* textures)
     destroy_textures_throw (&textures->throw);
     destroy_textures_lift (&textures->lift);
     destroy_textures_drop (&textures->drop);
+
+    destroy_textures_change (&textures->change);
 
     destroy_textures_object (&textures->object);
     destroy_textures_order_number (&textures->order_number);
@@ -416,6 +449,7 @@ Texture* get_texture_lift(Textures* textures, int dir4)
 
     switch(dir4)
     {
+        case DIR4__NONE: texture = textures->lift.none; break;
         case DIR4__UP: texture = textures->lift.up; break;
         case DIR4__RIGHT: texture = textures->lift.right; break;
         case DIR4__DOWN: texture = textures->lift.down; break;
