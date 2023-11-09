@@ -173,7 +173,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // enemy action sequence
 
-    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
+    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
+    state->gamestate == GAMESTATE__ENEMY_ATTACKING)
+    {
+        draw_action(renderer, state, state->gamemap.curr_object_enemy->enemy_action_sequence, colors->yellow, textures, colors);
+    }
+    else if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
@@ -184,7 +189,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            draw_action(renderer, state, hover_object->enemy_action_sequence, textures, colors);
+            draw_action(renderer, state, hover_object->enemy_action_sequence, colors->yellow, textures, colors);
         }
         else
         {
@@ -200,7 +205,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                     state->action.enemy_action_sequence == curr_action))
                     {
-                        draw_action(renderer, state, curr_action, textures, colors);
+                        draw_action(renderer, state, curr_action, colors->red, textures, colors);
                     }
                 }
             }
@@ -211,7 +216,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        draw_action(renderer, state, state->action.hero_action_sequence, textures, colors);
+        draw_action(renderer, state, state->action.hero_action_sequence, colors->green, textures, colors);
     }
 
     // yellow outline, order number

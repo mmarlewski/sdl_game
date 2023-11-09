@@ -1,6 +1,6 @@
 #include "../inc/game.h"
 
-void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures, Colors* colors)
+void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, Textures* textures, Colors* colors)
 {
     Vec2i tilemap_pos = action->tilemap_pos;
     Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
@@ -19,7 +19,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
                 Action* curr_action = (Action*)curr_elem->data;
-                draw_action(renderer, state, curr_action, textures, colors);
+                draw_action(renderer, state, curr_action, color, textures, colors);
             }
         }
         break;
@@ -28,7 +28,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
                 Action* curr_action = (Action*)curr_elem->data;
-                draw_action(renderer, state, curr_action, textures, colors);
+                draw_action(renderer, state, curr_action, color, textures, colors);
             }
         }
         break;
@@ -37,7 +37,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_move(textures, action->move.dir4),
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -49,7 +49,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_crash(textures, action->crash.dir4),
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -61,7 +61,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->fall.fall,
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -73,7 +73,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->death.death,
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -85,7 +85,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->blow_up.blow_up,
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -102,7 +102,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_throw(textures, action->throw.dir4),
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -111,7 +111,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->drop.drop,
-                colors->none,
+                color,
                 target_world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -123,7 +123,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 get_texture_lift(textures, action->lift.dir4),
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -135,7 +135,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->drop.drop,
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom
@@ -147,7 +147,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Textures* tex
             draw_texture_at_world_pos(
                 renderer,
                 textures->change.change,
-                colors->none,
+                color,
                 world_iso_pos,
                 state->camera.world_pos,
                 state->camera.zoom

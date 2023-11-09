@@ -28,6 +28,6 @@ void destroy_sdl (Window* window, Renderer* renderer);
 void render (Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors);
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors);
-void draw_action(Renderer* renderer, State* state, Action* action, Textures* textures, Colors* colors);
+void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, Textures* textures, Colors* colors);
 
 #endif
