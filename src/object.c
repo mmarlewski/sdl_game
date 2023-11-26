@@ -11,10 +11,15 @@ Object* new_object(int type)
     object->type = type;
     object->tilemap_pos = vec2i(0,0);
 
-    object->enemy_action_sequence = new_action_sequence();
-    object->enemy_performed_attack = 0;
-    object->enemy_order_number = 0;
-    object->enemy_attack_dir4 = DIR4__RIGHT;
+    object->enemy.action_sequence = new_action_sequence();
+    object->enemy.performed_attack = 0;
+    object->enemy.order_number = 0;
+    object->enemy.attack_dir4 = DIR4__RIGHT;
+
+    if(type == OBJECT_TYPE__PILLAR)
+    {
+        object->pillar.spikes_on = 0;
+    }
 
     return object;
 }
@@ -24,11 +29,11 @@ void destroy_object(Object* object)
     free(object);
 }
 
-int is_object_flying(int object_type)
+int is_object_flying(Object* object)
 {
     int is = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 0; break;
@@ -47,11 +52,11 @@ int is_object_flying(int object_type)
     return is;
 }
 
-int is_object_enemy(int object_type)
+int is_object_enemy(Object* object)
 {
     int is = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 0; break;
@@ -70,15 +75,14 @@ int is_object_enemy(int object_type)
     return is;
 }
 
-int is_object_interactable(int object_type)
+int is_object_interactable(Object* object)
 {
     int is = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 1; break;
-        case OBJECT_TYPE__PILLAR_SPIKES: is = 1; break;
         case OBJECT_TYPE__BARREL: is = 1; break;
         case OBJECT_TYPE__SPRING: is = 1; break;
         case OBJECT_TYPE__WEIGHT: is = 0; break;
@@ -102,7 +106,6 @@ char* get_name_from_object_type(int object_type)
     {
         case OBJECT_TYPE__NONE: name = "none"; break;
         case OBJECT_TYPE__PILLAR: name = "pillar"; break;
-        case OBJECT_TYPE__PILLAR_SPIKES: name = "pillar_spikes"; break;
         case OBJECT_TYPE__BARREL: name = "barrel"; break;
         case OBJECT_TYPE__SPRING: name = "spring"; break;
         case OBJECT_TYPE__WEIGHT: name = "weight"; break;
@@ -118,15 +121,25 @@ char* get_name_from_object_type(int object_type)
     return name;
 }
 
-Texture* get_texture_1_from_object_type(int object_type, Textures* textures)
+Texture* get_texture_1_from_object(Object* object, Textures* textures)
 {
     Texture* texture = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
-        case OBJECT_TYPE__PILLAR: texture = textures->object.pillar; break;
-        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes; break;
+        case OBJECT_TYPE__PILLAR:
+        {
+            if(object->pillar.spikes_on)
+            {
+                texture = textures->object.pillar_spikes;
+            }
+            else
+            {
+                texture = textures->object.pillar;
+            }
+        }
+        break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight; break;
@@ -142,15 +155,25 @@ Texture* get_texture_1_from_object_type(int object_type, Textures* textures)
     return texture;
 }
 
-Texture* get_texture_2_from_object_type(int object_type, Textures* textures)
+Texture* get_texture_2_from_object(Object* object, Textures* textures)
 {
     Texture* texture = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
-        case OBJECT_TYPE__PILLAR: texture = textures->object.pillar; break;
-        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes; break;
+        case OBJECT_TYPE__PILLAR:
+        {
+            if(object->pillar.spikes_on)
+            {
+                texture = textures->object.pillar_spikes;
+            }
+            else
+            {
+                texture = textures->object.pillar;
+            }
+        }
+        break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight; break;
@@ -166,15 +189,25 @@ Texture* get_texture_2_from_object_type(int object_type, Textures* textures)
     return texture;
 }
 
-Texture* get_texture_1_outline_from_object_type(int object_type, Textures* textures)
+Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 {
     Texture* texture = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
-        case OBJECT_TYPE__PILLAR: texture = textures->object.pillar_outline; break;
-        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes_outline; break;
+        case OBJECT_TYPE__PILLAR:
+        {
+            if(object->pillar.spikes_on)
+            {
+                texture = textures->object.pillar_spikes_outline;
+            }
+            else
+            {
+                texture = textures->object.pillar_outline;
+            }
+        }
+        break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight_outline; break;
@@ -190,15 +223,25 @@ Texture* get_texture_1_outline_from_object_type(int object_type, Textures* textu
     return texture;
 }
 
-Texture* get_texture_2_outline_from_object_type(int object_type, Textures* textures)
+Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 {
     Texture* texture = 0;
 
-    switch(object_type)
+    switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
-        case OBJECT_TYPE__PILLAR: texture = textures->object.pillar_outline; break;
-        case OBJECT_TYPE__PILLAR_SPIKES: texture = textures->object.pillar_spikes_outline; break;
+        case OBJECT_TYPE__PILLAR:
+        {
+            if(object->pillar.spikes_on)
+            {
+                texture = textures->object.pillar_spikes_outline;
+            }
+            else
+            {
+                texture = textures->object.pillar_outline;
+            }
+        }
+        break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight_outline; break;

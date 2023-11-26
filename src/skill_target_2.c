@@ -26,7 +26,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
                     if(is_floor_interactable(curr_floor) ||
                     (curr_object != 0 &&
-                     is_object_interactable(curr_object->type)))
+                     is_object_interactable(curr_object)))
                     {
                         add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
                     }

@@ -28,8 +28,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     {
         for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
         {
-            state->gamemap.tilemap[i][j] = malloc(sizeof(*state->gamemap.tilemap[i][j]));
-            state->gamemap.tilemap[i][j]->floor = FLOOR_TYPE__METAL;
+            state->gamemap.floor_array[i][j] = FLOOR_TYPE__METAL;
         }
     }
 
@@ -141,25 +140,21 @@ int get_floor_on_tilemap_pos(State* state, Vec2i tilemap_pos)
 {
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
 
-    Tile* tile = state->gamemap.tilemap[tilemap_pos.y][tilemap_pos.x];
-
-    return (tile) ? (tile->floor) : (0);
+    return state->gamemap.floor_array[tilemap_pos.y][tilemap_pos.x];
 }
 
 void change_floor_in_tilemap_pos(State* state, int new_floor, Vec2i tilemap_pos)
 {
     if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return;
 
-    Tile* tile = state->gamemap.tilemap[tilemap_pos.y][tilemap_pos.x];
-
-    tile->floor = new_floor;
+    state->gamemap.floor_array[tilemap_pos.y][tilemap_pos.x] = new_floor;
 }
 
 void add_object_to_gamemap_objects(State* state, Object* new_object)
 {
     add_new_list_element_to_list_end(state->gamemap.object_list, new_object);
 
-    if(is_object_enemy(new_object->type))
+    if(is_object_enemy(new_object))
     {
         add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
     }
@@ -172,7 +167,7 @@ void remove_object_from_gamemap_objects(State* state, Object* object)
         state->gamemap.object_hero = 0;
     }
 
-    if(is_object_enemy(object->type))
+    if(is_object_enemy(object))
     {
         remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
     }
@@ -316,7 +311,7 @@ void determine_enemy_order(State* state)
     for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
     {
         Object* curr_object = (Object*)curr_elem->data;
-        curr_object->enemy_order_number = order_number;
+        curr_object->enemy.order_number = order_number;
         order_number++;
     }
 }

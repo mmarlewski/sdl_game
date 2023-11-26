@@ -10,7 +10,6 @@ enum OBJECT_TYPE
     OBJECT_TYPE__NONE,
 
     OBJECT_TYPE__PILLAR,
-    OBJECT_TYPE__PILLAR_SPIKES,
     OBJECT_TYPE__BARREL,
     OBJECT_TYPE__SPRING,
     OBJECT_TYPE__WEIGHT,
@@ -28,6 +27,57 @@ struct _Action;
 
 typedef struct _Object Object;
 
+typedef struct
+{
+    int spikes_on;
+
+} Object_Pillar;
+
+typedef struct
+{
+} Object_Barrel;
+
+typedef struct
+{
+} Object_Spring;
+
+typedef struct
+{
+} Object_Weight;
+
+typedef struct
+{
+} Object_Hero;
+
+typedef struct
+{
+} Object_Goat;
+
+typedef struct
+{
+} Object_Spider;
+
+typedef struct
+{
+} Object_Bull;
+
+typedef struct
+{
+} Object_Fly;
+
+typedef struct
+{
+} Object_Chameleon;
+
+typedef struct
+{
+    struct _Action* action_sequence;
+    int performed_attack;
+    int order_number;
+    int attack_dir4;
+
+} Object_Enemy;
+
 struct _Object
 {
     int is_visible;
@@ -35,22 +85,33 @@ struct _Object
     int type;
     Vec2i tilemap_pos;
 
-    struct _Action* enemy_action_sequence;
-    int enemy_performed_attack;
-    int enemy_order_number;
-    int enemy_attack_dir4;
+    Object_Enemy enemy;
+
+    union
+    {
+        Object_Pillar pillar;
+        Object_Barrel barrel;
+        Object_Spring spring;
+        Object_Weight weight;
+        Object_Hero hero;
+        Object_Goat goat;
+        Object_Spider spider;
+        Object_Bull bull;
+        Object_Fly fly;
+        Object_Chameleon chameleon;
+    };
 };
 
 Object* new_object(int type);
 void destroy_object(Object* object);
 
-int is_object_flying(int object_type);
-int is_object_enemy(int object_type);
-int is_object_interactable(int object_type);
+int is_object_flying(Object* object);
+int is_object_enemy(Object* object);
+int is_object_interactable(Object* object);
 
 char* get_name_from_object_type(int object_type);
-Texture* get_texture_1_from_object_type(int type, Textures* textures);
-Texture* get_texture_2_from_object_type(int type, Textures* textures);
-Texture* get_texture_1_outline_from_object_type(int type, Textures* textures);
-Texture* get_texture_2_outline_from_object_type(int type, Textures* textures);
+Texture* get_texture_1_from_object(Object* object, Textures* textures);
+Texture* get_texture_2_from_object(Object* object, Textures* textures);
+Texture* get_texture_1_outline_from_object(Object* object, Textures* textures);
+Texture* get_texture_2_outline_from_object(Object* object, Textures* textures);
 #endif

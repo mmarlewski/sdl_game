@@ -108,7 +108,7 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
         }
         else break;
     }
-    object->enemy_attack_dir4 = dir4;
+    object->enemy.attack_dir4 = dir4;
 
     switch(object->type)
     {

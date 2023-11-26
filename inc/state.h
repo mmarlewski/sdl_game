@@ -39,12 +39,6 @@ enum GAMESTATE
 
 typedef struct
 {
-    int floor;
-
-} Tile;
-
-typedef struct
-{
     Vec2f world_pos;
     float zoom;
 
@@ -64,7 +58,7 @@ typedef struct
 
 typedef struct
 {
-    Tile* tilemap[TILEMAP_HEIGHT][TILEMAP_WIDTH];
+    int floor_array[TILEMAP_HEIGHT][TILEMAP_WIDTH];
 
     List* possible_target_1_tilemap_pos_list;
     List* possible_target_2_tilemap_pos_list;

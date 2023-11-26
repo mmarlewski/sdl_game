@@ -143,7 +143,8 @@ int main (int argc, char* argv[])
     object_pillar_2->tilemap_pos = vec2i(7,3);
     add_object_to_gamemap_objects(&state, object_pillar_2);
 
-    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR_SPIKES);
+    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_3->pillar.spikes_on = 1;
     object_pillar_3->tilemap_pos = vec2i(5,4);
     add_object_to_gamemap_objects(&state, object_pillar_3);
 
@@ -159,7 +160,8 @@ int main (int argc, char* argv[])
     object_pillar_6->tilemap_pos = vec2i(6,7);
     add_object_to_gamemap_objects(&state, object_pillar_6);
 
-    Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR_SPIKES);
+    Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR);
+    object_pillar_7->pillar.spikes_on = 1;
     object_pillar_7->tilemap_pos = vec2i(9,7);
     add_object_to_gamemap_objects(&state, object_pillar_7);
 
@@ -229,12 +231,12 @@ int main (int argc, char* argv[])
     {
         Object* curr_object = (Object*)curr_elem->data;
 
-        if(is_object_enemy(curr_object->type))
+        if(is_object_enemy(curr_object))
         {
-            curr_object->enemy_attack_dir4 = rand() % 4 + 1;
-            remove_all_actions_from_action_sequence(curr_object->enemy_action_sequence);
-            object_enemy_add_actions_to_action_sequence_attack(&state, curr_object->enemy_action_sequence, curr_object);
-            curr_object->enemy_performed_attack = 0;
+            curr_object->enemy.attack_dir4 = rand() % 4 + 1;
+            remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
+            object_enemy_add_actions_to_action_sequence_attack(&state, curr_object->enemy.action_sequence, curr_object);
+            curr_object->enemy.performed_attack = 0;
         }
     }
 

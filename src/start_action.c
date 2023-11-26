@@ -69,7 +69,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             else
             {
                 Animation* animation = new_animation_move_sprite_in_gamemap_in_line(
-                    get_texture_1_from_object_type(action->move.object->type, textures),
+                    get_texture_1_from_object(action->move.object, textures),
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                     0.2f
@@ -99,7 +99,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->crash.object_crushing->tilemap_pos = action->tilemap_pos;
 
-            Texture* object_texture = get_texture_1_from_object_type(action->crash.object_crushing->type, textures);
+            Texture* object_texture = get_texture_1_from_object(action->crash.object_crushing, textures);
             Vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object_crushing->tilemap_pos);
             Vec2f next_object_gamemap_pos = vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash.dir4, 1.0f);
             next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
@@ -153,7 +153,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->fall.object->tilemap_pos = action->tilemap_pos;
 
             Animation* animation = new_animation_fall_sprite_in_gamemap(
-                get_texture_1_from_object_type(action->fall.object->type, textures),
+                get_texture_1_from_object(action->fall.object, textures),
                 tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
                 0.2f,
                 0.2f
@@ -176,7 +176,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->death.object->tilemap_pos = action->tilemap_pos;
 
-            if(is_object_enemy(action->death.object->type))
+            if(is_object_enemy(action->death.object))
             {
                 add_animation_to_animation_list(
                     state,
@@ -248,7 +248,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos,action->throw.dir4,action->throw.distance);
 
             Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
-                get_texture_1_from_object_type(action->throw.object_thrown->type, textures),
+                get_texture_1_from_object(action->throw.object_thrown, textures),
                 tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                 1.0f,
@@ -276,7 +276,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->lift.object->tilemap_pos = action->tilemap_pos;
 
             Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
-                get_texture_1_from_object_type(action->lift.object->type, textures),
+                get_texture_1_from_object(action->lift.object, textures),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 1.0f,
@@ -319,7 +319,19 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 Object* object = get_object_on_tilemap_pos(state, action->tilemap_pos);
                 if(object != 0)
                 {
-                    object->type = action->change.new_object_type;
+                    object->type = action->change.new_object->type;
+                    object->enemy = action->change.new_object->enemy;
+
+                    object->pillar = action->change.new_object->pillar;
+                    object->barrel = action->change.new_object->barrel;
+                    object->spring = action->change.new_object->spring;
+                    object->weight = action->change.new_object->weight;
+                    object->hero = action->change.new_object->hero;
+                    object->goat = action->change.new_object->goat;
+                    object->spider = action->change.new_object->spider;
+                    object->bull = action->change.new_object->bull;
+                    object->fly = action->change.new_object->fly;
+                    object->chameleon = action->change.new_object->chameleon;
                 }
             }
             else
@@ -330,6 +342,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     change_floor_in_tilemap_pos(state, action->change.new_floor_type, action->tilemap_pos);
                 }
             }
+
+            destroy_object(action->change.new_object);
         }
         break;
         default:

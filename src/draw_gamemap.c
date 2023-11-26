@@ -13,15 +13,15 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
-            Tile* tile = state->gamemap.tilemap[i][j];
+            int floor = state->gamemap.floor_array[i][j];
             Texture* tile_floor_texture = 0;
             if(sin(state->time * 3) > 0)
             {
-                tile_floor_texture = get_texture_1_from_floor_type(tile->floor, textures);
+                tile_floor_texture = get_texture_1_from_floor_type(floor, textures);
             }
             else
             {
-                tile_floor_texture = get_texture_2_from_floor_type(tile->floor, textures);
+                tile_floor_texture = get_texture_2_from_floor_type(floor, textures);
             }
 
             // tile
@@ -112,11 +112,11 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     Texture* texture = 0;
                     if(sin(state->time * 3) > 0)
                     {
-                        texture = get_texture_1_from_object_type(curr_object->type, textures);
+                        texture = get_texture_1_from_object(curr_object, textures);
                     }
                     else
                     {
-                        texture = get_texture_2_from_object_type(curr_object->type, textures);
+                        texture = get_texture_2_from_object(curr_object, textures);
                     }
                     draw_texture_at_world_pos(
                         renderer,
@@ -126,12 +126,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         state->camera.world_pos,
                         state->camera.zoom);
 
-                    if(is_object_enemy(curr_object->type) &&
+                    if(is_object_enemy(curr_object) &&
                     state->gamemap.show_all_order_numbers)
                     {
                         draw_texture_at_world_pos(
                             renderer,
-                            get_texture_order_number(textures, curr_object->enemy_order_number),
+                            get_texture_order_number(textures, curr_object->enemy.order_number),
                 colors->none,
                             world_iso_pos,
                             state->camera.world_pos,
@@ -176,7 +176,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
     state->gamestate == GAMESTATE__ENEMY_ATTACKING)
     {
-        draw_action(renderer, state, state->gamemap.curr_object_enemy->enemy_action_sequence, colors->yellow, textures, colors);
+        draw_action(renderer, state, state->gamemap.curr_object_enemy->enemy.action_sequence, colors->yellow, textures, colors);
     }
     else if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
@@ -185,20 +185,20 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
-        is_object_enemy(hover_object->type) &&
+        is_object_enemy(hover_object) &&
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            draw_action(renderer, state, hover_object->enemy_action_sequence, colors->yellow, textures, colors);
+            draw_action(renderer, state, hover_object->enemy.action_sequence, colors->yellow, textures, colors);
         }
         else
         {
             for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*)curr_elem->data;
-                Action* curr_action = curr_object->enemy_action_sequence;
+                Action* curr_action = curr_object->enemy.action_sequence;
 
-                if(!curr_object->enemy_performed_attack)
+                if(!curr_object->enemy.performed_attack)
                 {
                     if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
                     state->action.enemy_action_sequence == curr_action) &&
@@ -237,11 +237,11 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Texture* texture_outline = 0;
             if(sin(state->time * 3) > 0)
             {
-                texture_outline = get_texture_1_outline_from_object_type(hover_object->type, textures);
+                texture_outline = get_texture_1_outline_from_object(hover_object, textures);
             }
             else
             {
-                texture_outline = get_texture_2_outline_from_object_type(hover_object->type, textures);
+                texture_outline = get_texture_2_outline_from_object(hover_object, textures);
             }
             draw_texture_at_world_pos(
                 renderer,
@@ -252,11 +252,11 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->camera.zoom
                 );
 
-            if(is_object_enemy(hover_object->type))
+            if(is_object_enemy(hover_object))
             {
                 draw_texture_at_world_pos(
                     renderer,
-                    get_texture_order_number(textures, hover_object->enemy_order_number),
+                    get_texture_order_number(textures, hover_object->enemy.order_number),
                     colors->none,
                     selected_world_iso_pos,
                     state->camera.world_pos,
@@ -285,11 +285,11 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Texture* texture_outline = 0;
             if(sin(state->time * 3) > 0)
             {
-                texture_outline = get_texture_1_outline_from_object_type(enemy_object->type, textures);
+                texture_outline = get_texture_1_outline_from_object(enemy_object, textures);
             }
             else
             {
-                texture_outline = get_texture_2_outline_from_object_type(enemy_object->type, textures);
+                texture_outline = get_texture_2_outline_from_object(enemy_object, textures);
             }
             draw_texture_at_world_pos(
                 renderer,
@@ -304,7 +304,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             {
                 draw_texture_at_world_pos(
                     renderer,
-                    get_texture_order_number(textures, enemy_object->enemy_order_number),
+                    get_texture_order_number(textures, enemy_object->enemy.order_number),
                 colors->none,
                     selected_world_iso_pos,
                     state->camera.world_pos,

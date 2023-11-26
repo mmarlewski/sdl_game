@@ -65,7 +65,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR_TYPE__METAL_SPIKES:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->move.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
@@ -79,7 +79,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR_TYPE__LAVA:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->move.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
@@ -88,7 +88,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR_TYPE__ICE:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->move.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
@@ -97,7 +97,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR_TYPE__ICE_WATER_CRACK:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->move.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
@@ -106,7 +106,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR_TYPE__WATER:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->move.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
@@ -120,7 +120,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR_TYPE__HATCH_OPEN:
         {
-            if(!is_object_flying(action->move.object->type))
+            if(!is_object_flying(action->move.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
@@ -151,7 +151,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__METAL_LAVA_CRACK:
         {
-            if(!is_object_flying(action->drop.object->type))
+            if(!is_object_flying(action->drop.object))
             {
                 change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->tilemap_pos);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -161,7 +161,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__LAVA:
         {
-            if(!is_object_flying(action->drop.object->type))
+            if(!is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
@@ -170,7 +170,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__ICE:
         {
-            if(!is_object_flying(action->drop.object->type))
+            if(!is_object_flying(action->drop.object))
             {
                 if(action->drop.object->type == OBJECT_TYPE__WEIGHT)
                 {
@@ -183,7 +183,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__ICE_WATER_CRACK:
         {
-            if(!is_object_flying(action->drop.object->type))
+            if(!is_object_flying(action->drop.object))
             {
                 change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->tilemap_pos);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -193,7 +193,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__WATER:
         {
-            if(!is_object_flying(action->drop.object->type))
+            if(!is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
@@ -207,7 +207,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         break;
         case FLOOR_TYPE__HATCH_OPEN:
         {
-            if(!is_object_flying(action->drop.object->type))
+            if(!is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->drop.object, action->tilemap_pos));
@@ -230,12 +230,12 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
         break;
         case FLOOR_TYPE__METAL_NO_SPIKES:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__METAL_SPIKES, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_SPIKES, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__METAL_SPIKES:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__METAL_NO_SPIKES, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_NO_SPIKES, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__METAL_LAVA_CRACK:
@@ -265,12 +265,12 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
         break;
         case FLOOR_TYPE__HATCH_CLOSED:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__HATCH_OPEN, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__HATCH_OPEN, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__HATCH_OPEN:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__HATCH_CLOSED, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__HATCH_CLOSED, tilemap_pos));
         }
         break;
         default:
@@ -284,14 +284,12 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
     {
         case OBJECT_TYPE__PILLAR:
         {
-            //
-        }
-        break;
-        case OBJECT_TYPE__PILLAR_SPIKES:
-        {
-            if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
+            if(object->pillar.spikes_on)
             {
-                add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushed, action->crash.object_crushed->tilemap_pos));
+                if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
+                {
+                    add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushed, action->crash.object_crushed->tilemap_pos));
+                }
             }
         }
         break;
@@ -351,14 +349,12 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
     {
         case OBJECT_TYPE__PILLAR:
         {
-            //
-        }
-        break;
-        case OBJECT_TYPE__PILLAR_SPIKES:
-        {
-            if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
+            if(object->pillar.spikes_on)
             {
-                add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushing, action->crash.object_crushed->tilemap_pos));
+                if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
+                {
+                    add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushing, action->crash.object_crushed->tilemap_pos));
+                }
             }
         }
         break;
@@ -539,12 +535,9 @@ void object_on_interact(State* state, Action* sequence, Object* object, Vec2i ti
     {
         case OBJECT_TYPE__PILLAR:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(1, OBJECT_TYPE__PILLAR_SPIKES, FLOOR_TYPE__NONE, tilemap_pos));
-        }
-        break;
-        case OBJECT_TYPE__PILLAR_SPIKES:
-        {
-            add_action_to_end_action_sequence(sequence, new_action_change(1, OBJECT_TYPE__PILLAR, FLOOR_TYPE__NONE, tilemap_pos));
+            Object* new_object_pillar = new_object(OBJECT_TYPE__PILLAR);
+            new_object_pillar->pillar.spikes_on = !object->pillar.spikes_on;
+            add_action_to_end_action_sequence(sequence,new_action_change(1, new_object_pillar, FLOOR_TYPE__NONE, object->tilemap_pos));
         }
         break;
         case OBJECT_TYPE__BARREL:
