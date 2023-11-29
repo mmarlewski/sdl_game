@@ -20,6 +20,10 @@ Object* new_object(int type)
     {
         object->pillar.spikes_on = 0;
     }
+    if(type == OBJECT_TYPE__DOOR)
+    {
+        object->door.dir4 = DIR4__UP;
+    }
 
     return object;
 }
@@ -36,6 +40,8 @@ int is_object_flying(Object* object)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__WALL: is = 0; break;
+        case OBJECT_TYPE__DOOR: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 0; break;
         case OBJECT_TYPE__BARREL: is = 0; break;
         case OBJECT_TYPE__SPRING: is = 0; break;
@@ -59,6 +65,8 @@ int is_object_enemy(Object* object)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__WALL: is = 0; break;
+        case OBJECT_TYPE__DOOR: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 0; break;
         case OBJECT_TYPE__BARREL: is = 0; break;
         case OBJECT_TYPE__SPRING: is = 0; break;
@@ -82,6 +90,8 @@ int is_object_interactable(Object* object)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__WALL: is = 0; break;
+        case OBJECT_TYPE__DOOR: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 1; break;
         case OBJECT_TYPE__BARREL: is = 1; break;
         case OBJECT_TYPE__SPRING: is = 1; break;
@@ -98,6 +108,31 @@ int is_object_interactable(Object* object)
     return is;
 }
 
+int is_object_movable(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__NONE: is = 0; break;
+        case OBJECT_TYPE__WALL: is = 0; break;
+        case OBJECT_TYPE__DOOR: is = 0; break;
+        case OBJECT_TYPE__PILLAR: is = 1; break;
+        case OBJECT_TYPE__BARREL: is = 1; break;
+        case OBJECT_TYPE__SPRING: is = 1; break;
+        case OBJECT_TYPE__WEIGHT: is = 1; break;
+        case OBJECT_TYPE__HERO: is = 1; break;
+        case OBJECT_TYPE__GOAT: is = 1; break;
+        case OBJECT_TYPE__SPIDER: is = 1; break;
+        case OBJECT_TYPE__BULL: is = 1; break;
+        case OBJECT_TYPE__FLY: is = 1; break;
+        case OBJECT_TYPE__CHAMELEON: is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
 char* get_name_from_object_type(int object_type)
 {
     char* name = "";
@@ -105,6 +140,8 @@ char* get_name_from_object_type(int object_type)
     switch(object_type)
     {
         case OBJECT_TYPE__NONE: name = "none"; break;
+        case OBJECT_TYPE__WALL: name = "wall"; break;
+        case OBJECT_TYPE__DOOR: name = "door"; break;
         case OBJECT_TYPE__PILLAR: name = "pillar"; break;
         case OBJECT_TYPE__BARREL: name = "barrel"; break;
         case OBJECT_TYPE__SPRING: name = "spring"; break;
@@ -128,6 +165,19 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
+        case OBJECT_TYPE__WALL: texture = textures->object.wall; break;
+        case OBJECT_TYPE__DOOR:
+        {
+            switch(object->door.dir4)
+            {
+                case DIR4__UP: texture = textures->object.door_up; break;
+                case DIR4__RIGHT: texture = textures->object.door_right; break;
+                case DIR4__DOWN: texture = textures->object.door_down; break;
+                case DIR4__LEFT: texture = textures->object.door_left; break;
+                break;
+            }
+        }
+        break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)
@@ -162,6 +212,19 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
+        case OBJECT_TYPE__WALL: texture = textures->object.wall; break;
+        case OBJECT_TYPE__DOOR:
+        {
+            switch(object->door.dir4)
+            {
+                case DIR4__UP: texture = textures->object.door_up; break;
+                case DIR4__RIGHT: texture = textures->object.door_right; break;
+                case DIR4__DOWN: texture = textures->object.door_down; break;
+                case DIR4__LEFT: texture = textures->object.door_left; break;
+                break;
+            }
+        }
+        break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)
@@ -196,6 +259,19 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
+        case OBJECT_TYPE__WALL: texture = textures->object.wall_outline; break;
+        case OBJECT_TYPE__DOOR:
+        {
+            switch(object->door.dir4)
+            {
+                case DIR4__UP: texture = textures->object.door_up_outline; break;
+                case DIR4__RIGHT: texture = textures->object.door_right_outline; break;
+                case DIR4__DOWN: texture = textures->object.door_down_outline; break;
+                case DIR4__LEFT: texture = textures->object.door_left_outline; break;
+                break;
+            }
+        }
+        break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)
@@ -230,6 +306,19 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
     switch(object->type)
     {
         case OBJECT_TYPE__NONE: texture = 0; break;
+        case OBJECT_TYPE__WALL: texture = textures->object.wall_outline; break;
+        case OBJECT_TYPE__DOOR:
+        {
+            switch(object->door.dir4)
+            {
+                case DIR4__UP: texture = textures->object.door_up_outline; break;
+                case DIR4__RIGHT: texture = textures->object.door_right_outline; break;
+                case DIR4__DOWN: texture = textures->object.door_down_outline; break;
+                case DIR4__LEFT: texture = textures->object.door_left_outline; break;
+                break;
+            }
+        }
+        break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)

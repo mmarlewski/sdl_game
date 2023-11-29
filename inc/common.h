@@ -29,9 +29,7 @@ typedef Mix_Music Music;
 #define FPS_CAP 60.0f
 #define FPS_CAP_IN_MILIS (1000.0f / FPS_CAP)
 
-#define TILEMAP_WIDTH 20
-#define TILEMAP_HEIGHT 20
-
+#define TILEMAP_LENGTH 10
 #define TILE_LENGTH 64
 
 #define HERO_MAX_AP 10

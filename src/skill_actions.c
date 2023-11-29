@@ -172,7 +172,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int push_abs_diff = push_distance_info.abs_diff;
             int push_dir4 = push_distance_info.dir4;
 
-            if(target_1_object == 0) break;
+            if(target_1_object == 0 || !is_object_movable(target_1_object)) break;
 
             Vec2i push_old_tilemap_pos = target_1_object->tilemap_pos;
             Vec2i push_tilemap_pos = target_1_object->tilemap_pos;
@@ -247,7 +247,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 }
             }
 
-            if(target_1_object == 0) break;
+            if(target_1_object == 0 || !is_object_movable(target_1_object)) break;
 
             DistanceInfo throw_distance_info = get_distance_info_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
             int throw_abs_diff = throw_distance_info.abs_diff;
@@ -293,6 +293,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 }
                 break;
             }
+            else if(!is_object_movable(target_1_object)) break;
 
             Vec2i old_tilemap_pos = target_1_object->tilemap_pos;
             Vec2i tilemap_pos = target_1_object->tilemap_pos;
@@ -344,6 +345,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 }
                 break;
             }
+            else if(!is_object_movable(target_1_object)) break;
 
             Vec2i pull_old_tilemap_pos = target_1_object->tilemap_pos;
             Vec2i pull_tilemap_pos = target_1_object->tilemap_pos;
@@ -410,7 +412,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
         break;
         case SKILL__THROW:
         {
-            if(target_1_object == 0) break;
+            if(target_1_object == 0 || !is_object_movable(target_1_object)) break;
 
             DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
             int abs_diff = distance_info.abs_diff;

@@ -9,6 +9,8 @@ enum OBJECT_TYPE
 {
     OBJECT_TYPE__NONE,
 
+    OBJECT_TYPE__WALL,
+    OBJECT_TYPE__DOOR,
     OBJECT_TYPE__PILLAR,
     OBJECT_TYPE__BARREL,
     OBJECT_TYPE__SPRING,
@@ -26,6 +28,16 @@ enum OBJECT_TYPE
 struct _Action;
 
 typedef struct _Object Object;
+
+typedef struct
+{
+} Object_Wall;
+
+typedef struct
+{
+    int dir4;
+
+} Object_Door;
 
 typedef struct
 {
@@ -89,6 +101,8 @@ struct _Object
 
     union
     {
+        Object_Wall wall;
+        Object_Door door;
         Object_Pillar pillar;
         Object_Barrel barrel;
         Object_Spring spring;
@@ -108,6 +122,7 @@ void destroy_object(Object* object);
 int is_object_flying(Object* object);
 int is_object_enemy(Object* object);
 int is_object_interactable(Object* object);
+int is_object_movable(Object* object);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_1_from_object(Object* object, Textures* textures);

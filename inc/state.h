@@ -58,7 +58,7 @@ typedef struct
 
 typedef struct
 {
-    int floor_array[TILEMAP_HEIGHT][TILEMAP_WIDTH];
+    int floor_array[TILEMAP_LENGTH][TILEMAP_LENGTH];
 
     List* possible_target_1_tilemap_pos_list;
     List* possible_target_2_tilemap_pos_list;

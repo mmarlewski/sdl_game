@@ -104,128 +104,137 @@ int main (int argc, char* argv[])
 
     state.camera.zoom = 5.0f;
 
-    Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(vec2f(TILEMAP_WIDTH * 0.5f,TILEMAP_HEIGHT * 0.5f)));
+    Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(vec2f(TILEMAP_LENGTH * 0.5f,TILEMAP_LENGTH * 0.5f)));
     Vec2f hero_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(tilemap_pos_to_gamemap_pos(state.gamemap.object_hero->tilemap_pos)));
     hero_world_iso_pos.x += TILE_LENGTH * 0.5f;
     hero_world_iso_pos.y += TILE_LENGTH * 0.5f;
     state.camera.world_pos = hero_world_iso_pos;
 
     change_floor_in_tilemap_pos(&state,
-     FLOOR_TYPE__LAVA, vec2i(9,9));
+     FLOOR_TYPE__LAVA, vec2i(6,7));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__LAVA, vec2i(8,3));
+    FLOOR_TYPE__LAVA, vec2i(7,2));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__LAVA, vec2i(5,5));
+    FLOOR_TYPE__LAVA, vec2i(4,4));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_SPIKES, vec2i(2,6));
+    FLOOR_TYPE__METAL_SPIKES, vec2i(1,5));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_NO_SPIKES, vec2i(8,7));
+    FLOOR_TYPE__METAL_NO_SPIKES, vec2i(7,6));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(3,3));
+    FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(2,2));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(3,7));
+    FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(2,6));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__WATER, vec2i(4,2));
+    FLOOR_TYPE__WATER, vec2i(3,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE_WATER_CRACK, vec2i(5,2));
+    FLOOR_TYPE__ICE_WATER_CRACK, vec2i(4,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE, vec2i(6,2));
+    FLOOR_TYPE__ICE, vec2i(5,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE, vec2i(7,2));
+    FLOOR_TYPE__ICE, vec2i(6,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__HATCH_CLOSED, vec2i(4,6));
+    FLOOR_TYPE__HATCH_CLOSED, vec2i(3,5));
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_1->tilemap_pos = vec2i(3,2);
+    object_pillar_1->tilemap_pos = vec2i(2,1);
     add_object_to_gamemap_objects(&state, object_pillar_1);
 
     Object* object_pillar_2 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_2->tilemap_pos = vec2i(7,3);
+    object_pillar_2->tilemap_pos = vec2i(6,2);
     add_object_to_gamemap_objects(&state, object_pillar_2);
 
     Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_3->pillar.spikes_on = 1;
-    object_pillar_3->tilemap_pos = vec2i(5,4);
+    object_pillar_3->tilemap_pos = vec2i(4,3);
     add_object_to_gamemap_objects(&state, object_pillar_3);
 
     Object* object_pillar_4 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_4->tilemap_pos = vec2i(1,4);
+    object_pillar_4->tilemap_pos = vec2i(1,3);
     add_object_to_gamemap_objects(&state, object_pillar_4);
 
     Object* object_pillar_5 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_5->tilemap_pos = vec2i(3,8);
+    object_pillar_5->tilemap_pos = vec2i(2,7);
     add_object_to_gamemap_objects(&state, object_pillar_5);
 
     Object* object_pillar_6 = new_object(OBJECT_TYPE__WEIGHT);
-    object_pillar_6->tilemap_pos = vec2i(6,7);
+    object_pillar_6->tilemap_pos = vec2i(5,6);
     add_object_to_gamemap_objects(&state, object_pillar_6);
 
     Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_7->pillar.spikes_on = 1;
-    object_pillar_7->tilemap_pos = vec2i(9,7);
+    object_pillar_7->tilemap_pos = vec2i(6,6);
     add_object_to_gamemap_objects(&state, object_pillar_7);
 
     Object* object_spring_1 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_1->tilemap_pos = vec2i(8,2);
+    object_spring_1->tilemap_pos = vec2i(7,1);
     add_object_to_gamemap_objects(&state, object_spring_1);
 
     Object* object_spring_2 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_2->tilemap_pos = vec2i(9,2);
+    object_spring_2->tilemap_pos = vec2i(7,1);
     add_object_to_gamemap_objects(&state, object_spring_2);
 
     Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_1->tilemap_pos = vec2i(7,5);
+    object_barrel_1->tilemap_pos = vec2i(6,4);
     add_object_to_gamemap_objects(&state, object_barrel_1);
 
     Object* object_barrel_2 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_2->tilemap_pos = vec2i(8,5);
+    object_barrel_2->tilemap_pos = vec2i(7,4);
     add_object_to_gamemap_objects(&state, object_barrel_2);
 
     Object* object_goat = new_object(OBJECT_TYPE__GOAT);
-    object_goat->tilemap_pos = vec2i(1,2);
+    object_goat->tilemap_pos = vec2i(2,3);
     add_object_to_gamemap_objects(&state, object_goat);
 
     Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
-    object_spider->tilemap_pos = vec2i(4,5);
+    object_spider->tilemap_pos = vec2i(3,4);
     add_object_to_gamemap_objects(&state, object_spider);
 
     Object* object_bull = new_object(OBJECT_TYPE__BULL);
-    object_bull->tilemap_pos = vec2i(6,5);
+    object_bull->tilemap_pos = vec2i(5,4);
     add_object_to_gamemap_objects(&state, object_bull);
 
     Object* object_fly = new_object(OBJECT_TYPE__FLY);
-    object_fly->tilemap_pos = vec2i(4,4);
+    object_fly->tilemap_pos = vec2i(3,3);
     add_object_to_gamemap_objects(&state, object_fly);
 
     Object* object_chameleon = new_object(OBJECT_TYPE__CHAMELEON);
-    object_chameleon->tilemap_pos = vec2i(4,8);
+    object_chameleon->tilemap_pos = vec2i(3,7);
     add_object_to_gamemap_objects(&state, object_chameleon);
 
-    int n = 8;
-    for(int i = 0; i < n; i++)
+    Vec2i tilemap_pos = vec2i(0,0);
+    for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
-        object_barrel->tilemap_pos = vec2i(10-i,10);
-        add_object_to_gamemap_objects(&state, object_barrel);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        object_wall->tilemap_pos = tilemap_pos;
+        add_object_to_gamemap_objects(&state, object_wall);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1);
     }
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
-        object_barrel->tilemap_pos = vec2i(10-n,10+i);
-        add_object_to_gamemap_objects(&state, object_barrel);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        object_wall->tilemap_pos = tilemap_pos;
+        add_object_to_gamemap_objects(&state, object_wall);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1);
     }
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
-        object_barrel->tilemap_pos = vec2i(10-n+i,10+n);
-        add_object_to_gamemap_objects(&state, object_barrel);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        object_wall->tilemap_pos = tilemap_pos;
+        add_object_to_gamemap_objects(&state, object_wall);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
     }
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < TILEMAP_LENGTH-2; i++)
     {
-        Object* object_barrel = new_object(OBJECT_TYPE__BARREL);
-        object_barrel->tilemap_pos = vec2i(10,10+n-i);
-        add_object_to_gamemap_objects(&state, object_barrel);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        object_wall->tilemap_pos = tilemap_pos;
+        add_object_to_gamemap_objects(&state, object_wall);
+        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
     }
+
+    Object* object_door = new_object(OBJECT_TYPE__DOOR);
+    object_door->door.dir4 = DIR4__RIGHT;
+    object_door->tilemap_pos = tilemap_pos;
+    add_object_to_gamemap_objects(&state, object_door);
 
     for(ListElem* curr_elem = state.gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
     {

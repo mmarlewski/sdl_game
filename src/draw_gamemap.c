@@ -4,9 +4,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 {
     // floors, highlights
 
-    for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
+    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
     {
-        for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
+        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
         {
             Vec2i tilemap_pos = vec2i(j,i);
             Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
@@ -90,9 +90,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // objects, sprites
 
-    for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
+    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
     {
-        for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
+        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
         {
             Vec2i tilemap_pos = vec2i(j,i);
             Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);

@@ -182,15 +182,37 @@ void destroy_textures_change (Textures_Change* change)
 
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
+
+    object->wall = load_texture_from_filepath
+    (renderer, "./res/object/wall/wall.png");
+    object->wall_outline = load_texture_from_filepath
+    (renderer, "./res/object/wall/wall_outline.png");
+
+    object->door_up = load_texture_from_filepath
+    (renderer, "./res/object/door/door_up.png");
+    object->door_up_outline = load_texture_from_filepath
+    (renderer, "./res/object/door/door_up_outline.png");
+    object->door_right = load_texture_from_filepath
+    (renderer, "./res/object/door/door_right.png");
+    object->door_right_outline = load_texture_from_filepath
+    (renderer, "./res/object/door/door_right_outline.png");
+    object->door_down = load_texture_from_filepath
+    (renderer, "./res/object/door/door_down.png");
+    object->door_down_outline = load_texture_from_filepath
+    (renderer, "./res/object/door/door_down_outline.png");
+    object->door_left = load_texture_from_filepath
+    (renderer, "./res/object/door/door_left.png");
+    object->door_left_outline = load_texture_from_filepath
+    (renderer, "./res/object/door/door_left_outline.png");
+
     object->pillar = load_texture_from_filepath
     (renderer, "./res/object/pillar/pillar.png");
     object->pillar_outline = load_texture_from_filepath
     (renderer, "./res/object/pillar/pillar_outline.png");
-
     object->pillar_spikes = load_texture_from_filepath
-    (renderer, "./res/object/pillar_spikes/pillar_spikes.png");
+    (renderer, "./res/object/pillar/pillar_spikes.png");
     object->pillar_spikes_outline = load_texture_from_filepath
-    (renderer, "./res/object/pillar_spikes/pillar_spikes_outline.png");
+    (renderer, "./res/object/pillar/pillar_spikes_outline.png");
 
     object->barrel = load_texture_from_filepath
     (renderer, "./res/object/barrel/barrel.png");

@@ -157,9 +157,20 @@ void destroy_textures_drop (Textures_Drop* drop);
 
 typedef struct
 {
+    Texture* wall;
+    Texture* wall_outline;
+
+    Texture* door_up;
+    Texture* door_up_outline;
+    Texture* door_right;
+    Texture* door_right_outline;
+    Texture* door_down;
+    Texture* door_down_outline;
+    Texture* door_left;
+    Texture* door_left_outline;
+
     Texture* pillar;
     Texture* pillar_outline;
-
     Texture* pillar_spikes;
     Texture* pillar_spikes_outline;
 

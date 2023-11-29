@@ -24,9 +24,9 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     // gamemap
 
-    for(int i = 0 ; i < TILEMAP_HEIGHT ; i++)
+    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
     {
-        for(int j = 0 ; j < TILEMAP_WIDTH ; j++)
+        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
         {
             state->gamemap.floor_array[i][j] = FLOOR_TYPE__METAL;
         }
@@ -35,7 +35,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.object_hero->tilemap_pos = vec2i(10,6);
+    state->gamemap.object_hero->tilemap_pos = vec2i(7,5);
     add_object_to_gamemap_objects(state, state->gamemap.object_hero);
     state->gamemap.curr_object_enemy = 0;
 
@@ -115,7 +115,7 @@ void change_background_color(State* state, Vec3i new_background_color)
 
 int is_tilemap_pos_in_tilemap(Vec2i tilemap_pos)
 {
-    return (tilemap_pos.x >= 0 && tilemap_pos.x < TILEMAP_WIDTH && tilemap_pos.y >= 0 && tilemap_pos.y < TILEMAP_HEIGHT);
+    return (tilemap_pos.x >= 0 && tilemap_pos.x < TILEMAP_LENGTH && tilemap_pos.y >= 0 && tilemap_pos.y < TILEMAP_LENGTH);
 }
 
 Object* get_object_on_tilemap_pos(State* state, Vec2i tilemap_pos)
