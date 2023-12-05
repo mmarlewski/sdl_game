@@ -116,6 +116,10 @@ int is_object_movable(Object* object)
     {
         case OBJECT_TYPE__NONE: is = 0; break;
         case OBJECT_TYPE__WALL: is = 0; break;
+        case OBJECT_TYPE__STALACTITE: is = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN: is = 0; break;
+        case OBJECT_TYPE__STALAGMITE: is = 0; break;
+        case OBJECT_TYPE__STALAGNATE: is = 0; break;
         case OBJECT_TYPE__DOOR: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 1; break;
         case OBJECT_TYPE__BARREL: is = 1; break;
@@ -142,6 +146,10 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__NONE: name = "none"; break;
         case OBJECT_TYPE__WALL: name = "wall"; break;
         case OBJECT_TYPE__DOOR: name = "door"; break;
+        case OBJECT_TYPE__STALACTITE: name = "stalactite"; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN: name = "stalactite fallen"; break;
+        case OBJECT_TYPE__STALAGMITE: name = "stalagmite"; break;
+        case OBJECT_TYPE__STALAGNATE: name = "stalagnate"; break;
         case OBJECT_TYPE__PILLAR: name = "pillar"; break;
         case OBJECT_TYPE__BARREL: name = "barrel"; break;
         case OBJECT_TYPE__SPRING: name = "spring"; break;
@@ -178,6 +186,10 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
             }
         }
         break;
+        case OBJECT_TYPE__STALACTITE: texture = textures->object.stalactite; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN: texture = textures->object.stalactite_fallen; break;
+        case OBJECT_TYPE__STALAGMITE: texture = textures->object.stalagmite; break;
+        case OBJECT_TYPE__STALAGNATE: texture = textures->object.stalagnate; break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)
@@ -225,6 +237,10 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
             }
         }
         break;
+        case OBJECT_TYPE__STALACTITE: texture = textures->object.stalactite; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN: texture = textures->object.stalactite_fallen; break;
+        case OBJECT_TYPE__STALAGMITE: texture = textures->object.stalagmite; break;
+        case OBJECT_TYPE__STALAGNATE: texture = textures->object.stalagnate; break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)
@@ -272,6 +288,10 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
             }
         }
         break;
+        case OBJECT_TYPE__STALACTITE: texture = textures->object.stalactite_outline; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN: texture = textures->object.stalactite_fallen_outline; break;
+        case OBJECT_TYPE__STALAGMITE: texture = textures->object.stalagmite_outline; break;
+        case OBJECT_TYPE__STALAGNATE: texture = textures->object.stalagnate_outline; break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)
@@ -319,6 +339,10 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
             }
         }
         break;
+        case OBJECT_TYPE__STALACTITE: texture = textures->object.stalactite_outline; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN: texture = textures->object.stalactite_fallen_outline; break;
+        case OBJECT_TYPE__STALAGMITE: texture = textures->object.stalagmite_outline; break;
+        case OBJECT_TYPE__STALAGNATE: texture = textures->object.stalagnate_outline; break;
         case OBJECT_TYPE__PILLAR:
         {
             if(object->pillar.spikes_on)

@@ -169,6 +169,18 @@ typedef struct
     Texture* door_left;
     Texture* door_left_outline;
 
+    Texture* stalactite;
+    Texture* stalactite_outline;
+
+    Texture* stalactite_fallen;
+    Texture* stalactite_fallen_outline;
+
+    Texture* stalagmite;
+    Texture* stalagmite_outline;
+
+    Texture* stalagnate;
+    Texture* stalagnate_outline;
+
     Texture* pillar;
     Texture* pillar_outline;
     Texture* pillar_spikes;

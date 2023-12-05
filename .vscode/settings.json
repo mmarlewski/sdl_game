@@ -3,6 +3,7 @@
         "gamemap",
         "gamestate",
         "interactable",
+        "STALAGNATE",
         "tilemap"
     ]
 }

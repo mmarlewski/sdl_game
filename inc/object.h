@@ -11,6 +11,10 @@ enum OBJECT_TYPE
 
     OBJECT_TYPE__WALL,
     OBJECT_TYPE__DOOR,
+    OBJECT_TYPE__STALACTITE,
+    OBJECT_TYPE__STALACTITE_FALLEN,
+    OBJECT_TYPE__STALAGMITE,
+    OBJECT_TYPE__STALAGNATE,
     OBJECT_TYPE__PILLAR,
     OBJECT_TYPE__BARREL,
     OBJECT_TYPE__SPRING,
@@ -38,6 +42,22 @@ typedef struct
     int dir4;
 
 } Object_Door;
+
+typedef struct
+{
+} Object_Stalactite;
+
+typedef struct
+{
+} Object_StalactiteFallen;
+
+typedef struct
+{
+} Object_Stalagmite;
+
+typedef struct
+{
+} Object_Stalagnate;
 
 typedef struct
 {
@@ -101,18 +121,22 @@ struct _Object
 
     union
     {
-        Object_Wall wall;
-        Object_Door door;
-        Object_Pillar pillar;
-        Object_Barrel barrel;
-        Object_Spring spring;
-        Object_Weight weight;
-        Object_Hero hero;
-        Object_Goat goat;
-        Object_Spider spider;
-        Object_Bull bull;
-        Object_Fly fly;
-        Object_Chameleon chameleon;
+        Object_Wall             wall;
+        Object_Door             door;
+        Object_Stalactite       stalactite;
+        Object_StalactiteFallen stalactite_fallen;
+        Object_Stalagmite       stalagmite;
+        Object_Stalagnate       stalagnate;
+        Object_Pillar           pillar;
+        Object_Barrel           barrel;
+        Object_Spring           spring;
+        Object_Weight           weight;
+        Object_Hero             hero;
+        Object_Goat             goat;
+        Object_Spider           spider;
+        Object_Bull             bull;
+        Object_Fly              fly;
+        Object_Chameleon        chameleon;
     };
 };
 

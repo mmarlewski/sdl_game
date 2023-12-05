@@ -182,7 +182,6 @@ void destroy_textures_change (Textures_Change* change)
 
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
-
     object->wall = load_texture_from_filepath
     (renderer, "./res/object/wall/wall.png");
     object->wall_outline = load_texture_from_filepath
@@ -204,6 +203,26 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     (renderer, "./res/object/door/door_left.png");
     object->door_left_outline = load_texture_from_filepath
     (renderer, "./res/object/door/door_left_outline.png");
+
+    object->stalactite = load_texture_from_filepath
+    (renderer, "./res/object/stalactite/stalactite.png");
+    object->stalactite_outline = load_texture_from_filepath
+    (renderer, "./res/object/stalactite/stalactite_outline.png");
+
+    object->stalactite_fallen = load_texture_from_filepath
+    (renderer, "./res/object/stalactite_fallen/stalactite_fallen.png");
+    object->stalactite_fallen_outline = load_texture_from_filepath
+    (renderer, "./res/object/stalactite_fallen/stalactite_fallen_outline.png");
+
+    object->stalagmite = load_texture_from_filepath
+    (renderer, "./res/object/stalagmite/stalagmite.png");
+    object->stalagmite_outline = load_texture_from_filepath
+    (renderer, "./res/object/stalagmite/stalagmite_outline.png");
+
+    object->stalagnate = load_texture_from_filepath
+    (renderer, "./res/object/stalagnate/stalagnate.png");
+    object->stalagnate_outline = load_texture_from_filepath
+    (renderer, "./res/object/stalagnate/stalagnate_outline.png");
 
     object->pillar = load_texture_from_filepath
     (renderer, "./res/object/pillar/pillar.png");
