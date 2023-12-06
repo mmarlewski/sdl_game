@@ -7,19 +7,36 @@
 
 typedef struct
 {
+    Texture* highlight;
+
+    Texture* rock;
+    Texture* rock_crack_water;
+    Texture* rock_crack_lava;
+
+    Texture* stone;
+    Texture* stone_spikes_on;
+    Texture* stone_spikes_off;
+
     Texture* metal;
-    Texture* metal_no_spikes;
-    Texture* metal_spikes;
-    Texture* metal_lava_crack;
-    Texture* lava_1;
-    Texture* lava_2;
-    Texture* ice;
-    Texture* ice_water_crack;
+    Texture* metal_hatch_open_1;
+    Texture* metal_hatch_open_2;
+    Texture* metal_hatch_closed;
+    Texture* metal_cover_bottom;
+
+    Texture* grass;
+
     Texture* water_1;
     Texture* water_2;
-    Texture* hatch_closed;
-    Texture* hatch_open_1;
-    Texture* hatch_open_2;
+    Texture* water_stalactite_fallen_1;
+    Texture* water_stalactite_fallen_2;
+
+    Texture* lava_1;
+    Texture* lava_2;
+    Texture* lava_stalactite_fallen_1;
+    Texture* lava_stalactite_fallen_2;
+
+    Texture* ice;
+    Texture* ice_crack_water;
 
 } Textures_Floor;
 
@@ -28,146 +45,41 @@ void destroy_textures_floor (Textures_Floor* floor);
 
 typedef struct
 {
-    Texture* highlight;
+    Texture* wall_rock;
+    Texture* wall_rock_outline;
 
-} Textures_Highlight;
+    Texture* wall_stone;
+    Texture* wall_stone_outline;
 
-void load_textures_highlight (Renderer* renderer, Textures_Highlight* highlight);
-void destroy_textures_highlight (Textures_Highlight* highlight);
+    Texture* wall_metal;
+    Texture* wall_metal_outline;
 
-typedef struct
-{
-    Texture* frame_1;
-    Texture* frame_2;
-    Texture* frame_3;
-    Texture* frame_4;
-    Texture* frame_5;
-    Texture* frame_6;
+    Texture* exit_rock_up;
+    Texture* exit_rock_up_outline;
+    Texture* exit_rock_right;
+    Texture* exit_rock_right_outline;
+    Texture* exit_rock_down;
+    Texture* exit_rock_down_outline;
+    Texture* exit_rock_left;
+    Texture* exit_rock_left_outline;
 
-} Textures_Danger;
+    Texture* exit_stone_up;
+    Texture* exit_stone_up_outline;
+    Texture* exit_stone_right;
+    Texture* exit_stone_right_outline;
+    Texture* exit_stone_down;
+    Texture* exit_stone_down_outline;
+    Texture* exit_stone_left;
+    Texture* exit_stone_left_outline;
 
-void load_textures_danger (Renderer* renderer, Textures_Danger* danger);
-void destroy_textures_danger (Textures_Danger* danger);
-
-typedef struct
-{
-    Texture* none;
-
-} Textures_None;
-
-void load_textures_none (Renderer* renderer, Textures_None* none);
-void destroy_textures_none (Textures_None* none);
-
-typedef struct
-{
-    Texture* up;
-    Texture* right;
-    Texture* down;
-    Texture* left;
-
-} Textures_Move;
-
-void load_textures_move (Renderer* renderer, Textures_Move* move);
-void destroy_textures_move (Textures_Move* move);
-
-typedef struct
-{
-    Texture* up;
-    Texture* right;
-    Texture* down;
-    Texture* left;
-
-} Textures_Crash;
-
-void load_textures_crash (Renderer* renderer, Textures_Crash* crash);
-void destroy_textures_crash (Textures_Crash* crash);
-
-typedef struct
-{
-    Texture* fall;
-
-} Textures_Fall;
-
-void load_textures_fall (Renderer* renderer, Textures_Fall* fall);
-void destroy_textures_fall (Textures_Fall* fall);
-
-typedef struct
-{
-    Texture* death;
-    Texture* skull;
-
-} Textures_Death;
-
-void load_textures_death (Renderer* renderer, Textures_Death* death);
-void destroy_textures_death (Textures_Death* death);
-
-typedef struct
-{
-    Texture* blow_up;
-    Texture* explosion;
-
-} Textures_BlowUp;
-
-void load_textures_blow_up (Renderer* renderer, Textures_BlowUp* blow_up);
-void destroy_textures_blow_up (Textures_BlowUp* blow_up);
-
-typedef struct
-{
-    Texture* up;
-    Texture* right;
-    Texture* down;
-    Texture* left;
-
-} Textures_Throw;
-
-void load_textures_throw (Renderer* renderer, Textures_Throw* throw);
-void destroy_textures_throw (Textures_Throw* throw);
-
-typedef struct
-{
-    Texture* none;
-    Texture* up;
-    Texture* right;
-    Texture* down;
-    Texture* left;
-
-} Textures_Lift;
-
-void load_textures_lift (Renderer* renderer, Textures_Lift* lift);
-void destroy_textures_lift (Textures_Lift* lift);
-
-typedef struct
-{
-    Texture* drop;
-    Texture* thump;
-
-} Textures_Drop;
-
-typedef struct
-{
-    Texture* change;
-
-} Textures_Change;
-
-void load_textures_change (Renderer* renderer, Textures_Change* change);
-void destroy_textures_change (Textures_Change* change);
-
-void load_textures_drop (Renderer* renderer, Textures_Drop* drop);
-void destroy_textures_drop (Textures_Drop* drop);
-
-typedef struct
-{
-    Texture* wall;
-    Texture* wall_outline;
-
-    Texture* door_up;
-    Texture* door_up_outline;
-    Texture* door_right;
-    Texture* door_right_outline;
-    Texture* door_down;
-    Texture* door_down_outline;
-    Texture* door_left;
-    Texture* door_left_outline;
+    Texture* exit_metal_up;
+    Texture* exit_metal_up_outline;
+    Texture* exit_metal_right;
+    Texture* exit_metal_right_outline;
+    Texture* exit_metal_down;
+    Texture* exit_metal_down_outline;
+    Texture* exit_metal_left;
+    Texture* exit_metal_left_outline;
 
     Texture* stalactite;
     Texture* stalactite_outline;
@@ -185,6 +97,21 @@ typedef struct
     Texture* pillar_outline;
     Texture* pillar_spikes;
     Texture* pillar_spikes_outline;
+
+    Texture* cover;
+    Texture* cover_outline;
+
+    Texture* rock;
+    Texture* rock_outline;
+
+    Texture* rock_damaged;
+    Texture* rock_damaged_outline;
+
+    Texture* safe;
+    Texture* safe_outline;
+
+    Texture* safe_damaged;
+    Texture* safe_damaged_outline;
 
     Texture* barrel;
     Texture* barrel_outline;
@@ -250,29 +177,53 @@ void destroy_textures_order_number (Textures_OrderNumber* order_number);
 
 typedef struct
 {
+    Texture* none;
+
+    Texture* move_up;
+    Texture* move_right;
+    Texture* move_down;
+    Texture* move_left;
+
+    Texture* crash_up;
+    Texture* crash_right;
+    Texture* crash_down;
+    Texture* crash_left;
+
+    Texture* fall;
+
+    Texture* death;
+    Texture* skull;
+
+    Texture* blow_up;
+    Texture* explosion;
+
+    Texture* throw_up;
+    Texture* throw_right;
+    Texture* throw_down;
+    Texture* throw_left;
+
+    Texture* lift_none;
+    Texture* lift_up;
+    Texture* lift_right;
+    Texture* lift_down;
+    Texture* lift_left;
+
+    Texture* drop;
+    Texture* thump;
+
+    Texture* change;
+
+} Textures_Action;
+
+void load_textures_action (Renderer* renderer, Textures_Action* action);
+void destroy_textures_action (Textures_Action* action);
+
+typedef struct
+{
     Textures_Floor floor;
-
-    Textures_Highlight highlight;
-    Textures_Danger danger;
-
-    Textures_None none;
-
-    Textures_Move move;
-    Textures_Crash crash;
-
-    Textures_Fall fall;
-    Textures_Death death;
-    Textures_BlowUp blow_up;
-
-    Textures_Throw throw;
-    Textures_Lift lift;
-    Textures_Drop drop;
-
-    Textures_Change change;
-
     Textures_Object object;
-
     Textures_OrderNumber order_number;
+    Textures_Action action;
 
 } Textures;
 

@@ -9,12 +9,12 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
             //
         }
         break;
-        case FLOOR_TYPE__METAL_SPIKES:
+        case FLOOR_TYPE__STONE_SPIKES_ON:
         {
             //
         }
         break;
-        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
             change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
         }
@@ -29,7 +29,7 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
             //
         }
         break;
-        case FLOOR_TYPE__ICE_WATER_CRACK:
+        case FLOOR_TYPE__ICE_CRACK_WATER:
         {
             change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
         }
@@ -39,12 +39,12 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
             //
         }
         break;
-        case FLOOR_TYPE__HATCH_CLOSED:
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
             //
         }
         break;
-        case FLOOR_TYPE__HATCH_OPEN:
+        case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
             //
         }
@@ -63,7 +63,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             //
         }
         break;
-        case FLOOR_TYPE__METAL_SPIKES:
+        case FLOOR_TYPE__STONE_SPIKES_ON:
         {
             if(!is_object_flying(action->move.object))
             {
@@ -72,7 +72,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             }
         }
         break;
-        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
             //
         }
@@ -95,7 +95,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             }
         }
         break;
-        case FLOOR_TYPE__ICE_WATER_CRACK:
+        case FLOOR_TYPE__ICE_CRACK_WATER:
         {
             if(!is_object_flying(action->move.object))
             {
@@ -113,12 +113,12 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
             }
         }
         break;
-        case FLOOR_TYPE__HATCH_CLOSED:
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
             //
         }
         break;
-        case FLOOR_TYPE__HATCH_OPEN:
+        case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
             if(!is_object_flying(action->move.object))
             {
@@ -140,16 +140,16 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         {
             if(action->drop.object->type == OBJECT_TYPE__WEIGHT)
             {
-                change_floor_in_tilemap_pos(state, FLOOR_TYPE__METAL_LAVA_CRACK, action->tilemap_pos);
+                change_floor_in_tilemap_pos(state, FLOOR_TYPE__ROCK_CRACK_LAVA, action->tilemap_pos);
             }
         }
         break;
-        case FLOOR_TYPE__METAL_SPIKES:
+        case FLOOR_TYPE__STONE_SPIKES_ON:
         {
             //
         }
         break;
-        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
             if(!is_object_flying(action->drop.object))
             {
@@ -174,14 +174,14 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             {
                 if(action->drop.object->type == OBJECT_TYPE__WEIGHT)
                 {
-                    change_floor_in_tilemap_pos(state, FLOOR_TYPE__ICE_WATER_CRACK, action->tilemap_pos);
+                    change_floor_in_tilemap_pos(state, FLOOR_TYPE__ICE_CRACK_WATER, action->tilemap_pos);
                 }
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_move(action->tilemap_pos, action->drop.dir4));
             }
         }
         break;
-        case FLOOR_TYPE__ICE_WATER_CRACK:
+        case FLOOR_TYPE__ICE_CRACK_WATER:
         {
             if(!is_object_flying(action->drop.object))
             {
@@ -200,12 +200,12 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             }
         }
         break;
-        case FLOOR_TYPE__HATCH_CLOSED:
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
             //
         }
         break;
-        case FLOOR_TYPE__HATCH_OPEN:
+        case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
             if(!is_object_flying(action->drop.object))
             {
@@ -228,17 +228,17 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
             //
         }
         break;
-        case FLOOR_TYPE__METAL_NO_SPIKES:
+        case FLOOR_TYPE__STONE_SPIKES_OFF:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_SPIKES, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__STONE_SPIKES_ON, tilemap_pos));
         }
         break;
-        case FLOOR_TYPE__METAL_SPIKES:
+        case FLOOR_TYPE__STONE_SPIKES_ON:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_NO_SPIKES, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__STONE_SPIKES_OFF, tilemap_pos));
         }
         break;
-        case FLOOR_TYPE__METAL_LAVA_CRACK:
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
             //
         }
@@ -253,7 +253,7 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
             //
         }
         break;
-        case FLOOR_TYPE__ICE_WATER_CRACK:
+        case FLOOR_TYPE__ICE_CRACK_WATER:
         {
             //
         }
@@ -263,14 +263,14 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
             //
         }
         break;
-        case FLOOR_TYPE__HATCH_CLOSED:
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__HATCH_OPEN, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_HATCH_OPEN, tilemap_pos));
         }
         break;
-        case FLOOR_TYPE__HATCH_OPEN:
+        case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__HATCH_CLOSED, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_HATCH_CLOSED, tilemap_pos));
         }
         break;
         default:

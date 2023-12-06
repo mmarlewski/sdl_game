@@ -28,7 +28,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     {
         for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
         {
-            state->gamemap.floor_array[i][j] = FLOOR_TYPE__METAL;
+            state->gamemap.floor_array[i][j] = FLOOR_TYPE__GRASS;
         }
     }
 
@@ -154,7 +154,7 @@ void add_object_to_gamemap_objects(State* state, Object* new_object)
 {
     add_new_list_element_to_list_end(state->gamemap.object_list, new_object);
 
-    if(is_object_enemy(new_object))
+    if(new_object->is_enemy)
     {
         add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
     }
@@ -167,7 +167,7 @@ void remove_object_from_gamemap_objects(State* state, Object* object)
         state->gamemap.object_hero = 0;
     }
 
-    if(is_object_enemy(object))
+    if(object->is_enemy)
     {
         remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
     }

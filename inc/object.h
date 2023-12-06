@@ -9,13 +9,22 @@ enum OBJECT_TYPE
 {
     OBJECT_TYPE__NONE,
 
-    OBJECT_TYPE__WALL,
-    OBJECT_TYPE__DOOR,
+    OBJECT_TYPE__WALL_ROCK,
+    OBJECT_TYPE__WALL_STONE,
+    OBJECT_TYPE__WALL_METAL,
+    OBJECT_TYPE__EXIT_ROCK,
+    OBJECT_TYPE__EXIT_STONE,
+    OBJECT_TYPE__EXIT_METAL,
     OBJECT_TYPE__STALACTITE,
     OBJECT_TYPE__STALACTITE_FALLEN,
     OBJECT_TYPE__STALAGMITE,
     OBJECT_TYPE__STALAGNATE,
     OBJECT_TYPE__PILLAR,
+    OBJECT_TYPE__COVER,
+    OBJECT_TYPE__ROCK,
+    OBJECT_TYPE__ROCK_DAMAGED,
+    OBJECT_TYPE__SAFE,
+    OBJECT_TYPE__SAFE_DAMAGED,
     OBJECT_TYPE__BARREL,
     OBJECT_TYPE__SPRING,
     OBJECT_TYPE__WEIGHT,
@@ -35,13 +44,33 @@ typedef struct _Object Object;
 
 typedef struct
 {
-} Object_Wall;
+} Object_WallRock;
+
+typedef struct
+{
+} Object_WallStone;
+
+typedef struct
+{
+} Object_WallMetal;
 
 typedef struct
 {
     int dir4;
 
-} Object_Door;
+} Object_ExitRock;
+
+typedef struct
+{
+    int dir4;
+
+} Object_ExitStone;
+
+typedef struct
+{
+    int dir4;
+
+} Object_ExitMetal;
 
 typedef struct
 {
@@ -64,6 +93,26 @@ typedef struct
     int spikes_on;
 
 } Object_Pillar;
+
+typedef struct
+{
+} Object_Cover;
+
+typedef struct
+{
+} Object_Rock;
+
+typedef struct
+{
+} Object_RockDamaged;
+
+typedef struct
+{
+} Object_Safe;
+
+typedef struct
+{
+} Object_SafeDamaged;
 
 typedef struct
 {
@@ -103,6 +152,12 @@ typedef struct
 
 typedef struct
 {
+    Vec2i to_tilemap_pos;
+
+} Object_Exit;
+
+typedef struct
+{
     struct _Action* action_sequence;
     int performed_attack;
     int order_number;
@@ -112,22 +167,34 @@ typedef struct
 
 struct _Object
 {
-    int is_visible;
     int is_dead;
+    int is_visible;
     int type;
     Vec2i tilemap_pos;
 
+    int is_exit;
+    Object_Exit exit;
+    int is_enemy;
     Object_Enemy enemy;
 
     union
     {
-        Object_Wall             wall;
-        Object_Door             door;
+        Object_WallRock         wall_rock;
+        Object_WallStone        wall_stone;
+        Object_WallMetal        wall_metal;
+        Object_ExitRock         exit_rock;
+        Object_ExitStone        exit_stone;
+        Object_ExitMetal        exit_metal;
         Object_Stalactite       stalactite;
         Object_StalactiteFallen stalactite_fallen;
         Object_Stalagmite       stalagmite;
         Object_Stalagnate       stalagnate;
         Object_Pillar           pillar;
+        Object_Cover            cover;
+        Object_Rock             rock;
+        Object_RockDamaged      rock_damaged;
+        Object_Safe             safe;
+        Object_SafeDamaged      safe_damaged;
         Object_Barrel           barrel;
         Object_Spring           spring;
         Object_Weight           weight;
@@ -144,7 +211,6 @@ Object* new_object(int type);
 void destroy_object(Object* object);
 
 int is_object_flying(Object* object);
-int is_object_enemy(Object* object);
 int is_object_interactable(Object* object);
 int is_object_movable(Object* object);
 

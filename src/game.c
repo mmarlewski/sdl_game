@@ -117,23 +117,25 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__LAVA, vec2i(4,4));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_SPIKES, vec2i(1,5));
+    FLOOR_TYPE__STONE_SPIKES_ON, vec2i(1,5));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_NO_SPIKES, vec2i(7,6));
+    FLOOR_TYPE__STONE_SPIKES_OFF, vec2i(7,6));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(2,2));
+    FLOOR_TYPE__ROCK_CRACK_LAVA, vec2i(2,2));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_LAVA_CRACK, vec2i(2,6));
+    FLOOR_TYPE__ROCK_CRACK_LAVA, vec2i(2,6));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__WATER, vec2i(3,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE_WATER_CRACK, vec2i(4,1));
+    FLOOR_TYPE__ICE_CRACK_WATER, vec2i(4,1));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__ICE, vec2i(5,1));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__ICE, vec2i(6,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__HATCH_CLOSED, vec2i(3,5));
+    FLOOR_TYPE__METAL_HATCH_CLOSED, vec2i(3,5));
+    change_floor_in_tilemap_pos(&state,
+    FLOOR_TYPE__METAL_COVER_BOTTOM, vec2i(6,6));
 
     Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
     object_pillar_1->tilemap_pos = vec2i(2,1);
@@ -160,17 +162,16 @@ int main (int argc, char* argv[])
     object_pillar_6->tilemap_pos = vec2i(5,6);
     add_object_to_gamemap_objects(&state, object_pillar_6);
 
-    Object* object_pillar_7 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_7->pillar.spikes_on = 1;
-    object_pillar_7->tilemap_pos = vec2i(6,6);
-    add_object_to_gamemap_objects(&state, object_pillar_7);
+    Object* object_cover = new_object(OBJECT_TYPE__COVER);
+    object_cover->tilemap_pos = vec2i(6,6);
+    add_object_to_gamemap_objects(&state, object_cover);
 
     Object* object_spring_1 = new_object(OBJECT_TYPE__SPRING);
     object_spring_1->tilemap_pos = vec2i(7,1);
     add_object_to_gamemap_objects(&state, object_spring_1);
 
     Object* object_spring_2 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_2->tilemap_pos = vec2i(7,1);
+    object_spring_2->tilemap_pos = vec2i(8,1);
     add_object_to_gamemap_objects(&state, object_spring_2);
 
     Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
@@ -182,57 +183,62 @@ int main (int argc, char* argv[])
     add_object_to_gamemap_objects(&state, object_barrel_2);
 
     Object* object_goat = new_object(OBJECT_TYPE__GOAT);
+    object_goat->is_enemy = 1;
     object_goat->tilemap_pos = vec2i(2,3);
     add_object_to_gamemap_objects(&state, object_goat);
 
     Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
+    object_spider->is_enemy = 1;
     object_spider->tilemap_pos = vec2i(3,4);
     add_object_to_gamemap_objects(&state, object_spider);
 
     Object* object_bull = new_object(OBJECT_TYPE__BULL);
+    object_bull->is_enemy = 1;
     object_bull->tilemap_pos = vec2i(5,4);
     add_object_to_gamemap_objects(&state, object_bull);
 
     Object* object_fly = new_object(OBJECT_TYPE__FLY);
+    object_fly->is_enemy = 1;
     object_fly->tilemap_pos = vec2i(3,3);
     add_object_to_gamemap_objects(&state, object_fly);
 
     Object* object_chameleon = new_object(OBJECT_TYPE__CHAMELEON);
+    object_chameleon->is_enemy = 1;
     object_chameleon->tilemap_pos = vec2i(3,7);
     add_object_to_gamemap_objects(&state, object_chameleon);
 
     Vec2i tilemap_pos = vec2i(0,0);
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL_ROCK);
         object_wall->tilemap_pos = tilemap_pos;
         add_object_to_gamemap_objects(&state, object_wall);
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1);
     }
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL_METAL);
         object_wall->tilemap_pos = tilemap_pos;
         add_object_to_gamemap_objects(&state, object_wall);
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1);
     }
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL_ROCK);
         object_wall->tilemap_pos = tilemap_pos;
         add_object_to_gamemap_objects(&state, object_wall);
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
     }
     for(int i = 0; i < TILEMAP_LENGTH-2; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL_STONE);
         object_wall->tilemap_pos = tilemap_pos;
         add_object_to_gamemap_objects(&state, object_wall);
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
     }
 
-    Object* object_door = new_object(OBJECT_TYPE__DOOR);
-    object_door->door.dir4 = DIR4__RIGHT;
+    Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE);
+    object_door->exit_metal.dir4 = DIR4__RIGHT;
     object_door->tilemap_pos = tilemap_pos;
     add_object_to_gamemap_objects(&state, object_door);
 
@@ -240,7 +246,7 @@ int main (int argc, char* argv[])
     {
         Object* curr_object = (Object*)curr_elem->data;
 
-        if(is_object_enemy(curr_object))
+        if(curr_object->is_enemy)
         {
             curr_object->enemy.attack_dir4 = rand() % 4 + 1;
             remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);

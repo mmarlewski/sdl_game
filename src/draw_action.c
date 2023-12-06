@@ -60,7 +60,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->fall.fall,
+                textures->action.fall,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -72,7 +72,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->death.death,
+                textures->action.death,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -84,7 +84,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->blow_up.blow_up,
+                textures->action.blow_up,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -110,7 +110,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
 
             draw_texture_at_world_pos(
                 renderer,
-                textures->drop.drop,
+                textures->action.drop,
                 color,
                 target_world_iso_pos,
                 state->camera.world_pos,
@@ -134,7 +134,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->drop.drop,
+                textures->action.drop,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -146,7 +146,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->change.change,
+                textures->action.change,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,

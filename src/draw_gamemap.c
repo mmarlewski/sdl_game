@@ -43,7 +43,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.highlight,
+                        textures->floor.highlight,
                 colors->orange,
                         world_iso_pos,
                         state->camera.world_pos,
@@ -60,7 +60,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.highlight,
+                        textures->floor.highlight,
                 colors->pink,
                         world_iso_pos,
                         state->camera.world_pos,
@@ -77,7 +77,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 {
                     draw_texture_at_world_pos(
                         renderer,
-                        textures->highlight.highlight,
+                        textures->floor.highlight,
                 colors->yellow,
                         world_iso_pos,
                         state->camera.world_pos,
@@ -126,13 +126,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         state->camera.world_pos,
                         state->camera.zoom);
 
-                    if(is_object_enemy(curr_object) &&
+                    if(curr_object->is_enemy &&
                     state->gamemap.show_all_order_numbers)
                     {
                         draw_texture_at_world_pos(
                             renderer,
                             get_texture_order_number(textures, curr_object->enemy.order_number),
-                colors->none,
+                            colors->yellow,
                             world_iso_pos,
                             state->camera.world_pos,
                             state->camera.zoom
@@ -185,7 +185,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
-        is_object_enemy(hover_object) &&
+        hover_object->is_enemy &&
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
@@ -252,12 +252,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->camera.zoom
                 );
 
-            if(is_object_enemy(hover_object))
+            if(hover_object->is_enemy)
             {
                 draw_texture_at_world_pos(
                     renderer,
                     get_texture_order_number(textures, hover_object->enemy.order_number),
-                    colors->none,
+                    colors->yellow,
                     selected_world_iso_pos,
                     state->camera.world_pos,
                     state->camera.zoom
@@ -305,7 +305,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 draw_texture_at_world_pos(
                     renderer,
                     get_texture_order_number(textures, enemy_object->enemy.order_number),
-                colors->none,
+                colors->yellow,
                     selected_world_iso_pos,
                     state->camera.world_pos,
                     state->camera.zoom

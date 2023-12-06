@@ -176,7 +176,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->death.object->tilemap_pos = action->tilemap_pos;
 
-            if(is_object_enemy(action->death.object))
+            if(action->death.object->is_enemy)
             {
                 add_animation_to_animation_list(
                     state,
@@ -194,7 +194,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
 
             Animation* animation = new_animation_show_sprite_in_gamemap(
-                textures->death.skull,
+                textures->action.skull,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 0.2f
                 );
@@ -207,7 +207,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION_TYPE__BLOW_UP:
         {
             Animation* animation = new_animation_show_sprite_in_gamemap(
-                textures->blow_up.explosion,
+                textures->action.explosion,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 0.2f
                 );
@@ -302,7 +302,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->drop.object->tilemap_pos = action->tilemap_pos;
 
             Animation* animation = new_animation_show_sprite_in_gamemap(
-                textures->drop.thump,
+                textures->action.thump,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 0.2f
                 );
