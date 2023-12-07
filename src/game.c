@@ -162,7 +162,7 @@ int main (int argc, char* argv[])
     object_pillar_6->tilemap_pos = vec2i(5,6);
     add_object_to_gamemap_objects(&state, object_pillar_6);
 
-    Object* object_cover = new_object(OBJECT_TYPE__COVER);
+    Object* object_cover = new_object(OBJECT_TYPE__COVER_ROCK);
     object_cover->tilemap_pos = vec2i(6,6);
     add_object_to_gamemap_objects(&state, object_cover);
 
@@ -238,7 +238,8 @@ int main (int argc, char* argv[])
     }
 
     Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE);
-    object_door->exit_metal.dir4 = DIR4__RIGHT;
+    object_door->exit_stone.is_blocked = 1;
+    object_door->exit_stone.dir4 = DIR4__RIGHT;
     object_door->tilemap_pos = tilemap_pos;
     add_object_to_gamemap_objects(&state, object_door);
 

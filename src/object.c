@@ -59,11 +59,17 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__EXIT_STONE: is = 0; break;
         case OBJECT_TYPE__EXIT_METAL: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 0; break;
-        case OBJECT_TYPE__COVER: is = 0; break;
+        case OBJECT_TYPE__COVER_ROCK: is = 0; break;
+        case OBJECT_TYPE__COVER_METAL: is = 0; break;
+        case OBJECT_TYPE__COVER_GLASS: is = 0; break;
         case OBJECT_TYPE__ROCK: is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED: is = 0; break;
         case OBJECT_TYPE__SAFE: is = 0; break;
         case OBJECT_TYPE__SAFE_DAMAGED: is = 0; break;
+        case OBJECT_TYPE__DISPLAY: is = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: is = 0; break;
+        case OBJECT_TYPE__VENDING: is = 0; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: is = 0; break;
         case OBJECT_TYPE__BARREL: is = 0; break;
         case OBJECT_TYPE__SPRING: is = 0; break;
         case OBJECT_TYPE__WEIGHT: is = 0; break;
@@ -93,11 +99,17 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__EXIT_STONE: is = 0; break;
         case OBJECT_TYPE__EXIT_METAL: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 1; break;
-        case OBJECT_TYPE__COVER: is = 0; break;
+        case OBJECT_TYPE__COVER_ROCK: is = 0; break;
+        case OBJECT_TYPE__COVER_METAL: is = 0; break;
+        case OBJECT_TYPE__COVER_GLASS: is = 0; break;
         case OBJECT_TYPE__ROCK: is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED: is = 0; break;
         case OBJECT_TYPE__SAFE: is = 0; break;
         case OBJECT_TYPE__SAFE_DAMAGED: is = 0; break;
+        case OBJECT_TYPE__DISPLAY: is = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: is = 0; break;
+        case OBJECT_TYPE__VENDING: is = 0; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: is = 0; break;
         case OBJECT_TYPE__BARREL: is = 1; break;
         case OBJECT_TYPE__SPRING: is = 1; break;
         case OBJECT_TYPE__WEIGHT: is = 0; break;
@@ -131,11 +143,17 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__STALAGMITE: is = 0; break;
         case OBJECT_TYPE__STALAGNATE: is = 0; break;
         case OBJECT_TYPE__PILLAR: is = 1; break;
-        case OBJECT_TYPE__COVER: is = 1; break;
+        case OBJECT_TYPE__COVER_ROCK: is = 1; break;
+        case OBJECT_TYPE__COVER_METAL: is = 1; break;
+        case OBJECT_TYPE__COVER_GLASS: is = 1; break;
         case OBJECT_TYPE__ROCK: is = 1; break;
         case OBJECT_TYPE__ROCK_DAMAGED: is = 1; break;
         case OBJECT_TYPE__SAFE: is = 1; break;
         case OBJECT_TYPE__SAFE_DAMAGED: is = 1; break;
+        case OBJECT_TYPE__DISPLAY: is = 1; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: is = 1; break;
+        case OBJECT_TYPE__VENDING: is = 1; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: is = 1; break;
         case OBJECT_TYPE__BARREL: is = 1; break;
         case OBJECT_TYPE__SPRING: is = 1; break;
         case OBJECT_TYPE__WEIGHT: is = 1; break;
@@ -169,11 +187,17 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__STALAGMITE: name = "stalagmite"; break;
         case OBJECT_TYPE__STALAGNATE: name = "stalagnate"; break;
         case OBJECT_TYPE__PILLAR: name = "pillar"; break;
-        case OBJECT_TYPE__COVER: name = "cover"; break;
+        case OBJECT_TYPE__COVER_ROCK: name = "cover rock"; break;
+        case OBJECT_TYPE__COVER_METAL: name = "cover metal"; break;
+        case OBJECT_TYPE__COVER_GLASS: name = "cover glass"; break;
         case OBJECT_TYPE__ROCK: name = "rock"; break;
         case OBJECT_TYPE__ROCK_DAMAGED: name = "rock damaged"; break;
         case OBJECT_TYPE__SAFE: name = "safe"; break;
         case OBJECT_TYPE__SAFE_DAMAGED: name = "safe damaged"; break;
+        case OBJECT_TYPE__DISPLAY: name = "display"; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: name = "display damaged"; break;
+        case OBJECT_TYPE__VENDING: name = "vending"; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: name = "vending damaged"; break;
         case OBJECT_TYPE__BARREL: name = "barrel"; break;
         case OBJECT_TYPE__SPRING: name = "spring"; break;
         case OBJECT_TYPE__WEIGHT: name = "weight"; break;
@@ -201,37 +225,79 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__WALL_METAL: texture = textures->object.wall_metal; break;
         case OBJECT_TYPE__EXIT_ROCK:
         {
-            switch(object->exit_rock.dir4)
+            if(!object->exit_rock.is_blocked)
             {
-                case DIR4__UP: texture = textures->object.exit_rock_up; break;
-                case DIR4__RIGHT: texture = textures->object.exit_rock_right; break;
-                case DIR4__DOWN: texture = textures->object.exit_rock_down; break;
-                case DIR4__LEFT: texture = textures->object.exit_rock_left; break;
-                break;
+                switch(object->exit_rock.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_rock_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_rock_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_rock_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_rock_left; break;
+                    break;
+                }
+            }
+            else
+            {
+                switch(object->exit_rock.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_rock_blocked_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_rock_blocked_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_rock_blocked_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_rock_blocked_left; break;
+                    break;
+                }
             }
         }
         break;
         case OBJECT_TYPE__EXIT_STONE:
         {
-            switch(object->exit_stone.dir4)
+            if(!object->exit_stone.is_blocked)
             {
-                case DIR4__UP: texture = textures->object.exit_stone_up; break;
-                case DIR4__RIGHT: texture = textures->object.exit_stone_right; break;
-                case DIR4__DOWN: texture = textures->object.exit_stone_down; break;
-                case DIR4__LEFT: texture = textures->object.exit_stone_left; break;
-                break;
+                switch(object->exit_stone.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_stone_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_stone_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_stone_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_stone_left; break;
+                    break;
+                }
+            }
+            else
+            {
+                switch(object->exit_stone.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_stone_blocked_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_stone_blocked_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_stone_blocked_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_stone_blocked_left; break;
+                    break;
+                }
             }
         }
         break;
         case OBJECT_TYPE__EXIT_METAL:
         {
-            switch(object->exit_metal.dir4)
+            if(!object->exit_metal.is_blocked)
             {
-                case DIR4__UP: texture = textures->object.exit_metal_up; break;
-                case DIR4__RIGHT: texture = textures->object.exit_metal_right; break;
-                case DIR4__DOWN: texture = textures->object.exit_metal_down; break;
-                case DIR4__LEFT: texture = textures->object.exit_metal_left; break;
-                break;
+                switch(object->exit_metal.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_metal_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_metal_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_metal_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_metal_left; break;
+                    break;
+                }
+            }
+            else
+            {
+                switch(object->exit_metal.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_metal_blocked_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_metal_blocked_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_metal_blocked_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_metal_blocked_left; break;
+                    break;
+                }
             }
         }
         break;
@@ -251,11 +317,17 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
             }
         }
         break;
-        case OBJECT_TYPE__COVER: texture = textures->object.cover; break;
+        case OBJECT_TYPE__COVER_ROCK: texture = textures->object.cover_rock; break;
+        case OBJECT_TYPE__COVER_METAL: texture = textures->object.cover_metal; break;
+        case OBJECT_TYPE__COVER_GLASS: texture = textures->object.cover_glass; break;
         case OBJECT_TYPE__ROCK: texture = textures->object.rock; break;
         case OBJECT_TYPE__ROCK_DAMAGED: texture = textures->object.rock_damaged; break;
         case OBJECT_TYPE__SAFE: texture = textures->object.safe; break;
         case OBJECT_TYPE__SAFE_DAMAGED: texture = textures->object.safe_damaged; break;
+        case OBJECT_TYPE__DISPLAY: texture = textures->object.display; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: texture = textures->object.display_damaged; break;
+        case OBJECT_TYPE__VENDING: texture = textures->object.vending; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: texture = textures->object.vending_damaged; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight; break;
@@ -283,37 +355,79 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__WALL_METAL: texture = textures->object.wall_metal; break;
         case OBJECT_TYPE__EXIT_ROCK:
         {
-            switch(object->exit_rock.dir4)
+            if(!object->exit_rock.is_blocked)
             {
-                case DIR4__UP: texture = textures->object.exit_rock_up; break;
-                case DIR4__RIGHT: texture = textures->object.exit_rock_right; break;
-                case DIR4__DOWN: texture = textures->object.exit_rock_down; break;
-                case DIR4__LEFT: texture = textures->object.exit_rock_left; break;
-                break;
+                switch(object->exit_rock.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_rock_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_rock_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_rock_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_rock_left; break;
+                    break;
+                }
+            }
+            else
+            {
+                switch(object->exit_rock.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_rock_blocked_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_rock_blocked_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_rock_blocked_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_rock_blocked_left; break;
+                    break;
+                }
             }
         }
         break;
         case OBJECT_TYPE__EXIT_STONE:
         {
-            switch(object->exit_stone.dir4)
+            if(!object->exit_stone.is_blocked)
             {
-                case DIR4__UP: texture = textures->object.exit_stone_up; break;
-                case DIR4__RIGHT: texture = textures->object.exit_stone_right; break;
-                case DIR4__DOWN: texture = textures->object.exit_stone_down; break;
-                case DIR4__LEFT: texture = textures->object.exit_stone_left; break;
-                break;
+                switch(object->exit_stone.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_stone_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_stone_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_stone_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_stone_left; break;
+                    break;
+                }
+            }
+            else
+            {
+                switch(object->exit_stone.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_stone_blocked_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_stone_blocked_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_stone_blocked_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_stone_blocked_left; break;
+                    break;
+                }
             }
         }
         break;
         case OBJECT_TYPE__EXIT_METAL:
         {
-            switch(object->exit_metal.dir4)
+            if(!object->exit_metal.is_blocked)
             {
-                case DIR4__UP: texture = textures->object.exit_metal_up; break;
-                case DIR4__RIGHT: texture = textures->object.exit_metal_right; break;
-                case DIR4__DOWN: texture = textures->object.exit_metal_down; break;
-                case DIR4__LEFT: texture = textures->object.exit_metal_left; break;
-                break;
+                switch(object->exit_metal.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_metal_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_metal_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_metal_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_metal_left; break;
+                    break;
+                }
+            }
+            else
+            {
+                switch(object->exit_metal.dir4)
+                {
+                    case DIR4__UP: texture = textures->object.exit_metal_blocked_up; break;
+                    case DIR4__RIGHT: texture = textures->object.exit_metal_blocked_right; break;
+                    case DIR4__DOWN: texture = textures->object.exit_metal_blocked_down; break;
+                    case DIR4__LEFT: texture = textures->object.exit_metal_blocked_left; break;
+                    break;
+                }
             }
         }
         break;
@@ -333,11 +447,17 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
             }
         }
         break;
-        case OBJECT_TYPE__COVER: texture = textures->object.cover; break;
+        case OBJECT_TYPE__COVER_ROCK: texture = textures->object.cover_rock; break;
+        case OBJECT_TYPE__COVER_METAL: texture = textures->object.cover_metal; break;
+        case OBJECT_TYPE__COVER_GLASS: texture = textures->object.cover_glass; break;
         case OBJECT_TYPE__ROCK: texture = textures->object.rock; break;
         case OBJECT_TYPE__ROCK_DAMAGED: texture = textures->object.rock_damaged; break;
         case OBJECT_TYPE__SAFE: texture = textures->object.safe; break;
         case OBJECT_TYPE__SAFE_DAMAGED: texture = textures->object.safe_damaged; break;
+        case OBJECT_TYPE__DISPLAY: texture = textures->object.display; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: texture = textures->object.display_damaged; break;
+        case OBJECT_TYPE__VENDING: texture = textures->object.vending; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: texture = textures->object.vending_damaged; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight; break;
@@ -415,11 +535,17 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
             }
         }
         break;
-        case OBJECT_TYPE__COVER: texture = textures->object.cover_outline; break;
+        case OBJECT_TYPE__COVER_ROCK: texture = textures->object.cover_rock_outline; break;
+        case OBJECT_TYPE__COVER_METAL: texture = textures->object.cover_metal_outline; break;
+        case OBJECT_TYPE__COVER_GLASS: texture = textures->object.cover_glass_outline; break;
         case OBJECT_TYPE__ROCK: texture = textures->object.rock_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED: texture = textures->object.rock_damaged_outline; break;
         case OBJECT_TYPE__SAFE: texture = textures->object.safe_outline; break;
         case OBJECT_TYPE__SAFE_DAMAGED: texture = textures->object.safe_damaged_outline; break;
+        case OBJECT_TYPE__DISPLAY: texture = textures->object.display_outline; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: texture = textures->object.display_damaged_outline; break;
+        case OBJECT_TYPE__VENDING: texture = textures->object.vending_outline; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: texture = textures->object.vending_damaged_outline; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight_outline; break;
@@ -497,11 +623,17 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
             }
         }
         break;
-        case OBJECT_TYPE__COVER: texture = textures->object.cover_outline; break;
+        case OBJECT_TYPE__COVER_ROCK: texture = textures->object.cover_rock_outline; break;
+        case OBJECT_TYPE__COVER_METAL: texture = textures->object.cover_metal_outline; break;
+        case OBJECT_TYPE__COVER_GLASS: texture = textures->object.cover_glass_outline; break;
         case OBJECT_TYPE__ROCK: texture = textures->object.rock_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED: texture = textures->object.rock_damaged_outline; break;
         case OBJECT_TYPE__SAFE: texture = textures->object.safe_outline; break;
         case OBJECT_TYPE__SAFE_DAMAGED: texture = textures->object.safe_damaged_outline; break;
+        case OBJECT_TYPE__DISPLAY: texture = textures->object.display_outline; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED: texture = textures->object.display_damaged_outline; break;
+        case OBJECT_TYPE__VENDING: texture = textures->object.vending_outline; break;
+        case OBJECT_TYPE__VENDING_DAMAGED: texture = textures->object.vending_damaged_outline; break;
         case OBJECT_TYPE__BARREL: texture = textures->object.barrel_outline; break;
         case OBJECT_TYPE__SPRING: texture = textures->object.spring_outline; break;
         case OBJECT_TYPE__WEIGHT: texture = textures->object.weight_outline; break;

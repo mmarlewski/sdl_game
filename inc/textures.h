@@ -55,30 +55,42 @@ typedef struct
     Texture* wall_metal_outline;
 
     Texture* exit_rock_up;
+    Texture* exit_rock_blocked_up;
     Texture* exit_rock_up_outline;
     Texture* exit_rock_right;
+    Texture* exit_rock_blocked_right;
     Texture* exit_rock_right_outline;
     Texture* exit_rock_down;
+    Texture* exit_rock_blocked_down;
     Texture* exit_rock_down_outline;
     Texture* exit_rock_left;
+    Texture* exit_rock_blocked_left;
     Texture* exit_rock_left_outline;
 
     Texture* exit_stone_up;
+    Texture* exit_stone_blocked_up;
     Texture* exit_stone_up_outline;
     Texture* exit_stone_right;
+    Texture* exit_stone_blocked_right;
     Texture* exit_stone_right_outline;
     Texture* exit_stone_down;
+    Texture* exit_stone_blocked_down;
     Texture* exit_stone_down_outline;
     Texture* exit_stone_left;
+    Texture* exit_stone_blocked_left;
     Texture* exit_stone_left_outline;
 
     Texture* exit_metal_up;
+    Texture* exit_metal_blocked_up;
     Texture* exit_metal_up_outline;
     Texture* exit_metal_right;
+    Texture* exit_metal_blocked_right;
     Texture* exit_metal_right_outline;
     Texture* exit_metal_down;
+    Texture* exit_metal_blocked_down;
     Texture* exit_metal_down_outline;
     Texture* exit_metal_left;
+    Texture* exit_metal_blocked_left;
     Texture* exit_metal_left_outline;
 
     Texture* stalactite;
@@ -98,8 +110,14 @@ typedef struct
     Texture* pillar_spikes;
     Texture* pillar_spikes_outline;
 
-    Texture* cover;
-    Texture* cover_outline;
+    Texture* cover_rock;
+    Texture* cover_rock_outline;
+
+    Texture* cover_metal;
+    Texture* cover_metal_outline;
+
+    Texture* cover_glass;
+    Texture* cover_glass_outline;
 
     Texture* rock;
     Texture* rock_outline;
@@ -112,6 +130,18 @@ typedef struct
 
     Texture* safe_damaged;
     Texture* safe_damaged_outline;
+
+    Texture* display;
+    Texture* display_outline;
+
+    Texture* display_damaged;
+    Texture* display_damaged_outline;
+
+    Texture* vending;
+    Texture* vending_outline;
+
+    Texture* vending_damaged;
+    Texture* vending_damaged_outline;
 
     Texture* barrel;
     Texture* barrel_outline;

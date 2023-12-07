@@ -20,11 +20,17 @@ enum OBJECT_TYPE
     OBJECT_TYPE__STALAGMITE,
     OBJECT_TYPE__STALAGNATE,
     OBJECT_TYPE__PILLAR,
-    OBJECT_TYPE__COVER,
+    OBJECT_TYPE__COVER_ROCK,
+    OBJECT_TYPE__COVER_METAL,
+    OBJECT_TYPE__COVER_GLASS,
     OBJECT_TYPE__ROCK,
     OBJECT_TYPE__ROCK_DAMAGED,
     OBJECT_TYPE__SAFE,
     OBJECT_TYPE__SAFE_DAMAGED,
+    OBJECT_TYPE__DISPLAY,
+    OBJECT_TYPE__DISPLAY_DAMAGED,
+    OBJECT_TYPE__VENDING,
+    OBJECT_TYPE__VENDING_DAMAGED,
     OBJECT_TYPE__BARREL,
     OBJECT_TYPE__SPRING,
     OBJECT_TYPE__WEIGHT,
@@ -56,18 +62,21 @@ typedef struct
 
 typedef struct
 {
+    int is_blocked;
     int dir4;
 
 } Object_ExitRock;
 
 typedef struct
 {
+    int is_blocked;
     int dir4;
 
 } Object_ExitStone;
 
 typedef struct
 {
+    int is_blocked;
     int dir4;
 
 } Object_ExitMetal;
@@ -96,7 +105,15 @@ typedef struct
 
 typedef struct
 {
-} Object_Cover;
+} Object_CoverRock;
+
+typedef struct
+{
+} Object_CoverMetal;
+
+typedef struct
+{
+} Object_CoverGlass;
 
 typedef struct
 {
@@ -113,6 +130,22 @@ typedef struct
 typedef struct
 {
 } Object_SafeDamaged;
+
+typedef struct
+{
+} Object_Display;
+
+typedef struct
+{
+} Object_DisplayDamaged;
+
+typedef struct
+{
+} Object_Vending;
+
+typedef struct
+{
+} Object_VendingDamaged;
 
 typedef struct
 {
@@ -190,11 +223,17 @@ struct _Object
         Object_Stalagmite       stalagmite;
         Object_Stalagnate       stalagnate;
         Object_Pillar           pillar;
-        Object_Cover            cover;
+        Object_CoverRock        cover_rock;
+        Object_CoverMetal       cover_metal;
+        Object_CoverGlass       cover_glass;
         Object_Rock             rock;
         Object_RockDamaged      rock_damaged;
         Object_Safe             safe;
         Object_SafeDamaged      safe_damaged;
+        Object_Display          display;
+        Object_DisplayDamaged   display_damaged;
+        Object_Vending          vending;
+        Object_VendingDamaged   vending_damaged;
         Object_Barrel           barrel;
         Object_Spring           spring;
         Object_Weight           weight;

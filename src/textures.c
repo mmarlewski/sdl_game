@@ -72,52 +72,76 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->exit_rock_up = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_up.png");
+    object->exit_rock_blocked_up = load_texture_from_filepath
+    (renderer, "./res/object/exit_rock/exit_rock_blocked_up.png");
     object->exit_rock_up_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_up_outline.png");
     object->exit_rock_right = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_right.png");
+    object->exit_rock_blocked_right = load_texture_from_filepath
+    (renderer, "./res/object/exit_rock/exit_rock_blocked_right.png");
     object->exit_rock_right_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_right_outline.png");
     object->exit_rock_down = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_down.png");
+    object->exit_rock_blocked_down = load_texture_from_filepath
+    (renderer, "./res/object/exit_rock/exit_rock_blocked_down.png");
     object->exit_rock_down_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_down_outline.png");
     object->exit_rock_left = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_left.png");
+    object->exit_rock_blocked_left = load_texture_from_filepath
+    (renderer, "./res/object/exit_rock/exit_rock_blocked_left.png");
     object->exit_rock_left_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_rock/exit_rock_left_outline.png");
 
     object->exit_stone_up = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_up.png");
+    object->exit_stone_blocked_up = load_texture_from_filepath
+    (renderer, "./res/object/exit_stone/exit_stone_blocked_up.png");
     object->exit_stone_up_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_up_outline.png");
     object->exit_stone_right = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_right.png");
+    object->exit_stone_blocked_right = load_texture_from_filepath
+    (renderer, "./res/object/exit_stone/exit_stone_blocked_right.png");
     object->exit_stone_right_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_right_outline.png");
     object->exit_stone_down = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_down.png");
+    object->exit_stone_blocked_down = load_texture_from_filepath
+    (renderer, "./res/object/exit_stone/exit_stone_blocked_down.png");
     object->exit_stone_down_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_down_outline.png");
     object->exit_stone_left = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_left.png");
+    object->exit_stone_blocked_left = load_texture_from_filepath
+    (renderer, "./res/object/exit_stone/exit_stone_blocked_left.png");
     object->exit_stone_left_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_stone/exit_stone_left_outline.png");
 
     object->exit_metal_up = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_up.png");
+    object->exit_metal_blocked_up = load_texture_from_filepath
+    (renderer, "./res/object/exit_metal/exit_metal_blocked_up.png");
     object->exit_metal_up_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_up_outline.png");
     object->exit_metal_right = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_right.png");
+    object->exit_metal_blocked_right = load_texture_from_filepath
+    (renderer, "./res/object/exit_metal/exit_metal_blocked_right.png");
     object->exit_metal_right_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_right_outline.png");
     object->exit_metal_down = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_down.png");
+    object->exit_metal_blocked_down = load_texture_from_filepath
+    (renderer, "./res/object/exit_metal/exit_metal_blocked_down.png");
     object->exit_metal_down_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_down_outline.png");
     object->exit_metal_left = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_left.png");
+    object->exit_metal_blocked_left = load_texture_from_filepath
+    (renderer, "./res/object/exit_metal/exit_metal_blocked_left.png");
     object->exit_metal_left_outline = load_texture_from_filepath
     (renderer, "./res/object/exit_metal/exit_metal_left_outline.png");
 
@@ -150,10 +174,20 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->pillar_spikes_outline = load_texture_from_filepath
     (renderer, "./res/object/pillar/pillar_spikes_outline.png");
 
-    object->cover = load_texture_from_filepath
-    (renderer, "./res/object/cover/cover.png");
-    object->cover_outline = load_texture_from_filepath
-     (renderer, "./res/object/cover/cover_outline.png");
+    object->cover_rock = load_texture_from_filepath
+    (renderer, "./res/object/cover_rock/cover_rock.png");
+    object->cover_rock_outline = load_texture_from_filepath
+     (renderer, "./res/object/cover_rock/cover_rock_outline.png");
+
+    object->cover_metal = load_texture_from_filepath
+    (renderer, "./res/object/cover_metal/cover_metal.png");
+    object->cover_metal_outline = load_texture_from_filepath
+     (renderer, "./res/object/cover_metal/cover_metal_outline.png");
+
+    object->cover_glass = load_texture_from_filepath
+    (renderer, "./res/object/cover_glass/cover_glass.png");
+    object->cover_glass_outline = load_texture_from_filepath
+     (renderer, "./res/object/cover_glass/cover_glass_outline.png");
 
     object->rock = load_texture_from_filepath
     (renderer, "./res/object/rock/rock.png");
@@ -174,6 +208,26 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     (renderer, "./res/object/safe_damaged/safe_damaged.png");
     object->safe_damaged_outline = load_texture_from_filepath
      (renderer, "./res/object/safe_damaged/safe_damaged_outline.png");
+
+    object->display = load_texture_from_filepath
+    (renderer, "./res/object/display/display.png");
+    object->display_outline = load_texture_from_filepath
+     (renderer, "./res/object/display/display_outline.png");
+
+    object->display_damaged = load_texture_from_filepath
+    (renderer, "./res/object/display_damaged/display_damaged.png");
+    object->display_damaged_outline = load_texture_from_filepath
+     (renderer, "./res/object/display_damaged/display_damaged_outline.png");
+
+    object->vending = load_texture_from_filepath
+    (renderer, "./res/object/vending/vending.png");
+    object->vending_outline = load_texture_from_filepath
+     (renderer, "./res/object/vending/vending_outline.png");
+
+    object->vending_damaged = load_texture_from_filepath
+    (renderer, "./res/object/vending_damaged/vending_damaged.png");
+    object->vending_damaged_outline = load_texture_from_filepath
+     (renderer, "./res/object/vending_damaged/vending_damaged_outline.png");
 
     object->barrel = load_texture_from_filepath
     (renderer, "./res/object/barrel/barrel.png");
