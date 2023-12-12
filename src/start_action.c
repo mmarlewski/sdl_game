@@ -319,19 +319,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 Object* object = get_object_on_tilemap_pos(state, action->tilemap_pos);
                 if(object != 0)
                 {
-                    object->type = action->change.new_object->type;
-                    object->enemy = action->change.new_object->enemy;
-
-                    object->pillar = action->change.new_object->pillar;
-                    object->barrel = action->change.new_object->barrel;
-                    object->spring = action->change.new_object->spring;
-                    object->weight = action->change.new_object->weight;
-                    object->hero = action->change.new_object->hero;
-                    object->goat = action->change.new_object->goat;
-                    object->spider = action->change.new_object->spider;
-                    object->bull = action->change.new_object->bull;
-                    object->fly = action->change.new_object->fly;
-                    object->chameleon = action->change.new_object->chameleon;
+                    object->type = action->change.new_object_type;
                 }
             }
             else
@@ -342,8 +330,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     change_floor_in_tilemap_pos(state, action->change.new_floor_type, action->tilemap_pos);
                 }
             }
-
-            destroy_object(action->change.new_object);
         }
         break;
         default:

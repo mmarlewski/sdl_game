@@ -99,6 +99,9 @@ typedef struct
     Texture* stalactite_fallen;
     Texture* stalactite_fallen_outline;
 
+    Texture* stalactite_fallen_item;
+    Texture* stalactite_fallen_item_outline;
+
     Texture* stalagmite;
     Texture* stalagmite_outline;
 
@@ -107,6 +110,7 @@ typedef struct
 
     Texture* pillar;
     Texture* pillar_outline;
+
     Texture* pillar_spikes;
     Texture* pillar_spikes_outline;
 
@@ -122,26 +126,62 @@ typedef struct
     Texture* rock;
     Texture* rock_outline;
 
+    Texture* rock_item;
+    Texture* rock_item_outline;
+
     Texture* rock_damaged;
     Texture* rock_damaged_outline;
+
+    Texture* rock_damaged_item;
+    Texture* rock_damaged_item_outline;
 
     Texture* safe;
     Texture* safe_outline;
 
+    Texture* safe_item;
+    Texture* safe_item_outline;
+
     Texture* safe_damaged;
     Texture* safe_damaged_outline;
+
+    Texture* safe_damaged_item;
+    Texture* safe_damaged_item_outline;
 
     Texture* display;
     Texture* display_outline;
 
+    Texture* display_item;
+    Texture* display_item_outline;
+
     Texture* display_damaged;
     Texture* display_damaged_outline;
 
-    Texture* vending;
-    Texture* vending_outline;
+    Texture* display_damaged_item;
+    Texture* display_damaged_item_outline;
 
-    Texture* vending_damaged;
-    Texture* vending_damaged_outline;
+    Texture* vending_cell;
+    Texture* vending_cell_outline;
+
+    Texture* vending_cell_item;
+    Texture* vending_cell_item_outline;
+
+    Texture* vending_cell_damaged;
+    Texture* vending_cell_damaged_outline;
+
+    Texture* vending_cell_damaged_item;
+    Texture* vending_cell_damaged_item_outline;
+
+    Texture* vending_dynamite;
+    Texture* vending_dynamite_outline;
+
+    Texture* vending_dynamite_item;
+    Texture* vending_dynamite_item_outline;
+
+    Texture* vending_dynamite_damaged;
+    Texture* vending_dynamite_damaged_outline;
+
+    Texture* vending_dynamite_damaged_item;
+    Texture* vending_dynamite_damaged_item_outline;
 
     Texture* barrel;
     Texture* barrel_outline;

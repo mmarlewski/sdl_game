@@ -145,8 +145,7 @@ int main (int argc, char* argv[])
     object_pillar_2->tilemap_pos = vec2i(6,2);
     add_object_to_gamemap_objects(&state, object_pillar_2);
 
-    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_3->pillar.spikes_on = 1;
+    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR_SPIKES);
     object_pillar_3->tilemap_pos = vec2i(4,3);
     add_object_to_gamemap_objects(&state, object_pillar_3);
 
@@ -178,7 +177,7 @@ int main (int argc, char* argv[])
     object_barrel_1->tilemap_pos = vec2i(6,4);
     add_object_to_gamemap_objects(&state, object_barrel_1);
 
-    Object* object_barrel_2 = new_object(OBJECT_TYPE__BARREL);
+    Object* object_barrel_2 = new_object(OBJECT_TYPE__STALACTITE_FALLEN_ITEM);
     object_barrel_2->tilemap_pos = vec2i(7,4);
     add_object_to_gamemap_objects(&state, object_barrel_2);
 
@@ -237,9 +236,7 @@ int main (int argc, char* argv[])
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
     }
 
-    Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE);
-    object_door->exit_stone.is_blocked = 1;
-    object_door->exit_stone.dir4 = DIR4__RIGHT;
+    Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT);
     object_door->tilemap_pos = tilemap_pos;
     add_object_to_gamemap_objects(&state, object_door);
 

@@ -18,6 +18,7 @@
 #include "../inc/sounds.h"
 #include "../inc/musics.h"
 #include "../inc/colors.h"
+#include "item.h"
 
 enum GAMESTATE
 {
@@ -72,6 +73,8 @@ typedef struct
     Object* object_hero;
 
     int hero_ap;
+
+    int item_number[ITEM__COUNT];
 
     Vec2i prev_selected_tilemap_pos;
     Vec2i curr_selected_tilemap_pos;

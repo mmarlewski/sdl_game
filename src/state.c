@@ -55,6 +55,11 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->gamemap.hero_ap = HERO_MAX_AP;
 
+    for(int i = 0; i < ITEM__COUNT; i++)
+    {
+        state->gamemap.item_number[i] = 0;
+    }
+
     state->gamemap.show_all_order_numbers = 0;
 
     state->gamemap.animation_list = new_list((void (*)(void *))&destroy_animation);
@@ -86,7 +91,11 @@ void change_gamestate(State* state, int new_gamestate)
             hero_ap_bar[i + 1] = (i + 1 <= hero_ap) ? '#' : '-';
         }
         hero_ap_bar[HERO_MAX_AP + 1] = ']';
-        printf("hero_ap: %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);
+        printf("hero ap: %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);
+        for(int i = 1; i < ITEM__COUNT; i++)
+        {
+            printf("item %s: %i \n", get_name_from_item(i), state->gamemap.item_number[i]);
+        }
     }
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||

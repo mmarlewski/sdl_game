@@ -230,12 +230,12 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
         break;
         case FLOOR_TYPE__STONE_SPIKES_OFF:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__STONE_SPIKES_ON, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__STONE_SPIKES_ON, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__STONE_SPIKES_OFF, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__STONE_SPIKES_OFF, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_LAVA:
@@ -265,12 +265,12 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
         break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_HATCH_OPEN, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__METAL_HATCH_OPEN, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change(0, new_object(OBJECT_TYPE__NONE), FLOOR_TYPE__METAL_HATCH_CLOSED, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change(0, OBJECT_TYPE__NONE, FLOOR_TYPE__METAL_HATCH_CLOSED, tilemap_pos));
         }
         break;
         default:
@@ -284,12 +284,14 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
     {
         case OBJECT_TYPE__PILLAR:
         {
-            if(object->pillar.spikes_on)
+            //
+        }
+        break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
+        {
+            if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
             {
-                if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
-                {
-                    add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushed, action->crash.object_crushed->tilemap_pos));
-                }
+                add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushed, action->crash.object_crushed->tilemap_pos));
             }
         }
         break;
@@ -347,14 +349,11 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
 {
     switch(object->type)
     {
-        case OBJECT_TYPE__PILLAR:
+        case OBJECT_TYPE__PILLAR_SPIKES:
         {
-            if(object->pillar.spikes_on)
+            if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
             {
-                if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
-                {
-                    add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushing, action->crash.object_crushed->tilemap_pos));
-                }
+                add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushing, action->crash.object_crushed->tilemap_pos));
             }
         }
         break;
@@ -535,9 +534,12 @@ void object_on_interact(State* state, Action* sequence, Object* object, Vec2i ti
     {
         case OBJECT_TYPE__PILLAR:
         {
-            Object* new_object_pillar = new_object(OBJECT_TYPE__PILLAR);
-            new_object_pillar->pillar.spikes_on = !object->pillar.spikes_on;
-            add_action_to_end_action_sequence(sequence,new_action_change(1, new_object_pillar, FLOOR_TYPE__NONE, object->tilemap_pos));
+            add_action_to_end_action_sequence(sequence,new_action_change(1, OBJECT_TYPE__PILLAR_SPIKES, FLOOR_TYPE__NONE, object->tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__PILLAR_SPIKES:
+        {
+            add_action_to_end_action_sequence(sequence,new_action_change(1, OBJECT_TYPE__PILLAR, FLOOR_TYPE__NONE, object->tilemap_pos));
         }
         break;
         case OBJECT_TYPE__BARREL:

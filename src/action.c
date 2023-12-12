@@ -238,7 +238,7 @@ Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_change(int is_change_object, Object* new_object, int new_floor_type, Vec2i tilemap_pos)
+Action* new_action_change(int is_change_object, int new_object_type, int new_floor_type, Vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -249,7 +249,7 @@ Action* new_action_change(int is_change_object, Object* new_object, int new_floo
     action->type = ACTION_TYPE__CHANGE;
 
     action->change.is_change_object = is_change_object;
-    action->change.new_object = new_object;
+    action->change.new_object_type = new_object_type;
     action->change.new_floor_type = new_floor_type;
 
     return action;
