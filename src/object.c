@@ -87,6 +87,15 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
         case OBJECT_TYPE__COVER_GLASS:                      is = 0; break;
 
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 0; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       is = 0; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 0; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 0; break;
+
         case OBJECT_TYPE__ROCK:                             is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 0; break;
@@ -181,6 +190,15 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
         case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
         case OBJECT_TYPE__COVER_GLASS:                      is = 0; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 0; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       is = 0; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 0; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 0; break;
 
         case OBJECT_TYPE__ROCK:                             is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
@@ -277,6 +295,15 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__COVER_METAL:                      is = 1; break;
         case OBJECT_TYPE__COVER_GLASS:                      is = 1; break;
 
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 1; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 1; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       is = 1; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 1; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 1; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 1; break;
+
         case OBJECT_TYPE__ROCK:                             is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 0; break;
@@ -371,6 +398,15 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__COVER_ROCK:                       name = "cover rock"; break;
         case OBJECT_TYPE__COVER_METAL:                      name = "cover metal"; break;
         case OBJECT_TYPE__COVER_GLASS:                      name = "cover glass"; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   name = "crate gemstone"; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              name = "crate gemstone item"; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       name = "crate cell"; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  name = "crate cell item"; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   name = "crate dynamite"; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              name = "crate dynamite item"; break;
 
         case OBJECT_TYPE__ROCK:                             name = "rock"; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     name = "rock damaged"; break;
@@ -467,6 +503,15 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal; break;
         case OBJECT_TYPE__COVER_GLASS:                      texture = textures->object.cover_glass; break;
 
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   texture = textures->object.crate_gemstone; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              texture = textures->object.crate_gemstone_item; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       texture = textures->object.crate_cell; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  texture = textures->object.crate_cell_item; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   texture = textures->object.crate_dynamite; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              texture = textures->object.crate_dynamite_item; break;
+
         case OBJECT_TYPE__ROCK:                             texture = textures->object.rock; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     texture = textures->object.rock_damaged; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                texture = textures->object.rock_damaged_item; break;
@@ -561,6 +606,15 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__COVER_ROCK:                       texture = textures->object.cover_rock; break;
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal; break;
         case OBJECT_TYPE__COVER_GLASS:                      texture = textures->object.cover_glass; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   texture = textures->object.crate_gemstone; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              texture = textures->object.crate_gemstone_item; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       texture = textures->object.crate_cell; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  texture = textures->object.crate_cell_item; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   texture = textures->object.crate_dynamite; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              texture = textures->object.crate_dynamite_item; break;
 
         case OBJECT_TYPE__ROCK:                             texture = textures->object.rock; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     texture = textures->object.rock_damaged; break;
@@ -657,6 +711,15 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal_outline; break;
         case OBJECT_TYPE__COVER_GLASS:                      texture = textures->object.cover_glass_outline; break;
 
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   texture = textures->object.crate_gemstone_outline; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              texture = textures->object.crate_gemstone_item_outline; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       texture = textures->object.crate_cell_outline; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  texture = textures->object.crate_cell_item_outline; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   texture = textures->object.crate_dynamite_outline; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              texture = textures->object.crate_dynamite_item_outline; break;
+
         case OBJECT_TYPE__ROCK:                             texture = textures->object.rock_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     texture = textures->object.rock_damaged_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                texture = textures->object.rock_damaged_item_outline; break;
@@ -752,6 +815,15 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal_outline; break;
         case OBJECT_TYPE__COVER_GLASS:                      texture = textures->object.cover_glass_outline; break;
 
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   texture = textures->object.crate_gemstone_outline; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              texture = textures->object.crate_gemstone_item_outline; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       texture = textures->object.crate_cell_outline; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  texture = textures->object.crate_cell_item_outline; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   texture = textures->object.crate_dynamite_outline; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              texture = textures->object.crate_dynamite_item_outline; break;
+        
         case OBJECT_TYPE__ROCK:                             texture = textures->object.rock_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     texture = textures->object.rock_damaged_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                texture = textures->object.rock_damaged_item_outline; break;

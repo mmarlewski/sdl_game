@@ -142,6 +142,24 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->cover_glass = load_texture_from_filepath(renderer, "./res/object/cover_glass.png");
     object->cover_glass_outline = load_texture_from_filepath(renderer, "./res/object/cover_glass_outline.png");
 
+    object->crate_gemstone = load_texture_from_filepath(renderer, "./res/object/crate_gemstone.png");
+    object->crate_gemstone_outline = load_texture_from_filepath(renderer, "./res/object/crate_gemstone_outline.png");
+
+    object->crate_gemstone_item = load_texture_from_filepath(renderer, "./res/object/crate_gemstone_item.png");
+    object->crate_gemstone_item_outline = load_texture_from_filepath(renderer, "./res/object/crate_gemstone_item_outline.png");
+
+    object->crate_cell = load_texture_from_filepath(renderer, "./res/object/crate_cell.png");
+    object->crate_cell_outline = load_texture_from_filepath(renderer, "./res/object/crate_cell_outline.png");
+
+    object->crate_cell_item = load_texture_from_filepath(renderer, "./res/object/crate_cell_item.png");
+    object->crate_cell_item_outline = load_texture_from_filepath(renderer, "./res/object/crate_cell_item_outline.png");
+
+    object->crate_dynamite = load_texture_from_filepath(renderer, "./res/object/crate_dynamite.png");
+    object->crate_dynamite_outline = load_texture_from_filepath(renderer, "./res/object/crate_dynamite_outline.png");
+
+    object->crate_dynamite_item = load_texture_from_filepath(renderer, "./res/object/crate_dynamite_item.png");
+    object->crate_dynamite_item_outline = load_texture_from_filepath(renderer, "./res/object/crate_dynamite_item_outline.png");
+
     object->rock = load_texture_from_filepath(renderer, "./res/object/rock.png");
     object->rock_outline = load_texture_from_filepath(renderer, "./res/object/rock_outline.png");
 

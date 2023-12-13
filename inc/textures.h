@@ -123,6 +123,24 @@ typedef struct
     Texture* cover_glass;
     Texture* cover_glass_outline;
 
+    Texture* crate_gemstone;
+    Texture* crate_gemstone_outline;
+
+    Texture* crate_gemstone_item;
+    Texture* crate_gemstone_item_outline;
+
+    Texture* crate_cell;
+    Texture* crate_cell_outline;
+
+    Texture* crate_cell_item;
+    Texture* crate_cell_item_outline;
+
+    Texture* crate_dynamite;
+    Texture* crate_dynamite_outline;
+
+    Texture* crate_dynamite_item;
+    Texture* crate_dynamite_item_outline;
+
     Texture* rock;
     Texture* rock_outline;
 
