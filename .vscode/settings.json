@@ -4,6 +4,7 @@
         "gamestate",
         "interactable",
         "STALAGNATE",
-        "tilemap"
+        "tilemap",
+        "undeployed"
     ]
 }

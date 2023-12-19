@@ -258,6 +258,24 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->chameleon_2 = load_texture_from_filepath(renderer, "./res/object/chameleon_2.png");
     object->chameleon_outline_1 = load_texture_from_filepath(renderer, "./res/object/chameleon_outline_1.png");
     object->chameleon_outline_2 = load_texture_from_filepath(renderer, "./res/object/chameleon_outline_2.png");
+
+    object->turret_grounded_1 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_1.png");
+    object->turret_grounded_2 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_2.png");
+    object->turret_grounded_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_outline_1.png");
+    object->turret_grounded_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_outline_2.png");
+
+    object->turret_standing_1 = load_texture_from_filepath(renderer, "./res/object/turret_standing_1.png");
+    object->turret_standing_2 = load_texture_from_filepath(renderer, "./res/object/turret_standing_2.png");
+    object->turret_standing_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_standing_outline_1.png");
+    object->turret_standing_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_standing_outline_2.png");
+
+    object->turret_undeployed = load_texture_from_filepath(renderer, "./res/object/turret_undeployed.png");
+    object->turret_undeployed_outline = load_texture_from_filepath(renderer, "./res/object/turret_undeployed_outline.png");
+
+    object->turret_deployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_1.png");
+    object->turret_deployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_2.png");
+    object->turret_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_outline_1.png");
+    object->turret_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_outline_2.png");
 }
 
 void destroy_textures_object (Textures_Object* object)

@@ -240,6 +240,24 @@ typedef struct
     Texture* chameleon_outline_1;
     Texture* chameleon_outline_2;
 
+    Texture* turret_grounded_1;
+    Texture* turret_grounded_2;
+    Texture* turret_grounded_outline_1;
+    Texture* turret_grounded_outline_2;
+
+    Texture* turret_standing_1;
+    Texture* turret_standing_2;
+    Texture* turret_standing_outline_1;
+    Texture* turret_standing_outline_2;
+
+    Texture* turret_undeployed;
+    Texture* turret_undeployed_outline;
+
+    Texture* turret_deployed_1;
+    Texture* turret_deployed_2;
+    Texture* turret_deployed_outline_1;
+    Texture* turret_deployed_outline_2;
+
 } Textures_Object;
 
 void load_textures_object (Renderer* renderer, Textures_Object* object);

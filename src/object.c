@@ -131,6 +131,11 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__FLY:                              is = 1; break;
         case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
 
+        case OBJECT_TYPE_TURRET_GROUNDED:                   is = 0; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   is = 0; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 is = 0; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   is = 0; break;
+
         default: break;
     }
 
@@ -234,6 +239,11 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__BULL:                             is = 0; break;
         case OBJECT_TYPE__FLY:                              is = 0; break;
         case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
+
+        case OBJECT_TYPE_TURRET_GROUNDED:                   is = 0; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   is = 0; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 is = 0; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   is = 0; break;
 
         default: break;
     }
@@ -339,6 +349,11 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__FLY:                              is = 1; break;
         case OBJECT_TYPE__CHAMELEON:                        is = 1; break;
 
+        case OBJECT_TYPE_TURRET_GROUNDED:                   is = 0; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   is = 1; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 is = 1; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   is = 1; break;
+
         default: break;
     }
 
@@ -442,6 +457,11 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__BULL:                             name = "bull"; break;
         case OBJECT_TYPE__FLY:                              name = "fly"; break;
         case OBJECT_TYPE__CHAMELEON:                        name = "chameleon"; break;
+
+        case OBJECT_TYPE_TURRET_GROUNDED:                   name = "turret grounded"; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   name = "turret standing"; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 name = "turret undeployed"; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   name = "turret deployed"; break;
 
         default: break;
     }
@@ -547,6 +567,11 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__FLY:                              texture = textures->object.fly_1; break;
         case OBJECT_TYPE__CHAMELEON:                        texture = textures->object.chameleon_1; break;
 
+        case OBJECT_TYPE_TURRET_GROUNDED:                   texture = textures->object.turret_grounded_1; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   texture = textures->object.turret_standing_1; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 texture = textures->object.turret_undeployed; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   texture = textures->object.turret_deployed_1; break;
+
         default: break;
     }
 
@@ -650,6 +675,11 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BULL:                             texture = textures->object.bull_2; break;
         case OBJECT_TYPE__FLY:                              texture = textures->object.fly_2; break;
         case OBJECT_TYPE__CHAMELEON:                        texture = textures->object.chameleon_2; break;
+
+        case OBJECT_TYPE_TURRET_GROUNDED:                   texture = textures->object.turret_grounded_2; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   texture = textures->object.turret_standing_2; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 texture = textures->object.turret_undeployed; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   texture = textures->object.turret_deployed_2; break;
 
         default: break;
     }
@@ -755,6 +785,11 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__FLY:                              texture = textures->object.fly_outline_1; break;
         case OBJECT_TYPE__CHAMELEON:                        texture = textures->object.chameleon_outline_1; break;
 
+        case OBJECT_TYPE_TURRET_GROUNDED:                   texture = textures->object.turret_grounded_outline_1; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   texture = textures->object.turret_standing_outline_1; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 texture = textures->object.turret_undeployed_outline; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   texture = textures->object.turret_deployed_outline_1; break;
+
         default: break;
     }
 
@@ -823,7 +858,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__CRATE_DYNAMITE:                   texture = textures->object.crate_dynamite_outline; break;
         case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              texture = textures->object.crate_dynamite_item_outline; break;
-        
+
         case OBJECT_TYPE__ROCK:                             texture = textures->object.rock_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED:                     texture = textures->object.rock_damaged_outline; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                texture = textures->object.rock_damaged_item_outline; break;
@@ -858,6 +893,11 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BULL:                             texture = textures->object.bull_outline_2; break;
         case OBJECT_TYPE__FLY:                              texture = textures->object.fly_outline_2; break;
         case OBJECT_TYPE__CHAMELEON:                        texture = textures->object.chameleon_outline_2; break;
+
+        case OBJECT_TYPE_TURRET_GROUNDED:                   texture = textures->object.turret_grounded_outline_2; break;
+        case OBJECT_TYPE_TURRET_STANDING:                   texture = textures->object.turret_standing_outline_2; break;
+        case OBJECT_TYPE_TURRET_UNDEPLOYED:                 texture = textures->object.turret_undeployed_outline; break;
+        case OBJECT_TYPE_TURRET_DEPLOYED:                   texture = textures->object.turret_deployed_outline_2; break;
 
         default: break;
     }
