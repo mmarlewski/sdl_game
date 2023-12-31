@@ -142,7 +142,43 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__CHANGE:
+        case ACTION_TYPE__CHANGE_FLOOR:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->action.change,
+                color,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__CHANGE_OBJECT:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->action.change,
+                color,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__ADD_OBJECT:
+        {
+            draw_texture_at_world_pos(
+                renderer,
+                textures->action.change,
+                color,
+                world_iso_pos,
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
+        case ACTION_TYPE__REMOVE_OBJECT:
         {
             draw_texture_at_world_pos(
                 renderer,

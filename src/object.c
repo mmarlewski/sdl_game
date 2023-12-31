@@ -72,6 +72,10 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
 
+        case OBJECT_TYPE__PILLAR:                           is = 0; break;
+
+        case OBJECT_TYPE__PIPE:                             is = 0; break;
+
         case OBJECT_TYPE__STALACTITE:                       is = 0; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
         case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
@@ -79,9 +83,6 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
 
         case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
-
-        case OBJECT_TYPE__PILLAR:                           is = 0; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    is = 0; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
         case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
@@ -120,9 +121,12 @@ int is_object_flying(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 0; break;
 
-        case OBJECT_TYPE__SPRING:                           is = 0; break;
-
         case OBJECT_TYPE__WEIGHT:                           is = 0; break;
+
+        case OBJECT_TYPE__PISTON:                           is = 0; break;
+
+        case OBJECT_TYPE__BALL:                             is = 0; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
 
         case OBJECT_TYPE__HERO:                             is = 0; break;
         case OBJECT_TYPE__GOAT:                             is = 0; break;
@@ -181,6 +185,10 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
 
+        case OBJECT_TYPE__PILLAR:                           is = 0; break;
+
+        case OBJECT_TYPE__PIPE:                             is = 0; break;
+
         case OBJECT_TYPE__STALACTITE:                       is = 0; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
         case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
@@ -188,9 +196,6 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
 
         case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
-
-        case OBJECT_TYPE__PILLAR:                           is = 1; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    is = 1; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
         case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
@@ -229,9 +234,12 @@ int is_object_interactable(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 1; break;
 
-        case OBJECT_TYPE__SPRING:                           is = 1; break;
-
         case OBJECT_TYPE__WEIGHT:                           is = 0; break;
+
+        case OBJECT_TYPE__PISTON:                           is = 1; break;
+
+        case OBJECT_TYPE__BALL:                             is = 1; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
 
         case OBJECT_TYPE__HERO:                             is = 0; break;
         case OBJECT_TYPE__GOAT:                             is = 0; break;
@@ -290,6 +298,10 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
 
+        case OBJECT_TYPE__PILLAR:                           is = 0; break;
+
+        case OBJECT_TYPE__PIPE:                             is = 0; break;
+
         case OBJECT_TYPE__STALACTITE:                       is = 0; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
         case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
@@ -297,9 +309,6 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
 
         case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
-
-        case OBJECT_TYPE__PILLAR:                           is = 1; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    is = 1; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       is = 1; break;
         case OBJECT_TYPE__COVER_METAL:                      is = 1; break;
@@ -338,9 +347,12 @@ int is_object_movable(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 1; break;
 
-        case OBJECT_TYPE__SPRING:                           is = 1; break;
-
         case OBJECT_TYPE__WEIGHT:                           is = 1; break;
+
+        case OBJECT_TYPE__PISTON:                           is = 0; break;
+
+        case OBJECT_TYPE__BALL:                             is = 1; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
 
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__GOAT:                             is = 1; break;
@@ -399,6 +411,10 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          name = "exit metal blocked down"; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          name = "exit metal blocked left"; break;
 
+        case OBJECT_TYPE__PILLAR:                           name = "pillar"; break;
+
+        case OBJECT_TYPE__PIPE:                             name = "pipe"; break;
+
         case OBJECT_TYPE__STALACTITE:                       name = "stalactite"; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                name = "stalactite fallen"; break;
         case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           name = "stalactite fallen item"; break;
@@ -406,9 +422,6 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__STALAGMITE:                       name = "stalagmite"; break;
 
         case OBJECT_TYPE__STALAGNATE:                       name = "stalagnate"; break;
-
-        case OBJECT_TYPE__PILLAR:                           name = "pillar"; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    name = "pillar spikes"; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       name = "cover rock"; break;
         case OBJECT_TYPE__COVER_METAL:                      name = "cover metal"; break;
@@ -447,9 +460,12 @@ char* get_name_from_object_type(int object_type)
 
         case OBJECT_TYPE__BARREL:                           name = "barrel"; break;
 
-        case OBJECT_TYPE__SPRING:                           name = "spring"; break;
-
         case OBJECT_TYPE__WEIGHT:                           name = "weight"; break;
+
+        case OBJECT_TYPE__PISTON:                           name = "piston"; break;
+
+        case OBJECT_TYPE__BALL:                             name = "ball"; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      name = "ball spikes"; break;
 
         case OBJECT_TYPE__HERO:                             name = "hero"; break;
         case OBJECT_TYPE__GOAT:                             name = "goat"; break;
@@ -508,6 +524,10 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          texture = textures->object.exit_metal_blocked_down; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          texture = textures->object.exit_metal_blocked_left; break;
 
+        case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
+
+        case OBJECT_TYPE__PIPE:                             texture = textures->object.pipe; break;
+
         case OBJECT_TYPE__STALACTITE:                       texture = textures->object.stalactite; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                texture = textures->object.stalactite_fallen; break;
         case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           texture = textures->object.stalactite_fallen_item; break;
@@ -515,9 +535,6 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STALAGMITE:                       texture = textures->object.stalagmite; break;
 
         case OBJECT_TYPE__STALAGNATE:                       texture = textures->object.stalagnate; break;
-
-        case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    texture = textures->object.pillar_spikes; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       texture = textures->object.cover_rock; break;
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal; break;
@@ -556,9 +573,12 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel; break;
 
-        case OBJECT_TYPE__SPRING:                           texture = textures->object.spring; break;
-
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight; break;
+
+        case OBJECT_TYPE__PISTON:                           texture = textures->object.piston; break;
+
+        case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_1; break;
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_1; break;
@@ -617,6 +637,10 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          texture = textures->object.exit_metal_blocked_down; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          texture = textures->object.exit_metal_blocked_left; break;
 
+        case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
+
+        case OBJECT_TYPE__PIPE:                             texture = textures->object.pipe; break;
+
         case OBJECT_TYPE__STALACTITE:                       texture = textures->object.stalactite; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                texture = textures->object.stalactite_fallen; break;
         case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           texture = textures->object.stalactite_fallen_item; break;
@@ -624,9 +648,6 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STALAGMITE:                       texture = textures->object.stalagmite; break;
 
         case OBJECT_TYPE__STALAGNATE:                       texture = textures->object.stalagnate; break;
-
-        case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    texture = textures->object.pillar_spikes; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       texture = textures->object.cover_rock; break;
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal; break;
@@ -665,9 +686,12 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel; break;
 
-        case OBJECT_TYPE__SPRING:                           texture = textures->object.spring; break;
-
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight; break;
+
+        case OBJECT_TYPE__PISTON:                           texture = textures->object.piston; break;
+
+        case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_2; break;
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_2; break;
@@ -735,7 +759,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STALAGNATE:                       texture = textures->object.stalagnate_outline; break;
 
         case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar_outline; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    texture = textures->object.pillar_spikes_outline; break;
+
+        case OBJECT_TYPE__PIPE:                             texture = textures->object.pipe_outline; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       texture = textures->object.cover_rock_outline; break;
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal_outline; break;
@@ -774,9 +799,12 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel_outline; break;
 
-        case OBJECT_TYPE__SPRING:                           texture = textures->object.spring_outline; break;
-
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight_outline; break;
+
+        case OBJECT_TYPE__PISTON:                           texture = textures->object.piston_outline; break;
+
+        case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_1; break;
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_1; break;
@@ -844,7 +872,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STALAGNATE:                       texture = textures->object.stalagnate_outline; break;
 
         case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar_outline; break;
-        case OBJECT_TYPE__PILLAR_SPIKES:                    texture = textures->object.pillar_spikes_outline; break;
+
+        case OBJECT_TYPE__PIPE:                             texture = textures->object.pipe_outline; break;
 
         case OBJECT_TYPE__COVER_ROCK:                       texture = textures->object.cover_rock_outline; break;
         case OBJECT_TYPE__COVER_METAL:                      texture = textures->object.cover_metal_outline; break;
@@ -883,9 +912,12 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel_outline; break;
 
-        case OBJECT_TYPE__SPRING:                           texture = textures->object.spring_outline; break;
-
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight_outline; break;
+
+        case OBJECT_TYPE__PISTON:                           texture = textures->object.piston_outline; break;
+
+        case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_2; break;
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_2; break;

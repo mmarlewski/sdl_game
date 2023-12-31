@@ -107,7 +107,22 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__CHANGE:
+        case ACTION_TYPE__CHANGE_FLOOR:
+        {
+            action->is_finished = 1;
+        }
+        break;
+        case ACTION_TYPE__CHANGE_OBJECT:
+        {
+            action->is_finished = 1;
+        }
+        break;
+        case ACTION_TYPE__ADD_OBJECT:
+        {
+            action->is_finished = 1;
+        }
+        break;
+        case ACTION_TYPE__REMOVE_OBJECT:
         {
             action->is_finished = 1;
         }

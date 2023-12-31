@@ -238,7 +238,7 @@ Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4)
     return action;
 }
 
-Action* new_action_change(int is_change_object, int new_object_type, int new_floor_type, Vec2i tilemap_pos)
+Action* new_action_change_floor(int new_floor_type, Vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
 
@@ -246,11 +246,54 @@ Action* new_action_change(int is_change_object, int new_object_type, int new_flo
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__CHANGE;
+    action->type = ACTION_TYPE__CHANGE_FLOOR;
 
-    action->change.is_change_object = is_change_object;
-    action->change.new_object_type = new_object_type;
-    action->change.new_floor_type = new_floor_type;
+    action->change_floor.new_floor_type = new_floor_type;
+
+    return action;
+}
+
+Action* new_action_change_object(int new_object_type, Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__CHANGE_OBJECT;
+
+    action->change_object.new_object_type = new_object_type;
+
+    return action;
+}
+
+Action* new_action_add_object(Object* new_object, Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__ADD_OBJECT;
+
+    action->add_object.new_object = new_object;
+
+    return action;
+}
+
+Action* new_action_remove_object(Object* object_to_remove, Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__REMOVE_OBJECT;
+
+    action->remove_object.object_to_remove = object_to_remove;
 
     return action;
 }
@@ -276,19 +319,22 @@ char* get_action_name_from_type(int action_type)
 
     switch(action_type)
     {
-        case ACTION_TYPE__NONE:         name = "none";          break;
-        case ACTION_TYPE__SEQUENCE:     name = "sequence";      break;
-        case ACTION_TYPE__SIMULTANEOUS: name = "simultaneous";  break;
-        case ACTION_TYPE__MOVE:         name = "move";          break;
-        case ACTION_TYPE__CRASH:        name = "crash";         break;
-        case ACTION_TYPE__FALL:         name = "fall";          break;
-        case ACTION_TYPE__DEATH:        name = "death";         break;
-        case ACTION_TYPE__BLOW_UP:      name = "blow up";       break;
-        case ACTION_TYPE__THROW:        name = "throw";         break;
-        case ACTION_TYPE__LIFT:         name = "lift";          break;
-        case ACTION_TYPE__DROP:         name = "drop";          break;
-        case ACTION_TYPE__CHANGE:       name = "change";        break;
-        case ACTION_TYPE__COUNT:        name = "count";         break;
+        case ACTION_TYPE__NONE:             name = "none";          break;
+        case ACTION_TYPE__SEQUENCE:         name = "sequence";      break;
+        case ACTION_TYPE__SIMULTANEOUS:     name = "simultaneous";  break;
+        case ACTION_TYPE__MOVE:             name = "move";          break;
+        case ACTION_TYPE__CRASH:            name = "crash";         break;
+        case ACTION_TYPE__FALL:             name = "fall";          break;
+        case ACTION_TYPE__DEATH:            name = "death";         break;
+        case ACTION_TYPE__BLOW_UP:          name = "blow up";       break;
+        case ACTION_TYPE__THROW:            name = "throw";         break;
+        case ACTION_TYPE__LIFT:             name = "lift";          break;
+        case ACTION_TYPE__DROP:             name = "drop";          break;
+        case ACTION_TYPE__CHANGE_FLOOR:     name = "change floor";  break;
+        case ACTION_TYPE__CHANGE_OBJECT:    name = "change object"; break;
+        case ACTION_TYPE__ADD_OBJECT:       name = "add object";    break;
+        case ACTION_TYPE__REMOVE_OBJECT:    name = "remove object"; break;
+        case ACTION_TYPE__COUNT:            name = "count";         break;
         default: break;
     }
 

@@ -133,7 +133,7 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__ICE, vec2i(6,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_HATCH_CLOSED, vec2i(3,5));
+    FLOOR_TYPE__METAL_PISTON, vec2i(3,5));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__METAL_COVER_BOTTOM, vec2i(6,6));
 
@@ -145,7 +145,7 @@ int main (int argc, char* argv[])
     object_pillar_2->tilemap_pos = vec2i(6,2);
     add_object_to_gamemap_objects(&state, object_pillar_2);
 
-    Object* object_pillar_3 = new_object(OBJECT_TYPE__PILLAR_SPIKES);
+    Object* object_pillar_3 = new_object(OBJECT_TYPE__PIPE);
     object_pillar_3->tilemap_pos = vec2i(4,3);
     add_object_to_gamemap_objects(&state, object_pillar_3);
 
@@ -153,7 +153,7 @@ int main (int argc, char* argv[])
     object_pillar_4->tilemap_pos = vec2i(1,3);
     add_object_to_gamemap_objects(&state, object_pillar_4);
 
-    Object* object_pillar_5 = new_object(OBJECT_TYPE__PILLAR);
+    Object* object_pillar_5 = new_object(OBJECT_TYPE__BALL);
     object_pillar_5->tilemap_pos = vec2i(2,7);
     add_object_to_gamemap_objects(&state, object_pillar_5);
 
@@ -164,14 +164,6 @@ int main (int argc, char* argv[])
     Object* object_cover = new_object(OBJECT_TYPE__COVER_ROCK);
     object_cover->tilemap_pos = vec2i(6,6);
     add_object_to_gamemap_objects(&state, object_cover);
-
-    Object* object_spring_1 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_1->tilemap_pos = vec2i(7,1);
-    add_object_to_gamemap_objects(&state, object_spring_1);
-
-    Object* object_spring_2 = new_object(OBJECT_TYPE__SPRING);
-    object_spring_2->tilemap_pos = vec2i(8,1);
-    add_object_to_gamemap_objects(&state, object_spring_2);
 
     Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
     object_barrel_1->tilemap_pos = vec2i(6,4);

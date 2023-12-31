@@ -140,16 +140,42 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__CHANGE:
+        case ACTION_TYPE__CHANGE_FLOOR:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("is change o.:   %i \n", action->change.is_change_object);
+            printf("floor type:     %s \n", get_name_from_floor(action->change_floor.new_floor_type));
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf(") \n");
+        }
+        break;
+        case ACTION_TYPE__CHANGE_OBJECT:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("new o. type:    %s \n", get_name_from_object_type(action->change.new_object_type));
+            printf("object type:    %s \n", get_name_from_object_type(action->change_object.new_object_type));
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf(") \n");
+        }
+        break;
+        case ACTION_TYPE__ADD_OBJECT:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("new f. type:    %s \n", get_name_from_floor(action->change.new_floor_type));
+            printf("object type:    %s \n", get_name_from_object_type(action->add_object.new_object->type));
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf(") \n");
+        }
+        break;
+        case ACTION_TYPE__REMOVE_OBJECT:
+        {
+            for(int i = 0; i < depth; i++) printf("  ");
+            printf("( \n");
+            for(int i = 0; i < depth + 1; i++) printf("  ");
+            printf("object type:    %s \n", get_name_from_object_type(action->remove_object.object_to_remove->type));
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }

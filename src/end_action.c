@@ -105,7 +105,22 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             floor_on_drop(state, sequence, action, floor);
         }
         break;
-        case ACTION_TYPE__CHANGE:
+        case ACTION_TYPE__CHANGE_FLOOR:
+        {
+            //
+        }
+        break;
+        case ACTION_TYPE__CHANGE_OBJECT:
+        {
+            //
+        }
+        break;
+        case ACTION_TYPE__ADD_OBJECT:
+        {
+            //
+        }
+        break;
+        case ACTION_TYPE__REMOVE_OBJECT:
         {
             //
         }

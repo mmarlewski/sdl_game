@@ -312,23 +312,38 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
-        case ACTION_TYPE__CHANGE:
+        case ACTION_TYPE__CHANGE_FLOOR:
         {
-            if(action->change.is_change_object)
+
+            int floor = get_floor_on_tilemap_pos(state, action->tilemap_pos);
+            if(floor != FLOOR_TYPE__NONE)
             {
-                Object* object = get_object_on_tilemap_pos(state, action->tilemap_pos);
-                if(object != 0)
-                {
-                    object->type = action->change.new_object_type;
-                }
+                change_floor_in_tilemap_pos(state, action->change_floor.new_floor_type, action->tilemap_pos);
             }
-            else
+        }
+        break;
+        case ACTION_TYPE__CHANGE_OBJECT:
+        {
+            Object* object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            if(object != 0)
             {
-                int floor = get_floor_on_tilemap_pos(state, action->tilemap_pos);
-                if(floor != FLOOR_TYPE__NONE)
-                {
-                    change_floor_in_tilemap_pos(state, action->change.new_floor_type, action->tilemap_pos);
-                }
+                object->type = action->change_object.new_object_type;
+            }
+        }
+        break;
+        case ACTION_TYPE__ADD_OBJECT:
+        {
+            if(action->add_object.new_object != 0)
+            {
+                add_object_to_gamemap_objects(state, action->add_object.new_object);
+            }
+        }
+        break;
+        case ACTION_TYPE__REMOVE_OBJECT:
+        {
+            if(action->remove_object.object_to_remove != 0)
+            {
+                remove_object_from_gamemap_objects(state, action->remove_object.object_to_remove);
             }
         }
         break;

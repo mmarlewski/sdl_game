@@ -14,6 +14,7 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_hatch_open_2 = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_open_2.png");
     floor->metal_hatch_closed = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_closed.png");
     floor->metal_cover_bottom = load_texture_from_filepath (renderer, "./res/floor/metal_cover_bottom.png");
+    floor->metal_piston = load_texture_from_filepath (renderer, "./res/floor/metal_piston.png");
     floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
     floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
@@ -40,6 +41,7 @@ void destroy_textures_floor (Textures_Floor* floor)
     destroy_texture(floor->metal_hatch_open_2);
     destroy_texture(floor->metal_hatch_closed);
     destroy_texture(floor->metal_cover_bottom);
+    destroy_texture(floor->metal_piston);
     destroy_texture(floor->grass);
     destroy_texture(floor->water_1);
     destroy_texture(floor->water_2);
@@ -130,8 +132,8 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->pillar = load_texture_from_filepath(renderer, "./res/object/pillar.png");
     object->pillar_outline = load_texture_from_filepath(renderer, "./res/object/pillar_outline.png");
 
-    object->pillar_spikes = load_texture_from_filepath(renderer, "./res/object/pillar_spikes.png");
-    object->pillar_spikes_outline = load_texture_from_filepath(renderer, "./res/object/pillar_spikes_outline.png");
+    object->pipe = load_texture_from_filepath(renderer, "./res/object/pipe.png");
+    object->pipe_outline = load_texture_from_filepath(renderer, "./res/object/pipe_outline.png");
 
     object->cover_rock = load_texture_from_filepath(renderer, "./res/object/cover_rock.png");
     object->cover_rock_outline = load_texture_from_filepath(renderer, "./res/object/cover_rock_outline.png");
@@ -228,6 +230,15 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->weight = load_texture_from_filepath(renderer, "./res/object/weight.png");
     object->weight_outline = load_texture_from_filepath(renderer, "./res/object/weight_outline.png");
+
+    object->piston = load_texture_from_filepath(renderer, "./res/object/piston.png");
+    object->piston_outline = load_texture_from_filepath(renderer, "./res/object/piston_outline.png");
+
+    object->ball = load_texture_from_filepath(renderer, "./res/object/ball.png");
+    object->ball_outline = load_texture_from_filepath(renderer, "./res/object/ball_outline.png");
+
+    object->ball_spikes = load_texture_from_filepath(renderer, "./res/object/ball_spikes.png");
+    object->ball_spikes_outline = load_texture_from_filepath(renderer, "./res/object/ball_spikes_outline.png");
 
     object->hero_1 = load_texture_from_filepath(renderer, "./res/object/hero_1.png");
     object->hero_2 = load_texture_from_filepath(renderer, "./res/object/hero_2.png");

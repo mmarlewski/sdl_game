@@ -27,7 +27,11 @@ enum ACTION_TYPE
     ACTION_TYPE__LIFT,
     ACTION_TYPE__DROP,
 
-    ACTION_TYPE__CHANGE,
+    ACTION_TYPE__CHANGE_FLOOR,
+    ACTION_TYPE__CHANGE_OBJECT,
+
+    ACTION_TYPE__ADD_OBJECT,
+    ACTION_TYPE__REMOVE_OBJECT,
 
     ACTION_TYPE__COUNT
 };
@@ -112,11 +116,27 @@ typedef struct
 
 typedef struct
 {
-    int is_change_object;
-    int new_object_type;
     int new_floor_type;
 
-} Action_Change;
+} Action_ChangeFloor;
+
+typedef struct
+{
+    int new_object_type;
+
+} Action_ChangeObject;
+
+typedef struct
+{
+    Object* new_object;
+
+} Action_AddObject;
+
+typedef struct
+{
+    Object* object_to_remove;
+
+} Action_RemoveObject;
 
 struct _Action
 {
@@ -144,7 +164,11 @@ struct _Action
         Action_Lift lift;
         Action_Drop drop;
 
-        Action_Change change;
+        Action_ChangeFloor change_floor;
+        Action_ChangeObject change_object;
+
+        Action_AddObject add_object;
+        Action_RemoveObject remove_object;
     };
 
 };
@@ -176,7 +200,11 @@ Action* new_action_throw(Vec2i tilemap_pos, int dir4, int distance);
 Action* new_action_lift(Vec2i tilemap_pos, int dir4);
 Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4);
 
-Action* new_action_change(int is_change_object, int new_object_type, int new_floor_type, Vec2i tilemap_pos);
+Action* new_action_change_floor(int new_floor_type, Vec2i tilemap_pos);
+Action* new_action_change_object(int new_object_type, Vec2i tilemap_pos);
+
+Action* new_action_add_object(Object* new_object, Vec2i tilemap_pos);
+Action* new_action_remove_object(Object* object_to_remove, Vec2i tilemap_pos);
 
 void destroy_action(Action* action);
 

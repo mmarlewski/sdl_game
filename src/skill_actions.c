@@ -18,11 +18,11 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             Object* object = target_2_object;
             int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
 
-            if(object != 0)
+            if(object != 0 && is_object_interactable(object))
             {
                 object_on_interact(state, action_sequence, object, target_2_tilemap_pos);
             }
-            else if(floor != FLOOR_TYPE__NONE)
+            else if(floor != FLOOR_TYPE__NONE && is_floor_interactable(floor))
             {
                 floor_on_interact(state, action_sequence, floor, target_2_tilemap_pos);
             }

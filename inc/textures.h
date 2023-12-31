@@ -22,6 +22,7 @@ typedef struct
     Texture* metal_hatch_open_2;
     Texture* metal_hatch_closed;
     Texture* metal_cover_bottom;
+    Texture* metal_piston;
 
     Texture* grass;
 
@@ -93,6 +94,12 @@ typedef struct
     Texture* exit_metal_blocked_left;
     Texture* exit_metal_left_outline;
 
+    Texture* pillar;
+    Texture* pillar_outline;
+
+    Texture* pipe;
+    Texture* pipe_outline;
+
     Texture* stalactite;
     Texture* stalactite_outline;
 
@@ -107,12 +114,6 @@ typedef struct
 
     Texture* stalagnate;
     Texture* stalagnate_outline;
-
-    Texture* pillar;
-    Texture* pillar_outline;
-
-    Texture* pillar_spikes;
-    Texture* pillar_spikes_outline;
 
     Texture* cover_rock;
     Texture* cover_rock_outline;
@@ -209,6 +210,15 @@ typedef struct
 
     Texture* weight;
     Texture* weight_outline;
+
+    Texture* piston;
+    Texture* piston_outline;
+
+    Texture* ball;
+    Texture* ball_outline;
+
+    Texture* ball_spikes;
+    Texture* ball_spikes_outline;
 
     Texture* hero_1;
     Texture* hero_2;
