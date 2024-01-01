@@ -29,19 +29,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
-            ListElem* curr_elem = action->simultaneous.action_list->head;
-            action->simultaneous.curr_action_list_elem = curr_elem;
-
-            if(curr_elem != 0)
-            {
-                Action* curr_action = (Action*)curr_elem->data;
-                start_action(state, sequence, curr_action, textures, sounds, musics, colors);
-                add_new_list_element_to_list_end(action->simultaneous.started_action_list,curr_action);
-            }
-        }
-        break;
-        case 666:
-        {
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
                 if(curr_elem)
@@ -85,7 +72,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     get_texture_1_from_object(action->move.object, textures),
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(next_tilemap_pos),
-                    0.2f
+                    ACTION_LENGTH_IN_SECONDS
                 );
                 action->animation = animation;
                 add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
@@ -124,12 +111,12 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                         object_texture,
                         curr_object_gamemap_pos,
                         next_object_gamemap_pos,
-                        0.1f
+                        ACTION_LENGTH_IN_SECONDS * 0.5f
                         ),
                     new_animation_show_sprite_in_gamemap(
                         object_texture,
                         next_object_gamemap_pos,
-                        .01f
+                        ACTION_LENGTH_IN_SECONDS * 0.1f
                         )
                     ),
                 new_animation_simultaneous_of_1(
@@ -137,13 +124,13 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                         object_texture,
                         next_object_gamemap_pos,
                         curr_object_gamemap_pos,
-                        0.1f
+                        ACTION_LENGTH_IN_SECONDS * 0.5f
                         )
                     ),
                 new_animation_show_sprite_in_gamemap(
                     object_texture,
                     curr_object_gamemap_pos,
-                    .01f
+                    ACTION_LENGTH_IN_SECONDS * 0.1f
                     )
                 );
 
@@ -169,7 +156,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 get_texture_1_from_object(action->fall.object, textures),
                 tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
                 0.2f,
-                0.2f
+                ACTION_LENGTH_IN_SECONDS
                 );
 
             action->animation = animation;
@@ -209,7 +196,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Animation* animation = new_animation_show_sprite_in_gamemap(
                 textures->action.skull,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                0.2f
+                ACTION_LENGTH_IN_SECONDS
                 );
 
             action->animation = animation;
@@ -222,7 +209,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Animation* animation = new_animation_show_sprite_in_gamemap(
                 textures->action.explosion,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                0.2f
+                ACTION_LENGTH_IN_SECONDS
                 );
 
             action->animation = animation;
@@ -264,7 +251,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 get_texture_1_from_object(action->throw.object_thrown, textures),
                 tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(next_tilemap_pos),
-                1.0f,
+                ACTION_LENGTH_IN_SECONDS * 4.0f,
                 2.0f
                 );
 
@@ -292,7 +279,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 get_texture_1_from_object(action->lift.object, textures),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                1.0f,
+                ACTION_LENGTH_IN_SECONDS * 4.0f,
                 2.0f
                 );
 
@@ -317,7 +304,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Animation* animation = new_animation_show_sprite_in_gamemap(
                 textures->action.thump,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                0.2f
+                ACTION_LENGTH_IN_SECONDS
                 );
 
             action->animation = animation;

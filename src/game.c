@@ -260,10 +260,9 @@ int main (int argc, char* argv[])
         prev_time = curr_time;
         curr_time = SDL_GetPerformanceCounter ();
         delta_time = (float)(curr_time - prev_time) / SDL_GetPerformanceFrequency ();
-        if (delta_time < FPS_CAP_IN_MILIS)
+        if (delta_time < FPS_CAP_IN_MILISECONDS)
         {
-            SDL_Delay (FPS_CAP_IN_MILIS - delta_time);
-            // printf ("delta time: %f s \n", delta_time);
+            SDL_Delay (FPS_CAP_IN_MILISECONDS - delta_time);
         }
 
         // game loop

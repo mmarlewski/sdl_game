@@ -17,15 +17,11 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             remove_all_list_elements(action->sequence.action_list, 1);
             action->sequence.curr_action_list_elem = 0;
-            action->sequence.was_curr_action_finished = 0;
-            action->sequence.was_curr_action_just_finished = 0;
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
             remove_all_list_elements(action->simultaneous.action_list, 1);
-            remove_all_list_elements(action->simultaneous.started_action_list, 0);
-            action->simultaneous.curr_action_list_elem = 0;
         }
         break;
         case ACTION_TYPE__MOVE:

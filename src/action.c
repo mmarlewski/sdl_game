@@ -25,8 +25,6 @@ Action* new_action_sequence()
 
     action->sequence.action_list = new_list((void(*)(void*))&destroy_action);
     action->sequence.curr_action_list_elem = 0;
-    action->sequence.was_curr_action_finished = 0;
-    action->sequence.was_curr_action_just_finished = 0;
 
     return action;
 }
@@ -81,8 +79,6 @@ Action* new_action_simultaneous()
     action->type = ACTION_TYPE__SIMULTANEOUS;
 
     action->simultaneous.action_list = new_list((void(*)(void*))&destroy_action);
-    action->simultaneous.started_action_list = new_list((void(*)(void*))&destroy_action);
-    action->simultaneous.curr_action_list_elem = 0;
 
     return action;
 }
@@ -312,7 +308,6 @@ void destroy_action(Action* action)
     if(action->type == ACTION_TYPE__SIMULTANEOUS)
     {
         destroy_list(action->simultaneous.action_list);
-        destroy_list(action->simultaneous.started_action_list);
     }
 
     free(action);
