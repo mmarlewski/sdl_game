@@ -46,12 +46,16 @@ typedef struct
 {
     List* action_list;
     ListElem* curr_action_list_elem;
+    int was_curr_action_finished;
+    int was_curr_action_just_finished;
 
 } Action_Sequence;
 
 typedef struct
 {
     List* action_list;
+    List* started_action_list;
+    ListElem* curr_action_list_elem;
 
 } Action_Simultaneous;
 

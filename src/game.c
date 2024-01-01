@@ -169,9 +169,17 @@ int main (int argc, char* argv[])
     object_barrel_1->tilemap_pos = vec2i(6,4);
     add_object_to_gamemap_objects(&state, object_barrel_1);
 
-    Object* object_barrel_2 = new_object(OBJECT_TYPE__STALACTITE_FALLEN_ITEM);
-    object_barrel_2->tilemap_pos = vec2i(7,4);
+    Object* object_barrel_2 = new_object(OBJECT_TYPE__BARREL);
+    object_barrel_2->tilemap_pos = vec2i(6,3);
     add_object_to_gamemap_objects(&state, object_barrel_2);
+
+    Object* object_barrel_3 = new_object(OBJECT_TYPE__BARREL);
+    object_barrel_3->tilemap_pos = vec2i(6,5);
+    add_object_to_gamemap_objects(&state, object_barrel_3);
+
+    Object* object_other = new_object(OBJECT_TYPE__STALACTITE_FALLEN_ITEM);
+    object_other->tilemap_pos = vec2i(7,4);
+    add_object_to_gamemap_objects(&state, object_other);
 
     Object* object_goat = new_object(OBJECT_TYPE__GOAT);
     object_goat->is_enemy = 1;

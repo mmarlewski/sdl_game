@@ -17,11 +17,15 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             remove_all_list_elements(action->sequence.action_list, 1);
             action->sequence.curr_action_list_elem = 0;
+            action->sequence.was_curr_action_finished = 0;
+            action->sequence.was_curr_action_just_finished = 0;
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
         {
             remove_all_list_elements(action->simultaneous.action_list, 1);
+            remove_all_list_elements(action->simultaneous.started_action_list, 0);
+            action->simultaneous.curr_action_list_elem = 0;
         }
         break;
         case ACTION_TYPE__MOVE:
@@ -53,7 +57,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->tilemap_pos));
 
-            action->fall.object->is_visible = 1;
+            action->fall.object->is_visible = 0;
         }
         break;
         case ACTION_TYPE__DEATH:

@@ -13,13 +13,13 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__SEQUENCE:
         {
-            action->sequence.curr_action_list_elem = action->sequence.action_list->head;
-            ListElem* curr_elem = action->sequence.curr_action_list_elem;
+            ListElem* curr_elem = action->sequence.action_list->head;
+            action->sequence.curr_action_list_elem = curr_elem;
 
             if(curr_elem != 0)
             {
                 Action* curr_action = (Action*)curr_elem->data;
-                start_action(state, sequence, curr_action, textures, sounds, musics, colors);
+                start_action(state, action, curr_action, textures, sounds, musics, colors);
             }
             else
             {
@@ -28,6 +28,19 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         }
         break;
         case ACTION_TYPE__SIMULTANEOUS:
+        {
+            ListElem* curr_elem = action->simultaneous.action_list->head;
+            action->simultaneous.curr_action_list_elem = curr_elem;
+
+            if(curr_elem != 0)
+            {
+                Action* curr_action = (Action*)curr_elem->data;
+                start_action(state, sequence, curr_action, textures, sounds, musics, colors);
+                add_new_list_element_to_list_end(action->simultaneous.started_action_list,curr_action);
+            }
+        }
+        break;
+        case 666:
         {
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
@@ -79,9 +92,9 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
                 int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
                 floor_on_move_start(state, sequence, action, floor);
-            }
 
-            action->move.object->is_visible = 0;
+                action->move.object->is_visible = 0;
+            }
         }
         break;
         case ACTION_TYPE__CRASH:
