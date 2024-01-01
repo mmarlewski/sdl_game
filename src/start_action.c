@@ -194,7 +194,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
 
             Animation* animation = new_animation_show_sprite_in_gamemap(
-                textures->action.skull,
+                textures->skill.skull,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 ACTION_LENGTH_IN_SECONDS
                 );
@@ -207,7 +207,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION_TYPE__BLOW_UP:
         {
             Animation* animation = new_animation_show_sprite_in_gamemap(
-                textures->action.explosion,
+                textures->skill.explosion,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 ACTION_LENGTH_IN_SECONDS
                 );
@@ -302,7 +302,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->drop.object->tilemap_pos = action->tilemap_pos;
 
             Animation* animation = new_animation_show_sprite_in_gamemap(
-                textures->action.thump,
+                textures->skill.thump,
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 ACTION_LENGTH_IN_SECONDS
                 );

@@ -321,63 +321,91 @@ void destroy_textures_order_number (Textures_OrderNumber* order_number)
     destroy_texture(order_number->num_0);
 }
 
-void load_textures_action (Renderer* renderer, Textures_Action* action)
+void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
 {
-    action->none = load_texture_from_filepath (renderer, "./res/action/none/none.png");
-    action->move_up = load_texture_from_filepath (renderer, "./res/action/move/up.png");
-    action->move_right = load_texture_from_filepath (renderer, "./res/action/move/right.png");
-    action->move_down = load_texture_from_filepath (renderer, "./res/action/move/down.png");
-    action->move_left = load_texture_from_filepath (renderer, "./res/action/move/left.png");
-    action->crash_up = load_texture_from_filepath (renderer, "./res/action/crash/up.png");
-    action->crash_right = load_texture_from_filepath (renderer, "./res/action/crash/right.png");
-    action->crash_down = load_texture_from_filepath (renderer, "./res/action/crash/down.png");
-    action->crash_left = load_texture_from_filepath (renderer, "./res/action/crash/left.png");
-    action->fall = load_texture_from_filepath (renderer, "./res/action/fall/fall.png");
-    action->death = load_texture_from_filepath (renderer, "./res/action/death/death.png");
-    action->skull = load_texture_from_filepath (renderer, "./res/action/death/skull.png");
-    action->blow_up = load_texture_from_filepath (renderer, "./res/action/blow_up/blow_up.png");
-    action->explosion = load_texture_from_filepath (renderer, "./res/action/blow_up/explosion.png");
-    action->throw_up = load_texture_from_filepath (renderer, "./res/action/throw/up.png");
-    action->throw_right = load_texture_from_filepath (renderer, "./res/action/throw/right.png");
-    action->throw_down = load_texture_from_filepath (renderer, "./res/action/throw/down.png");
-    action->throw_left = load_texture_from_filepath (renderer, "./res/action/throw/left.png");
-    action->lift_none = load_texture_from_filepath (renderer, "./res/action/lift/none.png");
-    action->lift_up = load_texture_from_filepath (renderer, "./res/action/lift/up.png");
-    action->lift_right = load_texture_from_filepath (renderer, "./res/action/lift/right.png");
-    action->lift_down = load_texture_from_filepath (renderer, "./res/action/lift/down.png");
-    action->lift_left = load_texture_from_filepath (renderer, "./res/action/lift/left.png");
-    action->drop = load_texture_from_filepath (renderer, "./res/action/drop/drop.png");
-    action->thump = load_texture_from_filepath (renderer, "./res/action/drop/thump.png");
-    action->change = load_texture_from_filepath (renderer, "./res/action/change/change.png");
+    skill->none = load_texture_from_filepath (renderer, "./res/skill/none.png");
+    skill->move_up = load_texture_from_filepath (renderer, "./res/skill/move_up.png");
+    skill->move_right = load_texture_from_filepath (renderer, "./res/skill/move_right.png");
+    skill->move_down = load_texture_from_filepath (renderer, "./res/skill/move_down.png");
+    skill->move_left = load_texture_from_filepath (renderer, "./res/skill/move_left.png");
+    skill->crash_up = load_texture_from_filepath (renderer, "./res/skill/crash_up.png");
+    skill->crash_right = load_texture_from_filepath (renderer, "./res/skill/crash_right.png");
+    skill->crash_down = load_texture_from_filepath (renderer, "./res/skill/crash_down.png");
+    skill->crash_left = load_texture_from_filepath (renderer, "./res/skill/crash_left.png");
+    skill->fall = load_texture_from_filepath (renderer, "./res/skill/fall.png");
+    skill->death = load_texture_from_filepath (renderer, "./res/skill/death.png");
+    skill->skull = load_texture_from_filepath (renderer, "./res/skill/skull.png");
+    skill->blow_up = load_texture_from_filepath (renderer, "./res/skill/blow_up.png");
+    skill->explosion = load_texture_from_filepath (renderer, "./res/skill/explosion.png");
+    skill->throw_up = load_texture_from_filepath (renderer, "./res/skill/throw_up.png");
+    skill->throw_right = load_texture_from_filepath (renderer, "./res/skill/throw_right.png");
+    skill->throw_down = load_texture_from_filepath (renderer, "./res/skill/throw_down.png");
+    skill->throw_left = load_texture_from_filepath (renderer, "./res/skill/throw_left.png");
+    skill->lift_none = load_texture_from_filepath (renderer, "./res/skill/lift_none.png");
+    skill->lift_up = load_texture_from_filepath (renderer, "./res/skill/lift_up.png");
+    skill->lift_right = load_texture_from_filepath (renderer, "./res/skill/lift_right.png");
+    skill->lift_down = load_texture_from_filepath (renderer, "./res/skill/lift_down.png");
+    skill->lift_left = load_texture_from_filepath (renderer, "./res/skill/lift_left.png");
+    skill->drop = load_texture_from_filepath (renderer, "./res/skill/drop.png");
+    skill->thump = load_texture_from_filepath (renderer, "./res/skill/thump.png");
+    skill->change = load_texture_from_filepath (renderer, "./res/skill/change.png");
+
+    skill->arrow_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_up_start.png");
+    skill->arrow_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_up_end.png");
+    skill->arrow_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_up_up.png");
+    skill->arrow_up_right = load_texture_from_filepath (renderer, "./res/skill/arrow_up_right.png");
+    skill->arrow_up_down = load_texture_from_filepath (renderer, "./res/skill/arrow_up_down.png");
+    skill->arrow_up_left = load_texture_from_filepath (renderer, "./res/skill/arrow_up_left.png");
+
+    skill->arrow_right_start = load_texture_from_filepath (renderer, "./res/skill/arrow_right_start.png");
+    skill->arrow_right_end = load_texture_from_filepath (renderer, "./res/skill/arrow_right_end.png");
+    skill->arrow_right_up = load_texture_from_filepath (renderer, "./res/skill/arrow_right_up.png");
+    skill->arrow_right_right = load_texture_from_filepath (renderer, "./res/skill/arrow_right_right.png");
+    skill->arrow_right_down = load_texture_from_filepath (renderer, "./res/skill/arrow_right_down.png");
+    skill->arrow_right_left = load_texture_from_filepath (renderer, "./res/skill/arrow_right_left.png");
+
+    skill->arrow_down_start = load_texture_from_filepath (renderer, "./res/skill/arrow_down_start.png");
+    skill->arrow_down_end = load_texture_from_filepath (renderer, "./res/skill/arrow_down_end.png");
+    skill->arrow_down_up = load_texture_from_filepath (renderer, "./res/skill/arrow_down_up.png");
+    skill->arrow_down_right = load_texture_from_filepath (renderer, "./res/skill/arrow_down_right.png");
+    skill->arrow_down_down = load_texture_from_filepath (renderer, "./res/skill/arrow_down_down.png");
+    skill->arrow_down_left = load_texture_from_filepath (renderer, "./res/skill/arrow_down_left.png");
+
+    skill->arrow_left_start = load_texture_from_filepath (renderer, "./res/skill/arrow_left_start.png");
+    skill->arrow_left_end = load_texture_from_filepath (renderer, "./res/skill/arrow_left_end.png");
+    skill->arrow_left_up = load_texture_from_filepath (renderer, "./res/skill/arrow_left_up.png");
+    skill->arrow_left_right = load_texture_from_filepath (renderer, "./res/skill/arrow_left_right.png");
+    skill->arrow_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_left_down.png");
+    skill->arrow_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_left_left.png");
 }
-void destroy_textures_action (Textures_Action* action)
+void destroy_textures_skill (Textures_Skill* skill)
 {
-    destroy_texture(action->none);
-    destroy_texture(action->move_up);
-    destroy_texture(action->move_right);
-    destroy_texture(action->move_down);
-    destroy_texture(action->move_left);
-    destroy_texture(action->crash_up);
-    destroy_texture(action->crash_right);
-    destroy_texture(action->crash_down);
-    destroy_texture(action->crash_left);
-    destroy_texture(action->fall);
-    destroy_texture(action->death);
-    destroy_texture(action->skull);
-    destroy_texture(action->blow_up);
-    destroy_texture(action->explosion);
-    destroy_texture(action->throw_up);
-    destroy_texture(action->throw_right);
-    destroy_texture(action->throw_down);
-    destroy_texture(action->throw_left);
-    destroy_texture(action->lift_none);
-    destroy_texture(action->lift_up);
-    destroy_texture(action->lift_right);
-    destroy_texture(action->lift_down);
-    destroy_texture(action->lift_left);
-    destroy_texture(action->drop);
-    destroy_texture(action->thump);
-    destroy_texture(action->change);
+    destroy_texture(skill->none);
+    destroy_texture(skill->move_up);
+    destroy_texture(skill->move_right);
+    destroy_texture(skill->move_down);
+    destroy_texture(skill->move_left);
+    destroy_texture(skill->crash_up);
+    destroy_texture(skill->crash_right);
+    destroy_texture(skill->crash_down);
+    destroy_texture(skill->crash_left);
+    destroy_texture(skill->fall);
+    destroy_texture(skill->death);
+    destroy_texture(skill->skull);
+    destroy_texture(skill->blow_up);
+    destroy_texture(skill->explosion);
+    destroy_texture(skill->throw_up);
+    destroy_texture(skill->throw_right);
+    destroy_texture(skill->throw_down);
+    destroy_texture(skill->throw_left);
+    destroy_texture(skill->lift_none);
+    destroy_texture(skill->lift_up);
+    destroy_texture(skill->lift_right);
+    destroy_texture(skill->lift_down);
+    destroy_texture(skill->lift_left);
+    destroy_texture(skill->drop);
+    destroy_texture(skill->thump);
+    destroy_texture(skill->change);
 }
 
 void load_textures (Renderer* renderer, Textures* textures)
@@ -385,7 +413,7 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_floor(renderer,&textures->floor);
     load_textures_object(renderer,&textures->object);
     load_textures_order_number(renderer,&textures->order_number);
-    load_textures_action(renderer,&textures->action);
+    load_textures_skill(renderer,&textures->skill);
 }
 
 void destroy_textures (Textures* textures)
@@ -393,7 +421,7 @@ void destroy_textures (Textures* textures)
     destroy_textures_floor (&textures->floor);
     destroy_textures_object (&textures->object);
     destroy_textures_order_number (&textures->order_number);
-    destroy_textures_action(&textures->action);
+    destroy_textures_skill(&textures->skill);
 }
 
 Texture* get_texture_move(Textures* textures, int dir4)
@@ -402,10 +430,10 @@ Texture* get_texture_move(Textures* textures, int dir4)
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->action.move_up; break;
-        case DIR4__RIGHT: texture = textures->action.move_right; break;
-        case DIR4__DOWN: texture = textures->action.move_down; break;
-        case DIR4__LEFT: texture = textures->action.move_left; break;
+        case DIR4__UP: texture = textures->skill.move_up; break;
+        case DIR4__RIGHT: texture = textures->skill.move_right; break;
+        case DIR4__DOWN: texture = textures->skill.move_down; break;
+        case DIR4__LEFT: texture = textures->skill.move_left; break;
         default: break;
     }
 
@@ -418,10 +446,10 @@ Texture* get_texture_crash(Textures* textures, int dir4)
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->action.crash_up; break;
-        case DIR4__RIGHT: texture = textures->action.crash_right; break;
-        case DIR4__DOWN: texture = textures->action.crash_down; break;
-        case DIR4__LEFT: texture = textures->action.crash_left; break;
+        case DIR4__UP: texture = textures->skill.crash_up; break;
+        case DIR4__RIGHT: texture = textures->skill.crash_right; break;
+        case DIR4__DOWN: texture = textures->skill.crash_down; break;
+        case DIR4__LEFT: texture = textures->skill.crash_left; break;
         default: break;
     }
 
@@ -434,10 +462,10 @@ Texture* get_texture_throw(Textures* textures, int dir4)
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->action.throw_up; break;
-        case DIR4__RIGHT: texture = textures->action.throw_right; break;
-        case DIR4__DOWN: texture = textures->action.throw_down; break;
-        case DIR4__LEFT: texture = textures->action.throw_left; break;
+        case DIR4__UP: texture = textures->skill.throw_up; break;
+        case DIR4__RIGHT: texture = textures->skill.throw_right; break;
+        case DIR4__DOWN: texture = textures->skill.throw_down; break;
+        case DIR4__LEFT: texture = textures->skill.throw_left; break;
         default: break;
     }
 
@@ -450,11 +478,11 @@ Texture* get_texture_lift(Textures* textures, int dir4)
 
     switch(dir4)
     {
-        case DIR4__NONE: texture = textures->action.lift_none; break;
-        case DIR4__UP: texture = textures->action.lift_up; break;
-        case DIR4__RIGHT: texture = textures->action.lift_right; break;
-        case DIR4__DOWN: texture = textures->action.lift_down; break;
-        case DIR4__LEFT: texture = textures->action.lift_left; break;
+        case DIR4__NONE: texture = textures->skill.lift_none; break;
+        case DIR4__UP: texture = textures->skill.lift_up; break;
+        case DIR4__RIGHT: texture = textures->skill.lift_right; break;
+        case DIR4__DOWN: texture = textures->skill.lift_down; break;
+        case DIR4__LEFT: texture = textures->skill.lift_left; break;
         default: break;
     }
 
@@ -476,6 +504,98 @@ Texture* get_texture_order_number(Textures* textures, int num)
         case 7: texture = textures->order_number.num_7; break;
         case 8: texture = textures->order_number.num_8; break;
         case 9: texture = textures->order_number.num_9; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_arrow_start(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->skill.arrow_up_start; break;
+        case DIR4__RIGHT: texture = textures->skill.arrow_right_start; break;
+        case DIR4__DOWN: texture = textures->skill.arrow_down_start; break;
+        case DIR4__LEFT: texture = textures->skill.arrow_left_start; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_arrow_end(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->skill.arrow_up_end; break;
+        case DIR4__RIGHT: texture = textures->skill.arrow_right_end; break;
+        case DIR4__DOWN: texture = textures->skill.arrow_down_end; break;
+        case DIR4__LEFT: texture = textures->skill.arrow_left_end; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_to)
+{
+    Texture* texture = 0;
+
+    switch(dir4_from)
+    {
+        case DIR4__UP:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_up_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_up_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_up_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_up_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__RIGHT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_right_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_right_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_right_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_right_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__DOWN:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_down_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_down_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_down_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_down_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__LEFT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_left_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_left_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_left_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_left_left; break;
+                default: break;
+            }
+        }
+        break;
         default: break;
     }
 

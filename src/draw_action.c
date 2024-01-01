@@ -60,7 +60,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.fall,
+                textures->skill.fall,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -72,7 +72,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.death,
+                textures->skill.death,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -84,7 +84,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.blow_up,
+                textures->skill.blow_up,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -110,7 +110,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
 
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.drop,
+                textures->skill.drop,
                 color,
                 target_world_iso_pos,
                 state->camera.world_pos,
@@ -134,7 +134,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.drop,
+                textures->skill.drop,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -146,7 +146,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.change,
+                textures->skill.change,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -158,7 +158,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.change,
+                textures->skill.change,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -170,7 +170,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.change,
+                textures->skill.change,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,
@@ -182,7 +182,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             draw_texture_at_world_pos(
                 renderer,
-                textures->action.change,
+                textures->skill.change,
                 color,
                 world_iso_pos,
                 state->camera.world_pos,

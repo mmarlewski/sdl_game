@@ -329,17 +329,45 @@ typedef struct
 
     Texture* change;
 
-} Textures_Action;
+    Texture* arrow_up_start;
+    Texture* arrow_up_end;
+    Texture* arrow_up_up;
+    Texture* arrow_up_right;
+    Texture* arrow_up_down;
+    Texture* arrow_up_left;
 
-void load_textures_action (Renderer* renderer, Textures_Action* action);
-void destroy_textures_action (Textures_Action* action);
+    Texture* arrow_right_start;
+    Texture* arrow_right_end;
+    Texture* arrow_right_up;
+    Texture* arrow_right_right;
+    Texture* arrow_right_down;
+    Texture* arrow_right_left;
+
+    Texture* arrow_down_start;
+    Texture* arrow_down_end;
+    Texture* arrow_down_up;
+    Texture* arrow_down_right;
+    Texture* arrow_down_down;
+    Texture* arrow_down_left;
+
+    Texture* arrow_left_start;
+    Texture* arrow_left_end;
+    Texture* arrow_left_up;
+    Texture* arrow_left_right;
+    Texture* arrow_left_down;
+    Texture* arrow_left_left;
+
+} Textures_Skill;
+
+void load_textures_skill (Renderer* renderer, Textures_Skill* skill);
+void destroy_textures_skill (Textures_Skill* skill);
 
 typedef struct
 {
     Textures_Floor floor;
     Textures_Object object;
     Textures_OrderNumber order_number;
-    Textures_Action action;
+    Textures_Skill skill;
 
 } Textures;
 
@@ -353,5 +381,9 @@ Texture* get_texture_throw(Textures* textures, int dir4);
 Texture* get_texture_lift(Textures* textures, int dir4);
 
 Texture* get_texture_order_number(Textures* textures, int num);
+
+Texture* get_texture_arrow_start(Textures* textures, int dir4);
+Texture* get_texture_arrow_end(Textures* textures, int dir4);
+Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 #endif
