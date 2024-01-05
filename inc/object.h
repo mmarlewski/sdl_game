@@ -134,9 +134,12 @@ typedef struct
 typedef struct
 {
     struct _Action* action_sequence;
+    Vec2i target_1_tilemap_pos;
+    Vec2i target_2_tilemap_pos;
+    int skill;
+    int attack_dir4;
     int performed_attack;
     int order_number;
-    int attack_dir4;
 
 } Object_Enemy;
 

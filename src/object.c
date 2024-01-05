@@ -1,6 +1,7 @@
 #include "../inc/object.h"
 
 #include "../inc/action.h"
+#include "../inc/skill.h"
 #include "../inc/item.h"
 
 Object* new_object(int type)
@@ -19,11 +20,20 @@ Object* new_object(int type)
     object->container.item_1 = ITEM__NONE;
     object->container.item_2 = ITEM__NONE;
     object->container.item_3 = ITEM__NONE;
+
     object->is_enemy = 0;
     object->enemy.action_sequence = new_action_sequence();
     object->enemy.performed_attack = 0;
     object->enemy.order_number = 0;
     object->enemy.attack_dir4 = DIR4__RIGHT;
+
+    object->enemy.action_sequence = new_action_sequence();
+    object->enemy.target_1_tilemap_pos = vec2i(0, 0);
+    object->enemy.target_2_tilemap_pos = vec2i(0, 0);
+    object->enemy.skill = SKILL__NONE;
+    object->enemy.attack_dir4 = DIR4__NONE;
+    object->enemy.performed_attack = 0;
+    object->enemy.order_number = 0;
 
     return object;
 }

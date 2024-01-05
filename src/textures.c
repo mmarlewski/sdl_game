@@ -328,10 +328,12 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->move_right = load_texture_from_filepath (renderer, "./res/skill/move_right.png");
     skill->move_down = load_texture_from_filepath (renderer, "./res/skill/move_down.png");
     skill->move_left = load_texture_from_filepath (renderer, "./res/skill/move_left.png");
+    skill->immovable = load_texture_from_filepath (renderer, "./res/skill/immovable.png");
     skill->crash_up = load_texture_from_filepath (renderer, "./res/skill/crash_up.png");
     skill->crash_right = load_texture_from_filepath (renderer, "./res/skill/crash_right.png");
     skill->crash_down = load_texture_from_filepath (renderer, "./res/skill/crash_down.png");
     skill->crash_left = load_texture_from_filepath (renderer, "./res/skill/crash_left.png");
+    skill->crash = load_texture_from_filepath (renderer, "./res/skill/crash.png");
     skill->fall = load_texture_from_filepath (renderer, "./res/skill/fall.png");
     skill->death = load_texture_from_filepath (renderer, "./res/skill/death.png");
     skill->skull = load_texture_from_filepath (renderer, "./res/skill/skull.png");

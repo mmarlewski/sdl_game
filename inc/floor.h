@@ -36,7 +36,11 @@ enum FLOOR_TYPE
     FLOOR_TYPE__COUNT
 };
 
-int is_floor_interactable(int type);
+int is_floor_interactable(int floor);
+int is_floor_traversable(int floor);
+int is_floor_deadly_on_move(int floor);
+int is_floor_deadly_on_drop(int floor);
+
 char* get_name_from_floor(int floor);
 Texture* get_texture_1_from_floor_type(int type, Textures* textures);
 Texture* get_texture_2_from_floor_type(int type, Textures* textures);

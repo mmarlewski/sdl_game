@@ -67,13 +67,65 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             Action* push_around = new_action_simultaneous();
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1), DIR4__UP)));
+            Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1);
+            Object* up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
+            if(up_object != 0 && is_object_movable(up_object))
+            {
+                add_action_sequence_to_action_simultaneous(
+                    push_around,
+                    new_action_sequence_of_1(
+                        new_action_move(
+                            up_tilemap_pos,
+                            DIR4__UP
+                            )
+                        )
+                    );
+            }
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1), DIR4__RIGHT)));
+            Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1);
+            Object* right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
+            if(right_object != 0 && is_object_movable(right_object))
+            {
+                add_action_sequence_to_action_simultaneous(
+                    push_around,
+                    new_action_sequence_of_1(
+                        new_action_move(
+                            right_tilemap_pos,
+                            DIR4__RIGHT
+                            )
+                        )
+                    );
+            }
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1), DIR4__DOWN)));
+            Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1);
+            Object* down_object = get_object_on_tilemap_pos(state, down_tilemap_pos);
+            if(down_object != 0 && is_object_movable(down_object))
+            {
+                add_action_sequence_to_action_simultaneous(
+                    push_around,
+                    new_action_sequence_of_1(
+                        new_action_move(
+                            down_tilemap_pos,
+                            DIR4__DOWN
+                            )
+                        )
+                    );
+            }
 
-            add_action_sequence_to_action_simultaneous(push_around, new_action_sequence_of_1(new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1), DIR4__LEFT)));
+            Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1);
+            Object* left_object = get_object_on_tilemap_pos(state, left_tilemap_pos);
+            if(left_object != 0 && is_object_movable(left_object))
+            {
+                add_action_sequence_to_action_simultaneous(
+                    push_around,
+                    new_action_sequence_of_1(
+                        new_action_move(
+                            left_tilemap_pos,
+                            DIR4__LEFT
+                            )
+                        )
+                    );
+            }
 
             add_action_after_curr_action_action_sequence(sequence, push_around);
         }

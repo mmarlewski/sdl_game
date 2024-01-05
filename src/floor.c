@@ -31,6 +31,99 @@ int is_floor_interactable(int floor)
     return is;
 }
 
+int is_floor_traversable(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR_TYPE__NONE:                      is = 0; break;
+        case FLOOR_TYPE__ROCK:                      is = 1; break;
+        case FLOOR_TYPE__ROCK_CRACK_WATER:          is = 1; break;
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:           is = 1; break;
+        case FLOOR_TYPE__STONE:                     is = 1; break;
+        case FLOOR_TYPE__STONE_SPIKES_ON:           is = 0; break;
+        case FLOOR_TYPE__STONE_SPIKES_OFF:          is = 1; break;
+        case FLOOR_TYPE__METAL:                     is = 1; break;
+        case FLOOR_TYPE__METAL_HATCH_OPEN:          is = 0; break;
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:        is = 1; break;
+        case FLOOR_TYPE__METAL_COVER_BOTTOM:        is = 1; break;
+        case FLOOR_TYPE__METAL_PISTON:              is = 1; break;
+        case FLOOR_TYPE__GRASS:                     is = 1; break;
+        case FLOOR_TYPE__WATER:                     is = 0; break;
+        case FLOOR_TYPE__WATER_STALACTITE_FALLEN:   is = 1; break;
+        case FLOOR_TYPE__LAVA:                      is = 0; break;
+        case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    is = 1; break;
+        case FLOOR_TYPE__ICE:                       is = 1; break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:           is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
+int is_floor_deadly_on_move(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR_TYPE__NONE:                      is = 0; break;
+        case FLOOR_TYPE__ROCK:                      is = 0; break;
+        case FLOOR_TYPE__ROCK_CRACK_WATER:          is = 0; break;
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:           is = 0; break;
+        case FLOOR_TYPE__STONE:                     is = 0; break;
+        case FLOOR_TYPE__STONE_SPIKES_ON:           is = 1; break;
+        case FLOOR_TYPE__STONE_SPIKES_OFF:          is = 0; break;
+        case FLOOR_TYPE__METAL:                     is = 0; break;
+        case FLOOR_TYPE__METAL_HATCH_OPEN:          is = 1; break;
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:        is = 0; break;
+        case FLOOR_TYPE__METAL_COVER_BOTTOM:        is = 0; break;
+        case FLOOR_TYPE__METAL_PISTON:              is = 0; break;
+        case FLOOR_TYPE__GRASS:                     is = 0; break;
+        case FLOOR_TYPE__WATER:                     is = 1; break;
+        case FLOOR_TYPE__WATER_STALACTITE_FALLEN:   is = 0; break;
+        case FLOOR_TYPE__LAVA:                      is = 1; break;
+        case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    is = 0; break;
+        case FLOOR_TYPE__ICE:                       is = 0; break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:           is = 0; break;
+        default: break;
+    }
+
+    return is;
+}
+
+int is_floor_deadly_on_drop(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR_TYPE__NONE:                      is = 0; break;
+        case FLOOR_TYPE__ROCK:                      is = 0; break;
+        case FLOOR_TYPE__ROCK_CRACK_WATER:          is = 1; break;
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:           is = 1; break;
+        case FLOOR_TYPE__STONE:                     is = 0; break;
+        case FLOOR_TYPE__STONE_SPIKES_ON:           is = 1; break;
+        case FLOOR_TYPE__STONE_SPIKES_OFF:          is = 0; break;
+        case FLOOR_TYPE__METAL:                     is = 0; break;
+        case FLOOR_TYPE__METAL_HATCH_OPEN:          is = 1; break;
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:        is = 0; break;
+        case FLOOR_TYPE__METAL_COVER_BOTTOM:        is = 0; break;
+        case FLOOR_TYPE__METAL_PISTON:              is = 0; break;
+        case FLOOR_TYPE__GRASS:                     is = 0; break;
+        case FLOOR_TYPE__WATER:                     is = 1; break;
+        case FLOOR_TYPE__WATER_STALACTITE_FALLEN:   is = 0; break;
+        case FLOOR_TYPE__LAVA:                      is = 1; break;
+        case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    is = 0; break;
+        case FLOOR_TYPE__ICE:                       is = 0; break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:           is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
 char* get_name_from_floor(int floor)
 {
     char* name = "";

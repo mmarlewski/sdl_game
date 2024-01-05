@@ -41,6 +41,7 @@ void draw_texture_at_world_pos (Renderer* renderer, Texture* texture, Vec3i colo
 
 void draw_texture_at_gamemap_pos (Renderer* renderer, Texture* texture, Vec3i color, Vec2f gamemap_pos, Vec2f camera_pos, float camera_zoom)
 {
-    Vec2f world_pos = gamemap_pos_to_world_pos(gamemap_pos);
-    draw_texture_at_world_pos (renderer, texture, color, world_pos, camera_pos, camera_zoom);
+    Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+    Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+    draw_texture_at_world_pos (renderer, texture, color, world_iso_pos, camera_pos, camera_zoom);
 }

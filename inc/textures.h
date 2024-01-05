@@ -299,11 +299,13 @@ typedef struct
     Texture* move_right;
     Texture* move_down;
     Texture* move_left;
+    Texture* immovable;
 
     Texture* crash_up;
     Texture* crash_right;
     Texture* crash_down;
     Texture* crash_left;
+    Texture* crash;
 
     Texture* fall;
 

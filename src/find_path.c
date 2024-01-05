@@ -99,7 +99,8 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
             Node* node = (Node*)elem->data;
             Vec2i tilemap_pos = node->tilemap_pos;
             if(!is_node_tilemap_pos_in_list(closed, node) &&
-            get_object_on_tilemap_pos(state, tilemap_pos) == 0)
+            get_object_on_tilemap_pos(state, tilemap_pos) == 0 &&
+            is_floor_traversable(get_floor_on_tilemap_pos(state, tilemap_pos)))
             {
                 int x_distance = abs(curr_tilemap_pos.x - tilemap_pos.x);
                 int y_distance = abs(curr_tilemap_pos.y - tilemap_pos.y);
