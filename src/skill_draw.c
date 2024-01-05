@@ -51,7 +51,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
 
                     if(prev_elem == 0)
                     {
-                        arrow_texture = get_texture_arrow_start(
+                        arrow_texture = get_texture_arrow_thin_start(
                             textures,
                             get_distance_info_from_vec2i_to_vec2i(
                                 *curr_tilemap_pos,
@@ -61,7 +61,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                     }
                     else if(next_elem == 0)
                     {
-                        arrow_texture = get_texture_arrow_end(
+                        arrow_texture = get_texture_arrow_thin_end(
                             textures,
                             get_distance_info_from_vec2i_to_vec2i(
                                 *curr_tilemap_pos,
@@ -71,7 +71,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                     }
                     else
                     {
-                        arrow_texture = get_texture_arrow_from_to(
+                        arrow_texture = get_texture_arrow_thin_from_to(
                             textures,
                             get_distance_info_from_vec2i_to_vec2i(
                                 *curr_tilemap_pos,
@@ -136,7 +136,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(curr_tilemap_pos, source_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thin_start(
                             textures,
                             distance_info.dir4
                             );
@@ -144,7 +144,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else if(vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thin_end(
                             textures,
                             get_opposite_dir4(distance_info.dir4)
                             );
@@ -155,7 +155,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thin_from_to(
                             textures,
                             distance_info.dir4,
                             get_opposite_dir4(distance_info.dir4)
@@ -164,7 +164,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thin_end(
                             textures,
                             get_opposite_dir4(distance_info.dir4)
                             );
@@ -275,7 +275,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thin_start(
                             textures,
                             charge_distance_info.dir4
                             );
@@ -286,7 +286,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 charge_curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thin_from_to(
                             textures,
                             charge_distance_info.dir4,
                             get_opposite_dir4(charge_distance_info.dir4)
@@ -295,7 +295,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thin_end(
                             textures,
                             get_opposite_dir4(charge_distance_info.dir4)
                             );
@@ -350,7 +350,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(push_curr_tilemap_pos, target_1_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thick_start(
                             textures,
                             push_distance_info.dir4
                             );
@@ -358,7 +358,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else if(vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(push_distance_info.dir4)
                             );
@@ -369,7 +369,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 push_curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thick_from_to(
                             textures,
                             push_distance_info.dir4,
                             get_opposite_dir4(push_distance_info.dir4)
@@ -378,7 +378,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(push_distance_info.dir4)
                             );
@@ -442,7 +442,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thin_start(
                             textures,
                             charge_distance_info.dir4
                             );
@@ -453,7 +453,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 charge_curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thin_from_to(
                             textures,
                             charge_distance_info.dir4,
                             get_opposite_dir4(charge_distance_info.dir4)
@@ -462,7 +462,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thin_end(
                             textures,
                             get_opposite_dir4(charge_distance_info.dir4)
                             );
@@ -563,7 +563,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(push_curr_tilemap_pos, target_1_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thick_start(
                             textures,
                             push_distance_info.dir4
                             );
@@ -571,7 +571,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else if(vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(push_distance_info.dir4)
                             );
@@ -582,7 +582,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 push_curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thick_from_to(
                             textures,
                             push_distance_info.dir4,
                             get_opposite_dir4(push_distance_info.dir4)
@@ -591,7 +591,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(push_distance_info.dir4)
                             );
@@ -648,7 +648,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(pull_curr_tilemap_pos, target_1_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thick_start(
                             textures,
                             pull_distance_info.dir4
                             );
@@ -656,7 +656,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else if(vec2i_equals(pull_curr_tilemap_pos, target_2_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(pull_distance_info.dir4)
                             );
@@ -667,7 +667,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 pull_curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thick_from_to(
                             textures,
                             pull_distance_info.dir4,
                             get_opposite_dir4(pull_distance_info.dir4)
@@ -676,7 +676,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(pull_distance_info.dir4)
                             );
@@ -735,7 +735,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 if(vec2i_equals(pull_curr_tilemap_pos, target_1_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_start(
+                        get_texture_arrow_thick_start(
                             textures,
                             pull_distance_info.dir4
                             );
@@ -743,7 +743,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else if(vec2i_equals(pull_curr_tilemap_pos, target_2_tilemap_pos))
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(pull_distance_info.dir4)
                             );
@@ -754,7 +754,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 pull_curr_object == 0)
                 {
                     arrow_texture =
-                        get_texture_arrow_from_to(
+                        get_texture_arrow_thick_from_to(
                             textures,
                             pull_distance_info.dir4,
                             get_opposite_dir4(pull_distance_info.dir4)
@@ -763,7 +763,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 else
                 {
                     arrow_texture =
-                        get_texture_arrow_end(
+                        get_texture_arrow_thick_end(
                             textures,
                             get_opposite_dir4(pull_distance_info.dir4)
                             );

@@ -331,33 +331,61 @@ typedef struct
 
     Texture* change;
 
-    Texture* arrow_up_start;
-    Texture* arrow_up_end;
-    Texture* arrow_up_up;
-    Texture* arrow_up_right;
-    Texture* arrow_up_down;
-    Texture* arrow_up_left;
+    Texture* arrow_thin_up_start;
+    Texture* arrow_thin_up_end;
+    Texture* arrow_thin_up_up;
+    Texture* arrow_thin_up_right;
+    Texture* arrow_thin_up_down;
+    Texture* arrow_thin_up_left;
 
-    Texture* arrow_right_start;
-    Texture* arrow_right_end;
-    Texture* arrow_right_up;
-    Texture* arrow_right_right;
-    Texture* arrow_right_down;
-    Texture* arrow_right_left;
+    Texture* arrow_thin_right_start;
+    Texture* arrow_thin_right_end;
+    Texture* arrow_thin_right_up;
+    Texture* arrow_thin_right_right;
+    Texture* arrow_thin_right_down;
+    Texture* arrow_thin_right_left;
 
-    Texture* arrow_down_start;
-    Texture* arrow_down_end;
-    Texture* arrow_down_up;
-    Texture* arrow_down_right;
-    Texture* arrow_down_down;
-    Texture* arrow_down_left;
+    Texture* arrow_thin_down_start;
+    Texture* arrow_thin_down_end;
+    Texture* arrow_thin_down_up;
+    Texture* arrow_thin_down_right;
+    Texture* arrow_thin_down_down;
+    Texture* arrow_thin_down_left;
 
-    Texture* arrow_left_start;
-    Texture* arrow_left_end;
-    Texture* arrow_left_up;
-    Texture* arrow_left_right;
-    Texture* arrow_left_down;
-    Texture* arrow_left_left;
+    Texture* arrow_thin_left_start;
+    Texture* arrow_thin_left_end;
+    Texture* arrow_thin_left_up;
+    Texture* arrow_thin_left_right;
+    Texture* arrow_thin_left_down;
+    Texture* arrow_thin_left_left;
+
+    Texture* arrow_thick_up_start;
+    Texture* arrow_thick_up_end;
+    Texture* arrow_thick_up_up;
+    Texture* arrow_thick_up_right;
+    Texture* arrow_thick_up_down;
+    Texture* arrow_thick_up_left;
+
+    Texture* arrow_thick_right_start;
+    Texture* arrow_thick_right_end;
+    Texture* arrow_thick_right_up;
+    Texture* arrow_thick_right_right;
+    Texture* arrow_thick_right_down;
+    Texture* arrow_thick_right_left;
+
+    Texture* arrow_thick_down_start;
+    Texture* arrow_thick_down_end;
+    Texture* arrow_thick_down_up;
+    Texture* arrow_thick_down_right;
+    Texture* arrow_thick_down_down;
+    Texture* arrow_thick_down_left;
+
+    Texture* arrow_thick_left_start;
+    Texture* arrow_thick_left_end;
+    Texture* arrow_thick_left_up;
+    Texture* arrow_thick_left_right;
+    Texture* arrow_thick_left_down;
+    Texture* arrow_thick_left_left;
 
 } Textures_Skill;
 
@@ -384,8 +412,12 @@ Texture* get_texture_lift(Textures* textures, int dir4);
 
 Texture* get_texture_order_number(Textures* textures, int num);
 
-Texture* get_texture_arrow_start(Textures* textures, int dir4);
-Texture* get_texture_arrow_end(Textures* textures, int dir4);
-Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_to);
+Texture* get_texture_arrow_thin_start(Textures* textures, int dir4);
+Texture* get_texture_arrow_thin_end(Textures* textures, int dir4);
+Texture* get_texture_arrow_thin_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_arrow_thick_start(Textures* textures, int dir4);
+Texture* get_texture_arrow_thick_end(Textures* textures, int dir4);
+Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 #endif

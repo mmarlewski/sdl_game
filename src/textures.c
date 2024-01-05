@@ -352,33 +352,61 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->thump = load_texture_from_filepath (renderer, "./res/skill/thump.png");
     skill->change = load_texture_from_filepath (renderer, "./res/skill/change.png");
 
-    skill->arrow_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_up_start.png");
-    skill->arrow_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_up_end.png");
-    skill->arrow_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_up_up.png");
-    skill->arrow_up_right = load_texture_from_filepath (renderer, "./res/skill/arrow_up_right.png");
-    skill->arrow_up_down = load_texture_from_filepath (renderer, "./res/skill/arrow_up_down.png");
-    skill->arrow_up_left = load_texture_from_filepath (renderer, "./res/skill/arrow_up_left.png");
+    skill->arrow_thin_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_start.png");
+    skill->arrow_thin_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_end.png");
+    skill->arrow_thin_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_up.png");
+    skill->arrow_thin_up_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_right.png");
+    skill->arrow_thin_up_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_down.png");
+    skill->arrow_thin_up_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_left.png");
 
-    skill->arrow_right_start = load_texture_from_filepath (renderer, "./res/skill/arrow_right_start.png");
-    skill->arrow_right_end = load_texture_from_filepath (renderer, "./res/skill/arrow_right_end.png");
-    skill->arrow_right_up = load_texture_from_filepath (renderer, "./res/skill/arrow_right_up.png");
-    skill->arrow_right_right = load_texture_from_filepath (renderer, "./res/skill/arrow_right_right.png");
-    skill->arrow_right_down = load_texture_from_filepath (renderer, "./res/skill/arrow_right_down.png");
-    skill->arrow_right_left = load_texture_from_filepath (renderer, "./res/skill/arrow_right_left.png");
+    skill->arrow_thin_right_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_start.png");
+    skill->arrow_thin_right_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_end.png");
+    skill->arrow_thin_right_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_up.png");
+    skill->arrow_thin_right_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_right.png");
+    skill->arrow_thin_right_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_down.png");
+    skill->arrow_thin_right_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_left.png");
 
-    skill->arrow_down_start = load_texture_from_filepath (renderer, "./res/skill/arrow_down_start.png");
-    skill->arrow_down_end = load_texture_from_filepath (renderer, "./res/skill/arrow_down_end.png");
-    skill->arrow_down_up = load_texture_from_filepath (renderer, "./res/skill/arrow_down_up.png");
-    skill->arrow_down_right = load_texture_from_filepath (renderer, "./res/skill/arrow_down_right.png");
-    skill->arrow_down_down = load_texture_from_filepath (renderer, "./res/skill/arrow_down_down.png");
-    skill->arrow_down_left = load_texture_from_filepath (renderer, "./res/skill/arrow_down_left.png");
+    skill->arrow_thin_down_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_start.png");
+    skill->arrow_thin_down_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_end.png");
+    skill->arrow_thin_down_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_up.png");
+    skill->arrow_thin_down_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_right.png");
+    skill->arrow_thin_down_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_down.png");
+    skill->arrow_thin_down_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_left.png");
 
-    skill->arrow_left_start = load_texture_from_filepath (renderer, "./res/skill/arrow_left_start.png");
-    skill->arrow_left_end = load_texture_from_filepath (renderer, "./res/skill/arrow_left_end.png");
-    skill->arrow_left_up = load_texture_from_filepath (renderer, "./res/skill/arrow_left_up.png");
-    skill->arrow_left_right = load_texture_from_filepath (renderer, "./res/skill/arrow_left_right.png");
-    skill->arrow_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_left_down.png");
-    skill->arrow_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_left_left.png");
+    skill->arrow_thin_left_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_start.png");
+    skill->arrow_thin_left_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_end.png");
+    skill->arrow_thin_left_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_up.png");
+    skill->arrow_thin_left_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_right.png");
+    skill->arrow_thin_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_down.png");
+    skill->arrow_thin_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_left.png");
+
+    skill->arrow_thick_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_start.png");
+    skill->arrow_thick_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_end.png");
+    skill->arrow_thick_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_up.png");
+    skill->arrow_thick_up_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_right.png");
+    skill->arrow_thick_up_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_down.png");
+    skill->arrow_thick_up_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_left.png");
+
+    skill->arrow_thick_right_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_start.png");
+    skill->arrow_thick_right_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_end.png");
+    skill->arrow_thick_right_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_up.png");
+    skill->arrow_thick_right_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_right.png");
+    skill->arrow_thick_right_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_down.png");
+    skill->arrow_thick_right_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_left.png");
+
+    skill->arrow_thick_down_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_start.png");
+    skill->arrow_thick_down_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_end.png");
+    skill->arrow_thick_down_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_up.png");
+    skill->arrow_thick_down_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_right.png");
+    skill->arrow_thick_down_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_down.png");
+    skill->arrow_thick_down_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_left.png");
+
+    skill->arrow_thick_left_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_start.png");
+    skill->arrow_thick_left_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_end.png");
+    skill->arrow_thick_left_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_up.png");
+    skill->arrow_thick_left_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_right.png");
+    skill->arrow_thick_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_down.png");
+    skill->arrow_thick_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_left.png");
 }
 void destroy_textures_skill (Textures_Skill* skill)
 {
@@ -512,39 +540,39 @@ Texture* get_texture_order_number(Textures* textures, int num)
     return texture;
 }
 
-Texture* get_texture_arrow_start(Textures* textures, int dir4)
+Texture* get_texture_arrow_thin_start(Textures* textures, int dir4)
 {
     Texture* texture = 0;
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->skill.arrow_up_start; break;
-        case DIR4__RIGHT: texture = textures->skill.arrow_right_start; break;
-        case DIR4__DOWN: texture = textures->skill.arrow_down_start; break;
-        case DIR4__LEFT: texture = textures->skill.arrow_left_start; break;
+        case DIR4__UP: texture = textures->skill.arrow_thin_up_start; break;
+        case DIR4__RIGHT: texture = textures->skill.arrow_thin_right_start; break;
+        case DIR4__DOWN: texture = textures->skill.arrow_thin_down_start; break;
+        case DIR4__LEFT: texture = textures->skill.arrow_thin_left_start; break;
         default: break;
     }
 
     return texture;
 }
 
-Texture* get_texture_arrow_end(Textures* textures, int dir4)
+Texture* get_texture_arrow_thin_end(Textures* textures, int dir4)
 {
     Texture* texture = 0;
 
     switch(dir4)
     {
-        case DIR4__UP: texture = textures->skill.arrow_up_end; break;
-        case DIR4__RIGHT: texture = textures->skill.arrow_right_end; break;
-        case DIR4__DOWN: texture = textures->skill.arrow_down_end; break;
-        case DIR4__LEFT: texture = textures->skill.arrow_left_end; break;
+        case DIR4__UP: texture = textures->skill.arrow_thin_up_end; break;
+        case DIR4__RIGHT: texture = textures->skill.arrow_thin_right_end; break;
+        case DIR4__DOWN: texture = textures->skill.arrow_thin_down_end; break;
+        case DIR4__LEFT: texture = textures->skill.arrow_thin_left_end; break;
         default: break;
     }
 
     return texture;
 }
 
-Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_to)
+Texture* get_texture_arrow_thin_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
     Texture* texture = 0;
 
@@ -554,10 +582,10 @@ Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_t
         {
             switch(dir4_to)
             {
-                case DIR4__UP: texture = textures->skill.arrow_up_up; break;
-                case DIR4__RIGHT: texture = textures->skill.arrow_up_right; break;
-                case DIR4__DOWN: texture = textures->skill.arrow_up_down; break;
-                case DIR4__LEFT: texture = textures->skill.arrow_up_left; break;
+                case DIR4__UP: texture = textures->skill.arrow_thin_up_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thin_up_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thin_up_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thin_up_left; break;
                 default: break;
             }
         }
@@ -566,10 +594,10 @@ Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_t
         {
             switch(dir4_to)
             {
-                case DIR4__UP: texture = textures->skill.arrow_right_up; break;
-                case DIR4__RIGHT: texture = textures->skill.arrow_right_right; break;
-                case DIR4__DOWN: texture = textures->skill.arrow_right_down; break;
-                case DIR4__LEFT: texture = textures->skill.arrow_right_left; break;
+                case DIR4__UP: texture = textures->skill.arrow_thin_right_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thin_right_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thin_right_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thin_right_left; break;
                 default: break;
             }
         }
@@ -578,10 +606,10 @@ Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_t
         {
             switch(dir4_to)
             {
-                case DIR4__UP: texture = textures->skill.arrow_down_up; break;
-                case DIR4__RIGHT: texture = textures->skill.arrow_down_right; break;
-                case DIR4__DOWN: texture = textures->skill.arrow_down_down; break;
-                case DIR4__LEFT: texture = textures->skill.arrow_down_left; break;
+                case DIR4__UP: texture = textures->skill.arrow_thin_down_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thin_down_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thin_down_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thin_down_left; break;
                 default: break;
             }
         }
@@ -590,10 +618,102 @@ Texture* get_texture_arrow_from_to(Textures* textures, int dir4_from, int dir4_t
         {
             switch(dir4_to)
             {
-                case DIR4__UP: texture = textures->skill.arrow_left_up; break;
-                case DIR4__RIGHT: texture = textures->skill.arrow_left_right; break;
-                case DIR4__DOWN: texture = textures->skill.arrow_left_down; break;
-                case DIR4__LEFT: texture = textures->skill.arrow_left_left; break;
+                case DIR4__UP: texture = textures->skill.arrow_thin_left_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thin_left_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thin_left_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thin_left_left; break;
+                default: break;
+            }
+        }
+        break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_arrow_thick_start(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->skill.arrow_thick_up_start; break;
+        case DIR4__RIGHT: texture = textures->skill.arrow_thick_right_start; break;
+        case DIR4__DOWN: texture = textures->skill.arrow_thick_down_start; break;
+        case DIR4__LEFT: texture = textures->skill.arrow_thick_left_start; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_arrow_thick_end(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->skill.arrow_thick_up_end; break;
+        case DIR4__RIGHT: texture = textures->skill.arrow_thick_right_end; break;
+        case DIR4__DOWN: texture = textures->skill.arrow_thick_down_end; break;
+        case DIR4__LEFT: texture = textures->skill.arrow_thick_left_end; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int dir4_to)
+{
+    Texture* texture = 0;
+
+    switch(dir4_from)
+    {
+        case DIR4__UP:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_thick_up_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thick_up_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thick_up_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thick_up_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__RIGHT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_thick_right_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thick_right_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thick_right_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thick_right_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__DOWN:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_thick_down_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thick_down_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thick_down_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thick_down_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__LEFT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->skill.arrow_thick_left_up; break;
+                case DIR4__RIGHT: texture = textures->skill.arrow_thick_left_right; break;
+                case DIR4__DOWN: texture = textures->skill.arrow_thick_left_down; break;
+                case DIR4__LEFT: texture = textures->skill.arrow_thick_left_left; break;
                 default: break;
             }
         }
