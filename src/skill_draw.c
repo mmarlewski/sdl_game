@@ -365,7 +365,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 }
                 else if(is_tilemap_pos_in_tilemap(push_curr_tilemap_pos) &&
                 (is_floor_traversable(push_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 push_curr_object == 0)
                 {
                     arrow_texture =
@@ -578,7 +578,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 }
                 else if(is_tilemap_pos_in_tilemap(push_curr_tilemap_pos) &&
                 (is_floor_traversable(push_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 push_curr_object == 0)
                 {
                     arrow_texture =
@@ -663,7 +663,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 }
                 else if(is_tilemap_pos_in_tilemap(pull_curr_tilemap_pos) &&
                 (is_floor_traversable(pull_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 pull_curr_object == 0)
                 {
                     arrow_texture =
@@ -750,7 +750,7 @@ void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilema
                 }
                 else if(is_tilemap_pos_in_tilemap(pull_curr_tilemap_pos) &&
                 (is_floor_traversable(pull_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 pull_curr_object == 0)
                 {
                     arrow_texture =

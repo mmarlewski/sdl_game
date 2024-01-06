@@ -38,7 +38,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     target_2_tilemap_pos
                     );
 
-            if(is_floor_deadly_on_move(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)))
+            if(is_floor_deadly_on_move(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
+            !is_object_flying(source_object))
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -91,7 +92,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         break;
         case SKILL__JUMP:
         {
-            if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)))
+            if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
+            !is_object_flying(source_object))
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -241,7 +243,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(is_tilemap_pos_in_tilemap(push_curr_tilemap_pos) &&
                 (is_floor_traversable(push_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 push_curr_object == 0)
                 {
                     //
@@ -249,6 +251,19 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 else
                 {
                     push_go_on = 0;
+
+                    if(!is_floor_traversable(push_curr_floor) &&
+                    !is_object_flying(target_1_object))
+                    {
+                        draw_texture_at_gamemap_pos(
+                            renderer,
+                            textures->skill.skull,
+                            colors->none,
+                            tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
+                            state->camera.world_pos,
+                            state->camera.zoom
+                            );
+                    }
                 }
 
                 push_curr_tilemap_pos = vec2i_move_in_dir4_by(push_curr_tilemap_pos,push_distance_info.dir4,1);
@@ -335,7 +350,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
             if(is_object_movable(target_1_object))
             {
-                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)))
+                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
+                !is_object_flying(target_1_object))
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
@@ -423,7 +439,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(is_tilemap_pos_in_tilemap(push_curr_tilemap_pos) &&
                 (is_floor_traversable(push_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 push_curr_object == 0)
                 {
                     //
@@ -431,6 +447,19 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 else
                 {
                     push_go_on = 0;
+
+                   if(!is_floor_traversable(push_curr_floor) &&
+                    !is_object_flying(target_1_object))
+                    {
+                        draw_texture_at_gamemap_pos(
+                            renderer,
+                            textures->skill.skull,
+                            colors->none,
+                            tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
+                            state->camera.world_pos,
+                            state->camera.zoom
+                            );
+                    }
                 }
 
                 push_curr_tilemap_pos = vec2i_move_in_dir4_by(push_curr_tilemap_pos,push_distance_info.dir4,1);
@@ -491,7 +520,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(is_tilemap_pos_in_tilemap(pull_curr_tilemap_pos) &&
                 (is_floor_traversable(pull_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 pull_curr_object == 0)
                 {
                     //
@@ -499,6 +528,19 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 else
                 {
                     pull_go_on = 0;
+
+                    if(!is_floor_traversable(pull_curr_floor) &&
+                    !is_object_flying(target_1_object))
+                    {
+                        draw_texture_at_gamemap_pos(
+                            renderer,
+                            textures->skill.skull,
+                            colors->none,
+                            tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
+                            state->camera.world_pos,
+                            state->camera.zoom
+                            );
+                    }
                 }
 
                 pull_curr_tilemap_pos = vec2i_move_in_dir4_by(pull_curr_tilemap_pos,pull_distance_info.dir4,1);
@@ -561,7 +603,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(is_tilemap_pos_in_tilemap(pull_curr_tilemap_pos) &&
                 (is_floor_traversable(pull_curr_floor) ||
-                is_object_flying(source_object)) &&
+                is_object_flying(target_1_object)) &&
                 pull_curr_object == 0)
                 {
                     //
@@ -598,7 +640,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
             if(is_object_movable(target_1_object))
             {
-                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)))
+                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
+                !is_object_flying(target_1_object))
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
@@ -638,7 +681,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         {
             if(is_object_movable(target_1_object))
             {
-                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)))
+                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
+                !is_object_flying(target_1_object))
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
