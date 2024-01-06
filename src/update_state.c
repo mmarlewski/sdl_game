@@ -310,7 +310,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     {
                         curr_object->enemy.performed_attack = 0;
                         remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-                        object_enemy_add_actions_to_action_sequence_attack(state, curr_object->enemy.action_sequence, curr_object);
+                        object_enemy_prepare_attack(state, curr_object);
                     }
                 }
 
@@ -357,7 +357,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     if(!curr_object->is_dead && !curr_object->enemy.performed_attack)
                     {
                         remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-                        object_enemy_add_actions_to_action_sequence_attack(state, curr_object->enemy.action_sequence, curr_object);
+                        object_enemy_prepare_attack(state, curr_object);
                     }
                 }
 
@@ -404,7 +404,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 state->timer = 0.0f;
 
-                object_enemy_add_actions_to_action_sequence_move(state, state->action.enemy_action_sequence, state->gamemap.curr_object_enemy);
+                object_enemy_prepare_move(state, state->gamemap.curr_object_enemy);
 
                 execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
@@ -425,7 +425,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     if(!curr_object->is_dead && !curr_object->enemy.performed_attack)
                     {
                         remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-                        object_enemy_add_actions_to_action_sequence_attack(state, curr_object->enemy.action_sequence, curr_object);
+                        object_enemy_prepare_attack(state, curr_object);
                     }
                 }
 
@@ -475,7 +475,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 state->timer = 0.0f;
 
                 remove_all_actions_from_action_sequence(state->action.enemy_action_sequence);
-                object_enemy_add_actions_to_action_sequence_attack(state, state->action.enemy_action_sequence, state->gamemap.curr_object_enemy);
+                object_enemy_prepare_attack(state, state->gamemap.curr_object_enemy);
 
                 state->gamemap.curr_object_enemy->enemy.performed_attack = 0;
 

@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* action_sequence, Object* object)
+void object_enemy_prepare_attack(State* state, Object* object)
 {
     switch(object->type)
     {
@@ -15,16 +15,19 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                 target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {
+                    object->enemy.skill = SKILL__CHARGE_AND_PUSH;
+                    object->enemy.target_1_tilemap_pos = target_1_tilemap_pos;
+                    object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                        target_1_tilemap_pos,
+                        object->enemy.attack_dir4, 1
+                        );
                     skill_add_actions_to_action_sequence(
                         state,
-                        action_sequence,
-                        SKILL__CHARGE_AND_PUSH,
+                        object->enemy.action_sequence,
+                        object->enemy.skill,
                         object->tilemap_pos,
-                        target_1_tilemap_pos,
-                        vec2i_move_in_dir4_by(
-                            target_1_tilemap_pos,
-                            object->enemy.attack_dir4, 1
-                            )
+                        object->enemy.target_1_tilemap_pos,
+                        object->enemy.target_2_tilemap_pos
                         );
                     found = 1;
                     break;
@@ -32,19 +35,22 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
             }
             if(!found)
             {
+                object->enemy.skill = SKILL__CHARGE_AND_PUSH;
+                object->enemy.target_1_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    object->enemy.attack_dir4, 10
+                    );
+                object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    object->enemy.attack_dir4, 11
+                    );
                 skill_add_actions_to_action_sequence(
                     state,
-                    action_sequence,
-                    SKILL__CHARGE_AND_PUSH,
+                    object->enemy.action_sequence,
+                    object->enemy.skill,
                     object->tilemap_pos,
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        object->enemy.attack_dir4, 10
-                        ),
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        object->enemy.attack_dir4, 11
-                        )
+                    object->enemy.target_1_tilemap_pos,
+                    object->enemy.target_2_tilemap_pos
                     );
             }
         }
@@ -61,13 +67,16 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                     Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
                     if(target_1_object != 0)
                     {
+                        object->enemy.skill = SKILL__PULL;
+                        object->enemy.target_1_tilemap_pos = target_1_tilemap_pos;
+                        object->enemy.target_2_tilemap_pos = object->tilemap_pos;
                         skill_add_actions_to_action_sequence(
                             state,
-                            action_sequence,
-                            SKILL__PULL,
+                            object->enemy.action_sequence,
+                            object->enemy.skill,
                             object->tilemap_pos,
-                            target_1_tilemap_pos,
-                            object->tilemap_pos
+                            object->enemy.target_1_tilemap_pos,
+                            object->enemy.target_2_tilemap_pos
                             );
                         found = 1;
                         break;
@@ -75,13 +84,16 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                 }
                 else
                 {
+                    object->enemy.skill = SKILL__PULL;
+                    object->enemy.target_1_tilemap_pos = old_target_1_tilemap_pos;
+                    object->enemy.target_2_tilemap_pos = object->tilemap_pos;
                     skill_add_actions_to_action_sequence(
                         state,
-                        action_sequence,
-                        SKILL__PULL,
+                        object->enemy.action_sequence,
+                        object->enemy.skill,
                         object->tilemap_pos,
-                        old_target_1_tilemap_pos,
-                        object->tilemap_pos
+                        object->enemy.target_1_tilemap_pos,
+                        object->enemy.target_2_tilemap_pos
                         );
                     found = 1;
                     break;
@@ -91,13 +103,16 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
             }
             if(!found)
             {
+                object->enemy.skill = SKILL__PULL;
+                object->enemy.target_1_tilemap_pos = old_target_1_tilemap_pos;
+                object->enemy.target_2_tilemap_pos = object->tilemap_pos;
                 skill_add_actions_to_action_sequence(
                     state,
-                    action_sequence,
-                    SKILL__PULL,
+                    object->enemy.action_sequence,
+                    object->enemy.skill,
                     object->tilemap_pos,
-                    old_target_1_tilemap_pos,
-                    object->tilemap_pos
+                    object->enemy.target_1_tilemap_pos,
+                    object->enemy.target_2_tilemap_pos
                     );
             }
         }
@@ -113,16 +128,19 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                 target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {
+                    object->enemy.skill = SKILL__CHARGE_AND_THROW;
+                    object->enemy.target_1_tilemap_pos = target_1_tilemap_pos;
+                    object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                        target_1_tilemap_pos,
+                        object->enemy.attack_dir4, 2
+                        );
                     skill_add_actions_to_action_sequence(
                         state,
-                        action_sequence,
-                        SKILL__CHARGE_AND_THROW,
+                        object->enemy.action_sequence,
+                        object->enemy.skill,
                         object->tilemap_pos,
-                        target_1_tilemap_pos,
-                        vec2i_move_in_dir4_by(
-                            target_1_tilemap_pos,
-                            object->enemy.attack_dir4, 2
-                            )
+                        object->enemy.target_1_tilemap_pos,
+                        object->enemy.target_2_tilemap_pos
                         );
                     found = 1;
                     break;
@@ -130,19 +148,22 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
             }
             if(!found)
             {
+                object->enemy.skill = SKILL__CHARGE_AND_THROW;
+                object->enemy.target_1_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    object->enemy.attack_dir4, 10
+                    );
+                object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    object->enemy.attack_dir4, 12
+                    );
                 skill_add_actions_to_action_sequence(
                     state,
-                    action_sequence,
-                    SKILL__CHARGE_AND_THROW,
+                    object->enemy.action_sequence,
+                    object->enemy.skill,
                     object->tilemap_pos,
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        object->enemy.attack_dir4, 10
-                        ),
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        object->enemy.attack_dir4, 12
-                        )
+                    object->enemy.target_1_tilemap_pos,
+                    object->enemy.target_2_tilemap_pos
                     );
             }
         }
@@ -158,16 +179,19 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                 target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {
+                    object->enemy.skill = SKILL__PUSH;
+                    object->enemy.target_1_tilemap_pos = target_1_tilemap_pos;
+                    object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                        target_1_tilemap_pos,
+                        object->enemy.attack_dir4, 1
+                        );
                     skill_add_actions_to_action_sequence(
                         state,
-                        action_sequence,
-                        SKILL__PUSH,
+                        object->enemy.action_sequence,
+                        object->enemy.skill,
                         object->tilemap_pos,
-                        target_1_tilemap_pos,
-                        vec2i_move_in_dir4_by(
-                            target_1_tilemap_pos,
-                            object->enemy.attack_dir4, 1
-                            )
+                        object->enemy.target_1_tilemap_pos,
+                        object->enemy.target_2_tilemap_pos
                         );
                     found = 1;
                     break;
@@ -175,19 +199,22 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
             }
             if(!found)
             {
+                object->enemy.skill = SKILL__CHARGE;
+                object->enemy.target_1_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    object->enemy.attack_dir4, 1
+                    );
+                object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    object->enemy.attack_dir4, 1
+                    );
                 skill_add_actions_to_action_sequence(
                     state,
-                    action_sequence,
-                    SKILL__CHARGE,
+                    object->enemy.action_sequence,
+                    object->enemy.skill,
                     object->tilemap_pos,
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        object->enemy.attack_dir4, 1
-                        ),
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        object->enemy.attack_dir4, 1
-                        )
+                    object->enemy.target_1_tilemap_pos,
+                    object->enemy.target_2_tilemap_pos
                     );
             }
         }
@@ -205,35 +232,41 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
                     target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
                     if(target_1_object != 0)
                     {
-                        skill_add_actions_to_action_sequence(
-                            state,
-                            action_sequence,
-                            SKILL__PULL_AND_THROW,
+                        object->enemy.skill = SKILL__PULL_AND_THROW;
+                        object->enemy.target_1_tilemap_pos = target_1_tilemap_pos;
+                        object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
                             object->tilemap_pos,
-                            target_1_tilemap_pos,
-                            vec2i_move_in_dir4_by(
-                                object->tilemap_pos,
-                                get_opposite_dir4(object->enemy.attack_dir4),
-                                1
-                                )
+                            get_opposite_dir4(object->enemy.attack_dir4),
+                            1
                             );
+                        skill_add_actions_to_action_sequence(
+                        state,
+                        object->enemy.action_sequence,
+                        object->enemy.skill,
+                        object->tilemap_pos,
+                        object->enemy.target_1_tilemap_pos,
+                        object->enemy.target_2_tilemap_pos
+                        );
                         found = 1;
                         break;
                     }
                 }
                 else
                 {
+                    object->enemy.skill = SKILL__PULL_AND_THROW;
+                    object->enemy.target_1_tilemap_pos = old_target_1_tilemap_pos;
+                    object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                        object->tilemap_pos,
+                        get_opposite_dir4(object->enemy.attack_dir4),
+                        1
+                        );
                     skill_add_actions_to_action_sequence(
                         state,
-                        action_sequence,
-                        SKILL__PULL_AND_THROW,
+                        object->enemy.action_sequence,
+                        object->enemy.skill,
                         object->tilemap_pos,
-                        old_target_1_tilemap_pos,
-                        vec2i_move_in_dir4_by(
-                            object->tilemap_pos,
-                            get_opposite_dir4(object->enemy.attack_dir4),
-                            1
-                            )
+                        object->enemy.target_1_tilemap_pos,
+                        object->enemy.target_2_tilemap_pos
                         );
                     found = 1;
                     break;
@@ -243,17 +276,20 @@ void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* ac
             }
             if(!found)
             {
+                object->enemy.skill = SKILL__PULL_AND_THROW;
+                object->enemy.target_1_tilemap_pos = old_target_1_tilemap_pos;
+                object->enemy.target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    get_opposite_dir4(object->enemy.attack_dir4),
+                    1
+                    );
                 skill_add_actions_to_action_sequence(
                     state,
-                    action_sequence,
-                    SKILL__PULL_AND_THROW,
+                    object->enemy.action_sequence,
+                    object->enemy.skill,
                     object->tilemap_pos,
-                    old_target_1_tilemap_pos,
-                    vec2i_move_in_dir4_by(
-                        object->tilemap_pos,
-                        get_opposite_dir4(object->enemy.attack_dir4),
-                        1
-                        )
+                    object->enemy.target_1_tilemap_pos,
+                    object->enemy.target_2_tilemap_pos
                     );
             }
         }

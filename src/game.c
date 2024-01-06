@@ -248,7 +248,7 @@ int main (int argc, char* argv[])
         {
             curr_object->enemy.attack_dir4 = rand() % 4 + 1;
             remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-            object_enemy_add_actions_to_action_sequence_attack(&state, curr_object->enemy.action_sequence, curr_object);
+            object_enemy_prepare_attack(&state, curr_object);
             curr_object->enemy.performed_attack = 0;
         }
     }

@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void object_enemy_add_actions_to_action_sequence_move(State* state, Action* action_sequence, Object* object)
+void object_enemy_prepare_move(State* state, Object* object)
 {
     Vec2i tilemap_pos_up = object->tilemap_pos;
     Object* object_up = 0;
@@ -103,7 +103,7 @@ void object_enemy_add_actions_to_action_sequence_move(State* state, Action* acti
         new_tilemap_pos_object = get_object_on_tilemap_pos(state, new_tilemap_pos);
         if(new_tilemap_pos_object == 0)
         {
-            add_action_to_end_action_sequence(action_sequence, new_action_move(curr_tilemap_pos,dir4));
+            add_action_to_end_action_sequence(object->enemy.action_sequence, new_action_move(curr_tilemap_pos,dir4));
             curr_tilemap_pos = new_tilemap_pos;
         }
         else break;

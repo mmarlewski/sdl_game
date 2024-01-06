@@ -170,8 +170,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
 void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Vec3i color, Textures* textures);
 void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
 
-void object_enemy_add_actions_to_action_sequence_move(State* state, Action* action_sequence, Object* object);
-void object_enemy_add_actions_to_action_sequence_attack(State* state, Action* action_sequence, Object* object);
+void object_enemy_prepare_move(State* state, Object* object);
+void object_enemy_prepare_attack(State* state, Object* object);
 
 char* get_gamestate_name(int gamestate);
 

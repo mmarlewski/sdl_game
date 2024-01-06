@@ -609,7 +609,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         state->camera.zoom
                         );
                 }
-                else
+                else if(target_2_object == 0)
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,

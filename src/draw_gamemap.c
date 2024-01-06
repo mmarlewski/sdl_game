@@ -171,14 +171,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
-    // enemy action sequence
+    // enemy skill
 
-    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
-    state->gamestate == GAMESTATE__ENEMY_ATTACKING)
-    {
-        draw_action(renderer, state, state->gamemap.curr_object_enemy->enemy.action_sequence, colors->yellow, textures, colors);
-    }
-    else if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
+    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
@@ -189,7 +184,27 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            draw_action(renderer, state, hover_object->enemy.action_sequence, colors->yellow, textures, colors);
+            skill_draw(
+                renderer,
+                state,
+                hover_object->enemy.skill,
+                hover_object->tilemap_pos,
+                hover_object->enemy.target_1_tilemap_pos,
+                hover_object->enemy.target_2_tilemap_pos,
+                colors->yellow,
+                textures
+                );
+
+            skill_draw_effect(
+                renderer,
+                state,
+                hover_object->enemy.skill,
+                hover_object->tilemap_pos,
+                hover_object->enemy.target_1_tilemap_pos,
+                hover_object->enemy.target_2_tilemap_pos,
+                textures,
+                colors
+                );
         }
         else
         {
@@ -205,94 +220,21 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                     state->action.enemy_action_sequence == curr_action))
                     {
-                        draw_action(renderer, state, curr_action, colors->red, textures, colors);
+                        skill_draw(
+                            renderer,
+                            state,
+                            curr_object->enemy.skill,
+                            curr_object->tilemap_pos,
+                            curr_object->enemy.target_1_tilemap_pos,
+                            curr_object->enemy.target_2_tilemap_pos,
+                            colors->red,
+                            textures
+                            );
                     }
                 }
             }
         }
     }
-
-    // enemy skill
-
-    // if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
-    // state->gamestate == GAMESTATE__ENEMY_ATTACKING)
-    // {
-    //     skill_draw(
-    //         renderer,
-    //         state,
-    //         state->gamemap.curr_object_enemy->enemy.skill,
-    //         state->gamemap.curr_object_enemy->tilemap_pos,
-    //         state->gamemap.curr_object_enemy->enemy.target_1_tilemap_pos,
-    //         state->gamemap.curr_object_enemy->enemy.target_2_tilemap_pos,
-    //         colors->red,
-    //         textures
-    //         );
-    // }
-    // else if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
-    // state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
-    // state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
-    // {
-    //     Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
-
-    //     if(hover_object != 0 &&
-    //     hover_object->is_enemy &&
-    //     !hover_object->is_dead &&
-    //     hover_object->is_visible)
-    //     {
-    //         skill_draw(
-    //             renderer,
-    //             state,
-    //             hover_object->enemy.skill,
-    //             hover_object->tilemap_pos,
-    //             hover_object->enemy.target_1_tilemap_pos,
-    //             hover_object->enemy.target_2_tilemap_pos,
-    //             colors->red,
-    //             textures
-    //             );
-    //     }
-    //     else
-    //     {
-    //         for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
-    //         {
-    //             Object* curr_object = (Object*)curr_elem->data;
-    //             Action* curr_action = curr_object->enemy.action_sequence;
-
-    //             if(!curr_object->enemy.performed_attack)
-    //             {
-    //                 if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
-    //                 state->action.enemy_action_sequence == curr_action) &&
-    //                 !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-    //                 state->action.enemy_action_sequence == curr_action))
-    //                 {
-    //                     skill_draw(
-    //                         renderer,
-    //                         state,
-    //                         curr_object->enemy.skill,
-    //                         curr_object->tilemap_pos,
-    //                         curr_object->enemy.target_1_tilemap_pos,
-    //                         curr_object->enemy.target_2_tilemap_pos,
-    //                         colors->red,
-    //                         textures
-    //                         );
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // main_action_sequence
-
-    // if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
-    // {
-    //     draw_action(
-    //         renderer,
-    //         state,
-    //         state->action.hero_action_sequence,
-    //         colors->green,
-    //         textures,
-    //         colors
-    //         );
-    // }
 
     // curr_skill
 
