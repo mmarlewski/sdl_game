@@ -171,7 +171,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
-    // enemy skill
+    // enemy skill draw
 
     if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
@@ -236,7 +236,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
-    // curr_skill
+    // hero skill draw
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
@@ -249,17 +249,6 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             state->gamemap.target_2_tilemap_pos,
             colors->green,
             textures
-            );
-
-        skill_draw_effect(
-            renderer,
-            state,
-            state->gamemap.curr_skill,
-            state->gamemap.object_hero->tilemap_pos,
-            state->gamemap.target_1_tilemap_pos,
-            state->gamemap.target_2_tilemap_pos,
-            textures,
-            colors
             );
     }
 
@@ -356,5 +345,47 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     );
             }
         }
+    }
+
+    // enemy skill draw effect
+
+    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
+    state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
+    {
+        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+
+        if(hover_object != 0 &&
+        hover_object->is_enemy &&
+        !hover_object->is_dead &&
+        hover_object->is_visible)
+        {
+            skill_draw_effect(
+                renderer,
+                state,
+                hover_object->enemy.skill,
+                hover_object->tilemap_pos,
+                hover_object->enemy.target_1_tilemap_pos,
+                hover_object->enemy.target_2_tilemap_pos,
+                textures,
+                colors
+                );
+        }
+    }
+
+    // hero skill draw effect
+
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    {
+        skill_draw_effect(
+            renderer,
+            state,
+            state->gamemap.curr_skill,
+            state->gamemap.object_hero->tilemap_pos,
+            state->gamemap.target_1_tilemap_pos,
+            state->gamemap.target_2_tilemap_pos,
+            textures,
+            colors
+            );
     }
 }
