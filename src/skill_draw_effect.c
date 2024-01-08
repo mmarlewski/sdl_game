@@ -43,7 +43,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.skull,
+                    textures->skill.death_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
@@ -81,7 +81,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.crash,
+                    textures->skill.crash_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
@@ -97,7 +97,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.skull,
+                    textures->skill.death_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
@@ -183,7 +183,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.skull,
+                    textures->skill.death_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
                     state->camera.world_pos,
@@ -197,7 +197,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
@@ -257,7 +257,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     {
                         draw_texture_at_gamemap_pos(
                             renderer,
-                            textures->skill.skull,
+                            textures->skill.death_effect,
                             colors->none,
                             tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                             state->camera.world_pos,
@@ -338,7 +338,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.skull,
+                    textures->skill.death_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
                     state->camera.world_pos,
@@ -355,7 +355,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
-                        textures->skill.skull,
+                        textures->skill.death_effect,
                         colors->none,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
@@ -378,7 +378,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
@@ -393,7 +393,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
@@ -453,7 +453,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     {
                         draw_texture_at_gamemap_pos(
                             renderer,
-                            textures->skill.skull,
+                            textures->skill.death_effect,
                             colors->none,
                             tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                             state->camera.world_pos,
@@ -474,7 +474,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
@@ -534,7 +534,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     {
                         draw_texture_at_gamemap_pos(
                             renderer,
-                            textures->skill.skull,
+                            textures->skill.death_effect,
                             colors->none,
                             tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
                             state->camera.world_pos,
@@ -555,7 +555,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
@@ -628,7 +628,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.skull,
+                    textures->skill.death_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
                     state->camera.world_pos,
@@ -645,7 +645,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
-                        textures->skill.skull,
+                        textures->skill.death_effect,
                         colors->none,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
@@ -668,7 +668,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
@@ -686,7 +686,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
-                        textures->skill.skull,
+                        textures->skill.death_effect,
                         colors->none,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
@@ -709,7 +709,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.immovable,
+                    textures->skill.immovable_effect,
                     colors->none,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,

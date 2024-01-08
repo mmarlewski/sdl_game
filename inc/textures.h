@@ -293,28 +293,6 @@ void destroy_textures_order_number (Textures_OrderNumber* order_number);
 
 typedef struct
 {
-    Texture* none;
-
-    Texture* move_up;
-    Texture* move_right;
-    Texture* move_down;
-    Texture* move_left;
-    Texture* immovable;
-
-    Texture* crash_up;
-    Texture* crash_right;
-    Texture* crash_down;
-    Texture* crash_left;
-    Texture* crash;
-
-    Texture* fall;
-
-    Texture* death;
-    Texture* skull;
-
-    Texture* blow_up;
-    Texture* explosion;
-
     Texture* throw_up;
     Texture* throw_right;
     Texture* throw_down;
@@ -326,9 +304,8 @@ typedef struct
     Texture* lift_down;
     Texture* lift_left;
 
+    Texture* fall;
     Texture* drop;
-    Texture* thump;
-
     Texture* change;
 
     Texture* arrow_thin_up_start;
@@ -387,6 +364,11 @@ typedef struct
     Texture* arrow_thick_left_down;
     Texture* arrow_thick_left_left;
 
+    Texture* immovable_effect;
+    Texture* crash_effect;
+    Texture* blow_up_effect;
+    Texture* death_effect;
+
 } Textures_Skill;
 
 void load_textures_skill (Renderer* renderer, Textures_Skill* skill);
@@ -394,18 +376,32 @@ void destroy_textures_skill (Textures_Skill* skill);
 
 typedef struct
 {
+    Texture* blow_up_1;
+    Texture* blow_up_2;
+
+    Texture* death_1;
+    Texture* death_2;
+
+    Texture* drop_1;
+    Texture* drop_2;
+
+} Textures_Animation;
+
+void load_textures_animation (Renderer* renderer, Textures_Animation* animation);
+void destroy_textures_animation (Textures_Animation* animation);
+
+typedef struct
+{
     Textures_Floor floor;
     Textures_Object object;
     Textures_OrderNumber order_number;
     Textures_Skill skill;
+    Textures_Animation animation;
 
 } Textures;
 
 void load_textures (Renderer* renderer, Textures* textures);
 void destroy_textures (Textures* textures);
-
-Texture* get_texture_move(Textures* textures, int dir4);
-Texture* get_texture_crash(Textures* textures, int dir4);
 
 Texture* get_texture_throw(Textures* textures, int dir4);
 Texture* get_texture_lift(Textures* textures, int dir4);
