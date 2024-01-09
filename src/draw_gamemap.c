@@ -44,7 +44,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     draw_texture_at_world_pos(
                         renderer,
                         textures->floor.highlight,
-                colors->orange,
+                        colors->orange,
                         world_iso_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -175,6 +175,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
+    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
         Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
@@ -215,7 +217,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
                 if(!curr_object->enemy.performed_attack)
                 {
-                    if(!(state->gamestate == GAMESTATE__ENEMY_ATTACKING &&
+                    if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
                     state->action.enemy_action_sequence == curr_action) &&
                     !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                     state->action.enemy_action_sequence == curr_action))
@@ -351,6 +353,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
+    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
         Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);

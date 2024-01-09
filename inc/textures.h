@@ -385,6 +385,43 @@ typedef struct
     Texture* drop_1;
     Texture* drop_2;
 
+    Texture* piston_1;
+    Texture* piston_2;
+
+    Texture* stone_spikes_1;
+    Texture* stone_spikes_2;
+
+    Texture* metal_hatch_1;
+    Texture* metal_hatch_2;
+
+    Texture* hook_up_start;
+    Texture* hook_up_end;
+    Texture* hook_up_up;
+    Texture* hook_up_right;
+    Texture* hook_up_down;
+    Texture* hook_up_left;
+
+    Texture* hook_right_start;
+    Texture* hook_right_end;
+    Texture* hook_right_up;
+    Texture* hook_right_right;
+    Texture* hook_right_down;
+    Texture* hook_right_left;
+
+    Texture* hook_down_start;
+    Texture* hook_down_end;
+    Texture* hook_down_up;
+    Texture* hook_down_right;
+    Texture* hook_down_down;
+    Texture* hook_down_left;
+
+    Texture* hook_left_start;
+    Texture* hook_left_end;
+    Texture* hook_left_up;
+    Texture* hook_left_right;
+    Texture* hook_left_down;
+    Texture* hook_left_left;
+
 } Textures_Animation;
 
 void load_textures_animation (Renderer* renderer, Textures_Animation* animation);
@@ -415,5 +452,9 @@ Texture* get_texture_arrow_thin_from_to(Textures* textures, int dir4_from, int d
 Texture* get_texture_arrow_thick_start(Textures* textures, int dir4);
 Texture* get_texture_arrow_thick_end(Textures* textures, int dir4);
 Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_hook_start(Textures* textures, int dir4);
+Texture* get_texture_hook_end(Textures* textures, int dir4);
+Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 #endif

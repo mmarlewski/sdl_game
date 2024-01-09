@@ -100,13 +100,15 @@ void change_gamestate(State* state, int new_gamestate)
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
     state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 ||
+    state->gamestate == GAMESTATE__HERO_EXECUTING_ANIMATION ||
     state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
     {
         printf("curr_skill: %s \n", get_skill_name(state->gamemap.curr_skill));
     }
 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
-    state->gamestate == GAMESTATE__ENEMY_ATTACKING ||
+    state->gamestate == GAMESTATE__ENEMY_EXECUTING_ANIMATION ||
+    state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK ||
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE ||
     state->gamestate == GAMESTATE__ENEMY_MOVING ||
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
@@ -284,9 +286,11 @@ char* get_gamestate_name(int gamestate)
         case GAMESTATE__HERO_CHOOSING_SKILL:        name = "hero choosing skill";       break;
         case GAMESTATE__HERO_CHOOSING_TARGET_1:     name = "hero choosing target 1";    break;
         case GAMESTATE__HERO_CHOOSING_TARGET_2:     name = "hero choosing target 2";    break;
-        case GAMESTATE__HERO_EXECUTING_SKILL:       name = "hero skill executing";      break;
+        case GAMESTATE__HERO_EXECUTING_ANIMATION:   name = "hero executing animation";  break;
+        case GAMESTATE__HERO_EXECUTING_SKILL:       name = "hero executing skill";      break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:  name = "enemy pause before attack"; break;
-        case GAMESTATE__ENEMY_ATTACKING:            name = "enemy attacking";           break;
+        case GAMESTATE__ENEMY_EXECUTING_ANIMATION:  name = "enemy executing animation"; break;
+        case GAMESTATE__ENEMY_EXECUTING_ATTACK:     name = "enemy executing attack";    break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "enemy pause before move";   break;
         case GAMESTATE__ENEMY_MOVING:               name = "enemy moving";              break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "enemy pause before target"; break;

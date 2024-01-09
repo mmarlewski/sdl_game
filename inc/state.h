@@ -27,10 +27,12 @@ enum GAMESTATE
     GAMESTATE__HERO_CHOOSING_SKILL,
     GAMESTATE__HERO_CHOOSING_TARGET_1,
     GAMESTATE__HERO_CHOOSING_TARGET_2,
+    GAMESTATE__HERO_EXECUTING_ANIMATION,
     GAMESTATE__HERO_EXECUTING_SKILL,
 
     GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK,
-    GAMESTATE__ENEMY_ATTACKING,
+    GAMESTATE__ENEMY_EXECUTING_ANIMATION,
+    GAMESTATE__ENEMY_EXECUTING_ATTACK,
     GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE,
     GAMESTATE__ENEMY_MOVING,
     GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET,
@@ -83,6 +85,7 @@ typedef struct
     int is_skill_two_target;
     Vec2i target_1_tilemap_pos;
     Vec2i target_2_tilemap_pos;
+    Animation* skill_animation;
 
     int show_all_order_numbers;
 
@@ -157,18 +160,21 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
 void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
+Animation* floor_on_interact_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
 
 void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
 void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
 void object_on_death(State* state, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
 void object_on_interact(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
+Animation* object_on_interact_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures);
 
 void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos);
 void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos);
 void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos);
 void skill_draw(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Vec3i color, Textures* textures);
 void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
+Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures);
 
 void object_enemy_prepare_move(State* state, Object* object);
 void object_enemy_prepare_attack(State* state, Object* object);

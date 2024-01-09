@@ -382,6 +382,43 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
 
     animation->drop_1 = load_texture_from_filepath (renderer, "./res/animation/drop_1.png");
     animation->drop_2 = load_texture_from_filepath (renderer, "./res/animation/drop_2.png");
+
+    animation->piston_1 = load_texture_from_filepath (renderer, "./res/animation/piston_1.png");
+    animation->piston_2 = load_texture_from_filepath (renderer, "./res/animation/piston_2.png");
+
+    animation->stone_spikes_1 = load_texture_from_filepath (renderer, "./res/animation/stone_spikes_1.png");
+    animation->stone_spikes_2 = load_texture_from_filepath (renderer, "./res/animation/stone_spikes_2.png");
+
+    animation->metal_hatch_1 = load_texture_from_filepath (renderer, "./res/animation/metal_hatch_1.png");
+    animation->metal_hatch_2 = load_texture_from_filepath (renderer, "./res/animation/metal_hatch_2.png");
+
+    animation->hook_up_start = load_texture_from_filepath (renderer, "./res/animation/hook_up_start.png");
+    animation->hook_up_end = load_texture_from_filepath (renderer, "./res/animation/hook_up_end.png");
+    animation->hook_up_up = load_texture_from_filepath (renderer, "./res/animation/hook_up_up.png");
+    animation->hook_up_right = load_texture_from_filepath (renderer, "./res/animation/hook_up_right.png");
+    animation->hook_up_down = load_texture_from_filepath (renderer, "./res/animation/hook_up_down.png");
+    animation->hook_up_left = load_texture_from_filepath (renderer, "./res/animation/hook_up_left.png");
+
+    animation->hook_right_start = load_texture_from_filepath (renderer, "./res/animation/hook_right_start.png");
+    animation->hook_right_end = load_texture_from_filepath (renderer, "./res/animation/hook_right_end.png");
+    animation->hook_right_up = load_texture_from_filepath (renderer, "./res/animation/hook_right_up.png");
+    animation->hook_right_right = load_texture_from_filepath (renderer, "./res/animation/hook_right_right.png");
+    animation->hook_right_down = load_texture_from_filepath (renderer, "./res/animation/hook_right_down.png");
+    animation->hook_right_left = load_texture_from_filepath (renderer, "./res/animation/hook_right_left.png");
+
+    animation->hook_down_start = load_texture_from_filepath (renderer, "./res/animation/hook_down_start.png");
+    animation->hook_down_end = load_texture_from_filepath (renderer, "./res/animation/hook_down_end.png");
+    animation->hook_down_up = load_texture_from_filepath (renderer, "./res/animation/hook_down_up.png");
+    animation->hook_down_right = load_texture_from_filepath (renderer, "./res/animation/hook_down_right.png");
+    animation->hook_down_down = load_texture_from_filepath (renderer, "./res/animation/hook_down_down.png");
+    animation->hook_down_left = load_texture_from_filepath (renderer, "./res/animation/hook_down_left.png");
+
+    animation->hook_left_start = load_texture_from_filepath (renderer, "./res/animation/hook_left_start.png");
+    animation->hook_left_end = load_texture_from_filepath (renderer, "./res/animation/hook_left_end.png");
+    animation->hook_left_up = load_texture_from_filepath (renderer, "./res/animation/hook_left_up.png");
+    animation->hook_left_right = load_texture_from_filepath (renderer, "./res/animation/hook_left_right.png");
+    animation->hook_left_down = load_texture_from_filepath (renderer, "./res/animation/hook_left_down.png");
+    animation->hook_left_left = load_texture_from_filepath (renderer, "./res/animation/hook_left_left.png");
 }
 
 void destroy_textures_animation (Textures_Animation* animation)
@@ -635,6 +672,98 @@ Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int 
                 case DIR4__RIGHT: texture = textures->skill.arrow_thick_left_right; break;
                 case DIR4__DOWN: texture = textures->skill.arrow_thick_left_down; break;
                 case DIR4__LEFT: texture = textures->skill.arrow_thick_left_left; break;
+                default: break;
+            }
+        }
+        break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_hook_start(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->animation.hook_up_start; break;
+        case DIR4__RIGHT: texture = textures->animation.hook_right_start; break;
+        case DIR4__DOWN: texture = textures->animation.hook_down_start; break;
+        case DIR4__LEFT: texture = textures->animation.hook_left_start; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_hook_end(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->animation.hook_up_end; break;
+        case DIR4__RIGHT: texture = textures->animation.hook_right_end; break;
+        case DIR4__DOWN: texture = textures->animation.hook_down_end; break;
+        case DIR4__LEFT: texture = textures->animation.hook_left_end; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to)
+{
+    Texture* texture = 0;
+
+    switch(dir4_from)
+    {
+        case DIR4__UP:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.hook_up_up; break;
+                case DIR4__RIGHT: texture = textures->animation.hook_up_right; break;
+                case DIR4__DOWN: texture = textures->animation.hook_up_down; break;
+                case DIR4__LEFT: texture = textures->animation.hook_up_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__RIGHT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.hook_right_up; break;
+                case DIR4__RIGHT: texture = textures->animation.hook_right_right; break;
+                case DIR4__DOWN: texture = textures->animation.hook_right_down; break;
+                case DIR4__LEFT: texture = textures->animation.hook_right_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__DOWN:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.hook_down_up; break;
+                case DIR4__RIGHT: texture = textures->animation.hook_down_right; break;
+                case DIR4__DOWN: texture = textures->animation.hook_down_down; break;
+                case DIR4__LEFT: texture = textures->animation.hook_down_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__LEFT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.hook_left_up; break;
+                case DIR4__RIGHT: texture = textures->animation.hook_left_right; break;
+                case DIR4__DOWN: texture = textures->animation.hook_left_down; break;
+                case DIR4__LEFT: texture = textures->animation.hook_left_left; break;
                 default: break;
             }
         }

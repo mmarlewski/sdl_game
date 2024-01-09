@@ -4,49 +4,14 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
 {
     switch(floor)
     {
-        case FLOOR_TYPE__METAL:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
             change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
         }
         break;
-        case FLOOR_TYPE__LAVA:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__ICE:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__ICE_CRACK_WATER:
         {
             change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
-        }
-        break;
-        case FLOOR_TYPE__WATER:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__METAL_HATCH_CLOSED:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__METAL_HATCH_OPEN:
-        {
-            //
         }
         break;
         default:
@@ -58,11 +23,6 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
 {
     switch(floor)
     {
-        case FLOOR_TYPE__METAL:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
             if(!is_object_flying(action->move.object))
@@ -70,11 +30,6 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
             }
-        }
-        break;
-        case FLOOR_TYPE__ROCK_CRACK_LAVA:
-        {
-            //
         }
         break;
         case FLOOR_TYPE__LAVA:
@@ -111,11 +66,6 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_to_end_action_sequence(sequence, new_action_fall(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
             }
-        }
-        break;
-        case FLOOR_TYPE__METAL_HATCH_CLOSED:
-        {
-            //
         }
         break;
         case FLOOR_TYPE__METAL_HATCH_OPEN:
@@ -142,11 +92,6 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             {
                 change_floor_in_tilemap_pos(state, FLOOR_TYPE__ROCK_CRACK_LAVA, action->tilemap_pos);
             }
-        }
-        break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
-        {
-            //
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_LAVA:
@@ -200,11 +145,6 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             }
         }
         break;
-        case FLOOR_TYPE__METAL_HATCH_CLOSED:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
             if(!is_object_flying(action->drop.object))
@@ -240,31 +180,6 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
             add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__STONE_SPIKES_OFF, tilemap_pos));
         }
         break;
-        case FLOOR_TYPE__ROCK_CRACK_LAVA:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__LAVA:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__ICE:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__ICE_CRACK_WATER:
-        {
-            //
-        }
-        break;
-        case FLOOR_TYPE__WATER:
-        {
-            //
-        }
-        break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
             add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__METAL_HATCH_OPEN, tilemap_pos));
@@ -278,6 +193,99 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
         default:
         break;
     }
+}
+
+Animation* floor_on_interact_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures)
+{
+    Animation* animation = new_animation_none();
+
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL_PISTON:
+        {
+            animation = new_animation_sequence_of_2(
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.piston_1,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.piston_2,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__STONE_SPIKES_OFF:
+        {
+            animation = new_animation_sequence_of_2(
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.stone_spikes_1,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.stone_spikes_2,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__STONE_SPIKES_ON:
+        {
+            animation = new_animation_sequence_of_2(
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.stone_spikes_2,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.stone_spikes_1,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__METAL_HATCH_CLOSED:
+        {
+            animation = new_animation_sequence_of_2(
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.metal_hatch_2,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.metal_hatch_1,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__METAL_HATCH_OPEN:
+        {
+            animation = new_animation_sequence_of_2(
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.metal_hatch_1,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.metal_hatch_2,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
+                );
+        }
+        break;
+        default:
+        break;
+    }
+
+    return animation;
 }
 
 void object_on_crashing(State* state, Action* sequence, Action* action, Object* object)
@@ -300,41 +308,6 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
-        }
-        break;
-        case OBJECT_TYPE__WEIGHT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__HERO:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__GOAT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__SPIDER:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__BULL:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__FLY:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__CHAMELEON:
-        {
-            //
         }
         break;
         default:
@@ -364,41 +337,6 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
             add_action_to_end_action_sequence(sequence, new_action_move(object->tilemap_pos, action->crash.dir4));
         }
         break;
-        case OBJECT_TYPE__WEIGHT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__HERO:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__GOAT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__SPIDER:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__BULL:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__FLY:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__CHAMELEON:
-        {
-            //
-        }
-        break;
         default:
         break;
     }
@@ -416,41 +354,6 @@ void object_on_death(State* state, Action* sequence, Action* action, Object* obj
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_blow_up(object->tilemap_pos));
-        }
-        break;
-        case OBJECT_TYPE__WEIGHT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__HERO:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__GOAT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__SPIDER:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__BULL:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__FLY:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__CHAMELEON:
-        {
-            //
         }
         break;
         default:
@@ -488,41 +391,6 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
             }
         }
         break;
-        case OBJECT_TYPE__WEIGHT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__HERO:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__GOAT:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__SPIDER:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__BULL:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__FLY:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__CHAMELEON:
-        {
-            //
-        }
-        break;
         default:
         break;
     }
@@ -552,42 +420,48 @@ void object_on_interact(State* state, Action* sequence, Object* object, Vec2i ti
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
         }
         break;
-        case OBJECT_TYPE__WEIGHT:
+        default:
+        break;
+    }
+}
+
+Animation* object_on_interact_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures)
+{
+    Animation* animation = new_animation_none();
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PISTON:
         {
-            //
+            animation = new_animation_sequence_of_2(
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.piston_2,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.piston_1,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
+                );
         }
         break;
-        case OBJECT_TYPE__HERO:
+        case OBJECT_TYPE__BALL:
         {
-            //
         }
         break;
-        case OBJECT_TYPE__GOAT:
+        case OBJECT_TYPE__BALL_SPIKES:
         {
-            //
         }
         break;
-        case OBJECT_TYPE__SPIDER:
+        case OBJECT_TYPE__BARREL:
         {
-            //
-        }
-        break;
-        case OBJECT_TYPE__BULL:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__FLY:
-        {
-            //
-        }
-        break;
-        case OBJECT_TYPE__CHAMELEON:
-        {
-            //
         }
         break;
         default:
         break;
     }
+
+    return animation;
 }

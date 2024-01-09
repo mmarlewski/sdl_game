@@ -289,10 +289,47 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
                     state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
 
-                    execute_action_sequence(state, state->action.hero_action_sequence, textures, sounds, musics, colors);
+                    Animation* animation = skill_get_animation(
+                        state,
+                        state->gamemap.curr_skill,
+                        state->gamemap.object_hero->tilemap_pos,
+                        state->gamemap.target_1_tilemap_pos,
+                        state->gamemap.target_2_tilemap_pos,
+                        textures
+                        );
 
-                    change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
+                    add_animation_to_animation_list(
+                        state,
+                        animation,
+                        textures,
+                        sounds,
+                        musics,
+                        colors
+                    );
+
+                    state->gamemap.skill_animation = animation;
+
+                    change_gamestate(state, GAMESTATE__HERO_EXECUTING_ANIMATION);
                 }
+            }
+        }
+        break;
+        case GAMESTATE__HERO_EXECUTING_ANIMATION:
+        {
+            if(state->gamemap.skill_animation->is_finished)
+            {
+                state->gamemap.skill_animation = 0;
+
+                execute_action_sequence(
+                    state,
+                    state->action.hero_action_sequence,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                    );
+
+                change_gamestate(state, GAMESTATE__HERO_EXECUTING_SKILL);
             }
         }
         break;
@@ -336,13 +373,48 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 state->timer = 0.0f;
 
-                execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics, colors);
+                Animation* animation = skill_get_animation(
+                    state,
+                    state->gamemap.curr_object_enemy->enemy.skill,
+                    state->gamemap.curr_object_enemy->tilemap_pos,
+                    state->gamemap.curr_object_enemy->enemy.target_1_tilemap_pos,
+                    state->gamemap.curr_object_enemy->enemy.target_2_tilemap_pos,
+                    textures
+                    );
 
-                change_gamestate(state, GAMESTATE__ENEMY_ATTACKING);
+                add_animation_to_animation_list(
+                    state,
+                    animation,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+
+                state->gamemap.skill_animation = animation;
+
+                change_gamestate(state, GAMESTATE__ENEMY_EXECUTING_ANIMATION);
             }
         }
         break;
-        case GAMESTATE__ENEMY_ATTACKING:
+        case GAMESTATE__ENEMY_EXECUTING_ANIMATION:
+        {
+            if(state->gamemap.skill_animation->is_finished)
+            {
+                execute_action_sequence(
+                    state,
+                    state->action.enemy_action_sequence,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                    );
+
+                change_gamestate(state, GAMESTATE__ENEMY_EXECUTING_ATTACK);
+            }
+        }
+        break;
+        case GAMESTATE__ENEMY_EXECUTING_ATTACK:
         {
             if(state->action.enemy_action_sequence->is_finished)
             {
