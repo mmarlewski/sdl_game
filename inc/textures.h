@@ -308,6 +308,8 @@ typedef struct
     Texture* drop;
     Texture* change;
 
+    Texture* floor_highlight;
+
     Texture* arrow_thin_up_start;
     Texture* arrow_thin_up_end;
     Texture* arrow_thin_up_up;

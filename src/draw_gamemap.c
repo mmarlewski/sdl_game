@@ -88,6 +88,90 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
+    // enemy skill draw below
+
+    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
+    state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
+    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
+    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
+    state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
+    {
+        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+
+        if(hover_object != 0 &&
+        hover_object->is_enemy &&
+        !hover_object->is_dead &&
+        hover_object->is_visible)
+        {
+            skill_draw_below(
+                renderer,
+                state,
+                hover_object->enemy.skill,
+                hover_object->tilemap_pos,
+                hover_object->enemy.target_1_tilemap_pos,
+                hover_object->enemy.target_2_tilemap_pos,
+                colors->yellow,
+                textures
+                );
+
+            skill_draw_effect(
+                renderer,
+                state,
+                hover_object->enemy.skill,
+                hover_object->tilemap_pos,
+                hover_object->enemy.target_1_tilemap_pos,
+                hover_object->enemy.target_2_tilemap_pos,
+                textures,
+                colors
+                );
+        }
+        else
+        {
+            for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            {
+                Object* curr_object = (Object*)curr_elem->data;
+                Action* curr_action = curr_object->enemy.action_sequence;
+
+                if(!curr_object->enemy.performed_attack)
+                {
+                    if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
+                    state->action.enemy_action_sequence == curr_action) &&
+                    !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
+                    state->action.enemy_action_sequence == curr_action))
+                    {
+                        skill_draw_below(
+                            renderer,
+                            state,
+                            curr_object->enemy.skill,
+                            curr_object->tilemap_pos,
+                            curr_object->enemy.target_1_tilemap_pos,
+                            curr_object->enemy.target_2_tilemap_pos,
+                            colors->red,
+                            textures
+                            );
+                    }
+                }
+            }
+        }
+    }
+
+    // hero skill draw below
+
+    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    {
+        skill_draw_below(
+            renderer,
+            state,
+            state->gamemap.curr_skill,
+            state->gamemap.object_hero->tilemap_pos,
+            state->gamemap.target_1_tilemap_pos,
+            state->gamemap.target_2_tilemap_pos,
+            colors->green,
+            textures
+            );
+    }
+
     // objects, sprites
 
     for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
@@ -171,12 +255,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
-    // enemy skill draw
+    // enemy skill draw above
 
     if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
     state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
+    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
         Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
@@ -186,7 +271,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            skill_draw(
+            skill_draw_above(
                 renderer,
                 state,
                 hover_object->enemy.skill,
@@ -222,7 +307,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                     state->action.enemy_action_sequence == curr_action))
                     {
-                        skill_draw(
+                        skill_draw_above(
                             renderer,
                             state,
                             curr_object->enemy.skill,
@@ -238,11 +323,11 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
-    // hero skill draw
+    // hero skill draw above
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        skill_draw(
+        skill_draw_above(
             renderer,
             state,
             state->gamemap.curr_skill,

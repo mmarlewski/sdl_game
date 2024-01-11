@@ -16,11 +16,12 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             ListElem* curr_elem = animation->sequence.curr_animation_list_elem;
             Animation* curr_animation = (Animation*)curr_elem->data;
 
+            update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
+
             if(curr_animation->is_finished)
             {
                 end_animation(state, curr_animation, textures, sounds, musics, colors);
                 ListElem* next_elem = curr_elem->next;
-                // remove_list_element(animation->sequence.animation_list, curr_elem, 1);
                 animation->sequence.curr_animation_list_elem = next_elem;
 
                 if(next_elem != 0)
@@ -28,10 +29,6 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
                     Animation* next_animation = (Animation*)next_elem->data;
                     start_animation(state, next_animation, textures, sounds, musics, colors);
                 }
-            }
-            else
-            {
-                update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
             }
 
             animation->is_finished = (!animation->sequence.curr_animation_list_elem);

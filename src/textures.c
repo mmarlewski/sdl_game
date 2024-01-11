@@ -306,6 +306,8 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->drop = load_texture_from_filepath (renderer, "./res/skill/drop.png");
     skill->change = load_texture_from_filepath (renderer, "./res/skill/change.png");
 
+    skill->floor_highlight = load_texture_from_filepath (renderer, "./res/skill/floor_highlight.png");
+
     skill->arrow_thin_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_start.png");
     skill->arrow_thin_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_end.png");
     skill->arrow_thin_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_up.png");
