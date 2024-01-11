@@ -1,4 +1,6 @@
 
+![](./doc/recordings/8.gif)
+![](./doc/recordings/7.gif)
 ![](./doc/recordings/6.gif)
 ![](./doc/recordings/5.gif)
 ![](./doc/recordings/1.gif)
