@@ -19,6 +19,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 renderer,
                 textures->skill.change,
                 color,
+                1.0f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                 state->camera.world_pos,
                 state->camera.zoom
@@ -54,6 +55,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_throw(textures, distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -63,6 +65,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         textures->skill.drop,
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -74,6 +77,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_lift(textures, distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -232,6 +236,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -349,6 +354,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_throw(textures, throw_distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -358,6 +364,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         textures->skill.drop,
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -369,6 +376,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_lift(textures, throw_distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -445,6 +453,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -530,6 +539,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -618,6 +628,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -650,6 +661,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_throw(textures, throw_distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -659,6 +671,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         textures->skill.drop,
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -670,6 +683,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_lift(textures, throw_distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -694,6 +708,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_throw(textures, throw_distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -703,6 +718,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         textures->skill.drop,
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -714,6 +730,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         get_texture_lift(textures, throw_distance_info.dir4),
                         color,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom

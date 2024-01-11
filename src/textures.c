@@ -306,7 +306,9 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->drop = load_texture_from_filepath (renderer, "./res/skill/drop.png");
     skill->change = load_texture_from_filepath (renderer, "./res/skill/change.png");
 
-    skill->floor_highlight = load_texture_from_filepath (renderer, "./res/skill/floor_highlight.png");
+    skill->floor_border_solid = load_texture_from_filepath (renderer, "./res/skill/floor_border_solid.png");
+    skill->floor_border_dashed = load_texture_from_filepath (renderer, "./res/skill/floor_border_dashed.png");
+    skill->floor_border_dotted = load_texture_from_filepath (renderer, "./res/skill/floor_border_dotted.png");
 
     skill->arrow_thin_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_start.png");
     skill->arrow_thin_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_end.png");

@@ -84,6 +84,7 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                         renderer,
                         arrow_texture,
                         color,
+                        1.0f,
                         curr_gamemap_pos,
                         state->camera.world_pos,
                         state->camera.zoom
@@ -169,6 +170,7 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -259,6 +261,7 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -279,8 +282,9 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
 
             draw_texture_at_gamemap_pos(
                 renderer,
-                textures->skill.floor_highlight,
+                textures->skill.floor_border_solid,
                 color,
+                1.0f,
                 tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                 state->camera.world_pos,
                 state->camera.zoom
@@ -355,6 +359,7 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     renderer,
                     arrow_texture,
                     color,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -378,8 +383,9 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         {
             draw_texture_at_gamemap_pos(
                 renderer,
-                textures->skill.floor_highlight,
+                textures->skill.floor_border_solid,
                 color,
+                1.0f,
                 tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                 state->camera.world_pos,
                 state->camera.zoom
@@ -390,8 +396,9 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         {
             draw_texture_at_gamemap_pos(
                 renderer,
-                textures->skill.floor_highlight,
+                textures->skill.floor_border_solid,
                 color,
+                1.0f,
                 tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                 state->camera.world_pos,
                 state->camera.zoom
@@ -402,8 +409,9 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         {
             draw_texture_at_gamemap_pos(
                 renderer,
-                textures->skill.floor_highlight,
+                textures->skill.floor_border_solid,
                 color,
+                1.0f,
                 tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                 state->camera.world_pos,
                 state->camera.zoom

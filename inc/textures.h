@@ -308,7 +308,9 @@ typedef struct
     Texture* drop;
     Texture* change;
 
-    Texture* floor_highlight;
+    Texture* floor_border_solid;
+    Texture* floor_border_dashed;
+    Texture* floor_border_dotted;
 
     Texture* arrow_thin_up_start;
     Texture* arrow_thin_up_end;

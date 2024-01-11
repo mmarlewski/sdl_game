@@ -24,6 +24,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 renderer,
                 get_texture_1_from_object(source_object, textures),
                 colors->none,
+                0.75f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                 state->camera.world_pos,
                 state->camera.zoom
@@ -45,6 +46,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.death_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -56,6 +58,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     get_texture_1_from_object(source_object, textures),
                     colors->none,
+                    0.75f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -74,6 +77,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     get_texture_1_from_object(source_object, textures),
                     colors->none,
+                    0.75f,
                     tilemap_pos_to_gamemap_pos(just_before_target_2_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -83,6 +87,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.crash_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -99,6 +104,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.death_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -110,6 +116,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     get_texture_1_from_object(source_object, textures),
                     colors->none,
+                    0.75f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -151,6 +158,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(source_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -185,6 +193,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.death_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -199,6 +208,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -236,6 +246,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -259,6 +270,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                             renderer,
                             textures->skill.death_effect,
                             colors->none,
+                            1.0f,
                             tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                             state->camera.world_pos,
                             state->camera.zoom
@@ -306,6 +318,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(source_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -340,6 +353,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.death_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -357,6 +371,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         textures->skill.death_effect,
                         colors->none,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -368,6 +383,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -380,6 +396,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -395,6 +412,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -432,6 +450,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -455,6 +474,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                             renderer,
                             textures->skill.death_effect,
                             colors->none,
+                            1.0f,
                             tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
                             state->camera.world_pos,
                             state->camera.zoom
@@ -476,6 +496,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -513,6 +534,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -536,6 +558,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                             renderer,
                             textures->skill.death_effect,
                             colors->none,
+                            1.0f,
                             tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
                             state->camera.world_pos,
                             state->camera.zoom
@@ -557,6 +580,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -596,6 +620,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -630,6 +655,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.death_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -647,6 +673,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         textures->skill.death_effect,
                         colors->none,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -658,6 +685,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -670,6 +698,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
@@ -688,6 +717,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         textures->skill.death_effect,
                         colors->none,
+                        1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -699,6 +729,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         renderer,
                         get_texture_1_from_object(target_1_object, textures),
                         colors->none,
+                        0.75f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                         state->camera.world_pos,
                         state->camera.zoom
@@ -711,6 +742,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     renderer,
                     textures->skill.immovable_effect,
                     colors->none,
+                    1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
                     state->camera.world_pos,
                     state->camera.zoom
