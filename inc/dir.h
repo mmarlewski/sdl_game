@@ -42,8 +42,8 @@ typedef struct
 
 DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to);
 
-
 void get_line_from_tilemap_pos_in_dir4(Vec2i from_tilemap_pos, int dir4, int length, List* list);
+void get_line_from_tilemap_pos_to_tilemap_pos(Vec2i from_tilemap_pos, Vec2i to_tilemap_pos, List* list);
 void get_square_perimeter_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list);
 void get_square_area_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list);
 

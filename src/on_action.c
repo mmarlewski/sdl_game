@@ -365,6 +365,14 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__DISPLAY:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(OBJECT_TYPE__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
+                );
+        }
+        break;
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));

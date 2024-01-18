@@ -200,6 +200,33 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
 
             skill_animation = animation_sequence;
         }
+        break;
+        case SKILL__TURRET_PROJECTILE:
+        {
+            Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_move_sprite_in_gamemap_in_line(
+                    textures->animation.gemstone,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.2f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->skill.shake_effect,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            skill_animation = animation_sequence;
+        }
+        break;
         default:
         break;
     }

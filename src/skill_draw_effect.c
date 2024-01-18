@@ -818,6 +818,20 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
             }
         }
+        break;
+        case SKILL__TURRET_PROJECTILE:
+        {
+            draw_texture_at_gamemap_pos(
+                renderer,
+                textures->skill.shake_effect,
+                colors->none,
+                1.0f,
+                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
         default:
         break;
     }

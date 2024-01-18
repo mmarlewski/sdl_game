@@ -294,7 +294,53 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
         {
             for(int i = 1; i <= OBJECT_TURRET_RANGE; i++)
             {
-                //
+                List* square_perimeter_tilemap_pos = new_list((void(*)(void*))destroy_vec2i);
+
+                get_square_perimeter_tilemap_pos(
+                    source_tilemap_pos,
+                    i,
+                    square_perimeter_tilemap_pos
+                    );
+
+                for(ListElem* perimeter_elem = square_perimeter_tilemap_pos->head; perimeter_elem != 0; perimeter_elem = perimeter_elem->next)
+                {
+                    Vec2i perimeter_tilemap_pos = *(Vec2i*)perimeter_elem->data;
+
+                    List* line_tilemap_pos = new_list((void(*)(void*))destroy_vec2i);
+
+                    get_line_from_tilemap_pos_to_tilemap_pos(
+                        source_tilemap_pos,
+                        perimeter_tilemap_pos,
+                        line_tilemap_pos
+                        );
+
+                    int is_line_obstructed = 0;
+                    for(ListElem* line_elem = line_tilemap_pos->head; line_elem != 0; line_elem = line_elem->next)
+                    {
+                        Vec2i line_tilemap_pos = *(Vec2i*)line_elem->data;
+                        Object* line_object = get_object_on_tilemap_pos(state, line_tilemap_pos);
+
+                        if(!vec2i_equals(line_tilemap_pos, source_tilemap_pos) &&
+                        !vec2i_equals(line_tilemap_pos, perimeter_tilemap_pos))
+                        {
+                            if(line_object != 0)
+                            {
+                                is_line_obstructed = 1;
+                            }
+                        }
+                    }
+
+                    if(!is_line_obstructed)
+                    {
+                         add_pos_to_possible_target_2_tilemap_pos_list(state, perimeter_tilemap_pos);
+                    }
+
+                    remove_all_list_elements(line_tilemap_pos, 0);
+                    destroy_list(line_tilemap_pos);
+                }
+
+                remove_all_list_elements(square_perimeter_tilemap_pos, 1);
+                destroy_list(square_perimeter_tilemap_pos);
             }
         }
         break;

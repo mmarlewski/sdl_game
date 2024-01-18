@@ -483,6 +483,18 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                 }
             }
         }
+        case SKILL__TURRET_PROJECTILE:
+        {
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    textures->skill.floor_danger,
+                    color,
+                    1.0f,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+        }
         default:
         break;
     }

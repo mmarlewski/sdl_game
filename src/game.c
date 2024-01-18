@@ -202,7 +202,7 @@ int main (int argc, char* argv[])
     object_chameleon->tilemap_pos = vec2i(3,7);
     add_object_to_gamemap_objects(&state, object_chameleon);
 
-    Object* object_turret = new_object(OBJECT_TYPE__TURRET_BOMB_DEPLOYED);
+    Object* object_turret = new_object(OBJECT_TYPE__TURRET_LASER_DEPLOYED);
     object_turret->is_enemy = 1;
     object_turret->tilemap_pos = vec2i(5,6);
     add_object_to_gamemap_objects(&state, object_turret);

@@ -438,6 +438,15 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     );
             }
         }
+        break;
+        case SKILL__TURRET_PROJECTILE:
+        {
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_shake(target_2_tilemap_pos)
+                );
+        }
+        break;
         default:
         break;
     }
