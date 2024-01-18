@@ -785,6 +785,39 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             }
         }
         break;
+        case SKILL__TURRET_BOMB:
+        {
+            if(target_2_object != 0 && is_object_breakable(target_2_object))
+            {
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    textures->skill.break_effect,
+                    colors->none,
+                    1.0f,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
+
+                if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                {
+                    draw_texture_at_gamemap_pos(
+                        renderer,
+                        textures->skill.shake_effect,
+                        colors->none,
+                        1.0f,
+                        tilemap_pos_to_gamemap_pos(tilemap_pos),
+                        state->camera.world_pos,
+                        state->camera.zoom
+                        );
+                }
+            }
+        }
         default:
         break;
     }

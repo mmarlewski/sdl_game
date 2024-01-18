@@ -245,7 +245,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 get_texture_1_from_object(action->throw.object_thrown, textures),
                 tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(next_tilemap_pos),
-                ACTION_LENGTH_IN_SECONDS * 4.0f,
+                ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                 2.0f
                 );
 
@@ -273,7 +273,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 get_texture_1_from_object(action->lift.object, textures),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                 tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                ACTION_LENGTH_IN_SECONDS * 4.0f,
+                ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                 2.0f
                 );
 
@@ -352,21 +352,30 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
 
-            object_on_melt(state, sequence, action, melt_object);
+            if(melt_object != 0)
+            {
+                object_on_melt(state, sequence, action, melt_object);
+            }
         }
         break;
         case ACTION_TYPE__BREAK:
         {
-            Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            Object* break_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
 
-            object_on_break(state, sequence, action, melt_object);
+            if(break_object != 0)
+            {
+                object_on_break(state, sequence, action, break_object);
+            }
         }
         break;
         case ACTION_TYPE__SHAKE:
         {
-            Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            Object* shake_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
 
-            object_on_shake(state, sequence, action, melt_object);
+            if(shake_object != 0)
+            {
+                object_on_shake(state, sequence, action, shake_object);
+            }
         }
         break;
         default:

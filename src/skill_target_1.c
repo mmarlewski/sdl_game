@@ -124,6 +124,14 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
         {
             //
         }
+        case SKILL__TURRET_BOMB:
+        {
+            //
+        }
+        case SKILL__TURRET_PROJECTILE:
+        {
+            //
+        }
         break;
         default:
         break;

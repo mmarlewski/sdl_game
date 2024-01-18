@@ -268,6 +268,36 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             }
         }
         break;
+        case SKILL__TURRET_BOMB:
+        {
+            for(int i = 2; i <= OBJECT_TURRET_RANGE; i++)
+            {
+                List* square_perimeter_tilemap_pos = new_list((void(*)(void*))destroy_vec2i);
+
+                get_square_perimeter_tilemap_pos(
+                    source_tilemap_pos,
+                    i,
+                    square_perimeter_tilemap_pos
+                    );
+
+                for(ListElem* curr_elem = square_perimeter_tilemap_pos->head; curr_elem != 0; curr_elem = curr_elem->next)
+                {
+                    Vec2i* curr_tilemap_pos = (Vec2i*)curr_elem->data;
+                    add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
+                }
+
+                remove_all_list_elements(square_perimeter_tilemap_pos, 1);
+            }
+        }
+        break;
+        case SKILL__TURRET_PROJECTILE:
+        {
+            for(int i = 1; i <= OBJECT_TURRET_RANGE; i++)
+            {
+                //
+            }
+        }
+        break;
         default:
         break;
     }

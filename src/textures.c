@@ -247,23 +247,65 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->chameleon_outline_1 = load_texture_from_filepath(renderer, "./res/object/chameleon_outline_1.png");
     object->chameleon_outline_2 = load_texture_from_filepath(renderer, "./res/object/chameleon_outline_2.png");
 
-    object->turret_grounded_1 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_1.png");
-    object->turret_grounded_2 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_2.png");
-    object->turret_grounded_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_outline_1.png");
-    object->turret_grounded_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_grounded_outline_2.png");
+    object->turret_laser_grounded_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_grounded_1.png");
+    object->turret_laser_grounded_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_grounded_2.png");
+    object->turret_laser_grounded_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_grounded_outline_1.png");
+    object->turret_laser_grounded_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_grounded_outline_2.png");
 
-    object->turret_standing_1 = load_texture_from_filepath(renderer, "./res/object/turret_standing_1.png");
-    object->turret_standing_2 = load_texture_from_filepath(renderer, "./res/object/turret_standing_2.png");
-    object->turret_standing_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_standing_outline_1.png");
-    object->turret_standing_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_standing_outline_2.png");
+    object->turret_laser_standing_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_standing_1.png");
+    object->turret_laser_standing_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_standing_2.png");
+    object->turret_laser_standing_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_standing_outline_1.png");
+    object->turret_laser_standing_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_standing_outline_2.png");
 
-    object->turret_undeployed = load_texture_from_filepath(renderer, "./res/object/turret_undeployed.png");
-    object->turret_undeployed_outline = load_texture_from_filepath(renderer, "./res/object/turret_undeployed_outline.png");
+    object->turret_laser_undeployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_undeployed_1.png");
+    object->turret_laser_undeployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_undeployed_2.png");
+    object->turret_laser_undeployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_undeployed_outline_1.png");
+    object->turret_laser_undeployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_undeployed_outline_2.png");
 
-    object->turret_deployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_1.png");
-    object->turret_deployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_2.png");
-    object->turret_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_outline_1.png");
-    object->turret_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_deployed_outline_2.png");
+    object->turret_laser_deployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_deployed_1.png");
+    object->turret_laser_deployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_deployed_2.png");
+    object->turret_laser_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_deployed_outline_1.png");
+    object->turret_laser_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_deployed_outline_2.png");
+
+    object->turret_bomb_grounded_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_grounded_1.png");
+    object->turret_bomb_grounded_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_grounded_2.png");
+    object->turret_bomb_grounded_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_grounded_outline_1.png");
+    object->turret_bomb_grounded_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_grounded_outline_2.png");
+
+    object->turret_bomb_standing_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_standing_1.png");
+    object->turret_bomb_standing_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_standing_2.png");
+    object->turret_bomb_standing_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_standing_outline_1.png");
+    object->turret_bomb_standing_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_standing_outline_2.png");
+
+    object->turret_bomb_undeployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_undeployed_1.png");
+    object->turret_bomb_undeployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_undeployed_2.png");
+    object->turret_bomb_undeployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_undeployed_outline_1.png");
+    object->turret_bomb_undeployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_undeployed_outline_2.png");
+
+    object->turret_bomb_deployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_deployed_1.png");
+    object->turret_bomb_deployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_deployed_2.png");
+    object->turret_bomb_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_deployed_outline_1.png");
+    object->turret_bomb_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_bomb_deployed_outline_2.png");
+
+    object->turret_projectile_grounded_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_grounded_1.png");
+    object->turret_projectile_grounded_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_grounded_2.png");
+    object->turret_projectile_grounded_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_grounded_outline_1.png");
+    object->turret_projectile_grounded_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_grounded_outline_2.png");
+
+    object->turret_projectile_standing_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_standing_1.png");
+    object->turret_projectile_standing_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_standing_2.png");
+    object->turret_projectile_standing_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_standing_outline_1.png");
+    object->turret_projectile_standing_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_standing_outline_2.png");
+
+    object->turret_projectile_undeployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_undeployed_1.png");
+    object->turret_projectile_undeployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_undeployed_2.png");
+    object->turret_projectile_undeployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_undeployed_outline_1.png");
+    object->turret_projectile_undeployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_undeployed_outline_2.png");
+
+    object->turret_projectile_deployed_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_1.png");
+    object->turret_projectile_deployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_2.png");
+    object->turret_projectile_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_outline_1.png");
+    object->turret_projectile_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_outline_2.png");
 }
 
 void destroy_textures_object (Textures_Object* object)
@@ -434,6 +476,10 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->laser_left = load_texture_from_filepath (renderer, "./res/animation/laser_left.png");
     animation->laser_vertical = load_texture_from_filepath (renderer, "./res/animation/laser_vertical.png");
     animation->laser_horizontal = load_texture_from_filepath (renderer, "./res/animation/laser_horizontal.png");
+
+    animation->cell = load_texture_from_filepath (renderer, "./res/animation/cell.png");
+    animation->dynamite = load_texture_from_filepath (renderer, "./res/animation/dynamite.png");
+    animation->gemstone = load_texture_from_filepath (renderer, "./res/animation/gemstone.png");
 }
 
 void destroy_textures_animation (Textures_Animation* animation)

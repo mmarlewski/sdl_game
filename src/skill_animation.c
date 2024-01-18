@@ -165,6 +165,41 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
             skill_animation = animation_simultaneous;
         }
         break;
+        case SKILL__TURRET_BOMB:
+        {
+            Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    textures->animation.dynamite,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    1.0f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.blow_up_1,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.blow_up_2,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            skill_animation = animation_sequence;
+        }
         default:
         break;
     }

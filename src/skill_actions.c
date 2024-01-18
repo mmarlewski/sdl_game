@@ -421,6 +421,23 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
+        case SKILL__TURRET_BOMB:
+        {
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_break(target_2_tilemap_pos)
+                );
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
+
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_shake(tilemap_pos)
+                    );
+            }
+        }
         default:
         break;
     }

@@ -298,9 +298,9 @@ void object_enemy_prepare_attack(State* state, Object* object)
             }
         }
         break;
-        case OBJECT_TYPE__TURRET_GROUNDED:
-        case OBJECT_TYPE__TURRET_STANDING:
-        case OBJECT_TYPE__TURRET_DEPLOYED:
+        case OBJECT_TYPE__TURRET_LASER_GROUNDED:
+        case OBJECT_TYPE__TURRET_LASER_STANDING:
+        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:
         {
             int found_target = 0;
             for(int i = 1; i < 3; i++)
@@ -332,6 +332,57 @@ void object_enemy_prepare_attack(State* state, Object* object)
                     }
                 }
             }
+        }
+        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:
+        case OBJECT_TYPE__TURRET_BOMB_STANDING:
+        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:
+        {
+            int found_target = 0;
+            for(int i = 2; i <= OBJECT_TURRET_RANGE; i++)
+            {
+                List* square_perimeter_tilemap_pos = new_list((void(*)(void*))destroy_vec2i);
+
+                get_square_perimeter_tilemap_pos(
+                    object->tilemap_pos,
+                    i,
+                    square_perimeter_tilemap_pos
+                    );
+
+                for(ListElem* curr_elem = square_perimeter_tilemap_pos->head; curr_elem != 0; curr_elem = curr_elem->next)
+                {
+                    Vec2i curr_tilemap_pos = *(Vec2i*)curr_elem->data;
+
+                    if(is_tilemap_pos_in_tilemap(curr_tilemap_pos))
+                    {
+                        Object* curr_object = get_object_on_tilemap_pos(state, curr_tilemap_pos);
+
+                        if(curr_object != 0 && !found_target)
+                        {
+                            found_target = 1;
+
+                            object->enemy.skill = SKILL__TURRET_BOMB;
+                            object->enemy.target_1_tilemap_pos = vec2i(-1,-1);
+                            object->enemy.target_2_tilemap_pos = curr_tilemap_pos;
+                            skill_add_actions_to_action_sequence(
+                                state,
+                                object->enemy.action_sequence,
+                                object->enemy.skill,
+                                object->tilemap_pos,
+                                object->enemy.target_1_tilemap_pos,
+                                object->enemy.target_2_tilemap_pos
+                                );
+                        }
+                    }
+                }
+
+                remove_all_list_elements(square_perimeter_tilemap_pos, 1);
+            }
+        }
+        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:
+        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:
+        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:
+        {
+            //
         }
         break;
         default:

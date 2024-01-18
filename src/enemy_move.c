@@ -2,10 +2,18 @@
 
 void object_enemy_prepare_move(State* state, Object* object)
 {
-    if(object->type == OBJECT_TYPE__TURRET_GROUNDED ||
-    object->type == OBJECT_TYPE__TURRET_STANDING ||
-    object->type == OBJECT_TYPE__TURRET_UNDEPLOYED ||
-    object->type == OBJECT_TYPE__TURRET_DEPLOYED)
+    if(object->type == OBJECT_TYPE__TURRET_LASER_GROUNDED ||
+    object->type == OBJECT_TYPE__TURRET_LASER_STANDING ||
+    object->type == OBJECT_TYPE__TURRET_LASER_UNDEPLOYED ||
+    object->type == OBJECT_TYPE__TURRET_LASER_DEPLOYED ||
+    object->type == OBJECT_TYPE__TURRET_BOMB_GROUNDED ||
+    object->type == OBJECT_TYPE__TURRET_BOMB_STANDING ||
+    object->type == OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED ||
+    object->type == OBJECT_TYPE__TURRET_BOMB_DEPLOYED ||
+    object->type == OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED ||
+    object->type == OBJECT_TYPE__TURRET_PROJECTILE_STANDING ||
+    object->type == OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED ||
+    object->type == OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED)
     {
         return;
     }

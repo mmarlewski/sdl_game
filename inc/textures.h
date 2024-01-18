@@ -250,23 +250,65 @@ typedef struct
     Texture* chameleon_outline_1;
     Texture* chameleon_outline_2;
 
-    Texture* turret_grounded_1;
-    Texture* turret_grounded_2;
-    Texture* turret_grounded_outline_1;
-    Texture* turret_grounded_outline_2;
+    Texture* turret_laser_grounded_1;
+    Texture* turret_laser_grounded_2;
+    Texture* turret_laser_grounded_outline_1;
+    Texture* turret_laser_grounded_outline_2;
 
-    Texture* turret_standing_1;
-    Texture* turret_standing_2;
-    Texture* turret_standing_outline_1;
-    Texture* turret_standing_outline_2;
+    Texture* turret_laser_standing_1;
+    Texture* turret_laser_standing_2;
+    Texture* turret_laser_standing_outline_1;
+    Texture* turret_laser_standing_outline_2;
 
-    Texture* turret_undeployed;
-    Texture* turret_undeployed_outline;
+    Texture* turret_laser_undeployed_1;
+    Texture* turret_laser_undeployed_2;
+    Texture* turret_laser_undeployed_outline_1;
+    Texture* turret_laser_undeployed_outline_2;
 
-    Texture* turret_deployed_1;
-    Texture* turret_deployed_2;
-    Texture* turret_deployed_outline_1;
-    Texture* turret_deployed_outline_2;
+    Texture* turret_laser_deployed_1;
+    Texture* turret_laser_deployed_2;
+    Texture* turret_laser_deployed_outline_1;
+    Texture* turret_laser_deployed_outline_2;
+
+    Texture* turret_bomb_grounded_1;
+    Texture* turret_bomb_grounded_2;
+    Texture* turret_bomb_grounded_outline_1;
+    Texture* turret_bomb_grounded_outline_2;
+
+    Texture* turret_bomb_standing_1;
+    Texture* turret_bomb_standing_2;
+    Texture* turret_bomb_standing_outline_1;
+    Texture* turret_bomb_standing_outline_2;
+
+    Texture* turret_bomb_undeployed_1;
+    Texture* turret_bomb_undeployed_2;
+    Texture* turret_bomb_undeployed_outline_1;
+    Texture* turret_bomb_undeployed_outline_2;
+
+    Texture* turret_bomb_deployed_1;
+    Texture* turret_bomb_deployed_2;
+    Texture* turret_bomb_deployed_outline_1;
+    Texture* turret_bomb_deployed_outline_2;
+
+    Texture* turret_projectile_grounded_1;
+    Texture* turret_projectile_grounded_2;
+    Texture* turret_projectile_grounded_outline_1;
+    Texture* turret_projectile_grounded_outline_2;
+
+    Texture* turret_projectile_standing_1;
+    Texture* turret_projectile_standing_2;
+    Texture* turret_projectile_standing_outline_1;
+    Texture* turret_projectile_standing_outline_2;
+
+    Texture* turret_projectile_undeployed_1;
+    Texture* turret_projectile_undeployed_2;
+    Texture* turret_projectile_undeployed_outline_1;
+    Texture* turret_projectile_undeployed_outline_2;
+
+    Texture* turret_projectile_deployed_1;
+    Texture* turret_projectile_deployed_2;
+    Texture* turret_projectile_deployed_outline_1;
+    Texture* turret_projectile_deployed_outline_2;
 
 } Textures_Object;
 
@@ -436,6 +478,10 @@ typedef struct
     Texture* laser_left;
     Texture* laser_vertical;
     Texture* laser_horizontal;
+
+    Texture* cell;
+    Texture* dynamite;
+    Texture* gemstone;
 
 } Textures_Animation;
 
