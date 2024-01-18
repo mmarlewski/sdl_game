@@ -2,6 +2,14 @@
 
 void object_enemy_prepare_move(State* state, Object* object)
 {
+    if(object->type == OBJECT_TYPE__TURRET_GROUNDED ||
+    object->type == OBJECT_TYPE__TURRET_STANDING ||
+    object->type == OBJECT_TYPE__TURRET_UNDEPLOYED ||
+    object->type == OBJECT_TYPE__TURRET_DEPLOYED)
+    {
+        return;
+    }
+
     Vec2i tilemap_pos_up = object->tilemap_pos;
     Object* object_up = 0;
     int distance_up = 0;

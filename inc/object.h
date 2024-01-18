@@ -105,10 +105,10 @@ enum OBJECT_TYPE
     OBJECT_TYPE__FLY,
     OBJECT_TYPE__CHAMELEON,
 
-    OBJECT_TYPE_TURRET_GROUNDED,
-    OBJECT_TYPE_TURRET_STANDING,
-    OBJECT_TYPE_TURRET_UNDEPLOYED,
-    OBJECT_TYPE_TURRET_DEPLOYED,
+    OBJECT_TYPE__TURRET_GROUNDED,
+    OBJECT_TYPE__TURRET_STANDING,
+    OBJECT_TYPE__TURRET_UNDEPLOYED,
+    OBJECT_TYPE__TURRET_DEPLOYED,
 
     OBJECT_TYPE__COUNT
 };
@@ -164,10 +164,13 @@ void destroy_object(Object* object);
 int is_object_flying(Object* object);
 int is_object_interactable(Object* object);
 int is_object_movable(Object* object);
+int is_object_meltable(Object* object);
+int is_object_breakable(Object* object);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_1_from_object(Object* object, Textures* textures);
 Texture* get_texture_2_from_object(Object* object, Textures* textures);
 Texture* get_texture_1_outline_from_object(Object* object, Textures* textures);
 Texture* get_texture_2_outline_from_object(Object* object, Textures* textures);
+
 #endif

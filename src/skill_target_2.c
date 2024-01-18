@@ -252,6 +252,22 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             }
         }
         break;
+        case SKILL__TURRET_LASER:
+        {
+            for(int i = 1; i <= OBJECT_TURRET_RANGE; i++)
+            {
+                for(int dir4 = 0; dir4 < DIR4__COUNT; dir4++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+
+                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    {
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    }
+                }
+            }
+        }
+        break;
         default:
         break;
     }

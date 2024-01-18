@@ -739,6 +739,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             }
         }
         break;
+        case SKILL__TURRET_LASER:
+        {
+            //
+        }
+        break;
         default:
         break;
     }

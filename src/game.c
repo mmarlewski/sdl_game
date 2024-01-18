@@ -157,10 +157,6 @@ int main (int argc, char* argv[])
     object_pillar_5->tilemap_pos = vec2i(2,7);
     add_object_to_gamemap_objects(&state, object_pillar_5);
 
-    Object* object_pillar_6 = new_object(OBJECT_TYPE__WEIGHT);
-    object_pillar_6->tilemap_pos = vec2i(5,6);
-    add_object_to_gamemap_objects(&state, object_pillar_6);
-
     Object* object_cover = new_object(OBJECT_TYPE__COVER_ROCK);
     object_cover->tilemap_pos = vec2i(6,6);
     add_object_to_gamemap_objects(&state, object_cover);
@@ -177,7 +173,7 @@ int main (int argc, char* argv[])
     object_barrel_3->tilemap_pos = vec2i(6,5);
     add_object_to_gamemap_objects(&state, object_barrel_3);
 
-    Object* object_other = new_object(OBJECT_TYPE__STALACTITE_FALLEN_ITEM);
+    Object* object_other = new_object(OBJECT_TYPE__SAFE);
     object_other->tilemap_pos = vec2i(7,4);
     add_object_to_gamemap_objects(&state, object_other);
 
@@ -205,6 +201,11 @@ int main (int argc, char* argv[])
     object_chameleon->is_enemy = 1;
     object_chameleon->tilemap_pos = vec2i(3,7);
     add_object_to_gamemap_objects(&state, object_chameleon);
+
+    Object* object_turret = new_object(OBJECT_TYPE__TURRET_DEPLOYED);
+    object_turret->is_enemy = 1;
+    object_turret->tilemap_pos = vec2i(5,6);
+    add_object_to_gamemap_objects(&state, object_turret);
 
     Vec2i tilemap_pos = vec2i(0,0);
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)

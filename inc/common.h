@@ -36,4 +36,6 @@ typedef Mix_Music Music;
 
 #define HERO_MAX_AP 10
 
+#define OBJECT_TURRET_RANGE 3
+
 #endif

@@ -472,7 +472,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             state->timer += delta_time;
 
-            if(state->timer > 1.0f)
+            if(state->timer > 0.5f)
             {
                 state->timer = 0.0f;
 

@@ -365,11 +365,6 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
 {
     switch(object->type)
     {
-        case OBJECT_TYPE__PILLAR:
-        {
-            //
-        }
-        break;
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
@@ -389,6 +384,83 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
             {
                 add_action_to_end_action_sequence(sequence, new_action_move( action->tilemap_pos, action->drop.dir4));
             }
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_melt(State* state, Action* sequence, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__SAFE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(OBJECT_TYPE__SAFE_DAMAGED_ITEM, object->tilemap_pos)
+                );
+        }
+        break;
+        default:
+        {
+            if(is_object_meltable(object))
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_death(object, object->tilemap_pos)
+                    );
+            }
+        }
+        break;
+    }
+}
+
+void object_on_break(State* state, Action* sequence, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__ROCK:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(OBJECT_TYPE__ROCK_DAMAGED_ITEM, object->tilemap_pos)
+                );
+        }
+        break;
+        default:
+        {
+            if(is_object_breakable(object))
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_death(object, object->tilemap_pos)
+                    );
+            }
+        }
+        break;
+    }
+}
+
+void object_on_shake(State* state, Action* sequence, Action* action, Object* object)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__DISPLAY:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(OBJECT_TYPE__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
+                );
+        }
+        break;
+        case OBJECT_TYPE__BARREL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(object, object->tilemap_pos)
+                );
         }
         break;
         default:

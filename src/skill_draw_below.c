@@ -423,6 +423,33 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
+        case SKILL__TURRET_LASER:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
+
+            if(distance_info.dir4 != DIR4__NONE)
+            {
+                for(int i = 1; i <= OBJECT_TURRET_RANGE; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, distance_info.dir4, i);
+
+                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    {
+                        draw_texture_at_gamemap_pos(
+                            renderer,
+                            textures->skill.floor_danger,
+                            color,
+                            1.0f,
+                            tilemap_pos_to_gamemap_pos(tilemap_pos),
+                            state->camera.world_pos,
+                            state->camera.zoom
+                            );
+                    }
+                }
+            }
+        }
+        break;
         default:
         break;
     }

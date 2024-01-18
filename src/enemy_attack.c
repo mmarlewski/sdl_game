@@ -2,6 +2,10 @@
 
 void object_enemy_prepare_attack(State* state, Object* object)
 {
+    object->enemy.skill = SKILL__NONE;
+    object->enemy.target_1_tilemap_pos = vec2i(-1,-1);
+    object->enemy.target_2_tilemap_pos = vec2i(-1,-1);
+
     switch(object->type)
     {
         case OBJECT_TYPE__GOAT:
@@ -291,6 +295,42 @@ void object_enemy_prepare_attack(State* state, Object* object)
                     object->enemy.target_1_tilemap_pos,
                     object->enemy.target_2_tilemap_pos
                     );
+            }
+        }
+        break;
+        case OBJECT_TYPE__TURRET_GROUNDED:
+        case OBJECT_TYPE__TURRET_STANDING:
+        case OBJECT_TYPE__TURRET_DEPLOYED:
+        {
+            int found_target = 0;
+            for(int i = 1; i < 3; i++)
+            {
+                for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(object->tilemap_pos, dir4, i);
+
+                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    {
+                        Object* curr_object = get_object_on_tilemap_pos(state, tilemap_pos);
+
+                        if(curr_object != 0 && !found_target)
+                        {
+                            found_target = 1;
+
+                            object->enemy.skill = SKILL__TURRET_LASER;
+                            object->enemy.target_1_tilemap_pos = vec2i(-1,-1);
+                            object->enemy.target_2_tilemap_pos = tilemap_pos;
+                            skill_add_actions_to_action_sequence(
+                                state,
+                                object->enemy.action_sequence,
+                                object->enemy.skill,
+                                object->tilemap_pos,
+                                object->enemy.target_1_tilemap_pos,
+                                object->enemy.target_2_tilemap_pos
+                                );
+                        }
+                    }
+                }
             }
         }
         break;

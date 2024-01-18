@@ -311,6 +311,7 @@ typedef struct
     Texture* floor_border_solid;
     Texture* floor_border_dashed;
     Texture* floor_border_dotted;
+    Texture* floor_danger;
 
     Texture* arrow_thin_up_start;
     Texture* arrow_thin_up_end;
@@ -372,6 +373,9 @@ typedef struct
     Texture* crash_effect;
     Texture* blow_up_effect;
     Texture* death_effect;
+    Texture* break_effect;
+    Texture* melt_effect;
+    Texture* shake_effect;
 
 } Textures_Skill;
 
@@ -426,6 +430,13 @@ typedef struct
     Texture* hook_left_down;
     Texture* hook_left_left;
 
+    Texture* laser_up;
+    Texture* laser_right;
+    Texture* laser_down;
+    Texture* laser_left;
+    Texture* laser_vertical;
+    Texture* laser_horizontal;
+
 } Textures_Animation;
 
 void load_textures_animation (Renderer* renderer, Textures_Animation* animation);
@@ -460,5 +471,7 @@ Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int 
 Texture* get_texture_hook_start(Textures* textures, int dir4);
 Texture* get_texture_hook_end(Textures* textures, int dir4);
 Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_laser(Textures* textures, int dir4);
 
 #endif

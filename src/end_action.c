@@ -177,6 +177,21 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             //
         }
         break;
+        case ACTION_TYPE__MELT:
+        {
+            //
+        }
+        break;
+        case ACTION_TYPE__BREAK:
+        {
+            //
+        }
+        break;
+        case ACTION_TYPE__SHAKE:
+        {
+            //
+        }
+        break;
         default:
         break;
     }

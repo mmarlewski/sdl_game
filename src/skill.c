@@ -17,6 +17,7 @@ int is_skill_two_target(int skill)
         case SKILL__PULL: is = 1; break;
         case SKILL__PULL_AND_THROW: is = 1; break;
         case SKILL__THROW: is = 1; break;
+        case SKILL__TURRET_LASER: is = 0; break;
         default: break;
     }
 
@@ -40,6 +41,7 @@ char* get_skill_name(int skill)
         case SKILL__PULL:               name = "pull";              break;
         case SKILL__PULL_AND_THROW:     name = "pull_and_throw";    break;
         case SKILL__THROW:              name = "throw";             break;
+        case SKILL__TURRET_LASER:       name = "turret laser";      break;
         default: break;
     }
 

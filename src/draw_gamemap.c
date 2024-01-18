@@ -160,6 +160,28 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
+    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
+    {
+        Object* curr_enemy = state->gamemap.curr_object_enemy;
+
+        if(curr_enemy != 0 &&
+        curr_enemy->is_enemy &&
+        !curr_enemy->is_dead &&
+        curr_enemy->is_visible)
+        {
+            skill_draw_below(
+                renderer,
+                state,
+                curr_enemy->enemy.skill,
+                curr_enemy->tilemap_pos,
+                curr_enemy->enemy.target_1_tilemap_pos,
+                curr_enemy->enemy.target_2_tilemap_pos,
+                colors->yellow,
+                textures
+                );
+        }
+    }
+
     // hero skill draw below
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
@@ -327,6 +349,39 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     }
                 }
             }
+        }
+    }
+
+    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
+    {
+        Object* curr_enemy = state->gamemap.curr_object_enemy;
+
+        if(curr_enemy != 0 &&
+        curr_enemy->is_enemy &&
+        !curr_enemy->is_dead &&
+        curr_enemy->is_visible)
+        {
+            skill_draw_above(
+                renderer,
+                state,
+                curr_enemy->enemy.skill,
+                curr_enemy->tilemap_pos,
+                curr_enemy->enemy.target_1_tilemap_pos,
+                curr_enemy->enemy.target_2_tilemap_pos,
+                colors->yellow,
+                textures
+                );
+
+            skill_draw_effect(
+                renderer,
+                state,
+                curr_enemy->enemy.skill,
+                curr_enemy->tilemap_pos,
+                curr_enemy->enemy.target_1_tilemap_pos,
+                curr_enemy->enemy.target_2_tilemap_pos,
+                textures,
+                colors
+                );
         }
     }
 

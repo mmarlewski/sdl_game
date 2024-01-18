@@ -126,6 +126,21 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = 1;
         }
         break;
+        case ACTION_TYPE__MELT:
+        {
+            action->is_finished = 1;
+        }
+        break;
+        case ACTION_TYPE__BREAK:
+        {
+            action->is_finished = 1;
+        }
+        break;
+        case ACTION_TYPE__SHAKE:
+        {
+            action->is_finished = 1;
+        }
+        break;
         default:
         break;
     }

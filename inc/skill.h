@@ -19,6 +19,8 @@ enum SKILL
     SKILL__PULL_AND_THROW,
     SKILL__THROW,
 
+    SKILL__TURRET_LASER,
+
     SKILL__COUNT
 };
 

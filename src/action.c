@@ -298,6 +298,45 @@ Action* new_action_remove_object(Object* object_to_remove, Vec2i tilemap_pos)
     return action;
 }
 
+Action* new_action_melt(Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__MELT;
+
+    return action;
+}
+
+Action* new_action_break(Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__BREAK;
+
+    return action;
+}
+
+Action* new_action_shake(Vec2i tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__SHAKE;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     if(action->type == ACTION_TYPE__SEQUENCE)
@@ -334,6 +373,9 @@ char* get_action_name_from_type(int action_type)
         case ACTION_TYPE__CHANGE_OBJECT:    name = "change object"; break;
         case ACTION_TYPE__ADD_OBJECT:       name = "add object";    break;
         case ACTION_TYPE__REMOVE_OBJECT:    name = "remove object"; break;
+        case ACTION_TYPE__MELT:             name = "melt";          break;
+        case ACTION_TYPE__BREAK:            name = "break";         break;
+        case ACTION_TYPE__SHAKE:            name = "shake";         break;
         case ACTION_TYPE__COUNT:            name = "count";         break;
         default: break;
     }

@@ -44,7 +44,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.death_effect,
+                    textures->skill.break_effect,
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
@@ -747,6 +747,41 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     state->camera.world_pos,
                     state->camera.zoom
                     );
+            }
+        }
+        break;
+        case SKILL__TURRET_LASER:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
+
+            if(distance_info.dir4 != DIR4__NONE)
+            {
+                for(int i = 1; i <= OBJECT_TURRET_RANGE; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, distance_info.dir4, i);
+
+                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    {
+                        Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+
+                        if(object != 0)
+                        {
+                            if(is_object_meltable(object))
+                            {
+                                draw_texture_at_gamemap_pos(
+                                    renderer,
+                                    textures->skill.melt_effect,
+                                    colors->none,
+                                    1.0f,
+                                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                    state->camera.world_pos,
+                                    state->camera.zoom
+                                    );
+                            }
+                        }
+                    }
+                }
             }
         }
         break;

@@ -348,6 +348,27 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
+        case ACTION_TYPE__MELT:
+        {
+            Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+
+            object_on_melt(state, sequence, action, melt_object);
+        }
+        break;
+        case ACTION_TYPE__BREAK:
+        {
+            Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+
+            object_on_break(state, sequence, action, melt_object);
+        }
+        break;
+        case ACTION_TYPE__SHAKE:
+        {
+            Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+
+            object_on_shake(state, sequence, action, melt_object);
+        }
+        break;
         default:
         break;
     }

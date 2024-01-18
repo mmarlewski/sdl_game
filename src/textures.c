@@ -309,6 +309,7 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->floor_border_solid = load_texture_from_filepath (renderer, "./res/skill/floor_border_solid.png");
     skill->floor_border_dashed = load_texture_from_filepath (renderer, "./res/skill/floor_border_dashed.png");
     skill->floor_border_dotted = load_texture_from_filepath (renderer, "./res/skill/floor_border_dotted.png");
+    skill->floor_danger = load_texture_from_filepath (renderer, "./res/skill/floor_danger.png");
 
     skill->arrow_thin_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_start.png");
     skill->arrow_thin_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_end.png");
@@ -370,6 +371,9 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->crash_effect = load_texture_from_filepath (renderer, "./res/skill/crash_effect.png");
     skill->blow_up_effect = load_texture_from_filepath (renderer, "./res/skill/blow_up_effect.png");
     skill->death_effect = load_texture_from_filepath (renderer, "./res/skill/death_effect.png");
+    skill->break_effect = load_texture_from_filepath (renderer, "./res/skill/break_effect.png");
+    skill->melt_effect = load_texture_from_filepath (renderer, "./res/skill/melt_effect.png");
+    skill->shake_effect = load_texture_from_filepath (renderer, "./res/skill/shake_effect.png");
 }
 void destroy_textures_skill (Textures_Skill* skill)
 {
@@ -423,6 +427,13 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->hook_left_right = load_texture_from_filepath (renderer, "./res/animation/hook_left_right.png");
     animation->hook_left_down = load_texture_from_filepath (renderer, "./res/animation/hook_left_down.png");
     animation->hook_left_left = load_texture_from_filepath (renderer, "./res/animation/hook_left_left.png");
+
+    animation->laser_up = load_texture_from_filepath (renderer, "./res/animation/laser_up.png");
+    animation->laser_right = load_texture_from_filepath (renderer, "./res/animation/laser_right.png");
+    animation->laser_down = load_texture_from_filepath (renderer, "./res/animation/laser_down.png");
+    animation->laser_left = load_texture_from_filepath (renderer, "./res/animation/laser_left.png");
+    animation->laser_vertical = load_texture_from_filepath (renderer, "./res/animation/laser_vertical.png");
+    animation->laser_horizontal = load_texture_from_filepath (renderer, "./res/animation/laser_horizontal.png");
 }
 
 void destroy_textures_animation (Textures_Animation* animation)
@@ -772,6 +783,22 @@ Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to
             }
         }
         break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_laser(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->animation.laser_up; break;
+        case DIR4__RIGHT: texture = textures->animation.laser_right; break;
+        case DIR4__DOWN: texture = textures->animation.laser_down; break;
+        case DIR4__LEFT: texture = textures->animation.laser_left; break;
         default: break;
     }
 

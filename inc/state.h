@@ -166,6 +166,9 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
 void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
 void object_on_death(State* state, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
+void object_on_melt(State* state, Action* sequence, Action* action, Object* object);
+void object_on_break(State* state, Action* sequence, Action* action, Object* object);
+void object_on_shake(State* state, Action* sequence, Action* action, Object* object);
 void object_on_interact(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 Animation* object_on_interact_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures);
 
