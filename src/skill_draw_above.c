@@ -13,7 +13,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
-        case SKILL__INTERACT:
+        case SKILL__HERO_INTERACT:
         {
             draw_texture_at_gamemap_pos(
                 renderer,
@@ -26,7 +26,22 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 );
         }
         break;
-        case SKILL__MOVE:
+        case SKILL__HERO_MOVE:
+        {
+            //
+        }
+        break;
+        case SKILL__HERO_THROW_CELL:
+        {
+            //
+        }
+        break;
+        case SKILL__HERO_THROW_DYNAMITE:
+        {
+            //
+        }
+        break;
+        case SKILL__HERO_THROW_GEMSTONE:
         {
             //
         }
@@ -737,11 +752,6 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         );
                 }
             }
-        }
-        break;
-        case SKILL__TURRET_LASER:
-        {
-            //
         }
         break;
         default:

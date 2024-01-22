@@ -12,7 +12,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             //
         }
         break;
-        case SKILL__INTERACT:
+        case SKILL__HERO_INTERACT:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
             get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
@@ -35,7 +35,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             destroy_list(square_area_pos);
         }
         break;
-        case SKILL__MOVE:
+        case SKILL__HERO_MOVE:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
             get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
@@ -53,6 +53,42 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             }
             remove_all_list_elements(square_area_pos, 1);
             destroy_list(square_area_pos);
+        }
+        break;
+        case SKILL__HERO_THROW_CELL:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i < 10; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                }
+            }
+        }
+        break;
+        case SKILL__HERO_THROW_DYNAMITE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i < 10; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                }
+            }
+        }
+        break;
+        case SKILL__HERO_THROW_GEMSTONE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i < 10; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                }
+            }
         }
         break;
         case SKILL__CHARGE:

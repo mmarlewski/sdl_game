@@ -48,6 +48,12 @@ typedef struct
     int was_w;
     int is_e;
     int was_e;
+    int is_z;
+    int was_z;
+    int is_x;
+    int was_x;
+    int is_c;
+    int was_c;
 
     int is_mouse_left;
     int was_mouse_left;

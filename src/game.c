@@ -256,6 +256,10 @@ int main (int argc, char* argv[])
 
     determine_enemy_order(&state);
 
+    state.gamemap.item_number[ITEM__CELL] = 5;
+    state.gamemap.item_number[ITEM__DYNAMITE] = 5;
+    state.gamemap.item_number[ITEM__GEMSTONE] = 5;
+
     while (state.is_game_running)
     {
         prev_time = curr_time;

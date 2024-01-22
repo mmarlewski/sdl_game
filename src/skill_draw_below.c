@@ -13,12 +13,12 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
-        case SKILL__INTERACT:
+        case SKILL__HERO_INTERACT:
         {
             //
         }
         break;
-        case SKILL__MOVE:
+        case SKILL__HERO_MOVE:
         {
             List* path_pos = new_list((void(*)(void*))destroy_vec2i);
             find_path(
@@ -102,6 +102,66 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
 
             remove_all_list_elements(path_pos, 1);
             destroy_list(path_pos);
+        }
+        break;
+        case SKILL__HERO_THROW_CELL:
+        {
+            draw_texture_at_gamemap_pos(
+                    renderer,
+                    textures->skill.floor_danger,
+                    color,
+                    1.0f,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+        }
+        break;
+        case SKILL__HERO_THROW_DYNAMITE:
+        {
+            if(is_tilemap_pos_in_tilemap(target_2_tilemap_pos))
+            {
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    textures->skill.floor_danger,
+                    color,
+                    1.0f,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
+
+                if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                {
+                    draw_texture_at_gamemap_pos(
+                        renderer,
+                        textures->skill.floor_danger,
+                        color,
+                        1.0f,
+                        tilemap_pos_to_gamemap_pos(tilemap_pos),
+                        state->camera.world_pos,
+                        state->camera.zoom
+                        );
+                }
+            }
+        }
+        break;
+        case SKILL__HERO_THROW_GEMSTONE:
+        {
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    textures->skill.floor_danger,
+                    color,
+                    1.0f,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
         }
         break;
         case SKILL__CHARGE:
@@ -483,6 +543,7 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                 }
             }
         }
+        break;
         case SKILL__TURRET_PROJECTILE:
         {
                 draw_texture_at_gamemap_pos(
@@ -495,6 +556,7 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     state->camera.zoom
                     );
         }
+        break;
         default:
         break;
     }

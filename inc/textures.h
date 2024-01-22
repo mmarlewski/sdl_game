@@ -419,6 +419,25 @@ typedef struct
     Texture* melt_effect;
     Texture* shake_effect;
 
+    Texture* plus_1_cell;
+    Texture* plus_2_cell;
+    Texture* plus_3_cell;
+    Texture* minus_1_cell;
+    Texture* minus_2_cell;
+    Texture* minus_3_cell;
+    Texture* plus_1_dynamite;
+    Texture* plus_2_dynamite;
+    Texture* plus_3_dynamite;
+    Texture* minus_1_dynamite;
+    Texture* minus_2_dynamite;
+    Texture* minus_3_dynamite;
+    Texture* plus_1_gemstone;
+    Texture* plus_2_gemstone;
+    Texture* plus_3_gemstone;
+    Texture* minus_1_gemstone;
+    Texture* minus_2_gemstone;
+    Texture* minus_3_gemstone;
+
 } Textures_Skill;
 
 void load_textures_skill (Renderer* renderer, Textures_Skill* skill);
@@ -513,6 +532,8 @@ Texture* get_texture_arrow_thin_from_to(Textures* textures, int dir4_from, int d
 Texture* get_texture_arrow_thick_start(Textures* textures, int dir4);
 Texture* get_texture_arrow_thick_end(Textures* textures, int dir4);
 Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_item(Textures* textures, int item, int number);
 
 Texture* get_texture_hook_start(Textures* textures, int dir4);
 Texture* get_texture_hook_end(Textures* textures, int dir4);

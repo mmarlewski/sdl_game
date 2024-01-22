@@ -150,8 +150,29 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             int skill = SKILL__NONE;
 
-            if(input->was_q && !input->is_q) skill = SKILL__INTERACT;
-            if(input->was_1 && !input->is_1) skill = SKILL__MOVE;
+            if(input->was_q && !input->is_q) skill = SKILL__HERO_INTERACT;
+            if(input->was_z && !input->is_z)
+            {
+                if(state->gamemap.item_number[ITEM__CELL])
+                {
+                    skill = SKILL__HERO_THROW_CELL;
+                }
+            }
+            if(input->was_x && !input->is_x)
+            {
+                if(state->gamemap.item_number[ITEM__DYNAMITE])
+                {
+                    skill = SKILL__HERO_THROW_DYNAMITE;
+                }
+            }
+            if(input->was_c && !input->is_c)
+            {
+                if(state->gamemap.item_number[ITEM__GEMSTONE])
+                {
+                    skill = SKILL__HERO_THROW_GEMSTONE;
+                }
+            }
+            if(input->was_1 && !input->is_1) skill = SKILL__HERO_MOVE;
             if(input->was_2 && !input->is_2) skill = SKILL__CHARGE;
             if(input->was_3 && !input->is_3) skill = SKILL__JUMP;
             if(input->was_4 && !input->is_4) skill = SKILL__CHARGE_AND_PUSH;
@@ -306,6 +327,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         musics,
                         colors
                     );
+
+                    skill_on_use(state, state->gamemap.curr_skill);
 
                     state->gamemap.skill_animation = animation;
 

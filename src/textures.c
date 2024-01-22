@@ -1,4 +1,5 @@
 #include "../inc/textures.h"
+#include "../inc/item.h"
 
 void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
 {
@@ -416,6 +417,25 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->break_effect = load_texture_from_filepath (renderer, "./res/skill/break_effect.png");
     skill->melt_effect = load_texture_from_filepath (renderer, "./res/skill/melt_effect.png");
     skill->shake_effect = load_texture_from_filepath (renderer, "./res/skill/shake_effect.png");
+
+    skill->plus_1_cell = load_texture_from_filepath (renderer, "./res/skill/plus_1_cell.png");
+    skill->plus_2_cell = load_texture_from_filepath (renderer, "./res/skill/plus_2_cell.png");
+    skill->plus_3_cell = load_texture_from_filepath (renderer, "./res/skill/plus_3_cell.png");
+    skill->minus_1_cell = load_texture_from_filepath (renderer, "./res/skill/minus_1_cell.png");
+    skill->minus_2_cell = load_texture_from_filepath (renderer, "./res/skill/minus_2_cell.png");
+    skill->minus_3_cell = load_texture_from_filepath (renderer, "./res/skill/minus_3_cell.png");
+    skill->plus_1_dynamite = load_texture_from_filepath (renderer, "./res/skill/plus_1_dynamite.png");
+    skill->plus_2_dynamite = load_texture_from_filepath (renderer, "./res/skill/plus_2_dynamite.png");
+    skill->plus_3_dynamite = load_texture_from_filepath (renderer, "./res/skill/plus_3_dynamite.png");
+    skill->minus_1_dynamite = load_texture_from_filepath (renderer, "./res/skill/minus_1_dynamite.png");
+    skill->minus_2_dynamite = load_texture_from_filepath (renderer, "./res/skill/minus_2_dynamite.png");
+    skill->minus_3_dynamite = load_texture_from_filepath (renderer, "./res/skill/minus_3_dynamite.png");
+    skill->plus_1_gemstone = load_texture_from_filepath (renderer, "./res/skill/plus_1_gemstone.png");
+    skill->plus_2_gemstone = load_texture_from_filepath (renderer, "./res/skill/plus_2_gemstone.png");
+    skill->plus_3_gemstone = load_texture_from_filepath (renderer, "./res/skill/plus_3_gemstone.png");
+    skill->minus_1_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_1_gemstone.png");
+    skill->minus_2_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_2_gemstone.png");
+    skill->minus_3_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_3_gemstone.png");
 }
 void destroy_textures_skill (Textures_Skill* skill)
 {
@@ -738,6 +758,61 @@ Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int 
         }
         break;
         default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_item(Textures* textures, int item, int number)
+{
+    Texture* texture = 0;
+
+    switch(item)
+    {
+        case ITEM__CELL:
+        {
+            switch(number)
+            {
+                case -3:texture = textures->skill.minus_3_cell;break;
+                case -2:texture = textures->skill.minus_2_cell;break;
+                case -1:texture = textures->skill.minus_1_cell;break;
+                case 1:texture = textures->skill.plus_1_cell;break;
+                case 2:texture = textures->skill.plus_2_cell;break;
+                case 3:texture = textures->skill.plus_3_cell;break;
+                default:break;
+            }
+        }
+        break;
+        case ITEM__DYNAMITE:
+        {
+            switch(number)
+            {
+                case -3:texture = textures->skill.minus_3_dynamite;break;
+                case -2:texture = textures->skill.minus_2_dynamite;break;
+                case -1:texture = textures->skill.minus_1_dynamite;break;
+                case 1:texture = textures->skill.plus_1_dynamite;break;
+                case 2:texture = textures->skill.plus_2_dynamite;break;
+                case 3:texture = textures->skill.plus_3_dynamite;break;
+                default:break;
+            }
+        }
+        break;
+        case ITEM__GEMSTONE:
+        {
+            switch(number)
+            {
+                case -3:texture = textures->skill.minus_3_gemstone;break;
+                case -2:texture = textures->skill.minus_2_gemstone;break;
+                case -1:texture = textures->skill.minus_1_gemstone;break;
+                case 1:texture = textures->skill.plus_1_gemstone;break;
+                case 2:texture = textures->skill.plus_2_gemstone;break;
+                case 3:texture = textures->skill.plus_3_gemstone;break;
+                default:break;
+            }
+        }
+        break;
+        default:
+        break;
     }
 
     return texture;

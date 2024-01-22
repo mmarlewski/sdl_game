@@ -394,6 +394,72 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
             }
         }
         break;
+        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__TURRET_LASER_UNDEPLOYED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__TURRET_LASER_DEPLOYED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__TURRET_BOMB_DEPLOYED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
         default:
         break;
     }

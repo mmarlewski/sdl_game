@@ -10,7 +10,7 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
 
     switch (skill)
     {
-        case SKILL__INTERACT:
+        case SKILL__HERO_INTERACT:
         {
             Object* object = target_2_object;
             int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
@@ -33,6 +33,96 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
                     textures
                 );
             }
+        }
+        break;
+        case SKILL__HERO_THROW_CELL:
+        {
+            Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    textures->animation.cell,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    1.0f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->skill.melt_effect,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            skill_animation = animation_sequence;
+        }
+        break;
+        case SKILL__HERO_THROW_DYNAMITE:
+        {
+            Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    textures->animation.dynamite,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    1.0f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.blow_up_1,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->animation.blow_up_2,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            skill_animation = animation_sequence;
+        }
+        break;
+        case SKILL__HERO_THROW_GEMSTONE:
+        {
+            Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    textures->animation.gemstone,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    1.0f
+                    )
+                );
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_show_sprite_in_gamemap(
+                    textures->skill.shake_effect,
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.1f
+                    )
+                );
+
+            skill_animation = animation_sequence;
         }
         break;
         case SKILL__PULL:
@@ -211,7 +301,7 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
                     textures->animation.gemstone,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    0.2f
+                    ACTION_LENGTH_IN_SECONDS
                     )
                 );
 
