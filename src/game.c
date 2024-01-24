@@ -177,6 +177,10 @@ int main (int argc, char* argv[])
     object_other->tilemap_pos = vec2i(7,4);
     add_object_to_gamemap_objects(&state, object_other);
 
+    Object* object_stalactite = new_object(OBJECT_TYPE__STALACTITE);
+    object_stalactite->tilemap_pos = vec2i(7,2);
+    add_object_to_gamemap_objects(&state, object_stalactite);
+
     Object* object_goat = new_object(OBJECT_TYPE__GOAT);
     object_goat->is_enemy = 1;
     object_goat->tilemap_pos = vec2i(2,3);

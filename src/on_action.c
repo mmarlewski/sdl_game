@@ -581,6 +581,64 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 );
         }
         break;
+        case OBJECT_TYPE__STALACTITE:
+        {
+            int floor = get_floor_on_tilemap_pos(state, action->tilemap_pos);
+
+            switch(floor)
+            {
+                case FLOOR_TYPE__WATER:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR_TYPE__WATER_STALACTITE_FALLEN,
+                            object->tilemap_pos
+                            )
+                        );
+
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+                case FLOOR_TYPE__LAVA:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR_TYPE__LAVA_STALACTITE_FALLEN,
+                            object->tilemap_pos
+                            )
+                        );
+
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+                default:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_object(
+                            OBJECT_TYPE__STALACTITE_FALLEN_ITEM,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+            }
+        }
+        break;
         default:
         break;
     }
