@@ -660,6 +660,154 @@ int is_object_breakable(Object* object)
     return is;
 }
 
+int get_object_item_type(Object* object)
+{
+    int item_type = ITEM__NONE;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__WALL_ROCK:                        item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__WALL_STONE:                       item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__WALL_METAL:                       item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__PILLAR:                           item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__PIPE:                             item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__STALACTITE:                       item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN:                item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           item_type = ITEM__GEMSTONE; break;
+
+        case OBJECT_TYPE__STALAGMITE:                       item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__STALAGNATE:                       item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__COVER_ROCK:                       item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__COVER_METAL:                      item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__COVER_GLASS:                      item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              item_type = ITEM__GEMSTONE; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  item_type = ITEM__CELL; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              item_type = ITEM__DYNAMITE; break;
+
+        case OBJECT_TYPE__ROCK:                             item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__ROCK_DAMAGED:                     item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                item_type = ITEM__GEMSTONE; break;
+
+        case OBJECT_TYPE__SAFE:                             item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__SAFE_DAMAGED:                     item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:                item_type = ITEM__GEMSTONE; break;
+
+        case OBJECT_TYPE__DISPLAY:                          item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED:                  item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             item_type = ITEM__GEMSTONE; break;
+
+        case OBJECT_TYPE__VENDING_CELL:                     item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__VENDING_CELL_ITEM:                item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED:             item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:        item_type = ITEM__CELL; break;
+
+        case OBJECT_TYPE__VENDING_DYNAMITE:                 item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:            item_type = ITEM__DYNAMITE; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED:         item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    item_type = ITEM__DYNAMITE; break;
+
+        case OBJECT_TYPE__BARREL:                           item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__WEIGHT:                           item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__PISTON:                           item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__BALL:                             item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      item_type = ITEM__NONE; break;
+
+        default: break;
+    }
+
+    return item_type;
+}
+
+int get_object_item_count(Object* object)
+{
+    int count = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__WALL_ROCK:                        count = 0; break;
+
+        case OBJECT_TYPE__WALL_STONE:                       count = 0; break;
+
+        case OBJECT_TYPE__WALL_METAL:                       count = 0; break;
+
+        case OBJECT_TYPE__PILLAR:                           count = 0; break;
+
+        case OBJECT_TYPE__PIPE:                             count = 0; break;
+
+        case OBJECT_TYPE__STALACTITE:                       count = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN:                count = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           count = 1; break;
+
+        case OBJECT_TYPE__STALAGMITE:                       count = 0; break;
+
+        case OBJECT_TYPE__STALAGNATE:                       count = 0; break;
+
+        case OBJECT_TYPE__COVER_ROCK:                       count = 0; break;
+        case OBJECT_TYPE__COVER_METAL:                      count = 0; break;
+        case OBJECT_TYPE__COVER_GLASS:                      count = 0; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   count = 0; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              count = 1; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       count = 0; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  count = 0; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   count = 0; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              count = 1; break;
+
+        case OBJECT_TYPE__ROCK:                             count = 0; break;
+        case OBJECT_TYPE__ROCK_DAMAGED:                     count = 0; break;
+        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                count = 1; break;
+
+        case OBJECT_TYPE__SAFE:                             count = 0; break;
+        case OBJECT_TYPE__SAFE_DAMAGED:                     count = 0; break;
+        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:                count = 1; break;
+
+        case OBJECT_TYPE__DISPLAY:                          count = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED:                  count = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             count = 1; break;
+
+        case OBJECT_TYPE__VENDING_CELL:                     count = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_ITEM:                count = 1; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED:             count = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:        count = 3; break;
+
+        case OBJECT_TYPE__VENDING_DYNAMITE:                 count = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:            count = 1; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED:         count = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    count = 3; break;
+
+        case OBJECT_TYPE__BARREL:                           count = 0; break;
+
+        case OBJECT_TYPE__WEIGHT:                           count = 0; break;
+
+        case OBJECT_TYPE__PISTON:                           count = 0; break;
+
+        case OBJECT_TYPE__BALL:                             count = 0; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      count = 0; break;
+
+        default: break;
+    }
+
+    return count;
+}
+
 char* get_name_from_object_type(int object_type)
 {
     char* name = "";

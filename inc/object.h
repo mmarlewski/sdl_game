@@ -177,6 +177,9 @@ int is_object_movable(Object* object);
 int is_object_meltable(Object* object);
 int is_object_breakable(Object* object);
 
+int get_object_item_type(Object* object);
+int get_object_item_count(Object* object);
+
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_1_from_object(Object* object, Textures* textures);
 Texture* get_texture_2_from_object(Object* object, Textures* textures);

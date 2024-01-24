@@ -13,6 +13,80 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             //
         }
         break;
+        case SKILL__HERO_PICK_ITEM_CLOSE:
+        {
+            if(target_2_object != 0)
+            {
+                int item_type = get_object_item_type(target_2_object);
+                int item_count = get_object_item_count(target_2_object);
+
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    get_texture_item(textures, item_type, item_count),
+                    colors->none,
+                    0.75f,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+        }
+        break;
+        case SKILL__HERO_PICK_ITEM_FAR:
+        {
+            if(target_2_object != 0)
+            {
+                int item_type = get_object_item_type(target_2_object);
+                int item_count = get_object_item_count(target_2_object);
+
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    get_texture_item(textures, item_type, item_count),
+                    colors->none,
+                    0.75f,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_CLOSE:
+        {
+            if(target_2_object != 0)
+            {
+                int item_type = state->gamemap.curr_item;
+
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    get_texture_item(textures, item_type, -1),
+                    colors->none,
+                    0.75f,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_FAR:
+        {
+            if(target_2_object != 0)
+            {
+                int item_type = state->gamemap.curr_item;
+
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    get_texture_item(textures, item_type, -1),
+                    colors->none,
+                    0.75f,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+        }
+        break;
         case SKILL__HERO_INTERACT:
         {
             //
@@ -137,7 +211,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
-                    textures->skill.break_effect,
+                    textures->skill.death_effect,
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),

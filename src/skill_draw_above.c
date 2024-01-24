@@ -13,6 +13,26 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
+        case SKILL__HERO_PICK_ITEM_CLOSE:
+        {
+            //
+        }
+        break;
+        case SKILL__HERO_PICK_ITEM_FAR:
+        {
+            //
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_CLOSE:
+        {
+            //
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_FAR:
+        {
+            //
+        }
+        break;
         case SKILL__HERO_INTERACT:
         {
             draw_texture_at_gamemap_pos(

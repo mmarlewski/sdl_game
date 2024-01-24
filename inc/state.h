@@ -77,6 +77,7 @@ typedef struct
     int hero_ap;
 
     int item_number[ITEM__COUNT];
+    int curr_item;
 
     Vec2i prev_selected_tilemap_pos;
     Vec2i curr_selected_tilemap_pos;
@@ -171,8 +172,10 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
 void object_on_shake(State* state, Action* sequence, Action* action, Object* object);
 void object_on_interact(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 Animation* object_on_interact_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures);
+void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
+void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
 
-void skill_on_use(State* state, int skill);
+void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos);
 void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos);
 void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos);
 void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos);

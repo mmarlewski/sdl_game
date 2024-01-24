@@ -10,6 +10,68 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
 
     switch (skill)
     {
+        case SKILL__HERO_PICK_ITEM_FAR:
+        case SKILL__HERO_PUT_ITEM_FAR:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
+
+            Animation* animation_sequence = new_animation_sequence();
+
+            for(int i = 0; i < distance_info.abs_diff + 1; i++)
+            {
+                Animation* animation_simultaneous = new_animation_simultaneous();
+                Vec2i tilemap_pos = source_tilemap_pos;
+                float show_sprite_length_in_seconds = 0.1f;
+
+                for(int j = 0; j <= i; j++)
+                {
+                    if(vec2i_equals(tilemap_pos, source_tilemap_pos))
+                    {
+                        add_animation_to_end_animation_simultaneous(
+                            animation_simultaneous,
+                            new_animation_show_sprite_in_gamemap(
+                                get_texture_scissor_start(textures, distance_info.dir4),
+                                tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                show_sprite_length_in_seconds
+                                )
+                            );
+                    }
+                    else if(vec2i_equals(tilemap_pos, target_2_tilemap_pos))
+                    {
+                        add_animation_to_end_animation_simultaneous(
+                            animation_simultaneous,
+                            new_animation_show_sprite_in_gamemap(
+                                get_texture_scissor_end(textures, get_opposite_dir4(distance_info.dir4)),
+                                tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                show_sprite_length_in_seconds
+                                )
+                            );
+                    }
+                    else
+                    {
+                        add_animation_to_end_animation_simultaneous(
+                            animation_simultaneous,
+                            new_animation_show_sprite_in_gamemap(
+                                get_texture_scissor_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4),
+                                tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                show_sprite_length_in_seconds
+                                )
+                            );
+                    }
+
+                    tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
+                }
+
+                add_animation_to_end_animation_sequence(
+                    animation_sequence,
+                    animation_simultaneous
+                    );
+            }
+
+            skill_animation = animation_sequence;
+        }
+        break;
         case SKILL__HERO_INTERACT:
         {
             Object* object = target_2_object;

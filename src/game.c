@@ -173,7 +173,7 @@ int main (int argc, char* argv[])
     object_barrel_3->tilemap_pos = vec2i(6,5);
     add_object_to_gamemap_objects(&state, object_barrel_3);
 
-    Object* object_other = new_object(OBJECT_TYPE__DISPLAY);
+    Object* object_other = new_object(OBJECT_TYPE__VENDING_DYNAMITE);
     object_other->tilemap_pos = vec2i(7,4);
     add_object_to_gamemap_objects(&state, object_other);
 

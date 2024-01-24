@@ -59,6 +59,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     {
         state->gamemap.item_number[i] = 0;
     }
+    state->gamemap.curr_item = ITEM__NONE;
 
     state->gamemap.show_all_order_numbers = 0;
 

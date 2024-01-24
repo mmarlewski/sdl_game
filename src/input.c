@@ -5,48 +5,11 @@ void init_input (Input* input)
 {
     input->is_quit = 0;
 
-    input->is_esc = 0;
-    input->was_esc = 0;
-
-    input->is_up = 0;
-    input->was_up = 0;
-    input->is_down = 0;
-    input->was_down = 0;
-    input->is_left = 0;
-    input->was_left = 0;
-    input->is_right = 0;
-    input->was_right = 0;
-
-    input->is_1 = 0;
-    input->was_1 = 0;
-    input->is_2 = 0;
-    input->was_2 = 0;
-    input->is_3 = 0;
-    input->was_3 = 0;
-    input->is_4 = 0;
-    input->was_4 = 0;
-    input->is_5 = 0;
-    input->was_5 = 0;
-    input->is_6 = 0;
-    input->was_6 = 0;
-    input->is_7 = 0;
-    input->was_7 = 0;
-    input->is_8 = 0;
-    input->was_8 = 0;
-    input->is_9 = 0;
-    input->was_9 = 0;
-    input->is_0 = 0;
-    input->was_0 = 0;
-
-    input->is_q = 0;
-    input->was_q = 0;
-    input->is_w = 0;
-    input->was_w = 0;
-    input->is_e = 0;
-    input->was_e = 0;
-    input->was_z = 0;
-    input->was_x = 0;
-    input->was_c = 0;
+    for(int i = 1; i < KEY__COUNT; i++)
+    {
+        input->is_key[i] = 0;
+        input->was_key[i] = 0;
+    }
 
     input->is_mouse_left = 0;
     input->was_mouse_left = 0;
@@ -72,34 +35,14 @@ void update_input (Input* input)
 
     // update 'was' from 'is'
 
-    input->was_esc = input->is_esc;
-    input->was_enter = input->is_enter;
+    for(int i = 1; i < KEY__COUNT; i++)
+    {
+        input->was_key[i] = input->is_key[i];
+    }
 
-    input->was_up = input->is_up;
-    input->was_down = input->is_down;
-    input->was_left = input->is_left;
-    input->was_right = input->is_right;
     input->was_mouse_left = input->is_mouse_left;
     input->was_mouse_middle = input->is_mouse_middle;
     input->was_mouse_right = input->is_mouse_right;
-
-    input->was_1 = input->is_1;
-    input->was_2 = input->is_2;
-    input->was_3 = input->is_3;
-    input->was_4 = input->is_4;
-    input->was_5 = input->is_5;
-    input->was_6 = input->is_6;
-    input->was_7 = input->is_7;
-    input->was_8 = input->is_8;
-    input->was_9 = input->is_9;
-    input->was_0 = input->is_0;
-
-    input->was_q = input->is_q;
-    input->was_w = input->is_w;
-    input->was_e = input->is_e;
-    input->was_z = input->is_z;
-    input->was_x = input->is_x;
-    input->was_c = input->is_c;
 
     while (SDL_PollEvent(&event))
     {
@@ -122,31 +65,54 @@ void update_input (Input* input)
 
             switch (keyboard_event.keysym.scancode)
             {
-                case SDL_SCANCODE_ESCAPE: input->is_esc = 1;   break;
-                case SDL_SCANCODE_RETURN: input->is_enter = 1;   break;
+                case SDL_SCANCODE_ESCAPE:   input->is_key[KEY__ESC] = 1;     break;
+                case SDL_SCANCODE_RETURN:   input->is_key[KEY__ENTER] = 1;   break;
+                case SDL_SCANCODE_SPACE:    input->is_key[KEY__SPACE] = 1;   break;
 
-                case SDL_SCANCODE_UP:     input->is_up = 1;    break;
-                case SDL_SCANCODE_DOWN:   input->is_down = 1;  break;
-                case SDL_SCANCODE_LEFT:   input->is_left = 1;  break;
-                case SDL_SCANCODE_RIGHT:  input->is_right = 1; break;
+                case SDL_SCANCODE_UP:       input->is_key[KEY__UP] = 1;      break;
+                case SDL_SCANCODE_DOWN:     input->is_key[KEY__DOWN] = 1;    break;
+                case SDL_SCANCODE_LEFT:     input->is_key[KEY__LEFT] = 1;    break;
+                case SDL_SCANCODE_RIGHT:    input->is_key[KEY__RIGHT] = 1;   break;
 
-                case SDL_SCANCODE_1:  input->is_1 = 1; break;
-                case SDL_SCANCODE_2:  input->is_2 = 1; break;
-                case SDL_SCANCODE_3:  input->is_3 = 1; break;
-                case SDL_SCANCODE_4:  input->is_4 = 1; break;
-                case SDL_SCANCODE_5:  input->is_5 = 1; break;
-                case SDL_SCANCODE_6:  input->is_6 = 1; break;
-                case SDL_SCANCODE_7:  input->is_7 = 1; break;
-                case SDL_SCANCODE_8:  input->is_8 = 1; break;
-                case SDL_SCANCODE_9:  input->is_9 = 1; break;
-                case SDL_SCANCODE_0:  input->is_0 = 1; break;
+                case SDL_SCANCODE_1:        input->is_key[KEY__1] = 1;       break;
+                case SDL_SCANCODE_2:        input->is_key[KEY__2] = 1;       break;
+                case SDL_SCANCODE_3:        input->is_key[KEY__3] = 1;       break;
+                case SDL_SCANCODE_4:        input->is_key[KEY__4] = 1;       break;
+                case SDL_SCANCODE_5:        input->is_key[KEY__5] = 1;       break;
+                case SDL_SCANCODE_6:        input->is_key[KEY__6] = 1;       break;
+                case SDL_SCANCODE_7:        input->is_key[KEY__7] = 1;       break;
+                case SDL_SCANCODE_8:        input->is_key[KEY__8] = 1;       break;
+                case SDL_SCANCODE_9:        input->is_key[KEY__9] = 1;       break;
+                case SDL_SCANCODE_0:        input->is_key[KEY__0] = 1;       break;
 
-                case SDL_SCANCODE_Q:  input->is_q = 1; break;
-                case SDL_SCANCODE_W:  input->is_w = 1; break;
-                case SDL_SCANCODE_E:  input->is_e = 1; break;
-                case SDL_SCANCODE_Z:  input->is_z = 1; break;
-                case SDL_SCANCODE_X:  input->is_x = 1; break;
-                case SDL_SCANCODE_C:  input->is_c = 1; break;
+                case SDL_SCANCODE_Q:        input->is_key[KEY__Q] = 1;       break;
+                case SDL_SCANCODE_W:        input->is_key[KEY__W] = 1;       break;
+                case SDL_SCANCODE_E:        input->is_key[KEY__E] = 1;       break;
+                case SDL_SCANCODE_R:        input->is_key[KEY__R] = 1;       break;
+                case SDL_SCANCODE_T:        input->is_key[KEY__T] = 1;       break;
+                case SDL_SCANCODE_Y:        input->is_key[KEY__Y] = 1;       break;
+                case SDL_SCANCODE_U:        input->is_key[KEY__U] = 1;       break;
+                case SDL_SCANCODE_I:        input->is_key[KEY__I] = 1;       break;
+                case SDL_SCANCODE_O:        input->is_key[KEY__O] = 1;       break;
+                case SDL_SCANCODE_P:        input->is_key[KEY__P] = 1;       break;
+
+                case SDL_SCANCODE_A:        input->is_key[KEY__A] = 1;       break;
+                case SDL_SCANCODE_S:        input->is_key[KEY__S] = 1;       break;
+                case SDL_SCANCODE_D:        input->is_key[KEY__D] = 1;       break;
+                case SDL_SCANCODE_F:        input->is_key[KEY__F] = 1;       break;
+                case SDL_SCANCODE_G:        input->is_key[KEY__G] = 1;       break;
+                case SDL_SCANCODE_H:        input->is_key[KEY__H] = 1;       break;
+                case SDL_SCANCODE_J:        input->is_key[KEY__J] = 1;       break;
+                case SDL_SCANCODE_K:        input->is_key[KEY__K] = 1;       break;
+                case SDL_SCANCODE_L:        input->is_key[KEY__L] = 1;       break;
+
+                case SDL_SCANCODE_Z:        input->is_key[KEY__Z] = 1;       break;
+                case SDL_SCANCODE_X:        input->is_key[KEY__X] = 1;       break;
+                case SDL_SCANCODE_C:        input->is_key[KEY__C] = 1;       break;
+                case SDL_SCANCODE_V:        input->is_key[KEY__V] = 1;       break;
+                case SDL_SCANCODE_B:        input->is_key[KEY__B] = 1;       break;
+                case SDL_SCANCODE_N:        input->is_key[KEY__N] = 1;       break;
+                case SDL_SCANCODE_M:        input->is_key[KEY__M] = 1;       break;
 
                 default: break;
             }
@@ -156,31 +122,54 @@ void update_input (Input* input)
 
             switch (keyboard_event.keysym.scancode)
             {
-                case SDL_SCANCODE_ESCAPE: input->is_esc = 0;   break;
-                case SDL_SCANCODE_RETURN: input->is_enter = 0;   break;
+                case SDL_SCANCODE_ESCAPE:   input->is_key[KEY__ESC] = 0;     break;
+                case SDL_SCANCODE_RETURN:   input->is_key[KEY__ENTER] = 0;   break;
+                case SDL_SCANCODE_SPACE:    input->is_key[KEY__SPACE] = 0;   break;
 
-                case SDL_SCANCODE_UP:     input->is_up = 0;    break;
-                case SDL_SCANCODE_DOWN:   input->is_down = 0;  break;
-                case SDL_SCANCODE_LEFT:   input->is_left = 0;  break;
-                case SDL_SCANCODE_RIGHT:  input->is_right = 0; break;
+                case SDL_SCANCODE_UP:       input->is_key[KEY__UP] = 0;      break;
+                case SDL_SCANCODE_DOWN:     input->is_key[KEY__DOWN] = 0;    break;
+                case SDL_SCANCODE_LEFT:     input->is_key[KEY__LEFT] = 0;    break;
+                case SDL_SCANCODE_RIGHT:    input->is_key[KEY__RIGHT] = 0;   break;
 
-                case SDL_SCANCODE_1:  input->is_1 = 0; break;
-                case SDL_SCANCODE_2:  input->is_2 = 0; break;
-                case SDL_SCANCODE_3:  input->is_3 = 0; break;
-                case SDL_SCANCODE_4:  input->is_4 = 0; break;
-                case SDL_SCANCODE_5:  input->is_5 = 0; break;
-                case SDL_SCANCODE_6:  input->is_6 = 0; break;
-                case SDL_SCANCODE_7:  input->is_7 = 0; break;
-                case SDL_SCANCODE_8:  input->is_8 = 0; break;
-                case SDL_SCANCODE_9:  input->is_9 = 0; break;
-                case SDL_SCANCODE_0:  input->is_0 = 0; break;
+                case SDL_SCANCODE_1:        input->is_key[KEY__1] = 0;       break;
+                case SDL_SCANCODE_2:        input->is_key[KEY__2] = 0;       break;
+                case SDL_SCANCODE_3:        input->is_key[KEY__3] = 0;       break;
+                case SDL_SCANCODE_4:        input->is_key[KEY__4] = 0;       break;
+                case SDL_SCANCODE_5:        input->is_key[KEY__5] = 0;       break;
+                case SDL_SCANCODE_6:        input->is_key[KEY__6] = 0;       break;
+                case SDL_SCANCODE_7:        input->is_key[KEY__7] = 0;       break;
+                case SDL_SCANCODE_8:        input->is_key[KEY__8] = 0;       break;
+                case SDL_SCANCODE_9:        input->is_key[KEY__9] = 0;       break;
+                case SDL_SCANCODE_0:        input->is_key[KEY__0] = 0;       break;
 
-                case SDL_SCANCODE_Q:  input->is_q = 0; break;
-                case SDL_SCANCODE_W:  input->is_w = 0; break;
-                case SDL_SCANCODE_E:  input->is_e = 0; break;
-                case SDL_SCANCODE_Z:  input->is_z = 0; break;
-                case SDL_SCANCODE_X:  input->is_x = 0; break;
-                case SDL_SCANCODE_C:  input->is_c = 0; break;
+                case SDL_SCANCODE_Q:        input->is_key[KEY__Q] = 0;       break;
+                case SDL_SCANCODE_W:        input->is_key[KEY__W] = 0;       break;
+                case SDL_SCANCODE_E:        input->is_key[KEY__E] = 0;       break;
+                case SDL_SCANCODE_R:        input->is_key[KEY__R] = 0;       break;
+                case SDL_SCANCODE_T:        input->is_key[KEY__T] = 0;       break;
+                case SDL_SCANCODE_Y:        input->is_key[KEY__Y] = 0;       break;
+                case SDL_SCANCODE_U:        input->is_key[KEY__U] = 0;       break;
+                case SDL_SCANCODE_I:        input->is_key[KEY__I] = 0;       break;
+                case SDL_SCANCODE_O:        input->is_key[KEY__O] = 0;       break;
+                case SDL_SCANCODE_P:        input->is_key[KEY__P] = 0;       break;
+
+                case SDL_SCANCODE_A:        input->is_key[KEY__A] = 0;       break;
+                case SDL_SCANCODE_S:        input->is_key[KEY__S] = 0;       break;
+                case SDL_SCANCODE_D:        input->is_key[KEY__D] = 0;       break;
+                case SDL_SCANCODE_F:        input->is_key[KEY__F] = 0;       break;
+                case SDL_SCANCODE_G:        input->is_key[KEY__G] = 0;       break;
+                case SDL_SCANCODE_H:        input->is_key[KEY__H] = 0;       break;
+                case SDL_SCANCODE_J:        input->is_key[KEY__J] = 0;       break;
+                case SDL_SCANCODE_K:        input->is_key[KEY__K] = 0;       break;
+                case SDL_SCANCODE_L:        input->is_key[KEY__L] = 0;       break;
+
+                case SDL_SCANCODE_Z:        input->is_key[KEY__Z] = 0;       break;
+                case SDL_SCANCODE_X:        input->is_key[KEY__X] = 0;       break;
+                case SDL_SCANCODE_C:        input->is_key[KEY__C] = 0;       break;
+                case SDL_SCANCODE_V:        input->is_key[KEY__V] = 0;       break;
+                case SDL_SCANCODE_B:        input->is_key[KEY__B] = 0;       break;
+                case SDL_SCANCODE_N:        input->is_key[KEY__N] = 0;       break;
+                case SDL_SCANCODE_M:        input->is_key[KEY__M] = 0;       break;
 
                 default: break;
             }

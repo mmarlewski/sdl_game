@@ -3,57 +3,67 @@
 
 #include "../inc/common.h"
 
+enum KEY
+{
+    KEY__NONE,
+
+    KEY__ESC,
+    KEY__ENTER,
+    KEY__SPACE,
+
+    KEY__UP,
+    KEY__DOWN,
+    KEY__RIGHT,
+    KEY__LEFT,
+
+    KEY__1,
+    KEY__2,
+    KEY__3,
+    KEY__4,
+    KEY__5,
+    KEY__6,
+    KEY__7,
+    KEY__8,
+    KEY__9,
+    KEY__0,
+
+    KEY__Q,
+    KEY__W,
+    KEY__E,
+    KEY__R,
+    KEY__T,
+    KEY__Y,
+    KEY__U,
+    KEY__I,
+    KEY__O,
+    KEY__P,
+
+    KEY__A,
+    KEY__S,
+    KEY__D,
+    KEY__F,
+    KEY__G,
+    KEY__H,
+    KEY__J,
+    KEY__K,
+    KEY__L,
+
+    KEY__Z,
+    KEY__X,
+    KEY__C,
+    KEY__V,
+    KEY__B,
+    KEY__N,
+    KEY__M,
+
+    KEY__COUNT
+};
 typedef struct
 {
     int is_quit;
 
-    int is_esc;
-    int was_esc;
-    int is_enter;
-    int was_enter;
-
-    int is_up;
-    int was_up;
-    int is_down;
-    int was_down;
-    int is_left;
-    int was_left;
-    int is_right;
-    int was_right;
-
-    int is_1;
-    int was_1;
-    int is_2;
-    int was_2;
-    int is_3;
-    int was_3;
-    int is_4;
-    int was_4;
-    int is_5;
-    int was_5;
-    int is_6;
-    int was_6;
-    int is_7;
-    int was_7;
-    int is_8;
-    int was_8;
-    int is_9;
-    int was_9;
-    int is_0;
-    int was_0;
-
-    int is_q;
-    int was_q;
-    int is_w;
-    int was_w;
-    int is_e;
-    int was_e;
-    int is_z;
-    int was_z;
-    int is_x;
-    int was_x;
-    int is_c;
-    int was_c;
+    int is_key[KEY__COUNT];
+    int was_key[KEY__COUNT];
 
     int is_mouse_left;
     int was_mouse_left;

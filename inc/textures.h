@@ -491,6 +491,34 @@ typedef struct
     Texture* hook_left_down;
     Texture* hook_left_left;
 
+    Texture* scissor_up_start;
+    Texture* scissor_up_end;
+    Texture* scissor_up_up;
+    Texture* scissor_up_right;
+    Texture* scissor_up_down;
+    Texture* scissor_up_left;
+
+    Texture* scissor_right_start;
+    Texture* scissor_right_end;
+    Texture* scissor_right_up;
+    Texture* scissor_right_right;
+    Texture* scissor_right_down;
+    Texture* scissor_right_left;
+
+    Texture* scissor_down_start;
+    Texture* scissor_down_end;
+    Texture* scissor_down_up;
+    Texture* scissor_down_right;
+    Texture* scissor_down_down;
+    Texture* scissor_down_left;
+
+    Texture* scissor_left_start;
+    Texture* scissor_left_end;
+    Texture* scissor_left_up;
+    Texture* scissor_left_right;
+    Texture* scissor_left_down;
+    Texture* scissor_left_left;
+
     Texture* laser_up;
     Texture* laser_right;
     Texture* laser_down;
@@ -538,6 +566,10 @@ Texture* get_texture_item(Textures* textures, int item, int number);
 Texture* get_texture_hook_start(Textures* textures, int dir4);
 Texture* get_texture_hook_end(Textures* textures, int dir4);
 Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_scissor_start(Textures* textures, int dir4);
+Texture* get_texture_scissor_end(Textures* textures, int dir4);
+Texture* get_texture_scissor_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 Texture* get_texture_laser(Textures* textures, int dir4);
 

@@ -64,7 +64,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->camera.world_pos = new_camera_world_pos;
     }
 
-    state->gamemap.show_all_order_numbers = input->is_e;
+    state->gamemap.show_all_order_numbers = input->is_key[KEY__E];
 
     // animations
 
@@ -103,7 +103,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
     {
         case GAMESTATE__NONE:
         {
-            if (input->was_esc && !input->is_esc)
+            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC])
             {
                 state->is_game_running = 0;
 
@@ -113,14 +113,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__HERO_CHOOSING_SKILL:
         {
-            if (input->was_esc && !input->is_esc)
+            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC])
             {
                 state->is_game_running = 0;
 
                 break;
             }
 
-            if(input->was_enter && !input->is_enter)
+            if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER])
             {
                 restore_hero_ap(state);
 
@@ -150,39 +150,98 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             int skill = SKILL__NONE;
 
-            if(input->was_q && !input->is_q) skill = SKILL__HERO_INTERACT;
-            if(input->was_z && !input->is_z)
+            if(input->was_key[KEY__W] && !input->is_key[KEY__W]) skill = SKILL__HERO_INTERACT;
+
+            if(input->was_key[KEY__1] && !input->is_key[KEY__1]) skill = SKILL__HERO_MOVE;
+            if(input->was_key[KEY__2] && !input->is_key[KEY__2]) skill = SKILL__CHARGE;
+            if(input->was_key[KEY__3] && !input->is_key[KEY__3]) skill = SKILL__JUMP;
+            if(input->was_key[KEY__4] && !input->is_key[KEY__4]) skill = SKILL__CHARGE_AND_PUSH;
+            if(input->was_key[KEY__5] && !input->is_key[KEY__5]) skill = SKILL__CHARGE_AND_THROW;
+            if(input->was_key[KEY__6] && !input->is_key[KEY__6]) skill = SKILL__PUSH;
+            if(input->was_key[KEY__7] && !input->is_key[KEY__7]) skill = SKILL__PULL;
+            if(input->was_key[KEY__8] && !input->is_key[KEY__8]) skill = SKILL__PULL_AND_THROW;
+            if(input->was_key[KEY__9] && !input->is_key[KEY__9]) skill = SKILL__THROW;
+
+            if(input->was_key[KEY__A] && !input->is_key[KEY__A])
             {
-                if(state->gamemap.item_number[ITEM__CELL])
+                skill = SKILL__HERO_PICK_ITEM_CLOSE;
+            }
+            if(input->was_key[KEY__S] && !input->is_key[KEY__S])
+            {
+                skill = SKILL__HERO_PICK_ITEM_FAR;
+            }
+            if(input->was_key[KEY__D] && !input->is_key[KEY__D])
+            {
+                if(state->gamemap.item_number[ITEM__CELL] > 0)
+                {
+                    state->gamemap.curr_item = ITEM__CELL;
+                    skill = SKILL__HERO_PUT_ITEM_CLOSE;
+                }
+            }
+            if(input->was_key[KEY__F] && !input->is_key[KEY__F])
+            {
+                if(state->gamemap.item_number[ITEM__CELL] > 0)
+                {
+                    state->gamemap.curr_item = ITEM__CELL;
+                    skill = SKILL__HERO_PUT_ITEM_FAR;
+                }
+            }
+            if(input->was_key[KEY__G] && !input->is_key[KEY__G])
+            {
+                if(state->gamemap.item_number[ITEM__DYNAMITE] > 0)
+                {
+                    state->gamemap.curr_item = ITEM__DYNAMITE;
+                    skill = SKILL__HERO_PUT_ITEM_CLOSE;
+                }
+            }
+            if(input->was_key[KEY__H] && !input->is_key[KEY__H])
+            {
+                if(state->gamemap.item_number[ITEM__DYNAMITE] > 0)
+                {
+                    state->gamemap.curr_item = ITEM__DYNAMITE;
+                    skill = SKILL__HERO_PUT_ITEM_FAR;
+                }
+            }
+            if(input->was_key[KEY__J] && !input->is_key[KEY__J])
+            {
+                if(state->gamemap.item_number[ITEM__GEMSTONE] > 0)
+                {
+                    state->gamemap.curr_item = ITEM__GEMSTONE;
+                    skill = SKILL__HERO_PUT_ITEM_CLOSE;
+                }
+            }
+            if(input->was_key[KEY__K] && !input->is_key[KEY__K])
+            {
+                if(state->gamemap.item_number[ITEM__GEMSTONE] > 0)
+                {
+                    state->gamemap.curr_item = ITEM__GEMSTONE;
+                    skill = SKILL__HERO_PUT_ITEM_FAR;
+                }
+            }
+
+            if(input->was_key[KEY__Z] && !input->is_key[KEY__Z])
+            {
+                if(state->gamemap.item_number[ITEM__CELL] > 0)
                 {
                     skill = SKILL__HERO_THROW_CELL;
                 }
             }
-            if(input->was_x && !input->is_x)
+            if(input->was_key[KEY__X] && !input->is_key[KEY__X])
             {
-                if(state->gamemap.item_number[ITEM__DYNAMITE])
+                if(state->gamemap.item_number[ITEM__DYNAMITE] > 0)
                 {
                     skill = SKILL__HERO_THROW_DYNAMITE;
                 }
             }
-            if(input->was_c && !input->is_c)
+            if(input->was_key[KEY__C] && !input->is_key[KEY__C])
             {
-                if(state->gamemap.item_number[ITEM__GEMSTONE])
+                if(state->gamemap.item_number[ITEM__GEMSTONE] > 0)
                 {
                     skill = SKILL__HERO_THROW_GEMSTONE;
                 }
             }
-            if(input->was_1 && !input->is_1) skill = SKILL__HERO_MOVE;
-            if(input->was_2 && !input->is_2) skill = SKILL__CHARGE;
-            if(input->was_3 && !input->is_3) skill = SKILL__JUMP;
-            if(input->was_4 && !input->is_4) skill = SKILL__CHARGE_AND_PUSH;
-            if(input->was_5 && !input->is_5) skill = SKILL__CHARGE_AND_THROW;
-            if(input->was_6 && !input->is_6) skill = SKILL__PUSH;
-            if(input->was_7 && !input->is_7) skill = SKILL__PULL;
-            if(input->was_8 && !input->is_8) skill = SKILL__PULL_AND_THROW;
-            if(input->was_9 && !input->is_9) skill = SKILL__THROW;
 
-            if(input->was_0 && !input->is_0)
+            if(input->was_key[KEY__0] && !input->is_key[KEY__0])
             {
                 state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
                 state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
@@ -233,7 +292,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__HERO_CHOOSING_TARGET_1:
         {
-            if (input->was_esc && !input->is_esc)
+            if (input->was_key[KEY__Q] && !input->is_key[KEY__Q])
             {
                 remove_all_actions_from_action_sequence(state->action.hero_action_sequence);
 
@@ -269,7 +328,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__HERO_CHOOSING_TARGET_2:
         {
-            if (input->was_esc && !input->is_esc)
+            if (input->was_key[KEY__Q] && !input->is_key[KEY__Q])
             {
                 state->gamemap.prev_selected_tilemap_pos = vec2i(-1, -1);
                 state->gamemap.curr_selected_tilemap_pos = vec2i(-1, -1);
@@ -328,7 +387,13 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         colors
                     );
 
-                    skill_on_use(state, state->gamemap.curr_skill);
+                    skill_on_use(
+                        state,
+                        state->gamemap.curr_skill,
+                        state->gamemap.object_hero->tilemap_pos,
+                        state->gamemap.target_1_tilemap_pos,
+                        state->gamemap.target_2_tilemap_pos
+                        );
 
                     state->gamemap.skill_animation = animation;
 

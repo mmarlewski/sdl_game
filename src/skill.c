@@ -7,6 +7,10 @@ int is_skill_two_target(int skill)
     switch(skill)
     {
         case SKILL__NONE:                   is = 0; break;
+        case SKILL__HERO_PICK_ITEM_CLOSE:   is = 0; break;
+        case SKILL__HERO_PICK_ITEM_FAR:     is = 0; break;
+        case SKILL__HERO_PUT_ITEM_CLOSE:    is = 0; break;
+        case SKILL__HERO_PUT_ITEM_FAR:      is = 0; break;
         case SKILL__HERO_INTERACT:          is = 0; break;
         case SKILL__HERO_MOVE:              is = 0; break;
         case SKILL__HERO_THROW_CELL:        is = 0; break;

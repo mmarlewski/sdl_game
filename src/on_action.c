@@ -477,6 +477,50 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 );
         }
         break;
+        case OBJECT_TYPE__VENDING_CELL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_CELL_ITEM:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_DYNAMITE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         default:
         {
             if(is_object_meltable(object))
@@ -610,4 +654,171 @@ Animation* object_on_interact_get_animation(State* state, Object* object, Vec2i 
     }
 
     return animation;
+}
+
+void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__CRATE_CELL_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__CRATE_CELL_ITEM,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__CRATE_DYNAMITE,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__CRATE_GEMSTONE,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__STALACTITE_FALLEN,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__ROCK_DAMAGED,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__SAFE_DAMAGED,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__DISPLAY_DAMAGED,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_CELL_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__VENDING_CELL,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__VENDING_CELL_DAMAGED,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__VENDING_DYNAMITE,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type)
+{
+    switch(object->type)
+    {
+        case OBJECT_TYPE__VENDING_CELL:
+        {
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__VENDING_CELL_ITEM,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__VENDING_DYNAMITE:
+        {
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__VENDING_DYNAMITE_ITEM,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        default:
+        break;
+    }
 }

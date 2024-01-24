@@ -13,6 +13,35 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             //
         }
         break;
+        case SKILL__HERO_PICK_ITEM_CLOSE:
+        case SKILL__HERO_PICK_ITEM_FAR:
+        {
+            if(target_2_object != 0)
+            {
+                object_on_pick_item(
+                    state,
+                    action_sequence,
+                    target_2_object,
+                    target_2_tilemap_pos
+                    );
+            }
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_CLOSE:
+        case SKILL__HERO_PUT_ITEM_FAR:
+        {
+            if(target_2_object != 0)
+            {
+                object_on_put_item(
+                    state,
+                    action_sequence,
+                    target_2_object,
+                    target_2_tilemap_pos,
+                    state->gamemap.curr_item
+                    );
+            }
+        }
+        break;
         case SKILL__HERO_INTERACT:
         {
             Object* object = target_2_object;

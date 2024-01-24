@@ -12,6 +12,64 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             //
         }
         break;
+        case SKILL__HERO_PICK_ITEM_CLOSE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                if(object != 0 && get_object_item_type(object) != ITEM__NONE)
+                {
+                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                }
+            }
+        }
+        break;
+        case SKILL__HERO_PICK_ITEM_FAR:
+        {
+            for(int i = 1; i < 10; i++)
+            {
+                for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                    if(object != 0 && get_object_item_type(object) != ITEM__NONE)
+                    {
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_CLOSE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                if(object != 0)
+                {
+                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                }
+            }
+        }
+        break;
+        case SKILL__HERO_PUT_ITEM_FAR:
+        {
+            for(int i = 1; i < 10; i++)
+            {
+                for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                    if(object != 0)
+                    {
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    }
+                }
+            }
+        }
+        break;
         case SKILL__HERO_INTERACT:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
