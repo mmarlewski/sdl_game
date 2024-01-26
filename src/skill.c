@@ -40,6 +40,10 @@ char* get_skill_name(int skill)
     switch(skill)
     {
         case SKILL__NONE:                   name = "none";                  break;
+        case SKILL__HERO_PICK_ITEM_CLOSE:   name = "hero pick item close";  break;
+        case SKILL__HERO_PICK_ITEM_FAR:     name = "hero pick item far";    break;
+        case SKILL__HERO_PUT_ITEM_CLOSE:    name = "hero put item close";   break;
+        case SKILL__HERO_PUT_ITEM_FAR:      name = "hero put item far";     break;
         case SKILL__HERO_INTERACT:          name = "hero interact";         break;
         case SKILL__HERO_MOVE:              name = "hero move";             break;
         case SKILL__HERO_THROW_CELL:        name = "hero throw cell";       break;

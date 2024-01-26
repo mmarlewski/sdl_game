@@ -133,7 +133,7 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__ICE, vec2i(6,1));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_PISTON, vec2i(3,5));
+    FLOOR_TYPE__METAL_PISTON_CELL, vec2i(3,5));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__METAL_COVER_BOTTOM, vec2i(6,6));
 

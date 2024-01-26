@@ -134,6 +134,9 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__WEIGHT:                           is = 0; break;
 
         case OBJECT_TYPE__PISTON:                           is = 0; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
 
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
@@ -271,6 +274,9 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__WEIGHT:                           is = 0; break;
 
         case OBJECT_TYPE__PISTON:                           is = 1; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 1; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 1; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 1; break;
 
         case OBJECT_TYPE__BALL:                             is = 1; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
@@ -408,6 +414,9 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__WEIGHT:                           is = 1; break;
 
         case OBJECT_TYPE__PISTON:                           is = 0; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
 
         case OBJECT_TYPE__BALL:                             is = 1; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
@@ -545,6 +554,9 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__WEIGHT:                           is = 1; break;
 
         case OBJECT_TYPE__PISTON:                           is = 1; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 1; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 1; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 1; break;
 
         case OBJECT_TYPE__BALL:                             is = 1; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
@@ -682,6 +694,9 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__WEIGHT:                           is = 0; break;
 
         case OBJECT_TYPE__PISTON:                           is = 0; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
 
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
@@ -793,6 +808,9 @@ int get_object_item_type(Object* object)
         case OBJECT_TYPE__WEIGHT:                           item_type = ITEM__NONE; break;
 
         case OBJECT_TYPE__PISTON:                           item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__PISTON_CELL:                      item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  item_type = ITEM__DYNAMITE; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    item_type = ITEM__NONE; break;
 
         case OBJECT_TYPE__BALL:                             item_type = ITEM__NONE; break;
         case OBJECT_TYPE__BALL_SPIKES:                      item_type = ITEM__NONE; break;
@@ -882,6 +900,9 @@ int get_object_item_count(Object* object)
         case OBJECT_TYPE__WEIGHT:                           count = 0; break;
 
         case OBJECT_TYPE__PISTON:                           count = 0; break;
+        case OBJECT_TYPE__PISTON_CELL:                      count = 2; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  count = 2; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    count = 0; break;
 
         case OBJECT_TYPE__BALL:                             count = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      count = 0; break;
@@ -1008,6 +1029,9 @@ int is_object_put_item(Object* object)
         case OBJECT_TYPE__WEIGHT:                           is = 0; break;
 
         case OBJECT_TYPE__PISTON:                           is = 0; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
 
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
@@ -1164,6 +1188,9 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__WEIGHT:                           name = "weight"; break;
 
         case OBJECT_TYPE__PISTON:                           name = "piston"; break;
+        case OBJECT_TYPE__PISTON_CELL:                      name = "piston cell"; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  name = "piston dynamite"; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    name = "piston barrel"; break;
 
         case OBJECT_TYPE__BALL:                             name = "ball"; break;
         case OBJECT_TYPE__BALL_SPIKES:                      name = "ball spikes"; break;
@@ -1320,6 +1347,9 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight; break;
 
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston; break;
+        case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel; break;
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
@@ -1476,6 +1506,9 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight; break;
 
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston; break;
+        case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel; break;
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
@@ -1632,6 +1665,9 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight_outline; break;
 
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston_outline; break;
+        case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel_outline; break;
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
@@ -1788,6 +1824,9 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight_outline; break;
 
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston_outline; break;
+        case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel_outline; break;
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;

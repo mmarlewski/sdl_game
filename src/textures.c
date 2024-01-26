@@ -16,6 +16,10 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_hatch_closed = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_closed.png");
     floor->metal_cover_bottom = load_texture_from_filepath (renderer, "./res/floor/metal_cover_bottom.png");
     floor->metal_piston = load_texture_from_filepath (renderer, "./res/floor/metal_piston.png");
+    floor->metal_piston_cell = load_texture_from_filepath (renderer, "./res/floor/metal_piston_cell.png");
+    floor->metal_piston_dynamite = load_texture_from_filepath (renderer, "./res/floor/metal_piston_dynamite.png");
+    floor->metal_piston_barrel = load_texture_from_filepath (renderer, "./res/floor/metal_piston_barrel.png");
+    floor->metal_no_piston = load_texture_from_filepath (renderer, "./res/floor/metal_no_piston.png");
     floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
     floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
@@ -254,6 +258,15 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->piston = load_texture_from_filepath(renderer, "./res/object/piston.png");
     object->piston_outline = load_texture_from_filepath(renderer, "./res/object/piston_outline.png");
+
+    object->piston_cell = load_texture_from_filepath(renderer, "./res/object/piston_cell.png");
+    object->piston_cell_outline = load_texture_from_filepath(renderer, "./res/object/piston_cell_outline.png");
+
+    object->piston_dynamite = load_texture_from_filepath(renderer, "./res/object/piston_dynamite.png");
+    object->piston_dynamite_outline = load_texture_from_filepath(renderer, "./res/object/piston_dynamite_outline.png");
+
+    object->piston_barrel = load_texture_from_filepath(renderer, "./res/object/piston_barrel.png");
+    object->piston_barrel_outline = load_texture_from_filepath(renderer, "./res/object/piston_barrel_outline.png");
 
     object->ball = load_texture_from_filepath(renderer, "./res/object/ball.png");
     object->ball_outline = load_texture_from_filepath(renderer, "./res/object/ball_outline.png");

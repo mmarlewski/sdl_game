@@ -33,7 +33,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             {
                 for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                 {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
                     int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
                     Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
                     if(get_floor_item_type(floor) != ITEM__NONE ||
@@ -66,7 +66,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             {
                 for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                 {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
                     int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
                     Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
                     if(is_floor_put_item(floor) ||

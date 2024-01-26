@@ -22,7 +22,12 @@ typedef struct
     Texture* metal_hatch_open_2;
     Texture* metal_hatch_closed;
     Texture* metal_cover_bottom;
+
     Texture* metal_piston;
+    Texture* metal_piston_cell;
+    Texture* metal_piston_dynamite;
+    Texture* metal_piston_barrel;
+    Texture* metal_no_piston;
 
     Texture* grass;
 
@@ -254,6 +259,15 @@ typedef struct
 
     Texture* piston;
     Texture* piston_outline;
+
+    Texture* piston_cell;
+    Texture* piston_cell_outline;
+
+    Texture* piston_dynamite;
+    Texture* piston_dynamite_outline;
+
+    Texture* piston_barrel;
+    Texture* piston_barrel_outline;
 
     Texture* ball;
     Texture* ball_outline;
