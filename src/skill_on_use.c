@@ -18,6 +18,15 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
 
                 state->gamemap.item_number[item_type] += item_count;
             }
+            else
+            {
+                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
+                int item_type = get_floor_item_type(floor);
+                int item_count = get_floor_item_count(floor);
+
+                state->gamemap.item_number[item_type] += item_count;
+            }
         }
         break;
         case SKILL__HERO_PUT_ITEM_CLOSE:

@@ -5,6 +5,7 @@
         "interactable",
         "STALAGNATE",
         "tilemap",
-        "undeployed"
+        "undeployed",
+        "UNPOWERED"
     ]
 }

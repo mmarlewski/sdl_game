@@ -25,6 +25,17 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     target_2_tilemap_pos
                     );
             }
+            else
+            {
+                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
+                floor_on_pick_item(
+                    state,
+                    action_sequence,
+                    floor,
+                    target_2_tilemap_pos
+                    );
+            }
         }
         break;
         case SKILL__HERO_PUT_ITEM_CLOSE:
@@ -36,6 +47,18 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     state,
                     action_sequence,
                     target_2_object,
+                    target_2_tilemap_pos,
+                    state->gamemap.curr_item
+                    );
+            }
+            else
+            {
+                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
+                floor_on_put_item(
+                    state,
+                    action_sequence,
+                    floor,
                     target_2_tilemap_pos,
                     state->gamemap.curr_item
                     );

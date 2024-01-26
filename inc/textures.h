@@ -39,6 +39,15 @@ typedef struct
     Texture* ice;
     Texture* ice_crack_water;
 
+    Texture* stone_stairs_below;
+    Texture* stone_stairs_above_unpowered;
+    Texture* stone_stairs_above_powered;
+    Texture* rock_stairs_below;
+    Texture* metal_stairs_below_off;
+    Texture* metal_stairs_above_off;
+    Texture* metal_stairs_below_on;
+    Texture* metal_stairs_below;
+
 } Textures_Floor;
 
 void load_textures_floor (Renderer* renderer, Textures_Floor* floor);
@@ -309,6 +318,21 @@ typedef struct
     Texture* turret_projectile_deployed_2;
     Texture* turret_projectile_deployed_outline_1;
     Texture* turret_projectile_deployed_outline_2;
+
+    Texture* stairs_above_stone_powered;
+    Texture* stairs_above_stone_powered_outline;
+
+    Texture* stairs_above_stone;
+    Texture* stairs_above_stone_outline;
+
+    Texture* stairs_above_rock;
+    Texture* stairs_above_rock_outline;
+
+    Texture* stairs_above_metal_on;
+    Texture* stairs_above_metal_on_outline;
+
+    Texture* stairs_above_metal;
+    Texture* stairs_above_metal_outline;
 
 } Textures_Object;
 

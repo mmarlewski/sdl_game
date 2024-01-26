@@ -241,7 +241,7 @@ int main (int argc, char* argv[])
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
     }
 
-    Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT);
+    Object* object_door = new_object(OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT);
     object_door->tilemap_pos = tilemap_pos;
     add_object_to_gamemap_objects(&state, object_door);
 

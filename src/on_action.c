@@ -190,6 +190,40 @@ void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_
             add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__METAL_HATCH_CLOSED, tilemap_pos));
         }
         break;
+        case FLOOR_TYPE__METAL_STAIRS_ABOVE_OFF:
+        {
+            Object* object_piston = new_object(OBJECT_TYPE__STAIRS_ABOVE_METAL_ON);
+            object_piston->tilemap_pos = tilemap_pos;
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    object_piston, tilemap_pos
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__METAL_STAIRS_BELOW_OFF:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__METAL_STAIRS_BELOW_ON,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__METAL_STAIRS_BELOW_ON:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__METAL_STAIRS_BELOW_OFF,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
         default:
         break;
     }
@@ -281,11 +315,70 @@ Animation* floor_on_interact_get_animation(State* state, int floor, Vec2i tilema
                 );
         }
         break;
+        case FLOOR_TYPE__METAL_STAIRS_ABOVE_OFF:
+        {
+            //
+        }
+        break;
         default:
         break;
     }
 
     return animation;
+}
+
+void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__STONE_STAIRS_ABOVE_POWERED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos, int item_type)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR_TYPE__STONE_STAIRS_ABOVE_POWERED,
+                        tilemap_pos
+                        )
+                    );
+
+                Object* object = new_object(OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED);
+                object->tilemap_pos = tilemap_pos;
+
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_add_object(
+                        object,
+                        tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        default:
+        break;
+    }
 }
 
 void object_on_crashing(State* state, Action* sequence, Action* action, Object* object)
@@ -469,6 +562,39 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_STONE_UP,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_STONE_RIGHT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_STONE_DOWN,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__SAFE:
         {
             add_action_to_end_action_sequence(
@@ -539,6 +665,50 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_STONE_LEFT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_ROCK_UP,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_ROCK_RIGHT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_ROCK_DOWN,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__ROCK:
         {
             add_action_to_end_action_sequence(
@@ -565,6 +735,61 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_ROCK_LEFT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_UP,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_RIGHT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_DOWN,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_LEFT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__DISPLAY:
         {
             add_action_to_end_action_sequence(
@@ -666,6 +891,17 @@ void object_on_interact(State* state, Action* sequence, Object* object, Vec2i ti
         case OBJECT_TYPE__BARREL:
         {
             add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
+        }
+        break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_remove_object(
+                    object,
+                    tilemap_pos
+                    )
+                );
         }
         break;
         default:
@@ -839,6 +1075,24 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                     );
         }
         break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED,
+                        tilemap_pos
+                        )
+                    );
+
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        object,
+                        tilemap_pos
+                        )
+                    );
+        }
         default:
         break;
     }

@@ -120,26 +120,18 @@ enum OBJECT_TYPE
     OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED,
     OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED,
 
+    OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED,
+    OBJECT_TYPE__STAIRS_ABOVE_STONE,
+    OBJECT_TYPE__STAIRS_ABOVE_ROCK,
+    OBJECT_TYPE__STAIRS_ABOVE_METAL_ON,
+    OBJECT_TYPE__STAIRS_ABOVE_METAL,
+
     OBJECT_TYPE__COUNT
 };
 
 struct _Action;
 
 typedef struct _Object Object;
-
-typedef struct
-{
-    int item_1;
-    int item_2;
-    int item_3;
-
-} Object_Container;
-
-typedef struct
-{
-    Vec2i to_tilemap_pos;
-
-} Object_Exit;
 
 typedef struct
 {
@@ -160,10 +152,6 @@ struct _Object
     int type;
     Vec2i tilemap_pos;
 
-    int is_container;
-    Object_Container container;
-    int is_exit;
-    Object_Exit exit;
     int is_enemy;
     Object_Enemy enemy;
 };
@@ -179,6 +167,7 @@ int is_object_breakable(Object* object);
 
 int get_object_item_type(Object* object);
 int get_object_item_count(Object* object);
+int is_object_put_item(Object* object);
 
 char* get_name_from_object_type(int object_type);
 Texture* get_texture_1_from_object(Object* object, Textures* textures);

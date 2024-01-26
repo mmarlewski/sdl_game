@@ -27,6 +27,14 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->lava_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_2.png");
     floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
     floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
+    floor->stone_stairs_below = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below.png");
+    floor->stone_stairs_above_unpowered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_unpowered.png");
+    floor->stone_stairs_above_powered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_powered.png");
+    floor->rock_stairs_below = load_texture_from_filepath (renderer, "./res/floor/rock_stairs_below.png");
+    floor->metal_stairs_below_off = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_below_off.png");
+    floor->metal_stairs_above_off = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_above_off.png");
+    floor->metal_stairs_below_on = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_below_on.png");
+    floor->metal_stairs_below = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_below.png");
 }
 void destroy_textures_floor (Textures_Floor* floor)
 {
@@ -307,6 +315,21 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->turret_projectile_deployed_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_2.png");
     object->turret_projectile_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_outline_1.png");
     object->turret_projectile_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_outline_2.png");
+
+    object->stairs_above_stone_powered = load_texture_from_filepath(renderer, "./res/object/stairs_above_stone_powered.png");
+    object->stairs_above_stone_powered_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_stone_powered_outline.png");
+
+    object->stairs_above_stone = load_texture_from_filepath(renderer, "./res/object/stairs_above_stone.png");
+    object->stairs_above_stone_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_stone_outline.png");
+
+    object->stairs_above_rock = load_texture_from_filepath(renderer, "./res/object/stairs_above_rock.png");
+    object->stairs_above_rock_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_rock_outline.png");
+
+    object->stairs_above_metal_on = load_texture_from_filepath(renderer, "./res/object/stairs_above_metal_on.png");
+    object->stairs_above_metal_on_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_metal_on_outline.png");
+
+    object->stairs_above_metal = load_texture_from_filepath(renderer, "./res/object/stairs_above_metal.png");
+    object->stairs_above_metal_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_metal_outline.png");
 }
 
 void destroy_textures_object (Textures_Object* object)

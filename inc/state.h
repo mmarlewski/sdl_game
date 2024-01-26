@@ -162,6 +162,8 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 Animation* floor_on_interact_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
+void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
+void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos, int item_type);
 
 void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
 void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);

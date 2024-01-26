@@ -14,24 +14,6 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         }
         break;
         case SKILL__HERO_PICK_ITEM_CLOSE:
-        {
-            if(target_2_object != 0)
-            {
-                int item_type = get_object_item_type(target_2_object);
-                int item_count = get_object_item_count(target_2_object);
-
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, item_type, item_count),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
-                    );
-            }
-        }
-        break;
         case SKILL__HERO_PICK_ITEM_FAR:
         {
             if(target_2_object != 0)
@@ -49,9 +31,27 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     state->camera.zoom
                     );
             }
+            else
+            {
+                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
+                int item_type = get_floor_item_type(floor);
+                int item_count = get_floor_item_count(floor);
+
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    get_texture_item(textures, item_type, item_count),
+                    colors->none,
+                    0.75f,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
         }
         break;
         case SKILL__HERO_PUT_ITEM_CLOSE:
+        case SKILL__HERO_PUT_ITEM_FAR:
         {
             if(target_2_object != 0)
             {
@@ -67,12 +67,10 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     state->camera.zoom
                     );
             }
-        }
-        break;
-        case SKILL__HERO_PUT_ITEM_FAR:
-        {
-            if(target_2_object != 0)
+            else
             {
+                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
                 int item_type = state->gamemap.curr_item;
 
                 draw_texture_at_gamemap_pos(

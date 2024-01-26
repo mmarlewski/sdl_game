@@ -33,6 +33,15 @@ enum FLOOR_TYPE
     FLOOR_TYPE__ICE,
     FLOOR_TYPE__ICE_CRACK_WATER,
 
+    FLOOR_TYPE__STONE_STAIRS_BELOW,
+    FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED,
+    FLOOR_TYPE__STONE_STAIRS_ABOVE_POWERED,
+    FLOOR_TYPE__ROCK_STAIRS_BELOW,
+    FLOOR_TYPE__METAL_STAIRS_BELOW_OFF,
+    FLOOR_TYPE__METAL_STAIRS_ABOVE_OFF,
+    FLOOR_TYPE__METAL_STAIRS_BELOW_ON,
+    FLOOR_TYPE__METAL_STAIRS_BELOW,
+
     FLOOR_TYPE__COUNT
 };
 
@@ -40,6 +49,10 @@ int is_floor_interactable(int floor);
 int is_floor_traversable(int floor);
 int is_floor_deadly_on_move(int floor);
 int is_floor_deadly_on_drop(int floor);
+
+int get_floor_item_type(int floor);
+int get_floor_item_count(int floor);
+int is_floor_put_item(int floor);
 
 char* get_name_from_floor(int floor);
 Texture* get_texture_1_from_floor_type(int type, Textures* textures);

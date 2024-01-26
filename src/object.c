@@ -13,14 +13,6 @@ Object* new_object(int type)
     object->type = type;
     object->tilemap_pos = vec2i(0,0);
 
-    object->is_exit = 0;
-    object->exit.to_tilemap_pos = vec2i(0,0);
-
-    object->is_container = 0;
-    object->container.item_1 = ITEM__NONE;
-    object->container.item_2 = ITEM__NONE;
-    object->container.item_3 = ITEM__NONE;
-
     object->is_enemy = 0;
     object->enemy.action_sequence = new_action_sequence();
     object->enemy.performed_attack = 0;
@@ -160,6 +152,12 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
+
         default: break;
     }
 
@@ -283,6 +281,11 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
 
         default: break;
     }
@@ -407,6 +410,11 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 1; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
 
         default: break;
     }
@@ -439,10 +447,10 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 0; break;
         case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 0; break;
         case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 1; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
@@ -531,6 +539,12 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 1; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 1; break;
+
         default: break;
     }
 
@@ -553,10 +567,10 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 0; break;
         case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 1; break;
 
         case OBJECT_TYPE__EXIT_STONE_UP:                    is = 0; break;
         case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 0; break;
@@ -654,6 +668,12 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
+
         default: break;
     }
 
@@ -727,6 +747,12 @@ int get_object_item_type(Object* object)
 
         case OBJECT_TYPE__BALL:                             item_type = ITEM__NONE; break;
         case OBJECT_TYPE__BALL_SPIKES:                      item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               item_type = ITEM__NONE; break;
 
         default: break;
     }
@@ -802,10 +828,145 @@ int get_object_item_count(Object* object)
         case OBJECT_TYPE__BALL:                             count = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      count = 0; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       count = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               count = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                count = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            count = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               count = 0; break;
+
         default: break;
     }
 
     return count;
+}
+
+int is_object_put_item(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
+
+        case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
+
+        case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
+
+        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
+
+        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
+
+        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
+
+        case OBJECT_TYPE__PILLAR:                           is = 0; break;
+
+        case OBJECT_TYPE__PIPE:                             is = 0; break;
+
+        case OBJECT_TYPE__STALACTITE:                       is = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
+
+        case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
+
+        case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
+
+        case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
+        case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
+        case OBJECT_TYPE__COVER_GLASS:                      is = 0; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 0; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       is = 0; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 0; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 0; break;
+
+        case OBJECT_TYPE__ROCK:                             is = 0; break;
+        case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
+        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 0; break;
+
+        case OBJECT_TYPE__SAFE:                             is = 0; break;
+        case OBJECT_TYPE__SAFE_DAMAGED:                     is = 0; break;
+        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:                is = 0; break;
+
+        case OBJECT_TYPE__DISPLAY:                          is = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED:                  is = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             is = 0; break;
+
+        case OBJECT_TYPE__VENDING_CELL:                     is = 1; break;
+        case OBJECT_TYPE__VENDING_CELL_ITEM:                is = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED:             is = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:        is = 0; break;
+
+        case OBJECT_TYPE__VENDING_DYNAMITE:                 is = 1; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:            is = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED:         is = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
+
+        case OBJECT_TYPE__BARREL:                           is = 0; break;
+
+        case OBJECT_TYPE__WEIGHT:                           is = 0; break;
+
+        case OBJECT_TYPE__PISTON:                           is = 0; break;
+
+        case OBJECT_TYPE__BALL:                             is = 0; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
+
+        case OBJECT_TYPE__HERO:                             is = 0; break;
+        case OBJECT_TYPE__GOAT:                             is = 0; break;
+        case OBJECT_TYPE__SPIDER:                           is = 0; break;
+        case OBJECT_TYPE__BULL:                             is = 0; break;
+        case OBJECT_TYPE__FLY:                              is = 0; break;
+        case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
+
+        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            is = 0; break;
+
+        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_STANDING:             is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             is = 0; break;
+
+        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
+
+        default: break;
+    }
+
+    return is;
 }
 
 char* get_name_from_object_type(int object_type)
@@ -924,6 +1085,12 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       name = "turret projectile standing"; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     name = "turret projectile undeployed"; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       name = "turret projectile deployed"; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       name = "stairs above stone powered"; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               name = "stairs above stone"; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                name = "stairs above rock"; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            name = "stairs above metal on"; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               name = "stairs above metal"; break;
 
         default: break;
     }
@@ -1048,6 +1215,12 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_1; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal; break;
+
         default: break;
     }
 
@@ -1170,6 +1343,12 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       texture = textures->object.turret_projectile_standing_2; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_2; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_2; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal; break;
 
         default: break;
     }
@@ -1294,6 +1473,12 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_outline_1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_outline_1; break;
 
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal_outline; break;
+
         default: break;
     }
 
@@ -1416,6 +1601,12 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       texture = textures->object.turret_projectile_standing_outline_1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_outline_1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_outline_1; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on_outline; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal_outline; break;
 
         default: break;
     }
