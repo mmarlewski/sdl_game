@@ -52,6 +52,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->wall_metal = load_texture_from_filepath(renderer, "./res/object/wall_metal.png");
     object->wall_metal_outline = load_texture_from_filepath(renderer, "./res/object/wall_metal_outline.png");
 
+    object->wall_gold = load_texture_from_filepath(renderer, "./res/object/wall_gold.png");
+    object->wall_gold_outline = load_texture_from_filepath(renderer, "./res/object/wall_gold_outline.png");
+
     object->exit_rock_up = load_texture_from_filepath(renderer, "./res/object/exit_rock_up.png");
     object->exit_rock_blocked_up = load_texture_from_filepath(renderer, "./res/object/exit_rock_blocked_up.png");
     object->exit_rock_up_outline = load_texture_from_filepath(renderer, "./res/object/exit_rock_up_outline.png");
@@ -70,35 +73,67 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->exit_stone_up = load_texture_from_filepath(renderer, "./res/object/exit_stone_up.png");
     object->exit_stone_blocked_up = load_texture_from_filepath(renderer, "./res/object/exit_stone_blocked_up.png");
+    object->exit_stone_powered_up = load_texture_from_filepath(renderer, "./res/object/exit_stone_powered_up.png");
+    object->exit_stone_unpowered_up = load_texture_from_filepath(renderer, "./res/object/exit_stone_unpowered_up.png");
     object->exit_stone_up_outline = load_texture_from_filepath(renderer, "./res/object/exit_stone_up_outline.png");
 
     object->exit_stone_right = load_texture_from_filepath(renderer, "./res/object/exit_stone_right.png");
     object->exit_stone_blocked_right = load_texture_from_filepath(renderer, "./res/object/exit_stone_blocked_right.png");
+    object->exit_stone_powered_right = load_texture_from_filepath(renderer, "./res/object/exit_stone_powered_right.png");
+    object->exit_stone_unpowered_right = load_texture_from_filepath(renderer, "./res/object/exit_stone_unpowered_right.png");
     object->exit_stone_right_outline = load_texture_from_filepath(renderer, "./res/object/exit_stone_right_outline.png");
 
     object->exit_stone_down = load_texture_from_filepath(renderer, "./res/object/exit_stone_down.png");
     object->exit_stone_blocked_down = load_texture_from_filepath(renderer, "./res/object/exit_stone_blocked_down.png");
+    object->exit_stone_powered_down = load_texture_from_filepath(renderer, "./res/object/exit_stone_powered_down.png");
+    object->exit_stone_unpowered_down = load_texture_from_filepath(renderer, "./res/object/exit_stone_unpowered_down.png");
     object->exit_stone_down_outline = load_texture_from_filepath(renderer, "./res/object/exit_stone_down_outline.png");
 
     object->exit_stone_left = load_texture_from_filepath(renderer, "./res/object/exit_stone_left.png");
     object->exit_stone_blocked_left = load_texture_from_filepath(renderer, "./res/object/exit_stone_blocked_left.png");
+    object->exit_stone_powered_left = load_texture_from_filepath(renderer, "./res/object/exit_stone_powered_left.png");
+    object->exit_stone_unpowered_left = load_texture_from_filepath(renderer, "./res/object/exit_stone_unpowered_left.png");
     object->exit_stone_left_outline = load_texture_from_filepath(renderer, "./res/object/exit_stone_left_outline.png");
 
     object->exit_metal_up = load_texture_from_filepath(renderer, "./res/object/exit_metal_up.png");
     object->exit_metal_blocked_up = load_texture_from_filepath(renderer, "./res/object/exit_metal_blocked_up.png");
+    object->exit_metal_on_up = load_texture_from_filepath(renderer, "./res/object/exit_metal_on_up.png");
+    object->exit_metal_off_up = load_texture_from_filepath(renderer, "./res/object/exit_metal_off_up.png");
     object->exit_metal_up_outline = load_texture_from_filepath(renderer, "./res/object/exit_metal_up_outline.png");
 
     object->exit_metal_right = load_texture_from_filepath(renderer, "./res/object/exit_metal_right.png");
     object->exit_metal_blocked_right = load_texture_from_filepath(renderer, "./res/object/exit_metal_blocked_right.png");
+    object->exit_metal_on_right = load_texture_from_filepath(renderer, "./res/object/exit_metal_on_right.png");
+    object->exit_metal_off_right = load_texture_from_filepath(renderer, "./res/object/exit_metal_off_right.png");
     object->exit_metal_right_outline = load_texture_from_filepath(renderer, "./res/object/exit_metal_right_outline.png");
 
     object->exit_metal_down = load_texture_from_filepath(renderer, "./res/object/exit_metal_down.png");
     object->exit_metal_blocked_down = load_texture_from_filepath(renderer, "./res/object/exit_metal_blocked_down.png");
+    object->exit_metal_on_down = load_texture_from_filepath(renderer, "./res/object/exit_metal_on_down.png");
+    object->exit_metal_off_down = load_texture_from_filepath(renderer, "./res/object/exit_metal_off_down.png");
     object->exit_metal_down_outline = load_texture_from_filepath(renderer, "./res/object/exit_metal_down_outline.png");
 
     object->exit_metal_left = load_texture_from_filepath(renderer, "./res/object/exit_metal_left.png");
     object->exit_metal_blocked_left = load_texture_from_filepath(renderer, "./res/object/exit_metal_blocked_left.png");
+    object->exit_metal_on_left = load_texture_from_filepath(renderer, "./res/object/exit_metal_on_left.png");
+    object->exit_metal_off_left = load_texture_from_filepath(renderer, "./res/object/exit_metal_off_left.png");
     object->exit_metal_left_outline = load_texture_from_filepath(renderer, "./res/object/exit_metal_left_outline.png");
+
+    object->exit_gold_locked_up = load_texture_from_filepath(renderer, "./res/object/exit_gold_locked_up.png");
+    object->exit_gold_unlocked_up = load_texture_from_filepath(renderer, "./res/object/exit_gold_unlocked_up.png");
+    object->exit_gold_up_outline = load_texture_from_filepath(renderer, "./res/object/exit_gold_up_outline.png");
+
+    object->exit_gold_locked_right = load_texture_from_filepath(renderer, "./res/object/exit_gold_locked_right.png");
+    object->exit_gold_unlocked_right = load_texture_from_filepath(renderer, "./res/object/exit_gold_unlocked_right.png");
+    object->exit_gold_right_outline = load_texture_from_filepath(renderer, "./res/object/exit_gold_right_outline.png");
+
+    object->exit_gold_locked_down = load_texture_from_filepath(renderer, "./res/object/exit_gold_locked_down.png");
+    object->exit_gold_unlocked_down = load_texture_from_filepath(renderer, "./res/object/exit_gold_unlocked_down.png");
+    object->exit_gold_down_outline = load_texture_from_filepath(renderer, "./res/object/exit_gold_down_outline.png");
+
+    object->exit_gold_locked_left = load_texture_from_filepath(renderer, "./res/object/exit_gold_locked_left.png");
+    object->exit_gold_unlocked_left = load_texture_from_filepath(renderer, "./res/object/exit_gold_unlocked_left.png");
+    object->exit_gold_left_outline = load_texture_from_filepath(renderer, "./res/object/exit_gold_left_outline.png");
 
     object->stalactite = load_texture_from_filepath(renderer, "./res/object/stalactite.png");
     object->stalactite_outline = load_texture_from_filepath(renderer, "./res/object/stalactite_outline.png");

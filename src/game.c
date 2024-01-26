@@ -228,7 +228,7 @@ int main (int argc, char* argv[])
     }
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL_ROCK);
+        Object* object_wall = new_object(OBJECT_TYPE__WALL_GOLD);
         object_wall->tilemap_pos = tilemap_pos;
         add_object_to_gamemap_objects(&state, object_wall);
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
@@ -241,7 +241,7 @@ int main (int argc, char* argv[])
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
     }
 
-    Object* object_door = new_object(OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT);
+    Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT);
     object_door->tilemap_pos = tilemap_pos;
     add_object_to_gamemap_objects(&state, object_door);
 

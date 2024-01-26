@@ -64,6 +64,9 @@ typedef struct
     Texture* wall_metal;
     Texture* wall_metal_outline;
 
+    Texture* wall_gold;
+    Texture* wall_gold_outline;
+
     Texture* exit_rock_up;
     Texture* exit_rock_blocked_up;
     Texture* exit_rock_up_outline;
@@ -79,29 +82,58 @@ typedef struct
 
     Texture* exit_stone_up;
     Texture* exit_stone_blocked_up;
+    Texture* exit_stone_powered_up;
+    Texture* exit_stone_unpowered_up;
     Texture* exit_stone_up_outline;
     Texture* exit_stone_right;
     Texture* exit_stone_blocked_right;
+    Texture* exit_stone_powered_right;
+    Texture* exit_stone_unpowered_right;
     Texture* exit_stone_right_outline;
     Texture* exit_stone_down;
     Texture* exit_stone_blocked_down;
+    Texture* exit_stone_powered_down;
+    Texture* exit_stone_unpowered_down;
     Texture* exit_stone_down_outline;
     Texture* exit_stone_left;
     Texture* exit_stone_blocked_left;
+    Texture* exit_stone_powered_left;
+    Texture* exit_stone_unpowered_left;
     Texture* exit_stone_left_outline;
 
     Texture* exit_metal_up;
     Texture* exit_metal_blocked_up;
+    Texture* exit_metal_on_up;
+    Texture* exit_metal_off_up;
     Texture* exit_metal_up_outline;
     Texture* exit_metal_right;
     Texture* exit_metal_blocked_right;
+    Texture* exit_metal_on_right;
+    Texture* exit_metal_off_right;
     Texture* exit_metal_right_outline;
     Texture* exit_metal_down;
     Texture* exit_metal_blocked_down;
+    Texture* exit_metal_on_down;
+    Texture* exit_metal_off_down;
     Texture* exit_metal_down_outline;
     Texture* exit_metal_left;
     Texture* exit_metal_blocked_left;
+    Texture* exit_metal_on_left;
+    Texture* exit_metal_off_left;
     Texture* exit_metal_left_outline;
+
+    Texture* exit_gold_locked_up;
+    Texture* exit_gold_unlocked_up;
+    Texture* exit_gold_up_outline;
+    Texture* exit_gold_locked_right;
+    Texture* exit_gold_unlocked_right;
+    Texture* exit_gold_right_outline;
+    Texture* exit_gold_locked_down;
+    Texture* exit_gold_unlocked_down;
+    Texture* exit_gold_down_outline;
+    Texture* exit_gold_locked_left;
+    Texture* exit_gold_unlocked_left;
+    Texture* exit_gold_left_outline;
 
     Texture* pillar;
     Texture* pillar_outline;

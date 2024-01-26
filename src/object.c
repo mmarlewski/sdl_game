@@ -69,6 +69,14 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
@@ -198,6 +206,14 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 1; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
@@ -327,6 +343,14 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
@@ -456,6 +480,14 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
@@ -585,6 +617,14 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
@@ -686,6 +726,15 @@ int get_object_item_type(Object* object)
 
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        item_type = ITEM__NONE; break;
+
         case OBJECT_TYPE__WALL_ROCK:                        item_type = ITEM__NONE; break;
 
         case OBJECT_TYPE__WALL_STONE:                       item_type = ITEM__NONE; break;
@@ -766,6 +815,15 @@ int get_object_item_count(Object* object)
 
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            count = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         count = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          count = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          count = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          count = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       count = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        count = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        count = 0; break;
+
         case OBJECT_TYPE__WALL_ROCK:                        count = 0; break;
 
         case OBJECT_TYPE__WALL_STONE:                       count = 0; break;
@@ -846,6 +904,15 @@ int is_object_put_item(Object* object)
 
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        is = 1; break;
+
         case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
 
         case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
@@ -878,6 +945,16 @@ int is_object_put_item(Object* object)
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          is = 0; break;
+
 
         case OBJECT_TYPE__PILLAR:                           is = 0; break;
 
@@ -981,6 +1058,8 @@ char* get_name_from_object_type(int object_type)
 
         case OBJECT_TYPE__WALL_METAL:                       name = "wall metal"; break;
 
+        case OBJECT_TYPE__WALL_GOLD:                        name = "wall gold"; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     name = "exit rock up"; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  name = "exit rock right"; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   name = "exit rock down"; break;
@@ -998,15 +1077,40 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         name = "exit stone blocked right"; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          name = "exit stone blocked down"; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          name = "exit stone blocked left"; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            name = "exit stone powered up"; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         name = "exit stone powered right"; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          name = "exit stone powered down"; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          name = "exit stone powered left"; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          name = "exit stone unpowered up"; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       name = "exit stone unpowered right"; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        name = "exit stone unpowered down"; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        name = "exit stone unpowered left"; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    name = "exit metal up"; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 name = "exit metal right"; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  name = "exit metal down"; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  name = "exit metal left"; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 name = "exit metal on up"; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              name = "exit metal on right"; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               name = "exit metal on down"; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               name = "exit metal on left"; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                name = "exit metal off up"; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             name = "exit metal off right"; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              name = "exit metal off down"; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              name = "exit metal off left"; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            name = "exit metal blocked up"; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         name = "exit metal blocked right"; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          name = "exit metal blocked down"; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          name = "exit metal blocked left"; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              name = "exit gold locked up"; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           name = "exit gold locked right"; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            name = "exit gold locked down"; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            name = "exit gold locked left"; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            name = "exit gold unlocked up"; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         name = "exit gold unlocked right"; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          name = "exit gold unlocked down"; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          name = "exit gold unlocked left"; break;
 
         case OBJECT_TYPE__PILLAR:                           name = "pillar"; break;
 
@@ -1110,6 +1214,8 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal; break;
 
+        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   texture = textures->object.exit_rock_down; break;
@@ -1127,15 +1233,40 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         texture = textures->object.exit_stone_blocked_right; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          texture = textures->object.exit_stone_blocked_down; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          texture = textures->object.exit_stone_blocked_left; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            texture = textures->object.exit_stone_powered_up; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         texture = textures->object.exit_stone_powered_right; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          texture = textures->object.exit_stone_powered_down; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          texture = textures->object.exit_stone_powered_left; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          texture = textures->object.exit_stone_unpowered_up; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       texture = textures->object.exit_stone_unpowered_right; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        texture = textures->object.exit_stone_unpowered_down; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        texture = textures->object.exit_stone_unpowered_left; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    texture = textures->object.exit_metal_up; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 texture = textures->object.exit_metal_right; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  texture = textures->object.exit_metal_down; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  texture = textures->object.exit_metal_left; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 texture = textures->object.exit_metal_on_up; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              texture = textures->object.exit_metal_on_right; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               texture = textures->object.exit_metal_on_down; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               texture = textures->object.exit_metal_on_left; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                texture = textures->object.exit_metal_off_up; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             texture = textures->object.exit_metal_off_right; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              texture = textures->object.exit_metal_off_down; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              texture = textures->object.exit_metal_off_left; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            texture = textures->object.exit_metal_blocked_up; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         texture = textures->object.exit_metal_blocked_right; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          texture = textures->object.exit_metal_blocked_down; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          texture = textures->object.exit_metal_blocked_left; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              texture = textures->object.exit_gold_locked_up; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           texture = textures->object.exit_gold_locked_right; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            texture = textures->object.exit_gold_locked_down; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            texture = textures->object.exit_gold_locked_left; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            texture = textures->object.exit_gold_unlocked_up; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_unlocked_right; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_unlocked_down; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_unlocked_left; break;
 
         case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
 
@@ -1239,6 +1370,8 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal; break;
 
+        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   texture = textures->object.exit_rock_down; break;
@@ -1256,15 +1389,40 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         texture = textures->object.exit_stone_blocked_right; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          texture = textures->object.exit_stone_blocked_down; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          texture = textures->object.exit_stone_blocked_left; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            texture = textures->object.exit_stone_powered_up; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         texture = textures->object.exit_stone_powered_right; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          texture = textures->object.exit_stone_powered_down; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          texture = textures->object.exit_stone_powered_left; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          texture = textures->object.exit_stone_unpowered_up; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       texture = textures->object.exit_stone_unpowered_right; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        texture = textures->object.exit_stone_unpowered_down; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        texture = textures->object.exit_stone_unpowered_left; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    texture = textures->object.exit_metal_up; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 texture = textures->object.exit_metal_right; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  texture = textures->object.exit_metal_down; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  texture = textures->object.exit_metal_left; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 texture = textures->object.exit_metal_on_up; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              texture = textures->object.exit_metal_on_right; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               texture = textures->object.exit_metal_on_down; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               texture = textures->object.exit_metal_on_left; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                texture = textures->object.exit_metal_off_up; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             texture = textures->object.exit_metal_off_right; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              texture = textures->object.exit_metal_off_down; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              texture = textures->object.exit_metal_off_left; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            texture = textures->object.exit_metal_blocked_up; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         texture = textures->object.exit_metal_blocked_right; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          texture = textures->object.exit_metal_blocked_down; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          texture = textures->object.exit_metal_blocked_left; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              texture = textures->object.exit_gold_locked_up; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           texture = textures->object.exit_gold_locked_right; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            texture = textures->object.exit_gold_locked_down; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            texture = textures->object.exit_gold_locked_left; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            texture = textures->object.exit_gold_unlocked_up; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_unlocked_right; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_unlocked_down; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_unlocked_left; break;
 
         case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
 
@@ -1368,6 +1526,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal_outline; break;
 
+        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold_outline; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up_outline; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right_outline; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   texture = textures->object.exit_rock_down_outline; break;
@@ -1385,15 +1545,40 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         texture = textures->object.exit_stone_right_outline; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          texture = textures->object.exit_stone_down_outline; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          texture = textures->object.exit_stone_left_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            texture = textures->object.exit_stone_up_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         texture = textures->object.exit_stone_right_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          texture = textures->object.exit_stone_down_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          texture = textures->object.exit_stone_left_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          texture = textures->object.exit_stone_up_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       texture = textures->object.exit_stone_right_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        texture = textures->object.exit_stone_down_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        texture = textures->object.exit_stone_left_outline; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    texture = textures->object.exit_metal_up_outline; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 texture = textures->object.exit_metal_right_outline; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  texture = textures->object.exit_metal_down_outline; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  texture = textures->object.exit_metal_left_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 texture = textures->object.exit_metal_up_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              texture = textures->object.exit_metal_right_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               texture = textures->object.exit_metal_down_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               texture = textures->object.exit_metal_left_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                texture = textures->object.exit_metal_up_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             texture = textures->object.exit_metal_right_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              texture = textures->object.exit_metal_down_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              texture = textures->object.exit_metal_left_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            texture = textures->object.exit_metal_up_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         texture = textures->object.exit_metal_right_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          texture = textures->object.exit_metal_down_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          texture = textures->object.exit_metal_left_outline; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              texture = textures->object.exit_gold_up_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           texture = textures->object.exit_gold_right_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            texture = textures->object.exit_gold_down_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            texture = textures->object.exit_gold_left_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            texture = textures->object.exit_gold_up_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_right_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_down_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_left_outline; break;
 
         case OBJECT_TYPE__STALACTITE:                       texture = textures->object.stalactite_outline; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                texture = textures->object.stalactite_fallen_outline; break;
@@ -1497,6 +1682,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal_outline; break;
 
+        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold_outline; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up_outline; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right_outline; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   texture = textures->object.exit_rock_down_outline; break;
@@ -1514,15 +1701,40 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         texture = textures->object.exit_stone_right_outline; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          texture = textures->object.exit_stone_down_outline; break;
         case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          texture = textures->object.exit_stone_left_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            texture = textures->object.exit_stone_up_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         texture = textures->object.exit_stone_right_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          texture = textures->object.exit_stone_down_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          texture = textures->object.exit_stone_left_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          texture = textures->object.exit_stone_up_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       texture = textures->object.exit_stone_right_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        texture = textures->object.exit_stone_down_outline; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        texture = textures->object.exit_stone_left_outline; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    texture = textures->object.exit_metal_up_outline; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 texture = textures->object.exit_metal_right_outline; break;
         case OBJECT_TYPE__EXIT_METAL_DOWN:                  texture = textures->object.exit_metal_down_outline; break;
         case OBJECT_TYPE__EXIT_METAL_LEFT:                  texture = textures->object.exit_metal_left_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 texture = textures->object.exit_metal_up_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              texture = textures->object.exit_metal_right_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               texture = textures->object.exit_metal_down_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               texture = textures->object.exit_metal_left_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                texture = textures->object.exit_metal_up_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             texture = textures->object.exit_metal_right_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              texture = textures->object.exit_metal_down_outline; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              texture = textures->object.exit_metal_left_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            texture = textures->object.exit_metal_up_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         texture = textures->object.exit_metal_right_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          texture = textures->object.exit_metal_down_outline; break;
         case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          texture = textures->object.exit_metal_left_outline; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              texture = textures->object.exit_gold_up_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           texture = textures->object.exit_gold_right_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            texture = textures->object.exit_gold_down_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            texture = textures->object.exit_gold_left_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            texture = textures->object.exit_gold_up_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_right_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_down_outline; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_left_outline; break;
 
         case OBJECT_TYPE__STALACTITE:                       texture = textures->object.stalactite_outline; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                texture = textures->object.stalactite_fallen_outline; break;

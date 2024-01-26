@@ -873,6 +873,94 @@ void object_on_interact(State* state, Action* sequence, Object* object, Vec2i ti
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_OFF_UP,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_OFF_RIGHT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_OFF_DOWN,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_OFF_LEFT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_ON_UP,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_ON_RIGHT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_ON_DOWN,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__EXIT_METAL_ON_LEFT,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__PISTON:
         {
             add_action_to_end_action_sequence(sequence,new_action_remove_object(object, object->tilemap_pos));
@@ -954,6 +1042,50 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT,
+                        object->tilemap_pos
+                        )
+                    );
+        }
+        break;
         case OBJECT_TYPE__CRATE_CELL_ITEM:
         {
                 add_action_to_end_action_sequence(
@@ -1102,6 +1234,118 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_POWERED_UP,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_POWERED_DOWN,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_STONE_POWERED_LEFT,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:
+        {
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:
+        {
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:
+        {
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:
+        {
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case OBJECT_TYPE__VENDING_CELL:
         {
             if(item_type == ITEM__GEMSTONE)
