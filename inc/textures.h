@@ -12,8 +12,10 @@ typedef struct
     Texture* rock;
     Texture* rock_crack_water;
     Texture* rock_crack_lava;
+    Texture* rock_crack_pit;
 
     Texture* stone;
+    Texture* stone_trap;
     Texture* stone_spikes_on;
     Texture* stone_spikes_off;
 
@@ -31,8 +33,12 @@ typedef struct
 
     Texture* grass;
 
+    Texture* pit;
+
     Texture* water_1;
     Texture* water_2;
+    Texture* water_lily_pod_1;
+    Texture* water_lily_pod_2;
     Texture* water_stalactite_fallen_1;
     Texture* water_stalactite_fallen_2;
 
@@ -45,6 +51,7 @@ typedef struct
     Texture* ice_crack_water;
 
     Texture* stone_stairs_below;
+    Texture* stone_stairs_below_blocked;
     Texture* stone_stairs_above_unpowered;
     Texture* stone_stairs_above_powered;
     Texture* rock_stairs_below;

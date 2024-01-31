@@ -7,7 +7,9 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->rock = load_texture_from_filepath (renderer, "./res/floor/rock.png");
     floor->rock_crack_water = load_texture_from_filepath (renderer, "./res/floor/rock_crack_water.png");
     floor->rock_crack_lava = load_texture_from_filepath (renderer, "./res/floor/rock_crack_lava.png");
+    floor->rock_crack_pit = load_texture_from_filepath (renderer, "./res/floor/rock_crack_pit.png");
     floor->stone = load_texture_from_filepath (renderer, "./res/floor/stone.png");
+    floor->stone_trap = load_texture_from_filepath (renderer, "./res/floor/stone_trap.png");
     floor->stone_spikes_on = load_texture_from_filepath (renderer, "./res/floor/stone_spikes_on.png");
     floor->stone_spikes_off = load_texture_from_filepath (renderer, "./res/floor/stone_spikes_off.png");
     floor->metal = load_texture_from_filepath (renderer, "./res/floor/metal.png");
@@ -21,8 +23,11 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_piston_barrel = load_texture_from_filepath (renderer, "./res/floor/metal_piston_barrel.png");
     floor->metal_no_piston = load_texture_from_filepath (renderer, "./res/floor/metal_no_piston.png");
     floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
+    floor->pit = load_texture_from_filepath (renderer, "./res/floor/pit.png");
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
     floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
+    floor->water_lily_pod_1 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_1.png");
+    floor->water_lily_pod_2 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_2.png");
     floor->water_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_1.png");
     floor->water_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_2.png");
     floor->lava_1 = load_texture_from_filepath (renderer, "./res/floor/lava_1.png");
@@ -32,6 +37,7 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
     floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
     floor->stone_stairs_below = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below.png");
+    floor->stone_stairs_below_blocked = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below_blocked.png");
     floor->stone_stairs_above_unpowered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_unpowered.png");
     floor->stone_stairs_above_powered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_powered.png");
     floor->rock_stairs_below = load_texture_from_filepath (renderer, "./res/floor/rock_stairs_below.png");

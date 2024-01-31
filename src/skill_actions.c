@@ -15,12 +15,24 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
         break;
         case SKILL__STOMP:
         {
-            floor_on_stomp(
-                state,
-                action_sequence,
-                get_floor_on_tilemap_pos(state, target_2_tilemap_pos),
-                target_2_tilemap_pos
-                );
+            if(target_2_object != 0)
+            {
+                object_on_stomp(
+                    state,
+                    action_sequence,
+                    target_2_object,
+                    target_2_tilemap_pos
+                    );
+            }
+            else
+            {
+                floor_on_stomp(
+                    state,
+                    action_sequence,
+                    get_floor_on_tilemap_pos(state, target_2_tilemap_pos),
+                    target_2_tilemap_pos
+                    );
+            }
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
