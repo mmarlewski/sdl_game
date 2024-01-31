@@ -13,6 +13,34 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             //
         }
         break;
+        case SKILL__STOMP:
+        {
+            draw_texture_at_gamemap_pos(
+                renderer,
+                textures->skill.stomp_effect,
+                colors->none,
+                0.75f,
+                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos =vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
+
+                draw_texture_at_gamemap_pos(
+                    renderer,
+                    textures->skill.shake_effect,
+                    colors->none,
+                    0.75f,
+                    tilemap_pos_to_gamemap_pos(tilemap_pos),
+                    state->camera.world_pos,
+                    state->camera.zoom
+                    );
+            }
+        }
+        break;
         case SKILL__HERO_PICK_ITEM_CLOSE:
         case SKILL__HERO_PICK_ITEM_FAR:
         {

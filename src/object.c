@@ -1223,6 +1223,20 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            name = "stairs above metal on"; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               name = "stairs above metal"; break;
 
+        case OBJECT_TYPE__STATION_FIST_HAND:                name = "station push hand"; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                name = "station hook hand"; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               name = "station chain hand"; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             name = "station scissor hand"; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               name = "station spring leg"; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              name = "station strider leg"; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                name = "station track leg"; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 name = "station boot leg"; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            name = "station minibot torso"; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              name = "station wings torso"; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        name = "station manipulation head"; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       name = "station teleportation head"; break;
+        case OBJECT_TYPE__STATION_TAKEN:                    name = "station taken"; break;
+
         default: break;
     }
 
@@ -1381,6 +1395,20 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal; break;
+
+        case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               texture = textures->object.station_chain_hand; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             texture = textures->object.station_scissor_hand; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               texture = textures->object.station_spring_leg; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              texture = textures->object.station_strider_leg; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                texture = textures->object.station_track_leg; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 texture = textures->object.station_boot_leg; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            texture = textures->object.station_minibot_torso; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              texture = textures->object.station_wings_torso; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_manipulation_head; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
+        case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_taken; break;
 
         default: break;
     }
@@ -1541,6 +1569,20 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal; break;
 
+        case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               texture = textures->object.station_chain_hand; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             texture = textures->object.station_scissor_hand; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               texture = textures->object.station_spring_leg; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              texture = textures->object.station_strider_leg; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                texture = textures->object.station_track_leg; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 texture = textures->object.station_boot_leg; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            texture = textures->object.station_minibot_torso; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              texture = textures->object.station_wings_torso; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_manipulation_head; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
+        case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_taken; break;
+
         default: break;
     }
 
@@ -1700,6 +1742,20 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal_outline; break;
 
+        case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_outline; break;
+
         default: break;
     }
 
@@ -1858,6 +1914,20 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal_outline; break;
+
+        case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
+        case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_outline; break;
 
         default: break;
     }

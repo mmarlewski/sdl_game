@@ -153,14 +153,13 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             if(input->was_key[KEY__W] && !input->is_key[KEY__W]) skill = SKILL__HERO_INTERACT;
 
             if(input->was_key[KEY__1] && !input->is_key[KEY__1]) skill = SKILL__HERO_MOVE;
-            if(input->was_key[KEY__2] && !input->is_key[KEY__2]) skill = SKILL__CHARGE;
-            if(input->was_key[KEY__3] && !input->is_key[KEY__3]) skill = SKILL__JUMP;
-            if(input->was_key[KEY__4] && !input->is_key[KEY__4]) skill = SKILL__CHARGE_AND_PUSH;
-            if(input->was_key[KEY__5] && !input->is_key[KEY__5]) skill = SKILL__CHARGE_AND_THROW;
-            if(input->was_key[KEY__6] && !input->is_key[KEY__6]) skill = SKILL__PUSH;
-            if(input->was_key[KEY__7] && !input->is_key[KEY__7]) skill = SKILL__PULL;
-            if(input->was_key[KEY__8] && !input->is_key[KEY__8]) skill = SKILL__PULL_AND_THROW;
-            if(input->was_key[KEY__9] && !input->is_key[KEY__9]) skill = SKILL__THROW;
+            if(input->was_key[KEY__2] && !input->is_key[KEY__2]) skill = SKILL__PUSH;
+            if(input->was_key[KEY__3] && !input->is_key[KEY__3]) skill = SKILL__THROW;
+            if(input->was_key[KEY__4] && !input->is_key[KEY__4]) skill = SKILL__PULL;
+            if(input->was_key[KEY__5] && !input->is_key[KEY__5]) skill = SKILL__PULL_AND_THROW;
+            if(input->was_key[KEY__6] && !input->is_key[KEY__6]) skill = SKILL__JUMP;
+            if(input->was_key[KEY__7] && !input->is_key[KEY__7]) skill = SKILL__CHARGE;
+            if(input->was_key[KEY__8] && !input->is_key[KEY__8]) skill = SKILL__STOMP;
 
             if(input->was_key[KEY__A] && !input->is_key[KEY__A])
             {

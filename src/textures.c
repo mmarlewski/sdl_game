@@ -378,6 +378,21 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->stairs_above_metal = load_texture_from_filepath(renderer, "./res/object/stairs_above_metal.png");
     object->stairs_above_metal_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_metal_outline.png");
+
+    object->station_fist_hand = load_texture_from_filepath(renderer, "./res/object/station_fist_hand.png");
+    object->station_hook_hand = load_texture_from_filepath(renderer, "./res/object/station_hook_hand.png");
+    object->station_chain_hand = load_texture_from_filepath(renderer, "./res/object/station_chain_hand.png");
+    object->station_scissor_hand = load_texture_from_filepath(renderer, "./res/object/station_scissor_hand.png");
+    object->station_spring_leg = load_texture_from_filepath(renderer, "./res/object/station_spring_leg.png");
+    object->station_strider_leg = load_texture_from_filepath(renderer, "./res/object/station_strider_leg.png");
+    object->station_track_leg = load_texture_from_filepath(renderer, "./res/object/station_track_leg.png");
+    object->station_boot_leg = load_texture_from_filepath(renderer, "./res/object/station_boot_leg.png");
+    object->station_minibot_torso = load_texture_from_filepath(renderer, "./res/object/station_minibot_torso.png");
+    object->station_wings_torso = load_texture_from_filepath(renderer, "./res/object/station_wings_torso.png");
+    object->station_manipulation_head = load_texture_from_filepath(renderer, "./res/object/station_manipulation_head.png");
+    object->station_teleportation_head = load_texture_from_filepath(renderer, "./res/object/station_teleportation_head.png");
+    object->station_taken = load_texture_from_filepath(renderer, "./res/object/station_taken.png");
+    object->station_outline = load_texture_from_filepath(renderer, "./res/object/station_outline.png");
 }
 
 void destroy_textures_object (Textures_Object* object)
@@ -488,6 +503,7 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->break_effect = load_texture_from_filepath (renderer, "./res/skill/break_effect.png");
     skill->melt_effect = load_texture_from_filepath (renderer, "./res/skill/melt_effect.png");
     skill->shake_effect = load_texture_from_filepath (renderer, "./res/skill/shake_effect.png");
+    skill->stomp_effect = load_texture_from_filepath (renderer, "./res/skill/stomp_effect.png");
 
     skill->plus_1_cell = load_texture_from_filepath (renderer, "./res/skill/plus_1_cell.png");
     skill->plus_2_cell = load_texture_from_filepath (renderer, "./res/skill/plus_2_cell.png");

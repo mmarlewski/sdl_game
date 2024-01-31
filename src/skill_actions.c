@@ -13,6 +13,32 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             //
         }
         break;
+        case SKILL__STOMP:
+        {
+            floor_on_stomp(
+                state,
+                action_sequence,
+                get_floor_on_tilemap_pos(state, target_2_tilemap_pos),
+                target_2_tilemap_pos
+                );
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos =vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
+                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+
+                if(object != 0)
+                {
+                    object_on_shake(
+                        state,
+                        action_sequence,
+                        new_action_shake(tilemap_pos),
+                        object
+                        );
+                }
+            }
+        }
+        break;
         case SKILL__HERO_PICK_ITEM_CLOSE:
         case SKILL__HERO_PICK_ITEM_FAR:
         {

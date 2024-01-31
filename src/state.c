@@ -59,6 +59,10 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     {
         state->gamemap.item_number[i] = 0;
     }
+    for(int i = 0; i < BODY_PART__COUNT; i++)
+    {
+        state->gamemap.body_part_augmentation[i] = AUGMENTATION__NONE;
+    }
     state->gamemap.curr_item = ITEM__NONE;
 
     state->gamemap.show_all_order_numbers = 0;
@@ -76,8 +80,10 @@ void change_gamestate(State* state, int new_gamestate)
 {
     state->gamestate = new_gamestate;
 
-    printf("\n");
-    printf("gamestate: %s \n", get_gamestate_name(state->gamestate));
+    printf("########################################\n");
+    printf("----------------------------------------\n");
+    printf("gamestate : %s \n", get_gamestate_name(state->gamestate));
+    printf("----------------------------------------\n");
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL ||
     state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
@@ -92,11 +98,24 @@ void change_gamestate(State* state, int new_gamestate)
             hero_ap_bar[i + 1] = (i + 1 <= hero_ap) ? '#' : '-';
         }
         hero_ap_bar[HERO_MAX_AP + 1] = ']';
-        printf("hero ap: %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);
+        printf("hero ap   : %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);
+        printf("----------------------------------------\n");
         for(int i = 1; i < ITEM__COUNT; i++)
         {
-            printf("item %s: %i \n", get_name_from_item(i), state->gamemap.item_number[i]);
+            printf("%-10s: %i \n",
+                get_name_from_item(i),
+                state->gamemap.item_number[i]
+                );
         }
+        printf("----------------------------------------\n");
+        for(int i = 1; i < BODY_PART__COUNT; i++)
+        {
+            printf("%-10s: %-10s \n",
+                get_body_part_name(i),
+                get_augmentation_name(state->gamemap.body_part_augmentation[i])
+                );
+        }
+        printf("----------------------------------------\n");
     }
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
@@ -105,6 +124,7 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
     {
         printf("curr_skill: %s \n", get_skill_name(state->gamemap.curr_skill));
+        printf("----------------------------------------\n");
     }
 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
@@ -115,6 +135,7 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
     {
         printf("curr_enemy: %s \n", get_name_from_object_type(state->gamemap.curr_object_enemy->type));
+        printf("----------------------------------------\n");
     }
 }
 

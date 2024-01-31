@@ -380,6 +380,21 @@ typedef struct
     Texture* stairs_above_metal;
     Texture* stairs_above_metal_outline;
 
+    Texture* station_fist_hand;
+    Texture* station_hook_hand;
+    Texture* station_chain_hand;
+    Texture* station_scissor_hand;
+    Texture* station_spring_leg;
+    Texture* station_strider_leg;
+    Texture* station_track_leg;
+    Texture* station_boot_leg;
+    Texture* station_minibot_torso;
+    Texture* station_wings_torso;
+    Texture* station_manipulation_head;
+    Texture* station_teleportation_head;
+    Texture* station_taken;
+    Texture* station_outline;
+
 } Textures_Object;
 
 void load_textures_object (Renderer* renderer, Textures_Object* object);
@@ -488,6 +503,7 @@ typedef struct
     Texture* break_effect;
     Texture* melt_effect;
     Texture* shake_effect;
+    Texture* stomp_effect;
 
     Texture* plus_1_cell;
     Texture* plus_2_cell;

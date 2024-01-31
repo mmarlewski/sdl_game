@@ -12,6 +12,21 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             //
         }
         break;
+        case SKILL__STOMP:
+        {
+            Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
+            add_pos_to_possible_target_2_tilemap_pos_list(state, up_tilemap_pos);
+
+            Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
+            add_pos_to_possible_target_2_tilemap_pos_list(state, right_tilemap_pos);
+
+            Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
+            add_pos_to_possible_target_2_tilemap_pos_list(state, down_tilemap_pos);
+
+            Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
+            add_pos_to_possible_target_2_tilemap_pos_list(state, left_tilemap_pos);
+        }
+        break;
         case SKILL__HERO_PICK_ITEM_CLOSE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)

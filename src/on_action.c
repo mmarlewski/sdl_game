@@ -159,6 +159,60 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
     }
 }
 
+void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__ICE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__ICE_CRACK_WATER,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__WATER,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_WATER:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__WATER,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__LAVA,
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+
 void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
 {
     switch(floor)

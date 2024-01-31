@@ -18,6 +18,7 @@
 #include "../inc/sounds.h"
 #include "../inc/musics.h"
 #include "../inc/colors.h"
+#include "augmentation.h"
 #include "item.h"
 
 enum GAMESTATE
@@ -77,6 +78,7 @@ typedef struct
     int hero_ap;
 
     int item_number[ITEM__COUNT];
+    int body_part_augmentation[BODY_PART__COUNT];
     int curr_item;
 
     Vec2i prev_selected_tilemap_pos;
@@ -160,6 +162,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
 void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
+void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 Animation* floor_on_interact_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
 void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
