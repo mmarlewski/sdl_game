@@ -93,6 +93,31 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             }
         }
         break;
+        case SKILL__HERO_USE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
+
+                if(object != 0)
+                {
+                    if(is_object_exit(object) || is_object_station(object))
+                    {
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    }
+                }
+                else if(floor != FLOOR_TYPE__NONE)
+                {
+                    if(is_floor_exit(floor))
+                    {
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    }
+                }
+            }
+        }
+        break;
         case SKILL__HERO_MANIPULATION:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);

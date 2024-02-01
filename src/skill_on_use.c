@@ -62,6 +62,34 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
             }
         }
         break;
+        case SKILL__HERO_USE:
+        {
+            if(target_2_object != 0)
+            {
+                if(is_object_station(target_2_object))
+                {
+                    int augmentation = get_station_augmentation(target_2_object);
+                    hero_add_augmentation(state, augmentation);
+                }
+                else if(is_object_exit(target_2_object))
+                {
+                    // using object exit
+                }
+            }
+            else
+            {
+                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+
+                if(floor != FLOOR_TYPE__NONE)
+                {
+                    if(is_floor_exit(floor))
+                    {
+                        // using floor exit
+                    }
+                }
+            }
+        }
+        break;
         default:
         break;
     }

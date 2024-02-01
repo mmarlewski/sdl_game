@@ -64,7 +64,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->camera.world_pos = new_camera_world_pos;
     }
 
-    state->gamemap.show_all_order_numbers = input->is_key[KEY__E];
+    state->gamemap.show_all_order_numbers = input->is_key[KEY__R];
 
     // animations
 
@@ -151,6 +151,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             int skill = SKILL__NONE;
 
             if(input->was_key[KEY__W] && !input->is_key[KEY__W]) skill = SKILL__HERO_MANIPULATION;
+            if(input->was_key[KEY__E] && !input->is_key[KEY__E]) skill = SKILL__HERO_USE;
 
             if(input->was_key[KEY__1] && !input->is_key[KEY__1])
             {

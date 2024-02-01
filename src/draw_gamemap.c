@@ -104,7 +104,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
-        hover_object->is_enemy &&
+        is_object_enemy(hover_object) &&
         !hover_object->is_dead &&
         hover_object->is_visible)
         {

@@ -13,6 +13,19 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             //
         }
         break;
+        case SKILL__HERO_USE:
+        {
+            draw_texture_at_gamemap_pos(
+                renderer,
+                textures->skill.use_effect,
+                colors->none,
+                0.75f,
+                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                state->camera.world_pos,
+                state->camera.zoom
+                );
+        }
+        break;
         case SKILL__STOMP:
         {
             draw_texture_at_gamemap_pos(

@@ -11,6 +11,7 @@ int is_skill_two_target(int skill)
         case SKILL__HERO_PICK_ITEM_FAR:     is = 0; break;
         case SKILL__HERO_PUT_ITEM_CLOSE:    is = 0; break;
         case SKILL__HERO_PUT_ITEM_FAR:      is = 0; break;
+        case SKILL__HERO_USE:               is = 0; break;
         case SKILL__HERO_MANIPULATION:      is = 0; break;
         case SKILL__HERO_MOVE:              is = 0; break;
         case SKILL__HERO_MOVE_FLOATING:     is = 0; break;
@@ -47,6 +48,7 @@ char* get_skill_name(int skill)
         case SKILL__HERO_PICK_ITEM_FAR:     name = "hero pick item far";    break;
         case SKILL__HERO_PUT_ITEM_CLOSE:    name = "hero put item close";   break;
         case SKILL__HERO_PUT_ITEM_FAR:      name = "hero put item far";     break;
+        case SKILL__HERO_USE:               name = "hero use";              break;
         case SKILL__HERO_MANIPULATION:      name = "hero manipulation";     break;
         case SKILL__HERO_MOVE:              name = "hero move";             break;
         case SKILL__HERO_MOVE_FLOATING:     name = "hero move floating";    break;

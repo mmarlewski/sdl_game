@@ -517,6 +517,7 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->melt_effect = load_texture_from_filepath (renderer, "./res/skill/melt_effect.png");
     skill->shake_effect = load_texture_from_filepath (renderer, "./res/skill/shake_effect.png");
     skill->stomp_effect = load_texture_from_filepath (renderer, "./res/skill/stomp_effect.png");
+    skill->use_effect = load_texture_from_filepath (renderer, "./res/skill/use_effect.png");
 
     skill->plus_1_cell = load_texture_from_filepath (renderer, "./res/skill/plus_1_cell.png");
     skill->plus_2_cell = load_texture_from_filepath (renderer, "./res/skill/plus_2_cell.png");
@@ -537,6 +538,7 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->minus_2_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_2_gemstone.png");
     skill->minus_3_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_3_gemstone.png");
 }
+
 void destroy_textures_skill (Textures_Skill* skill)
 {
     // later

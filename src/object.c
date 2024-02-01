@@ -3,6 +3,7 @@
 #include "../inc/action.h"
 #include "../inc/skill.h"
 #include "../inc/item.h"
+#include "../inc/augmentation.h"
 
 Object* new_object(int type)
 {
@@ -33,6 +34,126 @@ Object* new_object(int type)
 void destroy_object(Object* object)
 {
     free(object);
+}
+
+int is_object_enemy(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__GOAT:                             is = 1; break;
+        case OBJECT_TYPE__SPIDER:                           is = 1; break;
+        case OBJECT_TYPE__BULL:                             is = 1; break;
+        case OBJECT_TYPE__FLY:                              is = 1; break;
+        case OBJECT_TYPE__CHAMELEON:                        is = 1; break;
+
+        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 1; break;
+        case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 1; break;
+        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            is = 1; break;
+
+        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 1; break;
+        case OBJECT_TYPE__TURRET_BOMB_STANDING:             is = 1; break;
+        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             is = 1; break;
+
+        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 1; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 1; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 1; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
+int is_object_exit(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 1; break;
+
+        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 1; break;
+
+        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 1; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 1; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
+int is_object_station(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__STATION_FIST_HAND:                is = 1; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                is = 1; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               is = 1; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             is = 1; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               is = 1; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              is = 1; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                is = 1; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 is = 1; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            is = 1; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              is = 1; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        is = 1; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       is = 1; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
+int get_station_augmentation(Object* object)
+{
+    int augmentation = AUGMENTATION__NONE;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__STATION_FIST_HAND:            augmentation = AUGMENTATION__FIST_HAND; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:            augmentation = AUGMENTATION__HOOK_HAND; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:           augmentation = AUGMENTATION__CHAIN_HAND; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:         augmentation = AUGMENTATION__SCISSOR_HAND; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:           augmentation = AUGMENTATION__SPRING_LEG; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:          augmentation = AUGMENTATION__STRIDER_LEG; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:            augmentation = AUGMENTATION__TRACK_LEG; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:             augmentation = AUGMENTATION__BOOT_LEG; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:        augmentation = AUGMENTATION__MINIBOT_TORSO; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:          augmentation = AUGMENTATION__WINGS_TORSO; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:    augmentation = AUGMENTATION__MANIPULATION_HEAD; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:   augmentation = AUGMENTATION__TELEPORTATION_HEAD; break;
+
+        default: break;
+    }
+
+    return augmentation;
 }
 
 int is_object_floating(Object* object)

@@ -518,6 +518,7 @@ typedef struct
     Texture* melt_effect;
     Texture* shake_effect;
     Texture* stomp_effect;
+    Texture* use_effect;
 
     Texture* plus_1_cell;
     Texture* plus_2_cell;

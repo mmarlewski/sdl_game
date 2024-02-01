@@ -56,6 +56,7 @@ enum FLOOR_TYPE
     FLOOR_TYPE__COUNT
 };
 
+int is_floor_exit(int floor);
 int is_floor_manipulatable(int floor);
 int is_floor_traversable(int floor);
 int is_floor_traversable_for_floating(int floor);

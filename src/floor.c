@@ -1,6 +1,26 @@
 #include "../inc/floor.h"
 #include "../inc/item.h"
 
+int is_floor_exit(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR_TYPE__STONE_STAIRS_BELOW:            is = 1; break;
+        case FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED:  is = 1; break;
+        case FLOOR_TYPE__STONE_STAIRS_ABOVE_POWERED:    is = 1; break;
+        case FLOOR_TYPE__ROCK_STAIRS_BELOW:             is = 1; break;
+        case FLOOR_TYPE__METAL_STAIRS_BELOW_OFF:        is = 1; break;
+        case FLOOR_TYPE__METAL_STAIRS_ABOVE_OFF:        is = 1; break;
+        case FLOOR_TYPE__METAL_STAIRS_BELOW_ON:         is = 1; break;
+        case FLOOR_TYPE__METAL_STAIRS_BELOW:            is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
 int is_floor_manipulatable(int floor)
 {
     int is = 0;

@@ -204,6 +204,10 @@ struct _Object
 Object* new_object(int type);
 void destroy_object(Object* object);
 
+int is_object_enemy(Object* object);
+int is_object_exit(Object* object);
+int is_object_station(Object* object);
+int get_station_augmentation(Object* object);
 int is_object_floating(Object* object);
 int is_object_flying(Object* object);
 int is_object_manipulatable(Object* object);

@@ -111,7 +111,7 @@ int main (int argc, char* argv[])
     state.camera.world_pos = hero_world_iso_pos;
 
     change_floor_in_tilemap_pos(&state,
-     FLOOR_TYPE__ROCK_CRACK_PIT, vec2i(6,7));
+     FLOOR_TYPE__STONE_STAIRS_BELOW_BLOCKED, vec2i(6,7));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__LAVA, vec2i(7,2));
     change_floor_in_tilemap_pos(&state,
@@ -173,7 +173,7 @@ int main (int argc, char* argv[])
     object_barrel_3->tilemap_pos = vec2i(6,5);
     add_object_to_gamemap_objects(&state, object_barrel_3);
 
-    Object* object_other = new_object(OBJECT_TYPE__VENDING_DYNAMITE);
+    Object* object_other = new_object(OBJECT_TYPE__STAIRS_ABOVE_ROCK);
     object_other->tilemap_pos = vec2i(7,4);
     add_object_to_gamemap_objects(&state, object_other);
 
