@@ -41,7 +41,7 @@ int is_node_tilemap_pos_in_list(List* list, Node* node)
     return 0;
 }
 
-void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path)
+void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying)
 {
     if(!is_tilemap_pos_in_tilemap(start_tilemap_pos) ||
     !is_tilemap_pos_in_tilemap(end_tilemap_pos) ||
@@ -98,26 +98,30 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
         {
             Node* node = (Node*)elem->data;
             Vec2i tilemap_pos = node->tilemap_pos;
+            int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
+
             if(!is_node_tilemap_pos_in_list(closed, node) &&
-            get_object_on_tilemap_pos(state, tilemap_pos) == 0 &&
-            is_floor_traversable(get_floor_on_tilemap_pos(state, tilemap_pos)))
+            get_object_on_tilemap_pos(state, tilemap_pos) == 0)
             {
-                int x_distance = abs(curr_tilemap_pos.x - tilemap_pos.x);
-                int y_distance = abs(curr_tilemap_pos.y - tilemap_pos.y);
-                // int distance = (14 * y_distance + 10 * abs(x_distance - y_distance));
-                // int distance = sqrt ( x_distance * x_distance + y_distance * y_distance);
-                int distance = x_distance + y_distance;
-                int is_node_in_open = is_node_tilemap_pos_in_list(open, node);
-
-                if(curr_node->g_val + distance < node->g_val || !is_node_in_open)
+                if((is_flying && is_floor_traversable_for_flying(floor)) ||
+                (is_floating && is_floor_traversable_for_floating(floor)) ||
+                is_floor_traversable(floor))
                 {
-                    node->g_val = curr_node->g_val + distance;
-                    node->h_val = distance;
-                    node->parent = curr_node;
+                    int x_distance = abs(curr_tilemap_pos.x - tilemap_pos.x);
+                    int y_distance = abs(curr_tilemap_pos.y - tilemap_pos.y);
+                    int distance = x_distance + y_distance;
+                    int is_node_in_open = is_node_tilemap_pos_in_list(open, node);
 
-                    if (!is_node_in_open)
+                    if(curr_node->g_val + distance < node->g_val || !is_node_in_open)
                     {
-                        add_new_list_element_to_list_end(open, node);
+                        node->g_val = curr_node->g_val + distance;
+                        node->h_val = distance;
+                        node->parent = curr_node;
+
+                        if (!is_node_in_open)
+                        {
+                            add_new_list_element_to_list_end(open, node);
+                        }
                     }
                 }
             }

@@ -11,8 +11,10 @@ int is_skill_two_target(int skill)
         case SKILL__HERO_PICK_ITEM_FAR:     is = 0; break;
         case SKILL__HERO_PUT_ITEM_CLOSE:    is = 0; break;
         case SKILL__HERO_PUT_ITEM_FAR:      is = 0; break;
-        case SKILL__HERO_INTERACT:          is = 0; break;
+        case SKILL__HERO_MANIPULATION:      is = 0; break;
         case SKILL__HERO_MOVE:              is = 0; break;
+        case SKILL__HERO_MOVE_FLOATING:     is = 0; break;
+        case SKILL__HERO_MOVE_FLYING:       is = 0; break;
         case SKILL__HERO_THROW_CELL:        is = 0; break;
         case SKILL__HERO_THROW_DYNAMITE:    is = 0; break;
         case SKILL__HERO_THROW_GEMSTONE:    is = 0; break;
@@ -45,8 +47,10 @@ char* get_skill_name(int skill)
         case SKILL__HERO_PICK_ITEM_FAR:     name = "hero pick item far";    break;
         case SKILL__HERO_PUT_ITEM_CLOSE:    name = "hero put item close";   break;
         case SKILL__HERO_PUT_ITEM_FAR:      name = "hero put item far";     break;
-        case SKILL__HERO_INTERACT:          name = "hero interact";         break;
+        case SKILL__HERO_MANIPULATION:      name = "hero manipulation";     break;
         case SKILL__HERO_MOVE:              name = "hero move";             break;
+        case SKILL__HERO_MOVE_FLOATING:     name = "hero move floating";    break;
+        case SKILL__HERO_MOVE_FLYING:       name = "hero move flying";      break;
         case SKILL__HERO_THROW_CELL:        name = "hero throw cell";       break;
         case SKILL__HERO_THROW_DYNAMITE:    name = "hero throw dynamite";   break;
         case SKILL__HERO_THROW_GEMSTONE:    name = "hero throw gemstone";   break;

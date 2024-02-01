@@ -31,7 +31,7 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             //
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             //
         }

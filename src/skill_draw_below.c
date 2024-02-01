@@ -33,19 +33,23 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             //
         }
         break;
         case SKILL__HERO_MOVE:
+        case SKILL__HERO_MOVE_FLOATING:
+        case SKILL__HERO_MOVE_FLYING:
         {
             List* path_pos = new_list((void(*)(void*))destroy_vec2i);
             find_path(
                 state,
                 source_tilemap_pos,
                 target_2_tilemap_pos,
-                path_pos
+                path_pos,
+                is_object_floating(source_object),
+                is_object_flying(source_object)
                 );
 
             if(path_pos->size > 0)

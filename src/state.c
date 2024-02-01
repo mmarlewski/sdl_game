@@ -340,6 +340,29 @@ void restore_hero_ap(State* state)
     state->gamemap.hero_ap = HERO_MAX_AP;
 }
 
+void hero_add_augmentation(State* state, int augmentation)
+{
+    int body_part = get_augmentation_body_part(augmentation);
+
+    state->gamemap.body_part_augmentation[body_part] = augmentation;
+
+    if(hero_has_augmentation(state, AUGMENTATION__STRIDER_LEG))
+    {
+        state->gamemap.object_hero->type = OBJECT_TYPE__HERO_FLOATING;
+    }
+    if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
+    {
+        state->gamemap.object_hero->type = OBJECT_TYPE__HERO_FLYING;
+    }
+}
+
+int hero_has_augmentation(State* state, int augmentation)
+{
+    int body_part = get_augmentation_body_part(augmentation);
+
+    return state->gamemap.body_part_augmentation[body_part] == augmentation;
+}
+
 void determine_enemy_order(State* state)
 {
     int order_number = 1;

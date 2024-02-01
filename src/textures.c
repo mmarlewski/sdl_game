@@ -259,9 +259,6 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->spring = load_texture_from_filepath(renderer, "./res/object/spring.png");
     object->spring_outline = load_texture_from_filepath(renderer, "./res/object/spring_outline.png");
 
-    object->weight = load_texture_from_filepath(renderer, "./res/object/weight.png");
-    object->weight_outline = load_texture_from_filepath(renderer, "./res/object/weight_outline.png");
-
     object->piston = load_texture_from_filepath(renderer, "./res/object/piston.png");
     object->piston_outline = load_texture_from_filepath(renderer, "./res/object/piston_outline.png");
 
@@ -284,6 +281,16 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->hero_2 = load_texture_from_filepath(renderer, "./res/object/hero_2.png");
     object->hero_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_outline_1.png");
     object->hero_outline_2 = load_texture_from_filepath(renderer, "./res/object/hero_outline_2.png");
+
+    object->hero_floating_1 = load_texture_from_filepath(renderer, "./res/object/hero_floating_1.png");
+    object->hero_floating_2 = load_texture_from_filepath(renderer, "./res/object/hero_floating_2.png");
+    object->hero_floating_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_floating_outline_1.png");
+    object->hero_floating_outline_2 = load_texture_from_filepath(renderer, "./res/object/hero_floating_outline_2.png");
+
+    object->hero_flying_1 = load_texture_from_filepath(renderer, "./res/object/hero_flying_1.png");
+    object->hero_flying_2 = load_texture_from_filepath(renderer, "./res/object/hero_flying_2.png");
+    object->hero_flying_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_flying_outline_1.png");
+    object->hero_flying_outline_2 = load_texture_from_filepath(renderer, "./res/object/hero_flying_outline_2.png");
 
     object->goat_1 = load_texture_from_filepath(renderer, "./res/object/goat_1.png");
     object->goat_2 = load_texture_from_filepath(renderer, "./res/object/goat_2.png");

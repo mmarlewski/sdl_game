@@ -118,8 +118,6 @@ enum OBJECT_TYPE
 
     OBJECT_TYPE__BARREL,
 
-    OBJECT_TYPE__WEIGHT,
-
     OBJECT_TYPE__PISTON,
     OBJECT_TYPE__PISTON_CELL,
     OBJECT_TYPE__PISTON_DYNAMITE,
@@ -129,6 +127,9 @@ enum OBJECT_TYPE
     OBJECT_TYPE__BALL_SPIKES,
 
     OBJECT_TYPE__HERO,
+    OBJECT_TYPE__HERO_FLOATING,
+    OBJECT_TYPE__HERO_FLYING,
+
     OBJECT_TYPE__GOAT,
     OBJECT_TYPE__SPIDER,
     OBJECT_TYPE__BULL,
@@ -203,8 +204,9 @@ struct _Object
 Object* new_object(int type);
 void destroy_object(Object* object);
 
+int is_object_floating(Object* object);
 int is_object_flying(Object* object);
-int is_object_interactable(Object* object);
+int is_object_manipulatable(Object* object);
 int is_object_movable(Object* object);
 int is_object_meltable(Object* object);
 int is_object_breakable(Object* object);

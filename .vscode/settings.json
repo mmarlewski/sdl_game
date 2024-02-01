@@ -3,10 +3,10 @@
         "gamemap",
         "gamestate",
         "interactable",
-        "MINIBOT",
-        "STALAGNATE",
+        "minibot",
+        "stalagnate",
         "tilemap",
         "undeployed",
-        "UNPOWERED"
+        "unpowered"
     ]
 }

@@ -103,25 +103,34 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             Object* object = target_2_object;
             int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
 
-            if(object != 0 && is_object_interactable(object))
+            if(object != 0 && is_object_manipulatable(object))
             {
-                object_on_interact(state, action_sequence, object, target_2_tilemap_pos);
+                object_on_manipulate(state, action_sequence, object, target_2_tilemap_pos);
             }
-            else if(floor != FLOOR_TYPE__NONE && is_floor_interactable(floor))
+            else if(floor != FLOOR_TYPE__NONE && is_floor_manipulatable(floor))
             {
-                floor_on_interact(state, action_sequence, floor, target_2_tilemap_pos);
+                floor_on_manipulation(state, action_sequence, floor, target_2_tilemap_pos);
             }
         }
         break;
         case SKILL__HERO_MOVE:
+        case SKILL__HERO_MOVE_FLOATING:
+        case SKILL__HERO_MOVE_FLYING:
         {
             List* path_pos = new_list((void(*)(void*))destroy_vec2i);
-            find_path(state, source_tilemap_pos, target_2_tilemap_pos, path_pos);
+            find_path(
+                state,
+                source_tilemap_pos,
+                target_2_tilemap_pos,
+                path_pos,
+                is_object_floating(source_object),
+                is_object_flying(source_object)
+                );
 
             if(path_pos->size > 0)
             {
@@ -206,12 +215,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(old_tilemap_pos, dir4));
                     break;
                 }
-                else if(!is_object_flying(source_object) && is_floor_deadly_on_move(floor))
-                {
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(old_tilemap_pos,dir4));
-                    add_action_to_end_action_sequence(action_sequence, new_action_death(source_object,tilemap_pos));
-                    break;
-                }
                 else
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(old_tilemap_pos,dir4));
@@ -231,11 +234,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(source_tilemap_pos, dir4));
-            }
-            else if(!is_object_flying(source_object) && is_floor_deadly_on_drop(floor))
-            {
-                add_action_to_end_action_sequence(action_sequence, new_action_throw( source_tilemap_pos, dir4, abs_diff));
-                add_action_to_end_action_sequence(action_sequence, new_action_death(source_object, target_2_tilemap_pos));
             }
             else
             {
@@ -266,12 +264,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(charge_old_tilemap_pos, charge_dir4));
                     break;
                 }
-                else if(!is_object_flying(source_object) && is_floor_deadly_on_move(charge_floor))
-                {
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(charge_old_tilemap_pos,charge_dir4));
-                    add_action_to_end_action_sequence(action_sequence, new_action_death(source_object,charge_tilemap_pos));
-                    break;
-                }
                 else
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(charge_old_tilemap_pos,charge_dir4));
@@ -299,12 +291,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 if(!is_tilemap_pos_in_tilemap(push_tilemap_pos) || push_object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(push_old_tilemap_pos, push_dir4));
-                    break;
-                }
-                else if(!is_object_flying(target_1_object) && is_floor_deadly_on_move(push_floor))
-                {
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(push_old_tilemap_pos,push_dir4));
-                    add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object,push_tilemap_pos));
                     break;
                 }
                 else
@@ -337,12 +323,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(charge_old_tilemap_pos, charge_dir4));
                     break;
                 }
-                else if(!is_object_flying(source_object) && is_floor_deadly_on_move(charge_floor))
-                {
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(charge_old_tilemap_pos,charge_dir4));
-                    add_action_to_end_action_sequence(action_sequence, new_action_death(source_object,charge_tilemap_pos));
-                    break;
-                }
                 else
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(charge_old_tilemap_pos,charge_dir4));
@@ -361,11 +341,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || throw_object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(target_1_tilemap_pos, throw_dir4));
-            }
-            else if(!is_object_flying(target_1_object) && is_floor_deadly_on_drop(throw_floor))
-            {
-                add_action_to_end_action_sequence(action_sequence, new_action_throw( target_1_tilemap_pos, throw_dir4, throw_abs_diff));
-                add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object, target_2_tilemap_pos));
             }
             else
             {
@@ -406,12 +381,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 if(!is_tilemap_pos_in_tilemap(tilemap_pos) || object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(old_tilemap_pos, dir4));
-                    break;
-                }
-                else if(!is_object_flying(target_1_object) && is_floor_deadly_on_move(floor))
-                {
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(old_tilemap_pos,dir4));
-                    add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object,tilemap_pos));
                     break;
                 }
                 else
@@ -456,12 +425,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(pull_old_tilemap_pos, pull_dir4));
                     break;
                 }
-                else if(!is_object_flying(target_1_object) && is_floor_deadly_on_move(pull_floor))
-                {
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(pull_old_tilemap_pos,pull_dir4));
-                    add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object,pull_tilemap_pos));
-                    break;
-                }
                 else
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_move(pull_old_tilemap_pos,pull_dir4));
@@ -480,11 +443,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || throw_object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(before_source_tilemap_pos, throw_dir4));
-            }
-            else if(!is_object_flying(target_1_object) && is_floor_deadly_on_drop(throw_floor))
-            {
-                add_action_to_end_action_sequence(action_sequence, new_action_throw( before_source_tilemap_pos, throw_dir4, throw_abs_diff));
-                add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object, target_2_tilemap_pos));
             }
             else
             {
@@ -506,11 +464,6 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(target_1_tilemap_pos, dir4));
-            }
-            else if(!is_object_flying(target_1_object) && is_floor_deadly_on_drop(floor))
-            {
-                add_action_to_end_action_sequence(action_sequence, new_action_throw( target_1_tilemap_pos, dir4, abs_diff));
-                add_action_to_end_action_sequence(action_sequence, new_action_death(target_1_object, target_2_tilemap_pos));
             }
             else
             {

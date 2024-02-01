@@ -261,9 +261,6 @@ typedef struct
     Texture* spring;
     Texture* spring_outline;
 
-    Texture* weight;
-    Texture* weight_outline;
-
     Texture* piston;
     Texture* piston_outline;
 
@@ -286,6 +283,16 @@ typedef struct
     Texture* hero_2;
     Texture* hero_outline_1;
     Texture* hero_outline_2;
+
+    Texture* hero_floating_1;
+    Texture* hero_floating_2;
+    Texture* hero_floating_outline_1;
+    Texture* hero_floating_outline_2;
+
+    Texture* hero_flying_1;
+    Texture* hero_flying_2;
+    Texture* hero_flying_outline_1;
+    Texture* hero_flying_outline_2;
 
     Texture* goat_1;
     Texture* goat_2;

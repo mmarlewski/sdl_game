@@ -93,7 +93,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             }
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
             get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
@@ -105,8 +105,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                     int curr_floor = get_floor_on_tilemap_pos(state, *curr_tilemap_pos);
                     Object* curr_object = get_object_on_tilemap_pos(state, *curr_tilemap_pos);
 
-                    if((curr_object == 0 && is_floor_interactable(curr_floor)) ||
-                    (curr_object != 0 && is_object_interactable(curr_object)))
+                    if((curr_object == 0 && is_floor_manipulatable(curr_floor)) ||
+                    (curr_object != 0 && is_object_manipulatable(curr_object)))
                     {
                         add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
                     }
@@ -117,6 +117,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
         }
         break;
         case SKILL__HERO_MOVE:
+        case SKILL__HERO_MOVE_FLOATING:
+        case SKILL__HERO_MOVE_FLYING:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
             get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
@@ -124,7 +126,14 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             {
                 Vec2i* curr_tilemap_pos = (Vec2i*)curr_elem->data;
                 List* path_pos = new_list((void(*)(void*))destroy_vec2i);
-                find_path(state, source_tilemap_pos, *curr_tilemap_pos, path_pos);
+                find_path(
+                    state,
+                    source_tilemap_pos,
+                    *curr_tilemap_pos,
+                    path_pos,
+                    is_object_floating(source_object),
+                    is_object_flying(source_object)
+                    );
                 if(path_pos->size > 0 && path_pos->size < 10)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
@@ -211,10 +220,10 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 if(down_cont) add_pos_to_possible_target_2_tilemap_pos_list(state,down_tilemap_pos);
                 if(left_cont)  add_pos_to_possible_target_2_tilemap_pos_list( state,left_tilemap_pos);
 
-                if(up_object != 0 || is_floor_deadly_on_move(up_floor)) up_cont = 0;
-                if(right_object != 0 || is_floor_deadly_on_move(right_floor)) right_cont = 0;
-                if(down_object != 0 || is_floor_deadly_on_move(down_floor)) down_cont = 0;
-                if(left_object != 0 || is_floor_deadly_on_move(left_floor)) left_cont = 0;
+                if(up_object != 0) up_cont = 0;
+                if(right_object != 0) right_cont = 0;
+                if(down_object != 0) down_cont = 0;
+                if(left_object != 0) left_cont = 0;
             }
         }
         break;

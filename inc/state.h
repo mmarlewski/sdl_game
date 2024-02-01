@@ -163,8 +163,8 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
 void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
-void floor_on_interact(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
-Animation* floor_on_interact_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
+void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
+Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
 void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos, int item_type);
 
@@ -176,8 +176,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
 void object_on_break(State* state, Action* sequence, Action* action, Object* object);
 void object_on_shake(State* state, Action* sequence, Action* action, Object* object);
 void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
-void object_on_interact(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
-Animation* object_on_interact_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures);
+void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
+Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures);
 void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
 
@@ -198,9 +198,11 @@ char* get_gamestate_name(int gamestate);
 int get_hero_ap(State* state);
 void modify_hero_ap(State* state, int by);
 void restore_hero_ap(State* state);
+void hero_add_augmentation(State* state, int augmentation);
+int hero_has_augmentation(State* state, int augmentation);
 
 void determine_enemy_order(State* state);
 
-void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path);
+void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying);
 
 #endif

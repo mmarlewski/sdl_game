@@ -150,9 +150,20 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             int skill = SKILL__NONE;
 
-            if(input->was_key[KEY__W] && !input->is_key[KEY__W]) skill = SKILL__HERO_INTERACT;
+            if(input->was_key[KEY__W] && !input->is_key[KEY__W]) skill = SKILL__HERO_MANIPULATION;
 
-            if(input->was_key[KEY__1] && !input->is_key[KEY__1]) skill = SKILL__HERO_MOVE;
+            if(input->was_key[KEY__1] && !input->is_key[KEY__1])
+            {
+                skill = SKILL__HERO_MOVE;
+                if(hero_has_augmentation(state, AUGMENTATION__STRIDER_LEG))
+                {
+                    skill = SKILL__HERO_MOVE_FLOATING;
+                }
+                if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
+                {
+                    skill = SKILL__HERO_MOVE_FLYING;
+                }
+            }
             if(input->was_key[KEY__2] && !input->is_key[KEY__2]) skill = SKILL__PUSH;
             if(input->was_key[KEY__3] && !input->is_key[KEY__3]) skill = SKILL__THROW;
             if(input->was_key[KEY__4] && !input->is_key[KEY__4]) skill = SKILL__PULL;

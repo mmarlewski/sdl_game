@@ -111,7 +111,7 @@ int main (int argc, char* argv[])
     state.camera.world_pos = hero_world_iso_pos;
 
     change_floor_in_tilemap_pos(&state,
-     FLOOR_TYPE__STONE_TRAP, vec2i(6,7));
+     FLOOR_TYPE__ROCK_CRACK_PIT, vec2i(6,7));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__LAVA, vec2i(7,2));
     change_floor_in_tilemap_pos(&state,
@@ -123,7 +123,7 @@ int main (int argc, char* argv[])
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__ROCK_CRACK_LAVA, vec2i(2,2));
     change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ROCK_CRACK_LAVA, vec2i(2,6));
+    FLOOR_TYPE__ROCK_CRACK_WATER, vec2i(2,6));
     change_floor_in_tilemap_pos(&state,
     FLOOR_TYPE__WATER, vec2i(3,1));
     change_floor_in_tilemap_pos(&state,
@@ -263,6 +263,9 @@ int main (int argc, char* argv[])
     state.gamemap.item_number[ITEM__CELL] = 5;
     state.gamemap.item_number[ITEM__DYNAMITE] = 5;
     state.gamemap.item_number[ITEM__GEMSTONE] = 5;
+
+    hero_add_augmentation(&state, AUGMENTATION__STRIDER_LEG);
+    // hero_add_augmentation(&state, AUGMENTATION__WINGS_TORSO);
 
     while (state.is_game_running)
     {

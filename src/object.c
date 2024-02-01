@@ -35,6 +35,147 @@ void destroy_object(Object* object)
     free(object);
 }
 
+int is_object_floating(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
+
+        case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
+
+        case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
+
+        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
+
+        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
+
+        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
+
+        case OBJECT_TYPE__PILLAR:                           is = 0; break;
+
+        case OBJECT_TYPE__PIPE:                             is = 0; break;
+
+        case OBJECT_TYPE__STALACTITE:                       is = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
+
+        case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
+
+        case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
+
+        case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
+        case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
+        case OBJECT_TYPE__COVER_GLASS:                      is = 0; break;
+
+        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 0; break;
+
+        case OBJECT_TYPE__CRATE_CELL:                       is = 0; break;
+        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 0; break;
+
+        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 0; break;
+        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 0; break;
+
+        case OBJECT_TYPE__ROCK:                             is = 0; break;
+        case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
+        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 0; break;
+
+        case OBJECT_TYPE__SAFE:                             is = 0; break;
+        case OBJECT_TYPE__SAFE_DAMAGED:                     is = 0; break;
+        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:                is = 0; break;
+
+        case OBJECT_TYPE__DISPLAY:                          is = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED:                  is = 0; break;
+        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             is = 0; break;
+
+        case OBJECT_TYPE__VENDING_CELL:                     is = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_ITEM:                is = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED:             is = 0; break;
+        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:        is = 0; break;
+
+        case OBJECT_TYPE__VENDING_DYNAMITE:                 is = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:            is = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED:         is = 0; break;
+        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
+
+        case OBJECT_TYPE__BARREL:                           is = 0; break;
+
+        case OBJECT_TYPE__PISTON:                           is = 0; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
+
+        case OBJECT_TYPE__BALL:                             is = 0; break;
+        case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
+
+        case OBJECT_TYPE__HERO:                             is = 0; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 0; break;
+
+        case OBJECT_TYPE__GOAT:                             is = 0; break;
+        case OBJECT_TYPE__SPIDER:                           is = 0; break;
+        case OBJECT_TYPE__BULL:                             is = 0; break;
+        case OBJECT_TYPE__FLY:                              is = 0; break;
+        case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
+
+        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
+        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            is = 0; break;
+
+        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_STANDING:             is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           is = 0; break;
+        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             is = 0; break;
+
+        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
 int is_object_flying(Object* object)
 {
     int is = 0;
@@ -131,8 +272,6 @@ int is_object_flying(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 0; break;
 
-        case OBJECT_TYPE__WEIGHT:                           is = 0; break;
-
         case OBJECT_TYPE__PISTON:                           is = 0; break;
         case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
@@ -142,6 +281,9 @@ int is_object_flying(Object* object)
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
 
         case OBJECT_TYPE__HERO:                             is = 0; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 0; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
+
         case OBJECT_TYPE__GOAT:                             is = 0; break;
         case OBJECT_TYPE__SPIDER:                           is = 0; break;
         case OBJECT_TYPE__BULL:                             is = 0; break;
@@ -175,7 +317,7 @@ int is_object_flying(Object* object)
     return is;
 }
 
-int is_object_interactable(Object* object)
+int is_object_manipulatable(Object* object)
 {
     int is = 0;
 
@@ -271,8 +413,6 @@ int is_object_interactable(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 1; break;
 
-        case OBJECT_TYPE__WEIGHT:                           is = 0; break;
-
         case OBJECT_TYPE__PISTON:                           is = 1; break;
         case OBJECT_TYPE__PISTON_CELL:                      is = 1; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 1; break;
@@ -282,6 +422,9 @@ int is_object_interactable(Object* object)
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
 
         case OBJECT_TYPE__HERO:                             is = 0; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 0; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 0; break;
+
         case OBJECT_TYPE__GOAT:                             is = 0; break;
         case OBJECT_TYPE__SPIDER:                           is = 0; break;
         case OBJECT_TYPE__BULL:                             is = 0; break;
@@ -411,8 +554,6 @@ int is_object_movable(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 1; break;
 
-        case OBJECT_TYPE__WEIGHT:                           is = 1; break;
-
         case OBJECT_TYPE__PISTON:                           is = 0; break;
         case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
@@ -422,6 +563,9 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
 
         case OBJECT_TYPE__HERO:                             is = 1; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
+
         case OBJECT_TYPE__GOAT:                             is = 1; break;
         case OBJECT_TYPE__SPIDER:                           is = 1; break;
         case OBJECT_TYPE__BULL:                             is = 1; break;
@@ -551,8 +695,6 @@ int is_object_meltable(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 1; break;
 
-        case OBJECT_TYPE__WEIGHT:                           is = 1; break;
-
         case OBJECT_TYPE__PISTON:                           is = 1; break;
         case OBJECT_TYPE__PISTON_CELL:                      is = 1; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 1; break;
@@ -562,6 +704,9 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
 
         case OBJECT_TYPE__HERO:                             is = 1; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
+
         case OBJECT_TYPE__GOAT:                             is = 1; break;
         case OBJECT_TYPE__SPIDER:                           is = 1; break;
         case OBJECT_TYPE__BULL:                             is = 1; break;
@@ -691,8 +836,6 @@ int is_object_breakable(Object* object)
 
         case OBJECT_TYPE__BARREL:                           is = 0; break;
 
-        case OBJECT_TYPE__WEIGHT:                           is = 0; break;
-
         case OBJECT_TYPE__PISTON:                           is = 0; break;
         case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
@@ -702,6 +845,9 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
 
         case OBJECT_TYPE__HERO:                             is = 0; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 0; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 0; break;
+
         case OBJECT_TYPE__GOAT:                             is = 0; break;
         case OBJECT_TYPE__SPIDER:                           is = 0; break;
         case OBJECT_TYPE__BULL:                             is = 0; break;
@@ -805,8 +951,6 @@ int get_object_item_type(Object* object)
 
         case OBJECT_TYPE__BARREL:                           item_type = ITEM__NONE; break;
 
-        case OBJECT_TYPE__WEIGHT:                           item_type = ITEM__NONE; break;
-
         case OBJECT_TYPE__PISTON:                           item_type = ITEM__NONE; break;
         case OBJECT_TYPE__PISTON_CELL:                      item_type = ITEM__CELL; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  item_type = ITEM__DYNAMITE; break;
@@ -896,8 +1040,6 @@ int get_object_item_count(Object* object)
         case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    count = 3; break;
 
         case OBJECT_TYPE__BARREL:                           count = 0; break;
-
-        case OBJECT_TYPE__WEIGHT:                           count = 0; break;
 
         case OBJECT_TYPE__PISTON:                           count = 0; break;
         case OBJECT_TYPE__PISTON_CELL:                      count = 2; break;
@@ -1025,8 +1167,6 @@ int is_object_put_item(Object* object)
         case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
 
         case OBJECT_TYPE__BARREL:                           is = 0; break;
-
-        case OBJECT_TYPE__WEIGHT:                           is = 0; break;
 
         case OBJECT_TYPE__PISTON:                           is = 0; break;
         case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
@@ -1185,8 +1325,6 @@ char* get_name_from_object_type(int object_type)
 
         case OBJECT_TYPE__BARREL:                           name = "barrel"; break;
 
-        case OBJECT_TYPE__WEIGHT:                           name = "weight"; break;
-
         case OBJECT_TYPE__PISTON:                           name = "piston"; break;
         case OBJECT_TYPE__PISTON_CELL:                      name = "piston cell"; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  name = "piston dynamite"; break;
@@ -1196,6 +1334,9 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__BALL_SPIKES:                      name = "ball spikes"; break;
 
         case OBJECT_TYPE__HERO:                             name = "hero"; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    name = "hero floating"; break;
+        case OBJECT_TYPE__HERO_FLYING:                      name = "hero flying"; break;
+
         case OBJECT_TYPE__GOAT:                             name = "goat"; break;
         case OBJECT_TYPE__SPIDER:                           name = "spider"; break;
         case OBJECT_TYPE__BULL:                             name = "bull"; break;
@@ -1358,8 +1499,6 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel; break;
 
-        case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight; break;
-
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston; break;
         case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
@@ -1369,6 +1508,9 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_1; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_1; break;
+        case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_1; break;
+
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_1; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_1; break;
         case OBJECT_TYPE__BULL:                             texture = textures->object.bull_1; break;
@@ -1531,8 +1673,6 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel; break;
 
-        case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight; break;
-
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston; break;
         case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
@@ -1542,6 +1682,9 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_2; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_2; break;
+        case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_2; break;
+
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_2; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_2; break;
         case OBJECT_TYPE__BULL:                             texture = textures->object.bull_2; break;
@@ -1704,8 +1847,6 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel_outline; break;
 
-        case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight_outline; break;
-
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston_outline; break;
         case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
@@ -1715,6 +1856,9 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_1; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_1; break;
+        case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_1; break;
+
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_1; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_outline_1; break;
         case OBJECT_TYPE__BULL:                             texture = textures->object.bull_outline_1; break;
@@ -1877,8 +2021,6 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BARREL:                           texture = textures->object.barrel_outline; break;
 
-        case OBJECT_TYPE__WEIGHT:                           texture = textures->object.weight_outline; break;
-
         case OBJECT_TYPE__PISTON:                           texture = textures->object.piston_outline; break;
         case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
@@ -1888,6 +2030,9 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_2; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_2; break;
+        case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_2; break;
+
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_2; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_outline_2; break;
         case OBJECT_TYPE__BULL:                             texture = textures->object.bull_outline_2; break;

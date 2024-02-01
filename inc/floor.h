@@ -56,10 +56,16 @@ enum FLOOR_TYPE
     FLOOR_TYPE__COUNT
 };
 
-int is_floor_interactable(int floor);
+int is_floor_manipulatable(int floor);
 int is_floor_traversable(int floor);
+int is_floor_traversable_for_floating(int floor);
+int is_floor_traversable_for_flying(int floor);
 int is_floor_deadly_on_move(int floor);
+int is_floor_deadly_on_move_for_floating(int floor);
+int is_floor_deadly_on_move_for_flying(int floor);
 int is_floor_deadly_on_drop(int floor);
+int is_floor_deadly_on_drop_for_floating(int floor);
+int is_floor_deadly_on_drop_for_flying(int floor);
 
 int get_floor_item_type(int floor);
 int get_floor_item_count(int floor);

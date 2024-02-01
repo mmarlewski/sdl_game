@@ -33,7 +33,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             draw_texture_at_gamemap_pos(
                 renderer,

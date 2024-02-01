@@ -72,23 +72,23 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
             skill_animation = animation_sequence;
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             Object* object = target_2_object;
             int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
 
-            if(object != 0 && is_object_interactable(object))
+            if(object != 0 && is_object_manipulatable(object))
             {
-                skill_animation = object_on_interact_get_animation(
+                skill_animation = object_on_manipulate_get_animation(
                     state,
                     object,
                     target_2_tilemap_pos,
                     textures
                 );
             }
-            else if(floor != FLOOR_TYPE__NONE && is_floor_interactable(floor))
+            else if(floor != FLOOR_TYPE__NONE && is_floor_manipulatable(floor))
             {
-                skill_animation = floor_on_interact_get_animation(
+                skill_animation = floor_on_manipulation_get_animation(
                     state,
                     floor,
                     target_2_tilemap_pos,

@@ -113,12 +113,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             }
         }
         break;
-        case SKILL__HERO_INTERACT:
+        case SKILL__HERO_MANIPULATION:
         {
             //
         }
         break;
         case SKILL__HERO_MOVE:
+        case SKILL__HERO_MOVE_FLOATING:
+        case SKILL__HERO_MOVE_FLYING:
         {
             draw_texture_at_gamemap_pos(
                 renderer,
@@ -232,8 +234,10 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     target_2_tilemap_pos
                     );
 
-            if(is_floor_deadly_on_move(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
-            !is_object_flying(source_object))
+            int target_2_floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            if((is_object_floating(source_object) && is_floor_deadly_on_move_for_floating(target_2_floor)) ||
+            (is_object_flying(source_object) && is_floor_deadly_on_move_for_flying(target_2_floor)) ||
+            (!is_object_floating(source_object) && !is_object_flying(source_object) && is_floor_deadly_on_move(target_2_floor)))
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -290,8 +294,10 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         break;
         case SKILL__JUMP:
         {
-            if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
-            !is_object_flying(source_object))
+            int target_2_floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            if((is_object_floating(source_object) && is_floor_deadly_on_move_for_floating(target_2_floor)) ||
+            (is_object_flying(source_object) && is_floor_deadly_on_move_for_flying(target_2_floor)) ||
+            (!is_object_floating(source_object) && !is_object_flying(source_object) && is_floor_deadly_on_move(target_2_floor)))
             {
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -557,8 +563,10 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
             if(is_object_movable(target_1_object))
             {
-                if(is_floor_deadly_on_drop(get_floor_on_tilemap_pos(state, target_2_tilemap_pos)) &&
-                !is_object_flying(target_1_object))
+                int target_2_floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+                if((is_object_floating(target_1_object) && is_floor_deadly_on_move_for_floating(target_2_floor)) ||
+                (is_object_flying(target_1_object) && is_floor_deadly_on_move_for_flying(target_2_floor)) ||
+                (!is_object_floating(target_1_object) && !is_object_flying(target_1_object) && is_floor_deadly_on_move(target_2_floor)))
                 {
                     draw_texture_at_gamemap_pos(
                         renderer,
