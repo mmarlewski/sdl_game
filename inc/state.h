@@ -18,8 +18,9 @@
 #include "../inc/sounds.h"
 #include "../inc/musics.h"
 #include "../inc/colors.h"
-#include "augmentation.h"
-#include "item.h"
+#include "../inc/augmentation.h"
+#include "../inc/item.h"
+#include "../inc/room.h"
 
 enum GAMESTATE
 {
@@ -62,8 +63,6 @@ typedef struct
 
 typedef struct
 {
-    int floor_array[TILEMAP_LENGTH][TILEMAP_LENGTH];
-
     List* possible_target_1_tilemap_pos_list;
     List* possible_target_2_tilemap_pos_list;
 
@@ -112,6 +111,10 @@ typedef struct
     float timer;
     Vec3i background_color;
 
+    List* room_list;
+    List* passage_list;
+    Room* curr_room;
+
     State_Camera camera;
     State_Mouse mouse;
     State_Gamemap gamemap;
@@ -122,17 +125,15 @@ typedef struct
 void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
+void add_room(State* state, Room* room);
+Room* get_room(State* state, char* name);
+void set_curr_room(State* state, Room* room);
+
+void add_passage(State* state, Passage* passage);
+Passage* get_passage(State* state, char* from_room_name, Vec2i from_tilemap_pos);
+
 void change_gamestate(State* state, int new_gamestate);
 void change_background_color(State* state, Vec3i new_background_color);
-
-int is_tilemap_pos_in_tilemap(Vec2i tilemap_pos);
-Object* get_object_on_tilemap_pos(State* state, Vec2i tilemap_pos);
-int get_floor_on_tilemap_pos(State* state, Vec2i tilemap_pos);
-void change_floor_in_tilemap_pos(State* state, int new_floor, Vec2i tilemap_pos);
-
-void add_object_to_gamemap_objects(State* state, Object* new_object);
-void remove_object_from_gamemap_objects(State* state, Object* object);
-void remove_all_dead_objects_from_gamemap_objects(State* state);
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
@@ -202,6 +203,8 @@ void hero_add_augmentation(State* state, int augmentation);
 int hero_has_augmentation(State* state, int augmentation);
 
 void determine_enemy_order(State* state);
+void determine_enemy_objects(State* state);
+void remove_all_dead_objects(State* state);
 
 void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying);
 

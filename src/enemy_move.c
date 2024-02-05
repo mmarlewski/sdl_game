@@ -39,28 +39,28 @@ void object_enemy_prepare_move(State* state, Object* object)
         if(object_up == 0)
         {
             tilemap_pos_up = vec2i_move_in_dir4_by(tilemap_pos_up, DIR4__UP, 1);
-            object_up = get_object_on_tilemap_pos(state, tilemap_pos_up);
+            object_up = room_get_object_at(state->curr_room, tilemap_pos_up);
             if(object_up != 0) distance_up = i;
         }
 
         if(object_right == 0)
         {
             tilemap_pos_right = vec2i_move_in_dir4_by(tilemap_pos_right, DIR4__RIGHT, 1);
-            object_right = get_object_on_tilemap_pos(state, tilemap_pos_right);
+            object_right = room_get_object_at(state->curr_room, tilemap_pos_right);
             if(object_right != 0) distance_right = i;
         }
 
         if(object_down == 0)
         {
             tilemap_pos_down = vec2i_move_in_dir4_by(tilemap_pos_down, DIR4__DOWN, 1);
-            object_down = get_object_on_tilemap_pos(state, tilemap_pos_down);
+            object_down = room_get_object_at(state->curr_room, tilemap_pos_down);
             if(object_down != 0) distance_down = i;
         }
 
         if(object_left == 0)
         {
             tilemap_pos_left = vec2i_move_in_dir4_by(tilemap_pos_left, DIR4__LEFT, 1);
-            object_left = get_object_on_tilemap_pos(state, tilemap_pos_left);
+            object_left = room_get_object_at(state->curr_room, tilemap_pos_left);
             if(object_left != 0) distance_left = i;
         }
     }
@@ -116,7 +116,7 @@ void object_enemy_prepare_move(State* state, Object* object)
     for(int i = 0; i < distance; i++)
     {
         new_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, dir4, 1);
-        new_tilemap_pos_object = get_object_on_tilemap_pos(state, new_tilemap_pos);
+        new_tilemap_pos_object = room_get_object_at(state->curr_room, new_tilemap_pos);
         if(new_tilemap_pos_object == 0)
         {
             add_action_to_end_action_sequence(object->enemy.action_sequence, new_action_move(curr_tilemap_pos,dir4));

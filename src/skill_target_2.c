@@ -2,8 +2,8 @@
 
 void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos)
 {
-    Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
-    Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
+    Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
+    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
 
     switch(skill)
     {
@@ -32,8 +32,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
-                int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
-                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                 if(get_floor_item_type(floor) != ITEM__NONE ||
                 (object != 0 && get_object_item_type(object) != ITEM__NONE))
                 {
@@ -49,8 +49,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
-                    Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                     if(get_floor_item_type(floor) != ITEM__NONE ||
                     (object != 0 && get_object_item_type(object) != ITEM__NONE))
                     {
@@ -65,8 +65,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
-                int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
-                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                 if(is_floor_put_item(floor) ||
                 (object != 0 && is_object_put_item(object)))
                 {
@@ -82,8 +82,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
-                    Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                     if(is_floor_put_item(floor) ||
                     (object != 0 && is_object_put_item(object)))
                     {
@@ -98,8 +98,8 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
-                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
-                int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
+                Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
                 if(object != 0)
                 {
@@ -124,16 +124,16 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
             for(ListElem* curr_elem = square_area_pos->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
-                Vec2i* curr_tilemap_pos = (Vec2i*)curr_elem->data;
-                if(is_tilemap_pos_in_tilemap(*curr_tilemap_pos))
+                Vec2i curr_tilemap_pos = *(Vec2i*)curr_elem->data;
+                if(is_tilemap_in_bounds(curr_tilemap_pos))
                 {
-                    int curr_floor = get_floor_on_tilemap_pos(state, *curr_tilemap_pos);
-                    Object* curr_object = get_object_on_tilemap_pos(state, *curr_tilemap_pos);
+                    int curr_floor = room_get_floor_at(state->curr_room, curr_tilemap_pos);
+                    Object* curr_object = room_get_object_at(state->curr_room, curr_tilemap_pos);
 
                     if((curr_object == 0 && is_floor_manipulatable(curr_floor)) ||
                     (curr_object != 0 && is_object_manipulatable(curr_object)))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
+                        add_pos_to_possible_target_2_tilemap_pos_list(state, curr_tilemap_pos);
                     }
                 }
             }
@@ -230,15 +230,15 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 down_tilemap_pos = vec2i_move_in_dir4_by(down_tilemap_pos, DIR4__DOWN, 1);
                 left_tilemap_pos = vec2i_move_in_dir4_by(left_tilemap_pos, DIR4__LEFT, 1);
 
-                int up_floor = get_floor_on_tilemap_pos(state, up_tilemap_pos);
-                int right_floor = get_floor_on_tilemap_pos(state, right_tilemap_pos);
-                int down_floor = get_floor_on_tilemap_pos(state, down_tilemap_pos);
-                int left_floor = get_floor_on_tilemap_pos(state, left_tilemap_pos);
+                int up_floor = room_get_floor_at(state->curr_room, up_tilemap_pos);
+                int right_floor = room_get_floor_at(state->curr_room, right_tilemap_pos);
+                int down_floor = room_get_floor_at(state->curr_room, down_tilemap_pos);
+                int left_floor = room_get_floor_at(state->curr_room, left_tilemap_pos);
 
-                up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
-                right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
-                down_object = get_object_on_tilemap_pos(state, down_tilemap_pos);
-                left_object = get_object_on_tilemap_pos(state, left_tilemap_pos);
+                up_object = room_get_object_at(state->curr_room, up_tilemap_pos);
+                right_object = room_get_object_at(state->curr_room, right_tilemap_pos);
+                down_object = room_get_object_at(state->curr_room, down_tilemap_pos);
+                left_object = room_get_object_at(state->curr_room, left_tilemap_pos);
 
                 if(up_cont) add_pos_to_possible_target_2_tilemap_pos_list(state,up_tilemap_pos);
                 if(right_cont) add_pos_to_possible_target_2_tilemap_pos_list(state,right_tilemap_pos);
@@ -257,25 +257,25 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int i = 1; i < 10; i++)
             {
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i);
-                if(get_object_on_tilemap_pos(state, up_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, up_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, up_tilemap_pos);
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i);
-                if(get_object_on_tilemap_pos(state, right_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, right_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, right_tilemap_pos);
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i);
-                if(get_object_on_tilemap_pos(state, down_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, down_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, down_tilemap_pos);
                 }
 
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i);
-                if(get_object_on_tilemap_pos(state, left_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, left_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, left_tilemap_pos);
                 }
@@ -308,7 +308,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int i = 0; i < 10; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, distance_info.dir4, i+1);
-                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                 if(object == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state,tilemap_pos);
@@ -378,25 +378,25 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int i = 1; i < 10; i++)
             {
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__UP, i);
-                if(get_object_on_tilemap_pos(state, up_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, up_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, up_tilemap_pos);
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__RIGHT, i);
-                if(get_object_on_tilemap_pos(state, right_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, right_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, right_tilemap_pos);
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__DOWN, i);
-                if(get_object_on_tilemap_pos(state, down_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, down_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, down_tilemap_pos);
                 }
 
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__LEFT, i);
-                if(get_object_on_tilemap_pos(state, left_tilemap_pos) == 0)
+                if(room_get_object_at(state->curr_room, left_tilemap_pos) == 0)
                 {
                     add_pos_to_possible_target_2_tilemap_pos_list(state, left_tilemap_pos);
                 }
@@ -411,7 +411,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
 
-                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    if(is_tilemap_in_bounds(tilemap_pos))
                     {
                         add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
                     }
@@ -469,7 +469,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                     for(ListElem* line_elem = line_tilemap_pos->head; line_elem != 0; line_elem = line_elem->next)
                     {
                         Vec2i line_tilemap_pos = *(Vec2i*)line_elem->data;
-                        Object* line_object = get_object_on_tilemap_pos(state, line_tilemap_pos);
+                        Object* line_object = room_get_object_at(state->curr_room, line_tilemap_pos);
 
                         if(!vec2i_equals(line_tilemap_pos, source_tilemap_pos) &&
                         !vec2i_equals(line_tilemap_pos, perimeter_tilemap_pos))

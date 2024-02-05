@@ -105,4 +105,6 @@ int vec4f_equals(Vec4f vec_1, Vec4f vec_2, float epsilon);
 Vec2i floor_vec2f_to_vec2i(Vec2f vec_in);
 Vec2f vec2i_to_vec2f(Vec2i vec_in);
 
+int is_tilemap_in_bounds(Vec2i tilemap_pos);
+
 #endif

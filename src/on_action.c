@@ -8,7 +8,7 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
         {
             if(!is_object_flying(action->move.object))
             {
-                change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
+                room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
             }
         }
         break;
@@ -16,7 +16,7 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
         {
             if(!is_object_flying(action->move.object))
             {
-                change_floor_in_tilemap_pos(state, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
+                room_change_floor_at(state->curr_room, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
             }
         }
         break;
@@ -24,7 +24,7 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
         {
             if(!is_object_flying(action->move.object))
             {
-                change_floor_in_tilemap_pos(state, FLOOR_TYPE__PIT, action->move.object->tilemap_pos);
+                room_change_floor_at(state->curr_room, FLOOR_TYPE__PIT, action->move.object->tilemap_pos);
             }
         }
         break;
@@ -32,7 +32,7 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
         {
             if(!is_object_flying(action->move.object))
             {
-                change_floor_in_tilemap_pos(state, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
+                room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
             }
         }
         break;
@@ -159,8 +159,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             !is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                change_floor_in_tilemap_pos(
-                    state,
+                room_change_floor_at(
+                    state->curr_room,
                     FLOOR_TYPE__WATER,
                     action->tilemap_pos
                     );
@@ -174,8 +174,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             }
             else if(is_object_floating(action->drop.object))
             {
-                change_floor_in_tilemap_pos(
-                    state,
+                room_change_floor_at(
+                    state->curr_room,
                     FLOOR_TYPE__WATER,
                     action->tilemap_pos
                     );
@@ -188,8 +188,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             !is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                change_floor_in_tilemap_pos(
-                    state,
+                room_change_floor_at(
+                    state->curr_room,
                     FLOOR_TYPE__LAVA,
                     action->tilemap_pos
                     );
@@ -203,8 +203,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             }
             else if(is_object_floating(action->drop.object))
             {
-                change_floor_in_tilemap_pos(
-                    state,
+                room_change_floor_at(
+                    state->curr_room,
                     FLOOR_TYPE__LAVA,
                     action->tilemap_pos
                     );
@@ -216,8 +216,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             if(!is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                change_floor_in_tilemap_pos(
-                    state,
+                room_change_floor_at(
+                    state->curr_room,
                     FLOOR_TYPE__PIT,
                     action->tilemap_pos
                     );
@@ -251,8 +251,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
             !is_object_flying(action->drop.object))
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
-                change_floor_in_tilemap_pos(
-                    state,
+                room_change_floor_at(
+                    state->curr_room,
                     FLOOR_TYPE__WATER,
                     action->tilemap_pos
                     );
@@ -1178,7 +1178,7 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
         break;
         case OBJECT_TYPE__STALACTITE:
         {
-            int floor = get_floor_on_tilemap_pos(state, action->tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             switch(floor)
             {

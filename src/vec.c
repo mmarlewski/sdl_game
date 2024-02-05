@@ -432,3 +432,9 @@ Vec2f vec2i_to_vec2f(Vec2i vec_in)
     vec_out.y = vec_in.y;
     return vec_out;
 }
+
+int is_tilemap_in_bounds(Vec2i tilemap_pos)
+{
+    return (tilemap_pos.x >= 0 && tilemap_pos.x < TILEMAP_LENGTH &&
+    tilemap_pos.y >= 0 && tilemap_pos.y < TILEMAP_LENGTH);
+}

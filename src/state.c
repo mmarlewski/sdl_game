@@ -1,4 +1,5 @@
 #include "../inc/state.h"
+#include <string.h>
 
 void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
@@ -22,21 +23,15 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->mouse.is_dragging = 0;
     state->mouse.drag_origin_world_pos = vec2f(0, 0);
 
-    // gamemap
+    state->room_list = new_list((void (*)(void *))&destroy_room);
+    state->passage_list = new_list((void (*)(void *))&destroy_passage);
+    state->curr_room = 0;
 
-    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
-    {
-        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
-        {
-            state->gamemap.floor_array[i][j] = FLOOR_TYPE__GRASS;
-        }
-    }
+    // gamemap
 
     state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.object_hero->tilemap_pos = vec2i(7,5);
-    add_object_to_gamemap_objects(state, state->gamemap.object_hero);
     state->gamemap.curr_object_enemy = 0;
 
     state->gamemap.sprite_list = new_list((void (*)(void *))&destroy_sprite);
@@ -146,16 +141,80 @@ void change_background_color(State* state, Vec3i new_background_color)
 
 // gamemap
 
-int is_tilemap_pos_in_tilemap(Vec2i tilemap_pos)
+void add_room(State* state, Room* room)
 {
-    return (tilemap_pos.x >= 0 && tilemap_pos.x < TILEMAP_LENGTH && tilemap_pos.y >= 0 && tilemap_pos.y < TILEMAP_LENGTH);
+    List* room_list = state->room_list;
+
+    add_new_list_element_to_list_end(room_list,room);
 }
 
-Object* get_object_on_tilemap_pos(State* state, Vec2i tilemap_pos)
+Room* get_room(State* state, char* name)
 {
-    if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
+    List* room_list = state->room_list;
 
-    for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem; curr_elem = curr_elem->next)
+    for(ListElem* elem = room_list->head; elem != 0; elem = elem->next)
+    {
+        if(elem != 0)
+        {
+            Room* room = (Room*) elem->data;
+
+            if(strcmp(room->name, name) == 0)
+            {
+                return room;
+            }
+        }
+    }
+
+    return 0;
+}
+
+void set_curr_room(State* state, Room* room)
+{
+    state->curr_room = room;
+}
+
+void add_passage(State* state, Passage* passage)
+{
+    List* passage_list = state->passage_list;
+
+    add_new_list_element_to_list_end(passage_list,passage);
+}
+
+Passage* get_passage(State* state, char* from_room_name, Vec2i from_tilemap_pos)
+{
+    List* passage_list = state->passage_list;
+
+    for(ListElem* elem = passage_list->head; elem != 0; elem = elem->next)
+    {
+        if(elem != 0)
+        {
+            Passage* passage = (Passage*) elem->data;
+
+            printf("passage: %p \n", passage);
+            printf("from_room_name: %s \n", passage->from_room_name);
+            printf("from_room_name: %s \n", from_room_name);
+            printf("from_tilemap_pos: %i, %i \n", passage->from_tilemap_pos.x, passage->from_tilemap_pos.y);
+            printf("from_tilemap_pos: %i, %i \n", from_tilemap_pos.x, from_tilemap_pos.y);
+
+            if(passage != 0)
+            {
+                if(strcmp(passage->from_room_name, from_room_name) == 0 &&
+                vec2i_equals(passage->from_tilemap_pos, from_tilemap_pos))
+                {
+                    return passage;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+Object* room_get_object_at(Room* room, Vec2i tilemap_pos)
+{
+    if(!is_tilemap_in_bounds(tilemap_pos)) return 0;
+
+    for(ListElem* curr_elem = room->object_list->head; curr_elem; curr_elem = curr_elem->next)
     {
         Object* curr_object = (Object*)curr_elem->data;
         if(!curr_object->is_dead &&
@@ -168,31 +227,6 @@ Object* get_object_on_tilemap_pos(State* state, Vec2i tilemap_pos)
 
     return 0;
 }
-
-int get_floor_on_tilemap_pos(State* state, Vec2i tilemap_pos)
-{
-    if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return 0;
-
-    return state->gamemap.floor_array[tilemap_pos.y][tilemap_pos.x];
-}
-
-void change_floor_in_tilemap_pos(State* state, int new_floor, Vec2i tilemap_pos)
-{
-    if(!is_tilemap_pos_in_tilemap(tilemap_pos)) return;
-
-    state->gamemap.floor_array[tilemap_pos.y][tilemap_pos.x] = new_floor;
-}
-
-void add_object_to_gamemap_objects(State* state, Object* new_object)
-{
-    add_new_list_element_to_list_end(state->gamemap.object_list, new_object);
-
-    if(new_object->is_enemy)
-    {
-        add_new_list_element_to_list_end(state->gamemap.object_enemy_list, new_object);
-    }
-}
-
 void remove_object_from_gamemap_objects(State* state, Object* object)
 {
     if(object == state->gamemap.object_hero)
@@ -372,4 +406,24 @@ void determine_enemy_order(State* state)
         curr_object->enemy.order_number = order_number;
         order_number++;
     }
+}
+
+void determine_enemy_objects(State* state)
+{
+    remove_all_list_elements(state->gamemap.object_enemy_list,0);
+
+    for(ListElem* elem = state->curr_room->object_list->head; elem != 0; elem = elem->next)
+    {
+        Object* object = (Object*)elem->data;
+
+        if(is_object_enemy(object))
+        {
+            add_new_list_element_to_list_end(state->gamemap.object_enemy_list, object);
+        }
+    }
+}
+
+void remove_all_dead_objects(State* state)
+{
+    //
 }

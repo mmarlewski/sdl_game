@@ -13,7 +13,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
 
-            int floor = state->gamemap.floor_array[i][j];
+            int floor = state->curr_room->floor_array[i][j];
             Texture* tile_floor_texture = 0;
             if(sin(state->time * 3) > 0)
             {
@@ -101,7 +101,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
         is_object_enemy(hover_object) &&
@@ -132,7 +132,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
         else
         {
-            for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*)curr_elem->data;
                 Action* curr_action = curr_object->enemy.action_sequence;
@@ -211,7 +211,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             // objects
 
-            for(ListElem* curr_elem = state->gamemap.object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*)curr_elem->data;
                 if(!curr_object->is_dead &&
@@ -293,7 +293,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
         hover_object->is_enemy &&
@@ -324,7 +324,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
         else
         {
-            for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*)curr_elem->data;
                 Action* curr_action = curr_object->enemy.action_sequence;
@@ -405,7 +405,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL)
     {
-        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
          !hover_object->is_dead &&
@@ -508,7 +508,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        Object* hover_object = get_object_on_tilemap_pos(state, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
 
         if(hover_object != 0 &&
         hover_object->is_enemy &&

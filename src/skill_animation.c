@@ -2,9 +2,9 @@
 
 Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures)
 {
-    Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
-    Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
-    Object* target_2_object = get_object_on_tilemap_pos(state, target_2_tilemap_pos);
+    Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
+    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
+    Object* target_2_object = room_get_object_at(state->curr_room, target_2_tilemap_pos);
 
     Animation* skill_animation = new_animation_none();
 
@@ -75,7 +75,7 @@ Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos
         case SKILL__HERO_MANIPULATION:
         {
             Object* object = target_2_object;
-            int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
             if(object != 0 && is_object_manipulatable(object))
             {

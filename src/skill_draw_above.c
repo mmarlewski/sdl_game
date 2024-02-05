@@ -2,9 +2,9 @@
 
 void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Vec3i color, Textures* textures)
 {
-    Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
-    Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
-    Object* target_2_object = get_object_on_tilemap_pos(state, target_2_tilemap_pos);
+    Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
+    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
+    Object* target_2_object = room_get_object_at(state->curr_room, target_2_tilemap_pos);
 
     switch(skill)
     {
@@ -79,10 +79,10 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     target_2_tilemap_pos
                     );
 
-            int target_floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int target_floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             Object* target_object = target_2_object;
 
-            if(is_tilemap_pos_in_tilemap(target_2_tilemap_pos))
+            if(is_tilemap_in_bounds(target_2_tilemap_pos))
             {
                 if(target_object == 0)
                 {
@@ -142,11 +142,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             Vec2i charge_curr_tilemap_pos = source_object->tilemap_pos;
             Vec2i charge_next_tilemap_pos = vec2i_move_in_dir4_by(charge_curr_tilemap_pos,charge_distance_info.dir4,1);
 
-            int charge_curr_floor = get_floor_on_tilemap_pos(state, charge_curr_tilemap_pos);
-            int charge_next_floor = get_floor_on_tilemap_pos(state, charge_next_tilemap_pos);
+            int charge_curr_floor = room_get_floor_at(state->curr_room, charge_curr_tilemap_pos);
+            int charge_next_floor = room_get_floor_at(state->curr_room, charge_next_tilemap_pos);
 
-            Object* charge_curr_object = get_object_on_tilemap_pos(state, charge_curr_tilemap_pos);
-            Object* charge_next_object = get_object_on_tilemap_pos(state, charge_next_tilemap_pos);
+            Object* charge_curr_object = room_get_object_at(state->curr_room, charge_curr_tilemap_pos);
+            Object* charge_next_object = room_get_object_at(state->curr_room, charge_next_tilemap_pos);
 
             int charge_go_on = 1;
             for(int i = 0; charge_go_on && i < charge_distance_info.abs_diff; i++)
@@ -161,7 +161,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                             charge_distance_info.dir4
                             );
                 }
-                else if(is_tilemap_pos_in_tilemap(charge_curr_tilemap_pos) &&
+                else if(is_tilemap_in_bounds(charge_curr_tilemap_pos) &&
                 (is_floor_traversable(charge_curr_floor) ||
                 is_object_flying(source_object)) &&
                 charge_curr_object == 0)
@@ -198,11 +198,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 charge_curr_tilemap_pos = charge_next_tilemap_pos;
                 charge_next_tilemap_pos = vec2i_move_in_dir4_by(charge_next_tilemap_pos,charge_distance_info.dir4,1);
 
-                charge_curr_floor = get_floor_on_tilemap_pos(state, charge_curr_tilemap_pos);
-                charge_next_floor = get_floor_on_tilemap_pos(state, charge_next_tilemap_pos);
+                charge_curr_floor = room_get_floor_at(state->curr_room, charge_curr_tilemap_pos);
+                charge_next_floor = room_get_floor_at(state->curr_room, charge_next_tilemap_pos);
 
-                charge_curr_object = get_object_on_tilemap_pos(state, charge_curr_tilemap_pos);
-                charge_next_object = get_object_on_tilemap_pos(state, charge_next_tilemap_pos);
+                charge_curr_object = room_get_object_at(state->curr_room, charge_curr_tilemap_pos);
+                charge_next_object = room_get_object_at(state->curr_room, charge_next_tilemap_pos);
             }
 
             if(!will_push_after_charge || !is_object_movable(target_1_object)) break;
@@ -217,11 +217,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             Vec2i push_curr_tilemap_pos = target_1_tilemap_pos;
             Vec2i push_next_tilemap_pos = vec2i_move_in_dir4_by(push_curr_tilemap_pos,push_distance_info.dir4,1);
 
-            int push_curr_floor = get_floor_on_tilemap_pos(state, push_curr_tilemap_pos);
-            int push_next_floor = get_floor_on_tilemap_pos(state, push_next_tilemap_pos);
+            int push_curr_floor = room_get_floor_at(state->curr_room, push_curr_tilemap_pos);
+            int push_next_floor = room_get_floor_at(state->curr_room, push_next_tilemap_pos);
 
-            Object* push_curr_object = get_object_on_tilemap_pos(state, push_curr_tilemap_pos);
-            Object* push_next_object = get_object_on_tilemap_pos(state, push_next_tilemap_pos);
+            Object* push_curr_object = room_get_object_at(state->curr_room, push_curr_tilemap_pos);
+            Object* push_next_object = room_get_object_at(state->curr_room, push_next_tilemap_pos);
 
             int push_go_on = 1;
             for(int i = 0; push_go_on && i < push_distance_info.abs_diff + 1; i++)
@@ -244,7 +244,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                             get_opposite_dir4(push_distance_info.dir4)
                             );
                 }
-                else if(is_tilemap_pos_in_tilemap(push_curr_tilemap_pos) &&
+                else if(is_tilemap_in_bounds(push_curr_tilemap_pos) &&
                 (is_floor_traversable(push_curr_floor) ||
                 is_object_flying(target_1_object)) &&
                 push_curr_object == 0)
@@ -281,11 +281,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 push_curr_tilemap_pos = push_next_tilemap_pos;
                 push_next_tilemap_pos = vec2i_move_in_dir4_by(push_next_tilemap_pos,push_distance_info.dir4,1);
 
-                push_curr_floor = get_floor_on_tilemap_pos(state, push_curr_tilemap_pos);
-                push_next_floor = get_floor_on_tilemap_pos(state, push_next_tilemap_pos);
+                push_curr_floor = room_get_floor_at(state->curr_room, push_curr_tilemap_pos);
+                push_next_floor = room_get_floor_at(state->curr_room, push_next_tilemap_pos);
 
-                push_curr_object = get_object_on_tilemap_pos(state, push_curr_tilemap_pos);
-                push_next_object = get_object_on_tilemap_pos(state, push_next_tilemap_pos);
+                push_curr_object = room_get_object_at(state->curr_room, push_curr_tilemap_pos);
+                push_next_object = room_get_object_at(state->curr_room, push_next_tilemap_pos);
             }
         }
         break;
@@ -310,11 +310,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             Vec2i charge_curr_tilemap_pos = source_object->tilemap_pos;
             Vec2i charge_next_tilemap_pos = vec2i_move_in_dir4_by(charge_curr_tilemap_pos,charge_distance_info.dir4,1);
 
-            int charge_curr_floor = get_floor_on_tilemap_pos(state, charge_curr_tilemap_pos);
-            int charge_next_floor = get_floor_on_tilemap_pos(state, charge_next_tilemap_pos);
+            int charge_curr_floor = room_get_floor_at(state->curr_room, charge_curr_tilemap_pos);
+            int charge_next_floor = room_get_floor_at(state->curr_room, charge_next_tilemap_pos);
 
-            Object* charge_curr_object = get_object_on_tilemap_pos(state, charge_curr_tilemap_pos);
-            Object* charge_next_object = get_object_on_tilemap_pos(state, charge_next_tilemap_pos);
+            Object* charge_curr_object = room_get_object_at(state->curr_room, charge_curr_tilemap_pos);
+            Object* charge_next_object = room_get_object_at(state->curr_room, charge_next_tilemap_pos);
 
             int charge_go_on = 1;
             for(int i = 0; charge_go_on && i < charge_distance_info.abs_diff; i++)
@@ -329,7 +329,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                             charge_distance_info.dir4
                             );
                 }
-                else if(is_tilemap_pos_in_tilemap(charge_curr_tilemap_pos) &&
+                else if(is_tilemap_in_bounds(charge_curr_tilemap_pos) &&
                 (is_floor_traversable(charge_curr_floor) ||
                 is_object_flying(source_object)) &&
                 charge_curr_object == 0)
@@ -366,11 +366,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 charge_curr_tilemap_pos = charge_next_tilemap_pos;
                 charge_next_tilemap_pos = vec2i_move_in_dir4_by(charge_next_tilemap_pos,charge_distance_info.dir4,1);
 
-                charge_curr_floor = get_floor_on_tilemap_pos(state, charge_curr_tilemap_pos);
-                charge_next_floor = get_floor_on_tilemap_pos(state, charge_next_tilemap_pos);
+                charge_curr_floor = room_get_floor_at(state->curr_room, charge_curr_tilemap_pos);
+                charge_next_floor = room_get_floor_at(state->curr_room, charge_next_tilemap_pos);
 
-                charge_curr_object = get_object_on_tilemap_pos(state, charge_curr_tilemap_pos);
-                charge_next_object = get_object_on_tilemap_pos(state, charge_next_tilemap_pos);
+                charge_curr_object = room_get_object_at(state->curr_room, charge_curr_tilemap_pos);
+                charge_next_object = room_get_object_at(state->curr_room, charge_next_tilemap_pos);
             }
 
             if(!will_throw_after_charge || !is_object_movable(target_1_object)) break;
@@ -434,11 +434,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             Vec2i push_curr_tilemap_pos = target_1_tilemap_pos;
             Vec2i push_next_tilemap_pos = vec2i_move_in_dir4_by(push_curr_tilemap_pos,push_distance_info.dir4,1);
 
-            int push_curr_floor = get_floor_on_tilemap_pos(state, push_curr_tilemap_pos);
-            int push_next_floor = get_floor_on_tilemap_pos(state, push_next_tilemap_pos);
+            int push_curr_floor = room_get_floor_at(state->curr_room, push_curr_tilemap_pos);
+            int push_next_floor = room_get_floor_at(state->curr_room, push_next_tilemap_pos);
 
-            Object* push_curr_object = get_object_on_tilemap_pos(state, push_curr_tilemap_pos);
-            Object* push_next_object = get_object_on_tilemap_pos(state, push_next_tilemap_pos);
+            Object* push_curr_object = room_get_object_at(state->curr_room, push_curr_tilemap_pos);
+            Object* push_next_object = room_get_object_at(state->curr_room, push_next_tilemap_pos);
 
             int push_go_on = 1;
             for(int i = 0; push_go_on && i < push_distance_info.abs_diff + 1; i++)
@@ -461,7 +461,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                             get_opposite_dir4(push_distance_info.dir4)
                             );
                 }
-                else if(is_tilemap_pos_in_tilemap(push_curr_tilemap_pos) &&
+                else if(is_tilemap_in_bounds(push_curr_tilemap_pos) &&
                 (is_floor_traversable(push_curr_floor) ||
                 is_object_flying(target_1_object)) &&
                 push_curr_object == 0)
@@ -498,11 +498,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 push_curr_tilemap_pos = push_next_tilemap_pos;
                 push_next_tilemap_pos = vec2i_move_in_dir4_by(push_next_tilemap_pos,push_distance_info.dir4,1);
 
-                push_curr_floor = get_floor_on_tilemap_pos(state, push_curr_tilemap_pos);
-                push_next_floor = get_floor_on_tilemap_pos(state, push_next_tilemap_pos);
+                push_curr_floor = room_get_floor_at(state->curr_room, push_curr_tilemap_pos);
+                push_next_floor = room_get_floor_at(state->curr_room, push_next_tilemap_pos);
 
-                push_curr_object = get_object_on_tilemap_pos(state, push_curr_tilemap_pos);
-                push_next_object = get_object_on_tilemap_pos(state, push_next_tilemap_pos);
+                push_curr_object = room_get_object_at(state->curr_room, push_curr_tilemap_pos);
+                push_next_object = room_get_object_at(state->curr_room, push_next_tilemap_pos);
             }
         }
         break;
@@ -520,11 +520,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             Vec2i pull_curr_tilemap_pos = target_1_tilemap_pos;
             Vec2i pull_next_tilemap_pos = vec2i_move_in_dir4_by(pull_curr_tilemap_pos,pull_distance_info.dir4,1);
 
-            int pull_curr_floor = get_floor_on_tilemap_pos(state, pull_curr_tilemap_pos);
-            int pull_next_floor = get_floor_on_tilemap_pos(state, pull_next_tilemap_pos);
+            int pull_curr_floor = room_get_floor_at(state->curr_room, pull_curr_tilemap_pos);
+            int pull_next_floor =room_get_floor_at(state->curr_room, pull_next_tilemap_pos);
 
-            Object* pull_curr_object = get_object_on_tilemap_pos(state, pull_curr_tilemap_pos);
-            Object* pull_next_object = get_object_on_tilemap_pos(state, pull_next_tilemap_pos);
+            Object* pull_curr_object = room_get_object_at(state->curr_room, pull_curr_tilemap_pos);
+            Object* pull_next_object = room_get_object_at(state->curr_room, pull_next_tilemap_pos);
 
             int pull_go_on = 1;
             for(int i = 0; pull_go_on && i < pull_distance_info.abs_diff + 1; i++)
@@ -547,7 +547,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                             get_opposite_dir4(pull_distance_info.dir4)
                             );
                 }
-                else if(is_tilemap_pos_in_tilemap(pull_curr_tilemap_pos) &&
+                else if(is_tilemap_in_bounds(pull_curr_tilemap_pos) &&
                 (is_floor_traversable(pull_curr_floor) ||
                 is_object_flying(target_1_object)) &&
                 pull_curr_object == 0)
@@ -584,11 +584,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 pull_curr_tilemap_pos = pull_next_tilemap_pos;
                 pull_next_tilemap_pos = vec2i_move_in_dir4_by(pull_next_tilemap_pos,pull_distance_info.dir4,1);
 
-                pull_curr_floor = get_floor_on_tilemap_pos(state, pull_curr_tilemap_pos);
-                pull_next_floor = get_floor_on_tilemap_pos(state, pull_next_tilemap_pos);
+                pull_curr_floor = room_get_floor_at(state->curr_room, pull_curr_tilemap_pos);
+                pull_next_floor = room_get_floor_at(state->curr_room, pull_next_tilemap_pos);
 
-                pull_curr_object = get_object_on_tilemap_pos(state, pull_curr_tilemap_pos);
-                pull_next_object = get_object_on_tilemap_pos(state, pull_next_tilemap_pos);
+                pull_curr_object = room_get_object_at(state->curr_room, pull_curr_tilemap_pos);
+                pull_next_object = room_get_object_at(state->curr_room, pull_next_tilemap_pos);
             }
         }
         break;
@@ -608,11 +608,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             Vec2i pull_curr_tilemap_pos = target_1_tilemap_pos;
             Vec2i pull_next_tilemap_pos = vec2i_move_in_dir4_by(pull_curr_tilemap_pos,pull_distance_info.dir4,1);
 
-            int pull_curr_floor = get_floor_on_tilemap_pos(state, pull_curr_tilemap_pos);
-            int pull_next_floor = get_floor_on_tilemap_pos(state, pull_next_tilemap_pos);
+            int pull_curr_floor = room_get_floor_at(state->curr_room, pull_curr_tilemap_pos);
+            int pull_next_floor = room_get_floor_at(state->curr_room, pull_next_tilemap_pos);
 
-            Object* pull_curr_object = get_object_on_tilemap_pos(state, pull_curr_tilemap_pos);
-            Object* pull_next_object = get_object_on_tilemap_pos(state, pull_next_tilemap_pos);
+            Object* pull_curr_object = room_get_object_at(state->curr_room, pull_curr_tilemap_pos);
+            Object* pull_next_object = room_get_object_at(state->curr_room, pull_next_tilemap_pos);
 
             int pull_go_on = 1;
             for(int i = 0; pull_go_on && i < pull_distance_info.abs_diff; i++)
@@ -635,7 +635,7 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                             get_opposite_dir4(pull_distance_info.dir4)
                             );
                 }
-                else if(is_tilemap_pos_in_tilemap(pull_curr_tilemap_pos) &&
+                else if(is_tilemap_in_bounds(pull_curr_tilemap_pos) &&
                 (is_floor_traversable(pull_curr_floor) ||
                 is_object_flying(target_1_object)) &&
                 pull_curr_object == 0)
@@ -673,11 +673,11 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 pull_curr_tilemap_pos = pull_next_tilemap_pos;
                 pull_next_tilemap_pos = vec2i_move_in_dir4_by(pull_next_tilemap_pos,pull_distance_info.dir4,1);
 
-                pull_curr_floor = get_floor_on_tilemap_pos(state, pull_curr_tilemap_pos);
-                pull_next_floor = get_floor_on_tilemap_pos(state, pull_next_tilemap_pos);
+                pull_curr_floor = room_get_floor_at(state->curr_room, pull_curr_tilemap_pos);
+                pull_next_floor = room_get_floor_at(state->curr_room, pull_next_tilemap_pos);
 
-                pull_curr_object = get_object_on_tilemap_pos(state, pull_curr_tilemap_pos);
-                pull_next_object = get_object_on_tilemap_pos(state, pull_next_tilemap_pos);
+                pull_curr_object = room_get_object_at(state->curr_room, pull_curr_tilemap_pos);
+                pull_next_object = room_get_object_at(state->curr_room, pull_next_tilemap_pos);
             }
 
             if(!will_throw_after_pull) break;

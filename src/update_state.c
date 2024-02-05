@@ -450,7 +450,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
 
-                remove_all_dead_objects_from_gamemap_objects(state);
+                remove_all_dead_objects(state);
+
+                determine_enemy_objects(state);
 
                 determine_enemy_order(state);
 
@@ -604,7 +606,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     if(state->gamemap.curr_object_enemy_list_elem->next == 0)
                     {
-                        remove_all_dead_objects_from_gamemap_objects(state);
+                        remove_all_dead_objects(state);
 
                         add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->hero_background, 0.25f), textures, sounds, musics, colors);
 
@@ -652,7 +654,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                 if(state->gamemap.curr_object_enemy_list_elem->next == 0)
                 {
-                    remove_all_dead_objects_from_gamemap_objects(state);
+                    remove_all_dead_objects(state);
+
+                    determine_enemy_objects(state);
 
                     determine_enemy_order(state);
 

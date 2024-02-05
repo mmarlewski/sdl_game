@@ -28,7 +28,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             action->move.object->tilemap_pos = vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
 
-            int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
             floor_on_move_end(state, sequence, action, floor);
 
             action->move.object->is_visible = 1;
@@ -37,7 +37,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         case ACTION_TYPE__CRASH:
         {
             Action* crushed_action_sequence = new_action_sequence();
-            Object* crushed_object = get_object_on_tilemap_pos(state, vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
+            Object* crushed_object = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
             object_on_crashed(state, crushed_action_sequence, action, crushed_object);
 
             Action* crushing_action_sequence = new_action_sequence();
@@ -68,7 +68,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             Action* push_around = new_action_simultaneous();
 
             Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1);
-            Object* up_object = get_object_on_tilemap_pos(state, up_tilemap_pos);
+            Object* up_object = room_get_object_at(state->curr_room, up_tilemap_pos);
             if(up_object != 0 && is_object_movable(up_object))
             {
                 add_action_sequence_to_action_simultaneous(
@@ -83,7 +83,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             }
 
             Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1);
-            Object* right_object = get_object_on_tilemap_pos(state, right_tilemap_pos);
+            Object* right_object = room_get_object_at(state->curr_room, right_tilemap_pos);
             if(right_object != 0 && is_object_movable(right_object))
             {
                 add_action_sequence_to_action_simultaneous(
@@ -98,7 +98,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             }
 
             Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1);
-            Object* down_object = get_object_on_tilemap_pos(state, down_tilemap_pos);
+            Object* down_object = room_get_object_at(state->curr_room, down_tilemap_pos);
             if(down_object != 0 && is_object_movable(down_object))
             {
                 add_action_sequence_to_action_simultaneous(
@@ -113,7 +113,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             }
 
             Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1);
-            Object* left_object = get_object_on_tilemap_pos(state, left_tilemap_pos);
+            Object* left_object = room_get_object_at(state->curr_room, left_tilemap_pos);
             if(left_object != 0 && is_object_movable(left_object))
             {
                 add_action_sequence_to_action_simultaneous(
@@ -153,7 +153,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             object_on_drop(state, sequence, action, action->drop.object);
 
-            int floor = get_floor_on_tilemap_pos(state, action->drop.object->tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, action->drop.object->tilemap_pos);
             floor_on_drop(state, sequence, action, floor);
         }
         break;

@@ -104,148 +104,373 @@ int main (int argc, char* argv[])
 
     state.camera.zoom = 5.0f;
 
-    Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(vec2f(TILEMAP_LENGTH * 0.5f,TILEMAP_LENGTH * 0.5f)));
-    Vec2f hero_world_iso_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(tilemap_pos_to_gamemap_pos(state.gamemap.object_hero->tilemap_pos)));
-    hero_world_iso_pos.x += TILE_LENGTH * 0.5f;
-    hero_world_iso_pos.y += TILE_LENGTH * 0.5f;
-    state.camera.world_pos = hero_world_iso_pos;
+    Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(
+        gamemap_pos_to_world_pos(
+            vec2f(TILEMAP_LENGTH * 0.5f,TILEMAP_LENGTH * 0.5f)
+            )
+        );
+    middle_world_iso_pos.x += TILE_LENGTH * 0.5f;
+    middle_world_iso_pos.y += TILE_LENGTH * 0.5f;
+    state.camera.world_pos = middle_world_iso_pos;
 
-    change_floor_in_tilemap_pos(&state,
-     FLOOR_TYPE__STONE_STAIRS_BELOW_BLOCKED, vec2i(6,7));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__LAVA, vec2i(7,2));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__LAVA, vec2i(4,4));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__STONE_SPIKES_ON, vec2i(1,5));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__STONE_SPIKES_OFF, vec2i(7,6));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ROCK_CRACK_LAVA, vec2i(2,2));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ROCK_CRACK_WATER, vec2i(2,6));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__WATER, vec2i(3,1));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE_CRACK_WATER, vec2i(4,1));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE, vec2i(5,1));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__ICE, vec2i(6,1));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_PISTON_CELL, vec2i(3,5));
-    change_floor_in_tilemap_pos(&state,
-    FLOOR_TYPE__METAL_COVER_BOTTOM, vec2i(6,6));
+    // first room
 
-    Object* object_pillar_1 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_1->tilemap_pos = vec2i(2,1);
-    add_object_to_gamemap_objects(&state, object_pillar_1);
+    Room* first_room = new_empty_room("first room");
+    add_room(
+        &state,
+        first_room
+        );
+    room_add_object_at(
+        first_room,
+        state.gamemap.object_hero,
+        vec2i(7,5)
+        );
+    set_curr_room(&state, first_room);
 
-    Object* object_pillar_2 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_2->tilemap_pos = vec2i(6,2);
-    add_object_to_gamemap_objects(&state, object_pillar_2);
+    for(int i = 0; i < TILEMAP_LENGTH; i++)
+    {
+        for(int j = 0; j < TILEMAP_LENGTH; j++)
+        {
+            room_change_floor_at(
+                first_room,
+                FLOOR_TYPE__ROCK,
+                vec2i(i,j)
+                );
+        }
+    }
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(6,7)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__LAVA,
+        vec2i(7,2)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__LAVA,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__STONE_SPIKES_ON,
+        vec2i(1,5)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__STONE_SPIKES_OFF,
+        vec2i(7,6)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__ROCK_CRACK_LAVA,
+        vec2i(2,2)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__ROCK_CRACK_WATER,
+        vec2i(2,6)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__WATER,
+        vec2i(3,1)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__ICE_CRACK_WATER,
+        vec2i(4,1)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__ICE,
+        vec2i(5,1)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__ICE,
+        vec2i(6,1)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__METAL_PISTON_CELL,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        first_room,
+        FLOOR_TYPE__METAL_COVER_BOTTOM,
+        vec2i(6,6)
+        );
 
-    Object* object_pillar_3 = new_object(OBJECT_TYPE__PIPE);
-    object_pillar_3->tilemap_pos = vec2i(4,3);
-    add_object_to_gamemap_objects(&state, object_pillar_3);
+        room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__PILLAR),
+        vec2i(2,1)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__PILLAR),
+        vec2i(6,2)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__PIPE),
+        vec2i(4,3)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__PILLAR),
+        vec2i(1,3)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__BALL),
+        vec2i(2,7)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__COVER_ROCK),
+        vec2i(6,6)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__BARREL),
+        vec2i(6,4)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__BARREL),
+        vec2i(6,3)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__BARREL),
+        vec2i(6,5)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__STAIRS_ABOVE_ROCK),
+        vec2i(7,4)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,2)
+        );
 
-    Object* object_pillar_4 = new_object(OBJECT_TYPE__PILLAR);
-    object_pillar_4->tilemap_pos = vec2i(1,3);
-    add_object_to_gamemap_objects(&state, object_pillar_4);
+        room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__GOAT),
+        vec2i(2,3)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__SPIDER),
+        vec2i(3,4)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__BULL),
+        vec2i(5,4)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__FLY),
+        vec2i(3,3)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__CHAMELEON),
+        vec2i(3,7)
+        );
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__TURRET_LASER_DEPLOYED),
+        vec2i(5,6)
+        );
 
-    Object* object_pillar_5 = new_object(OBJECT_TYPE__BALL);
-    object_pillar_5->tilemap_pos = vec2i(2,7);
-    add_object_to_gamemap_objects(&state, object_pillar_5);
-
-    Object* object_cover = new_object(OBJECT_TYPE__COVER_ROCK);
-    object_cover->tilemap_pos = vec2i(6,6);
-    add_object_to_gamemap_objects(&state, object_cover);
-
-    Object* object_barrel_1 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_1->tilemap_pos = vec2i(6,4);
-    add_object_to_gamemap_objects(&state, object_barrel_1);
-
-    Object* object_barrel_2 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_2->tilemap_pos = vec2i(6,3);
-    add_object_to_gamemap_objects(&state, object_barrel_2);
-
-    Object* object_barrel_3 = new_object(OBJECT_TYPE__BARREL);
-    object_barrel_3->tilemap_pos = vec2i(6,5);
-    add_object_to_gamemap_objects(&state, object_barrel_3);
-
-    Object* object_other = new_object(OBJECT_TYPE__STAIRS_ABOVE_ROCK);
-    object_other->tilemap_pos = vec2i(7,4);
-    add_object_to_gamemap_objects(&state, object_other);
-
-    Object* object_stalactite = new_object(OBJECT_TYPE__STALACTITE);
-    object_stalactite->tilemap_pos = vec2i(7,2);
-    add_object_to_gamemap_objects(&state, object_stalactite);
-
-    Object* object_goat = new_object(OBJECT_TYPE__GOAT);
-    object_goat->is_enemy = 1;
-    object_goat->tilemap_pos = vec2i(2,3);
-    add_object_to_gamemap_objects(&state, object_goat);
-
-    Object* object_spider = new_object(OBJECT_TYPE__SPIDER);
-    object_spider->is_enemy = 1;
-    object_spider->tilemap_pos = vec2i(3,4);
-    add_object_to_gamemap_objects(&state, object_spider);
-
-    Object* object_bull = new_object(OBJECT_TYPE__BULL);
-    object_bull->is_enemy = 1;
-    object_bull->tilemap_pos = vec2i(5,4);
-    add_object_to_gamemap_objects(&state, object_bull);
-
-    Object* object_fly = new_object(OBJECT_TYPE__FLY);
-    object_fly->is_enemy = 1;
-    object_fly->tilemap_pos = vec2i(3,3);
-    add_object_to_gamemap_objects(&state, object_fly);
-
-    Object* object_chameleon = new_object(OBJECT_TYPE__CHAMELEON);
-    object_chameleon->is_enemy = 1;
-    object_chameleon->tilemap_pos = vec2i(3,7);
-    add_object_to_gamemap_objects(&state, object_chameleon);
-
-    Object* object_turret = new_object(OBJECT_TYPE__TURRET_LASER_DEPLOYED);
-    object_turret->is_enemy = 1;
-    object_turret->tilemap_pos = vec2i(5,6);
-    add_object_to_gamemap_objects(&state, object_turret);
-
-    Vec2i tilemap_pos = vec2i(0,0);
+    Vec2i first_room_tilemap_pos = vec2i(0,0);
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL_ROCK);
-        object_wall->tilemap_pos = tilemap_pos;
-        add_object_to_gamemap_objects(&state, object_wall);
-        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1);
+        room_add_object_at(
+            first_room,
+            new_object(OBJECT_TYPE__WALL_ROCK),
+            first_room_tilemap_pos
+            );
+        first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__RIGHT, 1);
     }
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL_METAL);
-        object_wall->tilemap_pos = tilemap_pos;
-        add_object_to_gamemap_objects(&state, object_wall);
-        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1);
+        room_add_object_at(
+            first_room,
+            new_object(OBJECT_TYPE__WALL_ROCK),
+            first_room_tilemap_pos
+            );
+        first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__DOWN, 1);
     }
     for(int i = 0; i < TILEMAP_LENGTH-1; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL_GOLD);
-        object_wall->tilemap_pos = tilemap_pos;
-        add_object_to_gamemap_objects(&state, object_wall);
-        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
+        room_add_object_at(
+            first_room,
+            new_object(OBJECT_TYPE__WALL_ROCK),
+            first_room_tilemap_pos
+            );
+        first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__LEFT, 1);
     }
     for(int i = 0; i < TILEMAP_LENGTH-2; i++)
     {
-        Object* object_wall = new_object(OBJECT_TYPE__WALL_STONE);
-        object_wall->tilemap_pos = tilemap_pos;
-        add_object_to_gamemap_objects(&state, object_wall);
-        tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
+        room_add_object_at(
+            first_room,
+            new_object(OBJECT_TYPE__WALL_ROCK),
+            first_room_tilemap_pos
+            );
+        first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__UP, 1);
     }
 
-    Object* object_door = new_object(OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT);
-    object_door->tilemap_pos = tilemap_pos;
-    add_object_to_gamemap_objects(&state, object_door);
+    room_add_object_at(
+        first_room,
+        new_object(OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT),
+        first_room_tilemap_pos
+        );
 
-    for(ListElem* curr_elem = state.gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    // second room
+
+    Room* second_room = new_empty_room("second room");
+    add_room(
+        &state,
+        second_room
+        );
+
+    for(int i = 0; i < TILEMAP_LENGTH; i++)
+    {
+        for(int j = 0; j < TILEMAP_LENGTH; j++)
+        {
+            room_change_floor_at(
+                second_room,
+                FLOOR_TYPE__STONE,
+                vec2i(i,j)
+                );
+        }
+    }
+    room_change_floor_at(
+        second_room,
+        FLOOR_TYPE__ROCK_STAIRS_BELOW,
+        vec2i(7,4)
+        );
+
+    room_add_object_at(
+        second_room,
+        new_object(OBJECT_TYPE__STATION_STRIDER_LEG),
+        vec2i(3,2)
+        );
+    room_add_object_at(
+        second_room,
+        new_object(OBJECT_TYPE__STATION_WINGS_TORSO),
+        vec2i(3,3)
+        );
+    room_add_object_at(
+        second_room,
+        new_object(OBJECT_TYPE__BULL),
+        vec2i(3,4)
+        );
+    room_add_object_at(
+        second_room,
+        new_object(OBJECT_TYPE__BULL),
+        vec2i(3,5)
+        );
+    room_add_object_at(
+        second_room,
+        new_object(OBJECT_TYPE__BULL),
+        vec2i(3,6)
+        );
+
+    Vec2i second_room_tilemap_pos = vec2i(0,0);
+    for(int i = 0; i < TILEMAP_LENGTH-1; i++)
+    {
+        room_add_object_at(
+            second_room,
+            new_object(OBJECT_TYPE__WALL_STONE),
+            second_room_tilemap_pos
+            );
+        second_room_tilemap_pos = vec2i_move_in_dir4_by(second_room_tilemap_pos, DIR4__RIGHT, 1);
+    }
+    for(int i = 0; i < TILEMAP_LENGTH-1; i++)
+    {
+        room_add_object_at(
+            second_room,
+            new_object(OBJECT_TYPE__WALL_STONE),
+            second_room_tilemap_pos
+            );
+        second_room_tilemap_pos = vec2i_move_in_dir4_by(second_room_tilemap_pos, DIR4__DOWN, 1);
+    }
+    for(int i = 0; i < TILEMAP_LENGTH-1; i++)
+    {
+        room_add_object_at(
+            second_room,
+            new_object(OBJECT_TYPE__WALL_STONE),
+            second_room_tilemap_pos
+            );
+        second_room_tilemap_pos = vec2i_move_in_dir4_by(second_room_tilemap_pos, DIR4__LEFT, 1);
+    }
+    for(int i = 0; i < TILEMAP_LENGTH-2; i++)
+    {
+        room_add_object_at(
+            second_room,
+            new_object(OBJECT_TYPE__WALL_STONE),
+            second_room_tilemap_pos
+            );
+        second_room_tilemap_pos = vec2i_move_in_dir4_by(second_room_tilemap_pos, DIR4__UP, 1);
+    }
+    room_add_object_at(
+        second_room,
+        new_object(OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT),
+        second_room_tilemap_pos
+        );
+
+    // passages
+
+    add_passage(
+        &state,
+        new_passage(
+            "first room",
+            "second room",
+            vec2i(7,4),
+            vec2i(7,3)
+            )
+        );
+    add_passage(
+        &state,
+        new_passage(
+            "first room",
+            "second room",
+            vec2i(0,1),
+            vec2i(1,1)
+            )
+        );
+    add_passage(
+        &state,
+        new_passage(
+            "second room",
+            "first room",
+            vec2i(7,4),
+            vec2i(7,5)
+            )
+        );
+    add_passage(
+        &state,
+        new_passage(
+            "second room",
+            "first room",
+            vec2i(0,1),
+            vec2i(1,1)
+            )
+        );
+
+    //
+
+    for(ListElem* curr_elem = state.curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
     {
         Object* curr_object = (Object*)curr_elem->data;
 
@@ -258,14 +483,13 @@ int main (int argc, char* argv[])
         }
     }
 
+    determine_enemy_objects(&state);
+
     determine_enemy_order(&state);
 
     state.gamemap.item_number[ITEM__CELL] = 5;
     state.gamemap.item_number[ITEM__DYNAMITE] = 5;
     state.gamemap.item_number[ITEM__GEMSTONE] = 5;
-
-    hero_add_augmentation(&state, AUGMENTATION__STRIDER_LEG);
-    // hero_add_augmentation(&state, AUGMENTATION__WINGS_TORSO);
 
     while (state.is_game_running)
     {

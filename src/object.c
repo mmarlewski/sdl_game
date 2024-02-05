@@ -84,6 +84,10 @@ int is_object_exit(Object* object)
         case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 1; break;
         case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 1; break;
         case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          is = 1; break;
 
         case OBJECT_TYPE__EXIT_METAL_UP:                    is = 1; break;
         case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 1; break;

@@ -520,6 +520,8 @@ typedef struct
     Texture* stomp_effect;
     Texture* use_effect;
 
+    Texture* no_positions;
+
     Texture* plus_1_cell;
     Texture* plus_2_cell;
     Texture* plus_3_cell;

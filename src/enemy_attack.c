@@ -16,7 +16,7 @@ void object_enemy_prepare_attack(State* state, Object* object)
             for(int i = 0; i < 10; i++)
             {
                 target_1_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, object->enemy.attack_dir4,1);
-                target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
+                target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {
                     object->enemy.skill = SKILL__CHARGE_AND_PUSH;
@@ -66,9 +66,9 @@ void object_enemy_prepare_attack(State* state, Object* object)
             Vec2i target_1_tilemap_pos = vec2i_move_in_dir4_by(object->tilemap_pos, object->enemy.attack_dir4,1);
             for(int i = 0; i < 10; i++)
             {
-                if(is_tilemap_pos_in_tilemap(target_1_tilemap_pos))
+                if(is_tilemap_in_bounds(target_1_tilemap_pos))
                 {
-                    Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
+                    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                     if(target_1_object != 0)
                     {
                         object->enemy.skill = SKILL__PULL;
@@ -129,7 +129,7 @@ void object_enemy_prepare_attack(State* state, Object* object)
             for(int i = 0; i < 10; i++)
             {
                 target_1_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, object->enemy.attack_dir4,1);
-                target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
+                target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {
                     object->enemy.skill = SKILL__CHARGE_AND_THROW;
@@ -180,7 +180,7 @@ void object_enemy_prepare_attack(State* state, Object* object)
             for(int i = 0; i < 10; i++)
             {
                 target_1_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, object->enemy.attack_dir4,1);
-                target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
+                target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                 if(target_1_object != 0)
                 {
                     object->enemy.skill = SKILL__PUSH;
@@ -231,9 +231,9 @@ void object_enemy_prepare_attack(State* state, Object* object)
             Object* target_1_object = 0;
             for(int i = 0; i < 10; i++)
             {
-                if(is_tilemap_pos_in_tilemap(target_1_tilemap_pos))
+                if(is_tilemap_in_bounds(target_1_tilemap_pos))
                 {
-                    target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
+                    target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                     if(target_1_object != 0)
                     {
                         object->enemy.skill = SKILL__PULL_AND_THROW;
@@ -309,9 +309,9 @@ void object_enemy_prepare_attack(State* state, Object* object)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(object->tilemap_pos, dir4, i);
 
-                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        Object* curr_object = get_object_on_tilemap_pos(state, tilemap_pos);
+                        Object* curr_object = room_get_object_at(state->curr_room, tilemap_pos);
 
                         if(curr_object != 0 && !found_target)
                         {
@@ -353,9 +353,9 @@ void object_enemy_prepare_attack(State* state, Object* object)
                 {
                     Vec2i curr_tilemap_pos = *(Vec2i*)curr_elem->data;
 
-                    if(is_tilemap_pos_in_tilemap(curr_tilemap_pos))
+                    if(is_tilemap_in_bounds(curr_tilemap_pos))
                     {
-                        Object* curr_object = get_object_on_tilemap_pos(state, curr_tilemap_pos);
+                        Object* curr_object = room_get_object_at(state->curr_room, curr_tilemap_pos);
 
                         if(curr_object != 0 && !found_target)
                         {
@@ -398,7 +398,7 @@ void object_enemy_prepare_attack(State* state, Object* object)
                 for(ListElem* perimeter_elem = square_perimeter_tilemap_pos->head; perimeter_elem != 0; perimeter_elem = perimeter_elem->next)
                 {
                     Vec2i perimeter_tilemap_pos = *(Vec2i*)perimeter_elem->data;
-                    Object* perimeter_object = get_object_on_tilemap_pos(state, perimeter_tilemap_pos);
+                    Object* perimeter_object = room_get_object_at(state->curr_room, perimeter_tilemap_pos);
 
                     List* line_tilemap_pos = new_list((void(*)(void*))destroy_vec2i);
 
@@ -412,7 +412,7 @@ void object_enemy_prepare_attack(State* state, Object* object)
                     for(ListElem* line_elem = line_tilemap_pos->head; line_elem != 0; line_elem = line_elem->next)
                     {
                         Vec2i line_tilemap_pos = *(Vec2i*)line_elem->data;
-                        Object* line_object = get_object_on_tilemap_pos(state, line_tilemap_pos);
+                        Object* line_object = room_get_object_at(state->curr_room, line_tilemap_pos);
 
                         if(!vec2i_equals(line_tilemap_pos, object->tilemap_pos) &&
                         !vec2i_equals(line_tilemap_pos, perimeter_tilemap_pos))

@@ -519,6 +519,8 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->stomp_effect = load_texture_from_filepath (renderer, "./res/skill/stomp_effect.png");
     skill->use_effect = load_texture_from_filepath (renderer, "./res/skill/use_effect.png");
 
+    skill->no_positions = load_texture_from_filepath (renderer, "./res/skill/no_positions.png");
+
     skill->plus_1_cell = load_texture_from_filepath (renderer, "./res/skill/plus_1_cell.png");
     skill->plus_2_cell = load_texture_from_filepath (renderer, "./res/skill/plus_2_cell.png");
     skill->plus_3_cell = load_texture_from_filepath (renderer, "./res/skill/plus_3_cell.png");

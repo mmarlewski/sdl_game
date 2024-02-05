@@ -2,9 +2,9 @@
 
 void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos)
 {
-    Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
-    Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
-    Object* target_2_object = get_object_on_tilemap_pos(state, target_2_tilemap_pos);
+    Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
+    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
+    Object* target_2_object = room_get_object_at(state->curr_room, target_2_tilemap_pos);
 
     switch(skill)
     {
@@ -29,7 +29,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 floor_on_stomp(
                     state,
                     action_sequence,
-                    get_floor_on_tilemap_pos(state, target_2_tilemap_pos),
+                    room_get_floor_at(state->curr_room, target_2_tilemap_pos),
                     target_2_tilemap_pos
                     );
             }
@@ -37,7 +37,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos =vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
-                Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                Object* object = room_get_object_at(state->curr_room, tilemap_pos);
 
                 if(object != 0)
                 {
@@ -65,7 +65,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
             else
             {
-                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
                 floor_on_pick_item(
                     state,
@@ -91,7 +91,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
             else
             {
-                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
                 floor_on_put_item(
                     state,
@@ -106,7 +106,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
         case SKILL__HERO_MANIPULATION:
         {
             Object* object = target_2_object;
-            int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
             if(object != 0 && is_object_manipulatable(object))
             {
@@ -207,10 +207,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             {
                 old_tilemap_pos = tilemap_pos;
                 tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
-                floor = get_floor_on_tilemap_pos(state, tilemap_pos);
-                object = get_object_on_tilemap_pos(state, tilemap_pos);
+                floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                object = room_get_object_at(state->curr_room, tilemap_pos);
 
-                if(!is_tilemap_pos_in_tilemap(tilemap_pos) || object != 0)
+                if(!is_tilemap_in_bounds(tilemap_pos) || object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(old_tilemap_pos, dir4));
                     break;
@@ -228,10 +228,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int abs_diff = distance_info.abs_diff;
             int dir4 = distance_info.dir4;
 
-            int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             Object* object = target_2_object;
 
-            if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || object != 0)
+            if(!is_tilemap_in_bounds(target_2_tilemap_pos) || object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(source_tilemap_pos, dir4));
             }
@@ -256,10 +256,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             {
                 charge_old_tilemap_pos = charge_tilemap_pos;
                 charge_tilemap_pos = vec2i_move_in_dir4_by(charge_tilemap_pos, charge_dir4, 1);
-                charge_floor = get_floor_on_tilemap_pos(state, charge_tilemap_pos);
-                charge_object = get_object_on_tilemap_pos(state, charge_tilemap_pos);
+                charge_floor = room_get_floor_at(state->curr_room, charge_tilemap_pos);
+                charge_object = room_get_object_at(state->curr_room, charge_tilemap_pos);
 
-                if(!is_tilemap_pos_in_tilemap(charge_tilemap_pos) || charge_object != 0)
+                if(!is_tilemap_in_bounds(charge_tilemap_pos) || charge_object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(charge_old_tilemap_pos, charge_dir4));
                     break;
@@ -285,10 +285,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             {
                 push_old_tilemap_pos = push_tilemap_pos;
                 push_tilemap_pos = vec2i_move_in_dir4_by(push_tilemap_pos, push_dir4, 1);
-                push_floor = get_floor_on_tilemap_pos(state, push_tilemap_pos);
-                push_object = get_object_on_tilemap_pos(state, push_tilemap_pos);
+                push_floor = room_get_floor_at(state->curr_room, push_tilemap_pos);
+                push_object = room_get_object_at(state->curr_room, push_tilemap_pos);
 
-                if(!is_tilemap_pos_in_tilemap(push_tilemap_pos) || push_object != 0)
+                if(!is_tilemap_in_bounds(push_tilemap_pos) || push_object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(push_old_tilemap_pos, push_dir4));
                     break;
@@ -315,10 +315,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             {
                 charge_old_tilemap_pos = charge_tilemap_pos;
                 charge_tilemap_pos = vec2i_move_in_dir4_by(charge_tilemap_pos, charge_dir4, 1);
-                charge_floor = get_floor_on_tilemap_pos(state, charge_tilemap_pos);
-                charge_object = get_object_on_tilemap_pos(state, charge_tilemap_pos);
+                charge_floor = room_get_floor_at(state->curr_room, charge_tilemap_pos);
+                charge_object = room_get_object_at(state->curr_room, charge_tilemap_pos);
 
-                if(!is_tilemap_pos_in_tilemap(charge_tilemap_pos) || charge_object != 0)
+                if(!is_tilemap_in_bounds(charge_tilemap_pos) || charge_object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(charge_old_tilemap_pos, charge_dir4));
                     break;
@@ -335,10 +335,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int throw_abs_diff = throw_distance_info.abs_diff;
             int throw_dir4 = throw_distance_info.dir4;
 
-            int throw_floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int throw_floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             Object* throw_object = target_2_object;
 
-            if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || throw_object != 0)
+            if(!is_tilemap_in_bounds(target_2_tilemap_pos) || throw_object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(target_1_tilemap_pos, throw_dir4));
             }
@@ -375,10 +375,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             {
                 old_tilemap_pos = tilemap_pos;
                 tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
-                floor = get_floor_on_tilemap_pos(state, tilemap_pos);
-                object = get_object_on_tilemap_pos(state, tilemap_pos);
+                floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                object = room_get_object_at(state->curr_room, tilemap_pos);
 
-                if(!is_tilemap_pos_in_tilemap(tilemap_pos) || object != 0)
+                if(!is_tilemap_in_bounds(tilemap_pos) || object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(old_tilemap_pos, dir4));
                     break;
@@ -417,10 +417,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             {
                 pull_old_tilemap_pos = pull_tilemap_pos;
                 pull_tilemap_pos = vec2i_move_in_dir4_by(pull_tilemap_pos, pull_dir4, 1);
-                pull_floor = get_floor_on_tilemap_pos(state, pull_tilemap_pos);
-                pull_object = get_object_on_tilemap_pos(state, pull_tilemap_pos);
+                pull_floor = room_get_floor_at(state->curr_room, pull_tilemap_pos);
+                pull_object = room_get_object_at(state->curr_room, pull_tilemap_pos);
 
-                if(!is_tilemap_pos_in_tilemap(pull_tilemap_pos) || pull_object != 0)
+                if(!is_tilemap_in_bounds(pull_tilemap_pos) || pull_object != 0)
                 {
                     add_action_to_end_action_sequence(action_sequence, new_action_crash(pull_old_tilemap_pos, pull_dir4));
                     break;
@@ -437,10 +437,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int throw_abs_diff = throw_distance_info.abs_diff;
             int throw_dir4 = throw_distance_info.dir4;
 
-            int throw_floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int throw_floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             Object* throw_object = target_2_object;
 
-            if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || throw_object != 0)
+            if(!is_tilemap_in_bounds(target_2_tilemap_pos) || throw_object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(before_source_tilemap_pos, throw_dir4));
             }
@@ -458,10 +458,10 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             int abs_diff = distance_info.abs_diff;
             int dir4 = distance_info.dir4;
 
-            int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             Object* object = target_2_object;
 
-            if(!is_tilemap_pos_in_tilemap(target_2_tilemap_pos) || object != 0)
+            if(!is_tilemap_in_bounds(target_2_tilemap_pos) || object != 0)
             {
                 add_action_to_end_action_sequence(action_sequence, new_action_lift(target_1_tilemap_pos, dir4));
             }
@@ -482,9 +482,9 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, distance_info.dir4, i);
 
-                    if(is_tilemap_pos_in_tilemap(tilemap_pos))
+                    if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        Object* object = get_object_on_tilemap_pos(state, tilemap_pos);
+                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
 
                         if(object != 0 && is_object_meltable(object))
                         {

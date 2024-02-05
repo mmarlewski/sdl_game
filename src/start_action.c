@@ -41,10 +41,10 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__MOVE:
         {
-            action->move.object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            action->move.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(action->move.object == 0 ||
-            !is_tilemap_pos_in_tilemap(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)))
+            !is_tilemap_in_bounds(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)))
             {
                 action->is_finished = 1;
                 action->is_finished_at_start = 1;
@@ -55,7 +55,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             Vec2i curr_tilemap_pos = action->tilemap_pos;
             Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos,action->move.dir4,1);
-            Object* object_on_next_tilemap_pos = get_object_on_tilemap_pos(state, next_tilemap_pos);
+            Object* object_on_next_tilemap_pos = room_get_object_at(state->curr_room, next_tilemap_pos);
 
             if(object_on_next_tilemap_pos)
             {
@@ -77,7 +77,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 action->animation = animation;
                 add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
-                int floor = get_floor_on_tilemap_pos(state, action->move.object->tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
                 floor_on_move_start(state, sequence, action, floor);
 
                 action->move.object->is_visible = 0;
@@ -86,8 +86,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__CRASH:
         {
-            action->crash.object_crushing = get_object_on_tilemap_pos(state, action->tilemap_pos);
-            action->crash.object_crushed = get_object_on_tilemap_pos(state, vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
+            action->crash.object_crushing = room_get_object_at(state->curr_room, action->tilemap_pos);
+            action->crash.object_crushed = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
 
             if(action->crash.object_crushing == 0 ||
             action->crash.object_crushed == 0)
@@ -214,11 +214,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION_TYPE__THROW:
         {
             Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
-            action->throw.object_thrown = get_object_on_tilemap_pos(state, action->tilemap_pos);
-            action->throw.object_on_target = get_object_on_tilemap_pos(state, target_tilemap_pos);
+            action->throw.object_thrown = room_get_object_at(state->curr_room, action->tilemap_pos);
+            action->throw.object_on_target = room_get_object_at(state->curr_room, target_tilemap_pos);
 
             if(action->throw.object_on_target != 0 ||
-            !is_tilemap_pos_in_tilemap(target_tilemap_pos))
+            !is_tilemap_in_bounds(target_tilemap_pos))
             {
                 Action* lift = new_action_lift(action->tilemap_pos, action->throw.dir4);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -258,7 +258,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__LIFT:
         {
-            action->lift.object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            action->lift.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(action->lift.object == 0)
             {
@@ -316,16 +316,16 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION_TYPE__CHANGE_FLOOR:
         {
 
-            int floor = get_floor_on_tilemap_pos(state, action->tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
             if(floor != FLOOR_TYPE__NONE)
             {
-                change_floor_in_tilemap_pos(state, action->change_floor.new_floor_type, action->tilemap_pos);
+                room_change_floor_at(state->curr_room, action->change_floor.new_floor_type, action->tilemap_pos);
             }
         }
         break;
         case ACTION_TYPE__CHANGE_OBJECT:
         {
-            Object* object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            Object* object = room_get_object_at(state->curr_room, action->tilemap_pos);
             if(object != 0)
             {
                 object->type = action->change_object.new_object_type;
@@ -336,7 +336,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             if(action->add_object.new_object != 0)
             {
-                add_object_to_gamemap_objects(state, action->add_object.new_object);
+                room_add_object(state->curr_room, action->add_object.new_object);
             }
         }
         break;
@@ -344,13 +344,13 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             if(action->remove_object.object_to_remove != 0)
             {
-                remove_object_from_gamemap_objects(state, action->remove_object.object_to_remove);
+                room_remove_object(state->curr_room, action->remove_object.object_to_remove);
             }
         }
         break;
         case ACTION_TYPE__MELT:
         {
-            Object* melt_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            Object* melt_object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(melt_object != 0)
             {
@@ -360,7 +360,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__BREAK:
         {
-            Object* break_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            Object* break_object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(break_object != 0)
             {
@@ -370,7 +370,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__SHAKE:
         {
-            Object* shake_object = get_object_on_tilemap_pos(state, action->tilemap_pos);
+            Object* shake_object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(shake_object != 0)
             {

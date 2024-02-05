@@ -43,9 +43,9 @@ int is_node_tilemap_pos_in_list(List* list, Node* node)
 
 void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying)
 {
-    if(!is_tilemap_pos_in_tilemap(start_tilemap_pos) ||
-    !is_tilemap_pos_in_tilemap(end_tilemap_pos) ||
-    get_object_on_tilemap_pos(state, end_tilemap_pos) != 0) return;
+    if(!is_tilemap_in_bounds(start_tilemap_pos) ||
+    !is_tilemap_in_bounds(end_tilemap_pos) ||
+    room_get_object_at(state->curr_room, end_tilemap_pos) != 0) return;
 
     List* open = new_list((void(*)(void*))destroy_node);
     List* closed = new_list((void(*)(void*))destroy_node);
@@ -98,10 +98,10 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
         {
             Node* node = (Node*)elem->data;
             Vec2i tilemap_pos = node->tilemap_pos;
-            int floor = get_floor_on_tilemap_pos(state, tilemap_pos);
+            int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
             if(!is_node_tilemap_pos_in_list(closed, node) &&
-            get_object_on_tilemap_pos(state, tilemap_pos) == 0)
+            room_get_object_at(state->curr_room, tilemap_pos) == 0)
             {
                 if((is_flying && is_floor_traversable_for_flying(floor)) ||
                 (is_floating && is_floor_traversable_for_floating(floor)) ||

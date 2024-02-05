@@ -2,9 +2,9 @@
 
 void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos)
 {
-    Object* source_object = get_object_on_tilemap_pos(state, source_tilemap_pos);
-    Object* target_1_object = get_object_on_tilemap_pos(state, target_1_tilemap_pos);
-    Object* target_2_object = get_object_on_tilemap_pos(state, target_2_tilemap_pos);
+    Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
+    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
+    Object* target_2_object = room_get_object_at(state->curr_room, target_2_tilemap_pos);
 
     switch (skill)
     {
@@ -20,7 +20,7 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
             }
             else
             {
-                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
                 int item_type = get_floor_item_type(floor);
                 int item_count = get_floor_item_count(floor);
@@ -73,18 +73,54 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
                 }
                 else if(is_object_exit(target_2_object))
                 {
-                    // using object exit
+                    Passage* passage = get_passage(
+                        state,
+                        state->curr_room->name,
+                        target_2_tilemap_pos
+                        );
+
+                    if(passage != 0)
+                    {
+                        Room* room = get_room(state, passage->to_room_name);
+
+                        if(room != 0)
+                        {
+                            room_remove_object(state->curr_room, state->gamemap.object_hero);
+                            set_curr_room(state, room);
+                            room_add_object_at(room, state->gamemap.object_hero, passage->to_tilemap_pos);
+                            determine_enemy_objects(state);
+                            determine_enemy_order(state);
+                        }
+                    }
                 }
             }
             else
             {
-                int floor = get_floor_on_tilemap_pos(state, target_2_tilemap_pos);
+                int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
                 if(floor != FLOOR_TYPE__NONE)
                 {
                     if(is_floor_exit(floor))
                     {
-                        // using floor exit
+                        Passage* passage = get_passage(
+                            state,
+                            state->curr_room->name,
+                            target_2_tilemap_pos
+                            );
+
+                        if(passage != 0)
+                        {
+                            Room* room = get_room(state, passage->to_room_name);
+
+                            if(room != 0)
+                            {
+                                room_remove_object(state->curr_room, state->gamemap.object_hero);
+                                set_curr_room(state, room);
+                                room_add_object_at(room, state->gamemap.object_hero, passage->to_tilemap_pos);
+                                determine_enemy_objects(state);
+                                determine_enemy_order(state);
+                            }
+                        }
                     }
                 }
             }
