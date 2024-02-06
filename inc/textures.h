@@ -294,10 +294,25 @@ typedef struct
     Texture* hero_flying_outline_1;
     Texture* hero_flying_outline_2;
 
-    Texture* minibot_1;
-    Texture* minibot_2;
-    Texture* minibot_outline_1;
-    Texture* minibot_outline_2;
+    Texture* minibot_ally_1;
+    Texture* minibot_ally_2;
+    Texture* minibot_ally_outline_1;
+    Texture* minibot_ally_outline_2;
+
+    Texture* minibot_ally_cell_1;
+    Texture* minibot_ally_cell_2;
+    Texture* minibot_ally_cell_outline_1;
+    Texture* minibot_ally_cell_outline_2;
+
+    Texture* minibot_ally_dynamite_1;
+    Texture* minibot_ally_dynamite_2;
+    Texture* minibot_ally_dynamite_outline_1;
+    Texture* minibot_ally_dynamite_outline_2;
+
+    Texture* minibot_ally_gemstone_1;
+    Texture* minibot_ally_gemstone_2;
+    Texture* minibot_ally_gemstone_outline_1;
+    Texture* minibot_ally_gemstone_outline_2;
 
     Texture* goat_1;
     Texture* goat_2;
@@ -323,6 +338,26 @@ typedef struct
     Texture* chameleon_2;
     Texture* chameleon_outline_1;
     Texture* chameleon_outline_2;
+
+    Texture* minibot_enemy_1;
+    Texture* minibot_enemy_2;
+    Texture* minibot_enemy_outline_1;
+    Texture* minibot_enemy_outline_2;
+
+    Texture* minibot_enemy_cell_1;
+    Texture* minibot_enemy_cell_2;
+    Texture* minibot_enemy_cell_outline_1;
+    Texture* minibot_enemy_cell_outline_2;
+
+    Texture* minibot_enemy_dynamite_1;
+    Texture* minibot_enemy_dynamite_2;
+    Texture* minibot_enemy_dynamite_outline_1;
+    Texture* minibot_enemy_dynamite_outline_2;
+
+    Texture* minibot_enemy_gemstone_1;
+    Texture* minibot_enemy_gemstone_2;
+    Texture* minibot_enemy_gemstone_outline_1;
+    Texture* minibot_enemy_gemstone_outline_2;
 
     Texture* turret_laser_grounded_1;
     Texture* turret_laser_grounded_2;

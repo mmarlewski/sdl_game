@@ -292,10 +292,25 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->hero_flying_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_flying_outline_1.png");
     object->hero_flying_outline_2 = load_texture_from_filepath(renderer, "./res/object/hero_flying_outline_2.png");
 
-    object->minibot_1 = load_texture_from_filepath(renderer, "./res/object/minibot_1.png");
-    object->minibot_2 = load_texture_from_filepath(renderer, "./res/object/minibot_2.png");
-    object->minibot_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_outline_1.png");
-    object->minibot_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_outline_2.png");
+    object->minibot_ally_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_1.png");
+    object->minibot_ally_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_2.png");
+    object->minibot_ally_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_outline_1.png");
+    object->minibot_ally_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_outline_2.png");
+
+    object->minibot_ally_cell_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_cell_1.png");
+    object->minibot_ally_cell_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_cell_2.png");
+    object->minibot_ally_cell_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_cell_outline_1.png");
+    object->minibot_ally_cell_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_cell_outline_2.png");
+
+    object->minibot_ally_dynamite_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_dynamite_1.png");
+    object->minibot_ally_dynamite_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_dynamite_2.png");
+    object->minibot_ally_dynamite_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_dynamite_outline_1.png");
+    object->minibot_ally_dynamite_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_dynamite_outline_2.png");
+
+    object->minibot_ally_gemstone_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_gemstone_1.png");
+    object->minibot_ally_gemstone_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_gemstone_2.png");
+    object->minibot_ally_gemstone_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_gemstone_outline_1.png");
+    object->minibot_ally_gemstone_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_ally_gemstone_outline_2.png");
 
     object->goat_1 = load_texture_from_filepath(renderer, "./res/object/goat_1.png");
     object->goat_2 = load_texture_from_filepath(renderer, "./res/object/goat_2.png");
@@ -321,6 +336,26 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->chameleon_2 = load_texture_from_filepath(renderer, "./res/object/chameleon_2.png");
     object->chameleon_outline_1 = load_texture_from_filepath(renderer, "./res/object/chameleon_outline_1.png");
     object->chameleon_outline_2 = load_texture_from_filepath(renderer, "./res/object/chameleon_outline_2.png");
+
+    object->minibot_enemy_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_1.png");
+    object->minibot_enemy_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_2.png");
+    object->minibot_enemy_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_outline_1.png");
+    object->minibot_enemy_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_outline_2.png");
+
+    object->minibot_enemy_cell_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_cell_1.png");
+    object->minibot_enemy_cell_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_cell_2.png");
+    object->minibot_enemy_cell_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_cell_outline_1.png");
+    object->minibot_enemy_cell_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_cell_outline_2.png");
+
+    object->minibot_enemy_dynamite_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_dynamite_1.png");
+    object->minibot_enemy_dynamite_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_dynamite_2.png");
+    object->minibot_enemy_dynamite_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_dynamite_outline_1.png");
+    object->minibot_enemy_dynamite_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_dynamite_outline_2.png");
+
+    object->minibot_enemy_gemstone_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_gemstone_1.png");
+    object->minibot_enemy_gemstone_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_gemstone_2.png");
+    object->minibot_enemy_gemstone_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_gemstone_outline_1.png");
+    object->minibot_enemy_gemstone_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_gemstone_outline_2.png");
 
     object->turret_laser_grounded_1 = load_texture_from_filepath(renderer, "./res/object/turret_laser_grounded_1.png");
     object->turret_laser_grounded_2 = load_texture_from_filepath(renderer, "./res/object/turret_laser_grounded_2.png");

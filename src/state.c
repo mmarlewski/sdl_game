@@ -31,7 +31,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->gamemap.enemy_list = new_list((void (*)(void *))&destroy_enemy);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.object_minibot = new_object(OBJECT_TYPE__MINIBOT);
+    state->gamemap.object_minibot = new_object(OBJECT_TYPE__MINIBOT_ALLY);
     state->gamemap.curr_enemy = 0;
 
     state->gamemap.ally_list = new_list((void (*)(void *))&destroy_ally);

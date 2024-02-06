@@ -71,6 +71,11 @@ int is_object_enemy(Object* object)
         case OBJECT_TYPE__FLY:                              is = 1; break;
         case OBJECT_TYPE__CHAMELEON:                        is = 1; break;
 
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           is = 1; break;
+
         case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 1; break;
         case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 1; break;
         case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
@@ -101,7 +106,11 @@ int is_object_ally(Object* object)
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
-        case OBJECT_TYPE__MINIBOT:                          is = 1; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            is = 1; break;
 
         default: break;
     }
@@ -477,13 +486,22 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
-        case OBJECT_TYPE__MINIBOT:                          is = 1; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            is = 1; break;
 
         case OBJECT_TYPE__GOAT:                             is = 1; break;
         case OBJECT_TYPE__SPIDER:                           is = 1; break;
         case OBJECT_TYPE__BULL:                             is = 1; break;
         case OBJECT_TYPE__FLY:                              is = 1; break;
         case OBJECT_TYPE__CHAMELEON:                        is = 1; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           is = 1; break;
 
         case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 0; break;
         case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 1; break;
@@ -619,13 +637,22 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
-        case OBJECT_TYPE__MINIBOT:                          is = 1; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            is = 1; break;
 
         case OBJECT_TYPE__GOAT:                             is = 1; break;
         case OBJECT_TYPE__SPIDER:                           is = 1; break;
         case OBJECT_TYPE__BULL:                             is = 1; break;
         case OBJECT_TYPE__FLY:                              is = 1; break;
         case OBJECT_TYPE__CHAMELEON:                        is = 1; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           is = 1; break;
 
         case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 1; break;
         case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 1; break;
@@ -758,32 +785,6 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
 
-        case OBJECT_TYPE__HERO:                             is = 0; break;
-        case OBJECT_TYPE__HERO_FLOATING:                    is = 0; break;
-        case OBJECT_TYPE__HERO_FLYING:                      is = 0; break;
-        case OBJECT_TYPE__MINIBOT:                          is = 0; break;
-
-        case OBJECT_TYPE__GOAT:                             is = 0; break;
-        case OBJECT_TYPE__SPIDER:                           is = 0; break;
-        case OBJECT_TYPE__BULL:                             is = 0; break;
-        case OBJECT_TYPE__FLY:                              is = 0; break;
-        case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
-
-        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            is = 0; break;
-
-        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_STANDING:             is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             is = 0; break;
-
-        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
-
         case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
@@ -880,6 +881,16 @@ int get_object_item_type(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            item_type = ITEM__NONE; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               item_type = ITEM__NONE; break;
 
+        case OBJECT_TYPE__MINIBOT_ALLY:                     item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            item_type = ITEM__DYNAMITE; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            item_type = ITEM__GEMSTONE; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           item_type = ITEM__DYNAMITE; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           item_type = ITEM__GEMSTONE; break;
+
         default: break;
     }
 
@@ -969,6 +980,16 @@ int get_object_item_count(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                count = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            count = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               count = 0; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     count = 0; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                count = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            count = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            count = 1; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    count = 0; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               count = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           count = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           count = 1; break;
 
         default: break;
     }
@@ -1119,6 +1140,16 @@ int is_object_put_item(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
 
+        case OBJECT_TYPE__MINIBOT_ALLY:                     is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                is = 0; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            is = 0; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            is = 0; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    is = 1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               is = 0; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           is = 0; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           is = 0; break;
+
         default: break;
     }
 
@@ -1251,7 +1282,6 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__HERO:                             name = "hero"; break;
         case OBJECT_TYPE__HERO_FLOATING:                    name = "hero floating"; break;
         case OBJECT_TYPE__HERO_FLYING:                      name = "hero flying"; break;
-        case OBJECT_TYPE__MINIBOT:                          name = "minibot"; break;
 
         case OBJECT_TYPE__GOAT:                             name = "goat"; break;
         case OBJECT_TYPE__SPIDER:                           name = "spider"; break;
@@ -1293,6 +1323,16 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        name = "station manipulation head"; break;
         case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       name = "station teleportation head"; break;
         case OBJECT_TYPE__STATION_TAKEN:                    name = "station taken"; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     name = "minibot ally"; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                name = "minibot ally cell"; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            name = "minibot ally dynamite"; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            name = "minibot ally gemstone"; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    name = "minibot enemy"; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               name = "minibot enemy cell"; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           name = "minibot enemy dynamite"; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           name = "minibot enemy gemstone"; break;
 
         default: break;
     }
@@ -1426,7 +1466,6 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_1; break;
-        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_1; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_1; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_1; break;
@@ -1468,6 +1507,16 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_manipulation_head; break;
         case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
         case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_taken; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            texture = textures->object.minibot_ally_dynamite_1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            texture = textures->object.minibot_ally_gemstone_1; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    texture = textures->object.minibot_enemy_1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               texture = textures->object.minibot_enemy_cell_1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           texture = textures->object.minibot_enemy_dynamite_1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           texture = textures->object.minibot_enemy_gemstone_1; break;
 
         default: break;
     }
@@ -1601,7 +1650,6 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_2; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_2; break;
-        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_2; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_2; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_2; break;
@@ -1643,6 +1691,16 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_manipulation_head; break;
         case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
         case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_taken; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_2; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_2; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            texture = textures->object.minibot_ally_dynamite_2; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            texture = textures->object.minibot_ally_gemstone_2; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    texture = textures->object.minibot_enemy_2; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               texture = textures->object.minibot_enemy_cell_2; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           texture = textures->object.minibot_enemy_dynamite_2; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           texture = textures->object.minibot_enemy_gemstone_2; break;
 
         default: break;
     }
@@ -1776,7 +1834,6 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_1; break;
-        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_outline_1; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_1; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_outline_1; break;
@@ -1818,6 +1875,16 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_outline; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_outline_1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_outline_1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            texture = textures->object.minibot_ally_dynamite_outline_1; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            texture = textures->object.minibot_ally_gemstone_outline_1; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    texture = textures->object.minibot_enemy_outline_1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               texture = textures->object.minibot_enemy_cell_outline_1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           texture = textures->object.minibot_enemy_dynamite_outline_1; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           texture = textures->object.minibot_enemy_gemstone_outline_1; break;
 
         default: break;
     }
@@ -1951,7 +2018,6 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_2; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_2; break;
-        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_outline_2; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_2; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_outline_2; break;
@@ -1959,20 +2025,20 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__FLY:                              texture = textures->object.fly_outline_2; break;
         case OBJECT_TYPE__CHAMELEON:                        texture = textures->object.chameleon_outline_2; break;
 
-        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_outline_1; break;
-        case OBJECT_TYPE__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_outline_1; break;
-        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          texture = textures->object.turret_laser_undeployed_outline_1; break;
-        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            texture = textures->object.turret_laser_deployed_outline_1; break;
+        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_outline_2; break;
+        case OBJECT_TYPE__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_outline_2; break;
+        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          texture = textures->object.turret_laser_undeployed_outline_2; break;
+        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            texture = textures->object.turret_laser_deployed_outline_2; break;
 
-        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             texture = textures->object.turret_bomb_grounded_outline_1; break;
-        case OBJECT_TYPE__TURRET_BOMB_STANDING:             texture = textures->object.turret_bomb_standing_outline_1; break;
-        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           texture = textures->object.turret_bomb_undeployed_outline_1; break;
-        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             texture = textures->object.turret_bomb_deployed_outline_1; break;
+        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             texture = textures->object.turret_bomb_grounded_outline_2; break;
+        case OBJECT_TYPE__TURRET_BOMB_STANDING:             texture = textures->object.turret_bomb_standing_outline_2; break;
+        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           texture = textures->object.turret_bomb_undeployed_outline_2; break;
+        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             texture = textures->object.turret_bomb_deployed_outline_2; break;
 
-        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       texture = textures->object.turret_projectile_grounded_outline_1; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       texture = textures->object.turret_projectile_standing_outline_1; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_outline_1; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_outline_1; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       texture = textures->object.turret_projectile_grounded_outline_2; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       texture = textures->object.turret_projectile_standing_outline_2; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_outline_2; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_outline_2; break;
 
         case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone_outline; break;
@@ -1993,6 +2059,16 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_TAKEN:                    texture = textures->object.station_outline; break;
+
+        case OBJECT_TYPE__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_outline_2; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_outline_2; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:            texture = textures->object.minibot_ally_dynamite_outline_2; break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:            texture = textures->object.minibot_ally_gemstone_outline_2; break;
+
+        case OBJECT_TYPE__MINIBOT_ENEMY:                    texture = textures->object.minibot_enemy_outline_2; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:               texture = textures->object.minibot_enemy_cell_outline_2; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:           texture = textures->object.minibot_enemy_dynamite_outline_2; break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:           texture = textures->object.minibot_enemy_gemstone_outline_2; break;
 
         default: break;
     }

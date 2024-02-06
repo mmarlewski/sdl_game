@@ -1243,7 +1243,14 @@ void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilem
 {
     switch(object->type)
     {
-        case OBJECT_TYPE__MINIBOT:
+        case OBJECT_TYPE__MINIBOT_ALLY:
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
+        case OBJECT_TYPE__MINIBOT_ENEMY:
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:
         {
             add_action_to_end_action_sequence(
                 sequence,
@@ -1480,6 +1487,72 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__MINIBOT_ALLY_CELL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__MINIBOT_ALLY,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__MINIBOT_ALLY,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__MINIBOT_ALLY,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__MINIBOT_ENEMY,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__MINIBOT_ENEMY,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__MINIBOT_ENEMY,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__EXIT_STONE_POWERED_UP:
         {
                 add_action_to_end_action_sequence(
@@ -1695,6 +1768,74 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__MINIBOT_ALLY:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__MINIBOT_ALLY_CELL,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+            if(item_type == ITEM__DYNAMITE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__MINIBOT_ENEMY:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__MINIBOT_ENEMY_CELL,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+            if(item_type == ITEM__DYNAMITE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+            if(item_type == ITEM__GEMSTONE)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:
         {
             if(item_type == ITEM__CELL)

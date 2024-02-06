@@ -128,7 +128,7 @@ int main (int argc, char* argv[])
     room_add_object_at(
         first_room,
         state.gamemap.object_minibot,
-        vec2i(7,7)
+        vec2i(7,6)
         );
     set_curr_room(&state, first_room);
 
