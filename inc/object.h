@@ -129,6 +129,7 @@ enum OBJECT_TYPE
     OBJECT_TYPE__HERO,
     OBJECT_TYPE__HERO_FLOATING,
     OBJECT_TYPE__HERO_FLYING,
+    OBJECT_TYPE__MINIBOT,
 
     OBJECT_TYPE__GOAT,
     OBJECT_TYPE__SPIDER,
@@ -176,10 +177,18 @@ enum OBJECT_TYPE
 
 struct _Action;
 
-typedef struct _Object Object;
+typedef struct
+{
+    int is_dead;
+    int is_visible;
+    int type;
+    Vec2i tilemap_pos;
+
+} Object;
 
 typedef struct
 {
+    Object* object;
     struct _Action* action_sequence;
     Vec2i target_1_tilemap_pos;
     Vec2i target_2_tilemap_pos;
@@ -188,23 +197,25 @@ typedef struct
     int performed_attack;
     int order_number;
 
-} Object_Enemy;
+} Enemy;
 
-struct _Object
+typedef struct
 {
-    int is_dead;
-    int is_visible;
-    int type;
-    Vec2i tilemap_pos;
+    Object* object;
 
-    int is_enemy;
-    Object_Enemy enemy;
-};
+} Ally;
 
 Object* new_object(int type);
 void destroy_object(Object* object);
 
+Enemy* new_enemy(Object* object);
+void destroy_enemy(Enemy* enemy);
+
+Ally* new_ally(Object* object);
+void destroy_ally(Ally* ally);
+
 int is_object_enemy(Object* object);
+int is_object_ally(Object* object);
 int is_object_exit(Object* object);
 int is_object_station(Object* object);
 int get_station_augmentation(Object* object);

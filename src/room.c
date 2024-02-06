@@ -49,7 +49,6 @@ void room_add_object(Room* room, Object* object)
 {
     if(room != 0 && room->object_list != 0 && object != 0)
     {
-        object->is_enemy = is_object_enemy(object);
         add_new_list_element_to_list_end(room->object_list, object);
     }
 }

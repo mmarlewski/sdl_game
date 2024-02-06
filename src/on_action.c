@@ -1243,6 +1243,17 @@ void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilem
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__MINIBOT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(
+                    object,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         default:
         break;
     }

@@ -29,10 +29,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     // gamemap
 
-    state->gamemap.object_list = new_list((void (*)(void *))&destroy_object);
-    state->gamemap.object_enemy_list = new_list((void (*)(void *))&destroy_object);
+    state->gamemap.enemy_list = new_list((void (*)(void *))&destroy_enemy);
     state->gamemap.object_hero = new_object(OBJECT_TYPE__HERO);
-    state->gamemap.curr_object_enemy = 0;
+    state->gamemap.object_minibot = new_object(OBJECT_TYPE__MINIBOT);
+    state->gamemap.curr_enemy = 0;
+
+    state->gamemap.ally_list = new_list((void (*)(void *))&destroy_ally);
 
     state->gamemap.sprite_list = new_list((void (*)(void *))&destroy_sprite);
 
@@ -129,7 +131,7 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ENEMY_MOVING ||
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
     {
-        printf("curr_enemy: %s \n", get_name_from_object_type(state->gamemap.curr_object_enemy->type));
+        printf("curr_enemy: %s \n", get_name_from_object_type(state->gamemap.curr_enemy->object->type));
         printf("----------------------------------------\n");
     }
 }
@@ -226,37 +228,6 @@ Object* room_get_object_at(Room* room, Vec2i tilemap_pos)
     }
 
     return 0;
-}
-void remove_object_from_gamemap_objects(State* state, Object* object)
-{
-    if(object == state->gamemap.object_hero)
-    {
-        state->gamemap.object_hero = 0;
-    }
-
-    if(object->is_enemy)
-    {
-        remove_list_element_of_data(state->gamemap.object_enemy_list, object, 0);
-    }
-
-    remove_list_element_of_data(state->gamemap.object_list, object, 1);
-}
-
-void remove_all_dead_objects_from_gamemap_objects(State* state)
-{
-    ListElem* curr_elem = state->gamemap.object_list->head;
-    while(curr_elem != 0)
-    {
-        ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
-
-        Object* curr_object = (Object*)curr_elem->data;
-        if(curr_object->is_dead)
-        {
-            remove_object_from_gamemap_objects(state, curr_object);
-        }
-
-        curr_elem = next_elem;
-    }
 }
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite)
@@ -400,30 +371,69 @@ int hero_has_augmentation(State* state, int augmentation)
 void determine_enemy_order(State* state)
 {
     int order_number = 1;
-    for(ListElem* curr_elem = state->gamemap.object_enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    for(ListElem* curr_elem = state->gamemap.enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
     {
-        Object* curr_object = (Object*)curr_elem->data;
-        curr_object->enemy.order_number = order_number;
+        Enemy* curr_enemy = (Enemy*)curr_elem->data;
+        curr_enemy->order_number = order_number;
         order_number++;
     }
 }
 
-void determine_enemy_objects(State* state)
+void determine_allies(State* state)
 {
-    remove_all_list_elements(state->gamemap.object_enemy_list,0);
+    remove_all_list_elements(state->gamemap.ally_list,1);
 
     for(ListElem* elem = state->curr_room->object_list->head; elem != 0; elem = elem->next)
     {
         Object* object = (Object*)elem->data;
 
-        if(is_object_enemy(object))
+        if(object != 0 && is_object_ally(object))
         {
-            add_new_list_element_to_list_end(state->gamemap.object_enemy_list, object);
+            Ally* ally = new_ally(object);
+
+            add_new_list_element_to_list_end(state->gamemap.ally_list, ally);
         }
     }
+}
+
+void determine_enemies(State* state)
+{
+    remove_all_list_elements(state->gamemap.enemy_list,1);
+
+    for(ListElem* elem = state->curr_room->object_list->head; elem != 0; elem = elem->next)
+    {
+        Object* object = (Object*)elem->data;
+
+        if(object != 0 && is_object_enemy(object))
+        {
+            Enemy* enemy = new_enemy(object);
+
+            add_new_list_element_to_list_end(state->gamemap.enemy_list, enemy);
+        }
+    }
+}
+
+void determine_enemies_attack(State* state)
+{
+    //
 }
 
 void remove_all_dead_objects(State* state)
 {
     //
+}
+
+Enemy* get_enemy_of_object(State* state, Object* object)
+{
+    for(ListElem* elem = state->gamemap.enemy_list->head; elem != 0; elem = elem->next)
+    {
+        Enemy* enemy = (Enemy*)elem->data;
+
+        if(enemy->object == object)
+        {
+            return enemy;
+        }
+    }
+
+    return 0;
 }

@@ -125,6 +125,11 @@ int main (int argc, char* argv[])
         state.gamemap.object_hero,
         vec2i(7,5)
         );
+    room_add_object_at(
+        first_room,
+        state.gamemap.object_minibot,
+        vec2i(7,7)
+        );
     set_curr_room(&state, first_room);
 
     for(int i = 0; i < TILEMAP_LENGTH; i++)
@@ -470,22 +475,22 @@ int main (int argc, char* argv[])
 
     //
 
-    for(ListElem* curr_elem = state.curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
-    {
-        Object* curr_object = (Object*)curr_elem->data;
-
-        if(curr_object->is_enemy)
-        {
-            curr_object->enemy.attack_dir4 = rand() % 4 + 1;
-            remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-            object_enemy_prepare_attack(&state, curr_object);
-            curr_object->enemy.performed_attack = 0;
-        }
-    }
-
-    determine_enemy_objects(&state);
+    determine_enemies(&state);
 
     determine_enemy_order(&state);
+
+    for(ListElem* curr_elem = state.gamemap.enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+
+        if(curr_enemy != 0)
+        {
+            curr_enemy->attack_dir4 = rand() % 4 + 1;
+            remove_all_actions_from_action_sequence(curr_enemy->action_sequence);
+            object_enemy_prepare_attack(&state, curr_enemy);
+            curr_enemy->performed_attack = 0;
+        }
+    }
 
     state.gamemap.item_number[ITEM__CELL] = 5;
     state.gamemap.item_number[ITEM__DYNAMITE] = 5;

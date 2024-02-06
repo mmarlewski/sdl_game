@@ -124,16 +124,16 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 restore_hero_ap(state);
 
-                if(state->gamemap.object_enemy_list->size > 0)
+                if(state->gamemap.enemy_list->size > 0)
                 {
-                    state->gamemap.curr_object_enemy_list_elem =
-                    state->gamemap.object_enemy_list->head;
+                    state->gamemap.curr_enemy_list_elem =
+                    state->gamemap.enemy_list->head;
 
-                    state->gamemap.curr_object_enemy =
-                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+                    state->gamemap.curr_enemy =
+                    (Enemy*)state->gamemap.curr_enemy_list_elem->data;
 
                     state->action.enemy_action_sequence =
-                    (Action*)state->gamemap.curr_object_enemy->enemy.action_sequence;
+                    (Action*)state->gamemap.curr_enemy->action_sequence;
 
                     add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->enemy_background, 0.25f), textures, sounds, musics, colors);
 
@@ -438,21 +438,21 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 end_action(state, state->action.hero_action_sequence, state->action.hero_action_sequence, textures, sounds, musics, colors);
 
-                for(ListElem* curr_elem = state->gamemap.object_enemy_list->head;
+                for(ListElem* curr_elem = state->gamemap.enemy_list->head;
                 curr_elem != 0; curr_elem = curr_elem->next)
                 {
-                    Object* curr_object = (Object*)curr_elem->data;
-                    if(!curr_object->is_dead)
+                    Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                    if(curr_enemy != 0)
                     {
-                        curr_object->enemy.performed_attack = 0;
-                        remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-                        object_enemy_prepare_attack(state, curr_object);
+                        curr_enemy->performed_attack = 0;
+                        remove_all_actions_from_action_sequence(curr_enemy->action_sequence);
+                        object_enemy_prepare_attack(state, curr_enemy);
                     }
                 }
 
                 remove_all_dead_objects(state);
 
-                determine_enemy_objects(state);
+                determine_enemies(state);
 
                 determine_enemy_order(state);
 
@@ -476,10 +476,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                 Animation* animation = skill_get_animation(
                     state,
-                    state->gamemap.curr_object_enemy->enemy.skill,
-                    state->gamemap.curr_object_enemy->tilemap_pos,
-                    state->gamemap.curr_object_enemy->enemy.target_1_tilemap_pos,
-                    state->gamemap.curr_object_enemy->enemy.target_2_tilemap_pos,
+                    state->gamemap.curr_enemy->skill,
+                    state->gamemap.curr_enemy->object->tilemap_pos,
+                    state->gamemap.curr_enemy->target_1_tilemap_pos,
+                    state->gamemap.curr_enemy->target_2_tilemap_pos,
                     textures
                     );
 
@@ -519,45 +519,45 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         {
             if(state->action.enemy_action_sequence->is_finished)
             {
-                state->gamemap.curr_object_enemy->enemy.performed_attack = 1;
+                state->gamemap.curr_enemy->performed_attack = 1;
 
                 end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
-                for(ListElem* curr_elem = state->gamemap.object_enemy_list->head;
+                for(ListElem* curr_elem = state->gamemap.enemy_list->head;
                 curr_elem != 0; curr_elem = curr_elem->next)
                 {
-                    Object* curr_object = (Object*)curr_elem->data;
-                    if(!curr_object->is_dead && !curr_object->enemy.performed_attack)
+                    Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                    if(!curr_enemy->performed_attack)
                     {
-                        remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-                        object_enemy_prepare_attack(state, curr_object);
+                        remove_all_actions_from_action_sequence(curr_enemy->action_sequence);
+                        object_enemy_prepare_attack(state, curr_enemy);
                     }
                 }
 
-                if(state->gamemap.curr_object_enemy_list_elem->next == 0)
+                if(state->gamemap.curr_enemy_list_elem->next == 0)
                 {
-                    state->gamemap.curr_object_enemy_list_elem =
-                    state->gamemap.object_enemy_list->head;
+                    state->gamemap.curr_enemy_list_elem =
+                    state->gamemap.enemy_list->head;
 
-                    state->gamemap.curr_object_enemy =
-                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+                    state->gamemap.curr_enemy =
+                    (Enemy*)state->gamemap.curr_enemy_list_elem->data;
 
                     state->action.enemy_action_sequence =
-                    (Action*)state->gamemap.curr_object_enemy->enemy.action_sequence;
+                    (Action*)state->gamemap.curr_enemy->action_sequence;
 
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
                     state->timer = 0.0f;
                 }
                 else
                 {
-                    state->gamemap.curr_object_enemy_list_elem =
-                    state->gamemap.curr_object_enemy_list_elem->next;
+                    state->gamemap.curr_enemy_list_elem =
+                    state->gamemap.curr_enemy_list_elem->next;
 
-                    state->gamemap.curr_object_enemy =
-                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+                    state->gamemap.curr_enemy =
+                    (Enemy*)state->gamemap.curr_enemy_list_elem->data;
 
                     state->action.enemy_action_sequence =
-                    (Action*)state->gamemap.curr_object_enemy->enemy.action_sequence;
+                    (Action*)state->gamemap.curr_enemy->action_sequence;
 
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
                     state->timer = 0.0f;
@@ -577,7 +577,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 state->timer = 0.0f;
 
-                object_enemy_prepare_move(state, state->gamemap.curr_object_enemy);
+                object_enemy_prepare_move(state, state->gamemap.curr_enemy);
 
                 execute_action_sequence(state, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
@@ -591,20 +591,20 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 end_action(state, state->action.enemy_action_sequence, state->action.enemy_action_sequence, textures, sounds, musics, colors);
 
-                for(ListElem* curr_elem = state->gamemap.object_enemy_list->head;
+                for(ListElem* curr_elem = state->gamemap.enemy_list->head;
                 curr_elem != 0; curr_elem = curr_elem->next)
                 {
-                    Object* curr_object = (Object*)curr_elem->data;
-                    if(!curr_object->is_dead && !curr_object->enemy.performed_attack)
+                    Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                    if(!curr_enemy->performed_attack)
                     {
-                        remove_all_actions_from_action_sequence(curr_object->enemy.action_sequence);
-                        object_enemy_prepare_attack(state, curr_object);
+                        remove_all_actions_from_action_sequence(curr_enemy->action_sequence);
+                        object_enemy_prepare_attack(state, curr_enemy);
                     }
                 }
 
-                if(state->gamemap.curr_object_enemy->is_dead)
+                if(state->gamemap.curr_enemy->object->is_dead)
                 {
-                    if(state->gamemap.curr_object_enemy_list_elem->next == 0)
+                    if(state->gamemap.curr_enemy_list_elem->next == 0)
                     {
                         remove_all_dead_objects(state);
 
@@ -614,14 +614,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                     else
                     {
-                        state->gamemap.curr_object_enemy_list_elem =
-                        state->gamemap.curr_object_enemy_list_elem->next;
+                        state->gamemap.curr_enemy_list_elem =
+                        state->gamemap.curr_enemy_list_elem->next;
 
-                        state->gamemap.curr_object_enemy =
-                        (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+                        state->gamemap.curr_enemy =
+                        (Enemy*)state->gamemap.curr_enemy_list_elem->data;
 
                         state->action.enemy_action_sequence =
-                        (Action*)state->gamemap.curr_object_enemy->enemy.action_sequence;
+                        (Action*)state->gamemap.curr_enemy->action_sequence;
 
                         change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
                         state->timer = 0.0f;
@@ -648,15 +648,15 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 state->timer = 0.0f;
 
                 remove_all_actions_from_action_sequence(state->action.enemy_action_sequence);
-                object_enemy_prepare_attack(state, state->gamemap.curr_object_enemy);
+                object_enemy_prepare_attack(state, state->gamemap.curr_enemy);
 
-                state->gamemap.curr_object_enemy->enemy.performed_attack = 0;
+                state->gamemap.curr_enemy->performed_attack = 0;
 
-                if(state->gamemap.curr_object_enemy_list_elem->next == 0)
+                if(state->gamemap.curr_enemy_list_elem->next == 0)
                 {
                     remove_all_dead_objects(state);
 
-                    determine_enemy_objects(state);
+                    determine_enemies(state);
 
                     determine_enemy_order(state);
 
@@ -666,14 +666,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 }
                 else
                 {
-                    state->gamemap.curr_object_enemy_list_elem =
-                    state->gamemap.curr_object_enemy_list_elem->next;
+                    state->gamemap.curr_enemy_list_elem =
+                    state->gamemap.curr_enemy_list_elem->next;
 
-                    state->gamemap.curr_object_enemy =
-                    (Object*)state->gamemap.curr_object_enemy_list_elem->data;
+                    state->gamemap.curr_enemy =
+                    (Enemy*)state->gamemap.curr_enemy_list_elem->data;
 
                     state->action.enemy_action_sequence =
-                    (Action*)state->gamemap.curr_object_enemy->enemy.action_sequence;
+                    (Action*)state->gamemap.curr_enemy->action_sequence;
 
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
                     state->timer = 0.0f;

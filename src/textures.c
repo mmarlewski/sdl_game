@@ -292,6 +292,11 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->hero_flying_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_flying_outline_1.png");
     object->hero_flying_outline_2 = load_texture_from_filepath(renderer, "./res/object/hero_flying_outline_2.png");
 
+    object->minibot_1 = load_texture_from_filepath(renderer, "./res/object/minibot_1.png");
+    object->minibot_2 = load_texture_from_filepath(renderer, "./res/object/minibot_2.png");
+    object->minibot_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_outline_1.png");
+    object->minibot_outline_2 = load_texture_from_filepath(renderer, "./res/object/minibot_outline_2.png");
+
     object->goat_1 = load_texture_from_filepath(renderer, "./res/object/goat_1.png");
     object->goat_2 = load_texture_from_filepath(renderer, "./res/object/goat_2.png");
     object->goat_outline_1 = load_texture_from_filepath(renderer, "./res/object/goat_outline_1.png");

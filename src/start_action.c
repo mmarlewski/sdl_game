@@ -162,7 +162,9 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->death.object->tilemap_pos = action->tilemap_pos;
 
-            if(action->death.object->is_enemy)
+            Enemy* enemy = get_enemy_of_object(state, action->death.object);
+
+            if(enemy != 0)
             {
                 add_animation_to_animation_list(
                     state,

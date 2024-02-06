@@ -4,6 +4,7 @@
 #include "../inc/skill.h"
 #include "../inc/item.h"
 #include "../inc/augmentation.h"
+#include <stdlib.h>
 
 Object* new_object(int type)
 {
@@ -14,26 +15,48 @@ Object* new_object(int type)
     object->type = type;
     object->tilemap_pos = vec2i(0,0);
 
-    object->is_enemy = 0;
-    object->enemy.action_sequence = new_action_sequence();
-    object->enemy.performed_attack = 0;
-    object->enemy.order_number = 0;
-    object->enemy.attack_dir4 = DIR4__RIGHT;
-
-    object->enemy.action_sequence = new_action_sequence();
-    object->enemy.target_1_tilemap_pos = vec2i(0, 0);
-    object->enemy.target_2_tilemap_pos = vec2i(0, 0);
-    object->enemy.skill = SKILL__NONE;
-    object->enemy.attack_dir4 = DIR4__NONE;
-    object->enemy.performed_attack = 0;
-    object->enemy.order_number = 0;
-
     return object;
 }
 
 void destroy_object(Object* object)
 {
     free(object);
+}
+
+Enemy* new_enemy(Object* object)
+{
+    Enemy* enemy = malloc(sizeof(*enemy));
+
+    enemy->object = object;
+    enemy->action_sequence = new_action_sequence();
+    enemy->target_1_tilemap_pos = vec2i(0, 0);
+    enemy->target_2_tilemap_pos = vec2i(0, 0);
+    enemy->skill = SKILL__NONE;
+    enemy->attack_dir4 = DIR4__NONE;
+    enemy->performed_attack = 0;
+    enemy->order_number = 0;
+
+    return enemy;
+}
+
+void destroy_enemy(Enemy* enemy)
+{
+    free(enemy);
+}
+
+
+Ally* new_ally(Object* object)
+{
+    Ally* ally = malloc(sizeof(*ally));
+
+    ally->object = object;
+
+    return ally;
+}
+
+void destroy_ally(Ally* ally)
+{
+    free(ally);
 }
 
 int is_object_enemy(Object* object)
@@ -62,6 +85,23 @@ int is_object_enemy(Object* object)
         case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 1; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
+int is_object_ally(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__HERO:                             is = 1; break;
+        case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
+        case OBJECT_TYPE__MINIBOT:                          is = 1; break;
 
         default: break;
     }
@@ -166,134 +206,7 @@ int is_object_floating(Object* object)
 
     switch(object->type)
     {
-        case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
-
-        case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
-
-        case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
-
-        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
-
-        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
-
-        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
-
-        case OBJECT_TYPE__PILLAR:                           is = 0; break;
-
-        case OBJECT_TYPE__PIPE:                             is = 0; break;
-
-        case OBJECT_TYPE__STALACTITE:                       is = 0; break;
-        case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
-        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
-
-        case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
-
-        case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
-
-        case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
-        case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
-        case OBJECT_TYPE__COVER_GLASS:                      is = 0; break;
-
-        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 0; break;
-        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 0; break;
-
-        case OBJECT_TYPE__CRATE_CELL:                       is = 0; break;
-        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 0; break;
-
-        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 0; break;
-        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 0; break;
-
-        case OBJECT_TYPE__ROCK:                             is = 0; break;
-        case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
-        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 0; break;
-
-        case OBJECT_TYPE__SAFE:                             is = 0; break;
-        case OBJECT_TYPE__SAFE_DAMAGED:                     is = 0; break;
-        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:                is = 0; break;
-
-        case OBJECT_TYPE__DISPLAY:                          is = 0; break;
-        case OBJECT_TYPE__DISPLAY_DAMAGED:                  is = 0; break;
-        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             is = 0; break;
-
-        case OBJECT_TYPE__VENDING_CELL:                     is = 0; break;
-        case OBJECT_TYPE__VENDING_CELL_ITEM:                is = 0; break;
-        case OBJECT_TYPE__VENDING_CELL_DAMAGED:             is = 0; break;
-        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:        is = 0; break;
-
-        case OBJECT_TYPE__VENDING_DYNAMITE:                 is = 0; break;
-        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:            is = 0; break;
-        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED:         is = 0; break;
-        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
-
-        case OBJECT_TYPE__BARREL:                           is = 0; break;
-
-        case OBJECT_TYPE__PISTON:                           is = 0; break;
-        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
-        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
-        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
-
-        case OBJECT_TYPE__BALL:                             is = 0; break;
-        case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
-
-        case OBJECT_TYPE__HERO:                             is = 0; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
-        case OBJECT_TYPE__HERO_FLYING:                      is = 0; break;
-
-        case OBJECT_TYPE__GOAT:                             is = 0; break;
-        case OBJECT_TYPE__SPIDER:                           is = 0; break;
-        case OBJECT_TYPE__BULL:                             is = 0; break;
-        case OBJECT_TYPE__FLY:                              is = 0; break;
-        case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
-
-        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            is = 0; break;
-
-        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_STANDING:             is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             is = 0; break;
-
-        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
-
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
 
         default: break;
     }
@@ -307,134 +220,8 @@ int is_object_flying(Object* object)
 
     switch(object->type)
     {
-        case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
-
-        case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
-
-        case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
-
-        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
-        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
-
-        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
-
-        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
-
-        case OBJECT_TYPE__PILLAR:                           is = 0; break;
-
-        case OBJECT_TYPE__PIPE:                             is = 0; break;
-
-        case OBJECT_TYPE__STALACTITE:                       is = 0; break;
-        case OBJECT_TYPE__STALACTITE_FALLEN:                is = 0; break;
-        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 0; break;
-
-        case OBJECT_TYPE__STALAGMITE:                       is = 0; break;
-
-        case OBJECT_TYPE__STALAGNATE:                       is = 0; break;
-
-        case OBJECT_TYPE__COVER_ROCK:                       is = 0; break;
-        case OBJECT_TYPE__COVER_METAL:                      is = 0; break;
-        case OBJECT_TYPE__COVER_GLASS:                      is = 0; break;
-
-        case OBJECT_TYPE__CRATE_GEMSTONE:                   is = 0; break;
-        case OBJECT_TYPE__CRATE_GEMSTONE_ITEM:              is = 0; break;
-
-        case OBJECT_TYPE__CRATE_CELL:                       is = 0; break;
-        case OBJECT_TYPE__CRATE_CELL_ITEM:                  is = 0; break;
-
-        case OBJECT_TYPE__CRATE_DYNAMITE:                   is = 0; break;
-        case OBJECT_TYPE__CRATE_DYNAMITE_ITEM:              is = 0; break;
-
-        case OBJECT_TYPE__ROCK:                             is = 0; break;
-        case OBJECT_TYPE__ROCK_DAMAGED:                     is = 0; break;
-        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 0; break;
-
-        case OBJECT_TYPE__SAFE:                             is = 0; break;
-        case OBJECT_TYPE__SAFE_DAMAGED:                     is = 0; break;
-        case OBJECT_TYPE__SAFE_DAMAGED_ITEM:                is = 0; break;
-
-        case OBJECT_TYPE__DISPLAY:                          is = 0; break;
-        case OBJECT_TYPE__DISPLAY_DAMAGED:                  is = 0; break;
-        case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             is = 0; break;
-
-        case OBJECT_TYPE__VENDING_CELL:                     is = 0; break;
-        case OBJECT_TYPE__VENDING_CELL_ITEM:                is = 0; break;
-        case OBJECT_TYPE__VENDING_CELL_DAMAGED:             is = 0; break;
-        case OBJECT_TYPE__VENDING_CELL_DAMAGED_ITEM:        is = 0; break;
-
-        case OBJECT_TYPE__VENDING_DYNAMITE:                 is = 0; break;
-        case OBJECT_TYPE__VENDING_DYNAMITE_ITEM:            is = 0; break;
-        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED:         is = 0; break;
-        case OBJECT_TYPE__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
-
-        case OBJECT_TYPE__BARREL:                           is = 0; break;
-
-        case OBJECT_TYPE__PISTON:                           is = 0; break;
-        case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
-        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
-        case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
-
-        case OBJECT_TYPE__BALL:                             is = 0; break;
-        case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
-
-        case OBJECT_TYPE__HERO:                             is = 0; break;
-        case OBJECT_TYPE__HERO_FLOATING:                    is = 0; break;
-        case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
-
-        case OBJECT_TYPE__GOAT:                             is = 0; break;
-        case OBJECT_TYPE__SPIDER:                           is = 0; break;
-        case OBJECT_TYPE__BULL:                             is = 0; break;
         case OBJECT_TYPE__FLY:                              is = 1; break;
-        case OBJECT_TYPE__CHAMELEON:                        is = 0; break;
-
-        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_STANDING:            is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_UNDEPLOYED:          is = 0; break;
-        case OBJECT_TYPE__TURRET_LASER_DEPLOYED:            is = 0; break;
-
-        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_STANDING:             is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_UNDEPLOYED:           is = 0; break;
-        case OBJECT_TYPE__TURRET_BOMB_DEPLOYED:             is = 0; break;
-
-        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_STANDING:       is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
-        case OBJECT_TYPE__TURRET_PROJECTILE_DEPLOYED:       is = 0; break;
-
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
+        case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
 
         default: break;
     }
@@ -690,6 +477,7 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
+        case OBJECT_TYPE__MINIBOT:                          is = 1; break;
 
         case OBJECT_TYPE__GOAT:                             is = 1; break;
         case OBJECT_TYPE__SPIDER:                           is = 1; break;
@@ -831,6 +619,7 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
+        case OBJECT_TYPE__MINIBOT:                          is = 1; break;
 
         case OBJECT_TYPE__GOAT:                             is = 1; break;
         case OBJECT_TYPE__SPIDER:                           is = 1; break;
@@ -972,6 +761,7 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__HERO:                             is = 0; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 0; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 0; break;
+        case OBJECT_TYPE__MINIBOT:                          is = 0; break;
 
         case OBJECT_TYPE__GOAT:                             is = 0; break;
         case OBJECT_TYPE__SPIDER:                           is = 0; break;
@@ -1461,6 +1251,7 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__HERO:                             name = "hero"; break;
         case OBJECT_TYPE__HERO_FLOATING:                    name = "hero floating"; break;
         case OBJECT_TYPE__HERO_FLYING:                      name = "hero flying"; break;
+        case OBJECT_TYPE__MINIBOT:                          name = "minibot"; break;
 
         case OBJECT_TYPE__GOAT:                             name = "goat"; break;
         case OBJECT_TYPE__SPIDER:                           name = "spider"; break;
@@ -1635,6 +1426,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_1; break;
+        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_1; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_1; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_1; break;
@@ -1809,6 +1601,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_2; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_2; break;
+        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_2; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_2; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_2; break;
@@ -1983,6 +1776,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_1; break;
+        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_outline_1; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_1; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_outline_1; break;
@@ -2157,6 +1951,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_2; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_2; break;
+        case OBJECT_TYPE__MINIBOT:                          texture = textures->object.minibot_outline_2; break;
 
         case OBJECT_TYPE__GOAT:                             texture = textures->object.goat_outline_2; break;
         case OBJECT_TYPE__SPIDER:                           texture = textures->object.spider_outline_2; break;

@@ -294,6 +294,11 @@ typedef struct
     Texture* hero_flying_outline_1;
     Texture* hero_flying_outline_2;
 
+    Texture* minibot_1;
+    Texture* minibot_2;
+    Texture* minibot_outline_1;
+    Texture* minibot_outline_2;
+
     Texture* goat_1;
     Texture* goat_2;
     Texture* goat_outline_1;

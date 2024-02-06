@@ -68,11 +68,16 @@ typedef struct
 
     List* sprite_list;
 
-    List* object_list;
-    List* object_enemy_list;
-    ListElem* curr_object_enemy_list_elem;
-    Object* curr_object_enemy;
+    List* enemy_list;
+    ListElem* curr_enemy_list_elem;
+    Enemy* curr_enemy;
+
+    List* ally_list;
+    ListElem* curr_ally_list_elem;
+    Ally* curr_ally;
+
     Object* object_hero;
+    Object* object_minibot;
 
     int hero_ap;
 
@@ -191,8 +196,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
 void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
 Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures);
 
-void object_enemy_prepare_move(State* state, Object* object);
-void object_enemy_prepare_attack(State* state, Object* object);
+void object_enemy_prepare_move(State* state, Enemy* enemy);
+void object_enemy_prepare_attack(State* state, Enemy* enemy);
 
 char* get_gamestate_name(int gamestate);
 
@@ -202,9 +207,14 @@ void restore_hero_ap(State* state);
 void hero_add_augmentation(State* state, int augmentation);
 int hero_has_augmentation(State* state, int augmentation);
 
+void determine_allies(State* state);
+void determine_enemies(State* state);
 void determine_enemy_order(State* state);
-void determine_enemy_objects(State* state);
+void determine_enemies_attack(State* state);
+
 void remove_all_dead_objects(State* state);
+
+Enemy* get_enemy_of_object(State* state, Object* object);
 
 void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying);
 

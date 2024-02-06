@@ -1,7 +1,9 @@
 #include "../inc/state.h"
 
-void object_enemy_prepare_move(State* state, Object* object)
+void object_enemy_prepare_move(State* state, Enemy* enemy)
 {
+    Object* object = enemy->object;
+
     if(object->type == OBJECT_TYPE__TURRET_LASER_GROUNDED ||
     object->type == OBJECT_TYPE__TURRET_LASER_STANDING ||
     object->type == OBJECT_TYPE__TURRET_LASER_UNDEPLOYED ||
@@ -119,12 +121,12 @@ void object_enemy_prepare_move(State* state, Object* object)
         new_tilemap_pos_object = room_get_object_at(state->curr_room, new_tilemap_pos);
         if(new_tilemap_pos_object == 0)
         {
-            add_action_to_end_action_sequence(object->enemy.action_sequence, new_action_move(curr_tilemap_pos,dir4));
+            add_action_to_end_action_sequence(enemy->action_sequence, new_action_move(curr_tilemap_pos,dir4));
             curr_tilemap_pos = new_tilemap_pos;
         }
         else break;
     }
-    object->enemy.attack_dir4 = dir4;
+    enemy->attack_dir4 = dir4;
 
     switch(object->type)
     {

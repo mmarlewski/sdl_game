@@ -88,7 +88,7 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
                             room_remove_object(state->curr_room, state->gamemap.object_hero);
                             set_curr_room(state, room);
                             room_add_object_at(room, state->gamemap.object_hero, passage->to_tilemap_pos);
-                            determine_enemy_objects(state);
+                            determine_enemies(state);
                             determine_enemy_order(state);
                         }
                     }
@@ -117,7 +117,7 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
                                 room_remove_object(state->curr_room, state->gamemap.object_hero);
                                 set_curr_room(state, room);
                                 room_add_object_at(room, state->gamemap.object_hero, passage->to_tilemap_pos);
-                                determine_enemy_objects(state);
+                                determine_enemies(state);
                                 determine_enemy_order(state);
                             }
                         }
