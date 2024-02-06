@@ -40,8 +40,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -53,8 +53,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -66,8 +66,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -79,8 +79,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -92,8 +92,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -110,8 +110,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
 
             draw_texture_at_world_pos(
@@ -120,8 +120,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 target_world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -133,8 +133,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -146,8 +146,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -159,8 +159,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -172,8 +172,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -185,8 +185,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -198,8 +198,8 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 color,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;

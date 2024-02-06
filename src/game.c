@@ -102,7 +102,7 @@ int main (int argc, char* argv[])
 
     state.gamestate = GAMESTATE__HERO_CHOOSING_SKILL;
 
-    state.camera.zoom = 5.0f;
+    state.camera_zoom = 5.0f;
 
     Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(
         gamemap_pos_to_world_pos(
@@ -111,7 +111,7 @@ int main (int argc, char* argv[])
         );
     middle_world_iso_pos.x += TILE_LENGTH * 0.5f;
     middle_world_iso_pos.y += TILE_LENGTH * 0.5f;
-    state.camera.world_pos = middle_world_iso_pos;
+    state.camera_world_pos = middle_world_iso_pos;
 
     // first room
 
@@ -122,12 +122,12 @@ int main (int argc, char* argv[])
         );
     room_add_object_at(
         first_room,
-        state.gamemap.object_hero,
+        state.hero_object,
         vec2i(7,5)
         );
     room_add_object_at(
         first_room,
-        state.gamemap.object_minibot,
+        new_object(OBJECT_TYPE__MINIBOT_ALLY),
         vec2i(7,6)
         );
     set_curr_room(&state, first_room);
@@ -475,11 +475,11 @@ int main (int argc, char* argv[])
 
     //
 
-    determine_enemies(&state);
+    determine_enemy_list(&state);
 
     determine_enemy_order(&state);
 
-    for(ListElem* curr_elem = state.gamemap.enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    for(ListElem* curr_elem = state.enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
     {
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
 
@@ -492,9 +492,9 @@ int main (int argc, char* argv[])
         }
     }
 
-    state.gamemap.item_number[ITEM__CELL] = 5;
-    state.gamemap.item_number[ITEM__DYNAMITE] = 5;
-    state.gamemap.item_number[ITEM__GEMSTONE] = 5;
+    state.hero_item_number[ITEM__CELL] = 5;
+    state.hero_item_number[ITEM__DYNAMITE] = 5;
+    state.hero_item_number[ITEM__GEMSTONE] = 5;
 
     while (state.is_game_running)
     {

@@ -51,8 +51,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
-        case SKILL__HERO_PICK_ITEM_CLOSE:
-        case SKILL__HERO_PICK_ITEM_FAR:
+        case SKILL__PICK_ITEM_CLOSE:
+        case SKILL__PICK_ITEM_FAR:
         {
             if(target_2_object != 0)
             {
@@ -76,8 +76,8 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
-        case SKILL__HERO_PUT_ITEM_CLOSE:
-        case SKILL__HERO_PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_CLOSE:
+        case SKILL__PUT_ITEM_FAR:
         {
             if(target_2_object != 0)
             {
@@ -86,7 +86,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     action_sequence,
                     target_2_object,
                     target_2_tilemap_pos,
-                    state->gamemap.curr_item
+                    state->hero_curr_item
                     );
             }
             else
@@ -98,12 +98,12 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                     action_sequence,
                     floor,
                     target_2_tilemap_pos,
-                    state->gamemap.curr_item
+                    state->hero_curr_item
                     );
             }
         }
         break;
-        case SKILL__HERO_MANIPULATION:
+        case SKILL__MANIPULATION:
         {
             Object* object = target_2_object;
             int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
@@ -118,9 +118,9 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
-        case SKILL__HERO_MOVE:
-        case SKILL__HERO_MOVE_FLOATING:
-        case SKILL__HERO_MOVE_FLYING:
+        case SKILL__MOVE:
+        case SKILL__MOVE_FLOATING:
+        case SKILL__MOVE_FLYING:
         {
             List* path_pos = new_list((void(*)(void*))destroy_vec2i);
             find_path(
@@ -158,7 +158,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             destroy_list(path_pos);
         }
         break;
-        case SKILL__HERO_THROW_CELL:
+        case SKILL__THROW_CELL:
         {
             add_action_to_end_action_sequence(
                 action_sequence,
@@ -166,7 +166,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
                 );
         }
         break;
-        case SKILL__HERO_THROW_DYNAMITE:
+        case SKILL__THROW_DYNAMITE:
         {
             add_action_to_end_action_sequence(
                 action_sequence,
@@ -184,7 +184,7 @@ void skill_add_actions_to_action_sequence(State* state, Action* action_sequence,
             }
         }
         break;
-        case SKILL__HERO_THROW_GEMSTONE:
+        case SKILL__THROW_GEMSTONE:
         {
             add_action_to_end_action_sequence(
                 action_sequence,

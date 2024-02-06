@@ -32,8 +32,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 colors->none,
                 1.0f,
                 world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
 
             // possible target 1
@@ -48,8 +48,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         colors->orange,
                         1.0f,
                         world_iso_pos,
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -66,8 +66,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         colors->pink,
                         1.0f,
                         world_iso_pos,
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -76,7 +76,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
             {
-                if(state->gamemap.curr_selected_tilemap_pos.x == j && state->gamemap.curr_selected_tilemap_pos.y == i)
+                if(state->curr_selected_tilemap_pos.x == j && state->curr_selected_tilemap_pos.y == i)
                 {
                     draw_texture_at_world_pos(
                         renderer,
@@ -84,8 +84,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         colors->yellow,
                         1.0f,
                         world_iso_pos,
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -101,7 +101,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
@@ -145,9 +145,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     if(!curr_enemy->performed_attack)
                     {
                         if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-                        state->action.enemy_action_sequence == curr_action) &&
+                        state->enemy_action_sequence == curr_action) &&
                         !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-                        state->action.enemy_action_sequence == curr_action))
+                        state->enemy_action_sequence == curr_action))
                         {
                             skill_draw_below(
                                 renderer,
@@ -168,7 +168,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
     {
-        Enemy* curr_enemy = state->gamemap.curr_enemy;
+        Enemy* curr_enemy = state->curr_enemy;
 
         if(curr_enemy != 0 &&
         !curr_enemy->object->is_dead &&
@@ -194,10 +194,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         skill_draw_below(
             renderer,
             state,
-            state->gamemap.curr_skill,
-            state->gamemap.object_hero->tilemap_pos,
-            state->gamemap.target_1_tilemap_pos,
-            state->gamemap.target_2_tilemap_pos,
+            state->curr_ally_skill,
+            state->hero_object->tilemap_pos,
+            state->target_1_tilemap_pos,
+            state->target_2_tilemap_pos,
             colors->green,
             textures
             );
@@ -242,12 +242,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         colors->none,
                         1.0f,
                         world_iso_pos,
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
 
                     if(curr_enemy != 0 &&
-                    state->gamemap.show_all_order_numbers)
+                    state->show_all_order_numbers)
                     {
                         draw_texture_at_world_pos(
                             renderer,
@@ -255,8 +255,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                             colors->yellow,
                             1.0f,
                             world_iso_pos,
-                            state->camera.world_pos,
-                            state->camera.zoom
+                            state->camera_world_pos,
+                            state->camera_zoom
                             );
                     }
                 }
@@ -264,7 +264,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             // sprites
 
-            for(ListElem* curr_elem = state->gamemap.sprite_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->sprite_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Sprite* curr_sprite = (Sprite*)curr_elem->data;
                 Vec2i curr_sprite_tilemap_pos = vec2i(
@@ -285,8 +285,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         colors->none,
                         1.0f,
                         world_iso_pos,
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -302,7 +302,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_enemy != 0 &&
@@ -345,9 +345,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     if(!hover_enemy->performed_attack)
                     {
                         if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-                        state->action.enemy_action_sequence == hover_action) &&
+                        state->enemy_action_sequence == hover_action) &&
                         !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-                        state->action.enemy_action_sequence == hover_action))
+                        state->enemy_action_sequence == hover_action))
                         {
                             skill_draw_above(
                                 renderer,
@@ -368,7 +368,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
     {
-        Enemy* curr_enemy = state->gamemap.curr_enemy;
+        Enemy* curr_enemy = state->curr_enemy;
 
         if(curr_enemy != 0 &&
         !curr_enemy->object->is_dead &&
@@ -405,10 +405,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         skill_draw_above(
             renderer,
             state,
-            state->gamemap.curr_skill,
-            state->gamemap.object_hero->tilemap_pos,
-            state->gamemap.target_1_tilemap_pos,
-            state->gamemap.target_2_tilemap_pos,
+            state->curr_ally_skill,
+            state->hero_object->tilemap_pos,
+            state->target_1_tilemap_pos,
+            state->target_2_tilemap_pos,
             colors->green,
             textures
             );
@@ -418,14 +418,14 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL)
     {
-        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
          !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            Vec2i selected_tilemap_pos = state->mouse.tilemap_pos;
+            Vec2i selected_tilemap_pos = state->mouse_tilemap_pos;
             Vec2f selected_gamemap_pos = tilemap_pos_to_gamemap_pos(selected_tilemap_pos);
             Vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
             Vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
@@ -445,8 +445,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 colors->yellow,
                 1.0f,
                 selected_world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
 
             if(hover_enemy != 0)
@@ -457,8 +457,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     colors->yellow,
                     1.0f,
                     selected_world_iso_pos,
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -469,7 +469,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE)
     {
-        Enemy* enemy = state->gamemap.curr_enemy;
+        Enemy* enemy = state->curr_enemy;
 
         if(enemy != 0 &&
          !enemy->object->is_dead &&
@@ -495,8 +495,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 colors->red,
                 1.0f,
                 selected_world_iso_pos,
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
 
             if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
@@ -507,8 +507,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     colors->yellow,
                     1.0f,
                     selected_world_iso_pos,
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -522,7 +522,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        Object* hover_object = room_get_object_at(state->curr_room, state->mouse.tilemap_pos);
+        Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_enemy != 0 &&
@@ -549,10 +549,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         skill_draw_effect(
             renderer,
             state,
-            state->gamemap.curr_skill,
-            state->gamemap.object_hero->tilemap_pos,
-            state->gamemap.target_1_tilemap_pos,
-            state->gamemap.target_2_tilemap_pos,
+            state->curr_ally_skill,
+            state->hero_object->tilemap_pos,
+            state->target_1_tilemap_pos,
+            state->target_2_tilemap_pos,
             textures,
             colors
             );

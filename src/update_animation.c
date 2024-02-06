@@ -199,7 +199,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             Vec2f camera_world_pos;
             camera_world_pos.x = animation_animation.from_world_pos.x + world_diff.x * time_ratio;
             camera_world_pos.y = animation_animation.from_world_pos.y + world_diff.y * time_ratio;
-            state->camera.world_pos = camera_world_pos;
+            state->camera_world_pos = camera_world_pos;
             animation_animation.time += delta_time;
 
             animation->move_camera_in_world_in_line = animation_animation;
@@ -219,7 +219,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             camera_world_pos.x = animation_animation.from_world_pos.x + world_diff.x * time_ratio;
             camera_world_pos.y = animation_animation.from_world_pos.y + world_diff.y * time_ratio;
             camera_world_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
-            state->camera.world_pos = camera_world_pos;
+            state->camera_world_pos = camera_world_pos;
             animation_animation.time += delta_time;
 
             animation->move_camera_in_world_in_arch = animation_animation;
@@ -238,7 +238,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             Vec2f camera_gamemap_pos;
             camera_gamemap_pos.x = animation_animation.from_gamemap_pos.x + gamemap_diff.x * time_ratio;
             camera_gamemap_pos.y = animation_animation.from_gamemap_pos.y + gamemap_diff.y * time_ratio;
-            state->camera.world_pos = gamemap_pos_to_world_pos(camera_gamemap_pos);
+            state->camera_world_pos = gamemap_pos_to_world_pos(camera_gamemap_pos);
             animation_animation.time += delta_time;
 
             animation->move_camera_in_gamemap_in_line = animation_animation;
@@ -260,7 +260,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             Vec2f camera_world_pos;
             camera_world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(camera_gamemap_pos));
             camera_world_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
-            state->camera.world_pos = camera_world_pos;
+            state->camera_world_pos = camera_world_pos;
             animation_animation.time += delta_time;
 
             animation->move_camera_in_gamemap_in_arch = animation_animation;

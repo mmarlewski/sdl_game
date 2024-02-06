@@ -44,29 +44,37 @@ enum GAMESTATE
 
 typedef struct
 {
-    Vec2f world_pos;
-    float zoom;
+    int is_game_running;
+    float time;
+    int gamestate;
+    float timer;
+    Vec3i background_color;
 
-} State_Camera;
+    Vec2f camera_world_pos;
+    float camera_zoom;
 
-typedef struct
-{
-    Vec2i screen_pos;
-    Vec2f world_pos;
-    Vec2f gamemap_pos;
-    Vec2i tilemap_pos;
+    Vec2i mouse_screen_pos;
+    Vec2f mouse_world_pos;
+    Vec2f mouse_gamemap_pos;
+    Vec2i mouse_tilemap_pos;
 
-    int is_dragging;
-    Vec2f drag_origin_world_pos;
+    int mouse_is_dragging;
+    Vec2f mouse_drag_origin_world_pos;
 
-} State_Mouse;
+    int is_executing_actions;
+    Action* ally_action_sequence;
+    Action* enemy_action_sequence;
 
-typedef struct
-{
+    List* room_list;
+    List* passage_list;
+    Room* curr_room;
+
+    List* animation_list;
+    List* sprite_list;
+
     List* possible_target_1_tilemap_pos_list;
     List* possible_target_2_tilemap_pos_list;
-
-    List* sprite_list;
+    int show_all_order_numbers;
 
     List* enemy_list;
     ListElem* curr_enemy_list_elem;
@@ -75,55 +83,20 @@ typedef struct
     List* ally_list;
     ListElem* curr_ally_list_elem;
     Ally* curr_ally;
+    int curr_ally_skill;
+    int is_curr_ally_skill_two_target;
+    Vec2i target_1_tilemap_pos;
+    Vec2i target_2_tilemap_pos;
+    Animation* curr_ally_skill_animation;
 
-    Object* object_hero;
-    Object* object_minibot;
-
+    Object* hero_object;
     int hero_ap;
-
-    int item_number[ITEM__COUNT];
-    int body_part_augmentation[BODY_PART__COUNT];
-    int curr_item;
+    int hero_item_number[ITEM__COUNT];
+    int hero_body_part_augmentation[BODY_PART__COUNT];
+    int hero_curr_item;
 
     Vec2i prev_selected_tilemap_pos;
     Vec2i curr_selected_tilemap_pos;
-
-    int curr_skill;
-    int is_skill_two_target;
-    Vec2i target_1_tilemap_pos;
-    Vec2i target_2_tilemap_pos;
-    Animation* skill_animation;
-
-    int show_all_order_numbers;
-
-    List* animation_list;
-
-} State_Gamemap;
-
-typedef struct
-{
-    int is_executing_actions;
-    Action* hero_action_sequence;
-    Action* enemy_action_sequence;
-
-} State_Action;
-
-typedef struct
-{
-    int is_game_running;
-    float time;
-    int gamestate;
-    float timer;
-    Vec3i background_color;
-
-    List* room_list;
-    List* passage_list;
-    Room* curr_room;
-
-    State_Camera camera;
-    State_Mouse mouse;
-    State_Gamemap gamemap;
-    State_Action action;
 
 } State;
 
@@ -207,10 +180,12 @@ void restore_hero_ap(State* state);
 void hero_add_augmentation(State* state, int augmentation);
 int hero_has_augmentation(State* state, int augmentation);
 
-void determine_allies(State* state);
-void determine_enemies(State* state);
+void determine_enemy_list(State* state);
 void determine_enemy_order(State* state);
-void determine_enemies_attack(State* state);
+
+void determine_ally_list(State* state);
+void determine_ally_order(State* state);
+void get_object_ally_skills(State* state, Object* object, List* skill_list);
 
 void remove_all_dead_objects(State* state);
 

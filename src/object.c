@@ -50,6 +50,9 @@ Ally* new_ally(Object* object)
     Ally* ally = malloc(sizeof(*ally));
 
     ally->object = object;
+    ally->skill_list = new_list((void (*)(void *))0);
+    ally->action_points = 0;
+    ally->order_number = 0;
 
     return ally;
 }

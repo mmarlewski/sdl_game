@@ -13,27 +13,27 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
             //
         }
         break;
-        case SKILL__HERO_PICK_ITEM_CLOSE:
+        case SKILL__PICK_ITEM_CLOSE:
         {
             //
         }
         break;
-        case SKILL__HERO_PICK_ITEM_FAR:
+        case SKILL__PICK_ITEM_FAR:
         {
             //
         }
         break;
-        case SKILL__HERO_PUT_ITEM_CLOSE:
+        case SKILL__PUT_ITEM_CLOSE:
         {
             //
         }
         break;
-        case SKILL__HERO_PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_FAR:
         {
             //
         }
         break;
-        case SKILL__HERO_MANIPULATION:
+        case SKILL__MANIPULATION:
         {
             draw_texture_at_gamemap_pos(
                 renderer,
@@ -41,27 +41,27 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                 color,
                 1.0f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
-        case SKILL__HERO_MOVE:
+        case SKILL__MOVE:
         {
             //
         }
         break;
-        case SKILL__HERO_THROW_CELL:
+        case SKILL__THROW_CELL:
         {
             //
         }
         break;
-        case SKILL__HERO_THROW_DYNAMITE:
+        case SKILL__THROW_DYNAMITE:
         {
             //
         }
         break;
-        case SKILL__HERO_THROW_GEMSTONE:
+        case SKILL__THROW_GEMSTONE:
         {
             //
         }
@@ -92,8 +92,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
 
                     draw_texture_at_gamemap_pos(
@@ -102,8 +102,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else
@@ -114,8 +114,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -273,8 +273,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     color,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 push_prev_tilemap_pos = push_curr_tilemap_pos;
@@ -391,8 +391,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
 
                     draw_texture_at_gamemap_pos(
@@ -401,8 +401,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else
@@ -413,8 +413,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -490,8 +490,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     color,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 push_prev_tilemap_pos = push_curr_tilemap_pos;
@@ -576,8 +576,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     color,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 pull_prev_tilemap_pos = pull_curr_tilemap_pos;
@@ -665,8 +665,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                     color,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 pull_prev_tilemap_pos = pull_curr_tilemap_pos;
@@ -698,8 +698,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
 
                     draw_texture_at_gamemap_pos(
@@ -708,8 +708,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else
@@ -720,8 +720,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -745,8 +745,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
 
                     draw_texture_at_gamemap_pos(
@@ -755,8 +755,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else
@@ -767,8 +767,8 @@ void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_
                         color,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }

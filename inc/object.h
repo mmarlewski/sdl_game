@@ -211,6 +211,9 @@ typedef struct
 typedef struct
 {
     Object* object;
+    List* skill_list;
+    int action_points;
+    int order_number;
 
 } Ally;
 

@@ -13,7 +13,7 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             //
         }
         break;
-        case SKILL__HERO_USE:
+        case SKILL__USE:
         {
             draw_texture_at_gamemap_pos(
                 renderer,
@@ -21,8 +21,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 colors->none,
                 0.75f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
@@ -34,8 +34,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 colors->none,
                 0.75f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -48,14 +48,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
         break;
-        case SKILL__HERO_PICK_ITEM_CLOSE:
-        case SKILL__HERO_PICK_ITEM_FAR:
+        case SKILL__PICK_ITEM_CLOSE:
+        case SKILL__PICK_ITEM_FAR:
         {
             if(target_2_object != 0)
             {
@@ -68,8 +68,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
             else
@@ -85,18 +85,18 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
         break;
-        case SKILL__HERO_PUT_ITEM_CLOSE:
-        case SKILL__HERO_PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_CLOSE:
+        case SKILL__PUT_ITEM_FAR:
         {
             if(target_2_object != 0)
             {
-                int item_type = state->gamemap.curr_item;
+                int item_type = state->hero_curr_item;
 
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -104,15 +104,15 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
             else
             {
                 int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
-                int item_type = state->gamemap.curr_item;
+                int item_type = state->hero_curr_item;
 
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -120,20 +120,20 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
         break;
-        case SKILL__HERO_MANIPULATION:
+        case SKILL__MANIPULATION:
         {
             //
         }
         break;
-        case SKILL__HERO_MOVE:
-        case SKILL__HERO_MOVE_FLOATING:
-        case SKILL__HERO_MOVE_FLYING:
+        case SKILL__MOVE:
+        case SKILL__MOVE_FLOATING:
+        case SKILL__MOVE_FLYING:
         {
             draw_texture_at_gamemap_pos(
                 renderer,
@@ -141,12 +141,12 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 colors->none,
                 0.75f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;
-        case SKILL__HERO_THROW_CELL:
+        case SKILL__THROW_CELL:
         {
             if(target_2_object != 0 && is_object_meltable(target_2_object))
             {
@@ -156,8 +156,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
 
@@ -167,12 +167,12 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
         }
         break;
-        case SKILL__HERO_THROW_DYNAMITE:
+        case SKILL__THROW_DYNAMITE:
         {
             if(target_2_object != 0 && is_object_breakable(target_2_object))
             {
@@ -182,8 +182,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
 
@@ -199,8 +199,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -211,12 +211,12 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
         }
         break;
-        case SKILL__HERO_THROW_GEMSTONE:
+        case SKILL__THROW_GEMSTONE:
         {
                 draw_texture_at_gamemap_pos(
                     renderer,
@@ -224,8 +224,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 draw_texture_at_gamemap_pos(
@@ -234,8 +234,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
         }
         break;
@@ -258,8 +258,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
             else if(room_get_object_at(state->curr_room, target_2_tilemap_pos) == 0)
@@ -270,8 +270,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
             else
@@ -289,8 +289,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(just_before_target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 draw_texture_at_gamemap_pos(
@@ -299,8 +299,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -318,8 +318,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
             else
@@ -330,8 +330,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     0.75f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -372,8 +372,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(is_tilemap_in_bounds(charge_curr_tilemap_pos) &&
@@ -407,8 +407,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -422,8 +422,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -460,8 +460,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(is_tilemap_in_bounds(push_curr_tilemap_pos) &&
@@ -484,8 +484,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                             colors->none,
                             1.0f,
                             tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                            state->camera.world_pos,
-                            state->camera.zoom
+                            state->camera_world_pos,
+                            state->camera_zoom
                             );
                     }
                 }
@@ -532,8 +532,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(is_tilemap_in_bounds(charge_curr_tilemap_pos) &&
@@ -567,8 +567,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -587,8 +587,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else
@@ -599,8 +599,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -612,8 +612,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -628,8 +628,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -666,8 +666,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(is_tilemap_in_bounds(push_curr_tilemap_pos) &&
@@ -690,8 +690,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                             colors->none,
                             1.0f,
                             tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                            state->camera.world_pos,
-                            state->camera.zoom
+                            state->camera_world_pos,
+                            state->camera_zoom
                             );
                     }
                 }
@@ -712,8 +712,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -750,8 +750,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(is_tilemap_in_bounds(pull_curr_tilemap_pos) &&
@@ -774,8 +774,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                             colors->none,
                             1.0f,
                             tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                            state->camera.world_pos,
-                            state->camera.zoom
+                            state->camera_world_pos,
+                            state->camera_zoom
                             );
                     }
                 }
@@ -796,8 +796,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -836,8 +836,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(is_tilemap_in_bounds(pull_curr_tilemap_pos) &&
@@ -871,8 +871,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(death_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
 
                 break;
@@ -889,8 +889,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else if(target_2_object == 0)
@@ -901,8 +901,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -914,8 +914,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -933,8 +933,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
                 else
@@ -945,8 +945,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         0.75f,
                         tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -958,8 +958,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
         }
@@ -989,8 +989,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                                     colors->none,
                                     1.0f,
                                     tilemap_pos_to_gamemap_pos(tilemap_pos),
-                                    state->camera.world_pos,
-                                    state->camera.zoom
+                                    state->camera_world_pos,
+                                    state->camera_zoom
                                     );
                             }
                         }
@@ -1009,8 +1009,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     colors->none,
                     1.0f,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera.world_pos,
-                    state->camera.zoom
+                    state->camera_world_pos,
+                    state->camera_zoom
                     );
             }
 
@@ -1026,8 +1026,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         colors->none,
                         1.0f,
                         tilemap_pos_to_gamemap_pos(tilemap_pos),
-                        state->camera.world_pos,
-                        state->camera.zoom
+                        state->camera_world_pos,
+                        state->camera_zoom
                         );
                 }
             }
@@ -1041,8 +1041,8 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 colors->none,
                 1.0f,
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera.world_pos,
-                state->camera.zoom
+                state->camera_world_pos,
+                state->camera_zoom
                 );
         }
         break;

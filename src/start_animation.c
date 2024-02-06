@@ -118,8 +118,8 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
 
             if(animation->move_camera_in_world_in_line.start_from_curr)
             {
-                animation->move_camera_in_world_in_line.from_world_pos = state->camera.world_pos;
-                Vec2f to_world_pos = state->camera.world_pos;
+                animation->move_camera_in_world_in_line.from_world_pos = state->camera_world_pos;
+                Vec2f to_world_pos = state->camera_world_pos;
                 to_world_pos.x += animation->move_camera_in_world_in_line.to_world_pos.x;
                 to_world_pos.y += animation->move_camera_in_world_in_line.to_world_pos.y;
                 animation->move_camera_in_world_in_line.to_world_pos = to_world_pos;
@@ -132,8 +132,8 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
 
             if(animation->move_camera_in_world_in_arch.start_from_curr)
             {
-                animation->move_camera_in_world_in_arch.from_world_pos = state->camera.world_pos;
-                Vec2f to_world_pos = state->camera.world_pos;
+                animation->move_camera_in_world_in_arch.from_world_pos = state->camera_world_pos;
+                Vec2f to_world_pos = state->camera_world_pos;
                 to_world_pos.x += animation->move_camera_in_world_in_arch.to_world_pos.x;
                 to_world_pos.y += animation->move_camera_in_world_in_arch.to_world_pos.y;
                 animation->move_camera_in_world_in_arch.to_world_pos = to_world_pos;
