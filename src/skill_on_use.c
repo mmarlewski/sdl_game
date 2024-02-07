@@ -1,6 +1,12 @@
 #include "../inc/state.h"
 
-void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos)
+void skill_on_use(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos
+)
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
@@ -163,6 +169,9 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
                             room_remove_object(state->curr_room, state->hero_object);
                             set_curr_room(state, room);
                             room_add_object_at(room, state->hero_object, passage->to_tilemap_pos);
+
+                            determine_ally_list(state);
+                            determine_ally_order(state);
                             determine_enemy_list(state);
                             determine_enemy_order(state);
                         }
@@ -192,6 +201,7 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
                                 room_remove_object(state->curr_room, state->hero_object);
                                 set_curr_room(state, room);
                                 room_add_object_at(room, state->hero_object, passage->to_tilemap_pos);
+
                                 determine_enemy_list(state);
                                 determine_enemy_order(state);
                             }

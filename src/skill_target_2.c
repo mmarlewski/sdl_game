@@ -1,6 +1,12 @@
 #include "../inc/state.h"
 
-void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos)
+void skill_get_possible_target_2_pos(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    List* target_2_pos_list
+)
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
@@ -15,16 +21,16 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
         case SKILL__STOMP:
         {
             Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
-            add_pos_to_possible_target_2_tilemap_pos_list(state, up_tilemap_pos);
+            add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(up_tilemap_pos));
 
             Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
-            add_pos_to_possible_target_2_tilemap_pos_list(state, right_tilemap_pos);
+            add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(right_tilemap_pos));
 
             Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
-            add_pos_to_possible_target_2_tilemap_pos_list(state, down_tilemap_pos);
+            add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(down_tilemap_pos));
 
             Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
-            add_pos_to_possible_target_2_tilemap_pos_list(state, left_tilemap_pos);
+            add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(left_tilemap_pos));
         }
         break;
         case SKILL__PICK_ITEM_CLOSE:
@@ -37,7 +43,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 if(get_floor_item_type(floor) != ITEM__NONE ||
                 (object != 0 && get_object_item_type(object) != ITEM__NONE))
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                 }
             }
         }
@@ -54,7 +60,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                     if(get_floor_item_type(floor) != ITEM__NONE ||
                     (object != 0 && get_object_item_type(object) != ITEM__NONE))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                        add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                     }
                 }
             }
@@ -70,7 +76,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 if(is_floor_put_item(floor) ||
                 (object != 0 && is_object_put_item(object)))
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                 }
             }
         }
@@ -87,7 +93,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                     if(is_floor_put_item(floor) ||
                     (object != 0 && is_object_put_item(object)))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                        add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                     }
                 }
             }
@@ -105,14 +111,14 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 {
                     if(is_object_exit(object) || is_object_station(object))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                        add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                     }
                 }
                 else if(floor != FLOOR_TYPE__NONE)
                 {
                     if(is_floor_exit(floor))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                        add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                     }
                 }
             }
@@ -133,7 +139,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                     if((curr_object == 0 && is_floor_manipulatable(curr_floor)) ||
                     (curr_object != 0 && is_object_manipulatable(curr_object)))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, curr_tilemap_pos);
+                        add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(curr_tilemap_pos));
                     }
                 }
             }
@@ -161,7 +167,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                     );
                 if(path_pos->size > 0 && path_pos->size < 10)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(*curr_tilemap_pos));
                 }
                 remove_all_list_elements(path_pos, 1);
                 destroy_list(path_pos);
@@ -177,7 +183,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                 }
             }
         }
@@ -189,7 +195,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                 }
             }
         }
@@ -201,7 +207,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                 }
             }
         }
@@ -240,10 +246,10 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 down_object = room_get_object_at(state->curr_room, down_tilemap_pos);
                 left_object = room_get_object_at(state->curr_room, left_tilemap_pos);
 
-                if(up_cont) add_pos_to_possible_target_2_tilemap_pos_list(state,up_tilemap_pos);
-                if(right_cont) add_pos_to_possible_target_2_tilemap_pos_list(state,right_tilemap_pos);
-                if(down_cont) add_pos_to_possible_target_2_tilemap_pos_list(state,down_tilemap_pos);
-                if(left_cont)  add_pos_to_possible_target_2_tilemap_pos_list( state,left_tilemap_pos);
+                if(up_cont) add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(up_tilemap_pos));
+                if(right_cont) add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(right_tilemap_pos));
+                if(down_cont) add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(down_tilemap_pos));
+                if(left_cont)  add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(left_tilemap_pos));
 
                 if(up_object != 0) up_cont = 0;
                 if(right_object != 0) right_cont = 0;
@@ -259,25 +265,25 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, i);
                 if(room_get_object_at(state->curr_room, up_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, up_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(up_tilemap_pos));
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, i);
                 if(room_get_object_at(state->curr_room, right_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, right_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(right_tilemap_pos));
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, i);
                 if(room_get_object_at(state->curr_room, down_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, down_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(down_tilemap_pos));
                 }
 
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, i);
                 if(room_get_object_at(state->curr_room, left_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, left_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(left_tilemap_pos));
                 }
             }
         }
@@ -293,7 +299,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
             for(int i = 0; i < 10; i++)
             {
                 Vec2i target_2_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, distance_info.dir4, i+1);
-                add_pos_to_possible_target_2_tilemap_pos_list(state, target_2_pos);
+                add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(target_2_pos));
             }
         }
         break;
@@ -311,7 +317,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                 if(object == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state,tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                 }
             }
         }
@@ -326,12 +332,12 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
             for(int i = 0; i < 10; i++)
             {
-                add_pos_to_possible_target_2_tilemap_pos_list(
-                    state,
-                    vec2i_move_in_dir4_by(
+                add_new_list_element_to_list_end(
+                    target_2_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
                         distance_info.dir4,
-                        i+1));
+                        i+1)));
             }
         }
         break;
@@ -345,12 +351,12 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
             for(int i = 1; i < distance_info.abs_diff + 1; i++)
             {
-                add_pos_to_possible_target_2_tilemap_pos_list(
-                    state,
-                    vec2i_move_in_dir4_by(
+                add_new_list_element_to_list_end(
+                    target_2_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
                         distance_info.dir4,
-                        -i));
+                        -i)));
             }
         }
         break;
@@ -364,12 +370,12 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
             for(int i = 1; i < 10; i++)
             {
-                add_pos_to_possible_target_2_tilemap_pos_list(
-                    state,
-                    vec2i_move_in_dir4_by(
+                add_new_list_element_to_list_end(
+                    target_2_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(
                         source_tilemap_pos,
                         distance_info.dir4,
-                         -i));
+                         -i)));
             }
         }
         break;
@@ -380,25 +386,25 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__UP, i);
                 if(room_get_object_at(state->curr_room, up_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, up_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(up_tilemap_pos));
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__RIGHT, i);
                 if(room_get_object_at(state->curr_room, right_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, right_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(right_tilemap_pos));
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__DOWN, i);
                 if(room_get_object_at(state->curr_room, down_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, down_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(down_tilemap_pos));
                 }
 
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, DIR4__LEFT, i);
                 if(room_get_object_at(state->curr_room, left_tilemap_pos) == 0)
                 {
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, left_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(left_tilemap_pos));
                 }
             }
         }
@@ -413,7 +419,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        add_pos_to_possible_target_2_tilemap_pos_list(state, tilemap_pos);
+                        add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
                     }
                 }
             }
@@ -434,7 +440,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
                 for(ListElem* curr_elem = square_perimeter_tilemap_pos->head; curr_elem != 0; curr_elem = curr_elem->next)
                 {
                     Vec2i* curr_tilemap_pos = (Vec2i*)curr_elem->data;
-                    add_pos_to_possible_target_2_tilemap_pos_list(state, *curr_tilemap_pos);
+                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(*curr_tilemap_pos));
                 }
 
                 remove_all_list_elements(square_perimeter_tilemap_pos, 1);
@@ -483,7 +489,7 @@ void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill
 
                     if(!is_line_obstructed)
                     {
-                         add_pos_to_possible_target_2_tilemap_pos_list(state, perimeter_tilemap_pos);
+                         add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(perimeter_tilemap_pos));
                     }
 
                     remove_all_list_elements(line_tilemap_pos, 0);

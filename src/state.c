@@ -46,8 +46,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
     state->possible_target_2_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
 
-    state->target_1_tilemap_pos = vec2i(0, 0);
-    state->target_2_tilemap_pos = vec2i(0, 0);
+    state->curr_ally_target_1_tilemap_pos = vec2i(0, 0);
+    state->curr_ally_target_2_tilemap_pos = vec2i(0, 0);
 
     state->hero_ap = HERO_MAX_AP;
 
@@ -70,6 +70,15 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->is_executing_actions = 0;
     state->ally_action_sequence = new_action_sequence();
     state->enemy_action_sequence = 0;
+
+    // draw
+
+    state->curr_ally_draw_below_texture_list = new_list((void (*)(void *)) 0);
+    state->curr_ally_draw_below_gamemap_pos_list = new_list((void (*)(void *)) &destroy_vec2f);
+    state->curr_ally_draw_above_texture_list = new_list((void (*)(void *)) 0);
+    state->curr_ally_draw_above_gamemap_pos_list = new_list((void (*)(void *)) &destroy_vec2f);
+    state->curr_ally_draw_effect_texture_list = new_list((void (*)(void *)) 0);
+    state->curr_ally_draw_effect_gamemap_pos_list = new_list((void (*)(void *)) &destroy_vec2f);
 }
 
 void change_gamestate(State* state, int new_gamestate)
@@ -548,4 +557,36 @@ Enemy* get_enemy_of_object(State* state, Object* object)
     }
 
     return 0;
+}
+
+void draw_texture_list(
+    Renderer* renderer,
+    State* state,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Vec3i color,
+    float transparency
+)
+{
+    ListElem* texture_elem = texture_list->head;
+    ListElem* tilemap_pos_elem = tilemap_pos_list->head;
+
+    while(texture_elem != 0 && tilemap_pos_elem != 0)
+    {
+        Texture* texture = (Texture*) texture_elem->data;
+        Vec2i* tilemap_pos = (Vec2i*) tilemap_pos_elem->data;
+
+        draw_texture_at_tilemap_pos(
+            renderer,
+            texture,
+            color,
+            transparency,
+            *tilemap_pos,
+            state->camera_world_pos,
+            state->camera_zoom
+            );
+
+        texture_elem = texture_elem->next;
+        tilemap_pos_elem = tilemap_pos_elem->next;
+    }
 }

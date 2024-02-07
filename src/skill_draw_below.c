@@ -1,6 +1,16 @@
 #include "../inc/state.h"
 
-void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Vec3i color, Textures* textures)
+void skill_get_draw_below(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Textures* textures,
+    Colors* colors
+)
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
@@ -101,17 +111,13 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                             );
                     }
 
-                    Vec2f curr_gamemap_pos =
-                        tilemap_pos_to_gamemap_pos(*curr_tilemap_pos);
-
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        arrow_texture,
-                        color,
-                        1.0f,
-                        curr_gamemap_pos,
-                        state->camera_world_pos,
-                        state->camera_zoom
+                    add_new_list_element_to_list_end(
+                        texture_list,
+                        arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(*curr_tilemap_pos)
                         );
 
                     prev_elem = curr_elem;
@@ -130,30 +136,28 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         break;
         case SKILL__THROW_CELL:
         {
-            draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.floor_danger,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         case SKILL__THROW_DYNAMITE:
         {
             if(is_tilemap_in_bounds(target_2_tilemap_pos))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.floor_danger,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+                add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -162,14 +166,13 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.floor_danger,
-                        color,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+                    add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
                         );
                 }
             }
@@ -177,15 +180,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         break;
         case SKILL__THROW_GEMSTONE:
         {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.floor_danger,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         case SKILL__CHARGE:
@@ -250,15 +252,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     go_on = 0;
                 }
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    arrow_texture,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+                    add_new_list_element_to_list_end(
+                        texture_list,
+                        arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(curr_tilemap_pos)
+                        );
 
                 prev_tilemap_pos = curr_tilemap_pos;
                 curr_tilemap_pos = next_tilemap_pos;
@@ -341,15 +342,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     will_push_after_charge = 0;
                 }
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    arrow_texture,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                        );
 
                 charge_prev_tilemap_pos = charge_curr_tilemap_pos;
                 charge_curr_tilemap_pos = charge_next_tilemap_pos;
@@ -364,15 +364,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
 
             if(!will_push_after_charge || !is_object_movable(target_1_object)) break;
 
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.floor_border_solid,
-                color,
-                1.0f,
-                tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_border_solid
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
         }
         break;
         case SKILL__CHARGE_AND_THROW:
@@ -439,15 +438,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
                     will_throw_after_charge = 0;
                 }
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    arrow_texture,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                        );
 
                 charge_prev_tilemap_pos = charge_curr_tilemap_pos;
                 charge_curr_tilemap_pos = charge_next_tilemap_pos;
@@ -465,41 +463,38 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         break;
         case SKILL__PUSH:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.floor_border_solid,
-                color,
-                1.0f,
-                tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_border_solid
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
         }
         break;
         case SKILL__PULL:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.floor_border_solid,
-                color,
-                1.0f,
-                tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_border_solid
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
         }
         break;
         case SKILL__PULL_AND_THROW:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.floor_border_solid,
-                color,
-                1.0f,
-                tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_border_solid
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
         }
         break;
         case SKILL__THROW:
@@ -520,15 +515,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        draw_texture_at_gamemap_pos(
-                            renderer,
-                            textures->skill.floor_danger,
-                            color,
-                            1.0f,
-                            tilemap_pos_to_gamemap_pos(tilemap_pos),
-                            state->camera_world_pos,
-                            state->camera_zoom
-                            );
+                        add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                        );
                     }
                 }
             }
@@ -538,15 +532,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         {
             if(is_tilemap_in_bounds(target_2_tilemap_pos))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.floor_danger,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+                add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -555,14 +548,13 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.floor_danger,
-                        color,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+                    add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
                         );
                 }
             }
@@ -570,15 +562,14 @@ void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_
         break;
         case SKILL__TURRET_PROJECTILE:
         {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.floor_danger,
-                    color,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         default:

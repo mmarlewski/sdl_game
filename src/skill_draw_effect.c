@@ -1,6 +1,16 @@
 #include "../inc/state.h"
 
-void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors)
+void skill_get_draw_effect(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Textures* textures,
+    Colors* colors
+)
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
@@ -15,42 +25,39 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         break;
         case SKILL__USE:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.use_effect,
-                colors->none,
-                0.75f,
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.use_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         case SKILL__STOMP:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.stomp_effect,
-                colors->none,
-                0.75f,
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.stomp_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos =vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.shake_effect,
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.shake_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                        );
             }
         }
         break;
@@ -62,15 +69,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 int item_type = get_object_item_type(target_2_object);
                 int item_count = get_object_item_count(target_2_object);
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, item_type, item_count),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, item_type, item_count)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
             }
             else
             {
@@ -79,15 +85,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 int item_type = get_floor_item_type(floor);
                 int item_count = get_floor_item_count(floor);
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, item_type, item_count),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, item_type, item_count)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
             }
         }
         break;
@@ -98,15 +103,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             {
                 int item_type = state->hero_curr_item;
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, item_type, -1),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, item_type, -1)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
             }
             else
             {
@@ -114,15 +118,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 int item_type = state->hero_curr_item;
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, item_type, -1),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, item_type, -1)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
             }
         }
         break;
@@ -135,56 +138,52 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         case SKILL__MOVE_FLOATING:
         case SKILL__MOVE_FLYING:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                get_texture_1_from_object(source_object, textures),
-                colors->none,
-                0.75f,
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(source_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         case SKILL__THROW_CELL:
         {
             if(target_2_object != 0 && is_object_meltable(target_2_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.melt_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.melt_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
 
-            draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, ITEM__CELL, -1),
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, ITEM__CELL, -1)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
         }
         break;
         case SKILL__THROW_DYNAMITE:
         {
             if(target_2_object != 0 && is_object_breakable(target_2_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.break_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.break_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -193,50 +192,46 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.shake_effect,
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.shake_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
                         );
                 }
             }
 
-            draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, ITEM__DYNAMITE, -1),
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, ITEM__DYNAMITE, -1)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
         }
         break;
         case SKILL__THROW_GEMSTONE:
         {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.shake_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.shake_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_item(textures, ITEM__GEMSTONE, -1),
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_item(textures, ITEM__GEMSTONE, -1)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(source_tilemap_pos)
+                        );
         }
         break;
         case SKILL__CHARGE:
@@ -252,27 +247,25 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             (is_object_flying(source_object) && is_floor_deadly_on_move_for_flying(target_2_floor)) ||
             (!is_object_floating(source_object) && !is_object_flying(source_object) && is_floor_deadly_on_move(target_2_floor)))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.death_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
             else if(room_get_object_at(state->curr_room, target_2_tilemap_pos) == 0)
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_1_from_object(source_object, textures),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(source_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
             else
             {
@@ -283,25 +276,23 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         1
                         );
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_1_from_object(source_object, textures),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(just_before_target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(source_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(just_before_target_2_tilemap_pos)
+                        );
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.crash_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.crash_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
         }
         break;
@@ -312,27 +303,25 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
             (is_object_flying(source_object) && is_floor_deadly_on_move_for_flying(target_2_floor)) ||
             (!is_object_floating(source_object) && !is_object_flying(source_object) && is_floor_deadly_on_move(target_2_floor)))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.death_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
             else
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    get_texture_1_from_object(source_object, textures),
-                    colors->none,
-                    0.75f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(source_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
         }
         break;
@@ -366,14 +355,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(source_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(source_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
                         );
                 }
                 else if(is_tilemap_in_bounds(charge_curr_tilemap_pos) &&
@@ -401,30 +389,28 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     get_opposite_dir4(charge_distance_info.dir4),
                     1);
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.death_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(death_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(death_tilemap_pos)
+                        );
 
                 break;
             }
 
             if(!is_object_movable(target_1_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
 
                 break;
             }
@@ -454,14 +440,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(push_curr_tilemap_pos)
                         );
                 }
                 else if(is_tilemap_in_bounds(push_curr_tilemap_pos) &&
@@ -478,15 +463,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     if(!is_floor_traversable(push_curr_floor) &&
                     !is_object_flying(target_1_object))
                     {
-                        draw_texture_at_gamemap_pos(
-                            renderer,
-                            textures->skill.death_effect,
-                            colors->none,
-                            1.0f,
-                            tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                            state->camera_world_pos,
-                            state->camera_zoom
-                            );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                        );
                     }
                 }
 
@@ -526,14 +510,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(source_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(source_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
                         );
                 }
                 else if(is_tilemap_in_bounds(charge_curr_tilemap_pos) &&
@@ -561,15 +544,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     get_opposite_dir4(charge_distance_info.dir4),
                     1);
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.death_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(death_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(death_tilemap_pos)
+                        );
 
                 break;
             }
@@ -581,40 +563,37 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 (is_object_flying(target_1_object) && is_floor_deadly_on_move_for_flying(target_2_floor)) ||
                 (!is_object_floating(target_1_object) && !is_object_flying(target_1_object) && is_floor_deadly_on_move(target_2_floor)))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.death_effect,
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
                 }
                 else
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
                 }
             }
             else
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
             }
         }
         break;
@@ -622,15 +601,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         {
             if(!is_object_movable(target_1_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
 
                 break;
             }
@@ -660,14 +638,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(push_curr_tilemap_pos)
                         );
                 }
                 else if(is_tilemap_in_bounds(push_curr_tilemap_pos) &&
@@ -684,15 +661,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                    if(!is_floor_traversable(push_curr_floor) &&
                     !is_object_flying(target_1_object))
                     {
-                        draw_texture_at_gamemap_pos(
-                            renderer,
-                            textures->skill.death_effect,
-                            colors->none,
-                            1.0f,
-                            tilemap_pos_to_gamemap_pos(push_curr_tilemap_pos),
-                            state->camera_world_pos,
-                            state->camera_zoom
-                            );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                        );
                     }
                 }
 
@@ -706,15 +682,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         {
             if(!is_object_movable(target_1_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
 
                 break;
             }
@@ -744,14 +719,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(vec2i_equals(pull_curr_tilemap_pos, target_2_tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(pull_curr_tilemap_pos)
                         );
                 }
                 else if(is_tilemap_in_bounds(pull_curr_tilemap_pos) &&
@@ -768,15 +742,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     if(!is_floor_traversable(pull_curr_floor) &&
                     !is_object_flying(target_1_object))
                     {
-                        draw_texture_at_gamemap_pos(
-                            renderer,
-                            textures->skill.death_effect,
-                            colors->none,
-                            1.0f,
-                            tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                            state->camera_world_pos,
-                            state->camera_zoom
-                            );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(pull_curr_tilemap_pos)
+                        );
                     }
                 }
 
@@ -790,15 +763,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         {
             if(!is_object_movable(target_1_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
 
                 break;
             }
@@ -830,14 +802,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 }
                 else if(vec2i_equals(pull_curr_tilemap_pos, target_2_tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(pull_curr_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(pull_curr_tilemap_pos)
                         );
                 }
                 else if(is_tilemap_in_bounds(pull_curr_tilemap_pos) &&
@@ -865,15 +836,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                     get_opposite_dir4(pull_distance_info.dir4),
                     1);
 
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.death_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(death_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(death_tilemap_pos)
+                        );
 
                 break;
             }
@@ -883,40 +853,37 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 if(is_floor_deadly_on_drop(room_get_floor_at(state->curr_room, target_2_tilemap_pos)) &&
                 !is_object_flying(target_1_object))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.death_effect,
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
                 }
                 else if(target_2_object == 0)
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
                 }
             }
             else
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
             }
         }
         break;
@@ -927,40 +894,37 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                 if(is_floor_deadly_on_drop(room_get_floor_at(state->curr_room, target_2_tilemap_pos)) &&
                 !is_object_flying(target_1_object))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.death_effect,
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
                 }
                 else
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        get_texture_1_from_object(target_1_object, textures),
-                        colors->none,
-                        0.75f,
-                        tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        get_texture_1_from_object(target_1_object, textures)
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
                 }
             }
             else
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.immovable_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.immovable_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                        );
             }
         }
         break;
@@ -983,15 +947,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
                         {
                             if(is_object_meltable(object))
                             {
-                                draw_texture_at_gamemap_pos(
-                                    renderer,
-                                    textures->skill.melt_effect,
-                                    colors->none,
-                                    1.0f,
-                                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                                    state->camera_world_pos,
-                                    state->camera_zoom
-                                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.melt_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                        );
                             }
                         }
                     }
@@ -1003,15 +966,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         {
             if(target_2_object != 0 && is_object_breakable(target_2_object))
             {
-                draw_texture_at_gamemap_pos(
-                    renderer,
-                    textures->skill.break_effect,
-                    colors->none,
-                    1.0f,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    state->camera_world_pos,
-                    state->camera_zoom
-                    );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.break_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
             }
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -1020,14 +982,13 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    draw_texture_at_gamemap_pos(
-                        renderer,
-                        textures->skill.shake_effect,
-                        colors->none,
-                        1.0f,
-                        tilemap_pos_to_gamemap_pos(tilemap_pos),
-                        state->camera_world_pos,
-                        state->camera_zoom
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.shake_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
                         );
                 }
             }
@@ -1035,15 +996,14 @@ void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source
         break;
         case SKILL__TURRET_PROJECTILE:
         {
-            draw_texture_at_gamemap_pos(
-                renderer,
-                textures->skill.shake_effect,
-                colors->none,
-                1.0f,
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+            add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->skill.shake_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         default:

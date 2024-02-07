@@ -476,7 +476,6 @@ int main (int argc, char* argv[])
     //
 
     determine_enemy_list(&state);
-
     determine_enemy_order(&state);
 
     for(ListElem* curr_elem = state.enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
@@ -491,6 +490,8 @@ int main (int argc, char* argv[])
             curr_enemy->performed_attack = 0;
         }
     }
+
+    state.curr_ally = new_ally(state.hero_object);
 
     state.hero_item_number[ITEM__CELL] = 5;
     state.hero_item_number[ITEM__DYNAMITE] = 5;

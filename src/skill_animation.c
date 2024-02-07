@@ -1,6 +1,14 @@
 #include "../inc/state.h"
 
-Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures)
+Animation* skill_get_animation(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    Textures* textures,
+    Colors* colors
+)
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);

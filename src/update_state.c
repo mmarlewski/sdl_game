@@ -2,6 +2,103 @@
 
 void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
+    if(state->curr_ally != 0 && state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    {
+            remove_all_list_elements(state->curr_ally_draw_below_texture_list, 0);
+            remove_all_list_elements(state->curr_ally_draw_below_gamemap_pos_list, 1);
+            skill_get_draw_below(
+                state,
+                state->curr_ally_skill,
+                state->curr_ally->object->tilemap_pos,
+                state->curr_ally_target_1_tilemap_pos,
+                state->curr_ally_target_2_tilemap_pos,
+                state->curr_ally_draw_below_texture_list,
+                state->curr_ally_draw_below_gamemap_pos_list,
+                textures,
+                colors
+                );
+
+            remove_all_list_elements(state->curr_ally_draw_above_texture_list, 0);
+            remove_all_list_elements(state->curr_ally_draw_above_gamemap_pos_list, 1);
+            skill_get_draw_above(
+                state,
+                state->curr_ally_skill,
+                state->curr_ally->object->tilemap_pos,
+                state->curr_ally_target_1_tilemap_pos,
+                state->curr_ally_target_2_tilemap_pos,
+                state->curr_ally_draw_above_texture_list,
+                state->curr_ally_draw_above_gamemap_pos_list,
+                textures,
+                colors
+                );
+
+            remove_all_list_elements(state->curr_ally_draw_effect_texture_list, 0);
+            remove_all_list_elements(state->curr_ally_draw_effect_gamemap_pos_list, 1);
+            skill_get_draw_effect(
+                state,
+                state->curr_ally_skill,
+                state->curr_ally->object->tilemap_pos,
+                state->curr_ally_target_1_tilemap_pos,
+                state->curr_ally_target_2_tilemap_pos,
+                state->curr_ally_draw_effect_texture_list,
+                state->curr_ally_draw_effect_gamemap_pos_list,
+                textures,
+                colors
+                );
+    }
+
+    for(ListElem* enemy_elem = state->enemy_list->head; enemy_elem != 0; enemy_elem = enemy_elem->next)
+    {
+        Enemy* enemy = (Enemy*) enemy_elem->data;
+
+        if(enemy != 0)
+        {
+            remove_all_list_elements(enemy->draw_below_texture_list, 0);
+            remove_all_list_elements(enemy->draw_below_tilemap_pos_list, 1);
+            skill_get_draw_below(
+                state,
+                enemy->skill,
+                enemy->object->tilemap_pos,
+                enemy->target_1_tilemap_pos,
+                enemy->target_2_tilemap_pos,
+                enemy->draw_below_texture_list,
+                enemy->draw_below_tilemap_pos_list,
+                textures,
+                colors
+                );
+
+            remove_all_list_elements(enemy->draw_above_texture_list, 0);
+            remove_all_list_elements(enemy->draw_above_tilemap_pos_list, 1);
+            skill_get_draw_above(
+                state,
+                enemy->skill,
+                enemy->object->tilemap_pos,
+                enemy->target_1_tilemap_pos,
+                enemy->target_2_tilemap_pos,
+                enemy->draw_above_texture_list,
+                enemy->draw_above_tilemap_pos_list,
+                textures,
+                colors
+                );
+
+            remove_all_list_elements(enemy->draw_effect_texture_list, 0);
+            remove_all_list_elements(enemy->draw_effect_tilemap_pos_list, 1);
+            skill_get_draw_effect(
+                state,
+                enemy->skill,
+                enemy->object->tilemap_pos,
+                enemy->target_1_tilemap_pos,
+                enemy->target_2_tilemap_pos,
+                enemy->draw_effect_texture_list,
+                enemy->draw_effect_tilemap_pos_list,
+                textures,
+                colors
+                );
+        }
+    }
+
+    // !!!!!
+
     // quit
 
     if(input->is_quit)
@@ -274,11 +371,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     remove_all_pos_from_possible_target_1_tilemap_pos_list(state);
 
-                    skill_add_pos_to_possible_target_1_tilemap_pos_list(
-                            state,
-                            state->curr_ally_skill,
-                            state->hero_object->tilemap_pos
-                            );
+                    skill_get_possible_target_1_pos(
+                        state,
+                        state->curr_ally_skill,
+                        state->hero_object->tilemap_pos,
+                        state->possible_target_1_tilemap_pos_list
+                        );
 
                     change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_1);
                 }
@@ -289,12 +387,13 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
 
-                    skill_add_pos_to_possible_target_2_tilemap_pos_list(
-                            state,
-                            state->curr_ally_skill,
-                            state->hero_object->tilemap_pos,
-                            state->target_1_tilemap_pos
-                            );
+                    skill_get_possible_target_2_pos(
+                        state,
+                        state->curr_ally_skill,
+                        state->hero_object->tilemap_pos,
+                        state->curr_ally_target_1_tilemap_pos,
+                        state->possible_target_2_tilemap_pos_list
+                        );
 
                     change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_2);
                 }
@@ -318,18 +417,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
-                    state->target_1_tilemap_pos = state->curr_selected_tilemap_pos;
+                    state->curr_ally_target_1_tilemap_pos = state->curr_selected_tilemap_pos;
 
                     state->prev_selected_tilemap_pos = vec2i(-1, -1);
                     state->curr_selected_tilemap_pos = vec2i(-1, -1);
 
                     remove_all_pos_from_possible_target_2_tilemap_pos_list(state);
 
-                    skill_add_pos_to_possible_target_2_tilemap_pos_list(
+                    skill_get_possible_target_2_pos(
                         state,
                         state->curr_ally_skill,
                         state->hero_object->tilemap_pos,
-                        state->target_1_tilemap_pos
+                        state->curr_ally_target_1_tilemap_pos,
+                        state->possible_target_2_tilemap_pos_list
                         );
 
                     change_gamestate(state, GAMESTATE__HERO_CHOOSING_TARGET_2);
@@ -364,15 +464,15 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 remove_all_actions_from_action_sequence(state->ally_action_sequence);
 
-                state->target_2_tilemap_pos = state->curr_selected_tilemap_pos;
+                state->curr_ally_target_2_tilemap_pos = state->curr_selected_tilemap_pos;
 
-                skill_add_actions_to_action_sequence(
+                skill_get_actions(
                     state,
                     state->ally_action_sequence,
                     state->curr_ally_skill,
                     state->hero_object->tilemap_pos,
-                    state->target_1_tilemap_pos,
-                    state->target_2_tilemap_pos
+                    state->curr_ally_target_1_tilemap_pos,
+                    state->curr_ally_target_2_tilemap_pos
                     );
 
                 if(input->was_mouse_left && !input->is_mouse_left)
@@ -384,9 +484,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state,
                         state->curr_ally_skill,
                         state->hero_object->tilemap_pos,
-                        state->target_1_tilemap_pos,
-                        state->target_2_tilemap_pos,
-                        textures
+                        state->curr_ally_target_1_tilemap_pos,
+                        state->curr_ally_target_2_tilemap_pos,
+                        textures,
+                        colors
                         );
 
                     add_animation_to_animation_list(
@@ -402,8 +503,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state,
                         state->curr_ally_skill,
                         state->hero_object->tilemap_pos,
-                        state->target_1_tilemap_pos,
-                        state->target_2_tilemap_pos
+                        state->curr_ally_target_1_tilemap_pos,
+                        state->curr_ally_target_2_tilemap_pos
                         );
 
                     state->curr_ally_skill_animation = animation;
@@ -453,7 +554,6 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 remove_all_dead_objects(state);
 
                 determine_enemy_list(state);
-
                 determine_enemy_order(state);
 
                 modify_hero_ap(state, -1);
@@ -480,7 +580,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->curr_enemy->object->tilemap_pos,
                     state->curr_enemy->target_1_tilemap_pos,
                     state->curr_enemy->target_2_tilemap_pos,
-                    textures
+                    textures,
+                    colors
                     );
 
                 add_animation_to_animation_list(
@@ -657,7 +758,6 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     remove_all_dead_objects(state);
 
                     determine_enemy_list(state);
-
                     determine_enemy_order(state);
 
                     add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->hero_background, 0.25f), textures, sounds, musics, colors);

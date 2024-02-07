@@ -85,8 +85,8 @@ typedef struct
     Ally* curr_ally;
     int curr_ally_skill;
     int is_curr_ally_skill_two_target;
-    Vec2i target_1_tilemap_pos;
-    Vec2i target_2_tilemap_pos;
+    Vec2i curr_ally_target_1_tilemap_pos;
+    Vec2i curr_ally_target_2_tilemap_pos;
     Animation* curr_ally_skill_animation;
 
     Object* hero_object;
@@ -97,6 +97,13 @@ typedef struct
 
     Vec2i prev_selected_tilemap_pos;
     Vec2i curr_selected_tilemap_pos;
+
+    List* curr_ally_draw_below_texture_list;
+    List* curr_ally_draw_below_gamemap_pos_list;
+    List* curr_ally_draw_above_texture_list;
+    List* curr_ally_draw_above_gamemap_pos_list;
+    List* curr_ally_draw_effect_texture_list;
+    List* curr_ally_draw_effect_gamemap_pos_list;
 
 } State;
 
@@ -116,13 +123,20 @@ void change_background_color(State* state, Vec3i new_background_color);
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 
-void add_pos_to_possible_target_1_tilemap_pos_list(State* state, Vec2i new_pos);
-void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state);
-int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i pos);
+void draw_texture_list(
+    Renderer* renderer,
+    State* state,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Vec3i color,
+    float transparency
+    );
 
-void add_pos_to_possible_target_2_tilemap_pos_list(State* state, Vec2i new_pos);
+int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i tilemap_pos);
+int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i tilemap_pos);
+
+void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state);
 void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
-int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i pos);
 
 void add_animation_to_animation_list(State* state, Animation* animation, Textures *textures, Sounds *sounds, Musics *musics, Colors *colors);
 
@@ -160,14 +174,76 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
 void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
 
-void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos);
-void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos);
-void skill_add_pos_to_possible_target_2_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos);
-void skill_add_actions_to_action_sequence(State* state, Action* action_sequence, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos);
-void skill_draw_below(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Vec3i color, Textures* textures);
-void skill_draw_above(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Vec3i color, Textures* textures);
-void skill_draw_effect(Renderer* renderer, State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
-Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures);
+void skill_on_use(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos
+    );
+void skill_get_possible_target_1_pos(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    List* target_1_pos_list
+    );
+void skill_get_possible_target_2_pos(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    List* target_2_pos_list
+    );
+void skill_get_actions(
+    State* state,
+    Action* action_sequence,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos
+    );
+void skill_get_draw_below(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Textures* textures,
+    Colors* colors
+    );
+void skill_get_draw_above(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Textures* textures,
+    Colors* colors
+    );
+void skill_get_draw_effect(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    List* texture_list,
+    List* tilemap_pos_list,
+    Textures* textures,
+    Colors* colors
+    );
+Animation* skill_get_animation(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    Vec2i target_1_tilemap_pos,
+    Vec2i target_2_tilemap_pos,
+    Textures* textures,
+    Colors* colors
+    );
 
 void object_enemy_prepare_move(State* state, Enemy* enemy);
 void object_enemy_prepare_attack(State* state, Enemy* enemy);

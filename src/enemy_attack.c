@@ -27,7 +27,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                         target_1_tilemap_pos,
                         enemy->attack_dir4, 1
                         );
-                    skill_add_actions_to_action_sequence(
+                    skill_get_actions(
                         state,
                         enemy->action_sequence,
                         enemy->skill,
@@ -50,7 +50,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     object->tilemap_pos,
                     enemy->attack_dir4, 11
                     );
-                skill_add_actions_to_action_sequence(
+                skill_get_actions(
                     state,
                     enemy->action_sequence,
                     enemy->skill,
@@ -76,7 +76,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                         enemy->skill = SKILL__PULL;
                         enemy->target_1_tilemap_pos = target_1_tilemap_pos;
                         enemy->target_2_tilemap_pos = object->tilemap_pos;
-                        skill_add_actions_to_action_sequence(
+                        skill_get_actions(
                             state,
                             enemy->action_sequence,
                             enemy->skill,
@@ -93,7 +93,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     enemy->skill = SKILL__PULL;
                     enemy->target_1_tilemap_pos = old_target_1_tilemap_pos;
                     enemy->target_2_tilemap_pos = object->tilemap_pos;
-                    skill_add_actions_to_action_sequence(
+                    skill_get_actions(
                         state,
                         enemy->action_sequence,
                         enemy->skill,
@@ -112,7 +112,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                 enemy->skill = SKILL__PULL;
                 enemy->target_1_tilemap_pos = old_target_1_tilemap_pos;
                 enemy->target_2_tilemap_pos = object->tilemap_pos;
-                skill_add_actions_to_action_sequence(
+                skill_get_actions(
                     state,
                     enemy->action_sequence,
                     enemy->skill,
@@ -140,7 +140,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                         target_1_tilemap_pos,
                         enemy->attack_dir4, 2
                         );
-                    skill_add_actions_to_action_sequence(
+                    skill_get_actions(
                         state,
                         enemy->action_sequence,
                         enemy->skill,
@@ -163,7 +163,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     object->tilemap_pos,
                     enemy->attack_dir4, 12
                     );
-                skill_add_actions_to_action_sequence(
+                skill_get_actions(
                     state,
                     enemy->action_sequence,
                     enemy->skill,
@@ -191,7 +191,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                         target_1_tilemap_pos,
                         enemy->attack_dir4, 1
                         );
-                    skill_add_actions_to_action_sequence(
+                    skill_get_actions(
                         state,
                         enemy->action_sequence,
                         enemy->skill,
@@ -214,7 +214,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     object->tilemap_pos,
                     enemy->attack_dir4, 1
                     );
-                skill_add_actions_to_action_sequence(
+                skill_get_actions(
                     state,
                     enemy->action_sequence,
                     enemy->skill,
@@ -245,7 +245,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                             get_opposite_dir4(enemy->attack_dir4),
                             1
                             );
-                        skill_add_actions_to_action_sequence(
+                        skill_get_actions(
                         state,
                         enemy->action_sequence,
                         enemy->skill,
@@ -266,7 +266,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                         get_opposite_dir4(enemy->attack_dir4),
                         1
                         );
-                    skill_add_actions_to_action_sequence(
+                    skill_get_actions(
                         state,
                         enemy->action_sequence,
                         enemy->skill,
@@ -289,7 +289,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     get_opposite_dir4(enemy->attack_dir4),
                     1
                     );
-                skill_add_actions_to_action_sequence(
+                skill_get_actions(
                     state,
                     enemy->action_sequence,
                     enemy->skill,
@@ -322,7 +322,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                             enemy->skill = SKILL__TURRET_LASER;
                             enemy->target_1_tilemap_pos = vec2i(-1,-1);
                             enemy->target_2_tilemap_pos = tilemap_pos;
-                            skill_add_actions_to_action_sequence(
+                            skill_get_actions(
                                 state,
                                 enemy->action_sequence,
                                 enemy->skill,
@@ -366,7 +366,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                             enemy->skill = SKILL__TURRET_BOMB;
                             enemy->target_1_tilemap_pos = vec2i(-1,-1);
                             enemy->target_2_tilemap_pos = curr_tilemap_pos;
-                            skill_add_actions_to_action_sequence(
+                            skill_get_actions(
                                 state,
                                 enemy->action_sequence,
                                 enemy->skill,
@@ -433,7 +433,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                         enemy->skill = SKILL__TURRET_PROJECTILE;
                         enemy->target_1_tilemap_pos = vec2i(-1,-1);
                         enemy->target_2_tilemap_pos = perimeter_tilemap_pos;
-                        skill_add_actions_to_action_sequence(
+                        skill_get_actions(
                             state,
                             enemy->action_sequence,
                             enemy->skill,

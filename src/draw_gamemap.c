@@ -109,26 +109,22 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !hover_object->is_dead &&
         hover_object->is_visible)
         {
-            skill_draw_below(
+            draw_texture_list(
                 renderer,
                 state,
-                hover_enemy->skill,
-                hover_object->tilemap_pos,
-                hover_enemy->target_1_tilemap_pos,
-                hover_enemy->target_2_tilemap_pos,
+                hover_enemy->draw_below_texture_list,
+                hover_enemy->draw_below_tilemap_pos_list,
                 colors->yellow,
-                textures
+                1.0f
                 );
 
-            skill_draw_effect(
+            draw_texture_list(
                 renderer,
                 state,
-                hover_enemy->skill,
-                hover_object->tilemap_pos,
-                hover_enemy->target_1_tilemap_pos,
-                hover_enemy->target_2_tilemap_pos,
-                textures,
-                colors
+                hover_enemy->draw_effect_texture_list,
+                hover_enemy->draw_effect_tilemap_pos_list,
+                colors->none,
+                0.75f
                 );
         }
         else
@@ -149,15 +145,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                         state->enemy_action_sequence == curr_action))
                         {
-                            skill_draw_below(
+                            draw_texture_list(
                                 renderer,
                                 state,
-                                curr_enemy->skill,
-                                curr_enemy->object->tilemap_pos,
-                                curr_enemy->target_1_tilemap_pos,
-                                curr_enemy->target_2_tilemap_pos,
+                                curr_enemy->draw_below_texture_list,
+                                curr_enemy->draw_below_tilemap_pos_list,
                                 colors->red,
-                                textures
+                                1.0f
                                 );
                         }
                     }
@@ -174,15 +168,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !curr_enemy->object->is_dead &&
         curr_enemy->object->is_visible)
         {
-            skill_draw_below(
+            draw_texture_list(
                 renderer,
                 state,
-                curr_enemy->skill,
-                curr_enemy->object->tilemap_pos,
-                curr_enemy->target_1_tilemap_pos,
-                curr_enemy->target_2_tilemap_pos,
+                curr_enemy->draw_below_texture_list,
+                curr_enemy->draw_below_tilemap_pos_list,
                 colors->yellow,
-                textures
+                1.0f
                 );
         }
     }
@@ -191,15 +183,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        skill_draw_below(
+        draw_texture_list(
             renderer,
             state,
-            state->curr_ally_skill,
-            state->hero_object->tilemap_pos,
-            state->target_1_tilemap_pos,
-            state->target_2_tilemap_pos,
+            state->curr_ally_draw_below_texture_list,
+            state->curr_ally_draw_below_gamemap_pos_list,
             colors->green,
-            textures
+            1.0f
             );
     }
 
@@ -309,26 +299,22 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !hover_enemy->object->is_dead &&
         hover_enemy->object->is_visible)
         {
-            skill_draw_above(
+            draw_texture_list(
                 renderer,
                 state,
-                hover_enemy->skill,
-                hover_object->tilemap_pos,
-                hover_enemy->target_1_tilemap_pos,
-                hover_enemy->target_2_tilemap_pos,
+                hover_enemy->draw_above_texture_list,
+                hover_enemy->draw_above_tilemap_pos_list,
                 colors->yellow,
-                textures
+                1.0f
                 );
 
-            skill_draw_effect(
+            draw_texture_list(
                 renderer,
                 state,
-                hover_enemy->skill,
-                hover_object->tilemap_pos,
-                hover_enemy->target_1_tilemap_pos,
-                hover_enemy->target_2_tilemap_pos,
-                textures,
-                colors
+                hover_enemy->draw_effect_texture_list,
+                hover_enemy->draw_effect_tilemap_pos_list,
+                colors->none,
+                0.75f
                 );
         }
         else
@@ -349,15 +335,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
                         state->enemy_action_sequence == hover_action))
                         {
-                            skill_draw_above(
+                            draw_texture_list(
                                 renderer,
                                 state,
-                                hover_enemy->skill,
-                                hover_enemy->object->tilemap_pos,
-                                hover_enemy->target_1_tilemap_pos,
-                                hover_enemy->target_2_tilemap_pos,
+                                hover_enemy->draw_above_texture_list,
+                                hover_enemy->draw_above_tilemap_pos_list,
                                 colors->red,
-                                textures
+                                1.0f
                                 );
                         }
                     }
@@ -374,26 +358,22 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !curr_enemy->object->is_dead &&
         curr_enemy->object->is_visible)
         {
-            skill_draw_above(
+            draw_texture_list(
                 renderer,
                 state,
-                curr_enemy->skill,
-                curr_enemy->object->tilemap_pos,
-                curr_enemy->target_1_tilemap_pos,
-                curr_enemy->target_2_tilemap_pos,
+                curr_enemy->draw_above_texture_list,
+                curr_enemy->draw_above_tilemap_pos_list,
                 colors->yellow,
-                textures
+                1.0f
                 );
 
-            skill_draw_effect(
+            draw_texture_list(
                 renderer,
                 state,
-                curr_enemy->skill,
-                curr_enemy->object->tilemap_pos,
-                curr_enemy->target_1_tilemap_pos,
-                curr_enemy->target_2_tilemap_pos,
-                textures,
-                colors
+                curr_enemy->draw_effect_texture_list,
+                curr_enemy->draw_effect_tilemap_pos_list,
+                colors->none,
+                0.75f
                 );
         }
     }
@@ -402,15 +382,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        skill_draw_above(
+        draw_texture_list(
             renderer,
             state,
-            state->curr_ally_skill,
-            state->hero_object->tilemap_pos,
-            state->target_1_tilemap_pos,
-            state->target_2_tilemap_pos,
+            state->curr_ally_draw_above_texture_list,
+            state->curr_ally_draw_above_gamemap_pos_list,
             colors->green,
-            textures
+            1.0f
             );
     }
 
@@ -529,15 +507,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         !hover_enemy->object->is_dead &&
         hover_enemy->object->is_visible)
         {
-            skill_draw_effect(
+            draw_texture_list(
                 renderer,
                 state,
-                hover_enemy->skill,
-                hover_object->tilemap_pos,
-                hover_enemy->target_1_tilemap_pos,
-                hover_enemy->target_2_tilemap_pos,
-                textures,
-                colors
+                hover_enemy->draw_effect_texture_list,
+                hover_enemy->draw_effect_tilemap_pos_list,
+                colors->none,
+                0.75f
                 );
         }
     }
@@ -546,15 +522,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
     {
-        skill_draw_effect(
+        draw_texture_list(
             renderer,
             state,
-            state->curr_ally_skill,
-            state->hero_object->tilemap_pos,
-            state->target_1_tilemap_pos,
-            state->target_2_tilemap_pos,
-            textures,
-            colors
+            state->curr_ally_draw_effect_texture_list,
+            state->curr_ally_draw_effect_gamemap_pos_list,
+            colors->none,
+            0.75f
             );
     }
 }

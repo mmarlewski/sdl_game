@@ -1,6 +1,11 @@
 #include "../inc/state.h"
 
-void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill, Vec2i source_tilemap_pos)
+void skill_get_possible_target_1_pos(
+    State* state,
+    int skill,
+    Vec2i source_tilemap_pos,
+    List* target_1_pos_list
+)
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
 
@@ -121,10 +126,10 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
                 }
             }
 
-            if(is_up_target) add_pos_to_possible_target_1_tilemap_pos_list(state, up_tilemap_pos);
-            if(is_right_target) add_pos_to_possible_target_1_tilemap_pos_list(state, right_tilemap_pos);
-            if(is_down_target) add_pos_to_possible_target_1_tilemap_pos_list(state, down_tilemap_pos);
-            if(is_left_target) add_pos_to_possible_target_1_tilemap_pos_list(state, left_tilemap_pos);
+            if(is_up_target) add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(up_tilemap_pos));
+            if(is_right_target) add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(right_tilemap_pos));
+            if(is_down_target) add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(down_tilemap_pos));
+            if(is_left_target) add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(left_tilemap_pos));
         }
         break;
         case SKILL__PUSH:
@@ -133,25 +138,25 @@ void skill_add_pos_to_possible_target_1_tilemap_pos_list(State* state, int skill
             Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__UP, 1);
             if(room_get_object_at(state->curr_room, up_tilemap_pos) != 0)
             {
-                add_pos_to_possible_target_1_tilemap_pos_list(state, up_tilemap_pos);
+                add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(up_tilemap_pos));
             }
 
             Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__RIGHT, 1);
             if(room_get_object_at(state->curr_room, right_tilemap_pos) != 0)
             {
-                add_pos_to_possible_target_1_tilemap_pos_list(state, right_tilemap_pos);
+                add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(right_tilemap_pos));
             }
 
             Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__DOWN, 1);
             if(room_get_object_at(state->curr_room, down_tilemap_pos) != 0)
             {
-                add_pos_to_possible_target_1_tilemap_pos_list(state, down_tilemap_pos);
+                add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(down_tilemap_pos));
             }
 
             Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, DIR4__LEFT, 1);
             if(room_get_object_at(state->curr_room, left_tilemap_pos) != 0)
             {
-                add_pos_to_possible_target_1_tilemap_pos_list(state, left_tilemap_pos);
+                add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(left_tilemap_pos));
             }
         }
         break;

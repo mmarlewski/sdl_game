@@ -206,6 +206,13 @@ typedef struct
     int performed_attack;
     int order_number;
 
+    List* draw_below_texture_list;
+    List* draw_below_tilemap_pos_list;
+    List* draw_above_texture_list;
+    List* draw_above_tilemap_pos_list;
+    List* draw_effect_texture_list;
+    List* draw_effect_tilemap_pos_list;
+
 } Enemy;
 
 typedef struct

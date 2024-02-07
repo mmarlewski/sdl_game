@@ -67,3 +67,16 @@ void draw_texture_at_gamemap_pos(
     Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
     draw_texture_at_world_pos (renderer, texture, color, transparency, world_iso_pos, camera_pos, camera_zoom);
 }
+
+void draw_texture_at_tilemap_pos(
+    Renderer* renderer,
+    Texture* texture,
+    Vec3i color,
+    float transparency,
+    Vec2i tilemap_pos,
+    Vec2f camera_pos,
+    float camera_zoom)
+{
+    Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
+    draw_texture_at_gamemap_pos (renderer, texture, color, transparency, gamemap_pos, camera_pos, camera_zoom);
+}

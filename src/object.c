@@ -36,6 +36,13 @@ Enemy* new_enemy(Object* object)
     enemy->performed_attack = 0;
     enemy->order_number = 0;
 
+    enemy->draw_below_texture_list = new_list((void (*)(void *)) 0);
+    enemy->draw_below_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
+    enemy->draw_above_texture_list = new_list((void (*)(void *)) 0);
+    enemy->draw_above_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
+    enemy->draw_effect_texture_list = new_list((void (*)(void *)) 0);
+    enemy->draw_effect_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
+
     return enemy;
 }
 
