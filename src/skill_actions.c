@@ -88,25 +88,95 @@ void skill_get_actions(
         {
             if(target_2_object != 0)
             {
-                object_on_put_item(
-                    state,
-                    action_sequence,
-                    target_2_object,
-                    target_2_tilemap_pos,
-                    state->hero_curr_item
-                    );
+                if(source_object->type == OBJECT_TYPE__HERO ||
+                source_object->type == OBJECT_TYPE__HERO_FLOATING ||
+                source_object->type == OBJECT_TYPE__HERO_FLYING)
+                {
+                    object_on_put_item(
+                        state,
+                        action_sequence,
+                        target_2_object,
+                        target_2_tilemap_pos,
+                        state->hero_curr_item
+                        );
+                }
+                else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL)
+                {
+                    object_on_put_item(
+                        state,
+                        action_sequence,
+                        target_2_object,
+                        target_2_tilemap_pos,
+                        ITEM__CELL
+                        );
+                }
+                else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE)
+                {
+                    object_on_put_item(
+                        state,
+                        action_sequence,
+                        target_2_object,
+                        target_2_tilemap_pos,
+                        ITEM__DYNAMITE
+                        );
+                }
+                else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+                {
+                    object_on_put_item(
+                        state,
+                        action_sequence,
+                        target_2_object,
+                        target_2_tilemap_pos,
+                        ITEM__GEMSTONE
+                        );
+                }
             }
             else
             {
                 int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
-                floor_on_put_item(
-                    state,
-                    action_sequence,
-                    floor,
-                    target_2_tilemap_pos,
-                    state->hero_curr_item
-                    );
+                if(source_object->type == OBJECT_TYPE__HERO ||
+                source_object->type == OBJECT_TYPE__HERO_FLOATING ||
+                source_object->type == OBJECT_TYPE__HERO_FLYING)
+                {
+                    floor_on_put_item(
+                        state,
+                        action_sequence,
+                        floor,
+                        target_2_tilemap_pos,
+                        state->hero_curr_item
+                        );
+                }
+                else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL)
+                {
+                    floor_on_put_item(
+                        state,
+                        action_sequence,
+                        floor,
+                        target_2_tilemap_pos,
+                        ITEM__CELL
+                        );
+                }
+                else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE)
+                {
+                    floor_on_put_item(
+                        state,
+                        action_sequence,
+                        floor,
+                        target_2_tilemap_pos,
+                        ITEM__DYNAMITE
+                        );
+                }
+                else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+                {
+                    floor_on_put_item(
+                        state,
+                        action_sequence,
+                        floor,
+                        target_2_tilemap_pos,
+                        ITEM__GEMSTONE
+                        );
+                }
             }
         }
         break;
@@ -151,7 +221,13 @@ void skill_get_actions(
                 {
                     DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(*curr_tilemap_pos, *next_tilemap_pos);
 
-                    add_action_to_end_action_sequence(action_sequence, new_action_move(*curr_tilemap_pos, distance_info.dir4));
+                    add_action_to_end_action_sequence(
+                        action_sequence,
+                        new_action_move(
+                            *curr_tilemap_pos,
+                            distance_info.dir4
+                            )
+                        );
 
                     curr_elem = next_elem;
                     next_elem = (curr_elem) ? (curr_elem->next) : (0);

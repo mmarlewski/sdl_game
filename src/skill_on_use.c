@@ -40,13 +40,13 @@ void skill_on_use(
             }
             else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY)
             {
-                //
-            }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
-            {
-                //
+                switch(item_type)
+                {
+                    case ITEM__CELL: source_object->type = OBJECT_TYPE__MINIBOT_ALLY_CELL; break;
+                    case ITEM__DYNAMITE: source_object->type = OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE; break;
+                    case ITEM__GEMSTONE: source_object->type = OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE; break;
+                    default:break;
+                }
             }
         }
         break;
@@ -62,15 +62,11 @@ void skill_on_use(
                     state->hero_item_number[state->hero_curr_item]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY)
-            {
-                //
-            }
             else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
             {
-                //
+                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
             }
         }
         break;
@@ -85,15 +81,11 @@ void skill_on_use(
                     state->hero_item_number[ITEM__CELL]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY)
-            {
-                //
-            }
             else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
             {
-                //
+                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
             }
         }
         break;
@@ -108,15 +100,11 @@ void skill_on_use(
                     state->hero_item_number[ITEM__DYNAMITE]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY)
-            {
-                //
-            }
             else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
             {
-                //
+                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
             }
         }
         break;
@@ -131,15 +119,11 @@ void skill_on_use(
                     state->hero_item_number[ITEM__GEMSTONE]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY)
-            {
-                //
-            }
             else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
             source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
             {
-                //
+                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
             }
         }
         break;
@@ -149,8 +133,13 @@ void skill_on_use(
             {
                 if(is_object_station(target_2_object))
                 {
-                    int augmentation = get_station_augmentation(target_2_object);
-                    hero_add_augmentation(state, augmentation);
+                    if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
+                    state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
+                    state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
+                    {
+                        int augmentation = get_station_augmentation(target_2_object);
+                        hero_add_augmentation(state, augmentation);
+                    }
                 }
                 else if(is_object_exit(target_2_object))
                 {
@@ -166,9 +155,14 @@ void skill_on_use(
 
                         if(room != 0)
                         {
-                            room_remove_object(state->curr_room, state->hero_object);
+                            room_remove_object(
+                                state->curr_room,
+                                state->curr_ally->object);
                             set_curr_room(state, room);
-                            room_add_object_at(room, state->hero_object, passage->to_tilemap_pos);
+                            room_add_object_at(
+                                room,
+                                state->curr_ally->object,
+                                passage->to_tilemap_pos);
 
                             determine_ally_list(state);
                             determine_ally_order(state);
@@ -198,10 +192,17 @@ void skill_on_use(
 
                             if(room != 0)
                             {
-                                room_remove_object(state->curr_room, state->hero_object);
+                                room_remove_object(
+                                    state->curr_room,
+                                    state->curr_ally->object);
                                 set_curr_room(state, room);
-                                room_add_object_at(room, state->hero_object, passage->to_tilemap_pos);
+                                room_add_object_at(
+                                    room,
+                                    state->curr_ally->object,
+                                    passage->to_tilemap_pos);
 
+                                determine_ally_list(state);
+                                determine_ally_order(state);
                                 determine_enemy_list(state);
                                 determine_enemy_order(state);
                             }

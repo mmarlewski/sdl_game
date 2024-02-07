@@ -40,7 +40,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->prev_selected_tilemap_pos = vec2i(0, 0);
     state->curr_selected_tilemap_pos = vec2i(0, 0);
 
-    state->curr_ally_skill = 0;
+    state->curr_ally_skill_list = new_list((void(*)(void*))0);
+    state->curr_ally_curr_skill = 0;
     state->is_curr_ally_skill_two_target = 0;
 
     state->possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
@@ -60,6 +61,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state->hero_body_part_augmentation[i] = AUGMENTATION__NONE;
     }
     state->hero_curr_item = ITEM__NONE;
+
+    state->minibot_object = new_object(OBJECT_TYPE__MINIBOT_ALLY);
 
     state->show_all_order_numbers = 0;
 
@@ -121,6 +124,19 @@ void change_gamestate(State* state, int new_gamestate)
                 );
         }
         printf("----------------------------------------\n");
+        for(int i = 0; i < state->curr_ally_skill_list->size; i++)
+        {
+            ListElem* curr_elem = get_nth_list_element(state->curr_ally_skill_list, i);
+            if(curr_elem != 0)
+            {
+                int curr_skill = (int) curr_elem->data;
+                printf("skill %-10i: %-10s \n",
+                    i + 1,
+                    get_skill_name(curr_skill)
+                    );
+            }
+        }
+        printf("----------------------------------------\n");
     }
 
     if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
@@ -128,7 +144,7 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__HERO_EXECUTING_ANIMATION ||
     state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
     {
-        printf("curr_skill: %s \n", get_skill_name(state->curr_ally_skill));
+        printf("curr_skill: %s \n", get_skill_name(state->curr_ally_curr_skill));
         printf("----------------------------------------\n");
     }
 
@@ -528,10 +544,21 @@ void get_object_ally_skills(State* state, Object* object, List* skill_list)
         }
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_CELL:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_CELL);
+        }
+        break;
         case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_DYNAMITE);
+        }
+        break;
         case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_GEMSTONE);
         }
         break;
         default:

@@ -83,7 +83,8 @@ typedef struct
     List* ally_list;
     ListElem* curr_ally_list_elem;
     Ally* curr_ally;
-    int curr_ally_skill;
+    List* curr_ally_skill_list;
+    int curr_ally_curr_skill;
     int is_curr_ally_skill_two_target;
     Vec2i curr_ally_target_1_tilemap_pos;
     Vec2i curr_ally_target_2_tilemap_pos;
@@ -94,6 +95,8 @@ typedef struct
     int hero_item_number[ITEM__COUNT];
     int hero_body_part_augmentation[BODY_PART__COUNT];
     int hero_curr_item;
+
+    Object* minibot_object;
 
     Vec2i prev_selected_tilemap_pos;
     Vec2i curr_selected_tilemap_pos;

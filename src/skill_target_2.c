@@ -109,9 +109,18 @@ void skill_get_possible_target_2_pos(
 
                 if(object != 0)
                 {
-                    if(is_object_exit(object) || is_object_station(object))
+                    if(is_object_exit(object))
                     {
                         add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
+                    }
+                    else if(is_object_station(object))
+                    {
+                        if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
+                        state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
+                        state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
+                        {
+                            add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
+                        }
                     }
                 }
                 else if(floor != FLOOR_TYPE__NONE)

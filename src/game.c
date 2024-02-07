@@ -127,7 +127,7 @@ int main (int argc, char* argv[])
         );
     room_add_object_at(
         first_room,
-        new_object(OBJECT_TYPE__MINIBOT_ALLY),
+        state.minibot_object,
         vec2i(7,6)
         );
     set_curr_room(&state, first_room);
@@ -246,12 +246,12 @@ int main (int argc, char* argv[])
         );
     room_add_object_at(
         first_room,
-        new_object(OBJECT_TYPE__BARREL),
+        new_object(OBJECT_TYPE__VENDING_DYNAMITE),
         vec2i(6,3)
         );
     room_add_object_at(
         first_room,
-        new_object(OBJECT_TYPE__BARREL),
+        new_object(OBJECT_TYPE__ROCK_DAMAGED_ITEM),
         vec2i(6,5)
         );
     room_add_object_at(
@@ -491,11 +491,16 @@ int main (int argc, char* argv[])
         }
     }
 
-    state.curr_ally = new_ally(state.hero_object);
+    state.curr_ally = new_ally(state.minibot_object);
 
     state.hero_item_number[ITEM__CELL] = 5;
     state.hero_item_number[ITEM__DYNAMITE] = 5;
     state.hero_item_number[ITEM__GEMSTONE] = 5;
+
+    hero_add_augmentation(&state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(&state, AUGMENTATION__CHAIN_HAND);
+    hero_add_augmentation(&state, AUGMENTATION__SPRING_LEG);
+    hero_add_augmentation(&state, AUGMENTATION__TRACK_LEG);
 
     while (state.is_game_running)
     {

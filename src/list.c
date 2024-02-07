@@ -235,6 +235,25 @@ void reverse_list(List* list)
     list->tail = temp;
 }
 
+ListElem* get_nth_list_element(List* list, int n)
+{
+    ListElem* list_elem = list->head;
+    int count = 0;
+
+    while(list_elem != 0)
+    {
+        if(count == n)
+        {
+            return list_elem;
+        }
+
+        list_elem = list_elem->next;
+        count++;
+    }
+
+    return 0;
+}
+
 void print_list(List* list)
 {
     printf("printing list: %p of size: %i \n", list, list->size);
