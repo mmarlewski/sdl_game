@@ -18,31 +18,6 @@ void skill_get_draw_above(
 
     switch(skill)
     {
-        case SKILL__NONE:
-        {
-            //
-        }
-        break;
-        case SKILL__PICK_ITEM_CLOSE:
-        {
-            //
-        }
-        break;
-        case SKILL__PICK_ITEM_FAR:
-        {
-            //
-        }
-        break;
-        case SKILL__PUT_ITEM_CLOSE:
-        {
-            //
-        }
-        break;
-        case SKILL__PUT_ITEM_FAR:
-        {
-            //
-        }
-        break;
         case SKILL__MANIPULATION:
         {
             add_new_list_element_to_list_end(
@@ -53,31 +28,6 @@ void skill_get_draw_above(
                         tilemap_pos_list,
                         new_vec2i_from_vec2i(target_2_tilemap_pos)
                         );
-        }
-        break;
-        case SKILL__MOVE:
-        {
-            //
-        }
-        break;
-        case SKILL__THROW_CELL:
-        {
-            //
-        }
-        break;
-        case SKILL__THROW_DYNAMITE:
-        {
-            //
-        }
-        break;
-        case SKILL__THROW_GEMSTONE:
-        {
-            //
-        }
-        break;
-        case SKILL__CHARGE:
-        {
-            //
         }
         break;
         case SKILL__JUMP:

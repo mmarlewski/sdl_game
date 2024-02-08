@@ -66,7 +66,9 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__PUT_ITEM_CLOSE:
+        case SKILL__PUT_ITEM_CELL_CLOSE:
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
@@ -81,7 +83,9 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_CELL_FAR:
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
             for(int i = 1; i < 10; i++)
             {
@@ -185,7 +189,7 @@ void skill_get_possible_target_2_pos(
             destroy_list(square_area_pos);
         }
         break;
-        case SKILL__THROW_CELL:
+        case SKILL__THROW_ITEM_CELL:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
@@ -197,7 +201,7 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__THROW_DYNAMITE:
+        case SKILL__THROW_ITEM_DYNAMITE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
@@ -209,7 +213,7 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__THROW_GEMSTONE:
+        case SKILL__THROW_ITEM_GEMSTONE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {

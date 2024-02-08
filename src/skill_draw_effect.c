@@ -96,12 +96,32 @@ void skill_get_draw_effect(
             }
         }
         break;
-        case SKILL__PUT_ITEM_CLOSE:
-        case SKILL__PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_CELL_CLOSE:
+        case SKILL__PUT_ITEM_CELL_FAR:
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
+            int item_type = ITEM__NONE;
+            if(skill == SKILL__PUT_ITEM_CELL_CLOSE ||
+            skill == SKILL__PUT_ITEM_CELL_FAR)
+            {
+                item_type = ITEM__CELL;
+            }
+            if(skill == SKILL__PUT_ITEM_DYNAMITE_CLOSE ||
+            skill == SKILL__PUT_ITEM_DYNAMITE_FAR)
+            {
+                item_type = ITEM__DYNAMITE;
+            }
+            if(skill == SKILL__PUT_ITEM_GEMSTONE_CLOSE ||
+            skill == SKILL__PUT_ITEM_GEMSTONE_FAR)
+            {
+                item_type = ITEM__GEMSTONE;
+            }
+
             if(target_2_object != 0)
             {
-                int item_type = state->hero_curr_item;
 
             add_new_list_element_to_list_end(
                         texture_list,
@@ -115,8 +135,6 @@ void skill_get_draw_effect(
             else
             {
                 int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
-
-                int item_type = state->hero_curr_item;
 
             add_new_list_element_to_list_end(
                         texture_list,
@@ -148,7 +166,7 @@ void skill_get_draw_effect(
                         );
         }
         break;
-        case SKILL__THROW_CELL:
+        case SKILL__THROW_ITEM_CELL:
         {
             if(target_2_object != 0 && is_object_meltable(target_2_object))
             {
@@ -172,7 +190,7 @@ void skill_get_draw_effect(
                         );
         }
         break;
-        case SKILL__THROW_DYNAMITE:
+        case SKILL__THROW_ITEM_DYNAMITE:
         {
             if(target_2_object != 0 && is_object_breakable(target_2_object))
             {
@@ -213,7 +231,7 @@ void skill_get_draw_effect(
                         );
         }
         break;
-        case SKILL__THROW_GEMSTONE:
+        case SKILL__THROW_ITEM_GEMSTONE:
         {
             add_new_list_element_to_list_end(
                         texture_list,

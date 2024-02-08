@@ -18,36 +18,6 @@ void skill_get_draw_below(
 
     switch(skill)
     {
-        case SKILL__NONE:
-        {
-            //
-        }
-        break;
-        case SKILL__PICK_ITEM_CLOSE:
-        {
-            //
-        }
-        break;
-        case SKILL__PICK_ITEM_FAR:
-        {
-            //
-        }
-        break;
-        case SKILL__PUT_ITEM_CLOSE:
-        {
-            //
-        }
-        break;
-        case SKILL__PUT_ITEM_FAR:
-        {
-            //
-        }
-        break;
-        case SKILL__MANIPULATION:
-        {
-            //
-        }
-        break;
         case SKILL__MOVE:
         case SKILL__MOVE_FLOATING:
         case SKILL__MOVE_FLYING:
@@ -134,7 +104,7 @@ void skill_get_draw_below(
             destroy_list(path_pos);
         }
         break;
-        case SKILL__THROW_CELL:
+        case SKILL__THROW_ITEM_CELL:
         {
             add_new_list_element_to_list_end(
                         texture_list,
@@ -146,7 +116,7 @@ void skill_get_draw_below(
                         );
         }
         break;
-        case SKILL__THROW_DYNAMITE:
+        case SKILL__THROW_ITEM_DYNAMITE:
         {
             if(is_tilemap_in_bounds(target_2_tilemap_pos))
             {
@@ -178,7 +148,7 @@ void skill_get_draw_below(
             }
         }
         break;
-        case SKILL__THROW_GEMSTONE:
+        case SKILL__THROW_ITEM_GEMSTONE:
         {
             add_new_list_element_to_list_end(
                         texture_list,

@@ -130,8 +130,39 @@ void change_gamestate(State* state, int new_gamestate)
             if(curr_elem != 0)
             {
                 int curr_skill = (int) curr_elem->data;
-                printf("skill %-10i: %-10s \n",
-                    i + 1,
+                char key_char = KEY__NONE;
+                switch(i)
+                {
+                    case 0:  key_char = 'Q'; break;
+                    case 1:  key_char = 'W'; break;
+                    case 2:  key_char = 'E'; break;
+                    case 3:  key_char = 'R'; break;
+                    case 4:  key_char = 'T'; break;
+                    case 5:  key_char = 'Y'; break;
+                    case 6:  key_char = 'U'; break;
+                    case 7:  key_char = 'I'; break;
+                    case 8:  key_char = 'O'; break;
+                    case 9:  key_char = 'P'; break;
+                    case 10: key_char = 'A'; break;
+                    case 11: key_char = 'S'; break;
+                    case 12: key_char = 'D'; break;
+                    case 13: key_char = 'F'; break;
+                    case 14: key_char = 'G'; break;
+                    case 15: key_char = 'H'; break;
+                    case 16: key_char = 'J'; break;
+                    case 17: key_char = 'K'; break;
+                    case 18: key_char = 'L'; break;
+                    case 19: key_char = 'Z'; break;
+                    case 20: key_char = 'X'; break;
+                    case 21: key_char = 'C'; break;
+                    case 22: key_char = 'V'; break;
+                    case 23: key_char = 'B'; break;
+                    case 24: key_char = 'N'; break;
+                    case 25: key_char = 'M'; break;
+                    default: break;
+                }
+                printf("key %-6c: %-10s \n",
+                    key_char,
                     get_skill_name(curr_skill)
                     );
             }
@@ -456,6 +487,33 @@ void get_object_ally_skills(State* state, Object* object, List* skill_list)
         case OBJECT_TYPE__HERO_FLOATING:
         case OBJECT_TYPE__HERO_FLYING:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+            if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MANIPULATION);
+            }
+            if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEPORTATION);
+            }
+
+            // move
+
+            if(object->type == OBJECT_TYPE__HERO)
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            }
+            if(object->type == OBJECT_TYPE__HERO_FLOATING)
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE_FLOATING);
+            }
+            if(object->type == OBJECT_TYPE__HERO_FLYING)
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE_FLYING);
+            }
+
+            // augmentation
+
             if(hero_has_augmentation(state, AUGMENTATION__FIST_HAND))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
@@ -467,10 +525,6 @@ void get_object_ally_skills(State* state, Object* object, List* skill_list)
             if(hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL);
-            }
-            if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_FAR);
             }
             if(hero_has_augmentation(state, AUGMENTATION__SPRING_LEG))
             {
@@ -496,7 +550,6 @@ void get_object_ally_skills(State* state, Object* object, List* skill_list)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__ASCEND);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__DESCEND);
-
             }
             if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
             {
@@ -536,29 +589,80 @@ void get_object_ally_skills(State* state, Object* object, List* skill_list)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_CARRY);
             }
+
+            // item
+
+            if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_FAR);
+            }
+            else
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
+            }
+            if(state->hero_item_number[ITEM__CELL] > 0)
+            {
+                if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_FAR);
+                }
+                else
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_CLOSE);
+                }
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
+            }
+            if(state->hero_item_number[ITEM__DYNAMITE] > 0)
+            {
+                if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_FAR);
+                }
+                else
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_CLOSE);
+                }
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
+            }
+            if(state->hero_item_number[ITEM__GEMSTONE] > 0)
+            {
+                if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_FAR);
+                }
+                else
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
+                }
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
+            }
         }
         break;
         case OBJECT_TYPE__MINIBOT_ALLY:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
         }
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_CELL:
         {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CLOSE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_CELL);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
         }
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
         {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CLOSE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_DYNAMITE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
         }
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
         {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CLOSE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_GEMSTONE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
         }
         break;
         default:

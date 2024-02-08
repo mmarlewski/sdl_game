@@ -6,31 +6,52 @@ int is_skill_two_target(int skill)
 
     switch(skill)
     {
-        case SKILL__NONE:                   is = 0; break;
-        case SKILL__PICK_ITEM_CLOSE:   is = 0; break;
-        case SKILL__PICK_ITEM_FAR:     is = 0; break;
-        case SKILL__PUT_ITEM_CLOSE:    is = 0; break;
-        case SKILL__PUT_ITEM_FAR:      is = 0; break;
-        case SKILL__USE:               is = 0; break;
-        case SKILL__MANIPULATION:      is = 0; break;
-        case SKILL__MOVE:              is = 0; break;
-        case SKILL__MOVE_FLOATING:     is = 0; break;
-        case SKILL__MOVE_FLYING:       is = 0; break;
-        case SKILL__THROW_CELL:        is = 0; break;
-        case SKILL__THROW_DYNAMITE:    is = 0; break;
-        case SKILL__THROW_GEMSTONE:    is = 0; break;
-        case SKILL__CHARGE:                 is = 0; break;
-        case SKILL__JUMP:                   is = 0; break;
-        case SKILL__CHARGE_AND_PUSH:        is = 1; break;
-        case SKILL__CHARGE_AND_THROW:       is = 1; break;
-        case SKILL__PUSH:                   is = 1; break;
-        case SKILL__PULL:                   is = 1; break;
-        case SKILL__PULL_AND_THROW:         is = 1; break;
-        case SKILL__THROW:                  is = 1; break;
-        case SKILL__STOMP:                  is = 0; break;
-        case SKILL__TURRET_LASER:           is = 0; break;
-        case SKILL__TURRET_BOMB:            is = 0; break;
-        case SKILL__TURRET_PROJECTILE:      is = 0; break;
+        case SKILL__NONE:               is = 0; break;
+
+        case SKILL__USE:                is = 0; break;
+        case SKILL__MANIPULATION:       is = 0; break;
+        case SKILL__TELEPORTATION:      is = 0; break;
+
+        case SKILL__MOVE:               is = 0; break;
+        case SKILL__MOVE_FLOATING:      is = 0; break;
+        case SKILL__MOVE_FLYING:        is = 0; break;
+
+        case SKILL__PICK_ITEM_CLOSE:            is = 0; break;
+        case SKILL__PICK_ITEM_FAR:              is = 0; break;
+
+        case SKILL__PUT_ITEM_CELL_CLOSE:        is = 0; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          is = 0; break;
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    is = 0; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      is = 0; break;
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    is = 0; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      is = 0; break;
+
+        case SKILL__THROW_ITEM_CELL:            is = 0; break;
+        case SKILL__THROW_ITEM_DYNAMITE:        is = 0; break;
+        case SKILL__THROW_ITEM_GEMSTONE:        is = 0; break;
+
+        case SKILL__PUSH:               is = 1; break;
+        case SKILL__THROW:              is = 1; break;
+        case SKILL__PULL:               is = 1; break;
+        case SKILL__JUMP:               is = 0; break;
+        case SKILL__CHARGE:             is = 0; break;
+        case SKILL__STOMP:              is = 0; break;
+
+        case SKILL__PULL_AND_THROW:     is = 1; break;
+        case SKILL__CHARGE_AND_PUSH:    is = 1; break;
+        case SKILL__CHARGE_AND_THROW:   is = 1; break;
+        case SKILL__CHARGE_AND_JUMP:    is = 0; break;
+        case SKILL__JUMP_AND_CARRY:     is = 1; break;
+        case SKILL__JUMP_AND_STOMP:     is = 0; break;
+
+        case SKILL__LAUNCH_MINIBOT:     is = 0; break;
+        case SKILL__ASCEND:             is = 0; break;
+        case SKILL__DESCEND:            is = 0; break;
+
+        case SKILL__TURRET_LASER:       is = 0; break;
+        case SKILL__TURRET_BOMB:        is = 0; break;
+        case SKILL__TURRET_PROJECTILE:  is = 0; break;
+
         default: break;
     }
 
@@ -39,35 +60,56 @@ int is_skill_two_target(int skill)
 
 char* get_skill_name(int skill)
 {
-    char* name = "";
+    char* name = "???";
 
     switch(skill)
     {
-        case SKILL__NONE:                   name = "none";                  break;
-        case SKILL__PICK_ITEM_CLOSE:   name = "hero pick item close";  break;
-        case SKILL__PICK_ITEM_FAR:     name = "hero pick item far";    break;
-        case SKILL__PUT_ITEM_CLOSE:    name = "hero put item close";   break;
-        case SKILL__PUT_ITEM_FAR:      name = "hero put item far";     break;
-        case SKILL__USE:               name = "hero use";              break;
-        case SKILL__MANIPULATION:      name = "hero manipulation";     break;
-        case SKILL__MOVE:              name = "hero move";             break;
-        case SKILL__MOVE_FLOATING:     name = "hero move floating";    break;
-        case SKILL__MOVE_FLYING:       name = "hero move flying";      break;
-        case SKILL__THROW_CELL:        name = "hero throw cell";       break;
-        case SKILL__THROW_DYNAMITE:    name = "hero throw dynamite";   break;
-        case SKILL__THROW_GEMSTONE:    name = "hero throw gemstone";   break;
-        case SKILL__CHARGE:                 name = "charge";                break;
-        case SKILL__JUMP:                   name = "jump";                  break;
-        case SKILL__CHARGE_AND_PUSH:        name = "charge and push";       break;
-        case SKILL__CHARGE_AND_THROW:       name = "charge and throw";      break;
-        case SKILL__PUSH:                   name = "push";                  break;
-        case SKILL__PULL:                   name = "pull";                  break;
-        case SKILL__PULL_AND_THROW:         name = "pull and throw";        break;
-        case SKILL__THROW:                  name = "throw";                 break;
-        case SKILL__STOMP:                  name = "stomp";                 break;
-        case SKILL__TURRET_LASER:           name = "turret laser";          break;
-        case SKILL__TURRET_BOMB:            name = "turret bomb";           break;
-        case SKILL__TURRET_PROJECTILE:      name = "turret projectile";     break;
+        case SKILL__NONE:               name = "none"; break;
+
+        case SKILL__USE:                name = "use"; break;
+        case SKILL__MANIPULATION:       name = "manipulation"; break;
+        case SKILL__TELEPORTATION:      name = "teleportation"; break;
+
+        case SKILL__MOVE:               name = "move"; break;
+        case SKILL__MOVE_FLOATING:      name = "move floating"; break;
+        case SKILL__MOVE_FLYING:        name = "move flying"; break;
+
+        case SKILL__PICK_ITEM_CLOSE:            name = "pick item close"; break;
+        case SKILL__PICK_ITEM_FAR:              name = "pick item far"; break;
+
+        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put item cell close"; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell far"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put item dynamite close"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite far"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put item gemstone close"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone far"; break;
+
+        case SKILL__THROW_ITEM_CELL:            name = "throw item cell"; break;
+        case SKILL__THROW_ITEM_DYNAMITE:        name = "throw item dynamite"; break;
+        case SKILL__THROW_ITEM_GEMSTONE:        name = "throw item gemstone"; break;
+
+        case SKILL__PUSH:               name = "push"; break;
+        case SKILL__THROW:              name = "throw"; break;
+        case SKILL__PULL:               name = "pull"; break;
+        case SKILL__JUMP:               name = "jump"; break;
+        case SKILL__CHARGE:             name = "charge"; break;
+        case SKILL__STOMP:              name = "stomp"; break;
+
+        case SKILL__PULL_AND_THROW:     name = "pull and throw"; break;
+        case SKILL__CHARGE_AND_PUSH:    name = "charge and push"; break;
+        case SKILL__CHARGE_AND_THROW:   name = "charge and throw"; break;
+        case SKILL__CHARGE_AND_JUMP:    name = "charge and jump"; break;
+        case SKILL__JUMP_AND_CARRY:     name = "jump and carry"; break;
+        case SKILL__JUMP_AND_STOMP:     name = "jump and stomp"; break;
+
+        case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
+        case SKILL__ASCEND:             name = "ascend"; break;
+        case SKILL__DESCEND:            name = "descend"; break;
+
+        case SKILL__TURRET_LASER:       name = "turret laser"; break;
+        case SKILL__TURRET_BOMB:        name = "turret bomb"; break;
+        case SKILL__TURRET_PROJECTILE:  name = "turret projectile"; break;
+
         default: break;
     }
 

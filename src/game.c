@@ -491,7 +491,7 @@ int main (int argc, char* argv[])
         }
     }
 
-    state.curr_ally = new_ally(state.minibot_object);
+    state.curr_ally = new_ally(state.hero_object);
 
     state.hero_item_number[ITEM__CELL] = 5;
     state.hero_item_number[ITEM__DYNAMITE] = 5;
@@ -501,6 +501,7 @@ int main (int argc, char* argv[])
     hero_add_augmentation(&state, AUGMENTATION__CHAIN_HAND);
     hero_add_augmentation(&state, AUGMENTATION__SPRING_LEG);
     hero_add_augmentation(&state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(&state, AUGMENTATION__MANIPULATION_HEAD);
 
     while (state.is_game_running)
     {

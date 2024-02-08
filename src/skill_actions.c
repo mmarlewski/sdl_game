@@ -15,9 +15,18 @@ void skill_get_actions(
 
     switch(skill)
     {
-        case SKILL__NONE:
+        case SKILL__USE:
         {
-            //
+            if(target_2_object != 0 && is_object_station(target_2_object))
+            {
+                add_action_after_curr_action_action_sequence(
+                    action_sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__STATION_TAKEN,
+                        target_2_tilemap_pos
+                        )
+                    );
+            }
         }
         break;
         case SKILL__STOMP:
@@ -83,9 +92,30 @@ void skill_get_actions(
             }
         }
         break;
-        case SKILL__PUT_ITEM_CLOSE:
-        case SKILL__PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_CELL_CLOSE:
+        case SKILL__PUT_ITEM_CELL_FAR:
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
+            int item_type = ITEM__NONE;
+            if(skill == SKILL__PUT_ITEM_CELL_CLOSE ||
+            skill == SKILL__PUT_ITEM_CELL_FAR)
+            {
+                item_type = ITEM__CELL;
+            }
+            if(skill == SKILL__PUT_ITEM_DYNAMITE_CLOSE ||
+            skill == SKILL__PUT_ITEM_DYNAMITE_FAR)
+            {
+                item_type = ITEM__DYNAMITE;
+            }
+            if(skill == SKILL__PUT_ITEM_GEMSTONE_CLOSE ||
+            skill == SKILL__PUT_ITEM_GEMSTONE_FAR)
+            {
+                item_type = ITEM__GEMSTONE;
+            }
+
             if(target_2_object != 0)
             {
                 if(source_object->type == OBJECT_TYPE__HERO ||
@@ -97,7 +127,7 @@ void skill_get_actions(
                         action_sequence,
                         target_2_object,
                         target_2_tilemap_pos,
-                        state->hero_curr_item
+                        item_type
                         );
                 }
                 else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL)
@@ -144,7 +174,7 @@ void skill_get_actions(
                         action_sequence,
                         floor,
                         target_2_tilemap_pos,
-                        state->hero_curr_item
+                        item_type
                         );
                 }
                 else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL)
@@ -241,7 +271,7 @@ void skill_get_actions(
             destroy_list(path_pos);
         }
         break;
-        case SKILL__THROW_CELL:
+        case SKILL__THROW_ITEM_CELL:
         {
             add_action_to_end_action_sequence(
                 action_sequence,
@@ -249,7 +279,7 @@ void skill_get_actions(
                 );
         }
         break;
-        case SKILL__THROW_DYNAMITE:
+        case SKILL__THROW_ITEM_DYNAMITE:
         {
             add_action_to_end_action_sequence(
                 action_sequence,
@@ -267,7 +297,7 @@ void skill_get_actions(
             }
         }
         break;
-        case SKILL__THROW_GEMSTONE:
+        case SKILL__THROW_ITEM_GEMSTONE:
         {
             add_action_to_end_action_sequence(
                 action_sequence,

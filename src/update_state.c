@@ -164,7 +164,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         state->camera_world_pos = new_camera_world_pos;
     }
 
-    state->show_all_order_numbers = input->is_key[KEY__T];
+    state->show_all_order_numbers = input->is_key[KEY__2];
 
     // animations
 
@@ -250,38 +250,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             int skill = SKILL__NONE;
 
-            if(input->was_key[KEY__W] && !input->is_key[KEY__W]) skill = SKILL__MANIPULATION;
-            if(input->was_key[KEY__E] && !input->is_key[KEY__E]) skill = SKILL__USE;
-
-            if(input->was_key[KEY__R] && !input->is_key[KEY__R])
-            {
-                switch(state->curr_ally->object->type)
-                {
-                    case OBJECT_TYPE__HERO:
-                    case OBJECT_TYPE__MINIBOT_ALLY:
-                    case OBJECT_TYPE__MINIBOT_ALLY_CELL:
-                    case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
-                    case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
-                    {
-                        skill = SKILL__MOVE;
-                    }
-                    break;
-                    case OBJECT_TYPE__HERO_FLOATING:
-                    {
-                        skill = SKILL__MOVE;
-                    }
-                    break;
-                    case OBJECT_TYPE__HERO_FLYING:
-                    {
-                        skill = SKILL__MOVE;
-                    }
-                    break;
-                    default:
-                    break;
-                }
-            }
-
-            if(input->was_key[KEY__1] && !input->is_key[KEY__1])
+            if(input->was_key[KEY__Q] && !input->is_key[KEY__Q])
             {
                 if(state->curr_ally_skill_list->size >= 1)
                 {
@@ -292,7 +261,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__2] && !input->is_key[KEY__2])
+            if(input->was_key[KEY__W] && !input->is_key[KEY__W])
             {
                 if(state->curr_ally_skill_list->size >= 2)
                 {
@@ -303,7 +272,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__3] && !input->is_key[KEY__3])
+            if(input->was_key[KEY__E] && !input->is_key[KEY__E])
             {
                 if(state->curr_ally_skill_list->size >= 3)
                 {
@@ -314,7 +283,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__4] && !input->is_key[KEY__4])
+            if(input->was_key[KEY__R] && !input->is_key[KEY__R])
             {
                 if(state->curr_ally_skill_list->size >= 4)
                 {
@@ -325,7 +294,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__5] && !input->is_key[KEY__5])
+            if(input->was_key[KEY__T] && !input->is_key[KEY__T])
             {
                 if(state->curr_ally_skill_list->size >= 5)
                 {
@@ -336,7 +305,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__6] && !input->is_key[KEY__6])
+            if(input->was_key[KEY__Y] && !input->is_key[KEY__Y])
             {
                 if(state->curr_ally_skill_list->size >= 6)
                 {
@@ -347,7 +316,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__7] && !input->is_key[KEY__7])
+            if(input->was_key[KEY__U] && !input->is_key[KEY__U])
             {
                 if(state->curr_ally_skill_list->size >= 7)
                 {
@@ -358,7 +327,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__8] && !input->is_key[KEY__8])
+            if(input->was_key[KEY__I] && !input->is_key[KEY__I])
             {
                 if(state->curr_ally_skill_list->size >= 8)
                 {
@@ -369,7 +338,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-            if(input->was_key[KEY__9] && !input->is_key[KEY__9])
+            if(input->was_key[KEY__O] && !input->is_key[KEY__O])
             {
                 if(state->curr_ally_skill_list->size >= 9)
                 {
@@ -380,83 +349,191 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     }
                 }
             }
-
+            if(input->was_key[KEY__P] && !input->is_key[KEY__P])
+            {
+                if(state->curr_ally_skill_list->size >= 10)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 9);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
+            }
             if(input->was_key[KEY__A] && !input->is_key[KEY__A])
             {
-                skill = SKILL__PICK_ITEM_CLOSE;
+                if(state->curr_ally_skill_list->size >= 11)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 10);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
             }
             if(input->was_key[KEY__S] && !input->is_key[KEY__S])
             {
-                skill = SKILL__PICK_ITEM_FAR;
+                if(state->curr_ally_skill_list->size >= 12)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 11);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
             }
             if(input->was_key[KEY__D] && !input->is_key[KEY__D])
             {
-                if(state->hero_item_number[ITEM__CELL] > 0)
+                if(state->curr_ally_skill_list->size >= 13)
                 {
-                    state->hero_curr_item = ITEM__CELL;
-                    skill = SKILL__PUT_ITEM_CLOSE;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 12);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__F] && !input->is_key[KEY__F])
             {
-                if(state->hero_item_number[ITEM__CELL] > 0)
+                if(state->curr_ally_skill_list->size >= 14)
                 {
-                    state->hero_curr_item = ITEM__CELL;
-                    skill = SKILL__PUT_ITEM_FAR;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 13);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__G] && !input->is_key[KEY__G])
             {
-                if(state->hero_item_number[ITEM__DYNAMITE] > 0)
+                if(state->curr_ally_skill_list->size >= 15)
                 {
-                    state->hero_curr_item = ITEM__DYNAMITE;
-                    skill = SKILL__PUT_ITEM_CLOSE;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 14);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__H] && !input->is_key[KEY__H])
             {
-                if(state->hero_item_number[ITEM__DYNAMITE] > 0)
+                if(state->curr_ally_skill_list->size >= 16)
                 {
-                    state->hero_curr_item = ITEM__DYNAMITE;
-                    skill = SKILL__PUT_ITEM_FAR;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 15);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__J] && !input->is_key[KEY__J])
             {
-                if(state->hero_item_number[ITEM__GEMSTONE] > 0)
+                if(state->curr_ally_skill_list->size >= 17)
                 {
-                    state->hero_curr_item = ITEM__GEMSTONE;
-                    skill = SKILL__PUT_ITEM_CLOSE;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 16);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__K] && !input->is_key[KEY__K])
             {
-                if(state->hero_item_number[ITEM__GEMSTONE] > 0)
+                if(state->curr_ally_skill_list->size >= 18)
                 {
-                    state->hero_curr_item = ITEM__GEMSTONE;
-                    skill = SKILL__PUT_ITEM_FAR;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 17);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
-
+            if(input->was_key[KEY__L] && !input->is_key[KEY__L])
+            {
+                if(state->curr_ally_skill_list->size >= 19)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 18);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
+            }
             if(input->was_key[KEY__Z] && !input->is_key[KEY__Z])
             {
-                if(state->hero_item_number[ITEM__CELL] > 0)
+                if(state->curr_ally_skill_list->size >= 20)
                 {
-                    skill = SKILL__THROW_CELL;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 19);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__X] && !input->is_key[KEY__X])
             {
-                if(state->hero_item_number[ITEM__DYNAMITE] > 0)
+                if(state->curr_ally_skill_list->size >= 21)
                 {
-                    skill = SKILL__THROW_DYNAMITE;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 20);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
             if(input->was_key[KEY__C] && !input->is_key[KEY__C])
             {
-                if(state->hero_item_number[ITEM__GEMSTONE] > 0)
+                if(state->curr_ally_skill_list->size >= 22)
                 {
-                    skill = SKILL__THROW_GEMSTONE;
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 21);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
+            }
+            if(input->was_key[KEY__V] && !input->is_key[KEY__V])
+            {
+                if(state->curr_ally_skill_list->size >= 23)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 22);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
+            }
+            if(input->was_key[KEY__B] && !input->is_key[KEY__B])
+            {
+                if(state->curr_ally_skill_list->size >= 24)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 23);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
+            }
+            if(input->was_key[KEY__N] && !input->is_key[KEY__N])
+            {
+                if(state->curr_ally_skill_list->size >= 25)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 24);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
+                }
+            }
+            if(input->was_key[KEY__M] && !input->is_key[KEY__M])
+            {
+                if(state->curr_ally_skill_list->size >= 26)
+                {
+                    ListElem* list_elem = get_nth_list_element(state->curr_ally_skill_list, 25);
+                    if(list_elem != 0)
+                    {
+                        skill = (int) list_elem->data;
+                    }
                 }
             }
 
@@ -513,7 +590,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__HERO_CHOOSING_TARGET_1:
         {
-            if (input->was_key[KEY__Q] && !input->is_key[KEY__Q])
+            if (input->was_key[KEY__1] && !input->is_key[KEY__1])
             {
                 remove_all_actions_from_action_sequence(state->ally_action_sequence);
 
@@ -550,7 +627,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__HERO_CHOOSING_TARGET_2:
         {
-            if (input->was_key[KEY__Q] && !input->is_key[KEY__Q])
+            if (input->was_key[KEY__1] && !input->is_key[KEY__1])
             {
                 state->prev_selected_tilemap_pos = vec2i(-1, -1);
                 state->curr_selected_tilemap_pos = vec2i(-1, -1);

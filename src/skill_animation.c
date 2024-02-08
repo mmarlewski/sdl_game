@@ -19,7 +19,9 @@ Animation* skill_get_animation(
     switch (skill)
     {
         case SKILL__PICK_ITEM_FAR:
-        case SKILL__PUT_ITEM_FAR:
+        case SKILL__PUT_ITEM_CELL_FAR:
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
@@ -105,7 +107,7 @@ Animation* skill_get_animation(
             }
         }
         break;
-        case SKILL__THROW_CELL:
+        case SKILL__THROW_ITEM_CELL:
         {
             Animation* animation_sequence = new_animation_sequence();
 
@@ -132,7 +134,7 @@ Animation* skill_get_animation(
             skill_animation = animation_sequence;
         }
         break;
-        case SKILL__THROW_DYNAMITE:
+        case SKILL__THROW_ITEM_DYNAMITE:
         {
             Animation* animation_sequence = new_animation_sequence();
 
@@ -168,7 +170,7 @@ Animation* skill_get_animation(
             skill_animation = animation_sequence;
         }
         break;
-        case SKILL__THROW_GEMSTONE:
+        case SKILL__THROW_ITEM_GEMSTONE:
         {
             Animation* animation_sequence = new_animation_sequence();
 

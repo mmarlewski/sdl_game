@@ -11,61 +11,6 @@ void skill_get_possible_target_1_pos(
 
     switch(skill)
     {
-        case SKILL__PICK_ITEM_CLOSE:
-        {
-            //
-        }
-        break;
-        case SKILL__PICK_ITEM_FAR:
-        {
-            //
-        }
-        break;
-        case SKILL__PUT_ITEM_CLOSE:
-        {
-            //
-        }
-        break;
-        case SKILL__PUT_ITEM_FAR:
-        {
-            //
-        }
-        break;
-        case SKILL__MOVE:
-        {
-            //
-        }
-        break;
-        case SKILL__MANIPULATION:
-        {
-            //
-        }
-        break;
-        case SKILL__THROW_CELL:
-        {
-            //
-        }
-        break;
-        case SKILL__THROW_DYNAMITE:
-        {
-            //
-        }
-        break;
-        case SKILL__THROW_GEMSTONE:
-        {
-            //
-        }
-        break;
-        case SKILL__CHARGE:
-        {
-            //
-        }
-        break;
-        case SKILL__JUMP:
-        {
-            //
-        }
-        break;
         case SKILL__CHARGE_AND_PUSH:
         case SKILL__CHARGE_AND_THROW:
         case SKILL__PULL:
