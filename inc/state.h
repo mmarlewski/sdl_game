@@ -95,7 +95,9 @@ typedef struct
     int hero_item_number[ITEM__COUNT];
     int hero_body_part_augmentation[BODY_PART__COUNT];
     int hero_curr_item;
+
     Object* minibot_object;
+    int was_minibot_launched;
 
     List* curr_ally_draw_below_texture_list;
     List* curr_ally_draw_below_tilemap_pos_list;
@@ -265,6 +267,7 @@ void update_ally_list(State* state);
 void update_ally_skill_list(State* state, Ally* ally);
 void restore_ally_action_points(State* state, Ally* ally);
 void update_curr_ally_draw(State* state, Textures* textures, Colors* colors);
+void clear_curr_ally_draw(State* state, Textures* textures, Colors* colors);
 
 void remove_all_object_to_be_removed(State* state);
 

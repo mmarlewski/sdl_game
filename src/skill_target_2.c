@@ -189,30 +189,9 @@ void skill_get_possible_target_2_pos(
             destroy_list(square_area_pos);
         }
         break;
+        case SKILL__LAUNCH_MINIBOT:
         case SKILL__THROW_ITEM_CELL:
-        {
-            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
-            {
-                for(int i = 1; i < 10; i++)
-                {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
-                }
-            }
-        }
-        break;
         case SKILL__THROW_ITEM_DYNAMITE:
-        {
-            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
-            {
-                for(int i = 1; i < 10; i++)
-                {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
-                    add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(tilemap_pos));
-                }
-            }
-        }
-        break;
         case SKILL__THROW_ITEM_GEMSTONE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)

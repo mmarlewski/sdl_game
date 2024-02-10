@@ -338,7 +338,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             if(action->add_object.new_object != 0)
             {
-                room_add_object(state->curr_room, action->add_object.new_object);
+                room_add_object_at(
+                    state->curr_room,
+                    action->add_object.new_object,
+                    action->tilemap_pos
+                    );
             }
         }
         break;

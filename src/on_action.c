@@ -385,12 +385,10 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
     {
         case FLOOR_TYPE__METAL_PISTON:
         {
-            Object* object_piston = new_object(OBJECT_TYPE__PISTON);
-            object_piston->tilemap_pos = tilemap_pos;
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_add_object(
-                    object_piston,
+                    new_object(OBJECT_TYPE__PISTON),
                     tilemap_pos
                     )
                 );
@@ -398,12 +396,10 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
         break;
         case FLOOR_TYPE__METAL_PISTON_CELL:
         {
-            Object* object_piston = new_object(OBJECT_TYPE__PISTON_CELL);
-            object_piston->tilemap_pos = tilemap_pos;
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_add_object(
-                    object_piston,
+                    new_object(OBJECT_TYPE__PISTON_CELL),
                     tilemap_pos
                     )
                 );
@@ -411,12 +407,10 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
         break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:
         {
-            Object* object_piston = new_object(OBJECT_TYPE__PISTON_DYNAMITE);
-            object_piston->tilemap_pos = tilemap_pos;
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_add_object(
-                    object_piston,
+                    new_object(OBJECT_TYPE__PISTON_DYNAMITE),
                     tilemap_pos
                     )
                 );
@@ -424,12 +418,10 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
         break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:
         {
-            Object* object_piston = new_object(OBJECT_TYPE__PISTON_BARREL);
-            object_piston->tilemap_pos = tilemap_pos;
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_add_object(
-                    object_piston,
+                    new_object(OBJECT_TYPE__PISTON_BARREL),
                     tilemap_pos
                     )
                 );
@@ -457,12 +449,11 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
         break;
         case FLOOR_TYPE__METAL_STAIRS_ABOVE_OFF:
         {
-            Object* object_piston = new_object(OBJECT_TYPE__STAIRS_ABOVE_METAL_ON);
-            object_piston->tilemap_pos = tilemap_pos;
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_add_object(
-                    object_piston, tilemap_pos
+                    new_object(OBJECT_TYPE__STAIRS_ABOVE_METAL_ON),
+                    tilemap_pos
                     )
                 );
         }
@@ -617,13 +608,10 @@ void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_
                         )
                     );
 
-                Object* object = new_object(OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED);
-                object->tilemap_pos = tilemap_pos;
-
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_add_object(
-                        object,
+                        new_object(OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED),
                         tilemap_pos
                         )
                     );

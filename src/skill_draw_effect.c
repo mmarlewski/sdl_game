@@ -18,9 +18,16 @@ void skill_get_draw_effect(
 
     switch(skill)
     {
-        case SKILL__NONE:
+        case SKILL__LAUNCH_MINIBOT:
         {
-            //
+                    add_new_list_element_to_list_end(
+                        texture_list,
+                        textures->object.minibot_ally_1
+                        );
+                    add_new_list_element_to_list_end(
+                        tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
         }
         break;
         case SKILL__USE:

@@ -672,6 +672,7 @@ typedef struct
     Texture* cell;
     Texture* dynamite;
     Texture* gemstone;
+    Texture* minibot;
 
 } Textures_Animation;
 

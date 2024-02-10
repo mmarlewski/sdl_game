@@ -610,6 +610,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     state->selected_tilemap_pos = vec2i(-1, -1);
 
+                    // possible target 2 positions
                     remove_all_list_elements(state->possible_target_2_tilemap_pos_list, 1);
                     skill_get_possible_target_2_pos(
                         state,
@@ -618,6 +619,39 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->curr_ally_target_1_tilemap_pos,
                         state->possible_target_2_tilemap_pos_list
                         );
+
+                    // selected position
+                    int is_mouse_pos_in_possible_target_2_pos = 0;
+                    for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
+                    !is_mouse_pos_in_possible_target_2_pos && curr_elem != 0;
+                    curr_elem = curr_elem->next)
+                    {
+                        Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+                        if(vec2i_equals(*tilemap_pos, mouse_tilemap_pos))
+                        {
+                            is_mouse_pos_in_possible_target_2_pos = 1;
+                        }
+                    }
+
+                    // new actions and draw
+                    if(is_mouse_pos_in_possible_target_2_pos)
+                    {
+                        remove_all_actions_from_action_sequence(state->ally_action_sequence);
+                        skill_get_actions(
+                            state,
+                            state->ally_action_sequence,
+                            state->curr_ally_skill,
+                            state->curr_ally->object->tilemap_pos,
+                            state->curr_ally_target_1_tilemap_pos,
+                            state->curr_ally_target_2_tilemap_pos
+                            );
+                        update_curr_ally_draw(state, textures, colors);
+                    }
+                    else
+                    {
+                        clear_curr_ally_draw(state, textures, colors);
+                    }
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
                     break;
@@ -651,19 +685,11 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     is_mouse_pos_in_possible_target_1_pos = 1;
                 }
             }
-            int is_new_selected_pos = 0;
-            if(is_mouse_pos_in_possible_target_1_pos)
-            {
-                is_new_selected_pos =
-                    !vec2i_equals(
-                        state->selected_tilemap_pos,
-                        state->mouse_tilemap_pos
-                        );
-                state->selected_tilemap_pos = state->mouse_tilemap_pos;
-            }
 
             if(is_mouse_pos_in_possible_target_1_pos)
             {
+                state->selected_tilemap_pos = mouse_tilemap_pos;
+
                 // go to choosing target 2
                 if(input->was_mouse_left && !input->is_mouse_left)
                 {
@@ -683,6 +709,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
                     break;
                 }
+            }
+            else
+            {
+                state->selected_tilemap_pos = vec2i(-1, -1);
             }
         }
         break;
@@ -724,33 +754,37 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     is_mouse_pos_in_possible_target_2_pos = 1;
                 }
             }
-            int is_new_selected_pos = 0;
-            if(is_mouse_pos_in_possible_target_2_pos)
-            {
-                is_new_selected_pos =
-                    !vec2i_equals(
-                        state->selected_tilemap_pos,
-                        state->mouse_tilemap_pos
-                        );
-                state->selected_tilemap_pos = state->mouse_tilemap_pos;
-            }
+            int is_new_selected_pos = !vec2i_equals(
+                state->selected_tilemap_pos,
+                state->mouse_tilemap_pos
+                );
 
+            // new actions and draw
             if(is_new_selected_pos)
             {
-                state->curr_ally_target_2_tilemap_pos = state->selected_tilemap_pos;
+                if(is_mouse_pos_in_possible_target_2_pos)
+                {
+                    state->selected_tilemap_pos = state->mouse_tilemap_pos;
 
-                remove_all_actions_from_action_sequence(state->ally_action_sequence);
+                    state->curr_ally_target_2_tilemap_pos = state->selected_tilemap_pos;
 
-                skill_get_actions(
-                    state,
-                    state->ally_action_sequence,
-                    state->curr_ally_skill,
-                    state->curr_ally->object->tilemap_pos,
-                    state->curr_ally_target_1_tilemap_pos,
-                    state->curr_ally_target_2_tilemap_pos
-                    );
+                    remove_all_actions_from_action_sequence(state->ally_action_sequence);
+                    skill_get_actions(
+                        state,
+                        state->ally_action_sequence,
+                        state->curr_ally_skill,
+                        state->curr_ally->object->tilemap_pos,
+                        state->curr_ally_target_1_tilemap_pos,
+                        state->curr_ally_target_2_tilemap_pos
+                        );
+                    update_curr_ally_draw(state, textures, colors);
+                }
+                else
+                {
+                    state->selected_tilemap_pos = vec2i(-1,-1);
 
-                update_curr_ally_draw(state, textures, colors);
+                    clear_curr_ally_draw(state, textures, colors);
+                }
             }
 
             // go to executing

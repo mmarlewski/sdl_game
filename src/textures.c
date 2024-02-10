@@ -672,6 +672,7 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->cell = load_texture_from_filepath (renderer, "./res/animation/cell.png");
     animation->dynamite = load_texture_from_filepath (renderer, "./res/animation/dynamite.png");
     animation->gemstone = load_texture_from_filepath (renderer, "./res/animation/gemstone.png");
+    animation->minibot = load_texture_from_filepath (renderer, "./res/animation/minibot.png");
 }
 
 void destroy_textures_animation (Textures_Animation* animation)

@@ -125,11 +125,6 @@ int main (int argc, char* argv[])
         state.hero_object,
         vec2i(7,5)
         );
-    room_add_object_at(
-        first_room,
-        state.minibot_object,
-        vec2i(7,6)
-        );
 
     for(int i = 0; i < TILEMAP_LENGTH; i++)
     {
@@ -482,6 +477,7 @@ int main (int argc, char* argv[])
     hero_add_augmentation(&state, AUGMENTATION__SCISSOR_HAND);
     hero_add_augmentation(&state, AUGMENTATION__SPRING_LEG);
     hero_add_augmentation(&state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(&state, AUGMENTATION__MINIBOT_TORSO);
     hero_add_augmentation(&state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(&state);

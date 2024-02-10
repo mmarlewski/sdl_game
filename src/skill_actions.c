@@ -15,6 +15,20 @@ void skill_get_actions(
 
     switch(skill)
     {
+        case SKILL__LAUNCH_MINIBOT:
+        {
+            if(target_2_object == 0)
+            {
+                add_action_after_curr_action_action_sequence(
+                    action_sequence,
+                    new_action_add_object(
+                        state->minibot_object,
+                        target_2_tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case SKILL__USE:
         {
             if(target_2_object != 0 && is_object_station(target_2_object))

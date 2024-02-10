@@ -16,6 +16,12 @@ void skill_on_use(
 
     switch (skill)
     {
+        case SKILL__LAUNCH_MINIBOT:
+        {
+            state->was_minibot_launched = 1;
+            state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
+        }
+        break;
         case SKILL__PICK_ITEM_CLOSE:
         case SKILL__PICK_ITEM_FAR:
         {

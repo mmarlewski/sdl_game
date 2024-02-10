@@ -50,7 +50,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->curr_skill_animation = 0;
 
     state->hero_object = new_object(OBJECT_TYPE__HERO);
-    state->hero_ap = ALLY_MAX_AP;
+    state->hero_ap = ALLY_MAX_ACTION_POINTS;
     for(int i = 0; i < ITEM__COUNT; i++)
     {
         state->hero_item_number[i] = 0;
@@ -60,7 +60,9 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state->hero_body_part_augmentation[i] = AUGMENTATION__NONE;
     }
     state->hero_curr_item = ITEM__NONE;
+
     state->minibot_object = new_object(OBJECT_TYPE__MINIBOT_ALLY);
+    state->was_minibot_launched = 0;
 
     state->curr_ally_draw_below_texture_list = new_list((void (*)(void *)) 0);
     state->curr_ally_draw_below_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
@@ -87,14 +89,14 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         int curr_ally_ap = state->curr_ally->object->action_points;
-        char hero_ap_bar[ALLY_MAX_AP + 2];
+        char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
         hero_ap_bar[0] = '[';
-        for(int i = 0; i < ALLY_MAX_AP; i ++)
+        for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i ++)
         {
             hero_ap_bar[i + 1] = (i + 1 <= curr_ally_ap) ? '#' : '-';
         }
-        hero_ap_bar[ALLY_MAX_AP + 1] = ']';
-        printf("a. points : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_AP);
+        hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
+        printf("a. points : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
         if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
         state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
         state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
@@ -414,20 +416,15 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             }
             if(hero_has_augmentation(state, AUGMENTATION__MINIBOT_TORSO))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__LAUNCH_MINIBOT);
+                if(!state->was_minibot_launched)
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__LAUNCH_MINIBOT);
+                }
             }
             if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__ASCEND);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__DESCEND);
-            }
-            if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MANIPULATION);
-            }
-            if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEPORTATION);
             }
             if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
             hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
@@ -747,7 +744,7 @@ void restore_ally_action_points(State* state, Ally* ally)
 {
     if(ally != 0)
     {
-        ally->object->action_points = ALLY_MAX_AP;
+        ally->object->action_points = ALLY_MAX_ACTION_POINTS;
     }
 }
 
@@ -796,6 +793,21 @@ void update_curr_ally_draw(State* state, Textures* textures, Colors* colors)
             textures,
             colors
             );
+    }
+}
+
+void clear_curr_ally_draw(State* state, Textures* textures, Colors* colors)
+{
+    if(state->curr_ally != 0)
+    {
+        remove_all_list_elements(state->curr_ally_draw_below_texture_list, 0);
+        remove_all_list_elements(state->curr_ally_draw_below_tilemap_pos_list, 1);
+
+        remove_all_list_elements(state->curr_ally_draw_above_texture_list, 0);
+        remove_all_list_elements(state->curr_ally_draw_above_tilemap_pos_list, 1);
+
+        remove_all_list_elements(state->curr_ally_draw_effect_texture_list, 0);
+        remove_all_list_elements(state->curr_ally_draw_effect_tilemap_pos_list, 1);
     }
 }
 
