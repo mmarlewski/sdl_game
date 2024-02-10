@@ -5,7 +5,9 @@ void skill_on_use(
     int skill,
     Vec2i source_tilemap_pos,
     Vec2i target_1_tilemap_pos,
-    Vec2i target_2_tilemap_pos
+    Vec2i target_2_tilemap_pos,
+    Textures* textures,
+    Colors* colors
 )
 {
     Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
@@ -195,19 +197,63 @@ void skill_on_use(
 
                         if(room != 0)
                         {
+                            // travel
                             room_remove_object(
                                 state->curr_room,
-                                state->curr_ally->object);
+                                state->curr_ally->object,
+                                0);
                             set_curr_room(state, room);
                             room_add_object_at(
                                 room,
                                 state->curr_ally->object,
                                 passage->to_tilemap_pos);
 
-                            determine_ally_list(state);
-                            determine_ally_order(state);
-                            determine_enemy_list(state);
-                            determine_enemy_order(state);
+                            // all enemies
+                            update_enemy_list(state);
+                            update_all_enemy_order(state);
+                            for(ListElem* curr_elem = state->enemy_list->head;
+                            curr_elem != 0; curr_elem = curr_elem->next)
+                            {
+                                Enemy* curr_enemy = (Enemy*) curr_elem->data;
+                                update_enemy_attack_dir4(state, curr_enemy);
+                                update_enemy_attack_targets(state, curr_enemy);
+                                update_enemy_draw(state, curr_enemy, textures, colors);
+                            }
+
+                            // all allies
+                            update_ally_list(state);
+                            for(ListElem* curr_elem = state->ally_list->head;
+                            curr_elem != 0; curr_elem = curr_elem->next)
+                            {
+                                Ally* curr_ally = (Ally*) curr_elem->data;
+                                update_ally_skill_list(state, curr_ally);
+                            }
+
+                            // curr ally
+                            int was_prev_ally_chosen = 0;
+                            for(ListElem* curr_elem = state->ally_list->head;
+                            !was_prev_ally_chosen && curr_elem != 0;
+                            curr_elem = curr_elem->next)
+                            {
+                                Ally* curr_ally = (Ally*) curr_elem->data;
+                                if(curr_ally != 0)
+                                {
+                                    if(curr_ally->object != 0 &&
+                                    curr_ally->object == state->curr_ally_object)
+                                    {
+                                        state->curr_ally_list_elem = curr_elem;
+                                        state->curr_ally = curr_ally;
+                                        state->curr_ally_object = curr_ally->object;
+                                        was_prev_ally_chosen = 1;
+                                    }
+                                }
+                            }
+                            if(!was_prev_ally_chosen)
+                            {
+                                state->curr_ally_list_elem = state->ally_list->head;
+                                state->curr_ally = state->curr_ally_list_elem->data;
+                                state->curr_ally_object = state->curr_ally->object;
+                            }
                         }
                     }
                 }
@@ -232,19 +278,63 @@ void skill_on_use(
 
                             if(room != 0)
                             {
+                                // travel
                                 room_remove_object(
                                     state->curr_room,
-                                    state->curr_ally->object);
+                                    state->curr_ally->object,
+                                    0);
                                 set_curr_room(state, room);
                                 room_add_object_at(
                                     room,
                                     state->curr_ally->object,
                                     passage->to_tilemap_pos);
 
-                                determine_ally_list(state);
-                                determine_ally_order(state);
-                                determine_enemy_list(state);
-                                determine_enemy_order(state);
+                                // all enemies
+                                update_enemy_list(state);
+                                update_all_enemy_order(state);
+                                for(ListElem* curr_elem = state->enemy_list->head;
+                                curr_elem != 0; curr_elem = curr_elem->next)
+                                {
+                                    Enemy* curr_enemy = (Enemy*) curr_elem->data;
+                                    update_enemy_attack_dir4(state, curr_enemy);
+                                    update_enemy_attack_targets(state, curr_enemy);
+                                    update_enemy_draw(state, curr_enemy, textures, colors);
+                                }
+
+                                // all allies
+                                update_ally_list(state);
+                                for(ListElem* curr_elem = state->ally_list->head;
+                                curr_elem != 0; curr_elem = curr_elem->next)
+                                {
+                                    Ally* curr_ally = (Ally*) curr_elem->data;
+                                    update_ally_skill_list(state, curr_ally);
+                                }
+
+                                // curr ally
+                                int was_prev_ally_chosen = 0;
+                                for(ListElem* curr_elem = state->ally_list->head;
+                                !was_prev_ally_chosen && curr_elem != 0;
+                                curr_elem = curr_elem->next)
+                                {
+                                    Ally* curr_ally = (Ally*) curr_elem->data;
+                                    if(curr_ally != 0)
+                                    {
+                                        if(curr_ally->object != 0 &&
+                                        curr_ally->object == state->curr_ally_object)
+                                        {
+                                            state->curr_ally_list_elem = curr_elem;
+                                            state->curr_ally = curr_ally;
+                                            state->curr_ally_object = curr_ally->object;
+                                            was_prev_ally_chosen = 1;
+                                        }
+                                    }
+                                }
+                                if(!was_prev_ally_chosen)
+                                {
+                                    state->curr_ally_list_elem = state->ally_list->head;
+                                    state->curr_ally = state->curr_ally_list_elem->data;
+                                    state->curr_ally_object = state->curr_ally->object;
+                                }
                             }
                         }
                     }

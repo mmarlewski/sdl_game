@@ -126,7 +126,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
         }
         else break;
     }
-    enemy->attack_dir4 = dir4;
+    enemy->object->attack_dir4 = dir4;
 
     switch(object->type)
     {

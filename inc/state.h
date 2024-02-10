@@ -26,11 +26,11 @@ enum GAMESTATE
 {
     GAMESTATE__NONE,
 
-    GAMESTATE__HERO_CHOOSING_SKILL,
-    GAMESTATE__HERO_CHOOSING_TARGET_1,
-    GAMESTATE__HERO_CHOOSING_TARGET_2,
-    GAMESTATE__HERO_EXECUTING_ANIMATION,
-    GAMESTATE__HERO_EXECUTING_SKILL,
+    GAMESTATE__ALLY_CHOOSING_SKILL,
+    GAMESTATE__ALLY_CHOOSING_TARGET_1,
+    GAMESTATE__ALLY_CHOOSING_TARGET_2,
+    GAMESTATE__ALLY_EXECUTING_ANIMATION,
+    GAMESTATE__ALLY_EXECUTING_SKILL,
 
     GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK,
     GAMESTATE__ENEMY_EXECUTING_ANIMATION,
@@ -75,6 +75,7 @@ typedef struct
     List* possible_target_1_tilemap_pos_list;
     List* possible_target_2_tilemap_pos_list;
     int show_all_order_numbers;
+    Vec2i selected_tilemap_pos;
 
     List* enemy_list;
     ListElem* curr_enemy_list_elem;
@@ -83,30 +84,25 @@ typedef struct
     List* ally_list;
     ListElem* curr_ally_list_elem;
     Ally* curr_ally;
-    List* curr_ally_skill_list;
-    int curr_ally_curr_skill;
-    int is_curr_ally_skill_two_target;
+    Object* curr_ally_object;
+    int curr_ally_skill;
     Vec2i curr_ally_target_1_tilemap_pos;
     Vec2i curr_ally_target_2_tilemap_pos;
-    Animation* curr_ally_skill_animation;
+    Animation* curr_skill_animation;
 
     Object* hero_object;
     int hero_ap;
     int hero_item_number[ITEM__COUNT];
     int hero_body_part_augmentation[BODY_PART__COUNT];
     int hero_curr_item;
-
     Object* minibot_object;
 
-    Vec2i prev_selected_tilemap_pos;
-    Vec2i curr_selected_tilemap_pos;
-
     List* curr_ally_draw_below_texture_list;
-    List* curr_ally_draw_below_gamemap_pos_list;
+    List* curr_ally_draw_below_tilemap_pos_list;
     List* curr_ally_draw_above_texture_list;
-    List* curr_ally_draw_above_gamemap_pos_list;
+    List* curr_ally_draw_above_tilemap_pos_list;
     List* curr_ally_draw_effect_texture_list;
-    List* curr_ally_draw_effect_gamemap_pos_list;
+    List* curr_ally_draw_effect_tilemap_pos_list;
 
 } State;
 
@@ -134,12 +130,6 @@ void draw_texture_list(
     Vec3i color,
     float transparency
     );
-
-int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i tilemap_pos);
-int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i tilemap_pos);
-
-void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state);
-void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state);
 
 void add_animation_to_animation_list(State* state, Animation* animation, Textures *textures, Sounds *sounds, Musics *musics, Colors *colors);
 
@@ -182,7 +172,9 @@ void skill_on_use(
     int skill,
     Vec2i source_tilemap_pos,
     Vec2i target_1_tilemap_pos,
-    Vec2i target_2_tilemap_pos
+    Vec2i target_2_tilemap_pos,
+    Textures* textures,
+    Colors* colors
     );
 void skill_get_possible_target_1_pos(
     State* state,
@@ -253,23 +245,27 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy);
 
 char* get_gamestate_name(int gamestate);
 
-int get_hero_ap(State* state);
-void modify_hero_ap(State* state, int by);
-void restore_hero_ap(State* state);
 void hero_add_augmentation(State* state, int augmentation);
 int hero_has_augmentation(State* state, int augmentation);
 
-void determine_enemy_list(State* state);
-void determine_enemy_order(State* state);
-
-void determine_ally_list(State* state);
-void determine_ally_order(State* state);
-void get_object_ally_skills(State* state, Object* object, List* skill_list);
-
-void remove_all_dead_objects(State* state);
+void get_object_skills(State* state, Object* object, List* skill_list);
 
 Enemy* get_enemy_of_object(State* state, Object* object);
+Ally* get_ally_of_object(State* state, Object* object);
 
 void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying);
+
+void update_enemy_list(State* state);
+void update_all_enemy_order(State* state);
+void update_enemy_attack_dir4(State* state, Enemy* enemy);
+void update_enemy_attack_targets(State* state, Enemy* enemy);
+void update_enemy_draw(State* state, Enemy* enemy, Textures* textures, Colors* colors);
+
+void update_ally_list(State* state);
+void update_ally_skill_list(State* state, Ally* ally);
+void restore_ally_action_points(State* state, Ally* ally);
+void update_curr_ally_draw(State* state, Textures* textures, Colors* colors);
+
+void remove_all_object_to_be_removed(State* state);
 
 #endif

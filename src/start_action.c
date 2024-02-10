@@ -346,7 +346,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             if(action->remove_object.object_to_remove != 0)
             {
-                room_remove_object(state->curr_room, action->remove_object.object_to_remove);
+                action->remove_object.object_to_remove->is_to_be_removed = 1;
             }
         }
         break;

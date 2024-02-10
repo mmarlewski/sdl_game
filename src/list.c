@@ -254,6 +254,15 @@ ListElem* get_nth_list_element(List* list, int n)
     return 0;
 }
 
+ListElem* get_list_element_of_data(List* list, void* data)
+{
+    for(ListElem* elem = list->head; elem != 0; elem = elem->next)
+    {
+        if(elem->data == data) return elem;
+    }
+    return 0;
+}
+
 void print_list(List* list)
 {
     printf("printing list: %p of size: %i \n", list, list->size);

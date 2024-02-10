@@ -39,6 +39,7 @@ int is_data_in_list(List* list, void* data);
 void reverse_list(List* list);
 
 ListElem* get_nth_list_element(List* list, int n);
+ListElem* get_list_element_of_data(List* list, void* data);
 
 void print_list(List* list);
 

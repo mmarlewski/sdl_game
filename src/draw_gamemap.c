@@ -35,78 +35,81 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->camera_world_pos,
                 state->camera_zoom
                 );
-
-            // possible target 1
-
-            if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1)
-            {
-                if(is_tilemap_pos_in_possible_target_1_tilemap_pos_list(state, tilemap_pos))
-                {
-                    draw_texture_at_world_pos(
-                        renderer,
-                        textures->floor.highlight,
-                        colors->orange,
-                        1.0f,
-                        world_iso_pos,
-                        state->camera_world_pos,
-                        state->camera_zoom
-                        );
-                }
-            }
-
-            // possible target 2
-
-            if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
-            {
-                if(is_tilemap_pos_in_possible_target_2_tilemap_pos_list(state, tilemap_pos))
-                {
-                    draw_texture_at_world_pos(
-                        renderer,
-                        textures->floor.highlight,
-                        colors->pink,
-                        1.0f,
-                        world_iso_pos,
-                        state->camera_world_pos,
-                        state->camera_zoom
-                        );
-                }
-            }
-
-            // selected
-
-            if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
-            {
-                if(state->curr_selected_tilemap_pos.x == j && state->curr_selected_tilemap_pos.y == i)
-                {
-                    draw_texture_at_world_pos(
-                        renderer,
-                        textures->floor.highlight,
-                        colors->yellow,
-                        1.0f,
-                        world_iso_pos,
-                        state->camera_world_pos,
-                        state->camera_zoom
-                        );
-                }
-            }
         }
+    }
+
+    // possible target 1 floor
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
+    {
+        for(ListElem* curr_elem = state->possible_target_1_tilemap_pos_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+            draw_texture_at_tilemap_pos(
+                renderer,
+                textures->floor.highlight,
+                colors->orange,
+                1.0f,
+                *tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+                );
+        }
+    }
+
+    // possible target 2 floor
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+            draw_texture_at_tilemap_pos(
+                renderer,
+                textures->floor.highlight,
+                colors->pink,
+                1.0f,
+                *tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+                );
+        }
+    }
+
+    // selected floor
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 || state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        draw_texture_at_tilemap_pos(
+            renderer,
+            textures->floor.highlight,
+            colors->yellow,
+            1.0f,
+            state->selected_tilemap_pos,
+            state->camera_world_pos,
+            state->camera_zoom
+            );
     }
 
     // enemy skill draw below
 
-    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
-    state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
-    state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
+    if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
+    state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-    state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
+    state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
         is_object_enemy(hover_object) &&
-        !hover_object->is_dead &&
+        !hover_object->is_to_be_removed &&
         hover_object->is_visible)
         {
             draw_texture_list(
@@ -165,7 +168,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* curr_enemy = state->curr_enemy;
 
         if(curr_enemy != 0 &&
-        !curr_enemy->object->is_dead &&
+        !curr_enemy->object->is_to_be_removed &&
         curr_enemy->object->is_visible)
         {
             draw_texture_list(
@@ -181,13 +184,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // hero skill draw below
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         draw_texture_list(
             renderer,
             state,
             state->curr_ally_draw_below_texture_list,
-            state->curr_ally_draw_below_gamemap_pos_list,
+            state->curr_ally_draw_below_tilemap_pos_list,
             colors->green,
             1.0f
             );
@@ -211,7 +214,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 Object* curr_object = (Object*)curr_elem->data;
                 Enemy* curr_enemy = get_enemy_of_object(state, curr_object);
 
-                if(!curr_object->is_dead &&
+                if(!curr_object->is_to_be_removed &&
                 curr_object->is_visible &&
                 curr_object->tilemap_pos.x == j &&
                 curr_object->tilemap_pos.y == i)
@@ -285,18 +288,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // enemy skill draw above
 
-    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
-    state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
-    state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
+    if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
+    state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-    state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
+    state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_enemy != 0 &&
-        !hover_enemy->object->is_dead &&
+        !hover_enemy->object->is_to_be_removed &&
         hover_enemy->object->is_visible)
         {
             draw_texture_list(
@@ -355,7 +358,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* curr_enemy = state->curr_enemy;
 
         if(curr_enemy != 0 &&
-        !curr_enemy->object->is_dead &&
+        !curr_enemy->object->is_to_be_removed &&
         curr_enemy->object->is_visible)
         {
             draw_texture_list(
@@ -380,13 +383,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // hero skill draw above
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         draw_texture_list(
             renderer,
             state,
             state->curr_ally_draw_above_texture_list,
-            state->curr_ally_draw_above_gamemap_pos_list,
+            state->curr_ally_draw_above_tilemap_pos_list,
             colors->green,
             1.0f
             );
@@ -394,13 +397,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // yellow outline, order number
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
     {
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
-         !hover_object->is_dead &&
+         !hover_object->is_to_be_removed &&
         hover_object->is_visible)
         {
             Vec2i selected_tilemap_pos = state->mouse_tilemap_pos;
@@ -450,7 +453,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* enemy = state->curr_enemy;
 
         if(enemy != 0 &&
-         !enemy->object->is_dead &&
+         !enemy->object->is_to_be_removed &&
         enemy->object->is_visible)
         {
             Vec2i selected_tilemap_pos = enemy->object->tilemap_pos;
@@ -492,19 +495,79 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
+    // selected outline
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        Object* selected_object = room_get_object_at(
+            state->curr_room,
+            state->selected_tilemap_pos
+            );
+
+        if(selected_object != 0)
+        {
+            Texture* texture_outline = 0;
+            if(sin(state->time * 3) > 0)
+            {
+                texture_outline = get_texture_1_outline_from_object(selected_object, textures);
+            }
+            else
+            {
+                texture_outline = get_texture_2_outline_from_object(selected_object, textures);
+            }
+
+            draw_texture_at_tilemap_pos(
+                renderer,
+                texture_outline,
+                colors->yellow,
+                1.0f,
+                state->selected_tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+                );
+        }
+    }
+
+    // green outline
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+            Texture* texture_outline = 0;
+            if(sin(state->time * 3) > 0)
+            {
+                texture_outline = get_texture_1_outline_from_object(state->curr_ally_object, textures);
+            }
+            else
+            {
+                texture_outline = get_texture_2_outline_from_object(state->curr_ally_object, textures);
+            }
+            draw_texture_at_tilemap_pos(
+                renderer,
+                texture_outline,
+                colors->green,
+                1.0f,
+                state->curr_ally_object->tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+                );
+    }
+
     // enemy skill draw effect
 
-    if(state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_1 &&
-    state->gamestate != GAMESTATE__HERO_CHOOSING_TARGET_2 &&
-    state->gamestate != GAMESTATE__HERO_EXECUTING_ANIMATION &&
+    if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
+    state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
+    state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__HERO_EXECUTING_SKILL)
+    state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_enemy != 0 &&
-        !hover_enemy->object->is_dead &&
+        !hover_enemy->object->is_to_be_removed &&
         hover_enemy->object->is_visible)
         {
             draw_texture_list(
@@ -520,13 +583,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // hero skill draw effect
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         draw_texture_list(
             renderer,
             state,
             state->curr_ally_draw_effect_texture_list,
-            state->curr_ally_draw_effect_gamemap_pos_list,
+            state->curr_ally_draw_effect_tilemap_pos_list,
             colors->none,
             0.75f
             );

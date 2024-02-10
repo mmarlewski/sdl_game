@@ -9,49 +9,48 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->timer = 0.0f;
     state->background_color = colors->hero_background;
 
-    // camera
-
     state->camera_world_pos = vec2f(0, 0);
     state->camera_zoom = 2.0f;
-
-    // mouse
 
     state->mouse_screen_pos = vec2i(0, 0);
     state->mouse_world_pos = vec2f(0, 0);
     state->mouse_gamemap_pos = vec2f(0, 0);
     state->mouse_tilemap_pos = vec2i(0, 0);
+
     state->mouse_is_dragging = 0;
     state->mouse_drag_origin_world_pos = vec2f(0, 0);
+
+    state->is_executing_actions = 0;
+    state->enemy_action_sequence = 0;
+    state->ally_action_sequence = new_action_sequence();
 
     state->room_list = new_list((void (*)(void *))&destroy_room);
     state->passage_list = new_list((void (*)(void *))&destroy_passage);
     state->curr_room = 0;
 
-    // gamemap
-
-    state->enemy_list = new_list((void (*)(void *))&destroy_enemy);
-    state->hero_object = new_object(OBJECT_TYPE__HERO);
-    state->curr_enemy = 0;
-
-    state->ally_list = new_list((void (*)(void *))&destroy_ally);
-
+    state->animation_list = new_list((void (*)(void *))&destroy_animation);
     state->sprite_list = new_list((void (*)(void *))&destroy_sprite);
-
-    state->prev_selected_tilemap_pos = vec2i(0, 0);
-    state->curr_selected_tilemap_pos = vec2i(0, 0);
-
-    state->curr_ally_skill_list = new_list((void(*)(void*))0);
-    state->curr_ally_curr_skill = 0;
-    state->is_curr_ally_skill_two_target = 0;
 
     state->possible_target_1_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
     state->possible_target_2_tilemap_pos_list = new_list((void(*)(void*))&destroy_vec2i);
+    state->show_all_order_numbers = 0;
+    state->selected_tilemap_pos = vec2i(0, 0);
 
+    state->enemy_list = new_list((void (*)(void *))&destroy_enemy);
+    state->curr_enemy_list_elem = 0;
+    state->curr_enemy = 0;
+
+    state->ally_list = new_list((void (*)(void *))&destroy_ally);
+    state->curr_ally_list_elem = 0;
+    state->curr_ally = 0;
+    state->curr_ally_object = 0;
+    state->curr_ally_skill = SKILL__NONE;
     state->curr_ally_target_1_tilemap_pos = vec2i(0, 0);
     state->curr_ally_target_2_tilemap_pos = vec2i(0, 0);
+    state->curr_skill_animation = 0;
 
-    state->hero_ap = HERO_MAX_AP;
-
+    state->hero_object = new_object(OBJECT_TYPE__HERO);
+    state->hero_ap = ALLY_MAX_AP;
     for(int i = 0; i < ITEM__COUNT; i++)
     {
         state->hero_item_number[i] = 0;
@@ -61,27 +60,14 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state->hero_body_part_augmentation[i] = AUGMENTATION__NONE;
     }
     state->hero_curr_item = ITEM__NONE;
-
     state->minibot_object = new_object(OBJECT_TYPE__MINIBOT_ALLY);
 
-    state->show_all_order_numbers = 0;
-
-    state->animation_list = new_list((void (*)(void *))&destroy_animation);
-
-    // action
-
-    state->is_executing_actions = 0;
-    state->ally_action_sequence = new_action_sequence();
-    state->enemy_action_sequence = 0;
-
-    // draw
-
     state->curr_ally_draw_below_texture_list = new_list((void (*)(void *)) 0);
-    state->curr_ally_draw_below_gamemap_pos_list = new_list((void (*)(void *)) &destroy_vec2f);
+    state->curr_ally_draw_below_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
     state->curr_ally_draw_above_texture_list = new_list((void (*)(void *)) 0);
-    state->curr_ally_draw_above_gamemap_pos_list = new_list((void (*)(void *)) &destroy_vec2f);
+    state->curr_ally_draw_above_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
     state->curr_ally_draw_effect_texture_list = new_list((void (*)(void *)) 0);
-    state->curr_ally_draw_effect_gamemap_pos_list = new_list((void (*)(void *)) &destroy_vec2f);
+    state->curr_ally_draw_effect_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
 }
 
 void change_gamestate(State* state, int new_gamestate)
@@ -92,41 +78,48 @@ void change_gamestate(State* state, int new_gamestate)
     printf("----------------------------------------\n");
     printf("gamestate : %s \n", get_gamestate_name(state->gamestate));
     printf("----------------------------------------\n");
+    printf("curr ally : %s \n", get_name_from_object_type(state->curr_ally_object->type));
+    printf("----------------------------------------\n");
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_SKILL ||
-    state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
-    state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 ||
-    state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+    state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        int hero_ap = get_hero_ap(state);
-        char hero_ap_bar[HERO_MAX_AP + 2];
+        int curr_ally_ap = state->curr_ally->object->action_points;
+        char hero_ap_bar[ALLY_MAX_AP + 2];
         hero_ap_bar[0] = '[';
-        for(int i = 0; i < HERO_MAX_AP; i ++)
+        for(int i = 0; i < ALLY_MAX_AP; i ++)
         {
-            hero_ap_bar[i + 1] = (i + 1 <= hero_ap) ? '#' : '-';
+            hero_ap_bar[i + 1] = (i + 1 <= curr_ally_ap) ? '#' : '-';
         }
-        hero_ap_bar[HERO_MAX_AP + 1] = ']';
-        printf("hero ap   : %s %i / %i \n", hero_ap_bar, hero_ap, HERO_MAX_AP);
-        printf("----------------------------------------\n");
-        for(int i = 1; i < ITEM__COUNT; i++)
+        hero_ap_bar[ALLY_MAX_AP + 1] = ']';
+        printf("a. points : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_AP);
+        if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
+        state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
+        state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
         {
-            printf("%-10s: %i \n",
-                get_name_from_item(i),
-                state->hero_item_number[i]
-                );
+            printf("----------------------------------------\n");
+            for(int i = 1; i < ITEM__COUNT; i++)
+            {
+                printf("%-10s: %i \n",
+                    get_name_from_item(i),
+                    state->hero_item_number[i]
+                    );
+            }
+            printf("----------------------------------------\n");
+            for(int i = 1; i < BODY_PART__COUNT; i++)
+            {
+                printf("%-10s: %-10s \n",
+                    get_body_part_name(i),
+                    get_augmentation_name(state->hero_body_part_augmentation[i])
+                    );
+            }
         }
         printf("----------------------------------------\n");
-        for(int i = 1; i < BODY_PART__COUNT; i++)
+        for(int i = 0; i < state->curr_ally->skill_list->size; i++)
         {
-            printf("%-10s: %-10s \n",
-                get_body_part_name(i),
-                get_augmentation_name(state->hero_body_part_augmentation[i])
-                );
-        }
-        printf("----------------------------------------\n");
-        for(int i = 0; i < state->curr_ally_skill_list->size; i++)
-        {
-            ListElem* curr_elem = get_nth_list_element(state->curr_ally_skill_list, i);
+            ListElem* curr_elem = get_nth_list_element(state->curr_ally->skill_list, i);
             if(curr_elem != 0)
             {
                 int curr_skill = (int) curr_elem->data;
@@ -170,12 +163,12 @@ void change_gamestate(State* state, int new_gamestate)
         printf("----------------------------------------\n");
     }
 
-    if(state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_1 ||
-    state->gamestate == GAMESTATE__HERO_CHOOSING_TARGET_2 ||
-    state->gamestate == GAMESTATE__HERO_EXECUTING_ANIMATION ||
-    state->gamestate == GAMESTATE__HERO_EXECUTING_SKILL)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+    state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
+    state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        printf("curr_skill: %s \n", get_skill_name(state->curr_ally_curr_skill));
+        printf("curr_skill: %s \n", get_skill_name(state->curr_ally_skill));
         printf("----------------------------------------\n");
     }
 
@@ -246,13 +239,6 @@ Passage* get_passage(State* state, char* from_room_name, Vec2i from_tilemap_pos)
         if(elem != 0)
         {
             Passage* passage = (Passage*) elem->data;
-
-            printf("passage: %p \n", passage);
-            printf("from_room_name: %s \n", passage->from_room_name);
-            printf("from_room_name: %s \n", from_room_name);
-            printf("from_tilemap_pos: %i, %i \n", passage->from_tilemap_pos.x, passage->from_tilemap_pos.y);
-            printf("from_tilemap_pos: %i, %i \n", from_tilemap_pos.x, from_tilemap_pos.y);
-
             if(passage != 0)
             {
                 if(strcmp(passage->from_room_name, from_room_name) == 0 &&
@@ -274,7 +260,7 @@ Object* room_get_object_at(Room* room, Vec2i tilemap_pos)
     for(ListElem* curr_elem = room->object_list->head; curr_elem; curr_elem = curr_elem->next)
     {
         Object* curr_object = (Object*)curr_elem->data;
-        if(!curr_object->is_dead &&
+        if(!curr_object->is_to_be_removed &&
         curr_object->tilemap_pos.x == tilemap_pos.x &&
         curr_object->tilemap_pos.y == tilemap_pos.y)
         {
@@ -295,52 +281,10 @@ void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite)
     remove_list_element_of_data(state->sprite_list, sprite, 1);
 }
 
-void add_pos_to_possible_target_1_tilemap_pos_list(State* state, Vec2i new_pos)
-{
-    add_new_list_element_to_list_end(state->possible_target_1_tilemap_pos_list, new_vec2i(new_pos.x, new_pos.y));
-}
-
-void remove_all_pos_from_possible_target_1_tilemap_pos_list(State* state)
-{
-    remove_all_list_elements(state->possible_target_1_tilemap_pos_list, 1);
-}
-
-int is_tilemap_pos_in_possible_target_1_tilemap_pos_list(State* state, Vec2i pos)
-{
-    for(ListElem* curr_elem = state->possible_target_1_tilemap_pos_list->head; curr_elem; curr_elem = curr_elem->next )
-    {
-        Vec2i* curr_vec = (Vec2i*)curr_elem->data;
-        if(curr_vec->x == pos.x && curr_vec->y == pos.y) return 1;
-    }
-
-    return 0;
-}
-
 void add_animation_to_animation_list(State* state, Animation* animation, Textures *textures, Sounds *sounds, Musics *musics, Colors *colors)
 {
     add_new_list_element_to_list_end(state->animation_list, animation);
     start_animation(state, animation, textures, sounds, musics, colors);
-}
-
-void add_pos_to_possible_target_2_tilemap_pos_list(State* state, Vec2i new_pos)
-{
-    add_new_list_element_to_list_end(state->possible_target_2_tilemap_pos_list, new_vec2i(new_pos.x, new_pos.y));
-}
-
-void remove_all_pos_from_possible_target_2_tilemap_pos_list(State* state)
-{
-    remove_all_list_elements(state->possible_target_2_tilemap_pos_list, 1);
-}
-
-int is_tilemap_pos_in_possible_target_2_tilemap_pos_list(State* state, Vec2i pos)
-{
-    for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head; curr_elem; curr_elem = curr_elem->next )
-    {
-        Vec2i* curr_vec = (Vec2i*)curr_elem->data;
-        if(curr_vec->x == pos.x && curr_vec->y == pos.y) return 1;
-    }
-
-    return 0;
 }
 
 // action
@@ -365,11 +309,11 @@ char* get_gamestate_name(int gamestate)
     switch(gamestate)
     {
         case GAMESTATE__NONE:                       name = "none";                      break;
-        case GAMESTATE__HERO_CHOOSING_SKILL:        name = "hero choosing skill";       break;
-        case GAMESTATE__HERO_CHOOSING_TARGET_1:     name = "hero choosing target 1";    break;
-        case GAMESTATE__HERO_CHOOSING_TARGET_2:     name = "hero choosing target 2";    break;
-        case GAMESTATE__HERO_EXECUTING_ANIMATION:   name = "hero executing animation";  break;
-        case GAMESTATE__HERO_EXECUTING_SKILL:       name = "hero executing skill";      break;
+        case GAMESTATE__ALLY_CHOOSING_SKILL:        name = "ally choosing skill";       break;
+        case GAMESTATE__ALLY_CHOOSING_TARGET_1:     name = "ally choosing target 1";    break;
+        case GAMESTATE__ALLY_CHOOSING_TARGET_2:     name = "ally choosing target 2";    break;
+        case GAMESTATE__ALLY_EXECUTING_ANIMATION:   name = "ally executing animation";  break;
+        case GAMESTATE__ALLY_EXECUTING_SKILL:       name = "ally executing skill";      break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:  name = "enemy pause before attack"; break;
         case GAMESTATE__ENEMY_EXECUTING_ANIMATION:  name = "enemy executing animation"; break;
         case GAMESTATE__ENEMY_EXECUTING_ATTACK:     name = "enemy executing attack";    break;
@@ -380,24 +324,6 @@ char* get_gamestate_name(int gamestate)
     }
 
     return name;
-}
-
-int get_hero_ap(State* state)
-{
-    return state->hero_ap;
-}
-
-void modify_hero_ap(State* state, int by)
-{
-    state->hero_ap += by;
-
-    if(state->hero_ap < 0) state->hero_ap = 0;
-    if(state->hero_ap > HERO_MAX_AP) state->hero_ap = HERO_MAX_AP;
-}
-
-void restore_hero_ap(State* state)
-{
-    state->hero_ap = HERO_MAX_AP;
 }
 
 void hero_add_augmentation(State* state, int augmentation)
@@ -423,63 +349,7 @@ int hero_has_augmentation(State* state, int augmentation)
     return state->hero_body_part_augmentation[body_part] == augmentation;
 }
 
-void determine_enemy_list(State* state)
-{
-    remove_all_list_elements(state->enemy_list,1);
-
-    for(ListElem* elem = state->curr_room->object_list->head; elem != 0; elem = elem->next)
-    {
-        Object* object = (Object*)elem->data;
-
-        if(object != 0 && is_object_enemy(object))
-        {
-            Enemy* enemy = new_enemy(object);
-
-            add_new_list_element_to_list_end(state->enemy_list, enemy);
-        }
-    }
-}
-
-void determine_enemy_order(State* state)
-{
-    int order_number = 1;
-    for(ListElem* curr_elem = state->enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
-    {
-        Enemy* curr_enemy = (Enemy*)curr_elem->data;
-        curr_enemy->order_number = order_number;
-        order_number++;
-    }
-}
-
-void determine_ally_list(State* state)
-{
-    remove_all_list_elements(state->ally_list,1);
-
-    for(ListElem* elem = state->curr_room->object_list->head; elem != 0; elem = elem->next)
-    {
-        Object* object = (Object*)elem->data;
-
-        if(object != 0 && is_object_ally(object))
-        {
-            Ally* ally = new_ally(object);
-
-            add_new_list_element_to_list_end(state->ally_list, ally);
-        }
-    }
-}
-
-void determine_ally_order(State* state)
-{
-    int order_number = 1;
-    for(ListElem* curr_elem = state->ally_list->head; curr_elem != 0; curr_elem = curr_elem->next)
-    {
-        Ally* curr_ally = (Ally*)curr_elem->data;
-        curr_ally->order_number = order_number;
-        order_number++;
-    }
-}
-
-void get_object_ally_skills(State* state, Object* object, List* skill_list)
+void get_object_skills(State* state, Object* object, List* skill_list)
 {
     switch(object->type)
     {
@@ -670,11 +540,6 @@ void get_object_ally_skills(State* state, Object* object, List* skill_list)
     }
 }
 
-void remove_all_dead_objects(State* state)
-{
-    //
-}
-
 Enemy* get_enemy_of_object(State* state, Object* object)
 {
     for(ListElem* elem = state->enemy_list->head; elem != 0; elem = elem->next)
@@ -684,6 +549,21 @@ Enemy* get_enemy_of_object(State* state, Object* object)
         if(enemy->object == object)
         {
             return enemy;
+        }
+    }
+
+    return 0;
+}
+
+Ally* get_ally_of_object(State* state, Object* object)
+{
+    for(ListElem* elem = state->ally_list->head; elem != 0; elem = elem->next)
+    {
+        Ally* ally = (Ally*)elem->data;
+
+        if(ally->object == object)
+        {
+            return ally;
         }
     }
 
@@ -719,5 +599,237 @@ void draw_texture_list(
 
         texture_elem = texture_elem->next;
         tilemap_pos_elem = tilemap_pos_elem->next;
+    }
+}
+
+// enemy
+
+void update_enemy_list(State* state)
+{
+    if(state->curr_room != 0)
+    {
+        remove_all_list_elements(state->enemy_list, 1);
+        for(ListElem* curr_elem = state->curr_room->object_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Object* curr_object = (Object*) curr_elem->data;
+
+            if(curr_object != 0 && is_object_enemy(curr_object))
+            {
+                add_new_list_element_to_list_end(
+                    state->enemy_list,
+                    new_enemy(curr_object)
+                    );
+            }
+        }
+    }
+}
+
+void update_all_enemy_order(State* state)
+{
+    int curr_order_number = 1;
+    for(ListElem* curr_elem = state->enemy_list->head;
+    curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+        if(curr_enemy != 0)
+        {
+            curr_enemy->order_number = curr_order_number;
+            curr_order_number++;
+        }
+    }
+}
+
+void update_enemy_attack_dir4(State* state, Enemy* enemy)
+{
+    if(enemy != 0)
+    {
+        enemy->object->attack_dir4 = rand() % 4 + 1;
+    }
+}
+
+void update_enemy_attack_targets(State* state, Enemy* enemy)
+{
+    if(enemy != 0)
+    {
+        remove_all_actions_from_action_sequence(
+            enemy->action_sequence
+            );
+        object_enemy_prepare_attack(state, enemy);
+    }
+}
+
+void update_enemy_draw(State* state, Enemy* enemy, Textures* textures, Colors* colors)
+{
+    if(enemy != 0)
+    {
+        remove_all_list_elements(enemy->draw_below_texture_list, 0);
+        remove_all_list_elements(enemy->draw_below_tilemap_pos_list, 1);
+        skill_get_draw_below(
+            state,
+            enemy->skill,
+            enemy->object->tilemap_pos,
+            enemy->target_1_tilemap_pos,
+            enemy->target_2_tilemap_pos,
+            enemy->draw_below_texture_list,
+            enemy->draw_below_tilemap_pos_list,
+            textures,
+            colors
+            );
+
+        remove_all_list_elements(enemy->draw_above_texture_list, 0);
+        remove_all_list_elements(enemy->draw_above_tilemap_pos_list, 1);
+        skill_get_draw_above(
+            state,
+            enemy->skill,
+            enemy->object->tilemap_pos,
+            enemy->target_1_tilemap_pos,
+            enemy->target_2_tilemap_pos,
+            enemy->draw_above_texture_list,
+            enemy->draw_above_tilemap_pos_list,
+            textures,
+            colors
+            );
+
+        remove_all_list_elements(enemy->draw_effect_texture_list, 0);
+        remove_all_list_elements(enemy->draw_effect_tilemap_pos_list, 1);
+        skill_get_draw_effect(
+            state,
+            enemy->skill,
+            enemy->object->tilemap_pos,
+            enemy->target_1_tilemap_pos,
+            enemy->target_2_tilemap_pos,
+            enemy->draw_effect_texture_list,
+            enemy->draw_effect_tilemap_pos_list,
+            textures,
+            colors
+            );
+    }
+}
+
+// ally
+
+void update_ally_list(State* state)
+{
+    if(state->curr_room != 0)
+    {
+        remove_all_list_elements(state->ally_list, 1);
+        for(ListElem* curr_elem = state->curr_room->object_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Object* curr_object = (Object*) curr_elem->data;
+
+            if(curr_object != 0 && is_object_ally(curr_object))
+            {
+                add_new_list_element_to_list_end(
+                    state->ally_list,
+                    new_ally(curr_object)
+                    );
+            }
+        }
+    }
+}
+
+void update_ally_skill_list(State* state, Ally* ally)
+{
+    if(ally != 0)
+    {
+        remove_all_list_elements(ally->skill_list, 0);
+        get_object_skills(
+            state,
+            ally->object,
+            ally->skill_list
+            );
+    }
+}
+
+void restore_ally_action_points(State* state, Ally* ally)
+{
+    if(ally != 0)
+    {
+        ally->object->action_points = ALLY_MAX_AP;
+    }
+}
+
+void update_curr_ally_draw(State* state, Textures* textures, Colors* colors)
+{
+    if(state->curr_ally != 0)
+    {
+        remove_all_list_elements(state->curr_ally_draw_below_texture_list, 0);
+        remove_all_list_elements(state->curr_ally_draw_below_tilemap_pos_list, 1);
+        skill_get_draw_below(
+            state,
+            state->curr_ally_skill,
+            state->curr_ally->object->tilemap_pos,
+            state->curr_ally_target_1_tilemap_pos,
+            state->curr_ally_target_2_tilemap_pos,
+            state->curr_ally_draw_below_texture_list,
+            state->curr_ally_draw_below_tilemap_pos_list,
+            textures,
+            colors
+            );
+
+        remove_all_list_elements(state->curr_ally_draw_above_texture_list, 0);
+        remove_all_list_elements(state->curr_ally_draw_above_tilemap_pos_list, 1);
+        skill_get_draw_above(
+            state,
+            state->curr_ally_skill,
+            state->curr_ally->object->tilemap_pos,
+            state->curr_ally_target_1_tilemap_pos,
+            state->curr_ally_target_2_tilemap_pos,
+            state->curr_ally_draw_above_texture_list,
+            state->curr_ally_draw_above_tilemap_pos_list,
+            textures,
+            colors
+            );
+
+        remove_all_list_elements(state->curr_ally_draw_effect_texture_list, 0);
+        remove_all_list_elements(state->curr_ally_draw_effect_tilemap_pos_list, 1);
+        skill_get_draw_effect(
+            state,
+            state->curr_ally_skill,
+            state->curr_ally->object->tilemap_pos,
+            state->curr_ally_target_1_tilemap_pos,
+            state->curr_ally_target_2_tilemap_pos,
+            state->curr_ally_draw_effect_texture_list,
+            state->curr_ally_draw_effect_tilemap_pos_list,
+            textures,
+            colors
+            );
+    }
+}
+
+// other
+
+void remove_all_object_to_be_removed(State* state)
+{
+    if(state->curr_room != 0)
+    {
+        List* object_to_be_removed_list = new_list((void (*)(void *))&destroy_object);
+
+        for(ListElem* curr_elem = state->curr_room->object_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Object* curr_object = (Object*) curr_elem->data;
+
+            if(curr_object != 0 && curr_object->is_to_be_removed)
+            {
+                add_new_list_element_to_list_end(object_to_be_removed_list, curr_object);
+            }
+        }
+
+        for(ListElem* curr_elem = object_to_be_removed_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Object* curr_object = (Object*) curr_elem->data;
+
+            if(curr_object != 0)
+            {
+                room_remove_object(state->curr_room, curr_object, 1);
+            }
+        }
+
+        remove_all_list_elements(object_to_be_removed_list, 0);
+        destroy_list(object_to_be_removed_list);
     }
 }

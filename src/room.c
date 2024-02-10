@@ -62,9 +62,9 @@ void room_add_object_at(Room* room, Object* object, Vec2i tilemap_pos)
     }
 }
 
-void room_remove_object(Room* room, Object* object)
+void room_remove_object(Room* room, Object* object, int destroy_data)
 {
-    remove_list_element_of_data(room->object_list, object, 0);
+    remove_list_element_of_data(room->object_list, object, destroy_data);
 }
 
 Passage* new_passage(char* from_room_name, char* to_room_name, Vec2i from_tilemap_pos, Vec2i to_tilemap_pos)

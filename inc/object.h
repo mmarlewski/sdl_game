@@ -188,10 +188,12 @@ struct _Action;
 
 typedef struct
 {
-    int is_dead;
+    int is_to_be_removed;
     int is_visible;
     int type;
     Vec2i tilemap_pos;
+    int attack_dir4;
+    int action_points;
 
 } Object;
 
@@ -202,7 +204,6 @@ typedef struct
     Vec2i target_1_tilemap_pos;
     Vec2i target_2_tilemap_pos;
     int skill;
-    int attack_dir4;
     int performed_attack;
     int order_number;
 
@@ -219,8 +220,6 @@ typedef struct
 {
     Object* object;
     List* skill_list;
-    int action_points;
-    int order_number;
 
 } Ally;
 

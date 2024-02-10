@@ -100,7 +100,7 @@ int main (int argc, char* argv[])
 
     init_state (&state, &textures, &sounds, &musics, &colors);
 
-    state.gamestate = GAMESTATE__HERO_CHOOSING_SKILL;
+    state.gamestate = GAMESTATE__ALLY_CHOOSING_SKILL;
 
     state.camera_zoom = 5.0f;
 
@@ -130,7 +130,6 @@ int main (int argc, char* argv[])
         state.minibot_object,
         vec2i(7,6)
         );
-    set_curr_room(&state, first_room);
 
     for(int i = 0; i < TILEMAP_LENGTH; i++)
     {
@@ -473,35 +472,43 @@ int main (int argc, char* argv[])
             )
         );
 
-    //
-
-    determine_enemy_list(&state);
-    determine_enemy_order(&state);
-
-    for(ListElem* curr_elem = state.enemy_list->head; curr_elem != 0; curr_elem = curr_elem->next)
-    {
-        Enemy* curr_enemy = (Enemy*) curr_elem->data;
-
-        if(curr_enemy != 0)
-        {
-            curr_enemy->attack_dir4 = rand() % 4 + 1;
-            remove_all_actions_from_action_sequence(curr_enemy->action_sequence);
-            object_enemy_prepare_attack(&state, curr_enemy);
-            curr_enemy->performed_attack = 0;
-        }
-    }
-
-    state.curr_ally = new_ally(state.hero_object);
+    set_curr_room(&state, first_room);
 
     state.hero_item_number[ITEM__CELL] = 5;
     state.hero_item_number[ITEM__DYNAMITE] = 5;
     state.hero_item_number[ITEM__GEMSTONE] = 5;
 
     hero_add_augmentation(&state, AUGMENTATION__HOOK_HAND);
-    hero_add_augmentation(&state, AUGMENTATION__CHAIN_HAND);
+    hero_add_augmentation(&state, AUGMENTATION__SCISSOR_HAND);
     hero_add_augmentation(&state, AUGMENTATION__SPRING_LEG);
     hero_add_augmentation(&state, AUGMENTATION__TRACK_LEG);
     hero_add_augmentation(&state, AUGMENTATION__MANIPULATION_HEAD);
+
+    update_enemy_list(&state);
+    update_all_enemy_order(&state);
+    for(ListElem* curr_elem = state.enemy_list->head;
+    curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+        update_enemy_attack_dir4(&state, curr_enemy);
+        update_enemy_attack_targets(&state, curr_enemy);
+        update_enemy_draw(&state, curr_enemy, &textures, &colors);
+    }
+
+    update_ally_list(&state);
+    for(ListElem* curr_elem = state.ally_list->head;
+    curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Ally* curr_ally = (Ally*) curr_elem->data;
+        update_ally_skill_list(&state, curr_ally);
+        restore_ally_action_points(&state, curr_ally);
+    }
+
+    state.curr_ally_list_elem = state.ally_list->head;
+    state.curr_ally = state.curr_ally_list_elem->data;
+    state.curr_ally_object = state.curr_ally->object;
+
+    change_gamestate(&state, GAMESTATE__ALLY_CHOOSING_SKILL);
 
     while (state.is_game_running)
     {

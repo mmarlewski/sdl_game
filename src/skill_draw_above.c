@@ -141,15 +141,6 @@ void skill_get_draw_above(
                     will_push_after_charge = 0;
                 }
 
-                // draw_texture_at_gamemap_pos(
-                //     renderer,
-                //     arrow_texture,
-                //     color,
-                //     tilemap_pos_to_gamemap_pos(charge_curr_tilemap_pos),
-                //     state->camera.world_pos,
-                //     state->camera.zoom
-                //     );
-
                 charge_prev_tilemap_pos = charge_curr_tilemap_pos;
                 charge_curr_tilemap_pos = charge_next_tilemap_pos;
                 charge_next_tilemap_pos = vec2i_move_in_dir4_by(charge_next_tilemap_pos,charge_distance_info.dir4,1);

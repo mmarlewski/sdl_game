@@ -60,7 +60,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             object_on_death(state, sequence, action, action->death.object);
 
-            action->death.object->is_dead = 1;
+            action->death.object->is_to_be_removed = 1;
         }
         break;
         case ACTION_TYPE__BLOW_UP:

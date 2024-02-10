@@ -11,9 +11,11 @@ Object* new_object(int type)
     Object* object = malloc(sizeof(*object));
 
     object->is_visible = 1;
-    object->is_dead = 0;
+    object->is_to_be_removed = 0;
     object->type = type;
-    object->tilemap_pos = vec2i(0,0);
+    object->tilemap_pos = vec2i(-1,-1);
+    object->action_points = 0;
+    object->attack_dir4 = DIR4__NONE;
 
     return object;
 }
@@ -29,10 +31,9 @@ Enemy* new_enemy(Object* object)
 
     enemy->object = object;
     enemy->action_sequence = new_action_sequence();
-    enemy->target_1_tilemap_pos = vec2i(0, 0);
-    enemy->target_2_tilemap_pos = vec2i(0, 0);
+    enemy->target_1_tilemap_pos = vec2i(-1, -1);
+    enemy->target_2_tilemap_pos = vec2i(-1, -1);
     enemy->skill = SKILL__NONE;
-    enemy->attack_dir4 = DIR4__NONE;
     enemy->performed_attack = 0;
     enemy->order_number = 0;
 
@@ -58,8 +59,6 @@ Ally* new_ally(Object* object)
 
     ally->object = object;
     ally->skill_list = new_list((void (*)(void *))0);
-    ally->action_points = 0;
-    ally->order_number = 0;
 
     return ally;
 }

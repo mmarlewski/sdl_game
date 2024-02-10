@@ -35,7 +35,7 @@ typedef Mix_Music Music;
 #define ACTION_LENGTH_IN_SECONDS 0.2f
 #define ACTION_THROW_LENGTH_MODIFIER 4.0f
 
-#define HERO_MAX_AP 10
+#define ALLY_MAX_AP 10
 
 #define OBJECT_TURRET_RANGE 3
 
