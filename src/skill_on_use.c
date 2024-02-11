@@ -214,6 +214,19 @@ void skill_on_use(
                                 state->curr_ally->object,
                                 passage->to_tilemap_pos);
 
+                            // visited status
+                            int was_room_already_visited = is_data_in_list(
+                                state->visited_room_list,
+                                room
+                                );
+                            if(!was_room_already_visited)
+                            {
+                                add_new_list_element_to_list_end(
+                                    state->visited_room_list,
+                                    room
+                                    );
+                            }
+
                             // all enemies
                             update_enemy_list(state);
                             update_all_enemy_order(state);
@@ -221,7 +234,10 @@ void skill_on_use(
                             curr_elem != 0; curr_elem = curr_elem->next)
                             {
                                 Enemy* curr_enemy = (Enemy*) curr_elem->data;
-                                update_enemy_attack_dir4(state, curr_enemy);
+                                if(!was_room_already_visited)
+                                {
+                                    update_enemy_attack_dir4(state, curr_enemy);
+                                }
                                 update_enemy_attack_targets(state, curr_enemy);
                                 update_enemy_draw(state, curr_enemy, textures, colors);
                             }
@@ -295,6 +311,19 @@ void skill_on_use(
                                     state->curr_ally->object,
                                     passage->to_tilemap_pos);
 
+                                // visited status
+                                int was_room_already_visited = is_data_in_list(
+                                    state->visited_room_list,
+                                    room
+                                    );
+                                if(!was_room_already_visited)
+                                {
+                                    add_new_list_element_to_list_end(
+                                        state->visited_room_list,
+                                        room
+                                        );
+                                }
+
                                 // all enemies
                                 update_enemy_list(state);
                                 update_all_enemy_order(state);
@@ -302,7 +331,10 @@ void skill_on_use(
                                 curr_elem != 0; curr_elem = curr_elem->next)
                                 {
                                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
-                                    update_enemy_attack_dir4(state, curr_enemy);
+                                    if(!was_room_already_visited)
+                                    {
+                                        update_enemy_attack_dir4(state, curr_enemy);
+                                    }
                                     update_enemy_attack_targets(state, curr_enemy);
                                     update_enemy_draw(state, curr_enemy, textures, colors);
                                 }

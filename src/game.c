@@ -468,6 +468,9 @@ int main (int argc, char* argv[])
         );
 
     set_curr_room(&state, first_room);
+    add_new_list_element_to_list_end(state.visited_room_list,
+        first_room
+        );
 
     state.hero_item_number[ITEM__CELL] = 5;
     state.hero_item_number[ITEM__DYNAMITE] = 5;

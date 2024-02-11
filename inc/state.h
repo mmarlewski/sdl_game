@@ -66,6 +66,7 @@ typedef struct
     Action* enemy_action_sequence;
 
     List* room_list;
+    List* visited_room_list;
     List* passage_list;
     Room* curr_room;
 

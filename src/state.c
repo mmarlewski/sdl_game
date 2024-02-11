@@ -25,6 +25,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->ally_action_sequence = new_action_sequence();
 
     state->room_list = new_list((void (*)(void *))&destroy_room);
+    state->visited_room_list = new_list((void (*)(void *))&destroy_room);
     state->passage_list = new_list((void (*)(void *))&destroy_passage);
     state->curr_room = 0;
 
@@ -96,7 +97,7 @@ void change_gamestate(State* state, int new_gamestate)
             hero_ap_bar[i + 1] = (i + 1 <= curr_ally_ap) ? '#' : '-';
         }
         hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
-        printf("a. points : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
+        printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
         if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
         state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
         state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
