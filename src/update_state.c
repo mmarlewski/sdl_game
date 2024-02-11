@@ -257,7 +257,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     add_animation_to_animation_list(
                         state,
                         new_animation_change_background_color(
-                            state->background_color,
+                            colors->ally_background,
                             colors->enemy_background,
                             0.25f
                             ),
@@ -1233,7 +1233,18 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->curr_ally_object = state->curr_ally->object;
                     }
 
-                    add_animation_to_animation_list(state,new_animation_change_background_color(state->background_color,colors->hero_background, 0.25f), textures, sounds, musics, colors);
+                    add_animation_to_animation_list(
+                        state,
+                        new_animation_change_background_color(
+                            colors->enemy_background,
+                            colors->ally_background,
+                            0.25f
+                            ),
+                        textures,
+                        sounds,
+                        musics,
+                        colors
+                        );
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                     break;

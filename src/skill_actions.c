@@ -19,11 +19,25 @@ void skill_get_actions(
         {
             if(target_2_object == 0)
             {
+                DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                    );
+
                 add_action_after_curr_action_action_sequence(
                     action_sequence,
                     new_action_add_object(
                         state->minibot_object,
                         target_2_tilemap_pos
+                        )
+                    );
+
+                add_action_after_curr_action_action_sequence(
+                    action_sequence,
+                    new_action_drop(
+                        state->minibot_object,
+                        target_2_tilemap_pos,
+                        distance_info.dir4
                         )
                     );
             }

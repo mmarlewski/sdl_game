@@ -162,18 +162,31 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->death.object->tilemap_pos = action->tilemap_pos;
 
-            Enemy* enemy = get_enemy_of_object(state, action->death.object);
-
-            if(enemy != 0)
+            if(is_object_enemy(action->death.object) ||
+            is_object_ally(action->death.object))
             {
+                // add_animation_to_animation_list(
+                //     state,
+                //     new_animation_background_flash(
+                //         state->background_color,
+                //         colors->white,
+                //         0.05f,
+                //         1.0f
+                //         ),
+                //     textures,
+                //     sounds,
+                //     musics,
+                //     colors
+                //     );
+
                 add_animation_to_animation_list(
                     state,
-                    new_animation_background_flash(
-                        state->background_color,
-                        colors->white,
-                        0.05f,
-                        1.0f
-                        ),
+                    new_animation_ascend_sprite_in_gamemap(
+                    textures->animation.death_2,
+                    tilemap_pos_to_gamemap_pos(action->tilemap_pos),
+                    0.1f,
+                    ACTION_LENGTH_IN_SECONDS
+                    ),
                     textures,
                     sounds,
                     musics,
@@ -181,12 +194,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     );
             }
 
-            Animation* animation = new_animation_ascend_sprite_in_gamemap(
-                textures->animation.death_2,
-                tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                0.1f,
-                ACTION_LENGTH_IN_SECONDS
-                );
+            Animation* animation = new_animation_none();
 
             action->animation = animation;
 
@@ -348,10 +356,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION_TYPE__REMOVE_OBJECT:
         {
-            if(action->remove_object.object_to_remove != 0)
-            {
-                action->remove_object.object_to_remove->is_to_be_removed = 1;
-            }
+            //
         }
         break;
         case ACTION_TYPE__MELT:

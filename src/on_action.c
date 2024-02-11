@@ -131,6 +131,21 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
+        case FLOOR_TYPE__STONE_SPIKES_ON:
+        {
+            if(!is_object_flying(action->move.object))
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_death(
+                        action->move.object,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR_TYPE__STONE_TRAP:
         {
             if(!is_object_flying(action->move.object))
@@ -275,6 +290,19 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         )
                     );
             }
+        }
+        break;
+        case FLOOR_TYPE__WATER:
+        case FLOOR_TYPE__LAVA:
+        case FLOOR_TYPE__PIT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
+                    action->tilemap_pos
+                    )
+                );
         }
         break;
         default:

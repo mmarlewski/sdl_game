@@ -174,7 +174,10 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION_TYPE__REMOVE_OBJECT:
         {
-            //
+            if(action->remove_object.object_to_remove != 0)
+            {
+                action->remove_object.object_to_remove->is_to_be_removed = 1;
+            }
         }
         break;
         case ACTION_TYPE__MELT:

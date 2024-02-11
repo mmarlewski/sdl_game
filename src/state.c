@@ -7,7 +7,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->time = 0.0f;
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
-    state->background_color = colors->hero_background;
+    state->background_color = colors->ally_background;
 
     state->camera_world_pos = vec2f(0, 0);
     state->camera_zoom = 2.0f;

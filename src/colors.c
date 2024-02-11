@@ -15,7 +15,7 @@ void load_colors (Colors* colors)
     colors->black =    vec3i(0, 0, 0);
     colors->white =    vec3i(255, 255, 255);
 
-    colors->hero_background =  vec3i(100, 160, 220);
+    colors->ally_background =  vec3i(100, 160, 220);
     colors->enemy_background = vec3i(200, 50, 50);
 
     colors->none =     vec3i(-1, -1, -1);
