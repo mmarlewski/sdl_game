@@ -46,6 +46,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->curr_ally = 0;
     state->curr_ally_object = 0;
     state->curr_ally_skill = SKILL__NONE;
+    state->ally_move_distance = 0;
     state->curr_ally_target_1_tilemap_pos = vec2i(0, 0);
     state->curr_ally_target_2_tilemap_pos = vec2i(0, 0);
     state->curr_skill_animation = 0;
@@ -94,7 +95,21 @@ void change_gamestate(State* state, int new_gamestate)
         hero_ap_bar[0] = '[';
         for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i ++)
         {
-            hero_ap_bar[i + 1] = (i + 1 <= curr_ally_ap) ? '#' : '-';
+            char character = ' ';
+
+            if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+            state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+            {
+                int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
+                if(i < curr_ally_ap - curr_skill_cost) character = '#';
+                else if(i < curr_ally_ap) character = '-';
+            }
+            else
+            {
+                character = (i < curr_ally_ap) ? '#' : ' ';
+            }
+
+            hero_ap_bar[i + 1] = character;
         }
         hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
         printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
@@ -157,10 +172,23 @@ void change_gamestate(State* state, int new_gamestate)
                     case 25: key_char = 'M'; break;
                     default: break;
                 }
-                printf("key %-6c: %-10s \n",
-                    key_char,
-                    get_skill_name(curr_skill)
-                    );
+                int curr_skill_cost = get_skill_action_points(curr_skill);
+                char* curr_skill_name = get_skill_name(curr_skill);
+                if(curr_skill_cost == -1)
+                {
+                    printf("key %-1c : ? : %-10s \n",
+                        key_char,
+                        curr_skill_name
+                        );
+                }
+                else
+                {
+                    printf("key %-1c : %i : %-10s \n",
+                        key_char,
+                        curr_skill_cost,
+                        curr_skill_name
+                        );
+                }
             }
         }
         printf("----------------------------------------\n");

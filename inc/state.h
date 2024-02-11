@@ -87,6 +87,7 @@ typedef struct
     Ally* curr_ally;
     Object* curr_ally_object;
     int curr_ally_skill;
+    int ally_move_distance;
     Vec2i curr_ally_target_1_tilemap_pos;
     Vec2i curr_ally_target_2_tilemap_pos;
     Animation* curr_skill_animation;

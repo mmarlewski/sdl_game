@@ -165,7 +165,7 @@ void skill_get_possible_target_2_pos(
         case SKILL__MOVE_FLYING:
         {
             List* square_area_pos = new_list((void(*)(void*))destroy_vec2i);
-            get_square_area_tilemap_pos(source_tilemap_pos, 10, square_area_pos);
+            get_square_area_tilemap_pos(source_tilemap_pos, ALLY_MAX_ACTION_POINTS, square_area_pos);
             for(ListElem* curr_elem = square_area_pos->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
                 Vec2i* curr_tilemap_pos = (Vec2i*)curr_elem->data;
@@ -178,7 +178,9 @@ void skill_get_possible_target_2_pos(
                     is_object_floating(source_object),
                     is_object_flying(source_object)
                     );
-                if(path_pos->size > 0 && path_pos->size < 10)
+
+                if(path_pos->size > 0 &&
+                path_pos->size <= state->curr_ally->object->action_points + 1)
                 {
                     add_new_list_element_to_list_end(target_2_pos_list, new_vec2i_from_vec2i(*curr_tilemap_pos));
                 }

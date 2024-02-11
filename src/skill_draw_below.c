@@ -32,6 +32,9 @@ void skill_get_draw_below(
                 is_object_flying(source_object)
                 );
 
+            // !!!
+            state->ally_move_distance = path_pos->size - 1;
+
             if(path_pos->size > 0)
             {
                 ListElem* prev_elem = 0;

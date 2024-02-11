@@ -575,6 +575,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             {
                 if(state->curr_ally->object->action_points > 0)
                 {
+                    state->curr_ally->object->action_points -= 1;
+
                     state->selected_tilemap_pos = vec2i(-1, -1);
 
                     execute_action_sequence(state, state->ally_action_sequence, textures, sounds, musics, colors);
@@ -586,7 +588,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             state->curr_ally_skill = skill;
 
+            // if curr ally has enough action points
             if(state->curr_ally->object->action_points > 0 &&
+            state->curr_ally->object->action_points >= get_skill_action_points(skill) &&
             skill != SKILL__NONE)
             {
                 // go to choosing target 1
@@ -865,7 +869,17 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     colors
                     );
 
-                state->curr_ally->object->action_points--;
+                if(state->curr_ally_skill == SKILL__MOVE ||
+                state->curr_ally_skill == SKILL__MOVE_FLOATING ||
+                state->curr_ally_skill == SKILL__MOVE_FLYING)
+                {
+                    state->curr_ally->object->action_points -= state->ally_move_distance;
+                }
+                else
+                {
+                    state->curr_ally->object->action_points -=
+                        get_skill_action_points(state->curr_ally_skill);
+                }
 
                 // objects to be removed
                 remove_all_object_to_be_removed(state);

@@ -58,6 +58,64 @@ int is_skill_two_target(int skill)
     return is;
 }
 
+int get_skill_action_points(int skill)
+{
+    int ap = 0;
+
+    switch(skill)
+    {
+        case SKILL__NONE:               ap = 0; break;
+
+        case SKILL__USE:                ap = 1; break;
+        case SKILL__MANIPULATION:       ap = 1; break;
+        case SKILL__TELEPORTATION:      ap = 1; break;
+
+        case SKILL__MOVE:               ap = -1; break;
+        case SKILL__MOVE_FLOATING:      ap = -1; break;
+        case SKILL__MOVE_FLYING:        ap = -1; break;
+
+        case SKILL__PICK_ITEM_CLOSE:            ap = 1; break;
+        case SKILL__PICK_ITEM_FAR:              ap = 1; break;
+
+        case SKILL__PUT_ITEM_CELL_CLOSE:        ap = 1; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          ap = 1; break;
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    ap = 1; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      ap = 1; break;
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    ap = 1; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      ap = 1; break;
+
+        case SKILL__THROW_ITEM_CELL:            ap = 1; break;
+        case SKILL__THROW_ITEM_DYNAMITE:        ap = 1; break;
+        case SKILL__THROW_ITEM_GEMSTONE:        ap = 1; break;
+
+        case SKILL__PUSH:               ap = 1; break;
+        case SKILL__THROW:              ap = 1; break;
+        case SKILL__PULL:               ap = 1; break;
+        case SKILL__JUMP:               ap = 1; break;
+        case SKILL__CHARGE:             ap = 1; break;
+        case SKILL__STOMP:              ap = 1; break;
+
+        case SKILL__PULL_AND_THROW:     ap = 2; break;
+        case SKILL__CHARGE_AND_PUSH:    ap = 2; break;
+        case SKILL__CHARGE_AND_THROW:   ap = 2; break;
+        case SKILL__CHARGE_AND_JUMP:    ap = 2; break;
+        case SKILL__JUMP_AND_CARRY:     ap = 2; break;
+        case SKILL__JUMP_AND_STOMP:     ap = 2; break;
+
+        case SKILL__LAUNCH_MINIBOT:     ap = 1; break;
+        case SKILL__ASCEND:             ap = 1; break;
+        case SKILL__DESCEND:            ap = 1; break;
+
+        case SKILL__TURRET_LASER:       ap = 0; break;
+        case SKILL__TURRET_BOMB:        ap = 0; break;
+        case SKILL__TURRET_PROJECTILE:  ap = 0; break;
+
+        default: break;
+    }
+
+    return ap;
+}
+
 char* get_skill_name(int skill)
 {
     char* name = "???";

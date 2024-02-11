@@ -56,6 +56,7 @@ enum SKILL
 };
 
 int is_skill_two_target(int skill);
+int get_skill_action_points(int skill);
 char* get_skill_name(int skill);
 
 #endif
