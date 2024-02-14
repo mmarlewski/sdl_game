@@ -254,10 +254,10 @@ int is_object_manipulatable(Object* object)
     switch(object->type)
     {
         case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
-
         case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
-
         case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
+        case OBJECT_TYPE__WALL_MARBLE:                      is = 0; break;
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    is = 0; break;
 
         case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
@@ -400,10 +400,10 @@ int is_object_movable(Object* object)
     switch(object->type)
     {
         case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
-
         case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
-
         case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
+        case OBJECT_TYPE__WALL_MARBLE:                      is = 0; break;
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    is = 0; break;
 
         case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
@@ -551,10 +551,10 @@ int is_object_meltable(Object* object)
     switch(object->type)
     {
         case OBJECT_TYPE__WALL_ROCK:                        is = 0; break;
-
         case OBJECT_TYPE__WALL_STONE:                       is = 0; break;
-
         case OBJECT_TYPE__WALL_METAL:                       is = 0; break;
+        case OBJECT_TYPE__WALL_MARBLE:                      is = 0; break;
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    is = 0; break;
 
         case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 0; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 0; break;
@@ -1209,6 +1209,10 @@ char* get_name_from_object_type(int object_type)
 
         case OBJECT_TYPE__WALL_GOLD:                        name = "wall gold"; break;
 
+        case OBJECT_TYPE__WALL_MARBLE:                      name = "wall marble"; break;
+
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    name = "wall obsidian"; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     name = "exit rock up"; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  name = "exit rock right"; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   name = "exit rock down"; break;
@@ -1260,6 +1264,16 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         name = "exit gold unlocked right"; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          name = "exit gold unlocked down"; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          name = "exit gold unlocked left"; break;
+
+        case OBJECT_TYPE__EXIT_MARBLE_UP:                   name = "exit marble up"; break;
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:                name = "exit marble right"; break;
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:                 name = "exit marble down"; break;
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:                 name = "exit marble left"; break;
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:                 name = "exit obsidian up"; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:              name = "exit obsidian right"; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:               name = "exit obsidian down"; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               name = "exit obsidian left"; break;
 
         case OBJECT_TYPE__PILLAR:                           name = "pillar"; break;
 
@@ -1396,7 +1410,11 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal; break;
 
-        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold; break;
+        case OBJECT_TYPE__WALL_GOLD:                        texture = textures->object.wall_gold; break;
+
+        case OBJECT_TYPE__WALL_MARBLE:                      texture = textures->object.wall_marble; break;
+
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    texture = textures->object.wall_obsidian; break;
 
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right; break;
@@ -1449,6 +1467,16 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_unlocked_right; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_unlocked_down; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_unlocked_left; break;
+
+        case OBJECT_TYPE__EXIT_MARBLE_UP:                   texture = textures->object.exit_marble_up; break;
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:                texture = textures->object.exit_marble_right; break;
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:                 texture = textures->object.exit_marble_down; break;
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:                 texture = textures->object.exit_marble_left; break;
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:                 texture = textures->object.exit_obsidian_up; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:              texture = textures->object.exit_obsidian_right; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:               texture = textures->object.exit_obsidian_down; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               texture = textures->object.exit_obsidian_left; break;
 
         case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
 
@@ -1587,6 +1615,10 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold; break;
 
+        case OBJECT_TYPE__WALL_MARBLE:                      texture = textures->object.wall_marble; break;
+
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    texture = textures->object.wall_obsidian; break;
+
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right; break;
         case OBJECT_TYPE__EXIT_ROCK_DOWN:                   texture = textures->object.exit_rock_down; break;
@@ -1638,6 +1670,16 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_unlocked_right; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_unlocked_down; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_unlocked_left; break;
+
+        case OBJECT_TYPE__EXIT_MARBLE_UP:                   texture = textures->object.exit_marble_up; break;
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:                texture = textures->object.exit_marble_right; break;
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:                 texture = textures->object.exit_marble_down; break;
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:                 texture = textures->object.exit_marble_left; break;
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:                 texture = textures->object.exit_obsidian_up; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:              texture = textures->object.exit_obsidian_right; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:               texture = textures->object.exit_obsidian_down; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               texture = textures->object.exit_obsidian_left; break;
 
         case OBJECT_TYPE__PILLAR:                           texture = textures->object.pillar; break;
 
@@ -1768,13 +1810,17 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
     switch(object->type)
     {
-        case OBJECT_TYPE__WALL_ROCK:                        texture = textures->object.wall_rock_outline; break;
+        case OBJECT_TYPE__WALL_ROCK:                        texture = textures->object.wall_outline; break;
 
-        case OBJECT_TYPE__WALL_STONE:                       texture = textures->object.wall_stone_outline; break;
+        case OBJECT_TYPE__WALL_STONE:                       texture = textures->object.wall_outline; break;
 
-        case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal_outline; break;
+        case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_outline; break;
 
-        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold_outline; break;
+        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_outline; break;
+
+        case OBJECT_TYPE__WALL_MARBLE:                      texture = textures->object.wall_outline; break;
+
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    texture = textures->object.wall_outline; break;
 
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up_outline; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right_outline; break;
@@ -1827,6 +1873,16 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_right_outline; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_down_outline; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_left_outline; break;
+
+        case OBJECT_TYPE__EXIT_MARBLE_UP:                   texture = textures->object.exit_marble_up_outline; break;
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:                texture = textures->object.exit_marble_right_outline; break;
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:                 texture = textures->object.exit_marble_down_outline; break;
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:                 texture = textures->object.exit_marble_left_outline; break;
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:                 texture = textures->object.exit_obsidian_up_outline; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:              texture = textures->object.exit_obsidian_right_outline; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:               texture = textures->object.exit_obsidian_down_outline; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               texture = textures->object.exit_obsidian_left_outline; break;
 
         case OBJECT_TYPE__STALACTITE:                       texture = textures->object.stalactite_outline; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                texture = textures->object.stalactite_fallen_outline; break;
@@ -1957,13 +2013,17 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
     switch(object->type)
     {
-        case OBJECT_TYPE__WALL_ROCK:                        texture = textures->object.wall_rock_outline; break;
+        case OBJECT_TYPE__WALL_ROCK:                        texture = textures->object.wall_outline; break;
 
-        case OBJECT_TYPE__WALL_STONE:                       texture = textures->object.wall_stone_outline; break;
+        case OBJECT_TYPE__WALL_STONE:                       texture = textures->object.wall_outline; break;
 
-        case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_metal_outline; break;
+        case OBJECT_TYPE__WALL_METAL:                       texture = textures->object.wall_outline; break;
 
-        case OBJECT_TYPE__WALL_GOLD:                       texture = textures->object.wall_gold_outline; break;
+        case OBJECT_TYPE__WALL_GOLD:                        texture = textures->object.wall_outline; break;
+
+        case OBJECT_TYPE__WALL_MARBLE:                      texture = textures->object.wall_outline; break;
+
+        case OBJECT_TYPE__WALL_OBSIDIAN:                    texture = textures->object.wall_outline; break;
 
         case OBJECT_TYPE__EXIT_ROCK_UP:                     texture = textures->object.exit_rock_up_outline; break;
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  texture = textures->object.exit_rock_right_outline; break;
@@ -2016,6 +2076,16 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         texture = textures->object.exit_gold_right_outline; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          texture = textures->object.exit_gold_down_outline; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          texture = textures->object.exit_gold_left_outline; break;
+
+        case OBJECT_TYPE__EXIT_MARBLE_UP:                   texture = textures->object.exit_marble_up_outline; break;
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:                texture = textures->object.exit_marble_right_outline; break;
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:                 texture = textures->object.exit_marble_down_outline; break;
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:                 texture = textures->object.exit_marble_left_outline; break;
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:                 texture = textures->object.exit_obsidian_up_outline; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:              texture = textures->object.exit_obsidian_right_outline; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:               texture = textures->object.exit_obsidian_down_outline; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               texture = textures->object.exit_obsidian_left_outline; break;
 
         case OBJECT_TYPE__STALACTITE:                       texture = textures->object.stalactite_outline; break;
         case OBJECT_TYPE__STALACTITE_FALLEN:                texture = textures->object.stalactite_fallen_outline; break;

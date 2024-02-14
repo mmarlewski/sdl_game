@@ -304,7 +304,7 @@ int main (int argc, char* argv[])
     {
         room_add_object_at(
             first_room,
-            new_object(OBJECT_TYPE__WALL_ROCK),
+            new_object(OBJECT_TYPE__WALL_STONE),
             first_room_tilemap_pos
             );
         first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__DOWN, 1);
@@ -313,7 +313,7 @@ int main (int argc, char* argv[])
     {
         room_add_object_at(
             first_room,
-            new_object(OBJECT_TYPE__WALL_ROCK),
+            new_object(OBJECT_TYPE__WALL_MARBLE),
             first_room_tilemap_pos
             );
         first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__LEFT, 1);
@@ -322,7 +322,7 @@ int main (int argc, char* argv[])
     {
         room_add_object_at(
             first_room,
-            new_object(OBJECT_TYPE__WALL_ROCK),
+            new_object(OBJECT_TYPE__WALL_OBSIDIAN),
             first_room_tilemap_pos
             );
         first_room_tilemap_pos = vec2i_move_in_dir4_by(first_room_tilemap_pos, DIR4__UP, 1);
@@ -330,7 +330,7 @@ int main (int argc, char* argv[])
 
     room_add_object_at(
         first_room,
-        new_object(OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT),
+        new_object(OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT),
         first_room_tilemap_pos
         );
 

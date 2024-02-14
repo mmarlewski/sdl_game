@@ -24,6 +24,9 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_piston_dynamite = load_texture_from_filepath (renderer, "./res/floor/metal_piston_dynamite.png");
     floor->metal_piston_barrel = load_texture_from_filepath (renderer, "./res/floor/metal_piston_barrel.png");
     floor->metal_no_piston = load_texture_from_filepath (renderer, "./res/floor/metal_no_piston.png");
+    floor->gold = load_texture_from_filepath (renderer, "./res/floor/gold.png");
+    floor->marble = load_texture_from_filepath (renderer, "./res/floor/marble.png");
+    floor->obsidian = load_texture_from_filepath (renderer, "./res/floor/obsidian.png");
     floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
     floor->pit = load_texture_from_filepath (renderer, "./res/floor/pit.png");
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
@@ -56,16 +59,12 @@ void destroy_textures_floor (Textures_Floor* floor)
 void load_textures_object (Renderer* renderer, Textures_Object* object)
 {
     object->wall_rock = load_texture_from_filepath(renderer, "./res/object/wall_rock.png");
-    object->wall_rock_outline = load_texture_from_filepath(renderer, "./res/object/wall_rock_outline.png");
-
     object->wall_stone = load_texture_from_filepath(renderer, "./res/object/wall_stone.png");
-    object->wall_stone_outline = load_texture_from_filepath(renderer, "./res/object/wall_stone_outline.png");
-
     object->wall_metal = load_texture_from_filepath(renderer, "./res/object/wall_metal.png");
-    object->wall_metal_outline = load_texture_from_filepath(renderer, "./res/object/wall_metal_outline.png");
-
     object->wall_gold = load_texture_from_filepath(renderer, "./res/object/wall_gold.png");
-    object->wall_gold_outline = load_texture_from_filepath(renderer, "./res/object/wall_gold_outline.png");
+    object->wall_marble = load_texture_from_filepath(renderer, "./res/object/wall_marble.png");
+    object->wall_obsidian = load_texture_from_filepath(renderer, "./res/object/wall_obsidian.png");
+    object->wall_outline = load_texture_from_filepath(renderer, "./res/object/wall_outline.png");
 
     object->exit_rock_up = load_texture_from_filepath(renderer, "./res/object/exit_rock_up.png");
     object->exit_rock_blocked_up = load_texture_from_filepath(renderer, "./res/object/exit_rock_blocked_up.png");
@@ -146,6 +145,30 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->exit_gold_locked_left = load_texture_from_filepath(renderer, "./res/object/exit_gold_locked_left.png");
     object->exit_gold_unlocked_left = load_texture_from_filepath(renderer, "./res/object/exit_gold_unlocked_left.png");
     object->exit_gold_left_outline = load_texture_from_filepath(renderer, "./res/object/exit_gold_left_outline.png");
+
+    object->exit_marble_up = load_texture_from_filepath(renderer, "./res/object/exit_marble_up.png");
+    object->exit_marble_up_outline = load_texture_from_filepath(renderer, "./res/object/exit_marble_up_outline.png");
+
+    object->exit_marble_right = load_texture_from_filepath(renderer, "./res/object/exit_marble_right.png");
+    object->exit_marble_right_outline = load_texture_from_filepath(renderer, "./res/object/exit_marble_right_outline.png");
+
+    object->exit_marble_down = load_texture_from_filepath(renderer, "./res/object/exit_marble_down.png");
+    object->exit_marble_down_outline = load_texture_from_filepath(renderer, "./res/object/exit_marble_down_outline.png");
+
+    object->exit_marble_left = load_texture_from_filepath(renderer, "./res/object/exit_marble_left.png");
+    object->exit_marble_left_outline = load_texture_from_filepath(renderer, "./res/object/exit_marble_left_outline.png");
+
+    object->exit_obsidian_up = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_up.png");
+    object->exit_obsidian_up_outline = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_up_outline.png");
+
+    object->exit_obsidian_right = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_right.png");
+    object->exit_obsidian_right_outline = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_right_outline.png");
+
+    object->exit_obsidian_down = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_down.png");
+    object->exit_obsidian_down_outline = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_down_outline.png");
+
+    object->exit_obsidian_left = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_left.png");
+    object->exit_obsidian_left_outline = load_texture_from_filepath(renderer, "./res/object/exit_obsidian_left_outline.png");
 
     object->stalactite = load_texture_from_filepath(renderer, "./res/object/stalactite.png");
     object->stalactite_outline = load_texture_from_filepath(renderer, "./res/object/stalactite_outline.png");

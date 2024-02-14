@@ -90,6 +90,9 @@ int is_floor_traversable(int floor)
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:       is = 1; break;
         case FLOOR_TYPE__METAL_NO_PISTON:           is = 1; break;
+        case FLOOR_TYPE__GOLD:                      is = 1; break;
+        case FLOOR_TYPE__MARBLE:                    is = 1; break;
+        case FLOOR_TYPE__OBSIDIAN:                  is = 1; break;
         case FLOOR_TYPE__GRASS:                     is = 1; break;
         case FLOOR_TYPE__PIT:                       is = 0; break;
         case FLOOR_TYPE__WATER:                     is = 0; break;
@@ -140,6 +143,9 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:       is = 1; break;
         case FLOOR_TYPE__METAL_NO_PISTON:           is = 1; break;
+        case FLOOR_TYPE__GOLD:                      is = 1; break;
+        case FLOOR_TYPE__MARBLE:                    is = 1; break;
+        case FLOOR_TYPE__OBSIDIAN:                  is = 1; break;
         case FLOOR_TYPE__GRASS:                     is = 1; break;
         case FLOOR_TYPE__PIT:                       is = 0; break;
         case FLOOR_TYPE__WATER:                     is = 1; break;
@@ -190,6 +196,9 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:       is = 1; break;
         case FLOOR_TYPE__METAL_NO_PISTON:           is = 1; break;
+        case FLOOR_TYPE__GOLD:                      is = 1; break;
+        case FLOOR_TYPE__MARBLE:                    is = 1; break;
+        case FLOOR_TYPE__OBSIDIAN:                  is = 1; break;
         case FLOOR_TYPE__GRASS:                     is = 1; break;
         case FLOOR_TYPE__PIT:                       is = 1; break;
         case FLOOR_TYPE__WATER:                     is = 1; break;
@@ -642,6 +651,9 @@ char* get_name_from_floor(int floor)
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     name = "metal piston dynamite"; break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:       name = "metal piston barrel"; break;
         case FLOOR_TYPE__METAL_NO_PISTON:           name = "metal no piston"; break;
+        case FLOOR_TYPE__GOLD:                      name = "gold"; break;
+        case FLOOR_TYPE__MARBLE:                    name = "marble"; break;
+        case FLOOR_TYPE__OBSIDIAN:                  name = "obsidian"; break;
         case FLOOR_TYPE__GRASS:                     name = "grass"; break;
         case FLOOR_TYPE__WATER:                     name = "water"; break;
         case FLOOR_TYPE__WATER_LILY_POD:            name = "water lily pod"; break;
@@ -691,6 +703,9 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     texture = textures->floor.metal_piston_dynamite; break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:       texture = textures->floor.metal_piston_barrel; break;
         case FLOOR_TYPE__METAL_NO_PISTON:           texture = textures->floor.metal_no_piston; break;
+        case FLOOR_TYPE__GOLD:                      texture = textures->floor.gold; break;
+        case FLOOR_TYPE__MARBLE:                    texture = textures->floor.marble; break;
+        case FLOOR_TYPE__OBSIDIAN:                  texture = textures->floor.obsidian; break;
         case FLOOR_TYPE__GRASS:                     texture = textures->floor.grass; break;
         case FLOOR_TYPE__PIT:                       texture = textures->floor.pit; break;
         case FLOOR_TYPE__WATER:                     texture = textures->floor.water_1; break;
@@ -741,6 +756,9 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     texture = textures->floor.metal_piston_dynamite; break;
         case FLOOR_TYPE__METAL_PISTON_BARREL:       texture = textures->floor.metal_piston_barrel; break;
         case FLOOR_TYPE__METAL_NO_PISTON:           texture = textures->floor.metal_no_piston; break;
+        case FLOOR_TYPE__GOLD:                      texture = textures->floor.gold; break;
+        case FLOOR_TYPE__MARBLE:                    texture = textures->floor.marble; break;
+        case FLOOR_TYPE__OBSIDIAN:                  texture = textures->floor.obsidian; break;
         case FLOOR_TYPE__GRASS:                     texture = textures->floor.grass; break;
         case FLOOR_TYPE__PIT:                       texture = textures->floor.pit; break;
         case FLOOR_TYPE__WATER:                     texture = textures->floor.water_2; break;

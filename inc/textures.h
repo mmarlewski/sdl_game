@@ -33,6 +33,12 @@ typedef struct
     Texture* metal_piston_barrel;
     Texture* metal_no_piston;
 
+    Texture* gold;
+
+    Texture* marble;
+
+    Texture* obsidian;
+
     Texture* grass;
 
     Texture* pit;
@@ -70,16 +76,12 @@ void destroy_textures_floor (Textures_Floor* floor);
 typedef struct
 {
     Texture* wall_rock;
-    Texture* wall_rock_outline;
-
     Texture* wall_stone;
-    Texture* wall_stone_outline;
-
     Texture* wall_metal;
-    Texture* wall_metal_outline;
-
     Texture* wall_gold;
-    Texture* wall_gold_outline;
+    Texture* wall_marble;
+    Texture* wall_obsidian;
+    Texture* wall_outline;
 
     Texture* exit_rock_up;
     Texture* exit_rock_blocked_up;
@@ -148,6 +150,24 @@ typedef struct
     Texture* exit_gold_locked_left;
     Texture* exit_gold_unlocked_left;
     Texture* exit_gold_left_outline;
+
+    Texture* exit_marble_up;
+    Texture* exit_marble_up_outline;
+    Texture* exit_marble_right;
+    Texture* exit_marble_right_outline;
+    Texture* exit_marble_down;
+    Texture* exit_marble_down_outline;
+    Texture* exit_marble_left;
+    Texture* exit_marble_left_outline;
+
+    Texture* exit_obsidian_up;
+    Texture* exit_obsidian_up_outline;
+    Texture* exit_obsidian_right;
+    Texture* exit_obsidian_right_outline;
+    Texture* exit_obsidian_down;
+    Texture* exit_obsidian_down_outline;
+    Texture* exit_obsidian_left;
+    Texture* exit_obsidian_left_outline;
 
     Texture* pillar;
     Texture* pillar_outline;
