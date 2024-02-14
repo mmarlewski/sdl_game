@@ -83,6 +83,8 @@ int is_floor_traversable(int floor)
         case FLOOR_TYPE__METAL_HATCH_OPEN:          is = 0; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        is = 1; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        is = 1; break;
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    is = 1; break;
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:      is = 1; break;
         case FLOOR_TYPE__METAL_PISTON:              is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     is = 1; break;
@@ -131,6 +133,8 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR_TYPE__METAL_HATCH_OPEN:          is = 0; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        is = 1; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        is = 1; break;
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    is = 1; break;
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:      is = 1; break;
         case FLOOR_TYPE__METAL_PISTON:              is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     is = 1; break;
@@ -179,6 +183,8 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR_TYPE__METAL_HATCH_OPEN:          is = 1; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        is = 1; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        is = 1; break;
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    is = 1; break;
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:      is = 1; break;
         case FLOOR_TYPE__METAL_PISTON:              is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     is = 1; break;
@@ -629,6 +635,8 @@ char* get_name_from_floor(int floor)
         case FLOOR_TYPE__METAL_HATCH_OPEN:          name = "metal hatch open"; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        name = "metal hatch closed"; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        name = "metal cover bottom"; break;
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    name = "metal target unchecked"; break;
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:      name = "metal target checked"; break;
         case FLOOR_TYPE__METAL_PISTON:              name = "metal piston"; break;
         case FLOOR_TYPE__METAL_PISTON_CELL:         name = "metal piston cell"; break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     name = "metal piston dynamite"; break;
@@ -676,6 +684,8 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__METAL_HATCH_OPEN:          texture = textures->floor.metal_hatch_open_1; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        texture = textures->floor.metal_hatch_closed; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        texture = textures->floor.metal_cover_bottom; break;
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    texture = textures->floor.metal_target_unchecked; break;
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:      texture = textures->floor.metal_target_checked; break;
         case FLOOR_TYPE__METAL_PISTON:              texture = textures->floor.metal_piston; break;
         case FLOOR_TYPE__METAL_PISTON_CELL:         texture = textures->floor.metal_piston_cell; break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     texture = textures->floor.metal_piston_dynamite; break;
@@ -724,6 +734,8 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__METAL_HATCH_OPEN:          texture = textures->floor.metal_hatch_open_1; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        texture = textures->floor.metal_hatch_closed; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        texture = textures->floor.metal_cover_bottom; break;
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    texture = textures->floor.metal_target_unchecked; break;
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:      texture = textures->floor.metal_target_checked; break;
         case FLOOR_TYPE__METAL_PISTON:              texture = textures->floor.metal_piston; break;
         case FLOOR_TYPE__METAL_PISTON_CELL:         texture = textures->floor.metal_piston_cell; break;
         case FLOOR_TYPE__METAL_PISTON_DYNAMITE:     texture = textures->floor.metal_piston_dynamite; break;

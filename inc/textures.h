@@ -24,6 +24,8 @@ typedef struct
     Texture* metal_hatch_open_2;
     Texture* metal_hatch_closed;
     Texture* metal_cover_bottom;
+    Texture* metal_target_unchecked;
+    Texture* metal_target_checked;
 
     Texture* metal_piston;
     Texture* metal_piston_cell;
@@ -433,6 +435,18 @@ typedef struct
 
     Texture* stairs_above_metal;
     Texture* stairs_above_metal_outline;
+
+    Texture* lever_metal_off;
+    Texture* lever_metal_off_outline;
+
+    Texture* lever_metal_on;
+    Texture* lever_metal_on_outline;
+
+    Texture* lever_stone_unpowered;
+    Texture* lever_stone_unpowered_outline;
+
+    Texture* lever_stone_powered;
+    Texture* lever_stone_powered_outline;
 
     Texture* station_fist_hand;
     Texture* station_hook_hand;

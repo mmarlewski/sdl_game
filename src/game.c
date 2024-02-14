@@ -139,7 +139,7 @@ int main (int argc, char* argv[])
     }
     room_change_floor_at(
         first_room,
-        FLOOR_TYPE__ROCK_CRACK_PIT,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
         vec2i(6,7)
         );
     room_change_floor_at(
@@ -250,7 +250,7 @@ int main (int argc, char* argv[])
         );
     room_add_object_at(
         first_room,
-        new_object(OBJECT_TYPE__STAIRS_ABOVE_ROCK),
+        new_object(OBJECT_TYPE__LEVER_METAL_OFF),
         vec2i(7,4)
         );
     room_add_object_at(

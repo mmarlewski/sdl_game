@@ -17,6 +17,8 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_hatch_open_2 = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_open_2.png");
     floor->metal_hatch_closed = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_closed.png");
     floor->metal_cover_bottom = load_texture_from_filepath (renderer, "./res/floor/metal_cover_bottom.png");
+    floor->metal_target_unchecked = load_texture_from_filepath (renderer, "./res/floor/metal_target_unchecked.png");
+    floor->metal_target_checked = load_texture_from_filepath (renderer, "./res/floor/metal_target_checked.png");
     floor->metal_piston = load_texture_from_filepath (renderer, "./res/floor/metal_piston.png");
     floor->metal_piston_cell = load_texture_from_filepath (renderer, "./res/floor/metal_piston_cell.png");
     floor->metal_piston_dynamite = load_texture_from_filepath (renderer, "./res/floor/metal_piston_dynamite.png");
@@ -446,6 +448,18 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->station_teleportation_head = load_texture_from_filepath(renderer, "./res/object/station_teleportation_head.png");
     object->station_taken = load_texture_from_filepath(renderer, "./res/object/station_taken.png");
     object->station_outline = load_texture_from_filepath(renderer, "./res/object/station_outline.png");
+
+    object->lever_metal_off = load_texture_from_filepath(renderer, "./res/object/lever_metal_off.png");
+    object->lever_metal_off_outline = load_texture_from_filepath(renderer, "./res/object/lever_metal_off_outline.png");
+
+    object->lever_metal_on = load_texture_from_filepath(renderer, "./res/object/lever_metal_on.png");
+    object->lever_metal_on_outline = load_texture_from_filepath(renderer, "./res/object/lever_metal_on_outline.png");
+
+    object->lever_stone_unpowered = load_texture_from_filepath(renderer, "./res/object/lever_stone_unpowered.png");
+    object->lever_stone_unpowered_outline = load_texture_from_filepath(renderer, "./res/object/lever_stone_unpowered_outline.png");
+
+    object->lever_stone_powered = load_texture_from_filepath(renderer, "./res/object/lever_stone_powered.png");
+    object->lever_stone_powered_outline = load_texture_from_filepath(renderer, "./res/object/lever_stone_powered_outline.png");
 }
 
 void destroy_textures_object (Textures_Object* object)

@@ -45,6 +45,20 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
 {
     switch(floor)
     {
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:
+        {
+            if(!is_object_flying(action->move.object))
+            {
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR_TYPE__METAL_TARGET_CHECKED,
+                        vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
             if(!is_object_flying(action->move.object))
@@ -131,6 +145,20 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:
+        {
+            if(!is_object_flying(action->move.object))
+            {
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR_TYPE__METAL_TARGET_CHECKED,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
             if(!is_object_flying(action->move.object))
@@ -1286,6 +1314,28 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__LEVER_METAL_OFF:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__LEVER_METAL_ON,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__LEVER_METAL_ON:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__LEVER_METAL_OFF,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__EXIT_METAL_ON_UP:
         {
             add_action_to_end_action_sequence(
@@ -1503,6 +1553,17 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__LEVER_STONE_POWERED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__LEVER_STONE_UNPOWERED,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__MINIBOT_ALLY_CELL:
         {
             add_action_to_end_action_sequence(
@@ -1784,6 +1845,20 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__LEVER_STONE_POWERED,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case OBJECT_TYPE__MINIBOT_ALLY:
         {
             if(item_type == ITEM__CELL)

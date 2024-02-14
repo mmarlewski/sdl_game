@@ -382,6 +382,11 @@ int is_object_manipulatable(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
 
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  is = 1; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   is = 1; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            is = 0; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              is = 0; break;
+
         default: break;
     }
 
@@ -684,6 +689,11 @@ int is_object_meltable(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 1; break;
 
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  is = 1; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   is = 1; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            is = 0; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              is = 0; break;
+
         default: break;
     }
 
@@ -800,6 +810,11 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 0; break;
 
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  is = 0; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   is = 0; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            is = 1; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              is = 1; break;
+
         default: break;
     }
 
@@ -889,6 +904,11 @@ int get_object_item_type(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                item_type = ITEM__NONE; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            item_type = ITEM__NONE; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            item_type = ITEM__NONE; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              item_type = ITEM__CELL; break;
 
         case OBJECT_TYPE__MINIBOT_ALLY:                     item_type = ITEM__NONE; break;
         case OBJECT_TYPE__MINIBOT_ALLY_CELL:                item_type = ITEM__CELL; break;
@@ -989,6 +1009,11 @@ int get_object_item_count(Object* object)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                count = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            count = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               count = 0; break;
+
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  count = 0; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   count = 0; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            count = 0; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              count = 1; break;
 
         case OBJECT_TYPE__MINIBOT_ALLY:                     count = 0; break;
         case OBJECT_TYPE__MINIBOT_ALLY_CELL:                count = 1; break;
@@ -1120,6 +1145,11 @@ int is_object_put_item(Object* object)
 
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
+
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  is = 0; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   is = 0; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            is = 1; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              is = 0; break;
 
         case OBJECT_TYPE__HERO:                             is = 0; break;
         case OBJECT_TYPE__GOAT:                             is = 0; break;
@@ -1319,6 +1349,11 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            name = "stairs above metal on"; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               name = "stairs above metal"; break;
 
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  name = "lever metal off"; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   name = "lever metal on"; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            name = "lever stone unpowered"; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              name = "lever stone powered"; break;
+
         case OBJECT_TYPE__STATION_FIST_HAND:                name = "station push hand"; break;
         case OBJECT_TYPE__STATION_HOOK_HAND:                name = "station hook hand"; break;
         case OBJECT_TYPE__STATION_CHAIN_HAND:               name = "station chain hand"; break;
@@ -1502,6 +1537,11 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal; break;
+
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  texture = textures->object.lever_metal_off; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   texture = textures->object.lever_metal_on; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered; break;
 
         case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
         case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
@@ -1687,6 +1727,11 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal; break;
 
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  texture = textures->object.lever_metal_off; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   texture = textures->object.lever_metal_on; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered; break;
+
         case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
         case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
         case OBJECT_TYPE__STATION_CHAIN_HAND:               texture = textures->object.station_chain_hand; break;
@@ -1871,6 +1916,11 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal_outline; break;
 
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  texture = textures->object.lever_metal_off_outline; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   texture = textures->object.lever_metal_on_outline; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered_outline; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered_outline; break;
+
         case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_CHAIN_HAND:               texture = textures->object.station_outline; break;
@@ -2054,6 +2104,11 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            texture = textures->object.stairs_above_metal_on_outline; break;
         case OBJECT_TYPE__STAIRS_ABOVE_METAL:               texture = textures->object.stairs_above_metal_outline; break;
+
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  texture = textures->object.lever_metal_off_outline; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   texture = textures->object.lever_metal_on_outline; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered_outline; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered_outline; break;
 
         case OBJECT_TYPE__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
         case OBJECT_TYPE__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;
