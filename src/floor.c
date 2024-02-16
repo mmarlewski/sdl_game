@@ -746,7 +746,7 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__STONE_SPIKES_ON:           texture = textures->floor.stone_spikes_on; break;
         case FLOOR_TYPE__STONE_SPIKES_OFF:          texture = textures->floor.stone_spikes_off; break;
         case FLOOR_TYPE__METAL:                     texture = textures->floor.metal; break;
-        case FLOOR_TYPE__METAL_HATCH_OPEN:          texture = textures->floor.metal_hatch_open_1; break;
+        case FLOOR_TYPE__METAL_HATCH_OPEN:          texture = textures->floor.metal_hatch_open_2; break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:        texture = textures->floor.metal_hatch_closed; break;
         case FLOOR_TYPE__METAL_COVER_BOTTOM:        texture = textures->floor.metal_cover_bottom; break;
         case FLOOR_TYPE__METAL_TARGET_UNCHECKED:    texture = textures->floor.metal_target_unchecked; break;

@@ -67,6 +67,15 @@ void room_remove_object(Room* room, Object* object, int destroy_data)
     remove_list_element_of_data(room->object_list, object, destroy_data);
 }
 
+void room_remove_object_at(Room* room, Vec2i tilemap_pos, int destroy_data)
+{
+    Object* object = room_get_object_at(room, tilemap_pos);
+    if(object != 0)
+    {
+        room_remove_object(room, object, destroy_data);
+    }
+}
+
 Passage* new_passage(char* from_room_name, char* to_room_name, Vec2i from_tilemap_pos, Vec2i to_tilemap_pos)
 {
     Passage* passage = malloc(sizeof(*passage));

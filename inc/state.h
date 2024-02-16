@@ -113,6 +113,8 @@ typedef struct
 void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
+void create_level(State* state);
+
 void add_room(State* state, Room* room);
 Room* get_room(State* state, char* name);
 void set_curr_room(State* state, Room* room);
