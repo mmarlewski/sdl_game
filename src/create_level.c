@@ -773,22 +773,12 @@ void create_level(State* state)
         );
 
     ///////////
-    // room_0_4
+    // room_0_5
     ///////////
 
     Room* room_0_5 = new_empty_room("0_5");
     add_room(
         state,
-        room_0_5
-        );
-    room_add_object_at(
-        room_0_5,
-        state->hero_object,
-        vec2i(1,1)
-        );
-    set_curr_room(state, room_0_5);
-    add_new_list_element_to_list_end(
-        state->visited_room_list,
         room_0_5
         );
 
@@ -945,4 +935,1750 @@ void create_level(State* state)
         new_object(OBJECT_TYPE__PILLAR),
         vec2i(5,8)
         );
+
+    ///////////
+    // room_1_0
+    ///////////
+
+    Room* room_1_0 = new_empty_room("1_0");
+    add_room(
+        state,
+        room_1_0
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_1_0, FLOOR_TYPE__OBSIDIAN);
+    room_change_floor_at(
+        room_1_0,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,4)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,5)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,5)
+        );
+
+    // walls
+
+    List* room_1_0_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_1_0_wall_exclude_pos_list,
+        new_vec2i(5,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_0_wall_exclude_pos_list,
+        new_vec2i(7,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_0_wall_exclude_pos_list,
+        new_vec2i(5,9)
+        );
+    add_new_list_element_to_list_end(
+        room_1_0_wall_exclude_pos_list,
+        new_vec2i(7,9)
+        );
+    add_walls_around_room(
+        room_1_0,
+        OBJECT_TYPE__WALL_OBSIDIAN,
+        room_1_0_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_1_0_wall_exclude_pos_list, 1);
+    destroy_list(room_1_0_wall_exclude_pos_list);
+
+    // objects
+
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,1)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,2)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,3)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,4)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,5)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,6)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,7)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,8)
+        );
+
+    ///////////
+    // room_1_1
+    ///////////
+
+    Room* room_1_1 = new_empty_room("1_1");
+    add_room(
+        state,
+        room_1_1
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_1_1, FLOOR_TYPE__GOLD);
+
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,1)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,2)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,3)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,5)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,6)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,7)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,8)
+        );
+
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(7,1)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(7,2)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(7,3)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(8,1)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(8,2)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(8,3)
+        );
+    room_change_floor_at(
+        room_1_1,
+        FLOOR_TYPE__WATER,
+        vec2i(8,4)
+        );
+
+    // walls
+
+    List* room_1_1_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_1_1_wall_exclude_pos_list,
+        new_vec2i(8,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_1_wall_exclude_pos_list,
+        new_vec2i(9,1)
+        );
+    add_walls_around_room(
+        room_1_1,
+        OBJECT_TYPE__WALL_GOLD,
+        room_1_1_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_1_1_wall_exclude_pos_list, 1);
+    destroy_list(room_1_1_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_1_2
+    ///////////
+
+    Room* room_1_2 = new_empty_room("1_2");
+    add_room(
+        state,
+        room_1_2
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_1_2, FLOOR_TYPE__GOLD);
+
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(1,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(2,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(3,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(5,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(6,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(7,1)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(8,1)
+        );
+
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(1,2)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(2,2)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(3,2)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,2)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(5,2)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(6,2)
+        );
+
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(1,3)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(2,3)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(3,3)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,3)
+        );
+
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(2,4)
+        );
+
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,7)
+        );
+    room_change_floor_at(
+        room_1_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,8)
+        );
+
+    // walls
+
+    List* room_1_2_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_1_2_wall_exclude_pos_list,
+        new_vec2i(1,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_2_wall_exclude_pos_list,
+        new_vec2i(0,1)
+        );
+    add_new_list_element_to_list_end(
+        room_1_2_wall_exclude_pos_list,
+        new_vec2i(8,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_2_wall_exclude_pos_list,
+        new_vec2i(9,1)
+        );
+    add_new_list_element_to_list_end(
+        room_1_2_wall_exclude_pos_list,
+        new_vec2i(4,9)
+        );
+    add_walls_around_room(
+        room_1_2,
+        OBJECT_TYPE__WALL_GOLD,
+        room_1_2_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_1_2_wall_exclude_pos_list, 1);
+    destroy_list(room_1_2_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_1_3
+    ///////////
+
+    Room* room_1_3 = new_empty_room("1_3");
+    add_room(
+        state,
+        room_1_3
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_1_3, FLOOR_TYPE__GOLD);
+
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__WATER,
+        vec2i(1,1)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__WATER,
+        vec2i(2,1)
+        );
+
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,1)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,2)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,3)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,7)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,8)
+        );
+
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(5,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(6,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_1_3,
+        FLOOR_TYPE__PIT,
+        vec2i(8,4)
+        );
+
+    // walls
+
+    List* room_1_3_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_1_3_wall_exclude_pos_list,
+        new_vec2i(1,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_3_wall_exclude_pos_list,
+        new_vec2i(0,1)
+        );
+    add_new_list_element_to_list_end(
+        room_1_3_wall_exclude_pos_list,
+        new_vec2i(8,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_3_wall_exclude_pos_list,
+        new_vec2i(9,1)
+        );
+    add_walls_around_room(
+        room_1_3,
+        OBJECT_TYPE__WALL_GOLD,
+        room_1_3_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_1_3_wall_exclude_pos_list, 1);
+    destroy_list(room_1_3_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_1_4
+    ///////////
+
+    Room* room_1_4 = new_empty_room("1_4");
+    add_room(
+        state,
+        room_1_4
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_1_4, FLOOR_TYPE__GOLD);
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,1)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,1)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,1)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,1)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,1)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,1)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,1)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,2)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,2)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,3)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,3)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,4)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,5)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,5)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,5)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,6)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,6)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,6)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,6)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,7)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,7)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,7)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,7)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(1,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(2,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,8)
+        );
+
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(7,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,8)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,7)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,6)
+        );
+    room_change_floor_at(
+        room_1_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(8,5)
+        );
+
+    // walls
+
+    List* room_1_4_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_1_4_wall_exclude_pos_list,
+        new_vec2i(1,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_4_wall_exclude_pos_list,
+        new_vec2i(0,1)
+        );
+    add_walls_around_room(
+        room_1_4,
+        OBJECT_TYPE__WALL_GOLD,
+        room_1_4_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_1_4_wall_exclude_pos_list, 1);
+    destroy_list(room_1_4_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_1_5
+    ///////////
+
+    Room* room_1_5 = new_empty_room("1_5");
+    add_room(
+        state,
+        room_1_5
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_1_5, FLOOR_TYPE__MARBLE);
+
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        vec2i(0,0)
+        );
+
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(5,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(6,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(8,4)
+        );
+
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(1,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(2,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(5,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(6,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(7,5)
+        );
+    room_change_floor_at(
+        room_1_5,
+        FLOOR_TYPE__ROCK_CRACK_PIT,
+        vec2i(8,5)
+        );
+
+    // walls
+
+    List* room_1_5_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_1_5_wall_exclude_pos_list,
+        new_vec2i(2,0)
+        );
+    add_new_list_element_to_list_end(
+        room_1_5_wall_exclude_pos_list,
+        new_vec2i(7,9)
+        );
+    add_walls_around_room(
+        room_1_5,
+        OBJECT_TYPE__WALL_MARBLE,
+        room_1_5_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_1_5_wall_exclude_pos_list, 1);
+    destroy_list(room_1_5_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_2_0
+    ///////////
+
+    Room* room_2_0 = new_empty_room("2_0");
+    add_room(
+        state,
+        room_2_0
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_2_0, FLOOR_TYPE__OBSIDIAN);
+    room_change_floor_at(
+        room_2_0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_2_0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        vec2i(5,4)
+        );
+
+    // walls
+
+    List* room_2_0_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_2_0_wall_exclude_pos_list,
+        new_vec2i(5,0)
+        );
+    add_new_list_element_to_list_end(
+        room_2_0_wall_exclude_pos_list,
+        new_vec2i(7,0)
+        );
+    add_new_list_element_to_list_end(
+        room_2_0_wall_exclude_pos_list,
+        new_vec2i(5,9)
+        );
+    add_new_list_element_to_list_end(
+        room_2_0_wall_exclude_pos_list,
+        new_vec2i(7,9)
+        );
+    add_walls_around_room(
+        room_2_0,
+        OBJECT_TYPE__WALL_OBSIDIAN,
+        room_2_0_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_2_0_wall_exclude_pos_list, 1);
+    destroy_list(room_2_0_wall_exclude_pos_list);
+
+    // objects
+
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,1)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,2)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,7)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,8)
+        );
+
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(2,2)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(2,3)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(2,4)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(2,5)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(2,6)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(2,7)
+        );
+
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(3,2)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(4,2)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(5,2)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(3,7)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(4,7)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(5,7)
+        );
+
+    ///////////
+    // room_2_1
+    ///////////
+
+    Room* room_2_1 = new_empty_room("2_1");
+    add_room(
+        state,
+        room_2_1
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_2_1, FLOOR_TYPE__METAL);
+
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(4,8)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(4,7)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(4,6)
+        );
+
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(3,6)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(3,4)
+        );
+
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(2,3)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(2,2)
+        );
+
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,2)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR_TYPE__LAVA,
+        vec2i(1,1)
+        );
+
+    // walls
+
+    List* room_2_1_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_2_1_wall_exclude_pos_list,
+        new_vec2i(4,9)
+        );
+    add_new_list_element_to_list_end(
+        room_2_1_wall_exclude_pos_list,
+        new_vec2i(7,9)
+        );
+    add_new_list_element_to_list_end(
+        room_2_1_wall_exclude_pos_list,
+        new_vec2i(9,7)
+        );
+    add_walls_around_room(
+        room_2_1,
+        OBJECT_TYPE__WALL_METAL,
+        room_2_1_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_2_1_wall_exclude_pos_list, 1);
+    destroy_list(room_2_1_wall_exclude_pos_list);
+
+    // objects
+
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT_TYPE__WALL_METAL),
+        vec2i(6,2)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT_TYPE__WALL_METAL),
+        vec2i(7,2)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT_TYPE__WALL_METAL),
+        vec2i(7,3)
+        );
+
+    ///////////
+    // room_2_2
+    ///////////
+
+    Room* room_2_2 = new_empty_room("2_2");
+    add_room(
+        state,
+        room_2_2
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_2_2, FLOOR_TYPE__METAL);
+
+    room_change_floor_at(
+        room_2_2,
+        FLOOR_TYPE__WATER,
+        vec2i(4,1)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR_TYPE__WATER,
+        vec2i(5,1)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR_TYPE__WATER,
+        vec2i(6,1)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR_TYPE__WATER,
+        vec2i(6,2)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR_TYPE__WATER,
+        vec2i(7,2)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR_TYPE__WATER,
+        vec2i(8,2)
+        );
+
+    // walls
+
+    List* room_2_2_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_2_2_wall_exclude_pos_list,
+        new_vec2i(0,7)
+        );
+    add_new_list_element_to_list_end(
+        room_2_2_wall_exclude_pos_list,
+        new_vec2i(5,9)
+        );
+    add_new_list_element_to_list_end(
+        room_2_2_wall_exclude_pos_list,
+        new_vec2i(4,0)
+        );
+    add_new_list_element_to_list_end(
+        room_2_2_wall_exclude_pos_list,
+        new_vec2i(9,2)
+        );
+    add_walls_around_room(
+        room_2_2,
+        OBJECT_TYPE__WALL_METAL,
+        room_2_2_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_2_2_wall_exclude_pos_list, 1);
+    destroy_list(room_2_2_wall_exclude_pos_list);
+
+    // objects
+
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT_TYPE__WALL_METAL),
+        vec2i(2,6)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT_TYPE__WALL_METAL),
+        vec2i(2,7)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT_TYPE__WALL_METAL),
+        vec2i(3,7)
+        );
+
+    ///////////
+    // room_2_3
+    ///////////
+
+    Room* room_2_3 = new_empty_room("2_3");
+    add_room(
+        state,
+        room_2_3
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_2_3, FLOOR_TYPE__STONE);
+
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(1,2)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(1,3)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(2,3)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(5,6)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(5,7)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(6,7)
+        );
+    room_change_floor_at(
+        room_2_3,
+        FLOOR_TYPE__WATER,
+        vec2i(6,8)
+        );
+    // walls
+
+    List* room_2_3_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_2_3_wall_exclude_pos_list,
+        new_vec2i(0,2)
+        );
+    add_new_list_element_to_list_end(
+        room_2_3_wall_exclude_pos_list,
+        new_vec2i(6,9)
+        );
+    add_new_list_element_to_list_end(
+        room_2_3_wall_exclude_pos_list,
+        new_vec2i(9,5)
+        );
+    add_walls_around_room(
+        room_2_3,
+        OBJECT_TYPE__WALL_STONE,
+        room_2_3_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_2_3_wall_exclude_pos_list, 1);
+    destroy_list(room_2_3_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_2_4
+    ///////////
+
+    Room* room_2_4 = new_empty_room("2_4");
+    add_room(
+        state,
+        room_2_4
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_2_4, FLOOR_TYPE__STONE);
+
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,3)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,3)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,3)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,3)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,4)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,5)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(6,6)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(5,6)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,6)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR_TYPE__STONE_TRAP,
+        vec2i(3,4)
+        );
+
+    // walls
+
+    List* room_2_4_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_2_4_wall_exclude_pos_list,
+        new_vec2i(0,5)
+        );
+    add_new_list_element_to_list_end(
+        room_2_4_wall_exclude_pos_list,
+        new_vec2i(6,9)
+        );
+    add_new_list_element_to_list_end(
+        room_2_4_wall_exclude_pos_list,
+        new_vec2i(9,2)
+        );
+    add_walls_around_room(
+        room_2_4,
+        OBJECT_TYPE__WALL_STONE,
+        room_2_4_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_2_4_wall_exclude_pos_list, 1);
+    destroy_list(room_2_4_wall_exclude_pos_list);
+
+    // objects
+
+    //
+
+    ///////////
+    // room_2_5
+    ///////////
+
+    Room* room_2_5 = new_empty_room("2_5");
+    add_room(
+        state,
+        room_2_5
+        );
+    room_add_object_at(
+        room_2_5,
+        state->hero_object,
+        vec2i(1,1)
+        );
+    set_curr_room(state, room_2_5);
+    add_new_list_element_to_list_end(
+        state->visited_room_list,
+        room_2_5
+        );
+
+    // floors
+
+    add_floor_at_every_room_position(room_2_5, FLOOR_TYPE__MARBLE);
+
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,1)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,2)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,3)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,4)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,5)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,6)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,7)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(8,8)
+        );
+
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(7,1)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(7,2)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(7,3)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(7,5)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(7,6)
+        );
+
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(6,1)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(6,2)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(6,3)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(6,4)
+        );
+
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(5,1)
+        );
+    room_change_floor_at(
+        room_2_5,
+        FLOOR_TYPE__WATER,
+        vec2i(5,2)
+        );
+
+    // walls
+
+    List* room_2_5_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    add_new_list_element_to_list_end(
+        room_2_5_wall_exclude_pos_list,
+        new_vec2i(0,2)
+        );
+    add_new_list_element_to_list_end(
+        room_2_5_wall_exclude_pos_list,
+        new_vec2i(7,0)
+        );
+    add_walls_around_room(
+        room_2_5,
+        OBJECT_TYPE__WALL_MARBLE,
+        room_2_5_wall_exclude_pos_list
+        );
+    remove_all_list_elements(room_2_5_wall_exclude_pos_list, 1);
+    destroy_list(room_2_5_wall_exclude_pos_list);
+
+    // objects
+
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,1)
+        );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,2)
+        );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,3)
+        );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,4)
+        );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,5)
+        );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(7,6)
+        );
+
+    ///////////
+    // room_0_0
+    ///////////
+
+    // Room* room_0_0 = new_empty_room("0_0");
+    // add_room(
+    //     state,
+    //     room_0_0
+    //     );
+
+    // // floors
+
+    // add_floor_at_every_room_position(room_0_0, FLOOR_TYPE__MARBLE);
+    // room_change_floor_at(
+    //     room_0_0,
+    //     FLOOR_TYPE__WATER,
+    //     vec2i(0,0)
+    //     );
+
+    // // walls
+
+    // List* room_0_0_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
+    // add_new_list_element_to_list_end(
+    //     room_0_0_wall_exclude_pos_list,
+    //     new_vec2i(0,0)
+    //     );
+    // add_walls_around_room(
+    //     room_0_0,
+    //     OBJECT_TYPE__WALL_MARBLE,
+    //     room_0_0_wall_exclude_pos_list
+    //     );
+    // remove_all_list_elements(room_0_0_wall_exclude_pos_list, 1);
+    // destroy_list(room_0_0_wall_exclude_pos_list);
+
+    // // objects
+
+    // room_add_object_at(
+    //     room_0_0,
+    //     new_object(OBJECT_TYPE__LEVER_STONE_UNPOWERED),
+    //     vec2i(0,0)
+    //     );
 }
