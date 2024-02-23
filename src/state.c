@@ -87,6 +87,22 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
+    Room* room = get_room(state, "0_0");
+
+    room_add_object_at(
+        room,
+        state->hero_object,
+        vec2i(1,1)
+        );
+    set_curr_room(
+        state,
+        room
+        );
+    add_new_list_element_to_list_end(
+        state->visited_room_list,
+        room
+        );
+
     state->hero_item_number[ITEM__CELL] = 5;
     state->hero_item_number[ITEM__DYNAMITE] = 5;
     state->hero_item_number[ITEM__GEMSTONE] = 5;
