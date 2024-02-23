@@ -133,36 +133,79 @@ int is_object_exit(Object* object)
 
     switch(object->type)
     {
-        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 1; break;
-        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 1; break;
-        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 1; break;
-        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_UP:
+        case OBJECT_TYPE__EXIT_ROCK_RIGHT:
+        case OBJECT_TYPE__EXIT_ROCK_DOWN:
+        case OBJECT_TYPE__EXIT_ROCK_LEFT:
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:
 
-        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          is = 1; break;
-        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_UP:
+        case OBJECT_TYPE__EXIT_STONE_RIGHT:
+        case OBJECT_TYPE__EXIT_STONE_DOWN:
+        case OBJECT_TYPE__EXIT_STONE_LEFT:
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:
 
-        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 1; break;
-        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_UP:
+        case OBJECT_TYPE__EXIT_METAL_RIGHT:
+        case OBJECT_TYPE__EXIT_METAL_DOWN:
+        case OBJECT_TYPE__EXIT_METAL_LEFT:
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:
 
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:
 
-        default: break;
+        case OBJECT_TYPE__EXIT_MARBLE_UP:
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:
+
+        is = 1;
+        break;
+
+        default:
+        break;
     }
 
     return is;

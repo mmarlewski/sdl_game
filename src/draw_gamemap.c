@@ -51,7 +51,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 renderer,
                 textures->floor.highlight,
                 colors->orange,
-                1.0f,
+                0.5f,
                 *tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
@@ -72,7 +72,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 renderer,
                 textures->floor.highlight,
                 colors->pink,
-                1.0f,
+                0.5f,
                 *tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
@@ -88,7 +88,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             renderer,
             textures->floor.highlight,
             colors->yellow,
-            1.0f,
+            0.5f,
             state->selected_tilemap_pos,
             state->camera_world_pos,
             state->camera_zoom

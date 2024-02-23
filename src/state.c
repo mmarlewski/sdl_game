@@ -87,7 +87,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "0_0");
+    Room* room = get_room(state, "2_0");
 
     room_add_object_at(
         room,
@@ -111,7 +111,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
     hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
     hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
@@ -148,6 +148,8 @@ void change_gamestate(State* state, int new_gamestate)
     printf("########################################\n");
     printf("----------------------------------------\n");
     printf("gamestate : %s \n", get_gamestate_name(state->gamestate));
+    printf("----------------------------------------\n");
+    printf("curr room : %s \n", state->curr_room->name);
     printf("----------------------------------------\n");
     printf("curr ally : %s \n", get_name_from_object_type(state->curr_ally_object->type));
     printf("----------------------------------------\n");
