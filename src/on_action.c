@@ -554,66 +554,22 @@ Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i ti
         break;
         case FLOOR_TYPE__STONE_SPIKES_OFF:
         {
-            animation = new_animation_sequence_of_2(
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.stone_spikes_1,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    ),
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.stone_spikes_2,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    )
-                );
+            //
         }
         break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
-            animation = new_animation_sequence_of_2(
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.stone_spikes_2,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    ),
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.stone_spikes_1,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    )
-                );
+            //
         }
         break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:
         {
-            animation = new_animation_sequence_of_2(
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.metal_hatch_2,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    ),
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.metal_hatch_1,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    )
-                );
+            //
         }
         break;
         case FLOOR_TYPE__METAL_HATCH_OPEN:
         {
-            animation = new_animation_sequence_of_2(
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.metal_hatch_1,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    ),
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.metal_hatch_2,
-                    tilemap_pos_to_gamemap_pos(tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                    )
-                );
+            //
         }
         break;
         case FLOOR_TYPE__METAL_STAIRS_ABOVE_OFF:

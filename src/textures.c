@@ -633,16 +633,7 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
 
     animation->drop_1 = load_texture_from_filepath (renderer, "./res/animation/drop_1.png");
     animation->drop_2 = load_texture_from_filepath (renderer, "./res/animation/drop_2.png");
-
-    animation->piston_1 = load_texture_from_filepath (renderer, "./res/animation/piston_1.png");
-    animation->piston_2 = load_texture_from_filepath (renderer, "./res/animation/piston_2.png");
-
-    animation->stone_spikes_1 = load_texture_from_filepath (renderer, "./res/animation/stone_spikes_1.png");
-    animation->stone_spikes_2 = load_texture_from_filepath (renderer, "./res/animation/stone_spikes_2.png");
-
-    animation->metal_hatch_1 = load_texture_from_filepath (renderer, "./res/animation/metal_hatch_1.png");
-    animation->metal_hatch_2 = load_texture_from_filepath (renderer, "./res/animation/metal_hatch_2.png");
-
+    
     animation->hook_up_start = load_texture_from_filepath (renderer, "./res/animation/hook_up_start.png");
     animation->hook_up_end = load_texture_from_filepath (renderer, "./res/animation/hook_up_end.png");
     animation->hook_up_up = load_texture_from_filepath (renderer, "./res/animation/hook_up_up.png");
