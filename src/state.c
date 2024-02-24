@@ -87,12 +87,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "4_0");
+    Room* room = get_room(state, "7_2");
 
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(1,1)
+        vec2i(7,2)
         );
     set_curr_room(
         state,
@@ -111,7 +111,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
     hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
@@ -605,12 +605,16 @@ void get_object_skills(State* state, Object* object, List* skill_list)
         break;
         case OBJECT_TYPE__MINIBOT_ALLY:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
         }
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_CELL:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
@@ -618,6 +622,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
@@ -625,6 +631,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
         break;
         case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+            
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
