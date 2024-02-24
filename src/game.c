@@ -16,7 +16,14 @@ void init_sdl (Window** window, Renderer** renderer)
 
     int window_flags = 0;
 
-    *window = SDL_CreateWindow("game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, window_flags);
+    *window = SDL_CreateWindow(
+        "sdl_game",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
+        window_flags
+        );
 
     if (!*window)
     {
@@ -28,9 +35,16 @@ void init_sdl (Window** window, Renderer** renderer)
 
     int renderer_flags = SDL_RENDERER_ACCELERATED;
 
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    SDL_SetHint(
+        SDL_HINT_RENDER_SCALE_QUALITY,
+        "linear"
+        );
 
-	*renderer = SDL_CreateRenderer(*window, -1, renderer_flags);
+	*renderer = SDL_CreateRenderer(
+        *window,
+        -1,
+        renderer_flags
+        );
 
     if (!*renderer)
     {
@@ -38,11 +52,19 @@ void init_sdl (Window** window, Renderer** renderer)
         exit(1);
     }
 
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    SDL_SetHint(
+        SDL_HINT_RENDER_SCALE_QUALITY,
+        "0"
+        );
 
     // audio
 
-    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048);
+    Mix_OpenAudio(
+        MIX_DEFAULT_FREQUENCY,
+        MIX_DEFAULT_FORMAT,
+        2,
+        2048
+        );
 }
 
 void destroy_sdl (Window* window, Renderer* renderer)

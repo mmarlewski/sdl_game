@@ -633,7 +633,7 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
 
     animation->drop_1 = load_texture_from_filepath (renderer, "./res/animation/drop_1.png");
     animation->drop_2 = load_texture_from_filepath (renderer, "./res/animation/drop_2.png");
-    
+
     animation->hook_up_start = load_texture_from_filepath (renderer, "./res/animation/hook_up_start.png");
     animation->hook_up_end = load_texture_from_filepath (renderer, "./res/animation/hook_up_end.png");
     animation->hook_up_up = load_texture_from_filepath (renderer, "./res/animation/hook_up_up.png");
@@ -710,6 +710,8 @@ void destroy_textures_animation (Textures_Animation* animation)
 
 void load_textures (Renderer* renderer, Textures* textures)
 {
+    textures->shadow = load_texture_from_filepath (renderer, "./res/shadow.png");
+
     load_textures_floor(renderer,&textures->floor);
     load_textures_object(renderer,&textures->object);
     load_textures_order_number(renderer,&textures->order_number);

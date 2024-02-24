@@ -1,7 +1,23 @@
 #include "../inc/game.h"
+#include <limits.h>
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors)
 {
+    // shadow
+
+    draw_texture_at_world_pos(
+        renderer,
+        textures->shadow,
+        colors->none,
+        1.0f,
+        vec2f(
+            -(GAMEMAP_WIDTH * 0.5f) + (TILE_LENGTH * 0.5f),
+            (TILE_LENGTH * 0.5f)
+            ),
+        state->camera_world_pos,
+        state->camera_zoom
+        );
+
     // floors, highlights
 
     for(int i = 0 ; i < TILEMAP_LENGTH ; i++)

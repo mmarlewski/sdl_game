@@ -87,7 +87,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "2_0");
+    Room* room = get_room(state, "4_0");
 
     room_add_object_at(
         room,

@@ -706,6 +706,8 @@ void destroy_textures_animation (Textures_Animation* animation);
 
 typedef struct
 {
+    Texture* shadow;
+
     Textures_Floor floor;
     Textures_Object object;
     Textures_OrderNumber order_number;
