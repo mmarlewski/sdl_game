@@ -239,7 +239,8 @@ void skill_on_use(
                                     update_enemy_attack_dir4(state, curr_enemy);
                                 }
                                 update_enemy_attack_targets(state, curr_enemy);
-                                update_enemy_draw(state, curr_enemy, textures, colors);
+                                clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                                get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
                             }
 
                             // all allies
@@ -336,7 +337,8 @@ void skill_on_use(
                                         update_enemy_attack_dir4(state, curr_enemy);
                                     }
                                     update_enemy_attack_targets(state, curr_enemy);
-                                    update_enemy_draw(state, curr_enemy, textures, colors);
+                                    clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                                    get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
                                 }
 
                                 // all allies

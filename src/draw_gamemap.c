@@ -463,6 +463,34 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
+        // Object* target_1_object = room_get_object_at(
+        //     state->curr_room,
+        //     state->curr_ally_target_1_tilemap_pos
+        //     );
+        // if(target_1_object != 0 && is_skill_two_target(state->curr_ally_skill))
+        // {
+        //     Texture* texture_outline = 0;
+        //         if(sin(state->time * 3) > 0)
+        //         {
+        //             texture_outline = get_texture_1_outline_from_object(
+        //                 target_1_object, textures);
+        //         }
+        //         else
+        //         {
+        //             texture_outline = get_texture_2_outline_from_object(
+        //                 target_1_object, textures);
+        //         }
+        //         draw_texture_at_tilemap_pos(
+        //             renderer,
+        //             texture_outline,
+        //             colors->orange,
+        //             1.0f,
+        //             target_1_object->tilemap_pos,
+        //             state->camera_world_pos,
+        //             state->camera_zoom
+        //         );
+        // }
+
         for(ListElem* curr_object_elem = state->curr_room->object_list->head;
         curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
         {

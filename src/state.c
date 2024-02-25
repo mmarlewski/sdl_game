@@ -102,17 +102,22 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state->visited_room_list,
         room
         );
+    room_add_object_at(
+        room,
+        new_object(OBJECT_TYPE__BULL),
+        vec2i(7,3)
+        );
 
     state->hero_item_number[ITEM__CELL] = 0;
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -122,7 +127,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
         update_enemy_attack_dir4(state, curr_enemy);
         update_enemy_attack_targets(state, curr_enemy);
-        update_enemy_draw(state, curr_enemy, textures, colors);
+        clear_enemy_attack_actions_and_draw(state,curr_enemy);
+        get_enemy_attack_actions_and_draw(state,curr_enemy,textures);
     }
 
     update_ally_list(state);
@@ -268,7 +274,7 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
     state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        printf("curr_skill: %s \n", get_skill_name(state->curr_ally_skill));
+        printf("curr skill: %s \n", get_skill_name(state->curr_ally_skill));
         printf("----------------------------------------\n");
     }
 
@@ -279,7 +285,9 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ENEMY_MOVING ||
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
     {
-        printf("curr_enemy: %s \n", get_name_from_object_type(state->curr_enemy->object->type));
+        printf("curr enemy: %s \n", get_name_from_object_type(state->curr_enemy->object->type));
+        printf("----------------------------------------\n");
+        printf("curr skill: %s \n", get_skill_name(state->curr_enemy->skill));
         printf("----------------------------------------\n");
     }
 }
@@ -755,58 +763,70 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
 {
     if(enemy != 0)
     {
-        remove_all_actions_from_action_sequence(
-            enemy->action_sequence
-            );
         object_enemy_prepare_attack(state, enemy);
     }
 }
 
-void update_enemy_draw(State* state, Enemy* enemy, Textures* textures, Colors* colors)
+void clear_enemy_attack_actions_and_draw(
+    State* state,
+    Enemy* enemy
+)
 {
     if(enemy != 0)
     {
-        remove_all_list_elements(enemy->draw_below_texture_list, 0);
-        remove_all_list_elements(enemy->draw_below_tilemap_pos_list, 1);
-        skill_get_draw_below(
+        remove_all_actions_from_action_sequence(
+            enemy->action_sequence
+            );
+        remove_all_list_elements(
+            enemy->draw_below_texture_list,
+            0
+            );
+        remove_all_list_elements(
+            enemy->draw_below_tilemap_pos_list,
+            1
+            );
+        remove_all_list_elements(
+            enemy->draw_above_texture_list,
+            0
+            );
+        remove_all_list_elements(
+            enemy->draw_above_tilemap_pos_list,
+            1
+            );
+        remove_all_list_elements(
+            enemy->draw_effect_texture_list,
+            0
+            );
+        remove_all_list_elements(
+            enemy->draw_effect_tilemap_pos_list,
+            1
+            );
+    }
+}
+
+void get_enemy_attack_actions_and_draw(
+    State* state,
+    Enemy* enemy,
+    Textures* textures
+)
+{
+    if(enemy != 0)
+    {
+        skill_get_actions_and_draw(
             state,
             enemy->skill,
             enemy->object->tilemap_pos,
             enemy->target_1_tilemap_pos,
             enemy->target_2_tilemap_pos,
+            enemy->action_sequence,
             enemy->draw_below_texture_list,
             enemy->draw_below_tilemap_pos_list,
-            textures,
-            colors
-            );
-
-        remove_all_list_elements(enemy->draw_above_texture_list, 0);
-        remove_all_list_elements(enemy->draw_above_tilemap_pos_list, 1);
-        skill_get_draw_above(
-            state,
-            enemy->skill,
-            enemy->object->tilemap_pos,
-            enemy->target_1_tilemap_pos,
-            enemy->target_2_tilemap_pos,
             enemy->draw_above_texture_list,
             enemy->draw_above_tilemap_pos_list,
-            textures,
-            colors
-            );
-
-        remove_all_list_elements(enemy->draw_effect_texture_list, 0);
-        remove_all_list_elements(enemy->draw_effect_tilemap_pos_list, 1);
-        skill_get_draw_effect(
-            state,
-            enemy->skill,
-            enemy->object->tilemap_pos,
-            enemy->target_1_tilemap_pos,
-            enemy->target_2_tilemap_pos,
             enemy->draw_effect_texture_list,
             enemy->draw_effect_tilemap_pos_list,
-            textures,
-            colors
-            );
+            textures
+        );
     }
 }
 
@@ -854,66 +874,65 @@ void restore_ally_action_points(State* state, Ally* ally)
     }
 }
 
-void update_curr_ally_draw(State* state, Textures* textures, Colors* colors)
+
+void clear_curr_ally_attack_actions_and_draw(
+    State* state
+)
 {
     if(state->curr_ally != 0)
     {
-        remove_all_list_elements(state->curr_ally_draw_below_texture_list, 0);
-        remove_all_list_elements(state->curr_ally_draw_below_tilemap_pos_list, 1);
-        skill_get_draw_below(
-            state,
-            state->curr_ally_skill,
-            state->curr_ally->object->tilemap_pos,
-            state->curr_ally_target_1_tilemap_pos,
-            state->curr_ally_target_2_tilemap_pos,
+        remove_all_actions_from_action_sequence(
+            state->ally_action_sequence
+            );
+        remove_all_list_elements(
             state->curr_ally_draw_below_texture_list,
+            0
+            );
+        remove_all_list_elements(
             state->curr_ally_draw_below_tilemap_pos_list,
-            textures,
-            colors
+            1
             );
-
-        remove_all_list_elements(state->curr_ally_draw_above_texture_list, 0);
-        remove_all_list_elements(state->curr_ally_draw_above_tilemap_pos_list, 1);
-        skill_get_draw_above(
-            state,
-            state->curr_ally_skill,
-            state->curr_ally->object->tilemap_pos,
-            state->curr_ally_target_1_tilemap_pos,
-            state->curr_ally_target_2_tilemap_pos,
+        remove_all_list_elements(
             state->curr_ally_draw_above_texture_list,
-            state->curr_ally_draw_above_tilemap_pos_list,
-            textures,
-            colors
+            0
             );
-
-        remove_all_list_elements(state->curr_ally_draw_effect_texture_list, 0);
-        remove_all_list_elements(state->curr_ally_draw_effect_tilemap_pos_list, 1);
-        skill_get_draw_effect(
-            state,
-            state->curr_ally_skill,
-            state->curr_ally->object->tilemap_pos,
-            state->curr_ally_target_1_tilemap_pos,
-            state->curr_ally_target_2_tilemap_pos,
+        remove_all_list_elements(
+            state->curr_ally_draw_above_tilemap_pos_list,
+            1
+            );
+        remove_all_list_elements(
             state->curr_ally_draw_effect_texture_list,
+            0
+            );
+        remove_all_list_elements(
             state->curr_ally_draw_effect_tilemap_pos_list,
-            textures,
-            colors
+            1
             );
     }
 }
 
-void clear_curr_ally_draw(State* state, Textures* textures, Colors* colors)
+void get_curr_ally_attack_actions_and_draw(
+    State* state,
+    Textures* textures
+)
 {
     if(state->curr_ally != 0)
     {
-        remove_all_list_elements(state->curr_ally_draw_below_texture_list, 0);
-        remove_all_list_elements(state->curr_ally_draw_below_tilemap_pos_list, 1);
-
-        remove_all_list_elements(state->curr_ally_draw_above_texture_list, 0);
-        remove_all_list_elements(state->curr_ally_draw_above_tilemap_pos_list, 1);
-
-        remove_all_list_elements(state->curr_ally_draw_effect_texture_list, 0);
-        remove_all_list_elements(state->curr_ally_draw_effect_tilemap_pos_list, 1);
+        skill_get_actions_and_draw(
+            state,
+            state->curr_ally_skill,
+            state->curr_ally->object->tilemap_pos,
+            state->curr_ally_target_1_tilemap_pos,
+            state->curr_ally_target_2_tilemap_pos,
+            state->ally_action_sequence,
+            state->curr_ally_draw_below_texture_list,
+            state->curr_ally_draw_below_tilemap_pos_list,
+            state->curr_ally_draw_above_texture_list,
+            state->curr_ally_draw_above_tilemap_pos_list,
+            state->curr_ally_draw_effect_texture_list,
+            state->curr_ally_draw_effect_tilemap_pos_list,
+            textures
+        );
     }
 }
 

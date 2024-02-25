@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void skill_get_actions(
+void xxx1(
     State* state,
     Action* action_sequence,
     int skill,

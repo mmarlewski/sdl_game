@@ -10,9 +10,30 @@ Animation* skill_get_animation(
     Colors* colors
 )
 {
-    Object* source_object = room_get_object_at(state->curr_room, source_tilemap_pos);
-    Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
-    Object* target_2_object = room_get_object_at(state->curr_room, target_2_tilemap_pos);
+    Object* source_object = room_get_object_at(
+        state->curr_room,
+        source_tilemap_pos
+        );
+    int source_floor = room_get_floor_at(
+        state->curr_room,
+        source_tilemap_pos
+        );
+    Object* target_1_object = room_get_object_at(
+        state->curr_room,
+        target_1_tilemap_pos
+        );
+    int target_1_floor = room_get_floor_at(
+        state->curr_room,
+        target_1_tilemap_pos
+        );
+    Object* target_2_object = room_get_object_at(
+        state->curr_room,
+        target_2_tilemap_pos
+        );
+    int target_2_floor = room_get_floor_at(
+        state->curr_room,
+        target_2_tilemap_pos
+        );
 
     Animation* skill_animation = new_animation_none();
 

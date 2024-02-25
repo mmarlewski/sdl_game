@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void skill_get_draw_below(
+void xxx2(
     State* state,
     int skill,
     Vec2i source_tilemap_pos,

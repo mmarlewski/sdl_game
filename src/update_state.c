@@ -638,23 +638,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         }
                     }
 
+                    clear_curr_ally_attack_actions_and_draw(state);
+
                     // new actions and draw
                     if(is_mouse_pos_in_possible_target_2_pos)
                     {
-                        remove_all_actions_from_action_sequence(state->ally_action_sequence);
-                        skill_get_actions(
-                            state,
-                            state->ally_action_sequence,
-                            state->curr_ally_skill,
-                            state->curr_ally->object->tilemap_pos,
-                            state->curr_ally_target_1_tilemap_pos,
-                            state->curr_ally_target_2_tilemap_pos
-                            );
-                        update_curr_ally_draw(state, textures, colors);
-                    }
-                    else
-                    {
-                        clear_curr_ally_draw(state, textures, colors);
+                        get_curr_ally_attack_actions_and_draw(state,textures);
                     }
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
@@ -766,28 +755,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             // new actions and draw
             if(is_new_selected_pos)
             {
+                clear_curr_ally_attack_actions_and_draw(state);
+
                 if(is_mouse_pos_in_possible_target_2_pos)
                 {
                     state->selected_tilemap_pos = state->mouse_tilemap_pos;
 
                     state->curr_ally_target_2_tilemap_pos = state->selected_tilemap_pos;
 
-                    remove_all_actions_from_action_sequence(state->ally_action_sequence);
-                    skill_get_actions(
-                        state,
-                        state->ally_action_sequence,
-                        state->curr_ally_skill,
-                        state->curr_ally->object->tilemap_pos,
-                        state->curr_ally_target_1_tilemap_pos,
-                        state->curr_ally_target_2_tilemap_pos
-                        );
-                    update_curr_ally_draw(state, textures, colors);
+                    get_curr_ally_attack_actions_and_draw(state,textures);
                 }
                 else
                 {
                     state->selected_tilemap_pos = vec2i(-1,-1);
-
-                    clear_curr_ally_draw(state, textures, colors);
                 }
             }
 
@@ -892,7 +872,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     update_enemy_attack_targets(state, curr_enemy);
-                    update_enemy_draw(state, curr_enemy, textures, colors);
+                    clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                    get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
                 }
 
                 // all allies
@@ -1027,7 +1008,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     !curr_enemy->performed_attack)
                     {
                         update_enemy_attack_targets(state,  curr_enemy);
-                        update_enemy_draw(state, curr_enemy, textures, colors);
+                        clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
                     }
                 }
 
@@ -1128,7 +1110,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     !curr_enemy->performed_attack)
                     {
                         update_enemy_attack_targets(state,  curr_enemy);
-                        update_enemy_draw(state, curr_enemy, textures, colors);
+                        clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
                     }
                 }
 
@@ -1163,7 +1146,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     update_enemy_attack_dir4(state,  state->curr_enemy);
                     update_enemy_attack_targets(state,  state->curr_enemy);
-                    update_enemy_draw(state,  state->curr_enemy, textures, colors);
+                    clear_enemy_attack_actions_and_draw(state, state->curr_enemy);
+                    get_enemy_attack_actions_and_draw(state, state->curr_enemy,textures);
                     state->curr_enemy->performed_attack = 0;
                 }
 
@@ -1209,7 +1193,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     {
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         update_enemy_attack_targets(state, curr_enemy);
-                        update_enemy_draw(state, curr_enemy, textures, colors);
+                        clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
                     }
 
                     // all allies

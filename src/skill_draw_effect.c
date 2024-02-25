@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void skill_get_draw_effect(
+void xxx4(
     State* state,
     int skill,
     Vec2i source_tilemap_pos,

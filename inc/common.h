@@ -23,7 +23,7 @@ typedef Mix_Music Music;
 
 // defines
 
-#define SCREEN_WIDTH 1350
+#define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 750
 
 #define FPS_CAP 60.0f
