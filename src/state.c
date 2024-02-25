@@ -103,16 +103,16 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         room
         );
 
-    state->hero_item_number[ITEM__CELL] = 5;
-    state->hero_item_number[ITEM__DYNAMITE] = 5;
-    state->hero_item_number[ITEM__GEMSTONE] = 5;
+    state->hero_item_number[ITEM__CELL] = 0;
+    state->hero_item_number[ITEM__DYNAMITE] = 0;
+    state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
-    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -632,7 +632,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
         case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
-            
+
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
