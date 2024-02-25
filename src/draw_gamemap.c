@@ -411,7 +411,101 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             );
     }
 
-    // yellow outline, order number
+    // orange outline
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
+    {
+        for(ListElem* curr_object_elem = state->curr_room->object_list->head;
+        curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
+        {
+            Object* curr_object = curr_object_elem->data;
+
+            int is_object_on_possible_target_1_pos = 0;
+
+            for(ListElem* curr_pos_elem = state->possible_target_1_tilemap_pos_list->head;
+            curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
+            {
+                Vec2i* curr_pos = curr_pos_elem->data;
+
+                if(vec2i_equals(curr_object->tilemap_pos, *curr_pos))
+                {
+                    is_object_on_possible_target_1_pos = 1;
+                }
+            }
+
+            if(is_object_on_possible_target_1_pos)
+            {
+                Texture* texture_outline = 0;
+                if(sin(state->time * 3) > 0)
+                {
+                    texture_outline = get_texture_1_outline_from_object(
+                        curr_object, textures);
+                }
+                else
+                {
+                    texture_outline = get_texture_2_outline_from_object(
+                        curr_object, textures);
+                }
+                draw_texture_at_tilemap_pos(
+                    renderer,
+                    texture_outline,
+                    colors->orange,
+                    1.0f,
+                    curr_object->tilemap_pos,
+                    state->camera_world_pos,
+                    state->camera_zoom
+                );
+            }
+        }
+    }
+
+    // pink outline
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        for(ListElem* curr_object_elem = state->curr_room->object_list->head;
+        curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
+        {
+            Object* curr_object = curr_object_elem->data;
+
+            int is_object_on_possible_target_2_pos = 0;
+
+            for(ListElem* curr_pos_elem = state->possible_target_2_tilemap_pos_list->head;
+            curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
+            {
+                Vec2i* curr_pos = curr_pos_elem->data;
+
+                if(vec2i_equals(curr_object->tilemap_pos, *curr_pos))
+                {
+                    is_object_on_possible_target_2_pos = 1;
+                }
+            }
+
+            if(is_object_on_possible_target_2_pos)
+            {
+                Texture* texture_outline = 0;
+                if(sin(state->time * 3) > 0)
+                {
+                    texture_outline = get_texture_1_outline_from_object(
+                        curr_object, textures);
+                }
+                else
+                {
+                    texture_outline = get_texture_2_outline_from_object(
+                        curr_object, textures);
+                }
+                draw_texture_at_tilemap_pos(
+                    renderer,
+                    texture_outline,
+                    colors->pink,
+                    1.0f,
+                    curr_object->tilemap_pos,
+                    state->camera_world_pos,
+                    state->camera_zoom
+                );
+            }
+        }
+    }
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
     {
@@ -419,7 +513,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
-         !hover_object->is_to_be_removed &&
+        !hover_object->is_to_be_removed &&
         hover_object->is_visible)
         {
             Vec2i selected_tilemap_pos = state->mouse_tilemap_pos;
@@ -469,7 +563,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* enemy = state->curr_enemy;
 
         if(enemy != 0 &&
-         !enemy->object->is_to_be_removed &&
+        !enemy->object->is_to_be_removed &&
         enemy->object->is_visible)
         {
             Vec2i selected_tilemap_pos = enemy->object->tilemap_pos;
@@ -511,7 +605,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
-    // selected outline
+    // yellow outline
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
     state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
