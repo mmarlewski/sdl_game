@@ -112,7 +112,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__DYNAMITE] = 1;
     state->hero_item_number[ITEM__GEMSTONE] = 1;
 
-    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
     hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
@@ -969,4 +969,24 @@ void remove_all_object_to_be_removed(State* state)
         remove_all_list_elements(object_to_be_removed_list, 0);
         destroy_list(object_to_be_removed_list);
     }
+}
+
+int is_floor_deadly_on_move_for_object(
+    int floor,
+    Object* object
+)
+{
+    return ((!is_object_floating(object) && !is_object_flying(object) && is_floor_deadly_on_move(floor)) ||
+    (is_object_floating(object) && is_floor_deadly_on_move_for_floating(floor)) ||
+    (is_object_flying(object) && is_floor_deadly_on_move_for_flying(floor)));
+}
+
+int is_floor_deadly_on_drop_for_object(
+    int floor,
+    Object* object
+)
+{
+    return ((!is_object_floating(object) && !is_object_flying(object) && is_floor_deadly_on_drop(floor)) ||
+    (is_object_floating(object) && is_floor_deadly_on_drop_for_floating(floor)) ||
+    (is_object_flying(object) && is_floor_deadly_on_drop_for_flying(floor)));
 }

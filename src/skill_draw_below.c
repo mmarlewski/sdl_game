@@ -436,7 +436,7 @@ void xxx2(
         break;
         case SKILL__PUSH:
         {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.floor_border_solid
                         );

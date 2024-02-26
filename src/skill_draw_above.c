@@ -427,7 +427,7 @@ void xxx3(
                     push_go_on = 0;
                 }
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         arrow_texture
                         );
@@ -676,16 +676,18 @@ void xxx3(
             {
                 if(target_2_object == 0)
                 {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
-                        get_texture_throw(textures, throw_distance_info.dir4)
+                        get_texture_throw(
+                            textures,
+                            throw_distance_info.dir4
+                            )
                         );
                     add_new_list_element_to_list_end(
                         tilemap_pos_list,
                         new_vec2i_from_vec2i(target_1_tilemap_pos)
                         );
-
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.drop
                         );
@@ -696,9 +698,12 @@ void xxx3(
                 }
                 else
                 {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
-                        get_texture_lift(textures, throw_distance_info.dir4)
+                        get_texture_lift(
+                            textures,
+                            throw_distance_info.dir4
+                            )
                         );
                     add_new_list_element_to_list_end(
                         tilemap_pos_list,

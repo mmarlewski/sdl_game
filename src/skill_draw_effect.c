@@ -626,14 +626,14 @@ void xxx4(
         {
             if(!is_object_movable(target_1_object))
             {
-            add_new_list_element_to_list_end(
-                        texture_list,
-                        textures->skill.immovable_effect
-                        );
-                    add_new_list_element_to_list_end(
-                        tilemap_pos_list,
-                        new_vec2i_from_vec2i(target_1_tilemap_pos)
-                        );
+                add_new_list_element_to_list_end(
+                    texture_list,
+                    textures->skill.immovable_effect
+                    );
+                add_new_list_element_to_list_end(
+                    tilemap_pos_list,
+                    new_vec2i_from_vec2i(target_1_tilemap_pos)
+                    );
 
                 break;
             }
@@ -663,7 +663,7 @@ void xxx4(
                 }
                 else if(vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
                 {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_1_from_object(target_1_object, textures)
                         );
@@ -686,14 +686,14 @@ void xxx4(
                    if(!is_floor_traversable(push_curr_floor) &&
                     !is_object_flying(target_1_object))
                     {
-            add_new_list_element_to_list_end(
-                        texture_list,
-                        textures->skill.death_effect
-                        );
-                    add_new_list_element_to_list_end(
-                        tilemap_pos_list,
-                        new_vec2i_from_vec2i(push_curr_tilemap_pos)
-                        );
+                        add_new_list_element_to_list_end(
+                            texture_list,
+                            textures->skill.death_effect
+                            );
+                        add_new_list_element_to_list_end(
+                            tilemap_pos_list,
+                            new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                            );
                     }
                 }
 
@@ -919,7 +919,7 @@ void xxx4(
                 if(is_floor_deadly_on_drop(room_get_floor_at(state->curr_room, target_2_tilemap_pos)) &&
                 !is_object_flying(target_1_object))
                 {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.death_effect
                         );
@@ -930,7 +930,7 @@ void xxx4(
                 }
                 else
                 {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_1_from_object(target_1_object, textures)
                         );
@@ -942,7 +942,7 @@ void xxx4(
             }
             else
             {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.immovable_effect
                         );
