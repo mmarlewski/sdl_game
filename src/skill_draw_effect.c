@@ -76,7 +76,7 @@ void xxx4(
                 int item_type = get_object_item_type(target_2_object);
                 int item_count = get_object_item_count(target_2_object);
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_item(textures, item_type, item_count)
                         );
@@ -92,7 +92,7 @@ void xxx4(
                 int item_type = get_floor_item_type(floor);
                 int item_count = get_floor_item_count(floor);
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_item(textures, item_type, item_count)
                         );
@@ -130,7 +130,7 @@ void xxx4(
             if(target_2_object != 0)
             {
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_item(textures, item_type, -1)
                         );
@@ -143,7 +143,7 @@ void xxx4(
             {
                 int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_item(textures, item_type, -1)
                         );
@@ -177,7 +177,7 @@ void xxx4(
         {
             if(target_2_object != 0 && is_object_meltable(target_2_object))
             {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.melt_effect
                         );
@@ -187,7 +187,7 @@ void xxx4(
                         );
             }
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         get_texture_item(textures, ITEM__CELL, -1)
                         );
@@ -972,7 +972,7 @@ void xxx4(
                         {
                             if(is_object_meltable(object))
                             {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.melt_effect
                         );
@@ -1021,7 +1021,7 @@ void xxx4(
         break;
         case SKILL__TURRET_PROJECTILE:
         {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.shake_effect
                         );

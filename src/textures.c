@@ -595,6 +595,8 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->shake_effect = load_texture_from_filepath (renderer, "./res/skill/shake_effect.png");
     skill->stomp_effect = load_texture_from_filepath (renderer, "./res/skill/stomp_effect.png");
     skill->use_effect = load_texture_from_filepath (renderer, "./res/skill/use_effect.png");
+    skill->manipulation_effect = load_texture_from_filepath (renderer, "./res/skill/manipulation_effect.png");
+    skill->teleportation_effect = load_texture_from_filepath (renderer, "./res/skill/teleportation_effect.png");
 
     skill->no_positions = load_texture_from_filepath (renderer, "./res/skill/no_positions.png");
 

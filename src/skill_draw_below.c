@@ -489,13 +489,13 @@ void xxx2(
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
                         add_new_list_element_to_list_end(
-                        texture_list,
-                        textures->skill.floor_danger
-                        );
-                    add_new_list_element_to_list_end(
-                        tilemap_pos_list,
-                        new_vec2i_from_vec2i(tilemap_pos)
-                        );
+                            texture_list,
+                            textures->skill.floor_danger
+                            );
+                        add_new_list_element_to_list_end(
+                            tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                            );
                     }
                 }
             }
@@ -505,7 +505,7 @@ void xxx2(
         {
             if(is_tilemap_in_bounds(target_2_tilemap_pos))
             {
-                add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.floor_danger
                         );
@@ -535,7 +535,7 @@ void xxx2(
         break;
         case SKILL__TURRET_PROJECTILE:
         {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.floor_danger
                         );

@@ -39,15 +39,29 @@ Animation* skill_get_animation(
 
     switch (skill)
     {
-        case SKILL__LAUNCH_MINIBOT:
+        case SKILL__MANIPULATION:
         {
-            skill_animation = new_animation_move_sprite_in_gamemap_in_arch(
-                textures->animation.minibot,
-                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
-                1.0f
+            Object* object = target_2_object;
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
+
+            if(object != 0 && is_object_manipulatable(object))
+            {
+                skill_animation = object_on_manipulate_get_animation(
+                    state,
+                    object,
+                    target_2_tilemap_pos,
+                    textures
                 );
+            }
+            else if(floor != FLOOR_TYPE__NONE && is_floor_manipulatable(floor))
+            {
+                skill_animation = floor_on_manipulation_get_animation(
+                    state,
+                    floor,
+                    target_2_tilemap_pos,
+                    textures
+                );
+            }
         }
         break;
         case SKILL__PICK_ITEM_FAR:
@@ -112,31 +126,6 @@ Animation* skill_get_animation(
             }
 
             skill_animation = animation_sequence;
-        }
-        break;
-        case SKILL__MANIPULATION:
-        {
-            Object* object = target_2_object;
-            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
-
-            if(object != 0 && is_object_manipulatable(object))
-            {
-                skill_animation = object_on_manipulate_get_animation(
-                    state,
-                    object,
-                    target_2_tilemap_pos,
-                    textures
-                );
-            }
-            else if(floor != FLOOR_TYPE__NONE && is_floor_manipulatable(floor))
-            {
-                skill_animation = floor_on_manipulation_get_animation(
-                    state,
-                    floor,
-                    target_2_tilemap_pos,
-                    textures
-                );
-            }
         }
         break;
         case SKILL__THROW_ITEM_CELL:
@@ -288,6 +277,17 @@ Animation* skill_get_animation(
             }
 
             skill_animation = animation_sequence;
+        }
+        break;
+        case SKILL__LAUNCH_MINIBOT:
+        {
+            skill_animation = new_animation_move_sprite_in_gamemap_in_arch(
+                textures->animation.minibot,
+                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                1.0f
+                );
         }
         break;
         case SKILL__TURRET_LASER:

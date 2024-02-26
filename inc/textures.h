@@ -593,6 +593,8 @@ typedef struct
     Texture* shake_effect;
     Texture* stomp_effect;
     Texture* use_effect;
+    Texture* manipulation_effect;
+    Texture* teleportation_effect;
 
     Texture* no_positions;
 

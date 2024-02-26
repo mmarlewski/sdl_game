@@ -17,7 +17,7 @@ int get_augmentation_body_part(int augmentation)
         case AUGMENTATION__MINIBOT_TORSO:       body_part = BODY_PART__TORSO; break;
         case AUGMENTATION__WINGS_TORSO:         body_part = BODY_PART__TORSO; break;
         case AUGMENTATION__MANIPULATION_HEAD:   body_part = BODY_PART__HEAD; break;
-        case AUGMENTATION__TELEPORTATION_HEAD:  body_part = BODY_PART__LEFT_HAND; break;
+        case AUGMENTATION__TELEPORTATION_HEAD:  body_part = BODY_PART__HEAD; break;
         default: break;
     }
 

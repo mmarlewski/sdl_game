@@ -98,26 +98,7 @@ void xxx1(
         case SKILL__PICK_ITEM_CLOSE:
         case SKILL__PICK_ITEM_FAR:
         {
-            if(target_2_object != 0)
-            {
-                object_on_pick_item(
-                    state,
-                    action_sequence,
-                    target_2_object,
-                    target_2_tilemap_pos
-                    );
-            }
-            else
-            {
-                int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
-                floor_on_pick_item(
-                    state,
-                    action_sequence,
-                    floor,
-                    target_2_tilemap_pos
-                    );
-            }
         }
         break;
         case SKILL__PUT_ITEM_CELL_CLOSE:
@@ -615,17 +596,27 @@ void xxx1(
         case SKILL__TURRET_LASER:
         {
             DistanceInfo distance_info =
-                get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                    );
 
             if(distance_info.dir4 != DIR4__NONE)
             {
                 for(int i = 1; i <= OBJECT_TURRET_RANGE; i++)
                 {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, distance_info.dir4, i);
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        distance_info.dir4,
+                        i
+                        );
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
 
                         if(object != 0 && is_object_meltable(object))
                         {
