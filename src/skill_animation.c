@@ -218,6 +218,7 @@ Animation* skill_get_animation(
             skill_animation = animation_sequence;
         }
         break;
+        case SKILL__DRAG:
         case SKILL__PULL:
         {
             DistanceInfo distance_info =

@@ -470,7 +470,7 @@ void xxx1(
             }
         }
         break;
-        case SKILL__PUSH: case SKILL__PULL:
+        case SKILL__PUSH: case SKILL__DRAG:
         {
             DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
             int abs_diff = distance_info.abs_diff;
@@ -512,7 +512,7 @@ void xxx1(
             }
         }
         break;
-        case SKILL__PULL_AND_THROW:
+        case SKILL__DRAG_AND_THROW:
         {
             DistanceInfo pull_distance_info = get_distance_info_from_vec2i_to_vec2i(target_1_tilemap_pos, source_tilemap_pos);
             int pull_abs_diff = pull_distance_info.abs_diff;

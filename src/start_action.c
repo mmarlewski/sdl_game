@@ -40,6 +40,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         }
         break;
         case ACTION_TYPE__MOVE:
+        case ACTION_TYPE__MOVE_FLOATING:
+        case ACTION_TYPE__MOVE_FLYING:
         {
             action->move.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
@@ -78,7 +80,19 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
 
                 int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
-                floor_on_move_start(state, sequence, action, floor);
+
+                if(action->type == ACTION_TYPE__MOVE)
+                {
+                    floor_on_move_start(state, sequence, action, floor);
+                }
+                else if(action->type == ACTION_TYPE__MOVE_FLOATING)
+                {
+                    floor_on_move_floating_start(state, sequence, action, floor);
+                }
+                else if(action->type == ACTION_TYPE__MOVE_FLYING)
+                {
+                    floor_on_move_flying_start(state, sequence, action, floor);
+                }
 
                 action->move.object->is_visible = 0;
             }

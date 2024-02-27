@@ -128,6 +128,38 @@ Action* new_action_move(Vec2i tilemap_pos, int dir4)
     return action;
 }
 
+Action* new_action_move_floating(Vec2i tilemap_pos, int dir4)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__MOVE_FLOATING;
+
+    action->move.dir4 = dir4;
+    action->move.object = 0;
+
+    return action;
+}
+
+Action* new_action_move_flying(Vec2i tilemap_pos, int dir4)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION_TYPE__MOVE_FLYING;
+
+    action->move.dir4 = dir4;
+    action->move.object = 0;
+
+    return action;
+}
+
 Action* new_action_crash(Vec2i tilemap_pos, int dir4)
 {
     Action* action = malloc(sizeof(* action));
@@ -362,6 +394,8 @@ char* get_action_name_from_type(int action_type)
         case ACTION_TYPE__SEQUENCE:         name = "sequence";      break;
         case ACTION_TYPE__SIMULTANEOUS:     name = "simultaneous";  break;
         case ACTION_TYPE__MOVE:             name = "move";          break;
+        case ACTION_TYPE__MOVE_FLOATING:    name = "move floating"; break;
+        case ACTION_TYPE__MOVE_FLYING:      name = "move flying";   break;
         case ACTION_TYPE__CRASH:            name = "crash";         break;
         case ACTION_TYPE__FALL:             name = "fall";          break;
         case ACTION_TYPE__DEATH:            name = "death";         break;

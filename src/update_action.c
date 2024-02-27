@@ -67,6 +67,8 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
         }
         break;
         case ACTION_TYPE__MOVE:
+        case ACTION_TYPE__MOVE_FLOATING:
+        case ACTION_TYPE__MOVE_FLYING:
         {
             action->is_finished = (action->animation->is_finished);
         }

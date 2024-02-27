@@ -114,6 +114,11 @@ void skill_get_possible_target_1_pos(
             //
         }
         break;
+        case SKILL__DRAG:
+        {
+            //
+        }
+        break;
         case SKILL__PULL:
         {
             //
@@ -134,7 +139,7 @@ void skill_get_possible_target_1_pos(
             //
         }
         break;
-        case SKILL__PULL_AND_THROW:
+        case SKILL__DRAG_AND_THROW:
         {
             //
         }

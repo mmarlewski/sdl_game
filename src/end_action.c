@@ -25,11 +25,25 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         }
         break;
         case ACTION_TYPE__MOVE:
+        case ACTION_TYPE__MOVE_FLOATING:
+        case ACTION_TYPE__MOVE_FLYING:
         {
             action->move.object->tilemap_pos = vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
 
             int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
-            floor_on_move_end(state, sequence, action, floor);
+
+            if(action->type == ACTION_TYPE__MOVE)
+            {
+                floor_on_move_end(state, sequence, action, floor);
+            }
+            else if(action->type == ACTION_TYPE__MOVE_FLOATING)
+            {
+                floor_on_move_floating_end(state, sequence, action, floor);
+            }
+            else if(action->type == ACTION_TYPE__MOVE_FLYING)
+            {
+                floor_on_move_flying_end(state, sequence, action, floor);
+            }
 
             action->move.object->is_visible = 1;
         }
@@ -154,7 +168,20 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             object_on_drop(state, sequence, action, action->drop.object);
 
             int floor = room_get_floor_at(state->curr_room, action->drop.object->tilemap_pos);
-            floor_on_drop(state, sequence, action, floor);
+
+            if(!is_object_floating(action->drop.object) &&
+            !is_object_flying(action->drop.object))
+            {
+                floor_on_drop(state, sequence, action, floor);
+            }
+            else if(is_object_floating(action->drop.object))
+            {
+                floor_on_drop_floating(state, sequence, action, floor);
+            }
+            else if(is_object_flying(action->drop.object))
+            {
+                floor_on_drop_flying(state, sequence, action, floor);
+            }
         }
         break;
         case ACTION_TYPE__CHANGE_FLOOR:

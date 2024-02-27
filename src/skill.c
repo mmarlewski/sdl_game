@@ -32,12 +32,13 @@ int is_skill_two_target(int skill)
 
         case SKILL__PUSH:               is = 1; break;
         case SKILL__THROW:              is = 1; break;
+        case SKILL__DRAG:               is = 1; break;
         case SKILL__PULL:               is = 1; break;
         case SKILL__JUMP:               is = 0; break;
         case SKILL__CHARGE:             is = 0; break;
         case SKILL__STOMP:              is = 0; break;
 
-        case SKILL__PULL_AND_THROW:     is = 1; break;
+        case SKILL__DRAG_AND_THROW:     is = 1; break;
         case SKILL__CHARGE_AND_PUSH:    is = 1; break;
         case SKILL__CHARGE_AND_THROW:   is = 1; break;
         case SKILL__CHARGE_AND_JUMP:    is = 0; break;
@@ -90,12 +91,13 @@ int get_skill_action_points(int skill)
 
         case SKILL__PUSH:               ap = 1; break;
         case SKILL__THROW:              ap = 1; break;
+        case SKILL__DRAG:               ap = 1; break;
         case SKILL__PULL:               ap = 1; break;
         case SKILL__JUMP:               ap = 1; break;
         case SKILL__CHARGE:             ap = 1; break;
         case SKILL__STOMP:              ap = 1; break;
 
-        case SKILL__PULL_AND_THROW:     ap = 2; break;
+        case SKILL__DRAG_AND_THROW:     ap = 2; break;
         case SKILL__CHARGE_AND_PUSH:    ap = 2; break;
         case SKILL__CHARGE_AND_THROW:   ap = 2; break;
         case SKILL__CHARGE_AND_JUMP:    ap = 2; break;
@@ -148,12 +150,13 @@ char* get_skill_name(int skill)
 
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__THROW:              name = "throw"; break;
+        case SKILL__DRAG:               name = "drag"; break;
         case SKILL__PULL:               name = "pull"; break;
         case SKILL__JUMP:               name = "jump"; break;
         case SKILL__CHARGE:             name = "charge"; break;
         case SKILL__STOMP:              name = "stomp"; break;
 
-        case SKILL__PULL_AND_THROW:     name = "pull and throw"; break;
+        case SKILL__DRAG_AND_THROW:     name = "drag and throw"; break;
         case SKILL__CHARGE_AND_PUSH:    name = "charge and push"; break;
         case SKILL__CHARGE_AND_THROW:   name = "charge and throw"; break;
         case SKILL__CHARGE_AND_JUMP:    name = "charge and jump"; break;

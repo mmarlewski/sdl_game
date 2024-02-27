@@ -446,7 +446,7 @@ void xxx2(
                         );
         }
         break;
-        case SKILL__PULL:
+        case SKILL__DRAG:
         {
             add_new_list_element_to_list_end(
                         texture_list,
@@ -458,7 +458,7 @@ void xxx2(
                         );
         }
         break;
-        case SKILL__PULL_AND_THROW:
+        case SKILL__DRAG_AND_THROW:
         {
             add_new_list_element_to_list_end(
                         texture_list,

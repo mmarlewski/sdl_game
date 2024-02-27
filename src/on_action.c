@@ -6,36 +6,62 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
     {
         case FLOOR_TYPE__ROCK_CRACK_WATER:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
-            }
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                room_change_floor_at(state->curr_room, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
-            }
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_PIT:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                room_change_floor_at(state->curr_room, FLOOR_TYPE__PIT, action->move.object->tilemap_pos);
-            }
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__PIT, action->move.object->tilemap_pos);
         }
         break;
         case FLOOR_TYPE__ICE_CRACK_WATER:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
-            }
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
         }
         break;
+        default:
+        break;
+    }
+}
+
+void floor_on_move_floating_start(State* state, Action* sequence, Action* action, int floor)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__ROCK_CRACK_WATER:
+        {
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
+        {
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__LAVA, action->move.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_PIT:
+        {
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__PIT, action->move.object->tilemap_pos);
+        }
+        break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:
+        {
+            room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void floor_on_move_flying_start(State* state, Action* sequence, Action* action, int floor)
+{
+    switch(floor)
+    {
         default:
         break;
     }
@@ -47,95 +73,144 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
     {
         case FLOOR_TYPE__METAL_TARGET_UNCHECKED:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_change_floor(
-                        FLOOR_TYPE__METAL_TARGET_CHECKED,
-                        vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)
-                        )
-                    );
-            }
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__METAL_TARGET_CHECKED,
+                    vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)
+                    )
+                );
         }
         break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
-            }
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+
         }
         break;
         case FLOOR_TYPE__STONE_TRAP:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
-                add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__STONE, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
-            }
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+            add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__STONE, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
         }
         break;
         case FLOOR_TYPE__ICE:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
-            }
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR_TYPE__ICE_CRACK_WATER:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
-            }
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR_TYPE__WATER:
         case FLOOR_TYPE__LAVA:
         {
-            if(!is_object_floating(action->move.object) &&
-            !is_object_flying(action->move.object))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->move.object,
-                        vec2i_move_in_dir4_by(
-                            action->tilemap_pos,
-                            action->move.dir4,
-                            1
-                            )
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->move.object,
+                    vec2i_move_in_dir4_by(
+                        action->tilemap_pos,
+                        action->move.dir4,
+                        1
                         )
-                    );
-            }
+                    )
+                );
         }
         break;
         case FLOOR_TYPE__PIT:
         {
-            if(!is_object_flying(action->move.object))
-            {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->move.object,
-                        vec2i_move_in_dir4_by(
-                            action->tilemap_pos,
-                            action->move.dir4,
-                            1
-                            )
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->move.object,
+                    vec2i_move_in_dir4_by(
+                        action->tilemap_pos,
+                        action->move.dir4,
+                        1
                         )
-                    );
-            }
+                    )
+                );
         }
         break;
+        default:
+        break;
+    }
+}
+
+void floor_on_move_floating_end(State* state, Action* sequence, Action* action, int floor)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:
+        {
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__METAL_TARGET_CHECKED,
+                    vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)
+                    )
+                );
+        }
+        break;
+        case FLOOR_TYPE__STONE_SPIKES_ON:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+        }
+        break;
+        case FLOOR_TYPE__STONE_TRAP:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+            add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__STONE, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+        }
+        break;
+        case FLOOR_TYPE__ICE:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+        }
+        break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+        }
+        break;
+        case FLOOR_TYPE__PIT:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->move.object,
+                    vec2i_move_in_dir4_by(
+                        action->tilemap_pos,
+                        action->move.dir4,
+                        1
+                        )
+                    )
+                );
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void floor_on_move_flying_end(State* state, Action* sequence, Action* action, int floor)
+{
+    switch(floor)
+    {
         default:
         break;
     }
@@ -147,8 +222,6 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
     {
         case FLOOR_TYPE__METAL_TARGET_UNCHECKED:
         {
-            if(!is_object_flying(action->move.object))
-            {
                 add_action_after_curr_action_action_sequence(
                     sequence,
                     new_action_change_floor(
@@ -156,13 +229,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
         }
         break;
         case FLOOR_TYPE__STONE_SPIKES_ON:
         {
-            if(!is_object_flying(action->move.object))
-            {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(
                     sequence,
@@ -171,13 +241,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
         }
         break;
         case FLOOR_TYPE__STONE_TRAP:
         {
-            if(!is_object_flying(action->move.object))
-            {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(
                     sequence,
@@ -193,14 +260,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_WATER:
         {
-            if(!is_object_floating(action->drop.object) &&
-            !is_object_flying(action->drop.object))
-            {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 room_change_floor_at(
                     state->curr_room,
@@ -214,22 +277,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
-            else if(is_object_floating(action->drop.object))
-            {
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR_TYPE__WATER,
-                    action->tilemap_pos
-                    );
-            }
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_LAVA:
         {
-            if(!is_object_floating(action->drop.object) &&
-            !is_object_flying(action->drop.object))
-            {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 room_change_floor_at(
                     state->curr_room,
@@ -243,21 +294,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
-            else if(is_object_floating(action->drop.object))
-            {
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR_TYPE__LAVA,
-                    action->tilemap_pos
-                    );
-            }
         }
         break;
         case FLOOR_TYPE__ROCK_CRACK_PIT:
         {
-            if(!is_object_flying(action->drop.object))
-            {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 room_change_floor_at(
                     state->curr_room,
@@ -271,13 +311,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
         }
         break;
         case FLOOR_TYPE__ICE:
         {
-            if(!is_object_flying(action->drop.object))
-            {
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_move(
@@ -285,14 +322,10 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->drop.dir4
                         )
                     );
-            }
         }
         break;
         case FLOOR_TYPE__ICE_CRACK_WATER:
         {
-            if(!is_object_floating(action->drop.object) &&
-            !is_object_flying(action->drop.object))
-            {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 room_change_floor_at(
                     state->curr_room,
@@ -306,18 +339,6 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                         action->tilemap_pos
                         )
                     );
-            }
-            else if(is_object_floating(action->drop.object) &&
-            !is_object_flying(action->drop.object))
-            {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_move(
-                        action->tilemap_pos,
-                        action->drop.dir4
-                        )
-                    );
-            }
         }
         break;
         case FLOOR_TYPE__WATER:
@@ -333,6 +354,134 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                 );
         }
         break;
+        default:
+        break;
+    }
+}
+
+void floor_on_drop_floating(State* state, Action* sequence, Action* action, int floor)
+{
+    switch(floor)
+    {
+        case FLOOR_TYPE__METAL_TARGET_UNCHECKED:
+        {
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR_TYPE__METAL_TARGET_CHECKED,
+                        action->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case FLOOR_TYPE__STONE_SPIKES_ON:
+        {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_death(
+                        action->move.object,
+                        action->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case FLOOR_TYPE__STONE_TRAP:
+        {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_death(
+                        action->move.object,
+                        action->tilemap_pos
+                        )
+                    );
+                add_action_after_curr_action_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR_TYPE__STONE,
+                        action->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_WATER:
+        {
+                room_change_floor_at(
+                    state->curr_room,
+                    FLOOR_TYPE__WATER,
+                    action->tilemap_pos
+                    );
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_LAVA:
+        {
+                room_change_floor_at(
+                    state->curr_room,
+                    FLOOR_TYPE__LAVA,
+                    action->tilemap_pos
+                    );
+        }
+        break;
+        case FLOOR_TYPE__ROCK_CRACK_PIT:
+        {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                room_change_floor_at(
+                    state->curr_room,
+                    FLOOR_TYPE__PIT,
+                    action->tilemap_pos
+                    );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+        }
+        break;
+        case FLOOR_TYPE__ICE:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_move(
+                        action->tilemap_pos,
+                        action->drop.dir4
+                        )
+                    );
+        }
+        break;
+        case FLOOR_TYPE__ICE_CRACK_WATER:
+        {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_move(
+                        action->tilemap_pos,
+                        action->drop.dir4
+                        )
+                    );
+        }
+        break;
+        case FLOOR_TYPE__PIT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
+        default:
+        break;
+    }
+}
+
+void floor_on_drop_flying(State* state, Action* sequence, Action* action, int floor)
+{
+    switch(floor)
+    {
         default:
         break;
     }

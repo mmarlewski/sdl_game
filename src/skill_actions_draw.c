@@ -490,6 +490,7 @@ void skill_get_actions_and_draw(
         }
         break;
         case SKILL__PUSH:
+        case SKILL__DRAG:
         {
             if(target_1_object != 0 &&
             is_object_movable(target_1_object))
@@ -789,7 +790,252 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__PULL:
         {
-            //
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                    );
+
+            if(distance_info.dir4 != DIR4__NONE)
+            {
+                // init
+
+                Vec2i prev_tilemap_pos = source_tilemap_pos;
+                Vec2i curr_tilemap_pos = source_tilemap_pos;
+                Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(
+                    curr_tilemap_pos,
+                    distance_info.dir4,
+                    1
+                    );
+
+                Object* prev_object = room_get_object_at(
+                    state->curr_room,
+                    prev_tilemap_pos
+                    );
+                Object* curr_object = room_get_object_at(
+                    state->curr_room,
+                    curr_tilemap_pos
+                    );
+                Object* next_object = room_get_object_at(
+                    state->curr_room,
+                    next_tilemap_pos
+                    );
+
+                int prev_floor = room_get_floor_at(
+                    state->curr_room,
+                    prev_tilemap_pos
+                    );
+                int curr_floor = room_get_floor_at(
+                    state->curr_room,
+                    curr_tilemap_pos
+                    );
+                int next_floor = room_get_floor_at(
+                    state->curr_room,
+                    next_tilemap_pos
+                    );
+
+                int go_on = 1;
+                for(int i = 0; i < distance_info.abs_diff + 1 && go_on; i++)
+                {
+                    Texture* arrow_texture = 0;
+
+                    if(vec2i_equals(curr_tilemap_pos, source_tilemap_pos))
+                    {
+                        arrow_texture =
+                            get_texture_arrow_thick_start(
+                                textures,
+                                distance_info.dir4
+                                );
+                    }
+                    else if(curr_object != 0 ||
+                    is_floor_deadly_on_move_for_flying(curr_floor))
+                    {
+                        go_on = 0;
+
+                        arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(distance_info.dir4)
+                                );
+
+                        if(is_floor_deadly_on_move_for_flying(curr_floor))
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.death_effect
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(curr_tilemap_pos)
+                                );
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                get_texture_1_from_object(source_object, textures)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(curr_tilemap_pos)
+                                );
+                        }
+                    }
+                    else if(vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
+                    {
+                        arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(distance_info.dir4)
+                                );
+
+                        if(is_floor_deadly_on_move_for_object(
+                            curr_floor,
+                            source_object)
+                        )
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.death_effect
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(curr_tilemap_pos)
+                                );
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                get_texture_1_from_object(source_object, textures)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(curr_tilemap_pos)
+                                );
+                        }
+                    }
+                    else
+                    {
+                        arrow_texture =
+                            get_texture_arrow_thick_from_to(
+                                textures,
+                                distance_info.dir4,
+                                get_opposite_dir4(distance_info.dir4)
+                                );
+                    }
+
+                    // if pos before target_2_pos
+                    if(!vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
+                    {
+                        Vec2i just_before_target_2_tilemap_pos =
+                            vec2i_move_in_dir4_by(
+                                target_2_tilemap_pos,
+                                get_opposite_dir4(distance_info.dir4),
+                                1
+                                );
+                        // if pos just before target_2_pos
+                        if(vec2i_equals(curr_tilemap_pos, just_before_target_2_tilemap_pos))
+                        {
+                            if(!is_object_floating(source_object) &&
+                            !is_object_flying(source_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_floating(source_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_floating(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_flying(source_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_flying(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                        }
+                        else
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_move_flying(
+                                    curr_tilemap_pos,
+                                    distance_info.dir4
+                                    )
+                                );
+                        }
+                    }
+
+                    // draw below
+                    add_new_list_element_to_list_end(
+                        draw_below_texture_list,
+                        arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_below_tilemap_pos_list,
+                        new_vec2i_from_vec2i(curr_tilemap_pos)
+                        );
+
+                    // next
+
+                    prev_tilemap_pos = curr_tilemap_pos;
+                    curr_tilemap_pos = next_tilemap_pos;
+                    next_tilemap_pos = vec2i_move_in_dir4_by(
+                        curr_tilemap_pos,
+                        distance_info.dir4,
+                        1
+                        );
+
+                    prev_object = room_get_object_at(
+                        state->curr_room,
+                        prev_tilemap_pos
+                        );
+                    curr_object = room_get_object_at(
+                        state->curr_room,
+                        curr_tilemap_pos
+                        );
+                    next_object = room_get_object_at(
+                        state->curr_room,
+                        next_tilemap_pos
+                        );
+
+                    prev_floor = room_get_floor_at(
+                        state->curr_room,
+                        prev_tilemap_pos
+                        );
+                    curr_floor = room_get_floor_at(
+                        state->curr_room,
+                        curr_tilemap_pos
+                        );
+                    next_floor = room_get_floor_at(
+                        state->curr_room,
+                        next_tilemap_pos
+                        );
+                }
+            }
         }
         break;
         case SKILL__JUMP:
@@ -1141,7 +1387,7 @@ void skill_get_actions_and_draw(
             }
         }
         break;
-        case SKILL__PULL_AND_THROW:
+        case SKILL__DRAG_AND_THROW:
         {
             //
         }

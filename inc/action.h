@@ -17,6 +17,8 @@ enum ACTION_TYPE
     ACTION_TYPE__SIMULTANEOUS,
 
     ACTION_TYPE__MOVE,
+    ACTION_TYPE__MOVE_FLOATING,
+    ACTION_TYPE__MOVE_FLYING,
     ACTION_TYPE__CRASH,
 
     ACTION_TYPE__FALL,
@@ -213,6 +215,8 @@ Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action*
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
 Action* new_action_move( Vec2i tilemap_pos, int dir4);
+Action* new_action_move_floating( Vec2i tilemap_pos, int dir4);
+Action* new_action_move_flying( Vec2i tilemap_pos, int dir4);
 Action* new_action_crash( Vec2i tilemap_pos, int dir4);
 
 Action* new_action_fall(Object* object, Vec2i tilemap_pos);

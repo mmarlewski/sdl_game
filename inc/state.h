@@ -152,8 +152,14 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_floating_start(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_flying_start(State* state, Action* sequence, Action* action, int floor);
 void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_floating_end(State* state, Action* sequence, Action* action, int floor);
+void floor_on_move_flying_end(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
+void floor_on_drop_floating(State* state, Action* sequence, Action* action, int floor);
+void floor_on_drop_flying(State* state, Action* sequence, Action* action, int floor);
 void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);

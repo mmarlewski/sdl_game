@@ -448,7 +448,7 @@ void xxx3(
             }
         }
         break;
-        case SKILL__PULL:
+        case SKILL__DRAG:
         {
             if(!is_object_movable(target_1_object)) break;
 
@@ -533,7 +533,7 @@ void xxx3(
             }
         }
         break;
-        case SKILL__PULL_AND_THROW:
+        case SKILL__DRAG_AND_THROW:
         {
             if(!is_object_movable(target_1_object)) break;
 
