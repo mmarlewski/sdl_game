@@ -422,6 +422,11 @@ Animation* skill_get_animation(
             skill_animation = animation_sequence;
         }
         break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            //
+        }
+        break;
         default:
         break;
     }

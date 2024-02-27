@@ -22,13 +22,9 @@ void skill_on_use(
             {
                 if(is_object_station(target_2_object))
                 {
-                    if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
-                    state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
-                    state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
-                    {
-                        int augmentation = get_station_augmentation(target_2_object);
-                        hero_add_augmentation(state, augmentation);
-                    }
+                    int augmentation =
+                        get_station_augmentation(target_2_object);
+                    hero_add_augmentation(state, augmentation);
                 }
                 else if(is_object_exit(target_2_object))
                 {
@@ -390,6 +386,39 @@ void skill_on_use(
             state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
         }
         break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            if(target_2_object != 0 &&
+            (target_2_object->type == OBJECT_TYPE__HERO ||
+            target_2_object->type == OBJECT_TYPE__HERO_FLOATING ||
+            target_2_object->type == OBJECT_TYPE__HERO_FLYING))
+            {
+                state->was_minibot_launched = 0;
+
+                room_remove_object(
+                    state->curr_room,
+                    state->minibot_object,
+                    0
+                    );
+
+                if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY)
+                {
+                    //
+                }
+                else if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL)
+                {
+                    state->hero_item_number[ITEM__CELL]++;
+                }
+                else if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE)
+                {
+                    state->hero_item_number[ITEM__DYNAMITE]++;
+                }
+                else if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+                {
+                    state->hero_item_number[ITEM__GEMSTONE]++;
+                }
+            }
+        }
         default:
         break;
     }

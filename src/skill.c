@@ -53,6 +53,8 @@ int is_skill_two_target(int skill)
         case SKILL__TURRET_BOMB:        is = 0; break;
         case SKILL__TURRET_PROJECTILE:  is = 0; break;
 
+        case SKILL__MINIBOT_MERGE:      is = 0; break;
+
         default: break;
     }
 
@@ -108,9 +110,11 @@ int get_skill_action_points(int skill)
         case SKILL__ASCEND:             ap = 1; break;
         case SKILL__DESCEND:            ap = 1; break;
 
-        case SKILL__TURRET_LASER:       ap = 0; break;
-        case SKILL__TURRET_BOMB:        ap = 0; break;
-        case SKILL__TURRET_PROJECTILE:  ap = 0; break;
+        case SKILL__TURRET_LASER:       ap = 1; break;
+        case SKILL__TURRET_BOMB:        ap = 1; break;
+        case SKILL__TURRET_PROJECTILE:  ap = 1; break;
+
+        case SKILL__MINIBOT_MERGE:      ap = 1; break;
 
         default: break;
     }
@@ -170,6 +174,8 @@ char* get_skill_name(int skill)
         case SKILL__TURRET_LASER:       name = "turret laser"; break;
         case SKILL__TURRET_BOMB:        name = "turret bomb"; break;
         case SKILL__TURRET_PROJECTILE:  name = "turret projectile"; break;
+
+        case SKILL__MINIBOT_MERGE:      name = "minibot merge"; break;
 
         default: break;
     }

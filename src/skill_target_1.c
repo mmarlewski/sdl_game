@@ -261,6 +261,11 @@ void skill_get_possible_target_1_pos(
             //
         }
         break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            //
+        }
+        break;
         default:
         break;
     }
