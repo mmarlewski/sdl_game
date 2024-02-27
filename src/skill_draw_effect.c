@@ -44,7 +44,7 @@ void xxx4(
         break;
         case SKILL__STOMP:
         {
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.stomp_effect
                         );
@@ -57,7 +57,7 @@ void xxx4(
             {
                 Vec2i tilemap_pos =vec2i_move_in_dir4_by(target_2_tilemap_pos, dir4, 1);
 
-            add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end(
                         texture_list,
                         textures->skill.shake_effect
                         );
