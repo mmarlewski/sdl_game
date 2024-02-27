@@ -697,6 +697,40 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 );
     }
 
+    // no positions
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
+    {
+        if(state->possible_target_1_tilemap_pos_list->size == 0)
+        {
+            draw_texture_at_tilemap_pos(
+                renderer,
+                textures->skill.no_positions,
+                colors->none,
+                1.0f,
+                state->curr_ally->object->tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+                );
+        }
+    }
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        if(state->possible_target_2_tilemap_pos_list->size == 0)
+        {
+            draw_texture_at_tilemap_pos(
+                renderer,
+                textures->skill.no_positions,
+                colors->none,
+                1.0f,
+                state->curr_ally->object->tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+                );
+        }
+    }
+
     // enemy skill draw effect
 
     if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&

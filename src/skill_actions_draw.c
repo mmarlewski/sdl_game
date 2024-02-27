@@ -176,17 +176,48 @@ void skill_get_actions_and_draw(
                     {
                         if(next_elem != 0)
                         {
-                            // actions
-                            add_action_to_end_action_sequence(
-                                action_sequence,
-                                new_action_move(
-                                    *curr_tilemap_pos,
-                                    get_distance_info_from_vec2i_to_vec2i(
+                            if(skill == SKILL__MOVE)
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move(
                                         *curr_tilemap_pos,
-                                        *next_tilemap_pos
-                                        ).dir4
-                                    )
-                                );
+                                        get_distance_info_from_vec2i_to_vec2i(
+                                            *curr_tilemap_pos,
+                                            *next_tilemap_pos
+                                            ).dir4
+                                        )
+                                    );
+                            }
+                            else if(skill == SKILL__MOVE_FLOATING)
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_floating(
+                                        *curr_tilemap_pos,
+                                        get_distance_info_from_vec2i_to_vec2i(
+                                            *curr_tilemap_pos,
+                                            *next_tilemap_pos
+                                            ).dir4
+                                        )
+                                    );
+                            }
+                            else if(skill == SKILL__MOVE_FLYING)
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_flying(
+                                        *curr_tilemap_pos,
+                                        get_distance_info_from_vec2i_to_vec2i(
+                                            *curr_tilemap_pos,
+                                            *next_tilemap_pos
+                                            ).dir4
+                                        )
+                                    );
+                            }
                         }
 
                         Texture* arrow_texture = 0;

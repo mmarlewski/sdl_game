@@ -7428,6 +7428,16 @@ void create_level(State* state)
         new_object(OBJECT_TYPE__STALACTITE),
         vec2i(3,8)
         );
+    room_add_object_at(
+        room_7_2,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(4,8)
+        );
+    room_add_object_at(
+        room_7_2,
+        new_object(OBJECT_TYPE__STALACTITE),
+        vec2i(6,5)
+        );
 
     room_add_object_at(
         room_7_2,
@@ -8253,7 +8263,7 @@ void create_level(State* state)
 
     add_new_list_element_to_list_end(
         station_type_list,
-        (void*)OBJECT_TYPE__STATION_FIST_HAND
+        (void*)OBJECT_TYPE__STATION_MINIBOT_TORSO
         );
     add_new_list_element_to_list_end(
         station_room_name_list,
@@ -8266,7 +8276,7 @@ void create_level(State* state)
 
     add_new_list_element_to_list_end(
         station_type_list,
-        (void*)OBJECT_TYPE__STATION_FIST_HAND
+        (void*)OBJECT_TYPE__STATION_SCISSOR_HAND
         );
     add_new_list_element_to_list_end(
         station_room_name_list,
@@ -8318,7 +8328,7 @@ void create_level(State* state)
 
     add_new_list_element_to_list_end(
         station_type_list,
-        (void*)OBJECT_TYPE__STATION_TELEPORTATION_HEAD
+        (void*)OBJECT_TYPE__STATION_WINGS_TORSO
         );
     add_new_list_element_to_list_end(
         station_room_name_list,
@@ -8362,6 +8372,32 @@ void create_level(State* state)
     add_new_list_element_to_list_end(
         station_room_name_list,
         "7_3"
+        );
+    add_new_list_element_to_list_end(
+        station_pos_list,
+        new_vec2i(6,1)
+        );
+
+    add_new_list_element_to_list_end(
+        station_type_list,
+        (void*)OBJECT_TYPE__STATION_TELEPORTATION_HEAD
+        );
+    add_new_list_element_to_list_end(
+        station_room_name_list,
+        "1_4"
+        );
+    add_new_list_element_to_list_end(
+        station_pos_list,
+        new_vec2i(7,7)
+        );
+
+    add_new_list_element_to_list_end(
+        station_type_list,
+        (void*)OBJECT_TYPE__STATION_BOOT_LEG
+        );
+    add_new_list_element_to_list_end(
+        station_room_name_list,
+        "0_3"
         );
     add_new_list_element_to_list_end(
         station_pos_list,

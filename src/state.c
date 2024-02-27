@@ -102,22 +102,17 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state->visited_room_list,
         room
         );
-    room_add_object_at(
-        room,
-        new_object(OBJECT_TYPE__DISPLAY),
-        vec2i(7,4)
-        );
 
     state->hero_item_number[ITEM__CELL] = 1;
     state->hero_item_number[ITEM__DYNAMITE] = 1;
     state->hero_item_number[ITEM__GEMSTONE] = 1;
 
-    hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
-    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
