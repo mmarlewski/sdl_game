@@ -126,7 +126,8 @@ void skill_get_possible_target_2_pos(
                         is_object_flying(source_object)
                         );
 
-                    if(path_tilemap_pos_list->size > 0)
+                    if(path_tilemap_pos_list->size > 0 &&
+                    path_tilemap_pos_list->size <= state->curr_ally->object->action_points + 1)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
