@@ -302,6 +302,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->ball_spikes = load_texture_from_filepath(renderer, "./res/object/ball_spikes.png");
     object->ball_spikes_outline = load_texture_from_filepath(renderer, "./res/object/ball_spikes_outline.png");
 
+    object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
+    object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
+
     object->hero_1 = load_texture_from_filepath(renderer, "./res/object/hero_1.png");
     object->hero_2 = load_texture_from_filepath(renderer, "./res/object/hero_2.png");
     object->hero_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_outline_1.png");

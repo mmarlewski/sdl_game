@@ -301,6 +301,9 @@ typedef struct
     Texture* ball_spikes;
     Texture* ball_spikes_outline;
 
+    Texture* throne;
+    Texture* throne_outline;
+
     Texture* hero_1;
     Texture* hero_2;
     Texture* hero_outline_1;

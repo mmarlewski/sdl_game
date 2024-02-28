@@ -679,6 +679,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_0_2,
+        new_object(OBJECT_TYPE__THRONE),
+        vec2i(4,1)
+        );
+
+    room_add_object_at(
+        room_0_2,
         new_object(OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT),
         vec2i(0,8)
         );

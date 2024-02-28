@@ -65,6 +65,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->minibot_object = new_object(OBJECT_TYPE__MINIBOT_ALLY);
     state->was_minibot_launched = 0;
+    state->was_throne_used = 0;
 
     state->curr_ally_draw_below_texture_list = new_list((void (*)(void *)) 0);
     state->curr_ally_draw_below_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
@@ -111,7 +112,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
@@ -423,6 +424,8 @@ char* get_gamestate_name(int gamestate)
         case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "enemy pause before move";   break;
         case GAMESTATE__ENEMY_MOVING:               name = "enemy moving";              break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "enemy pause before target"; break;
+        case GAMESTATE__GAME_OVER:                  name = "game over";                 break;
+        case GAMESTATE__GAME_WON:                   name = "game won";                  break;
         default: break;
     }
 

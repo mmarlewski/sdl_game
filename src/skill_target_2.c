@@ -45,7 +45,8 @@ void skill_get_possible_target_2_pos(
                         );
 
                     if(object != 0 &&
-                    (is_object_station(object) ||
+                    (object->type == OBJECT_TYPE__THRONE ||
+                    is_object_station(object) ||
                     is_object_exit(object)))
                     {
                         add_new_list_element_to_list_end(

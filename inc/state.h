@@ -39,6 +39,9 @@ enum GAMESTATE
     GAMESTATE__ENEMY_MOVING,
     GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET,
 
+    GAMESTATE__GAME_OVER,
+    GAMESTATE__GAME_WON,
+
     GAMESTATE__COUNT
 };
 
@@ -100,6 +103,7 @@ typedef struct
 
     Object* minibot_object;
     int was_minibot_launched;
+    int was_throne_used;
 
     List* curr_ally_draw_below_texture_list;
     List* curr_ally_draw_below_tilemap_pos_list;

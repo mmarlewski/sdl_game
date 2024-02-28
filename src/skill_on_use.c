@@ -20,7 +20,11 @@ void skill_on_use(
         {
             if(target_2_object != 0)
             {
-                if(is_object_station(target_2_object))
+                if(target_2_object->type == OBJECT_TYPE__THRONE)
+                {
+                    state->was_throne_used = 1;
+                }
+                else if(is_object_station(target_2_object))
                 {
                     int augmentation =
                         get_station_augmentation(target_2_object);

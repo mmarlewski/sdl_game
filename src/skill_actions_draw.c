@@ -1662,20 +1662,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__MINIBOT_MERGE:
         {
-            // if(target_2_object != 0 &&
-            // (target_2_object->type == OBJECT_TYPE__HERO ||
-            // target_2_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            // target_2_object->type == OBJECT_TYPE__HERO_FLYING))
-            // {
-            //     // actions
-            //     add_action_to_end_action_sequence(
-            //         action_sequence,
-            //         new_action_remove_object(
-            //             state->minibot_object,
-            //             source_tilemap_pos
-            //             )
-            //         );
-            // }
+            //
         }
         break;
         default:

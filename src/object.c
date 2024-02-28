@@ -540,6 +540,8 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__BALL:                             is = 1; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
 
+        case OBJECT_TYPE__THRONE:                           is = 1; break;
+
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
@@ -1375,6 +1377,8 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__BALL:                             name = "ball"; break;
         case OBJECT_TYPE__BALL_SPIKES:                      name = "ball spikes"; break;
 
+        case OBJECT_TYPE__THRONE:                           name = "throne"; break;
+
         case OBJECT_TYPE__HERO:                             name = "hero"; break;
         case OBJECT_TYPE__HERO_FLOATING:                    name = "hero floating"; break;
         case OBJECT_TYPE__HERO_FLYING:                      name = "hero flying"; break;
@@ -1577,6 +1581,8 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
+
+        case OBJECT_TYPE__THRONE:                           texture = textures->object.throne; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_1; break;
@@ -1781,6 +1787,8 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
+        case OBJECT_TYPE__THRONE:                           texture = textures->object.throne; break;
+
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_2; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_2; break;
@@ -1984,6 +1992,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
+        case OBJECT_TYPE__THRONE:                           texture = textures->object.throne_outline; break;
+
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_1; break;
@@ -2186,6 +2196,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
+
+        case OBJECT_TYPE__THRONE:                           texture = textures->object.throne_outline; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_2; break;

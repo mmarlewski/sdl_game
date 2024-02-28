@@ -118,15 +118,25 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     // gamestate
 
-    if(state->gamestate != GAMESTATE__NONE && state->hero_object->is_to_be_removed)
+    if(state->gamestate != GAMESTATE__GAME_OVER &&
+    state->hero_object->is_to_be_removed)
     {
         // game over
-        change_gamestate(state, GAMESTATE__NONE);
+        change_gamestate(state, GAMESTATE__GAME_OVER);
+    }
+
+    if(state->gamestate != GAMESTATE__GAME_WON &&
+    state->was_throne_used)
+    {
+        // game over
+        change_gamestate(state, GAMESTATE__GAME_WON);
     }
 
     switch(state->gamestate)
     {
         case GAMESTATE__NONE:
+        case GAMESTATE__GAME_OVER:
+        case GAMESTATE__GAME_WON:
         {
             //
         }
