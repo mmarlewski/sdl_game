@@ -304,6 +304,17 @@ typedef struct
     Texture* throne;
     Texture* throne_outline;
 
+    Texture* golem_unpowered;
+    Texture* golem_unpowered_outline;
+
+    Texture* golem_half_powered;
+    Texture* golem_half_powered_outline;
+
+    Texture* golem_powered_1;
+    Texture* golem_powered_2;
+    Texture* golem_powered_outline_1;
+    Texture* golem_powered_outline_2;
+
     Texture* hero_1;
     Texture* hero_2;
     Texture* hero_outline_1;

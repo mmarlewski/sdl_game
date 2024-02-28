@@ -305,6 +305,17 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
     object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
 
+    object->golem_unpowered = load_texture_from_filepath(renderer, "./res/object/golem_unpowered.png");
+    object->golem_unpowered_outline = load_texture_from_filepath(renderer, "./res/object/golem_unpowered_outline.png");
+
+    object->golem_half_powered = load_texture_from_filepath(renderer, "./res/object/golem_half_powered.png");
+    object->golem_half_powered_outline = load_texture_from_filepath(renderer, "./res/object/golem_half_powered_outline.png");
+
+    object->golem_powered_1 = load_texture_from_filepath(renderer, "./res/object/golem_powered_1.png");
+    object->golem_powered_2 = load_texture_from_filepath(renderer, "./res/object/golem_powered_2.png");
+    object->golem_powered_outline_1 = load_texture_from_filepath(renderer, "./res/object/golem_powered_outline_1.png");
+    object->golem_powered_outline_2 = load_texture_from_filepath(renderer, "./res/object/golem_powered_outline_2.png");
+
     object->hero_1 = load_texture_from_filepath(renderer, "./res/object/hero_1.png");
     object->hero_2 = load_texture_from_filepath(renderer, "./res/object/hero_2.png");
     object->hero_outline_1 = load_texture_from_filepath(renderer, "./res/object/hero_outline_1.png");

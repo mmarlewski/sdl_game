@@ -112,6 +112,8 @@ int is_object_ally(Object* object)
 
     switch(object->type)
     {
+        case OBJECT_TYPE__GOLEM_POWERED:                    is = 1; break;
+
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
@@ -542,6 +544,10 @@ int is_object_movable(Object* object)
 
         case OBJECT_TYPE__THRONE:                           is = 1; break;
 
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  is = 1; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               is = 1; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    is = 1; break;
+
         case OBJECT_TYPE__HERO:                             is = 1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    is = 1; break;
         case OBJECT_TYPE__HERO_FLYING:                      is = 1; break;
@@ -849,6 +855,10 @@ int is_object_breakable(Object* object)
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
 
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  is = 1; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               is = 1; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    is = 1; break;
+
         case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
@@ -943,6 +953,9 @@ int get_object_item_type(Object* object)
 
         case OBJECT_TYPE__BALL:                             item_type = ITEM__NONE; break;
         case OBJECT_TYPE__BALL_SPIKES:                      item_type = ITEM__NONE; break;
+
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               item_type = ITEM__CELL; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    item_type = ITEM__CELL; break;
 
         case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       item_type = ITEM__CELL; break;
         case OBJECT_TYPE__STAIRS_ABOVE_STONE:               item_type = ITEM__NONE; break;
@@ -1049,6 +1062,9 @@ int get_object_item_count(Object* object)
         case OBJECT_TYPE__BALL:                             count = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      count = 0; break;
 
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               count = 1; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    count = 1; break;
+
         case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       count = 1; break;
         case OBJECT_TYPE__STAIRS_ABOVE_STONE:               count = 0; break;
         case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                count = 0; break;
@@ -1133,7 +1149,6 @@ int is_object_put_item(Object* object)
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          is = 0; break;
         case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          is = 0; break;
 
-
         case OBJECT_TYPE__PILLAR:                           is = 0; break;
 
         case OBJECT_TYPE__PIPE:                             is = 0; break;
@@ -1190,6 +1205,9 @@ int is_object_put_item(Object* object)
 
         case OBJECT_TYPE__BALL:                             is = 0; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 0; break;
+
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  is = 1; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               is = 1; break;
 
         case OBJECT_TYPE__LEVER_METAL_OFF:                  is = 0; break;
         case OBJECT_TYPE__LEVER_METAL_ON:                   is = 0; break;
@@ -1378,6 +1396,10 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__BALL_SPIKES:                      name = "ball spikes"; break;
 
         case OBJECT_TYPE__THRONE:                           name = "throne"; break;
+
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  name = "golem unpowered"; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               name = "golem half powered"; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    name = "golem powered"; break;
 
         case OBJECT_TYPE__HERO:                             name = "hero"; break;
         case OBJECT_TYPE__HERO_FLOATING:                    name = "hero floating"; break;
@@ -1584,6 +1606,10 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__THRONE:                           texture = textures->object.throne; break;
 
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    texture = textures->object.golem_powered_1; break;
+
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_1; break;
@@ -1788,6 +1814,10 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
         case OBJECT_TYPE__THRONE:                           texture = textures->object.throne; break;
+
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    texture = textures->object.golem_powered_2; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_2; break;
@@ -1994,6 +2024,10 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT_TYPE__THRONE:                           texture = textures->object.throne_outline; break;
 
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered_outline; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered_outline; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    texture = textures->object.golem_powered_outline_1; break;
+
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_1; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_1; break;
         case OBJECT_TYPE__HERO_FLYING:                      texture = textures->object.hero_flying_outline_1; break;
@@ -2198,6 +2232,10 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
         case OBJECT_TYPE__THRONE:                           texture = textures->object.throne_outline; break;
+
+        case OBJECT_TYPE__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered_outline; break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered_outline; break;
+        case OBJECT_TYPE__GOLEM_POWERED:                    texture = textures->object.golem_powered_outline_2; break;
 
         case OBJECT_TYPE__HERO:                             texture = textures->object.hero_outline_2; break;
         case OBJECT_TYPE__HERO_FLOATING:                    texture = textures->object.hero_floating_outline_2; break;

@@ -1658,6 +1658,28 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__GOLEM_POWERED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__GOLEM_HALF_POWERED,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__GOLEM_UNPOWERED,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT_TYPE__LEVER_STONE_POWERED:
         {
             add_action_to_end_action_sequence(
@@ -1950,6 +1972,34 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__GOLEM_UNPOWERED:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__GOLEM_HALF_POWERED,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
+        case OBJECT_TYPE__GOLEM_HALF_POWERED:
+        {
+            if(item_type == ITEM__CELL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_object(
+                        OBJECT_TYPE__GOLEM_POWERED,
+                        object->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case OBJECT_TYPE__LEVER_STONE_UNPOWERED:
         {
             if(item_type == ITEM__CELL)

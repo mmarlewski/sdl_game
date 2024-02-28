@@ -459,6 +459,11 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__GOLEM_POWERED:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+        }
+        break;
         case OBJECT_TYPE__HERO:
         case OBJECT_TYPE__HERO_FLOATING:
         case OBJECT_TYPE__HERO_FLYING:
