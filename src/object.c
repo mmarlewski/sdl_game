@@ -135,6 +135,143 @@ int is_object_exit(Object* object)
 
     switch(object->type)
     {
+        case OBJECT_TYPE__EXIT_ROCK_UP:                     is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_RIGHT:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_DOWN:                   is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_LEFT:                   is = 1; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
+        case OBJECT_TYPE__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
+
+        case OBJECT_TYPE__EXIT_STONE_UP:                    is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_RIGHT:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_DOWN:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_LEFT:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_UP:            is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_RIGHT:         is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_DOWN:          is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_POWERED_LEFT:          is = 1; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_UP:          is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_RIGHT:       is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_DOWN:        is = 0; break;
+        case OBJECT_TYPE__EXIT_STONE_UNPOWERED_LEFT:        is = 0; break;
+
+        case OBJECT_TYPE__EXIT_METAL_UP:                    is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_RIGHT:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_DOWN:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_LEFT:                  is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_UP:            is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_UP:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_RIGHT:              is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_DOWN:               is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_ON_LEFT:               is = 1; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_UP:                is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_RIGHT:             is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_DOWN:              is = 0; break;
+        case OBJECT_TYPE__EXIT_METAL_OFF_LEFT:              is = 0; break;
+
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_UP:              is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_RIGHT:           is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_DOWN:            is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_LOCKED_LEFT:            is = 0; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_UP:            is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_RIGHT:         is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_DOWN:          is = 1; break;
+        case OBJECT_TYPE__EXIT_GOLD_UNLOCKED_LEFT:          is = 1; break;
+
+        case OBJECT_TYPE__EXIT_MARBLE_UP:                   is = 1; break;
+        case OBJECT_TYPE__EXIT_MARBLE_RIGHT:                is = 1; break;
+        case OBJECT_TYPE__EXIT_MARBLE_DOWN:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_MARBLE_LEFT:                 is = 1; break;
+
+        case OBJECT_TYPE__EXIT_OBSIDIAN_UP:                 is = 1; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:              is = 1; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:               is = 1; break;
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               is = 1; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 1; break;
+
+        default:                                            is = 0; break;
+    }
+
+    return is;
+}
+
+int is_object_pull_towards(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__PILLAR:                           is = 1; break;
+        case OBJECT_TYPE__PIPE:                             is = 1; break;
+
+        case OBJECT_TYPE__STALACTITE:                       is = 1; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN:                is = 1; break;
+        case OBJECT_TYPE__STALACTITE_FALLEN_ITEM:           is = 1; break;
+        case OBJECT_TYPE__STALAGMITE:                       is = 1; break;
+        case OBJECT_TYPE__STALAGNATE:                       is = 1; break;
+
+        case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 1; break;
+        case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 1; break;
+        case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 1; break;
+
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:       is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_STONE:               is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:                is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:            is = 1; break;
+        case OBJECT_TYPE__STAIRS_ABOVE_METAL:               is = 1; break;
+
+        case OBJECT_TYPE__STATION_FIST_HAND:                is = 1; break;
+        case OBJECT_TYPE__STATION_HOOK_HAND:                is = 1; break;
+        case OBJECT_TYPE__STATION_CHAIN_HAND:               is = 1; break;
+        case OBJECT_TYPE__STATION_SCISSOR_HAND:             is = 1; break;
+        case OBJECT_TYPE__STATION_SPRING_LEG:               is = 1; break;
+        case OBJECT_TYPE__STATION_STRIDER_LEG:              is = 1; break;
+        case OBJECT_TYPE__STATION_TRACK_LEG:                is = 1; break;
+        case OBJECT_TYPE__STATION_BOOT_LEG:                 is = 1; break;
+        case OBJECT_TYPE__STATION_MINIBOT_TORSO:            is = 1; break;
+        case OBJECT_TYPE__STATION_WINGS_TORSO:              is = 1; break;
+        case OBJECT_TYPE__STATION_MANIPULATION_HEAD:        is = 1; break;
+        case OBJECT_TYPE__STATION_TELEPORTATION_HEAD:       is = 1; break;
+        case OBJECT_TYPE__STATION_TAKEN:                    is = 1; break;
+
+        case OBJECT_TYPE__LEVER_METAL_OFF:                  is = 1; break;
+        case OBJECT_TYPE__LEVER_METAL_ON:                   is = 1; break;
+        case OBJECT_TYPE__LEVER_STONE_UNPOWERED:            is = 1; break;
+        case OBJECT_TYPE__LEVER_STONE_POWERED:              is = 1; break;
+
+        default:                                            is = 0; break;
+    }
+
+    return is;
+}
+
+int is_object_throw_over(Object* object)
+{
+    int is = 1;
+
+    switch(object->type)
+    {
+        case OBJECT_TYPE__WALL_ROCK:
+        case OBJECT_TYPE__WALL_STONE:
+        case OBJECT_TYPE__WALL_METAL:
+        case OBJECT_TYPE__WALL_GOLD:
+        case OBJECT_TYPE__WALL_MARBLE:
+        case OBJECT_TYPE__WALL_OBSIDIAN:
+
         case OBJECT_TYPE__EXIT_ROCK_UP:
         case OBJECT_TYPE__EXIT_ROCK_RIGHT:
         case OBJECT_TYPE__EXIT_ROCK_DOWN:
@@ -195,19 +332,9 @@ int is_object_exit(Object* object)
         case OBJECT_TYPE__EXIT_OBSIDIAN_UP:
         case OBJECT_TYPE__EXIT_OBSIDIAN_RIGHT:
         case OBJECT_TYPE__EXIT_OBSIDIAN_DOWN:
-        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:
+        case OBJECT_TYPE__EXIT_OBSIDIAN_LEFT:               is = 0; break;
 
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE_POWERED:
-        case OBJECT_TYPE__STAIRS_ABOVE_STONE:
-        case OBJECT_TYPE__STAIRS_ABOVE_ROCK:
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL_ON:
-        case OBJECT_TYPE__STAIRS_ABOVE_METAL:
-
-        is = 1;
-        break;
-
-        default:
-        break;
+        default:                                            is = 1; break;
     }
 
     return is;

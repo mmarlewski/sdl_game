@@ -174,7 +174,8 @@ void skill_get_possible_target_1_pos(
                             tilemap_pos
                             );
 
-                        if(object != 0 && !is_object_movable(object))
+                        if(object != 0 &&
+                        is_object_pull_towards(object))
                         {
                             add_new_list_element_to_list_end(
                                 target_1_pos_list,

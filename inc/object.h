@@ -255,6 +255,8 @@ void destroy_ally(Ally* ally);
 int is_object_enemy(Object* object);
 int is_object_ally(Object* object);
 int is_object_exit(Object* object);
+int is_object_pull_towards(Object* object);
+int is_object_throw_over(Object* object);
 int is_object_station(Object* object);
 int get_station_augmentation(Object* object);
 int is_object_floating(Object* object);

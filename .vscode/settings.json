@@ -4,6 +4,7 @@
         "gamestate",
         "interactable",
         "minibot",
+        "pullable",
         "stalagnate",
         "tilemap",
         "undeployed",
