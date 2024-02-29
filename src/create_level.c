@@ -7485,6 +7485,17 @@ void create_level(State* state)
 
     room_add_object_at(
         room_7_2,
+        new_object(OBJECT_TYPE__DISPLAY),
+        vec2i(5,3)
+        );
+    room_add_object_at(
+        room_7_2,
+        new_object(OBJECT_TYPE__DISPLAY),
+        vec2i(5,4)
+        );
+
+    room_add_object_at(
+        room_7_2,
         new_object(OBJECT_TYPE__EXIT_ROCK_LEFT),
         vec2i(9,5)
         );
@@ -8393,7 +8404,7 @@ void create_level(State* state)
         );
     add_new_list_element_to_list_end(
         station_pos_list,
-        new_vec2i(8,3)
+        new_vec2i(7,2)
         );
 
     add_new_list_element_to_list_end(

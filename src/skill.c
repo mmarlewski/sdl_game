@@ -41,7 +41,7 @@ int is_skill_two_target(int skill)
         case SKILL__DRAG_AND_THROW:     is = 1; break;
         case SKILL__CHARGE_AND_PUSH:    is = 1; break;
         case SKILL__CHARGE_AND_THROW:   is = 1; break;
-        case SKILL__CHARGE_AND_JUMP:    is = 0; break;
+        case SKILL__CHARGE_AND_JUMP:    is = 1; break;
         case SKILL__JUMP_AND_CARRY:     is = 1; break;
         case SKILL__JUMP_AND_STOMP:     is = 0; break;
 

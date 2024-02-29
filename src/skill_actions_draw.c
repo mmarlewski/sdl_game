@@ -1420,22 +1420,1279 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__DRAG_AND_THROW:
         {
-            //
+            if(target_1_object != 0 &&
+            is_object_movable(target_1_object))
+            {
+                DistanceInfo drag_distance_info =
+                    get_distance_info_from_vec2i_to_vec2i(
+                        target_1_tilemap_pos,
+                        source_tilemap_pos
+                        );
+
+                if(drag_distance_info.dir4 != DIR4__NONE)
+                {
+                    Vec2i just_before_source_tilemap_pos =
+                        vec2i_move_in_dir4_by(
+                            source_tilemap_pos,
+                            get_opposite_dir4(drag_distance_info.dir4),
+                            1
+                            );
+
+                    // init
+
+                    Vec2i drag_prev_tilemap_pos = target_1_tilemap_pos;
+                    Vec2i drag_curr_tilemap_pos = target_1_tilemap_pos;
+                    Vec2i drag_next_tilemap_pos = vec2i_move_in_dir4_by(
+                        drag_curr_tilemap_pos,
+                        drag_distance_info.dir4,
+                        1
+                        );
+
+                    Object* prev_object = room_get_object_at(
+                        state->curr_room,
+                        drag_prev_tilemap_pos
+                        );
+                    Object* curr_object = room_get_object_at(
+                        state->curr_room,
+                        drag_curr_tilemap_pos
+                        );
+                    Object* next_object = room_get_object_at(
+                        state->curr_room,
+                        drag_next_tilemap_pos
+                        );
+
+                    int prev_floor = room_get_floor_at(
+                        state->curr_room,
+                        drag_prev_tilemap_pos
+                        );
+                    int curr_floor = room_get_floor_at(
+                        state->curr_room,
+                        drag_curr_tilemap_pos
+                        );
+                    int next_floor = room_get_floor_at(
+                        state->curr_room,
+                        drag_next_tilemap_pos
+                        );
+
+                    int drag_go_on = 1;
+                    for(int i = 0; i < drag_distance_info.abs_diff && drag_go_on; i++)
+                    {
+                        Texture* drag_arrow_texture = 0;
+
+                        if(vec2i_equals(drag_curr_tilemap_pos, target_1_tilemap_pos))
+                        {
+                            drag_arrow_texture =
+                                get_texture_arrow_thick_start(
+                                    textures,
+                                    drag_distance_info.dir4
+                                    );
+                        }
+                        else if(curr_object != 0 ||
+                        is_floor_deadly_on_move_for_object(
+                            curr_floor,
+                            target_1_object)
+                        )
+                        {
+                            drag_go_on = 0;
+
+                            drag_arrow_texture =
+                                get_texture_arrow_thick_end(
+                                    textures,
+                                    get_opposite_dir4(drag_distance_info.dir4)
+                                    );
+
+                            if(is_floor_deadly_on_move_for_object(
+                            curr_floor,
+                            target_1_object)
+                            )
+                            {
+                                // draw effect
+                                add_new_list_element_to_list_end(
+                                    draw_effect_texture_list,
+                                    textures->skill.death_effect
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_effect_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(drag_curr_tilemap_pos)
+                                    );
+                            }
+                            else
+                            {
+                                // draw effect
+                                add_new_list_element_to_list_end(
+                                    draw_effect_texture_list,
+                                    get_texture_1_from_object(target_1_object, textures)
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_effect_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(drag_curr_tilemap_pos)
+                                    );
+                            }
+                        }
+                        else if(vec2i_equals(drag_curr_tilemap_pos, just_before_source_tilemap_pos))
+                        {
+                            drag_arrow_texture =
+                                get_texture_arrow_thick_end(
+                                    textures,
+                                    get_opposite_dir4(drag_distance_info.dir4)
+                                    );
+
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                get_texture_1_from_object(target_1_object, textures)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(drag_curr_tilemap_pos)
+                                );
+                        }
+                        else
+                        {
+                            drag_arrow_texture =
+                                get_texture_arrow_thick_from_to(
+                                    textures,
+                                    drag_distance_info.dir4,
+                                    get_opposite_dir4(drag_distance_info.dir4)
+                                    );
+                        }
+
+                        if(!vec2i_equals(drag_curr_tilemap_pos, just_before_source_tilemap_pos))
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_move(
+                                    drag_curr_tilemap_pos,
+                                    drag_distance_info.dir4
+                                    )
+                                );
+                        }
+
+                        // draw below
+                        add_new_list_element_to_list_end(
+                            draw_below_texture_list,
+                            drag_arrow_texture
+                            );
+                        add_new_list_element_to_list_end(
+                            draw_below_tilemap_pos_list,
+                            new_vec2i_from_vec2i(drag_curr_tilemap_pos)
+                            );
+
+                        // next
+
+                        drag_prev_tilemap_pos = drag_curr_tilemap_pos;
+                        drag_curr_tilemap_pos = drag_next_tilemap_pos;
+                        drag_next_tilemap_pos = vec2i_move_in_dir4_by(
+                            drag_curr_tilemap_pos,
+                            drag_distance_info.dir4,
+                            1
+                            );
+
+                        prev_object = room_get_object_at(
+                            state->curr_room,
+                            drag_prev_tilemap_pos
+                            );
+                        curr_object = room_get_object_at(
+                            state->curr_room,
+                            drag_curr_tilemap_pos
+                            );
+                        next_object = room_get_object_at(
+                            state->curr_room,
+                            drag_next_tilemap_pos
+                            );
+
+                        prev_floor = room_get_floor_at(
+                            state->curr_room,
+                            drag_prev_tilemap_pos
+                            );
+                        curr_floor = room_get_floor_at(
+                            state->curr_room,
+                            drag_curr_tilemap_pos
+                            );
+                        next_floor = room_get_floor_at(
+                            state->curr_room,
+                            drag_next_tilemap_pos
+                            );
+                    }
+
+                    if(drag_go_on)
+                    {
+                        DistanceInfo throw_distance_info =
+                            get_distance_info_from_vec2i_to_vec2i(
+                                just_before_source_tilemap_pos,
+                                target_2_tilemap_pos
+                                );
+
+                        if(throw_distance_info.dir4 != DIR4__NONE)
+                        {
+                            // lift
+                            if(target_2_object != 0)
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_lift(
+                                        just_before_source_tilemap_pos,
+                                        throw_distance_info.dir4
+                                        )
+                                    );
+
+                                // draw above
+                                add_new_list_element_to_list_end(
+                                    draw_above_texture_list,
+                                    get_texture_lift(
+                                        textures,
+                                        throw_distance_info.dir4
+                                        )
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_above_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(just_before_source_tilemap_pos)
+                                    );
+                            }
+                            // throw
+                            else
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_throw(
+                                        just_before_source_tilemap_pos,
+                                        throw_distance_info.dir4,
+                                        throw_distance_info.abs_diff
+                                        )
+                                    );
+
+                                // draw above
+                                add_new_list_element_to_list_end(
+                                    draw_above_texture_list,
+                                    get_texture_throw(
+                                        textures,
+                                        throw_distance_info.dir4
+                                        )
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_above_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(just_before_source_tilemap_pos)
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_above_texture_list,
+                                    textures->skill.drop
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_above_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                    );
+
+                                if(is_floor_deadly_on_drop_for_object(
+                                    target_2_floor,
+                                    target_1_object)
+                                )
+                                {
+                                    // draw effect
+                                    add_new_list_element_to_list_end(
+                                        draw_effect_texture_list,
+                                        textures->skill.death_effect
+                                        );
+                                    add_new_list_element_to_list_end(
+                                        draw_effect_tilemap_pos_list,
+                                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                        );
+                                }
+                                else
+                                {
+                                    // draw effect
+                                    add_new_list_element_to_list_end(
+                                        draw_effect_texture_list,
+                                        get_texture_1_from_object(target_1_object, textures)
+                                        );
+                                    add_new_list_element_to_list_end(
+                                        draw_effect_tilemap_pos_list,
+                                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                        );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         break;
         case SKILL__CHARGE_AND_PUSH:
         {
-            //
+            DistanceInfo charge_distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                    );
+
+            if(charge_distance_info.dir4 != DIR4__NONE)
+            {
+                Vec2i just_before_target_1_position = vec2i_move_in_dir4_by(
+                    target_1_tilemap_pos,
+                    get_opposite_dir4(charge_distance_info.dir4),
+                    1
+                    );
+
+                // init
+
+                Vec2i charge_prev_tilemap_pos = source_tilemap_pos;
+                Vec2i charge_curr_tilemap_pos = source_tilemap_pos;
+                Vec2i charge_next_tilemap_pos = vec2i_move_in_dir4_by(
+                    charge_curr_tilemap_pos,
+                    charge_distance_info.dir4,
+                    1
+                    );
+
+                Object* charge_prev_object = room_get_object_at(
+                    state->curr_room,
+                    charge_prev_tilemap_pos
+                    );
+                Object* charge_curr_object = room_get_object_at(
+                    state->curr_room,
+                    charge_curr_tilemap_pos
+                    );
+                Object* charge_next_object = room_get_object_at(
+                    state->curr_room,
+                    charge_next_tilemap_pos
+                    );
+
+                int charge_prev_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_prev_tilemap_pos
+                    );
+                int charge_curr_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_curr_tilemap_pos
+                    );
+                int charge_next_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_next_tilemap_pos
+                    );
+
+                int charge_go_on = 1;
+                for(int i = 0; i < charge_distance_info.abs_diff && charge_go_on; i++)
+                {
+                    Texture* charge_arrow_texture = 0;
+
+                    if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_start(
+                                textures,
+                                charge_distance_info.dir4
+                                );
+                    }
+                    else if(charge_curr_object != 0 ||
+                    is_floor_deadly_on_move_for_object(
+                        charge_curr_floor,
+                        source_object)
+                    )
+                    {
+                        charge_go_on = 0;
+
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+
+                        if(is_floor_deadly_on_move_for_object(
+                        charge_curr_floor,
+                        source_object)
+                        )
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.death_effect
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                                );
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                get_texture_1_from_object(source_object, textures)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                                );
+                        }
+                    }
+                    else if(vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_position))
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            get_texture_1_from_object(source_object, textures)
+                            );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                            );
+                    }
+                    else
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_from_to(
+                                textures,
+                                charge_distance_info.dir4,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+                    }
+
+                    if(!vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_position))
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_move(
+                                charge_curr_tilemap_pos,
+                                charge_distance_info.dir4
+                                )
+                            );
+                    }
+
+                    // draw below
+                    add_new_list_element_to_list_end(
+                        draw_below_texture_list,
+                        charge_arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_below_tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                        );
+
+                    // next
+
+                    charge_prev_tilemap_pos = charge_curr_tilemap_pos;
+                    charge_curr_tilemap_pos = charge_next_tilemap_pos;
+                    charge_next_tilemap_pos = vec2i_move_in_dir4_by(
+                        charge_curr_tilemap_pos,
+                        charge_distance_info.dir4,
+                        1
+                        );
+
+                    charge_prev_object = room_get_object_at(
+                        state->curr_room,
+                        charge_prev_tilemap_pos
+                        );
+                    charge_curr_object = room_get_object_at(
+                        state->curr_room,
+                        charge_curr_tilemap_pos
+                        );
+                    charge_next_object = room_get_object_at(
+                        state->curr_room,
+                        charge_next_tilemap_pos
+                        );
+
+                    charge_prev_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_prev_tilemap_pos
+                        );
+                    charge_curr_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_curr_tilemap_pos
+                        );
+                    charge_next_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_next_tilemap_pos
+                        );
+                }
+
+                if(charge_go_on)
+                {
+                    if(target_1_object != 0 &&
+                    is_object_movable(target_1_object))
+                    {
+                        DistanceInfo push_distance_info =
+                            get_distance_info_from_vec2i_to_vec2i(
+                                target_1_tilemap_pos,
+                                target_2_tilemap_pos
+                                );
+
+                        if(push_distance_info.dir4 != DIR4__NONE)
+                        {
+                            // init
+
+                            Vec2i push_prev_tilemap_pos = target_1_tilemap_pos;
+                            Vec2i push_curr_tilemap_pos = target_1_tilemap_pos;
+                            Vec2i push_next_tilemap_pos = vec2i_move_in_dir4_by(
+                                push_curr_tilemap_pos,
+                                push_distance_info.dir4,
+                                1
+                                );
+
+                            Object* push_prev_object = room_get_object_at(
+                                state->curr_room,
+                                push_prev_tilemap_pos
+                                );
+                            Object* push_curr_object = room_get_object_at(
+                                state->curr_room,
+                                push_curr_tilemap_pos
+                                );
+                            Object* push_next_object = room_get_object_at(
+                                state->curr_room,
+                                push_next_tilemap_pos
+                                );
+
+                            int push_prev_floor = room_get_floor_at(
+                                state->curr_room,
+                                push_prev_tilemap_pos
+                                );
+                            int push_curr_floor = room_get_floor_at(
+                                state->curr_room,
+                                push_curr_tilemap_pos
+                                );
+                            int push_next_floor = room_get_floor_at(
+                                state->curr_room,
+                                push_next_tilemap_pos
+                                );
+
+                            int push_go_on = 1;
+                            for(int i = 0; i < push_distance_info.abs_diff + 1 && push_go_on; i++)
+                            {
+                                Texture* push_arrow_texture = 0;
+
+                                if(vec2i_equals(push_curr_tilemap_pos, target_1_tilemap_pos))
+                                {
+                                    push_arrow_texture =
+                                        get_texture_arrow_thick_start(
+                                            textures,
+                                            push_distance_info.dir4
+                                            );
+                                }
+                                else if(push_curr_object != 0 ||
+                                is_floor_deadly_on_move_for_object(
+                                    push_curr_floor,
+                                    target_1_object)
+                                )
+                                {
+                                    push_go_on = 0;
+
+                                    push_arrow_texture =
+                                        get_texture_arrow_thick_end(
+                                            textures,
+                                            get_opposite_dir4(push_distance_info.dir4)
+                                            );
+
+                                    if(is_floor_deadly_on_move_for_object(
+                                    push_curr_floor,
+                                    target_1_object)
+                                    )
+                                    {
+                                        // draw effect
+                                        add_new_list_element_to_list_end(
+                                            draw_effect_texture_list,
+                                            textures->skill.death_effect
+                                            );
+                                        add_new_list_element_to_list_end(
+                                            draw_effect_tilemap_pos_list,
+                                            new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                                            );
+                                    }
+                                    else
+                                    {
+                                        // draw effect
+                                        add_new_list_element_to_list_end(
+                                            draw_effect_texture_list,
+                                            get_texture_1_from_object(target_1_object, textures)
+                                            );
+                                        add_new_list_element_to_list_end(
+                                            draw_effect_tilemap_pos_list,
+                                            new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                                            );
+                                    }
+                                }
+                                else if(vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
+                                {
+                                    push_arrow_texture =
+                                        get_texture_arrow_thick_end(
+                                            textures,
+                                            get_opposite_dir4(push_distance_info.dir4)
+                                            );
+
+                                    // draw effect
+                                    add_new_list_element_to_list_end(
+                                        draw_effect_texture_list,
+                                        get_texture_1_from_object(target_1_object, textures)
+                                        );
+                                    add_new_list_element_to_list_end(
+                                        draw_effect_tilemap_pos_list,
+                                        new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                                        );
+                                }
+                                else
+                                {
+                                    push_arrow_texture =
+                                        get_texture_arrow_thick_from_to(
+                                            textures,
+                                            push_distance_info.dir4,
+                                            get_opposite_dir4(push_distance_info.dir4)
+                                            );
+                                }
+
+                                if(!vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
+                                {
+                                    // actions
+                                    add_action_to_end_action_sequence(
+                                        action_sequence,
+                                        new_action_move(
+                                            push_curr_tilemap_pos,
+                                            push_distance_info.dir4
+                                            )
+                                        );
+                                }
+
+                                // draw below
+                                add_new_list_element_to_list_end(
+                                    draw_below_texture_list,
+                                    push_arrow_texture
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_below_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(push_curr_tilemap_pos)
+                                    );
+
+                                // next
+
+                                push_prev_tilemap_pos = push_curr_tilemap_pos;
+                                push_curr_tilemap_pos = push_next_tilemap_pos;
+                                push_next_tilemap_pos = vec2i_move_in_dir4_by(
+                                    push_curr_tilemap_pos,
+                                    push_distance_info.dir4,
+                                    1
+                                    );
+
+                                push_prev_object = room_get_object_at(
+                                    state->curr_room,
+                                    push_prev_tilemap_pos
+                                    );
+                                push_curr_object = room_get_object_at(
+                                    state->curr_room,
+                                    push_curr_tilemap_pos
+                                    );
+                                push_next_object = room_get_object_at(
+                                    state->curr_room,
+                                    push_next_tilemap_pos
+                                    );
+
+                                push_prev_floor = room_get_floor_at(
+                                    state->curr_room,
+                                    push_prev_tilemap_pos
+                                    );
+                                push_curr_floor = room_get_floor_at(
+                                    state->curr_room,
+                                    push_curr_tilemap_pos
+                                    );
+                                push_next_floor = room_get_floor_at(
+                                    state->curr_room,
+                                    push_next_tilemap_pos
+                                    );
+                            }
+                        }
+                    }
+                }
+            }
         }
         break;
         case SKILL__CHARGE_AND_THROW:
         {
-            //
+            DistanceInfo charge_distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                    );
+
+            if(charge_distance_info.dir4 != DIR4__NONE)
+            {
+                Vec2i just_before_target_1_position = vec2i_move_in_dir4_by(
+                    target_1_tilemap_pos,
+                    get_opposite_dir4(charge_distance_info.dir4),
+                    1
+                    );
+
+                // init
+
+                Vec2i charge_prev_tilemap_pos = source_tilemap_pos;
+                Vec2i charge_curr_tilemap_pos = source_tilemap_pos;
+                Vec2i charge_next_tilemap_pos = vec2i_move_in_dir4_by(
+                    charge_curr_tilemap_pos,
+                    charge_distance_info.dir4,
+                    1
+                    );
+
+                Object* charge_prev_object = room_get_object_at(
+                    state->curr_room,
+                    charge_prev_tilemap_pos
+                    );
+                Object* charge_curr_object = room_get_object_at(
+                    state->curr_room,
+                    charge_curr_tilemap_pos
+                    );
+                Object* charge_next_object = room_get_object_at(
+                    state->curr_room,
+                    charge_next_tilemap_pos
+                    );
+
+                int charge_prev_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_prev_tilemap_pos
+                    );
+                int charge_curr_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_curr_tilemap_pos
+                    );
+                int charge_next_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_next_tilemap_pos
+                    );
+
+                int charge_go_on = 1;
+                for(int i = 0; i < charge_distance_info.abs_diff && charge_go_on; i++)
+                {
+                    Texture* charge_arrow_texture = 0;
+
+                    if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_start(
+                                textures,
+                                charge_distance_info.dir4
+                                );
+                    }
+                    else if(charge_curr_object != 0 ||
+                    is_floor_deadly_on_move_for_object(
+                        charge_curr_floor,
+                        source_object)
+                    )
+                    {
+                        charge_go_on = 0;
+
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+
+                        if(is_floor_deadly_on_move_for_object(
+                        charge_curr_floor,
+                        source_object)
+                        )
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.death_effect
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                                );
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                get_texture_1_from_object(source_object, textures)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                                );
+                        }
+                    }
+                    else if(vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_position))
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            get_texture_1_from_object(source_object, textures)
+                            );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                            );
+                    }
+                    else
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_from_to(
+                                textures,
+                                charge_distance_info.dir4,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+                    }
+
+                    if(!vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_position))
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_move(
+                                charge_curr_tilemap_pos,
+                                charge_distance_info.dir4
+                                )
+                            );
+                    }
+
+                    // draw below
+                    add_new_list_element_to_list_end(
+                        draw_below_texture_list,
+                        charge_arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_below_tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                        );
+
+                    // next
+
+                    charge_prev_tilemap_pos = charge_curr_tilemap_pos;
+                    charge_curr_tilemap_pos = charge_next_tilemap_pos;
+                    charge_next_tilemap_pos = vec2i_move_in_dir4_by(
+                        charge_curr_tilemap_pos,
+                        charge_distance_info.dir4,
+                        1
+                        );
+
+                    charge_prev_object = room_get_object_at(
+                        state->curr_room,
+                        charge_prev_tilemap_pos
+                        );
+                    charge_curr_object = room_get_object_at(
+                        state->curr_room,
+                        charge_curr_tilemap_pos
+                        );
+                    charge_next_object = room_get_object_at(
+                        state->curr_room,
+                        charge_next_tilemap_pos
+                        );
+
+                    charge_prev_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_prev_tilemap_pos
+                        );
+                    charge_curr_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_curr_tilemap_pos
+                        );
+                    charge_next_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_next_tilemap_pos
+                        );
+                }
+
+                if(charge_go_on)
+                {
+                    DistanceInfo throw_distance_info =
+                        get_distance_info_from_vec2i_to_vec2i(
+                            target_1_tilemap_pos,
+                            target_2_tilemap_pos
+                            );
+
+                    if(throw_distance_info.dir4 != DIR4__NONE)
+                    {
+                        // lift
+                        if(target_2_object != 0)
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_lift(
+                                    target_1_tilemap_pos,
+                                    throw_distance_info.dir4
+                                    )
+                                );
+
+                            // draw above
+                            add_new_list_element_to_list_end(
+                                draw_above_texture_list,
+                                get_texture_lift(
+                                    textures,
+                                    throw_distance_info.dir4
+                                    )
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_tilemap_pos_list,
+                                new_vec2i_from_vec2i(target_1_tilemap_pos)
+                                );
+                        }
+                        // throw
+                        else
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_throw(
+                                    target_1_tilemap_pos,
+                                    throw_distance_info.dir4,
+                                    throw_distance_info.abs_diff
+                                    )
+                                );
+
+                            // draw above
+                            add_new_list_element_to_list_end(
+                                draw_above_texture_list,
+                                get_texture_throw(
+                                    textures,
+                                    throw_distance_info.dir4
+                                    )
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_tilemap_pos_list,
+                                new_vec2i_from_vec2i(target_1_tilemap_pos)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_texture_list,
+                                textures->skill.drop
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_tilemap_pos_list,
+                                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                );
+
+                            if(is_floor_deadly_on_drop_for_object(
+                                target_2_floor,
+                                target_1_object)
+                            )
+                            {
+                                // draw effect
+                                add_new_list_element_to_list_end(
+                                    draw_effect_texture_list,
+                                    textures->skill.death_effect
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_effect_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                    );
+                            }
+                            else
+                            {
+                                // draw effect
+                                add_new_list_element_to_list_end(
+                                    draw_effect_texture_list,
+                                    get_texture_1_from_object(target_1_object, textures)
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_effect_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                    );
+                            }
+                        }
+                    }
+                }
+            }
         }
         break;
         case SKILL__CHARGE_AND_JUMP:
         {
-            //
+            DistanceInfo charge_distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                    );
+
+            if(charge_distance_info.dir4 != DIR4__NONE)
+            {
+                // init
+
+                Vec2i charge_prev_tilemap_pos = source_tilemap_pos;
+                Vec2i charge_curr_tilemap_pos = source_tilemap_pos;
+                Vec2i charge_next_tilemap_pos = vec2i_move_in_dir4_by(
+                    charge_curr_tilemap_pos,
+                    charge_distance_info.dir4,
+                    1
+                    );
+
+                Object* charge_prev_object = room_get_object_at(
+                    state->curr_room,
+                    charge_prev_tilemap_pos
+                    );
+                Object* charge_curr_object = room_get_object_at(
+                    state->curr_room,
+                    charge_curr_tilemap_pos
+                    );
+                Object* charge_next_object = room_get_object_at(
+                    state->curr_room,
+                    charge_next_tilemap_pos
+                    );
+
+                int charge_prev_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_prev_tilemap_pos
+                    );
+                int charge_curr_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_curr_tilemap_pos
+                    );
+                int charge_next_floor = room_get_floor_at(
+                    state->curr_room,
+                    charge_next_tilemap_pos
+                    );
+
+                int charge_go_on = 1;
+                for(int i = 0; i < charge_distance_info.abs_diff + 1 && charge_go_on; i++)
+                {
+                    Texture* charge_arrow_texture = 0;
+
+                    if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_start(
+                                textures,
+                                charge_distance_info.dir4
+                                );
+                    }
+                    else if(charge_curr_object != 0 ||
+                    is_floor_deadly_on_move_for_object(
+                        charge_curr_floor,
+                        source_object)
+                    )
+                    {
+                        charge_go_on = 0;
+
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+
+                        if(is_floor_deadly_on_move_for_object(
+                        charge_curr_floor,
+                        source_object)
+                        )
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.death_effect
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                                );
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                get_texture_1_from_object(source_object, textures)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                                );
+                        }
+                    }
+                    else if(vec2i_equals(charge_curr_tilemap_pos, target_1_tilemap_pos))
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_end(
+                                textures,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            get_texture_1_from_object(source_object, textures)
+                            );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                            );
+                    }
+                    else
+                    {
+                        charge_arrow_texture =
+                            get_texture_arrow_thick_from_to(
+                                textures,
+                                charge_distance_info.dir4,
+                                get_opposite_dir4(charge_distance_info.dir4)
+                                );
+                    }
+
+                    if(!vec2i_equals(charge_curr_tilemap_pos, target_1_tilemap_pos))
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_move(
+                                charge_curr_tilemap_pos,
+                                charge_distance_info.dir4
+                                )
+                            );
+                    }
+
+                    // draw below
+                    add_new_list_element_to_list_end(
+                        draw_below_texture_list,
+                        charge_arrow_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_below_tilemap_pos_list,
+                        new_vec2i_from_vec2i(charge_curr_tilemap_pos)
+                        );
+
+                    // next
+
+                    charge_prev_tilemap_pos = charge_curr_tilemap_pos;
+                    charge_curr_tilemap_pos = charge_next_tilemap_pos;
+                    charge_next_tilemap_pos = vec2i_move_in_dir4_by(
+                        charge_curr_tilemap_pos,
+                        charge_distance_info.dir4,
+                        1
+                        );
+
+                    charge_prev_object = room_get_object_at(
+                        state->curr_room,
+                        charge_prev_tilemap_pos
+                        );
+                    charge_curr_object = room_get_object_at(
+                        state->curr_room,
+                        charge_curr_tilemap_pos
+                        );
+                    charge_next_object = room_get_object_at(
+                        state->curr_room,
+                        charge_next_tilemap_pos
+                        );
+
+                    charge_prev_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_prev_tilemap_pos
+                        );
+                    charge_curr_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_curr_tilemap_pos
+                        );
+                    charge_next_floor = room_get_floor_at(
+                        state->curr_room,
+                        charge_next_tilemap_pos
+                        );
+                }
+
+                if(charge_go_on)
+                {
+                    DistanceInfo throw_distance_info =
+                        get_distance_info_from_vec2i_to_vec2i(
+                            target_1_tilemap_pos,
+                            target_2_tilemap_pos
+                            );
+
+                    if(throw_distance_info.dir4 != DIR4__NONE)
+                    {
+                        // lift
+                        if(target_2_object != 0)
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_lift(
+                                    target_1_tilemap_pos,
+                                    throw_distance_info.dir4
+                                    )
+                                );
+
+                            // draw above
+                            add_new_list_element_to_list_end(
+                                draw_above_texture_list,
+                                get_texture_lift(
+                                    textures,
+                                    throw_distance_info.dir4
+                                    )
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_tilemap_pos_list,
+                                new_vec2i_from_vec2i(target_1_tilemap_pos)
+                                );
+                        }
+                        // throw
+                        else
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_throw(
+                                    target_1_tilemap_pos,
+                                    throw_distance_info.dir4,
+                                    throw_distance_info.abs_diff
+                                    )
+                                );
+
+                            // draw above
+                            add_new_list_element_to_list_end(
+                                draw_above_texture_list,
+                                get_texture_throw(
+                                    textures,
+                                    throw_distance_info.dir4
+                                    )
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_tilemap_pos_list,
+                                new_vec2i_from_vec2i(target_1_tilemap_pos)
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_texture_list,
+                                textures->skill.drop
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_above_tilemap_pos_list,
+                                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                );
+
+                            if(is_floor_deadly_on_drop_for_object(
+                                target_2_floor,
+                                source_object)
+                            )
+                            {
+                                // draw effect
+                                add_new_list_element_to_list_end(
+                                    draw_effect_texture_list,
+                                    textures->skill.death_effect
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_effect_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                    );
+                            }
+                            else
+                            {
+                                // draw effect
+                                add_new_list_element_to_list_end(
+                                    draw_effect_texture_list,
+                                    get_texture_1_from_object(source_object, textures)
+                                    );
+                                add_new_list_element_to_list_end(
+                                    draw_effect_tilemap_pos_list,
+                                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                                    );
+                            }
+                        }
+                    }
+                }
+            }
         }
         break;
         case SKILL__JUMP_AND_CARRY:

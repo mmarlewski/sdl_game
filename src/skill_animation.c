@@ -219,10 +219,13 @@ Animation* skill_get_animation(
         }
         break;
         case SKILL__DRAG:
+        case SKILL__DRAG_AND_THROW:
         case SKILL__PULL:
         {
             DistanceInfo distance_info =
-                get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos);
 
             Animation* animation_sequence = new_animation_sequence();
 

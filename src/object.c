@@ -265,6 +265,9 @@ int is_object_throw_over(Object* object)
 
     switch(object->type)
     {
+        case OBJECT_TYPE__STALACTITE:
+        case OBJECT_TYPE__STALAGNATE:
+
         case OBJECT_TYPE__WALL_ROCK:
         case OBJECT_TYPE__WALL_STONE:
         case OBJECT_TYPE__WALL_METAL:
