@@ -887,12 +887,88 @@ void skill_get_possible_target_2_pos(
         break;
         case SKILL__JUMP_AND_CARRY:
         {
-            //
+            DistanceInfo carry_distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                    );
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i < 3; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        dir4,
+                        i
+                        );
+
+                    Vec2i carry_tilemap_pos = vec2i_move_in_dir4_by(
+                        tilemap_pos,
+                        carry_distance_info.dir4,
+                        1
+                        );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
+
+                        Object* carry_object = room_get_object_at(
+                            state->curr_room,
+                            carry_tilemap_pos
+                            );
+
+                        if(object == 0 && carry_object == 0)
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+                        }
+                    }
+                }
+            }
         }
         break;
         case SKILL__JUMP_AND_STOMP:
         {
-            //
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                int go_on = 1;
+                for(int i = 1; i < 3 && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        dir4,
+                        i
+                        );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
+
+                        if(object == 0)
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+                        }
+
+                        if(object != 0 &&
+                        !is_object_throw_over(object))
+                        {
+                            go_on = 0;
+                        }
+                    }
+                }
+            }
         }
         break;
         case SKILL__LAUNCH_MINIBOT:

@@ -141,7 +141,10 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                     );
             }
 
-            add_action_after_curr_action_action_sequence(sequence, push_around);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                push_around
+                );
         }
         break;
         case ACTION_TYPE__THROW:
