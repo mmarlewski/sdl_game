@@ -7528,6 +7528,22 @@ void create_level(State* state)
 
     room_add_object_at(
         room_7_1,
+        new_object(OBJECT_TYPE__ROCK_DAMAGED_ITEM),
+        vec2i(8,8)
+        );
+    room_add_object_at(
+        room_7_1,
+        new_object(OBJECT_TYPE__ROCK_DAMAGED_ITEM),
+        vec2i(8,7)
+        );
+    room_add_object_at(
+        room_7_1,
+        new_object(OBJECT_TYPE__ROCK_DAMAGED_ITEM),
+        vec2i(7,8)
+        );
+
+    room_add_object_at(
+        room_7_1,
         new_object(OBJECT_TYPE__EXIT_ROCK_DOWN),
         vec2i(6,0)
         );

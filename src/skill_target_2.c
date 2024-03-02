@@ -177,7 +177,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -239,7 +239,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -302,7 +302,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -365,7 +365,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i < 10; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -603,7 +603,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 0; i < 5 && go_on; i++)
+                for(int i = 0; i < 10 && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,

@@ -104,16 +104,16 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         room
         );
 
-    state->hero_item_number[ITEM__CELL] = 1;
-    state->hero_item_number[ITEM__DYNAMITE] = 1;
-    state->hero_item_number[ITEM__GEMSTONE] = 1;
+    state->hero_item_number[ITEM__CELL] = 0;
+    state->hero_item_number[ITEM__DYNAMITE] = 0;
+    state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
-    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
-    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);

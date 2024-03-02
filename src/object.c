@@ -224,6 +224,10 @@ int is_object_pull_towards(Object* object)
         case OBJECT_TYPE__STALAGMITE:                       is = 1; break;
         case OBJECT_TYPE__STALAGNATE:                       is = 1; break;
 
+        case OBJECT_TYPE__ROCK:                             is = 1; break;
+        case OBJECT_TYPE__ROCK_DAMAGED:                     is = 1; break;
+        case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 1; break;
+
         case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 1; break;
         case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 1; break;
