@@ -108,10 +108,10 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__DYNAMITE] = 1;
     state->hero_item_number[ITEM__GEMSTONE] = 1;
 
-    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
+    hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
+    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 

@@ -835,13 +835,102 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
 {
     switch(object->type)
     {
+        case OBJECT_TYPE__STALACTITE:
+        {
+            int floor = room_get_floor_at(
+                state->curr_room,
+                object->tilemap_pos
+                );
+
+            switch(floor)
+            {
+                case FLOOR_TYPE__WATER:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR_TYPE__WATER_STALACTITE_FALLEN,
+                            object->tilemap_pos
+                            )
+                        );
+
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+                case FLOOR_TYPE__LAVA:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR_TYPE__LAVA_STALACTITE_FALLEN,
+                            object->tilemap_pos
+                            )
+                        );
+
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+                case FLOOR_TYPE__PIT:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+                default:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_object(
+                            OBJECT_TYPE__STALACTITE_FALLEN_ITEM,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+            }
+        }
+        break;
         case OBJECT_TYPE__BALL_SPIKES:
         {
             if(action->crash.object_crushed->type != OBJECT_TYPE__BARREL &&
             action->crash.object_crushed->type != OBJECT_TYPE__BARREL)
             {
-                add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushing, action->crash.object_crushed->tilemap_pos));
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_death(
+                        action->crash.object_crushing,
+                        action->crash.object_crushed->tilemap_pos
+                        )
+                    );
             }
+        }
+        break;
+        case OBJECT_TYPE__DISPLAY:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT_TYPE__DISPLAY_DAMAGED_ITEM,
+                    object->tilemap_pos
+                    )
+                );
         }
         break;
         case OBJECT_TYPE__BARREL:
@@ -876,7 +965,13 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         break;
         case OBJECT_TYPE__BALL:
         {
-            add_action_to_end_action_sequence(sequence, new_action_move(object->tilemap_pos, action->crash.dir4));
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_move(
+                    object->tilemap_pos,
+                    action->crash.dir4
+                    )
+                );
         }
         break;
         default:
@@ -1360,6 +1455,17 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                             )
                         );
 
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                            )
+                        );
+                }
+                break;
+                case FLOOR_TYPE__PIT:
+                {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(

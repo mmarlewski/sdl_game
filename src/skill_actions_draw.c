@@ -1300,14 +1300,39 @@ void skill_get_actions_and_draw(
 
                     if(!vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
                     {
-                        // actions
-                        add_action_to_end_action_sequence(
-                            action_sequence,
-                            new_action_move(
-                                curr_tilemap_pos,
-                                distance_info.dir4
-                                )
-                            );
+                        if(source_object->type == OBJECT_TYPE__HERO)
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_move(
+                                    curr_tilemap_pos,
+                                    distance_info.dir4
+                                    )
+                                );
+                        }
+                        else if(source_object->type == OBJECT_TYPE__HERO_FLOATING)
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_move_floating(
+                                    curr_tilemap_pos,
+                                    distance_info.dir4
+                                    )
+                                );
+                        }
+                        else if(source_object->type == OBJECT_TYPE__HERO_FLYING)
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_move_flying(
+                                    curr_tilemap_pos,
+                                    distance_info.dir4
+                                    )
+                                );
+                        }
                     }
 
                     // draw below
