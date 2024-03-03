@@ -130,7 +130,7 @@ void skill_get_possible_target_1_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i <= SKILL_DRAG_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -161,7 +161,7 @@ void skill_get_possible_target_1_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 10; i++)
+                for(int i = 1; i <= SKILL_PULL_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -210,7 +210,7 @@ void skill_get_possible_target_1_pos(
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_CHARGE_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -248,7 +248,7 @@ void skill_get_possible_target_1_pos(
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_CHARGE_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -315,16 +315,6 @@ void skill_get_possible_target_1_pos(
         }
         break;
         case SKILL__LAUNCH_MINIBOT:
-        {
-            //
-        }
-        break;
-        case SKILL__ASCEND:
-        {
-            //
-        }
-        break;
-        case SKILL__DESCEND:
         {
             //
         }

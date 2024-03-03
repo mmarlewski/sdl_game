@@ -7746,6 +7746,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_7_2,
+        new_object(OBJECT_TYPE__DISPLAY),
+        vec2i(7,5)
+        );
+
+    room_add_object_at(
+        room_7_2,
         new_object(OBJECT_TYPE__EXIT_ROCK_LEFT),
         vec2i(9,5)
         );

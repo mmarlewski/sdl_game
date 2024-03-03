@@ -46,8 +46,6 @@ int is_skill_two_target(int skill)
         case SKILL__JUMP_AND_STOMP:     is = 0; break;
 
         case SKILL__LAUNCH_MINIBOT:     is = 0; break;
-        case SKILL__ASCEND:             is = 0; break;
-        case SKILL__DESCEND:            is = 0; break;
 
         case SKILL__TURRET_LASER:       is = 0; break;
         case SKILL__TURRET_BOMB:        is = 0; break;
@@ -107,8 +105,6 @@ int get_skill_action_points(int skill)
         case SKILL__JUMP_AND_STOMP:     ap = 2; break;
 
         case SKILL__LAUNCH_MINIBOT:     ap = 1; break;
-        case SKILL__ASCEND:             ap = 1; break;
-        case SKILL__DESCEND:            ap = 1; break;
 
         case SKILL__TURRET_LASER:       ap = 1; break;
         case SKILL__TURRET_BOMB:        ap = 1; break;
@@ -168,8 +164,6 @@ char* get_skill_name(int skill)
         case SKILL__JUMP_AND_STOMP:     name = "jump and stomp"; break;
 
         case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
-        case SKILL__ASCEND:             name = "ascend"; break;
-        case SKILL__DESCEND:            name = "descend"; break;
 
         case SKILL__TURRET_LASER:       name = "turret laser"; break;
         case SKILL__TURRET_BOMB:        name = "turret bomb"; break;

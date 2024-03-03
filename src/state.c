@@ -108,8 +108,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
-    hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
@@ -533,8 +533,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             }
             if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ASCEND);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DESCEND);
+                //
             }
             if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
             hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))

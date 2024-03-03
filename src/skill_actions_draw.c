@@ -3128,26 +3128,34 @@ void skill_get_actions_and_draw(
                         )
                     );
 
-                // draw effect
-                add_new_list_element_to_list_end(
-                    draw_effect_texture_list,
-                    textures->object.minibot_ally_1
-                    );
-                add_new_list_element_to_list_end(
-                    draw_effect_tilemap_pos_list,
-                    new_vec2i_from_vec2i(target_2_tilemap_pos)
-                    );
+                if(is_floor_deadly_on_drop_for_object(
+                    target_2_floor,
+                    state->minibot_object)
+                )
+                {
+                    // draw effect
+                    add_new_list_element_to_list_end(
+                        draw_effect_texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_effect_tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
+                }
+                else
+                {
+                    // draw effect
+                    add_new_list_element_to_list_end(
+                        draw_effect_texture_list,
+                        textures->object.minibot_ally_1
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_effect_tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_2_tilemap_pos)
+                        );
+                }
             }
-        }
-        break;
-        case SKILL__ASCEND:
-        {
-            //
-        }
-        break;
-        case SKILL__DESCEND:
-        {
-            //
         }
         break;
         case SKILL__TURRET_LASER:

@@ -177,7 +177,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 10; i++)
+                for(int i = 1; i <= SKILL_PICK_AND_PUT_ITEM_FAR_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -239,7 +239,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 10; i++)
+                for(int i = 1; i <= SKILL_PICK_AND_PUT_ITEM_FAR_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -302,7 +302,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 10; i++)
+                for(int i = 1; i <= SKILL_PICK_AND_PUT_ITEM_FAR_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -365,7 +365,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 10; i++)
+                for(int i = 1; i <= SKILL_PICK_AND_PUT_ITEM_FAR_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -398,7 +398,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i <= SKILL_THROW_ITEM_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -425,7 +425,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i <= SKILL_THROW_ITEM_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -451,7 +451,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i <= SKILL_THROW_ITEM_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -484,7 +484,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_PUSH_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
@@ -524,7 +524,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -568,7 +568,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_DRAG_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
@@ -603,7 +603,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 0; i < 10 && go_on; i++)
+                for(int i = 0; i <= SKILL_PULL_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
@@ -632,7 +632,7 @@ void skill_get_possible_target_2_pos(
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int go_on = 1;
-                for(int i = 1; i < 3 && go_on; i++)
+                for(int i = 1; i <= SKILL_JUMP_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -670,7 +670,7 @@ void skill_get_possible_target_2_pos(
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_CHARGE_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -728,7 +728,7 @@ void skill_get_possible_target_2_pos(
                     );
 
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -771,7 +771,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_CHARGE_PUSH_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
@@ -811,7 +811,7 @@ void skill_get_possible_target_2_pos(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_CHARGE_THROW_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
@@ -853,7 +853,7 @@ void skill_get_possible_target_2_pos(
                     );
 
                 int go_on = 1;
-                for(int i = 1; i < 5 && go_on; i++)
+                for(int i = 1; i <= SKILL_CHARGE_JUMP_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,
@@ -895,7 +895,7 @@ void skill_get_possible_target_2_pos(
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 3; i++)
+                for(int i = 1; i <= SKILL_JUMP_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -938,7 +938,7 @@ void skill_get_possible_target_2_pos(
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int go_on = 1;
-                for(int i = 1; i < 3 && go_on; i++)
+                for(int i = 1; i <= SKILL_JUMP_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -975,7 +975,7 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 5; i++)
+                for(int i = 1; i <= SKILL_LAUNCH_MINIBOT_RANGE; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -1000,16 +1000,6 @@ void skill_get_possible_target_2_pos(
                     }
                 }
             }
-        }
-        break;
-        case SKILL__ASCEND:
-        {
-            //
-        }
-        break;
-        case SKILL__DESCEND:
-        {
-            //
         }
         break;
         case SKILL__TURRET_LASER:
