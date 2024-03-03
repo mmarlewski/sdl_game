@@ -93,7 +93,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(7,2)
+        vec2i(1,1)
         );
     set_curr_room(
         state,

@@ -41,6 +41,7 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->lava_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_2.png");
     floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
     floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
+    floor->obstacle = load_texture_from_filepath (renderer, "./res/floor/obstacle.png");
     floor->stone_stairs_below = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below.png");
     floor->stone_stairs_below_blocked = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below_blocked.png");
     floor->stone_stairs_above_unpowered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_unpowered.png");
@@ -295,6 +296,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->piston_barrel = load_texture_from_filepath(renderer, "./res/object/piston_barrel.png");
     object->piston_barrel_outline = load_texture_from_filepath(renderer, "./res/object/piston_barrel_outline.png");
+
+    object->obstacle = load_texture_from_filepath(renderer, "./res/object/obstacle.png");
+    object->obstacle_outline = load_texture_from_filepath(renderer, "./res/object/obstacle_outline.png");
 
     object->ball = load_texture_from_filepath(renderer, "./res/object/ball.png");
     object->ball_outline = load_texture_from_filepath(renderer, "./res/object/ball_outline.png");

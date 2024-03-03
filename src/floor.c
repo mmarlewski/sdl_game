@@ -662,6 +662,7 @@ char* get_name_from_floor(int floor)
         case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    name = "lava stalactite fallen"; break;
         case FLOOR_TYPE__ICE:                       name = "ice"; break;
         case FLOOR_TYPE__ICE_CRACK_WATER:           name = "ice crack water"; break;
+        case FLOOR_TYPE__OBSTACLE:                  name = "obstacle"; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW:        name = "stone stairs below"; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW_BLOCKED:name = "stone stairs below blocked"; break;
         case FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED:  name = "stone stairs above unpowered"; break;
@@ -715,6 +716,7 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    texture = textures->floor.lava_stalactite_fallen_1; break;
         case FLOOR_TYPE__ICE:                       texture = textures->floor.ice; break;
         case FLOOR_TYPE__ICE_CRACK_WATER:           texture = textures->floor.ice_crack_water; break;
+        case FLOOR_TYPE__OBSTACLE:                  texture = textures->floor.obstacle; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW:        texture = textures->floor.stone_stairs_below; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW_BLOCKED:texture = textures->floor.stone_stairs_below_blocked; break;
         case FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED:  texture = textures->floor.stone_stairs_above_unpowered; break;
@@ -768,6 +770,7 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    texture = textures->floor.lava_stalactite_fallen_2; break;
         case FLOOR_TYPE__ICE:                       texture = textures->floor.ice; break;
         case FLOOR_TYPE__ICE_CRACK_WATER:           texture = textures->floor.ice_crack_water; break;
+        case FLOOR_TYPE__OBSTACLE:                  texture = textures->floor.obstacle; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW:        texture = textures->floor.stone_stairs_below; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW_BLOCKED:texture = textures->floor.stone_stairs_below_blocked; break;
         case FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED:  texture = textures->floor.stone_stairs_above_unpowered; break;

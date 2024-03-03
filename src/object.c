@@ -228,6 +228,13 @@ int is_object_pull_towards(Object* object)
         case OBJECT_TYPE__ROCK_DAMAGED:                     is = 1; break;
         case OBJECT_TYPE__ROCK_DAMAGED_ITEM:                is = 1; break;
 
+        case OBJECT_TYPE__PISTON:                           is = 1; break;
+        case OBJECT_TYPE__PISTON_CELL:                      is = 1; break;
+        case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 1; break;
+        case OBJECT_TYPE__PISTON_BARREL:                    is = 1; break;
+
+        case OBJECT_TYPE__OBSTACLE:                         is = 1; break;
+
         case OBJECT_TYPE__TURRET_LASER_GROUNDED:            is = 1; break;
         case OBJECT_TYPE__TURRET_BOMB_GROUNDED:             is = 1; break;
         case OBJECT_TYPE__TURRET_PROJECTILE_GROUNDED:       is = 1; break;
@@ -672,6 +679,8 @@ int is_object_movable(Object* object)
         case OBJECT_TYPE__PISTON_CELL:                      is = 0; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  is = 0; break;
         case OBJECT_TYPE__PISTON_BARREL:                    is = 0; break;
+
+        case OBJECT_TYPE__OBSTACLE:                         is = 0; break;
 
         case OBJECT_TYPE__BALL:                             is = 1; break;
         case OBJECT_TYPE__BALL_SPIKES:                      is = 1; break;
@@ -1509,6 +1518,8 @@ char* get_name_from_object_type(int object_type)
         case OBJECT_TYPE__DISPLAY_DAMAGED:                  name = "display damaged"; break;
         case OBJECT_TYPE__DISPLAY_DAMAGED_ITEM:             name = "display damaged item"; break;
 
+        case OBJECT_TYPE__OBSTACLE:                         name = "obstacle"; break;
+
         case OBJECT_TYPE__VENDING_CELL:                     name = "vending cell"; break;
         case OBJECT_TYPE__VENDING_CELL_ITEM:                name = "vending cell item"; break;
         case OBJECT_TYPE__VENDING_CELL_DAMAGED:             name = "vending cell damaged"; break;
@@ -1735,6 +1746,8 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
         case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel; break;
 
+        case OBJECT_TYPE__OBSTACLE:                         texture = textures->object.obstacle; break;
+
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
@@ -1943,6 +1956,8 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
         case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel; break;
+
+        case OBJECT_TYPE__OBSTACLE:                         texture = textures->object.obstacle; break;
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
@@ -2153,6 +2168,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
         case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel_outline; break;
 
+        case OBJECT_TYPE__OBSTACLE:                         texture = textures->object.obstacle_outline; break;
+
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
 
@@ -2361,6 +2378,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT_TYPE__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
         case OBJECT_TYPE__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
         case OBJECT_TYPE__PISTON_BARREL:                    texture = textures->object.piston_barrel_outline; break;
+
+        case OBJECT_TYPE__OBSTACLE:                         texture = textures->object.obstacle_outline; break;
 
         case OBJECT_TYPE__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT_TYPE__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;

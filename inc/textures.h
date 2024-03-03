@@ -58,6 +58,8 @@ typedef struct
     Texture* ice;
     Texture* ice_crack_water;
 
+    Texture* obstacle;
+
     Texture* stone_stairs_below;
     Texture* stone_stairs_below_blocked;
     Texture* stone_stairs_above_unpowered;
@@ -294,6 +296,9 @@ typedef struct
 
     Texture* piston_barrel;
     Texture* piston_barrel_outline;
+
+    Texture* obstacle;
+    Texture* obstacle_outline;
 
     Texture* ball;
     Texture* ball_outline;
