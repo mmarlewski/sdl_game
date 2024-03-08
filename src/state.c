@@ -74,6 +74,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->curr_ally_draw_effect_texture_list = new_list((void (*)(void *)) 0);
     state->curr_ally_draw_effect_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
 
+    state->mechanism_list = new_list((void (*)(void *)) &destroy_mechanism);
+
     //
 
     state->camera_zoom = 2.0f;
@@ -93,7 +95,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(1,1)
+        vec2i(7,2)
         );
     set_curr_room(
         state,
@@ -104,16 +106,16 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         room
         );
 
-    state->hero_item_number[ITEM__CELL] = 0;
-    state->hero_item_number[ITEM__DYNAMITE] = 0;
-    state->hero_item_number[ITEM__GEMSTONE] = 0;
+    state->hero_item_number[ITEM__CELL] = 1;
+    state->hero_item_number[ITEM__DYNAMITE] = 1;
+    state->hero_item_number[ITEM__GEMSTONE] = 1;
 
-    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -359,6 +361,8 @@ Passage* get_passage(State* state, char* from_room_name, Vec2i from_tilemap_pos)
 
 Object* room_get_object_at(Room* room, Vec2i tilemap_pos)
 {
+    if(room == 0) return 0;
+
     if(!is_tilemap_in_bounds(tilemap_pos)) return 0;
 
     for(ListElem* curr_elem = room->object_list->head; curr_elem; curr_elem = curr_elem->next)
@@ -996,4 +1000,165 @@ int is_floor_deadly_on_drop_for_object(
     return ((!is_object_floating(object) && !is_object_flying(object) && is_floor_deadly_on_drop(floor)) ||
     (is_object_floating(object) && is_floor_deadly_on_drop_for_floating(floor)) ||
     (is_object_flying(object) && is_floor_deadly_on_drop_for_flying(floor)));
+}
+
+// mechanism
+
+void add_mechanism(
+    State* state,
+    Mechanism* mechanism
+)
+{
+    add_new_list_element_to_list_end(
+        state->mechanism_list,
+        mechanism
+        );
+}
+
+void execute_all_mechanisms(
+    State* state
+)
+{
+    for(ListElem* curr_mechanism_elem = state->mechanism_list->head;
+    curr_mechanism_elem != 0; curr_mechanism_elem = curr_mechanism_elem->next)
+    {
+        Mechanism* curr_mechanism = curr_mechanism_elem->data;
+
+        if(curr_mechanism != 0)
+        {
+            execute_mechanism(state, curr_mechanism);
+        }
+    }
+}
+
+void execute_mechanism(
+    State* state,
+    Mechanism* mechanism
+)
+{
+    if(mechanism == 0) return;
+
+    int is_in_1 = mechanism->is_in_1;
+    char* in_1_room_name = mechanism->in_1_room_name;
+    Vec2i in_1_tilemap_pos = mechanism->in_1_tilemap_pos;
+    int in_1_is_object = mechanism->in_1_is_object;
+    int in_1_type = mechanism->in_1_type;
+    Room* in_1_room = get_room(state, in_1_room_name);
+    Object* in_1_object = room_get_object_at(in_1_room, in_1_tilemap_pos);
+    int in_1_floor = room_get_floor_at(in_1_room, in_1_tilemap_pos);
+
+    int is_in_2 = mechanism->is_in_2;
+    char* in_2_room_name = mechanism->in_2_room_name;
+    Vec2i in_2_tilemap_pos = mechanism->in_2_tilemap_pos;
+    int in_2_is_object = mechanism->in_2_is_object;
+    int in_2_type = mechanism->in_2_type;
+    Room* in_2_room = get_room(state, in_2_room_name);
+    Object* in_2_object = room_get_object_at(in_2_room, in_2_tilemap_pos);
+    int in_2_floor = room_get_floor_at(in_2_room, in_2_tilemap_pos);
+
+    int is_in_3 = mechanism->is_in_3;
+    char* in_3_room_name = mechanism->in_3_room_name;
+    Vec2i in_3_tilemap_pos = mechanism->in_3_tilemap_pos;
+    int in_3_is_object = mechanism->in_3_is_object;
+    int in_3_type = mechanism->in_3_type;
+    Room* in_3_room = get_room(state, in_3_room_name);
+    Object* in_3_object = room_get_object_at(in_3_room, in_3_tilemap_pos);
+    int in_3_floor = room_get_floor_at(in_3_room, in_3_tilemap_pos);
+
+    int is_out = mechanism->is_out;
+    char* out_room_name = mechanism->out_room_name;
+    Vec2i out_tilemap_pos = mechanism->out_tilemap_pos;
+    int out_is_object = mechanism->out_is_object;
+    int out_type = mechanism->out_type;
+    Room* out_room = get_room(state, out_room_name);
+    Object* out_object = room_get_object_at(out_room, out_tilemap_pos);
+    int out_floor = room_get_floor_at(out_room, out_tilemap_pos);
+
+    int is_triggered = 1;
+
+    if(is_in_1)
+    {
+        if(in_1_is_object &&
+        ((in_1_object == 0 && in_1_type != OBJECT_TYPE__NONE) ||
+        (in_1_object != 0 && in_1_type != in_1_object->type)))
+        {
+            is_triggered = 0;
+        }
+
+        if(!in_1_is_object &&
+        in_1_type != in_1_floor)
+        {
+            is_triggered = 0;
+        }
+    }
+
+    if(is_in_2)
+    {
+        if(in_2_is_object &&
+        ((in_2_object == 0 && in_2_type != OBJECT_TYPE__NONE) ||
+        (in_2_object != 0 && in_2_type != in_2_object->type)))
+        {
+            is_triggered = 0;
+        }
+
+        if(!in_2_is_object &&
+        in_2_type != in_2_floor)
+        {
+            is_triggered = 0;
+        }
+    }
+
+    if(is_in_3)
+    {
+        if(in_3_is_object &&
+        ((in_3_object == 0 && in_3_type != OBJECT_TYPE__NONE) ||
+        (in_3_object != 0 && in_3_type != in_3_object->type)))
+        {
+            is_triggered = 0;
+        }
+
+        if(!in_3_is_object &&
+        in_3_type != in_3_floor)
+        {
+            is_triggered = 0;
+        }
+    }
+
+    if(is_triggered)
+    {
+        if(is_out)
+        {
+            if(out_is_object)
+            {
+                if(out_type == OBJECT_TYPE__NONE && out_object != 0)
+                {
+                    room_remove_object(
+                        out_room,
+                        out_object,
+                        1
+                        );
+                }
+                else if(out_type != OBJECT_TYPE__NONE && out_object != 0)
+                {
+                    out_object->type = out_type;
+                }
+                else if(out_type != OBJECT_TYPE__NONE && out_object == 0)
+                {
+                    room_add_object_at(
+                        out_room,
+                        new_object(out_type),
+                        out_tilemap_pos
+                        );
+                }
+            }
+            else
+            {
+                room_change_floor_at(
+                    out_room,
+                    out_floor,
+                    out_tilemap_pos
+                    );
+            }
+        }
+    }
 }

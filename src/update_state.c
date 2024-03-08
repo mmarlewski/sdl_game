@@ -14,6 +14,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     state->time += delta_time;
 
+    execute_all_mechanisms(state);
+
     // camera
 
     if(input->is_mouse_scrolling)

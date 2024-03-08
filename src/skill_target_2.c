@@ -223,8 +223,7 @@ void skill_get_possible_target_2_pos(
                         );
 
                     if(object != 0 &&
-                    is_object_put_item(object) &&
-                    state->hero_item_number[ITEM__CELL] > 0)
+                    is_object_put_item(object))
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -255,8 +254,7 @@ void skill_get_possible_target_2_pos(
                             );
 
                         if(object != 0 &&
-                        is_object_put_item(object) &&
-                        state->hero_item_number[ITEM__CELL] > 0)
+                        is_object_put_item(object))
                         {
                             add_new_list_element_to_list_end(
                                 target_2_pos_list,
@@ -286,8 +284,7 @@ void skill_get_possible_target_2_pos(
                         );
 
                     if(object != 0 &&
-                    is_object_put_item(object) &&
-                    state->hero_item_number[ITEM__DYNAMITE] > 0)
+                    is_object_put_item(object))
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -318,8 +315,7 @@ void skill_get_possible_target_2_pos(
                             );
 
                         if(object != 0 &&
-                        is_object_put_item(object) &&
-                        state->hero_item_number[ITEM__DYNAMITE] > 0)
+                        is_object_put_item(object))
                         {
                             add_new_list_element_to_list_end(
                                 target_2_pos_list,
@@ -349,8 +345,7 @@ void skill_get_possible_target_2_pos(
                         );
 
                     if(object != 0 &&
-                    is_object_put_item(object) &&
-                    state->hero_item_number[ITEM__GEMSTONE] > 0)
+                    is_object_put_item(object))
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -381,8 +376,7 @@ void skill_get_possible_target_2_pos(
                             );
 
                         if(object != 0 &&
-                        is_object_put_item(object) &&
-                        state->hero_item_number[ITEM__GEMSTONE] > 0)
+                        is_object_put_item(object))
                         {
                             add_new_list_element_to_list_end(
                                 target_2_pos_list,
@@ -408,14 +402,10 @@ void skill_get_possible_target_2_pos(
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
-
-                        if(state->hero_item_number[ITEM__CELL] > 0)
-                        {
-                            add_new_list_element_to_list_end(
-                                target_2_pos_list,
-                                new_vec2i_from_vec2i(tilemap_pos)
-                                );
-                        }
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                            );
                     }
                 }
             }
@@ -435,13 +425,10 @@ void skill_get_possible_target_2_pos(
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        if(state->hero_item_number[ITEM__DYNAMITE] > 0)
-                        {
-                            add_new_list_element_to_list_end(
-                                target_2_pos_list,
-                                new_vec2i_from_vec2i(tilemap_pos)
-                                );
-                        }
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                            );
                     }
                 }
             }
@@ -461,13 +448,10 @@ void skill_get_possible_target_2_pos(
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        if(state->hero_item_number[ITEM__GEMSTONE] > 0)
-                        {
-                            add_new_list_element_to_list_end(
-                                target_2_pos_list,
-                                new_vec2i_from_vec2i(tilemap_pos)
-                                );
-                        }
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                            );
                     }
                 }
             }

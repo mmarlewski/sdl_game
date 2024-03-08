@@ -102,6 +102,7 @@ int is_floor_traversable(int floor)
         case FLOOR_TYPE__LAVA_STALACTITE_FALLEN:    is = 1; break;
         case FLOOR_TYPE__ICE:                       is = 1; break;
         case FLOOR_TYPE__ICE_CRACK_WATER:           is = 1; break;
+        case FLOOR_TYPE__OBSTACLE:                  is = 1; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW:        is = 1; break;
         case FLOOR_TYPE__STONE_STAIRS_BELOW_BLOCKED:is = 1; break;
         case FLOOR_TYPE__STONE_STAIRS_ABOVE_UNPOWERED:  is = 1; break;

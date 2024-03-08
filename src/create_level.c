@@ -1,4 +1,5 @@
 #include "../inc/state.h"
+#include <stdlib.h>
 
 void add_floor_at_every_room_position(Room* room, int floor)
 {
@@ -1167,7 +1168,154 @@ void create_level(State* state)
     room_change_floor_at(
         room_0_5,
         FLOOR_TYPE__OBSTACLE,
-        vec2i(1,2)
+        vec2i(1,4)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(2,5)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(2,6)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(2,7)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(3,6)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(3,7)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(3,8)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(4,7)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(4,8)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(5,4)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(5,5)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(5,6)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(5,7)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(5,8)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(6,5)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(6,6)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(6,7)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(6,8)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(7,6)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(7,7)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(7,8)
+        );
+
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(8,7)
+        );
+    room_change_floor_at(
+        room_0_5,
+        FLOOR_TYPE__PIT,
+        vec2i(8,8)
         );
 
     // walls
@@ -1193,136 +1341,13 @@ void create_level(State* state)
 
     room_add_object_at(
         room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,1)
+        new_object(OBJECT_TYPE__OBSTACLE),
+        vec2i(1,4)
         );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,2)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,3)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,4)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,5)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,6)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,7)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(3,8)
-        );
-
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,1)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,2)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,3)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,4)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,5)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,6)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,7)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(4,8)
-        );
-
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,1)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,2)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,3)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,4)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,5)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,6)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,7)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__PILLAR),
-        vec2i(5,8)
-        );
-
     room_add_object_at(
         room_0_5,
         new_object(OBJECT_TYPE__LEVER_STONE_UNPOWERED),
         vec2i(7,2)
-        );
-    room_add_object_at(
-        room_0_5,
-        new_object(OBJECT_TYPE__OBSTACLE),
-        vec2i(1,2)
         );
 
     room_add_object_at(
@@ -2660,7 +2685,7 @@ void create_level(State* state)
     room_change_floor_at(
         room_2_0,
         FLOOR_TYPE__OBSTACLE,
-        vec2i(7,1)
+        vec2i(8,2)
         );
 
     // walls
@@ -2701,6 +2726,11 @@ void create_level(State* state)
         room_2_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
         vec2i(6,2)
+        );
+    room_add_object_at(
+        room_2_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(7,2)
         );
     room_add_object_at(
         room_2_0,
@@ -2778,7 +2808,7 @@ void create_level(State* state)
     room_add_object_at(
         room_2_0,
         new_object(OBJECT_TYPE__OBSTACLE),
-        vec2i(7,1)
+        vec2i(8,2)
         );
 
     room_add_object_at(
@@ -3730,47 +3760,6 @@ void create_level(State* state)
     room_change_floor_at(
         room_3_1,
         FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,1)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,2)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,3)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,4)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,5)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,6)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,7)
-        );
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
-        vec2i(2,8)
-        );
-
-    room_change_floor_at(
-        room_3_1,
-        FLOOR_TYPE__STONE_TRAP,
         vec2i(3,1)
         );
     room_change_floor_at(
@@ -4411,18 +4400,18 @@ void create_level(State* state)
     room_change_floor_at(
         room_4_0,
         FLOOR_TYPE__METAL_TARGET_UNCHECKED,
-        vec2i(2,6)
+        vec2i(2,7)
         );
 
     room_change_floor_at(
         room_4_0,
         FLOOR_TYPE__OBSTACLE,
-        vec2i(5,1)
+        vec2i(5,2)
         );
     room_change_floor_at(
         room_4_0,
         FLOOR_TYPE__OBSTACLE,
-        vec2i(5,4)
+        vec2i(5,5)
         );
 
     // walls
@@ -4449,48 +4438,69 @@ void create_level(State* state)
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(1,4)
+        vec2i(1,5)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(2,4)
+        vec2i(2,5)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(3,4)
+        vec2i(3,5)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(4,4)
+        vec2i(4,5)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(6,4)
+        vec2i(6,5)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(7,4)
+        vec2i(7,5)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__WALL_OBSIDIAN),
-        vec2i(8,4)
+        vec2i(8,5)
+        );
+
+    room_add_object_at(
+        room_4_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(4,1)
+        );
+    room_add_object_at(
+        room_4_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(4,2)
+        );
+    room_add_object_at(
+        room_4_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,1)
+        );
+    room_add_object_at(
+        room_4_0,
+        new_object(OBJECT_TYPE__WALL_OBSIDIAN),
+        vec2i(6,2)
         );
 
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__OBSTACLE),
-        vec2i(5,1)
+        vec2i(5,2)
         );
     room_add_object_at(
         room_4_0,
         new_object(OBJECT_TYPE__OBSTACLE),
-        vec2i(5,4)
+        vec2i(5,5)
         );
 
     room_add_object_at(
@@ -6914,7 +6924,13 @@ void create_level(State* state)
 
     room_add_object_at(
         room_6_3,
-        new_object(OBJECT_TYPE__EXIT_ROCK_RIGHT),
+        new_object(OBJECT_TYPE__CRATE_DYNAMITE_ITEM),
+        vec2i(2,2)
+        );
+
+    room_add_object_at(
+        room_6_3,
+        new_object(OBJECT_TYPE__EXIT_ROCK_BLOCKED_RIGHT),
         vec2i(0,5)
         );
     room_add_object_at(
@@ -7866,6 +7882,17 @@ void create_level(State* state)
         vec2i(8,1)
         );
 
+    room_change_floor_at(
+        room_7_3,
+        FLOOR_TYPE__PIT,
+        vec2i(2,6)
+        );
+    room_change_floor_at(
+        room_7_3,
+        FLOOR_TYPE__PIT,
+        vec2i(2,7)
+        );
+
     // walls
 
     List* room_7_3_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
@@ -7923,6 +7950,14 @@ void create_level(State* state)
         room_7_3,
         new_object(OBJECT_TYPE__EXIT_ROCK_DOWN),
         vec2i(4,0)
+        );
+
+    // enemies
+
+    room_add_object_at(
+        room_7_3,
+        new_object(OBJECT_TYPE__GOAT),
+        vec2i(6,6)
         );
 
     // passages
@@ -8783,6 +8818,284 @@ void create_level(State* state)
     destroy_list(station_room_name_list);
     remove_all_list_elements(station_pos_list, 1);
     destroy_list(station_pos_list);
+
+    /////////////
+    // mechanisms
+    /////////////
+
+    // 0_0 lever obstacle
+    add_mechanism(state, new_mechanism(
+        1,
+        "0_0",
+        vec2i(2,6),
+        1,
+        OBJECT_TYPE__LEVER_STONE_POWERED,
+        1,
+        "0_0",
+        vec2i(8,3),
+        1,
+        OBJECT_TYPE__OBSTACLE,
+        0,
+        "",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "0_0",
+        vec2i(8,3),
+        1,
+        OBJECT_TYPE__NONE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "0_0",
+        vec2i(2,6),
+        1,
+        OBJECT_TYPE__LEVER_STONE_UNPOWERED,
+        1,
+        "0_0",
+        vec2i(8,3),
+        1,
+        OBJECT_TYPE__NONE,
+        0,
+        "",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "0_0",
+        vec2i(8,3),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
+
+    // 2_0 two target obstacle
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_0",
+        vec2i(4,5),
+        0,
+        FLOOR_TYPE__METAL_TARGET_CHECKED,
+        1,
+        "2_0",
+        vec2i(5,4),
+        0,
+        FLOOR_TYPE__METAL_TARGET_CHECKED,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__OBSTACLE,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__NONE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_0",
+        vec2i(4,5),
+        0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        1,
+        "2_0",
+        vec2i(5,4),
+        0,
+        FLOOR_TYPE__METAL_TARGET_CHECKED,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__NONE,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_0",
+        vec2i(4,5),
+        0,
+        FLOOR_TYPE__METAL_TARGET_CHECKED,
+        1,
+        "2_0",
+        vec2i(5,4),
+        0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__NONE,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_0",
+        vec2i(4,5),
+        0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        1,
+        "2_0",
+        vec2i(5,4),
+        0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__NONE,
+        1,
+        "2_0",
+        vec2i(8,2),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
+
+    // 4_0 first target obstacle
+    add_mechanism(state, new_mechanism(
+        1,
+        "4_0",
+        vec2i(2,7),
+        0,
+        FLOOR_TYPE__METAL_TARGET_CHECKED,
+        1,
+        "4_0",
+        vec2i(5,5),
+        1,
+        OBJECT_TYPE__OBSTACLE,
+        0,
+        "0_0",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "4_0",
+        vec2i(5,5),
+        1,
+        OBJECT_TYPE__NONE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "4_0",
+        vec2i(2,7),
+        0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        1,
+        "4_0",
+        vec2i(5,5),
+        1,
+        OBJECT_TYPE__NONE,
+        0,
+        "0_0",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "4_0",
+        vec2i(5,5),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
+
+    // 4_0 second target obstacle
+    add_mechanism(state, new_mechanism(
+        1,
+        "4_0",
+        vec2i(2,2),
+        0,
+        FLOOR_TYPE__METAL_TARGET_CHECKED,
+        1,
+        "4_0",
+        vec2i(5,2),
+        1,
+        OBJECT_TYPE__OBSTACLE,
+        0,
+        "0_0",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "4_0",
+        vec2i(5,2),
+        1,
+        OBJECT_TYPE__NONE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "4_0",
+        vec2i(2,2),
+        0,
+        FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+        1,
+        "4_0",
+        vec2i(5,2),
+        1,
+        OBJECT_TYPE__NONE,
+        0,
+        "0_0",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "4_0",
+        vec2i(5,2),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
+
+    // 0_5 lever obstacle
+    add_mechanism(state, new_mechanism(
+        1,
+        "0_5",
+        vec2i(7,2),
+        1,
+        OBJECT_TYPE__LEVER_STONE_POWERED,
+        1,
+        "0_5",
+        vec2i(1,4),
+        1,
+        OBJECT_TYPE__OBSTACLE,
+        0,
+        "",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "0_5",
+        vec2i(1,4),
+        1,
+        OBJECT_TYPE__NONE
+        ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "0_5",
+        vec2i(7,2),
+        1,
+        OBJECT_TYPE__LEVER_STONE_UNPOWERED,
+        1,
+        "0_5",
+        vec2i(1,4),
+        1,
+        OBJECT_TYPE__NONE,
+        0,
+        "",
+        vec2i(0,0),
+        0,
+        0,
+        1,
+        "0_5",
+        vec2i(1,4),
+        1,
+        OBJECT_TYPE__OBSTACLE
+        ));
 
     ///////////
     // room_0_0

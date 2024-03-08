@@ -21,6 +21,7 @@
 #include "../inc/augmentation.h"
 #include "../inc/item.h"
 #include "../inc/room.h"
+#include "../inc/mechanism.h"
 
 enum GAMESTATE
 {
@@ -111,6 +112,8 @@ typedef struct
     List* curr_ally_draw_above_tilemap_pos_list;
     List* curr_ally_draw_effect_texture_list;
     List* curr_ally_draw_effect_tilemap_pos_list;
+
+    List* mechanism_list;
 
 } State;
 
@@ -299,6 +302,20 @@ int is_floor_deadly_on_move_for_object(
 int is_floor_deadly_on_drop_for_object(
     int floor,
     Object* object
+);
+
+// mechanism
+
+void add_mechanism(
+    State* state,
+    Mechanism* mechanism
+);
+void execute_all_mechanisms(
+    State* state
+);
+void execute_mechanism(
+    State* state,
+    Mechanism* mechanism
 );
 
 #endif

@@ -4,6 +4,17 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
 {
     switch(floor)
     {
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:
+        {
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
         case FLOOR_TYPE__ROCK_CRACK_WATER:
         {
             room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
@@ -33,6 +44,17 @@ void floor_on_move_floating_start(State* state, Action* sequence, Action* action
 {
     switch(floor)
     {
+        case FLOOR_TYPE__METAL_TARGET_CHECKED:
+        {
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR_TYPE__METAL_TARGET_UNCHECKED,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
         case FLOOR_TYPE__ROCK_CRACK_WATER:
         {
             room_change_floor_at(state->curr_room, FLOOR_TYPE__WATER, action->move.object->tilemap_pos);
