@@ -511,7 +511,7 @@ void skill_get_possible_target_2_pos(
                 for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-                        source_tilemap_pos,
+                        target_1_tilemap_pos,
                         distance_info.dir4,
                         i
                         );

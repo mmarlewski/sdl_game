@@ -104,7 +104,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                 );
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
+        case FLOOR_TYPE__METAL_SPIKES_ON:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
             add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
@@ -183,7 +183,7 @@ void floor_on_move_floating_end(State* state, Action* sequence, Action* action, 
                 );
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
+        case FLOOR_TYPE__METAL_SPIKES_ON:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
             add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
@@ -253,7 +253,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     );
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
+        case FLOOR_TYPE__METAL_SPIKES_ON:
         {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(
@@ -396,7 +396,7 @@ void floor_on_drop_floating(State* state, Action* sequence, Action* action, int 
                     );
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
+        case FLOOR_TYPE__METAL_SPIKES_ON:
         {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(
@@ -654,14 +654,14 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 );
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_OFF:
+        case FLOOR_TYPE__METAL_SPIKES_OFF:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__STONE_SPIKES_ON, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__METAL_SPIKES_ON, tilemap_pos));
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
+        case FLOOR_TYPE__METAL_SPIKES_ON:
         {
-            add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__STONE_SPIKES_OFF, tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR_TYPE__METAL_SPIKES_OFF, tilemap_pos));
         }
         break;
         case FLOOR_TYPE__METAL_HATCH_CLOSED:
@@ -723,12 +723,12 @@ Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i ti
             //
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_OFF:
+        case FLOOR_TYPE__METAL_SPIKES_OFF:
         {
             //
         }
         break;
-        case FLOOR_TYPE__STONE_SPIKES_ON:
+        case FLOOR_TYPE__METAL_SPIKES_ON:
         {
             //
         }

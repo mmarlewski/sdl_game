@@ -10,9 +10,9 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->rock_crack_pit = load_texture_from_filepath (renderer, "./res/floor/rock_crack_pit.png");
     floor->stone = load_texture_from_filepath (renderer, "./res/floor/stone.png");
     floor->stone_trap = load_texture_from_filepath (renderer, "./res/floor/stone_trap.png");
-    floor->stone_spikes_on = load_texture_from_filepath (renderer, "./res/floor/stone_spikes_on.png");
-    floor->stone_spikes_off = load_texture_from_filepath (renderer, "./res/floor/stone_spikes_off.png");
     floor->metal = load_texture_from_filepath (renderer, "./res/floor/metal.png");
+    floor->metal_spikes_on = load_texture_from_filepath (renderer, "./res/floor/metal_spikes_on.png");
+    floor->metal_spikes_off = load_texture_from_filepath (renderer, "./res/floor/metal_spikes_off.png");
     floor->metal_hatch_open_1 = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_open_1.png");
     floor->metal_hatch_open_2 = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_open_2.png");
     floor->metal_hatch_closed = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_closed.png");

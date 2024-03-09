@@ -16,10 +16,10 @@ typedef struct
 
     Texture* stone;
     Texture* stone_trap;
-    Texture* stone_spikes_on;
-    Texture* stone_spikes_off;
 
     Texture* metal;
+    Texture* metal_spikes_on;
+    Texture* metal_spikes_off;
     Texture* metal_hatch_open_1;
     Texture* metal_hatch_open_2;
     Texture* metal_hatch_closed;
