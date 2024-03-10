@@ -826,6 +826,14 @@ void create_level(State* state)
         vec2i(0,1)
         );
 
+    // enemies
+
+    room_add_object_at(
+        room_0_2,
+        new_object(OBJECT_TYPE__SQUID),
+        vec2i(3,6)
+        );
+
     // passages
 
     add_passage(state,new_passage(

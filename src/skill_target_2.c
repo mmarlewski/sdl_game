@@ -177,7 +177,8 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i <= SKILL_PICK_AND_PUT_ITEM_FAR_RANGE; i++)
+                int go_on = 1;
+                for(int i = 1; i <= SKILL_PICK_AND_PUT_ITEM_FAR_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -199,6 +200,11 @@ void skill_get_possible_target_2_pos(
                                 target_2_pos_list,
                                 new_vec2i_from_vec2i(tilemap_pos)
                                 );
+                        }
+
+                        if(object != 0)
+                        {
+                            go_on = 0;
                         }
                     }
                 }
@@ -541,7 +547,9 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__DRAG:
+        case SKILL__DRAG_HOOK:
+        case SKILL__DRAG_SPIDERWEB:
+        case SKILL__DRAG_TENTACLE:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(

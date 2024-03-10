@@ -57,7 +57,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                     if(target_1_object != 0)
                     {
-                        enemy->skill = SKILL__DRAG;
+                        enemy->skill = SKILL__DRAG_SPIDERWEB;
                         enemy->target_1_tilemap_pos = target_1_tilemap_pos;
                         enemy->target_2_tilemap_pos = object->tilemap_pos;
                         found = 1;
@@ -66,7 +66,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                 }
                 else
                 {
-                    enemy->skill = SKILL__DRAG;
+                    enemy->skill = SKILL__DRAG_SPIDERWEB;
                     enemy->target_1_tilemap_pos = old_target_1_tilemap_pos;
                     enemy->target_2_tilemap_pos = object->tilemap_pos;
                     found = 1;
@@ -77,7 +77,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
             }
             if(!found)
             {
-                enemy->skill = SKILL__DRAG;
+                enemy->skill = SKILL__DRAG_SPIDERWEB;
                 enemy->target_1_tilemap_pos = old_target_1_tilemap_pos;
                 enemy->target_2_tilemap_pos = object->tilemap_pos;
             }

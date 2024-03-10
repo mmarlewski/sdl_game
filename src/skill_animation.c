@@ -218,7 +218,9 @@ Animation* skill_get_animation(
             skill_animation = animation_sequence;
         }
         break;
-        case SKILL__DRAG:
+        case SKILL__DRAG_HOOK:
+        case SKILL__DRAG_SPIDERWEB:
+        case SKILL__DRAG_TENTACLE:
         case SKILL__DRAG_AND_THROW:
         case SKILL__PULL:
         {
@@ -239,10 +241,28 @@ Animation* skill_get_animation(
                 {
                     if(vec2i_equals(tilemap_pos, source_tilemap_pos))
                     {
+                        Texture* texture = 0;
+                        switch (skill)
+                        {
+                            case SKILL__DRAG_HOOK:
+                            case SKILL__DRAG_AND_THROW:
+                            case SKILL__PULL:
+                            texture = get_texture_hook_start(textures, distance_info.dir4);
+                            break;
+                            case SKILL__DRAG_SPIDERWEB:
+                            texture = get_texture_spiderweb_start(textures, distance_info.dir4);
+                            break;
+                            case SKILL__DRAG_TENTACLE:
+                            texture = get_texture_tentacle_start(textures, distance_info.dir4);
+                            break;
+                            default:
+                            break;
+                        }
+
                         add_animation_to_end_animation_simultaneous(
                             animation_simultaneous,
                             new_animation_show_sprite_in_gamemap(
-                                get_texture_hook_start(textures, distance_info.dir4),
+                                texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
                                 )
@@ -250,10 +270,28 @@ Animation* skill_get_animation(
                     }
                     else if(vec2i_equals(tilemap_pos, target_1_tilemap_pos))
                     {
+                        Texture* texture = 0;
+                        switch (skill)
+                        {
+                            case SKILL__DRAG_HOOK:
+                            case SKILL__DRAG_AND_THROW:
+                            case SKILL__PULL:
+                            texture = get_texture_hook_end(textures, get_opposite_dir4(distance_info.dir4));
+                            break;
+                            case SKILL__DRAG_SPIDERWEB:
+                            texture = get_texture_spiderweb_end(textures, get_opposite_dir4(distance_info.dir4));
+                            break;
+                            case SKILL__DRAG_TENTACLE:
+                            texture = get_texture_tentacle_end(textures, get_opposite_dir4(distance_info.dir4));
+                            break;
+                            default:
+                            break;
+                        }
+
                         add_animation_to_end_animation_simultaneous(
                             animation_simultaneous,
                             new_animation_show_sprite_in_gamemap(
-                                get_texture_hook_end(textures, get_opposite_dir4(distance_info.dir4)),
+                                texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
                                 )
@@ -261,10 +299,28 @@ Animation* skill_get_animation(
                     }
                     else
                     {
+                        Texture* texture = 0;
+                        switch (skill)
+                        {
+                            case SKILL__DRAG_HOOK:
+                            case SKILL__DRAG_AND_THROW:
+                            case SKILL__PULL:
+                            texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            break;
+                            case SKILL__DRAG_SPIDERWEB:
+                            texture = get_texture_spiderweb_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            break;
+                            case SKILL__DRAG_TENTACLE:
+                            texture = get_texture_tentacle_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            break;
+                            default:
+                            break;
+                        }
+
                         add_animation_to_end_animation_simultaneous(
                             animation_simultaneous,
                             new_animation_show_sprite_in_gamemap(
-                                get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4),
+                                texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
                                 )

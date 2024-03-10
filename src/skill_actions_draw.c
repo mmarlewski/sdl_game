@@ -521,7 +521,9 @@ void skill_get_actions_and_draw(
         }
         break;
         case SKILL__PUSH:
-        case SKILL__DRAG:
+        case SKILL__DRAG_HOOK:
+        case SKILL__DRAG_SPIDERWEB:
+        case SKILL__DRAG_TENTACLE:
         {
             if(target_1_object != 0 &&
             is_object_movable(target_1_object))

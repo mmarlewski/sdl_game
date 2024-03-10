@@ -32,8 +32,10 @@ int is_skill_two_target(int skill)
 
         case SKILL__PUSH:               is = 1; break;
         case SKILL__THROW:              is = 1; break;
-        case SKILL__DRAG:               is = 1; break;
         case SKILL__PULL:               is = 1; break;
+        case SKILL__DRAG_HOOK:          is = 1; break;
+        case SKILL__DRAG_SPIDERWEB:     is = 1; break;
+        case SKILL__DRAG_TENTACLE:      is = 1; break;
         case SKILL__JUMP:               is = 0; break;
         case SKILL__CHARGE:             is = 0; break;
         case SKILL__STOMP:              is = 0; break;
@@ -91,8 +93,10 @@ int get_skill_action_points(int skill)
 
         case SKILL__PUSH:               ap = 1; break;
         case SKILL__THROW:              ap = 1; break;
-        case SKILL__DRAG:               ap = 1; break;
         case SKILL__PULL:               ap = 1; break;
+        case SKILL__DRAG_HOOK:          ap = 1; break;
+        case SKILL__DRAG_SPIDERWEB:     ap = 1; break;
+        case SKILL__DRAG_TENTACLE:      ap = 1; break;
         case SKILL__JUMP:               ap = 1; break;
         case SKILL__CHARGE:             ap = 1; break;
         case SKILL__STOMP:              ap = 1; break;
@@ -150,8 +154,10 @@ char* get_skill_name(int skill)
 
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__THROW:              name = "throw"; break;
-        case SKILL__DRAG:               name = "drag"; break;
         case SKILL__PULL:               name = "pull"; break;
+        case SKILL__DRAG_HOOK:          name = "drag hook"; break;
+        case SKILL__DRAG_SPIDERWEB:     name = "drag spiderweb"; break;
+        case SKILL__DRAG_TENTACLE:      name = "drag tentacle"; break;
         case SKILL__JUMP:               name = "jump"; break;
         case SKILL__CHARGE:             name = "charge"; break;
         case SKILL__STOMP:              name = "stomp"; break;

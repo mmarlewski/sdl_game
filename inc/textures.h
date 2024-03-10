@@ -380,6 +380,11 @@ typedef struct
     Texture* chameleon_outline_1;
     Texture* chameleon_outline_2;
 
+    Texture* squid_1;
+    Texture* squid_2;
+    Texture* squid_outline_1;
+    Texture* squid_outline_2;
+
     Texture* minibot_enemy_1;
     Texture* minibot_enemy_2;
     Texture* minibot_enemy_outline_1;
@@ -680,6 +685,62 @@ typedef struct
     Texture* hook_left_down;
     Texture* hook_left_left;
 
+    Texture* spiderweb_up_start;
+    Texture* spiderweb_up_end;
+    Texture* spiderweb_up_up;
+    Texture* spiderweb_up_right;
+    Texture* spiderweb_up_down;
+    Texture* spiderweb_up_left;
+
+    Texture* spiderweb_right_start;
+    Texture* spiderweb_right_end;
+    Texture* spiderweb_right_up;
+    Texture* spiderweb_right_right;
+    Texture* spiderweb_right_down;
+    Texture* spiderweb_right_left;
+
+    Texture* spiderweb_down_start;
+    Texture* spiderweb_down_end;
+    Texture* spiderweb_down_up;
+    Texture* spiderweb_down_right;
+    Texture* spiderweb_down_down;
+    Texture* spiderweb_down_left;
+
+    Texture* spiderweb_left_start;
+    Texture* spiderweb_left_end;
+    Texture* spiderweb_left_up;
+    Texture* spiderweb_left_right;
+    Texture* spiderweb_left_down;
+    Texture* spiderweb_left_left;
+
+    Texture* tentacle_up_start;
+    Texture* tentacle_up_end;
+    Texture* tentacle_up_up;
+    Texture* tentacle_up_right;
+    Texture* tentacle_up_down;
+    Texture* tentacle_up_left;
+
+    Texture* tentacle_right_start;
+    Texture* tentacle_right_end;
+    Texture* tentacle_right_up;
+    Texture* tentacle_right_right;
+    Texture* tentacle_right_down;
+    Texture* tentacle_right_left;
+
+    Texture* tentacle_down_start;
+    Texture* tentacle_down_end;
+    Texture* tentacle_down_up;
+    Texture* tentacle_down_right;
+    Texture* tentacle_down_down;
+    Texture* tentacle_down_left;
+
+    Texture* tentacle_left_start;
+    Texture* tentacle_left_end;
+    Texture* tentacle_left_up;
+    Texture* tentacle_left_right;
+    Texture* tentacle_left_down;
+    Texture* tentacle_left_left;
+
     Texture* scissor_up_start;
     Texture* scissor_up_end;
     Texture* scissor_up_up;
@@ -758,6 +819,14 @@ Texture* get_texture_item(Textures* textures, int item, int number);
 Texture* get_texture_hook_start(Textures* textures, int dir4);
 Texture* get_texture_hook_end(Textures* textures, int dir4);
 Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_spiderweb_start(Textures* textures, int dir4);
+Texture* get_texture_spiderweb_end(Textures* textures, int dir4);
+Texture* get_texture_spiderweb_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_tentacle_start(Textures* textures, int dir4);
+Texture* get_texture_tentacle_end(Textures* textures, int dir4);
+Texture* get_texture_tentacle_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 Texture* get_texture_scissor_start(Textures* textures, int dir4);
 Texture* get_texture_scissor_end(Textures* textures, int dir4);

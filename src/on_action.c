@@ -1934,7 +1934,7 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_change_object(
-                        OBJECT_TYPE__CRATE_CELL_ITEM,
+                        OBJECT_TYPE__CRATE_CELL,
                         object->tilemap_pos
                         )
                     );

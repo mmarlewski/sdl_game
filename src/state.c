@@ -90,7 +90,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "3_1");
+    Room* room = get_room(state, "6_1");
 
     room_add_object_at(
         room,
@@ -509,8 +509,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             }
             if(hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG_HOOK);
             }
             if(hero_has_augmentation(state, AUGMENTATION__SPRING_LEG))
             {
