@@ -743,6 +743,34 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->tentacle_left_down = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_down.png");
     animation->tentacle_left_left = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_left.png");
 
+    animation->tongue_up_start = load_texture_from_filepath (renderer, "./res/animation/tongue_up_start.png");
+    animation->tongue_up_end = load_texture_from_filepath (renderer, "./res/animation/tongue_up_end.png");
+    animation->tongue_up_up = load_texture_from_filepath (renderer, "./res/animation/tongue_up_up.png");
+    animation->tongue_up_right = load_texture_from_filepath (renderer, "./res/animation/tongue_up_right.png");
+    animation->tongue_up_down = load_texture_from_filepath (renderer, "./res/animation/tongue_up_down.png");
+    animation->tongue_up_left = load_texture_from_filepath (renderer, "./res/animation/tongue_up_left.png");
+
+    animation->tongue_right_start = load_texture_from_filepath (renderer, "./res/animation/tongue_right_start.png");
+    animation->tongue_right_end = load_texture_from_filepath (renderer, "./res/animation/tongue_right_end.png");
+    animation->tongue_right_up = load_texture_from_filepath (renderer, "./res/animation/tongue_right_up.png");
+    animation->tongue_right_right = load_texture_from_filepath (renderer, "./res/animation/tongue_right_right.png");
+    animation->tongue_right_down = load_texture_from_filepath (renderer, "./res/animation/tongue_right_down.png");
+    animation->tongue_right_left = load_texture_from_filepath (renderer, "./res/animation/tongue_right_left.png");
+
+    animation->tongue_down_start = load_texture_from_filepath (renderer, "./res/animation/tongue_down_start.png");
+    animation->tongue_down_end = load_texture_from_filepath (renderer, "./res/animation/tongue_down_end.png");
+    animation->tongue_down_up = load_texture_from_filepath (renderer, "./res/animation/tongue_down_up.png");
+    animation->tongue_down_right = load_texture_from_filepath (renderer, "./res/animation/tongue_down_right.png");
+    animation->tongue_down_down = load_texture_from_filepath (renderer, "./res/animation/tongue_down_down.png");
+    animation->tongue_down_left = load_texture_from_filepath (renderer, "./res/animation/tongue_down_left.png");
+
+    animation->tongue_left_start = load_texture_from_filepath (renderer, "./res/animation/tongue_left_start.png");
+    animation->tongue_left_end = load_texture_from_filepath (renderer, "./res/animation/tongue_left_end.png");
+    animation->tongue_left_up = load_texture_from_filepath (renderer, "./res/animation/tongue_left_up.png");
+    animation->tongue_left_right = load_texture_from_filepath (renderer, "./res/animation/tongue_left_right.png");
+    animation->tongue_left_down = load_texture_from_filepath (renderer, "./res/animation/tongue_left_down.png");
+    animation->tongue_left_left = load_texture_from_filepath (renderer, "./res/animation/tongue_left_left.png");
+
     animation->scissor_up_start = load_texture_from_filepath (renderer, "./res/animation/scissor_up_start.png");
     animation->scissor_up_end = load_texture_from_filepath (renderer, "./res/animation/scissor_up_end.png");
     animation->scissor_up_up = load_texture_from_filepath (renderer, "./res/animation/scissor_up_up.png");
@@ -1368,6 +1396,98 @@ Texture* get_texture_tentacle_from_to(Textures* textures, int dir4_from, int dir
                 case DIR4__RIGHT: texture = textures->animation.tentacle_left_right; break;
                 case DIR4__DOWN: texture = textures->animation.tentacle_left_down; break;
                 case DIR4__LEFT: texture = textures->animation.tentacle_left_left; break;
+                default: break;
+            }
+        }
+        break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_tongue_start(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->animation.tongue_up_start; break;
+        case DIR4__RIGHT: texture = textures->animation.tongue_right_start; break;
+        case DIR4__DOWN: texture = textures->animation.tongue_down_start; break;
+        case DIR4__LEFT: texture = textures->animation.tongue_left_start; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_tongue_end(Textures* textures, int dir4)
+{
+    Texture* texture = 0;
+
+    switch(dir4)
+    {
+        case DIR4__UP: texture = textures->animation.tongue_up_end; break;
+        case DIR4__RIGHT: texture = textures->animation.tongue_right_end; break;
+        case DIR4__DOWN: texture = textures->animation.tongue_down_end; break;
+        case DIR4__LEFT: texture = textures->animation.tongue_left_end; break;
+        default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_tongue_from_to(Textures* textures, int dir4_from, int dir4_to)
+{
+    Texture* texture = 0;
+
+    switch(dir4_from)
+    {
+        case DIR4__UP:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.tongue_up_up; break;
+                case DIR4__RIGHT: texture = textures->animation.tongue_up_right; break;
+                case DIR4__DOWN: texture = textures->animation.tongue_up_down; break;
+                case DIR4__LEFT: texture = textures->animation.tongue_up_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__RIGHT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.tongue_right_up; break;
+                case DIR4__RIGHT: texture = textures->animation.tongue_right_right; break;
+                case DIR4__DOWN: texture = textures->animation.tongue_right_down; break;
+                case DIR4__LEFT: texture = textures->animation.tongue_right_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__DOWN:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.tongue_down_up; break;
+                case DIR4__RIGHT: texture = textures->animation.tongue_down_right; break;
+                case DIR4__DOWN: texture = textures->animation.tongue_down_down; break;
+                case DIR4__LEFT: texture = textures->animation.tongue_down_left; break;
+                default: break;
+            }
+        }
+        break;
+        case DIR4__LEFT:
+        {
+            switch(dir4_to)
+            {
+                case DIR4__UP: texture = textures->animation.tongue_left_up; break;
+                case DIR4__RIGHT: texture = textures->animation.tongue_left_right; break;
+                case DIR4__DOWN: texture = textures->animation.tongue_left_down; break;
+                case DIR4__LEFT: texture = textures->animation.tongue_left_left; break;
                 default: break;
             }
         }

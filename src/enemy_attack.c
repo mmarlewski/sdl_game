@@ -166,7 +166,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                     target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
                     if(target_1_object != 0)
                     {
-                        enemy->skill = SKILL__DRAG_AND_THROW;
+                        enemy->skill = SKILL__DRAG_AND_THROW_TONGUE;
                         enemy->target_1_tilemap_pos = target_1_tilemap_pos;
                         enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
                             object->tilemap_pos,
@@ -179,7 +179,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
                 }
                 else
                 {
-                    enemy->skill = SKILL__DRAG_AND_THROW;
+                    enemy->skill = SKILL__DRAG_AND_THROW_TONGUE;
                     enemy->target_1_tilemap_pos = old_target_1_tilemap_pos;
                     enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
                         object->tilemap_pos,
@@ -194,7 +194,7 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
             }
             if(!found)
             {
-                enemy->skill = SKILL__DRAG_AND_THROW;
+                enemy->skill = SKILL__DRAG_AND_THROW_TONGUE;
                 enemy->target_1_tilemap_pos = old_target_1_tilemap_pos;
                 enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
                     object->tilemap_pos,

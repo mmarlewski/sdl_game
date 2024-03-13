@@ -542,7 +542,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
             hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG_AND_THROW);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG_AND_THROW_HOOK);
             }
             if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
             hero_has_augmentation(state, AUGMENTATION__TRACK_LEG))

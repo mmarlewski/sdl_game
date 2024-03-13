@@ -741,6 +741,34 @@ typedef struct
     Texture* tentacle_left_down;
     Texture* tentacle_left_left;
 
+    Texture* tongue_up_start;
+    Texture* tongue_up_end;
+    Texture* tongue_up_up;
+    Texture* tongue_up_right;
+    Texture* tongue_up_down;
+    Texture* tongue_up_left;
+
+    Texture* tongue_right_start;
+    Texture* tongue_right_end;
+    Texture* tongue_right_up;
+    Texture* tongue_right_right;
+    Texture* tongue_right_down;
+    Texture* tongue_right_left;
+
+    Texture* tongue_down_start;
+    Texture* tongue_down_end;
+    Texture* tongue_down_up;
+    Texture* tongue_down_right;
+    Texture* tongue_down_down;
+    Texture* tongue_down_left;
+
+    Texture* tongue_left_start;
+    Texture* tongue_left_end;
+    Texture* tongue_left_up;
+    Texture* tongue_left_right;
+    Texture* tongue_left_down;
+    Texture* tongue_left_left;
+
     Texture* scissor_up_start;
     Texture* scissor_up_end;
     Texture* scissor_up_up;
@@ -827,6 +855,10 @@ Texture* get_texture_spiderweb_from_to(Textures* textures, int dir4_from, int di
 Texture* get_texture_tentacle_start(Textures* textures, int dir4);
 Texture* get_texture_tentacle_end(Textures* textures, int dir4);
 Texture* get_texture_tentacle_from_to(Textures* textures, int dir4_from, int dir4_to);
+
+Texture* get_texture_tongue_start(Textures* textures, int dir4);
+Texture* get_texture_tongue_end(Textures* textures, int dir4);
+Texture* get_texture_tongue_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 Texture* get_texture_scissor_start(Textures* textures, int dir4);
 Texture* get_texture_scissor_end(Textures* textures, int dir4);

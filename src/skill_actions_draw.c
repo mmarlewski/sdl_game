@@ -1445,7 +1445,8 @@ void skill_get_actions_and_draw(
             }
         }
         break;
-        case SKILL__DRAG_AND_THROW:
+        case SKILL__DRAG_AND_THROW_HOOK:
+        case SKILL__DRAG_AND_THROW_TONGUE:
         {
             if(target_1_object != 0 &&
             is_object_movable(target_1_object))

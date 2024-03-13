@@ -711,7 +711,8 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__DRAG_AND_THROW:
+        case SKILL__DRAG_AND_THROW_HOOK:
+        case SKILL__DRAG_AND_THROW_TONGUE:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(

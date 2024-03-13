@@ -128,7 +128,8 @@ void skill_get_possible_target_1_pos(
         case SKILL__DRAG_HOOK:
         case SKILL__DRAG_SPIDERWEB:
         case SKILL__DRAG_TENTACLE:
-        case SKILL__DRAG_AND_THROW:
+        case SKILL__DRAG_AND_THROW_HOOK:
+        case SKILL__DRAG_AND_THROW_TONGUE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {

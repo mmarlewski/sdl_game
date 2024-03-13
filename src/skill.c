@@ -40,12 +40,13 @@ int is_skill_two_target(int skill)
         case SKILL__CHARGE:             is = 0; break;
         case SKILL__STOMP:              is = 0; break;
 
-        case SKILL__DRAG_AND_THROW:     is = 1; break;
-        case SKILL__CHARGE_AND_PUSH:    is = 1; break;
-        case SKILL__CHARGE_AND_THROW:   is = 1; break;
-        case SKILL__CHARGE_AND_JUMP:    is = 1; break;
-        case SKILL__JUMP_AND_CARRY:     is = 1; break;
-        case SKILL__JUMP_AND_STOMP:     is = 0; break;
+        case SKILL__DRAG_AND_THROW_HOOK:    is = 1; break;
+        case SKILL__DRAG_AND_THROW_TONGUE:  is = 1; break;
+        case SKILL__CHARGE_AND_PUSH:        is = 1; break;
+        case SKILL__CHARGE_AND_THROW:       is = 1; break;
+        case SKILL__CHARGE_AND_JUMP:        is = 1; break;
+        case SKILL__JUMP_AND_CARRY:         is = 1; break;
+        case SKILL__JUMP_AND_STOMP:         is = 0; break;
 
         case SKILL__LAUNCH_MINIBOT:     is = 0; break;
 
@@ -101,12 +102,13 @@ int get_skill_action_points(int skill)
         case SKILL__CHARGE:             ap = 1; break;
         case SKILL__STOMP:              ap = 1; break;
 
-        case SKILL__DRAG_AND_THROW:     ap = 2; break;
-        case SKILL__CHARGE_AND_PUSH:    ap = 2; break;
-        case SKILL__CHARGE_AND_THROW:   ap = 2; break;
-        case SKILL__CHARGE_AND_JUMP:    ap = 2; break;
-        case SKILL__JUMP_AND_CARRY:     ap = 2; break;
-        case SKILL__JUMP_AND_STOMP:     ap = 2; break;
+        case SKILL__DRAG_AND_THROW_HOOK:    ap = 2; break;
+        case SKILL__DRAG_AND_THROW_TONGUE:  ap = 2; break;
+        case SKILL__CHARGE_AND_PUSH:        ap = 2; break;
+        case SKILL__CHARGE_AND_THROW:       ap = 2; break;
+        case SKILL__CHARGE_AND_JUMP:        ap = 2; break;
+        case SKILL__JUMP_AND_CARRY:         ap = 2; break;
+        case SKILL__JUMP_AND_STOMP:         ap = 2; break;
 
         case SKILL__LAUNCH_MINIBOT:     ap = 1; break;
 
@@ -162,12 +164,13 @@ char* get_skill_name(int skill)
         case SKILL__CHARGE:             name = "charge"; break;
         case SKILL__STOMP:              name = "stomp"; break;
 
-        case SKILL__DRAG_AND_THROW:     name = "drag and throw"; break;
-        case SKILL__CHARGE_AND_PUSH:    name = "charge and push"; break;
-        case SKILL__CHARGE_AND_THROW:   name = "charge and throw"; break;
-        case SKILL__CHARGE_AND_JUMP:    name = "charge and jump"; break;
-        case SKILL__JUMP_AND_CARRY:     name = "jump and carry"; break;
-        case SKILL__JUMP_AND_STOMP:     name = "jump and stomp"; break;
+        case SKILL__DRAG_AND_THROW_HOOK:    name = "drag and throw hook"; break;
+        case SKILL__DRAG_AND_THROW_TONGUE:  name = "drag and throw tongue"; break;
+        case SKILL__CHARGE_AND_PUSH:        name = "charge and push"; break;
+        case SKILL__CHARGE_AND_THROW:       name = "charge and throw"; break;
+        case SKILL__CHARGE_AND_JUMP:        name = "charge and jump"; break;
+        case SKILL__JUMP_AND_CARRY:         name = "jump and carry"; break;
+        case SKILL__JUMP_AND_STOMP:         name = "jump and stomp"; break;
 
         case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
 
