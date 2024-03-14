@@ -223,7 +223,10 @@ Animation* skill_get_animation(
         case SKILL__DRAG_TENTACLE:
         case SKILL__DRAG_AND_THROW_HOOK:
         case SKILL__DRAG_AND_THROW_TONGUE:
-        case SKILL__PULL:
+        case SKILL__PULL_HOOK:
+        case SKILL__PULL_SPIDERWEB:
+        case SKILL__PULL_TENTACLE:
+        case SKILL__PULL_TONGUE:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(
@@ -247,16 +250,19 @@ Animation* skill_get_animation(
                         {
                             case SKILL__DRAG_HOOK:
                             case SKILL__DRAG_AND_THROW_HOOK:
-                            case SKILL__PULL:
+                            case SKILL__PULL_HOOK:
                             texture = get_texture_hook_start(textures, distance_info.dir4);
                             break;
                             case SKILL__DRAG_SPIDERWEB:
+                            case SKILL__PULL_SPIDERWEB:
                             texture = get_texture_spiderweb_start(textures, distance_info.dir4);
                             break;
                             case SKILL__DRAG_TENTACLE:
+                            case SKILL__PULL_TENTACLE:
                             texture = get_texture_tentacle_start(textures, distance_info.dir4);
                             break;
                             case SKILL__DRAG_AND_THROW_TONGUE:
+                            case SKILL__PULL_TONGUE:
                             texture = get_texture_tongue_start(textures, distance_info.dir4);
                             break;
                             default:
@@ -279,16 +285,19 @@ Animation* skill_get_animation(
                         {
                             case SKILL__DRAG_HOOK:
                             case SKILL__DRAG_AND_THROW_HOOK:
-                            case SKILL__PULL:
+                            case SKILL__PULL_HOOK:
                             texture = get_texture_hook_end(textures, get_opposite_dir4(distance_info.dir4));
                             break;
                             case SKILL__DRAG_SPIDERWEB:
+                            case SKILL__PULL_SPIDERWEB:
                             texture = get_texture_spiderweb_end(textures, get_opposite_dir4(distance_info.dir4));
                             break;
                             case SKILL__DRAG_TENTACLE:
+                            case SKILL__PULL_TENTACLE:
                             texture = get_texture_tentacle_end(textures, get_opposite_dir4(distance_info.dir4));
                             break;
                             case SKILL__DRAG_AND_THROW_TONGUE:
+                            case SKILL__PULL_TONGUE:
                             texture = get_texture_tongue_end(textures, get_opposite_dir4(distance_info.dir4));
                             break;
                             default:
@@ -311,16 +320,19 @@ Animation* skill_get_animation(
                         {
                             case SKILL__DRAG_HOOK:
                             case SKILL__DRAG_AND_THROW_HOOK:
-                            case SKILL__PULL:
+                            case SKILL__PULL_HOOK:
                             texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
                             break;
                             case SKILL__DRAG_SPIDERWEB:
+                            case SKILL__PULL_SPIDERWEB:
                             texture = get_texture_spiderweb_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
                             break;
                             case SKILL__DRAG_TENTACLE:
+                            case SKILL__PULL_TENTACLE:
                             texture = get_texture_tentacle_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
                             break;
                             case SKILL__DRAG_AND_THROW_TONGUE:
+                            case SKILL__PULL_TONGUE:
                             texture = get_texture_tongue_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
                             break;
                             default:

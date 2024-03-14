@@ -657,14 +657,40 @@ void skill_get_actions_and_draw(
 
                         if(!vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
                         {
-                            // actions
-                            add_action_to_end_action_sequence(
-                                action_sequence,
-                                new_action_move(
-                                    curr_tilemap_pos,
-                                    distance_info.dir4
-                                    )
-                                );
+                            if(!is_object_floating(target_1_object) &&
+                            !is_object_flying(target_1_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_floating(target_1_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_floating(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_flying(target_1_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_flying(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
                         }
 
                         // draw below
@@ -821,7 +847,10 @@ void skill_get_actions_and_draw(
             }
         }
         break;
-        case SKILL__PULL:
+        case SKILL__PULL_HOOK:
+        case SKILL__PULL_SPIDERWEB:
+        case SKILL__PULL_TENTACLE:
+        case SKILL__PULL_TONGUE:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(
@@ -1225,7 +1254,7 @@ void skill_get_actions_and_draw(
                     if(vec2i_equals(curr_tilemap_pos, source_tilemap_pos))
                     {
                         arrow_texture =
-                            get_texture_arrow_thick_start(
+                            get_texture_arrow_thin_start(
                                 textures,
                                 distance_info.dir4
                                 );
@@ -1239,7 +1268,7 @@ void skill_get_actions_and_draw(
                         go_on = 0;
 
                         arrow_texture =
-                            get_texture_arrow_thick_end(
+                            get_texture_arrow_thin_end(
                                 textures,
                                 get_opposite_dir4(distance_info.dir4)
                                 );
@@ -1275,7 +1304,7 @@ void skill_get_actions_and_draw(
                     else if(vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
                     {
                         arrow_texture =
-                            get_texture_arrow_thick_end(
+                            get_texture_arrow_thin_end(
                                 textures,
                                 get_opposite_dir4(distance_info.dir4)
                                 );
@@ -1293,7 +1322,7 @@ void skill_get_actions_and_draw(
                     else
                     {
                         arrow_texture =
-                            get_texture_arrow_thick_from_to(
+                            get_texture_arrow_thin_from_to(
                                 textures,
                                 distance_info.dir4,
                                 get_opposite_dir4(distance_info.dir4)
@@ -1302,7 +1331,7 @@ void skill_get_actions_and_draw(
 
                     if(!vec2i_equals(curr_tilemap_pos, target_2_tilemap_pos))
                     {
-                        if(source_object->type == OBJECT_TYPE__HERO)
+                        if(!is_object_floating(source_object) && !is_object_flying(source_object))
                         {
                             // actions
                             add_action_to_end_action_sequence(
@@ -1313,7 +1342,7 @@ void skill_get_actions_and_draw(
                                     )
                                 );
                         }
-                        else if(source_object->type == OBJECT_TYPE__HERO_FLOATING)
+                        else if(is_object_floating(source_object))
                         {
                             // actions
                             add_action_to_end_action_sequence(
@@ -1324,7 +1353,7 @@ void skill_get_actions_and_draw(
                                     )
                                 );
                         }
-                        else if(source_object->type == OBJECT_TYPE__HERO_FLYING)
+                        else if(is_object_flying(source_object))
                         {
                             // actions
                             add_action_to_end_action_sequence(
@@ -1510,7 +1539,7 @@ void skill_get_actions_and_draw(
                         if(vec2i_equals(drag_curr_tilemap_pos, target_1_tilemap_pos))
                         {
                             drag_arrow_texture =
-                                get_texture_arrow_thick_start(
+                                get_texture_arrow_thin_start(
                                     textures,
                                     drag_distance_info.dir4
                                     );
@@ -1524,7 +1553,7 @@ void skill_get_actions_and_draw(
                             drag_go_on = 0;
 
                             drag_arrow_texture =
-                                get_texture_arrow_thick_end(
+                                get_texture_arrow_thin_end(
                                     textures,
                                     get_opposite_dir4(drag_distance_info.dir4)
                                     );
@@ -1560,7 +1589,7 @@ void skill_get_actions_and_draw(
                         else if(vec2i_equals(drag_curr_tilemap_pos, just_before_source_tilemap_pos))
                         {
                             drag_arrow_texture =
-                                get_texture_arrow_thick_end(
+                                get_texture_arrow_thin_end(
                                     textures,
                                     get_opposite_dir4(drag_distance_info.dir4)
                                     );
@@ -1578,7 +1607,7 @@ void skill_get_actions_and_draw(
                         else
                         {
                             drag_arrow_texture =
-                                get_texture_arrow_thick_from_to(
+                                get_texture_arrow_thin_from_to(
                                     textures,
                                     drag_distance_info.dir4,
                                     get_opposite_dir4(drag_distance_info.dir4)
@@ -1587,14 +1616,40 @@ void skill_get_actions_and_draw(
 
                         if(!vec2i_equals(drag_curr_tilemap_pos, just_before_source_tilemap_pos))
                         {
-                            // actions
-                            add_action_to_end_action_sequence(
-                                action_sequence,
-                                new_action_move(
-                                    drag_curr_tilemap_pos,
-                                    drag_distance_info.dir4
-                                    )
-                                );
+                            if(!is_object_floating(target_1_object) &&
+                            !is_object_flying(target_1_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move(
+                                        drag_curr_tilemap_pos,
+                                        drag_distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_floating(target_1_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_floating(
+                                        drag_curr_tilemap_pos,
+                                        drag_distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_flying(target_1_object))
+                            {
+                                // actions
+                                add_action_to_end_action_sequence(
+                                    action_sequence,
+                                    new_action_move_flying(
+                                        drag_curr_tilemap_pos,
+                                        drag_distance_info.dir4
+                                        )
+                                    );
+                            }
                         }
 
                         // draw below
@@ -1807,7 +1862,7 @@ void skill_get_actions_and_draw(
                     if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
                     {
                         charge_arrow_texture =
-                            get_texture_arrow_thick_start(
+                            get_texture_arrow_thin_start(
                                 textures,
                                 charge_distance_info.dir4
                                 );
@@ -1821,7 +1876,7 @@ void skill_get_actions_and_draw(
                         charge_go_on = 0;
 
                         charge_arrow_texture =
-                            get_texture_arrow_thick_end(
+                            get_texture_arrow_thin_end(
                                 textures,
                                 get_opposite_dir4(charge_distance_info.dir4)
                                 );
@@ -1857,7 +1912,7 @@ void skill_get_actions_and_draw(
                     else if(vec2i_equals(charge_curr_tilemap_pos, just_before_target_1_position))
                     {
                         charge_arrow_texture =
-                            get_texture_arrow_thick_end(
+                            get_texture_arrow_thin_end(
                                 textures,
                                 get_opposite_dir4(charge_distance_info.dir4)
                                 );
@@ -1875,7 +1930,7 @@ void skill_get_actions_and_draw(
                     else
                     {
                         charge_arrow_texture =
-                            get_texture_arrow_thick_from_to(
+                            get_texture_arrow_thin_from_to(
                                 textures,
                                 charge_distance_info.dir4,
                                 get_opposite_dir4(charge_distance_info.dir4)

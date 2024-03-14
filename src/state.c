@@ -97,6 +97,16 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state->hero_object,
         vec2i(7,2)
         );
+    room_add_object_at(
+        room,
+        new_object(OBJECT_TYPE__BULL),
+        vec2i(5,5)
+        );
+    room_add_object_at(
+        room,
+        new_object(OBJECT_TYPE__CHAMELEON),
+        vec2i(6,6)
+        );
     set_curr_room(
         state,
         room
@@ -115,7 +125,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -509,7 +519,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             }
             if(hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL_HOOK);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG_HOOK);
             }
             if(hero_has_augmentation(state, AUGMENTATION__SPRING_LEG))

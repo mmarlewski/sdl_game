@@ -584,7 +584,10 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__PULL:
+        case SKILL__PULL_HOOK:
+        case SKILL__PULL_SPIDERWEB:
+        case SKILL__PULL_TENTACLE:
+        case SKILL__PULL_TONGUE:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(

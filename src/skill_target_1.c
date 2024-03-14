@@ -160,7 +160,10 @@ void skill_get_possible_target_1_pos(
             }
         }
         break;
-        case SKILL__PULL:
+        case SKILL__PULL_HOOK:
+        case SKILL__PULL_SPIDERWEB:
+        case SKILL__PULL_TENTACLE:
+        case SKILL__PULL_TONGUE:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
