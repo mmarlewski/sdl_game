@@ -30,6 +30,8 @@ int is_skill_two_target(int skill)
         case SKILL__THROW_ITEM_DYNAMITE:        is = 0; break;
         case SKILL__THROW_ITEM_GEMSTONE:        is = 0; break;
 
+        case SKILL__SHOOT_PROJECTILE_FLY:       is = 0; break;
+
         case SKILL__PUSH:               is = 1; break;
         case SKILL__THROW:              is = 1; break;
         case SKILL__PULL_HOOK:          is = 1; break;
@@ -53,8 +55,6 @@ int is_skill_two_target(int skill)
 
         case SKILL__LAUNCH_MINIBOT:         is = 0; break;
         case SKILL__MINIBOT_MERGE:          is = 0; break;
-
-        case SKILL__SHOOT_PROJECTILE_FLY:   is = 0; break;
 
         case SKILL__TURRET_LASER:       is = 0; break;
         case SKILL__TURRET_BOMB:        is = 0; break;
@@ -96,6 +96,8 @@ int get_skill_action_points(int skill)
         case SKILL__THROW_ITEM_DYNAMITE:        ap = 1; break;
         case SKILL__THROW_ITEM_GEMSTONE:        ap = 1; break;
 
+        case SKILL__SHOOT_PROJECTILE_FLY:       ap = 1; break;
+
         case SKILL__PUSH:               ap = 1; break;
         case SKILL__THROW:              ap = 1; break;
         case SKILL__PULL_HOOK:          ap = 1; break;
@@ -119,8 +121,6 @@ int get_skill_action_points(int skill)
 
         case SKILL__LAUNCH_MINIBOT:         ap = 1; break;
         case SKILL__MINIBOT_MERGE:          ap = 1; break;
-
-        case SKILL__SHOOT_PROJECTILE_FLY:   ap = 1; break;
 
         case SKILL__TURRET_LASER:       ap = 1; break;
         case SKILL__TURRET_BOMB:        ap = 1; break;
@@ -162,6 +162,8 @@ char* get_skill_name(int skill)
         case SKILL__THROW_ITEM_DYNAMITE:        name = "throw item dynamite"; break;
         case SKILL__THROW_ITEM_GEMSTONE:        name = "throw item gemstone"; break;
 
+        case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile fly"; break;
+
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__THROW:              name = "throw"; break;
         case SKILL__PULL_HOOK:          name = "pull hook"; break;
@@ -185,8 +187,6 @@ char* get_skill_name(int skill)
 
         case SKILL__LAUNCH_MINIBOT:         name = "launch minibot"; break;
         case SKILL__MINIBOT_MERGE:          name = "minibot merge"; break;
-
-        case SKILL__SHOOT_PROJECTILE_FLY:   name = "shoot projectile fly"; break;
 
         case SKILL__TURRET_LASER:       name = "turret laser"; break;
         case SKILL__TURRET_BOMB:        name = "turret bomb"; break;

@@ -612,6 +612,9 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->dots_line_horizontal = load_texture_from_filepath (renderer, "./res/skill/dots_line_horizontal.png");
     skill->dots_line_vertical = load_texture_from_filepath (renderer, "./res/skill/dots_line_vertical.png");
 
+    skill->dots_arch_horizontal = load_texture_from_filepath (renderer, "./res/skill/dots_arch_horizontal.png");
+    skill->dots_arch_vertical = load_texture_from_filepath (renderer, "./res/skill/dots_arch_vertical.png");
+
     skill->immovable_effect = load_texture_from_filepath (renderer, "./res/skill/immovable_effect.png");
     skill->crash_effect = load_texture_from_filepath (renderer, "./res/skill/crash_effect.png");
     skill->blow_up_effect = load_texture_from_filepath (renderer, "./res/skill/blow_up_effect.png");

@@ -611,6 +611,9 @@ typedef struct
     Texture* dots_line_horizontal;
     Texture* dots_line_vertical;
 
+    Texture* dots_arch_horizontal;
+    Texture* dots_arch_vertical;
+
     Texture* immovable_effect;
     Texture* crash_effect;
     Texture* blow_up_effect;

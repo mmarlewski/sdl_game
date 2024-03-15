@@ -95,6 +95,11 @@ void skill_get_possible_target_1_pos(
             //
         }
         break;
+        case SKILL__SHOOT_PROJECTILE_FLY:
+        {
+            //
+        }
+        break;
         case SKILL__PUSH:
         case SKILL__THROW:
         {
@@ -326,11 +331,6 @@ void skill_get_possible_target_1_pos(
         }
         break;
         case SKILL__MINIBOT_MERGE:
-        {
-            //
-        }
-        break;
-        case SKILL__SHOOT_PROJECTILE_FLY:
         {
             //
         }
