@@ -3216,6 +3216,73 @@ void skill_get_actions_and_draw(
             }
         }
         break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            //
+        }
+        break;
+        case SKILL__SHOOT_PROJECTILE_FLY:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                    );
+
+            for(int i = 1; i < distance_info.abs_diff; i++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    source_tilemap_pos,
+                    distance_info.dir4,
+                    i
+                    );
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Texture* dots_line_texture = 0;
+                    if(distance_info.dir4 == DIR4__RIGHT ||
+                    distance_info.dir4 == DIR4__LEFT)
+                    {
+                        dots_line_texture = textures->skill.dots_line_horizontal;
+                    }
+                    if(distance_info.dir4 == DIR4__UP ||
+                    distance_info.dir4 == DIR4__DOWN)
+                    {
+                        dots_line_texture = textures->skill.dots_line_vertical;
+                    }
+
+                    // draw above
+                    add_new_list_element_to_list_end(
+                        draw_above_texture_list,
+                        dots_line_texture
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_above_tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                }
+            }
+
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_shake(target_2_tilemap_pos)
+                );
+
+            if(target_2_object != 0)
+            {
+                // draw effect
+                add_new_list_element_to_list_end(
+                    draw_effect_texture_list,
+                    textures->skill.shake_effect
+                    );
+                add_new_list_element_to_list_end(
+                    draw_effect_tilemap_pos_list,
+                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                    );
+            }
+        }
+        break;
         case SKILL__TURRET_LASER:
         {
             DistanceInfo distance_info =
@@ -3378,11 +3445,6 @@ void skill_get_actions_and_draw(
                 draw_effect_tilemap_pos_list,
                 new_vec2i_from_vec2i(target_2_tilemap_pos)
                 );
-        }
-        break;
-        case SKILL__MINIBOT_MERGE:
-        {
-            //
         }
         break;
         default:

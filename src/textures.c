@@ -609,6 +609,9 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->arrow_thick_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_down.png");
     skill->arrow_thick_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_left.png");
 
+    skill->dots_line_horizontal = load_texture_from_filepath (renderer, "./res/skill/dots_line_horizontal.png");
+    skill->dots_line_vertical = load_texture_from_filepath (renderer, "./res/skill/dots_line_vertical.png");
+
     skill->immovable_effect = load_texture_from_filepath (renderer, "./res/skill/immovable_effect.png");
     skill->crash_effect = load_texture_from_filepath (renderer, "./res/skill/crash_effect.png");
     skill->blow_up_effect = load_texture_from_filepath (renderer, "./res/skill/blow_up_effect.png");
@@ -810,6 +813,7 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->dynamite = load_texture_from_filepath (renderer, "./res/animation/dynamite.png");
     animation->gemstone = load_texture_from_filepath (renderer, "./res/animation/gemstone.png");
     animation->minibot = load_texture_from_filepath (renderer, "./res/animation/minibot.png");
+    animation->fly_projectile = load_texture_from_filepath (renderer, "./res/animation/fly_projectile.png");
 }
 
 void destroy_textures_animation (Textures_Animation* animation)

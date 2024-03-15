@@ -608,6 +608,9 @@ typedef struct
     Texture* arrow_thick_left_down;
     Texture* arrow_thick_left_left;
 
+    Texture* dots_line_horizontal;
+    Texture* dots_line_vertical;
+
     Texture* immovable_effect;
     Texture* crash_effect;
     Texture* blow_up_effect;
@@ -808,6 +811,7 @@ typedef struct
     Texture* dynamite;
     Texture* gemstone;
     Texture* minibot;
+    Texture* fly_projectile;
 
 } Textures_Animation;
 

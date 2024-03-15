@@ -99,12 +99,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         );
     room_add_object_at(
         room,
-        new_object(OBJECT_TYPE__BULL),
+        new_object(OBJECT_TYPE__FLY),
         vec2i(5,5)
         );
     room_add_object_at(
         room,
-        new_object(OBJECT_TYPE__CHAMELEON),
+        new_object(OBJECT_TYPE__FLY),
         vec2i(6,6)
         );
     set_curr_room(

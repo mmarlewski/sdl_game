@@ -220,36 +220,46 @@ void object_enemy_prepare_attack(State* state, Enemy* enemy)
         break;
         case OBJECT_TYPE__FLY:
         {
-            int found = 0;
-            Object* target_1_object = 0;
-            Vec2i target_1_tilemap_pos = enemy_object->tilemap_pos;
-            for(int i = 0; i < 10; i++)
+            Vec2i curr_tilemap_pos = enemy_object->tilemap_pos;
+            Object* curr_object = 0;
+
+            int go_on = 1;
+            for(int i = 0; i < 10 && go_on; i++)
             {
-                target_1_tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos, enemy->object->attack_dir4,1);
-                target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
-                if(target_1_object != 0)
+                curr_tilemap_pos = vec2i_move_in_dir4_by(
+                    curr_tilemap_pos,
+                    enemy->object->attack_dir4,
+                    1
+                    );
+
+                if(is_tilemap_in_bounds(curr_tilemap_pos))
                 {
-                    enemy->skill = SKILL__PUSH;
-                    enemy->target_1_tilemap_pos = target_1_tilemap_pos;
-                    enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                        target_1_tilemap_pos,
-                        enemy->object->attack_dir4, 1
+                    curr_object = room_get_object_at(
+                        state->curr_room,
+                        curr_tilemap_pos
                         );
-                    found = 1;
-                    break;
+
+                    if(curr_object != 0)
+                    {
+                        enemy->skill = SKILL__SHOOT_PROJECTILE_FLY;
+                        enemy->target_1_tilemap_pos = vec2i(0,0);
+                        enemy->target_2_tilemap_pos = curr_tilemap_pos;
+                        go_on = 0;
+                    }
                 }
-            }
-            if(!found)
-            {
-                enemy->skill = SKILL__CHARGE;
-                enemy->target_1_tilemap_pos = vec2i_move_in_dir4_by(
-                    enemy_object->tilemap_pos,
-                    enemy->object->attack_dir4, 1
-                    );
-                enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                    enemy_object->tilemap_pos,
-                    enemy->object->attack_dir4, 1
-                    );
+                else
+                {
+                    enemy->skill = SKILL__SHOOT_PROJECTILE_FLY;
+                    enemy->target_1_tilemap_pos = vec2i(0,0);
+                    enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                        curr_tilemap_pos,
+                        get_opposite_dir4(
+                            enemy->object->attack_dir4
+                            ),
+                        1
+                        );
+                    go_on = 0;
+                }
             }
         }
         break;

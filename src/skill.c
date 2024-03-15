@@ -51,13 +51,14 @@ int is_skill_two_target(int skill)
         case SKILL__JUMP_AND_CARRY:         is = 1; break;
         case SKILL__JUMP_AND_STOMP:         is = 0; break;
 
-        case SKILL__LAUNCH_MINIBOT:     is = 0; break;
+        case SKILL__LAUNCH_MINIBOT:         is = 0; break;
+        case SKILL__MINIBOT_MERGE:          is = 0; break;
+
+        case SKILL__SHOOT_PROJECTILE_FLY:   is = 0; break;
 
         case SKILL__TURRET_LASER:       is = 0; break;
         case SKILL__TURRET_BOMB:        is = 0; break;
         case SKILL__TURRET_PROJECTILE:  is = 0; break;
-
-        case SKILL__MINIBOT_MERGE:      is = 0; break;
 
         default: break;
     }
@@ -116,13 +117,14 @@ int get_skill_action_points(int skill)
         case SKILL__JUMP_AND_CARRY:         ap = 2; break;
         case SKILL__JUMP_AND_STOMP:         ap = 2; break;
 
-        case SKILL__LAUNCH_MINIBOT:     ap = 1; break;
+        case SKILL__LAUNCH_MINIBOT:         ap = 1; break;
+        case SKILL__MINIBOT_MERGE:          ap = 1; break;
+
+        case SKILL__SHOOT_PROJECTILE_FLY:   ap = 1; break;
 
         case SKILL__TURRET_LASER:       ap = 1; break;
         case SKILL__TURRET_BOMB:        ap = 1; break;
         case SKILL__TURRET_PROJECTILE:  ap = 1; break;
-
-        case SKILL__MINIBOT_MERGE:      ap = 1; break;
 
         default: break;
     }
@@ -181,13 +183,14 @@ char* get_skill_name(int skill)
         case SKILL__JUMP_AND_CARRY:         name = "jump and carry"; break;
         case SKILL__JUMP_AND_STOMP:         name = "jump and stomp"; break;
 
-        case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
+        case SKILL__LAUNCH_MINIBOT:         name = "launch minibot"; break;
+        case SKILL__MINIBOT_MERGE:          name = "minibot merge"; break;
+
+        case SKILL__SHOOT_PROJECTILE_FLY:   name = "shoot projectile fly"; break;
 
         case SKILL__TURRET_LASER:       name = "turret laser"; break;
         case SKILL__TURRET_BOMB:        name = "turret bomb"; break;
         case SKILL__TURRET_PROJECTILE:  name = "turret projectile"; break;
-
-        case SKILL__MINIBOT_MERGE:      name = "minibot merge"; break;
 
         default: break;
     }
