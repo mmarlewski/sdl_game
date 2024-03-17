@@ -6,12 +6,12 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
     switch(action->type)
     {
-        case ACTION_TYPE__NONE:
+        case ACTION__NONE:
         {
             //
         }
         break;
-        case ACTION_TYPE__SEQUENCE:
+        case ACTION__SEQUENCE:
         {
             ListElem* curr_elem = action->sequence.action_list->head;
             action->sequence.curr_action_list_elem = curr_elem;
@@ -27,7 +27,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
-        case ACTION_TYPE__SIMULTANEOUS:
+        case ACTION__SIMULTANEOUS:
         {
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
@@ -39,9 +39,9 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
-        case ACTION_TYPE__MOVE:
-        case ACTION_TYPE__MOVE_FLOATING:
-        case ACTION_TYPE__MOVE_FLYING:
+        case ACTION__MOVE:
+        case ACTION__MOVE_FLOATING:
+        case ACTION__MOVE_FLYING:
         {
             action->move.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
@@ -81,15 +81,15 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
                 int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
 
-                if(action->type == ACTION_TYPE__MOVE)
+                if(action->type == ACTION__MOVE)
                 {
                     floor_on_move_start(state, sequence, action, floor);
                 }
-                else if(action->type == ACTION_TYPE__MOVE_FLOATING)
+                else if(action->type == ACTION__MOVE_FLOATING)
                 {
                     floor_on_move_floating_start(state, sequence, action, floor);
                 }
-                else if(action->type == ACTION_TYPE__MOVE_FLYING)
+                else if(action->type == ACTION__MOVE_FLYING)
                 {
                     floor_on_move_flying_start(state, sequence, action, floor);
                 }
@@ -98,7 +98,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION__CRASH:
         {
             action->crash.object_crushing = room_get_object_at(state->curr_room, action->tilemap_pos);
             action->crash.object_crushed = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
@@ -141,7 +141,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->crash.object_crushing->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__FALL:
+        case ACTION__FALL:
         {
             if(action->fall.object == 0)
             {
@@ -165,7 +165,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->fall.object->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__DEATH:
+        case ACTION__DEATH:
         {
             if(action->death.object == 0)
             {
@@ -215,7 +215,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
-        case ACTION_TYPE__BLOW_UP:
+        case ACTION__BLOW_UP:
         {
             Animation* animation = new_animation_sequence_of_2(
                 new_animation_show_sprite_in_gamemap(
@@ -235,7 +235,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
-        case ACTION_TYPE__THROW:
+        case ACTION__THROW:
         {
             Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
             action->throw.object_thrown = room_get_object_at(state->curr_room, action->tilemap_pos);
@@ -280,7 +280,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->throw.object_thrown->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__LIFT:
+        case ACTION__LIFT:
         {
             action->lift.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
@@ -308,7 +308,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->lift.object->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION__DROP:
         {
             if(action->drop.object == 0)
             {
@@ -337,17 +337,17 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             add_animation_to_animation_list(state,animation,textures,sounds,musics,colors);
         }
         break;
-        case ACTION_TYPE__CHANGE_FLOOR:
+        case ACTION__CHANGE_FLOOR:
         {
 
             int floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
-            if(floor != FLOOR_TYPE__NONE)
+            if(floor != FLOOR__NONE)
             {
                 room_change_floor_at(state->curr_room, action->change_floor.new_floor_type, action->tilemap_pos);
             }
         }
         break;
-        case ACTION_TYPE__CHANGE_OBJECT:
+        case ACTION__CHANGE_OBJECT:
         {
             Object* object = room_get_object_at(state->curr_room, action->tilemap_pos);
             if(object != 0)
@@ -356,7 +356,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
-        case ACTION_TYPE__ADD_OBJECT:
+        case ACTION__ADD_OBJECT:
         {
             if(action->add_object.new_object != 0)
             {
@@ -368,38 +368,53 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
         }
         break;
-        case ACTION_TYPE__REMOVE_OBJECT:
+        case ACTION__REMOVE_OBJECT:
         {
             //
         }
         break;
-        case ACTION_TYPE__MELT:
+        case ACTION__MELT:
         {
             Object* melt_object = room_get_object_at(state->curr_room, action->tilemap_pos);
+            int melt_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             if(melt_object != 0)
             {
                 object_on_melt(state, sequence, action, melt_object);
             }
+            else if(melt_floor != FLOOR__NONE)
+            {
+                floor_on_melt(state, sequence, action, melt_floor);
+            }
         }
         break;
-        case ACTION_TYPE__BREAK:
+        case ACTION__BREAK:
         {
             Object* break_object = room_get_object_at(state->curr_room, action->tilemap_pos);
+            int break_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             if(break_object != 0)
             {
                 object_on_break(state, sequence, action, break_object);
             }
+            else if(break_floor != FLOOR__NONE)
+            {
+                floor_on_break(state, sequence, action, break_floor);
+            }
         }
         break;
-        case ACTION_TYPE__SHAKE:
+        case ACTION__SHAKE:
         {
             Object* shake_object = room_get_object_at(state->curr_room, action->tilemap_pos);
+            int shake_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             if(shake_object != 0)
             {
                 object_on_shake(state, sequence, action, shake_object);
+            }
+            else if(shake_floor != FLOOR__NONE)
+            {
+                floor_on_shake(state, sequence, action, shake_floor);
             }
         }
         break;

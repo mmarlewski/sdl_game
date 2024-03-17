@@ -5,7 +5,7 @@ Animation* new_animation_none()
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__NONE;
+    animation->type = ANIMATION__NONE;
 
     return animation;
 }
@@ -15,7 +15,7 @@ Animation* new_animation_sequence()
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__SEQUENCE;
+    animation->type = ANIMATION__SEQUENCE;
 
     animation->sequence.animation_list = new_list((void(*)(void*))&destroy_animation);
     animation->sequence.curr_animation_list_elem = 0;
@@ -57,7 +57,7 @@ Animation* new_animation_simultaneous()
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__SIMULTANEOUS;
+    animation->type = ANIMATION__SIMULTANEOUS;
 
     animation->simultaneous.animation_list = new_list((void(*)(void*))&destroy_animation);
 
@@ -98,7 +98,7 @@ Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, Vec2f 
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE;
+    animation->type = ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_LINE;
 
     animation->move_sprite_in_gamemap_in_line.time = 0.0f;
     animation->move_sprite_in_gamemap_in_line.sprite = 0;
@@ -116,7 +116,7 @@ Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, Vec2f 
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH;
+    animation->type = ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH;
 
     animation->move_sprite_in_gamemap_in_arch.time = 0.0f;
     animation->move_sprite_in_gamemap_in_arch.sprite = 0;
@@ -135,7 +135,7 @@ Animation* new_animation_show_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP;
+    animation->type = ANIMATION__SHOW_SPRITE_IN_GAMEMAP;
 
     animation->show_sprite_in_gamemap.time = 0.0f;
     animation->show_sprite_in_gamemap.sprite = 0;
@@ -152,7 +152,7 @@ Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, Vec2f gamema
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP;
+    animation->type = ANIMATION__ASCEND_SPRITE_IN_GAMEMAP;
 
     animation->ascend_sprite_in_gamemap.time = 0.0f;
     animation->ascend_sprite_in_gamemap.sprite = 0;
@@ -170,7 +170,7 @@ Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, Vec2f gamem
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP;
+    animation->type = ANIMATION__DESCEND_SPRITE_IN_GAMEMAP;
 
     animation->descend_sprite_in_gamemap.time = 0.0f;
     animation->descend_sprite_in_gamemap.sprite = 0;
@@ -188,7 +188,7 @@ Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP;
+    animation->type = ANIMATION__FALL_SPRITE_IN_GAMEMAP;
 
     animation->fall_sprite_in_gamemap.time = 0.0f;
     animation->fall_sprite_in_gamemap.sprite = 0;
@@ -206,7 +206,7 @@ Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE;
+    animation->type = ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE;
 
     animation->move_camera_in_world_in_line.time = 0.0f;
     animation->move_camera_in_world_in_line.from_world_pos = from_world_pos;
@@ -222,7 +222,7 @@ Animation* new_animation_move_camera_in_world_in_arch(Vec2f from_world_pos, Vec2
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH;
+    animation->type = ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH;
 
     animation->move_camera_in_world_in_arch.time = 0.0f;
     animation->move_camera_in_world_in_arch.from_world_pos = from_world_pos;
@@ -238,7 +238,7 @@ Animation* new_animation_move_camera_in_gamemap_in_line(Vec2f from_gamemap_pos, 
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE;
+    animation->type = ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_LINE;
 
     animation->move_camera_in_gamemap_in_line.time = 0.0f;
     animation->move_camera_in_gamemap_in_line.from_gamemap_pos = from_gamemap_pos;
@@ -253,7 +253,7 @@ Animation* new_animation_move_camera_in_gamemap_in_arch(Vec2f from_gamemap_pos, 
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH;
+    animation->type = ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH;
 
     animation->move_camera_in_gamemap_in_arch.time = 0.0f;
     animation->move_camera_in_gamemap_in_arch.from_gamemap_pos = from_gamemap_pos;
@@ -269,7 +269,7 @@ Animation* new_animation_play_sound(Sound* sound)
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__PLAY_SOUND;
+    animation->type = ANIMATION__PLAY_SOUND;
     animation->play_sound.sound = sound;
 
     return animation;
@@ -280,7 +280,7 @@ Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_colo
     Animation* animation = malloc(sizeof(* animation));
 
     animation->is_finished = 0;
-    animation->type = ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR;
+    animation->type = ANIMATION__CHANGE_BACKGROUND_COLOR;
     animation->change_background_color.from_color = from_color;
     animation->change_background_color.to_color = to_color;
     animation->change_background_color.seconds = seconds;
@@ -324,12 +324,12 @@ Animation* new_animation_background_flash(Vec3i from_color, Vec3i to_color, floa
 
 void destroy_animation(Animation* animation)
 {
-    if(animation->type == ANIMATION_TYPE__SEQUENCE)
+    if(animation->type == ANIMATION__SEQUENCE)
     {
         destroy_list(animation->sequence.animation_list);
     }
 
-    if(animation->type == ANIMATION_TYPE__SIMULTANEOUS)
+    if(animation->type == ANIMATION__SIMULTANEOUS)
     {
         destroy_list(animation->simultaneous.animation_list);
     }
@@ -343,21 +343,21 @@ char* get_animation_name_from_type(int animation_type)
 
     switch(animation_type)
     {
-        case ANIMATION_TYPE__NONE:                             name = "none";                              break;
-        case ANIMATION_TYPE__SEQUENCE:                         name = "sequence";                          break;
-        case ANIMATION_TYPE__SIMULTANEOUS:                     name = "simultaneous";                      break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:   name = "move sprite in gamemap in line";    break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:   name = "move sprite in gamemap in arch";    break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:           name = "show sprite in gamemap";            break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:         name = "ascend sprite in gamemap";          break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:        name = "descend sprite in gamemap";         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:           name = "fall sprite in gamemap";            break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE:     name = "move camera in world in line";      break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH:     name = "move camera in world in arch";      break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:   name = "move camera in gamemap in line";    break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:   name = "move camera in gamemap in arch";    break;
-        case ANIMATION_TYPE__PLAY_SOUND:                       name = "play sound";                        break;
-        case ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR:          name = "change background color";                        break;
+        case ANIMATION__NONE:                             name = "none";                              break;
+        case ANIMATION__SEQUENCE:                         name = "sequence";                          break;
+        case ANIMATION__SIMULTANEOUS:                     name = "simultaneous";                      break;
+        case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:   name = "move sprite in gamemap in line";    break;
+        case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:   name = "move sprite in gamemap in arch";    break;
+        case ANIMATION__SHOW_SPRITE_IN_GAMEMAP:           name = "show sprite in gamemap";            break;
+        case ANIMATION__ASCEND_SPRITE_IN_GAMEMAP:         name = "ascend sprite in gamemap";          break;
+        case ANIMATION__DESCEND_SPRITE_IN_GAMEMAP:        name = "descend sprite in gamemap";         break;
+        case ANIMATION__FALL_SPRITE_IN_GAMEMAP:           name = "fall sprite in gamemap";            break;
+        case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE:     name = "move camera in world in line";      break;
+        case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH:     name = "move camera in world in arch";      break;
+        case ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:   name = "move camera in gamemap in line";    break;
+        case ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:   name = "move camera in gamemap in arch";    break;
+        case ANIMATION__PLAY_SOUND:                       name = "play sound";                        break;
+        case ANIMATION__CHANGE_BACKGROUND_COLOR:          name = "change background color";                        break;
         default: break;
     }
 

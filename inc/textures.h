@@ -174,6 +174,9 @@ typedef struct
     Texture* pillar;
     Texture* pillar_outline;
 
+    Texture* sarcophagus;
+    Texture* sarcophagus_outline;
+
     Texture* pipe;
     Texture* pipe_outline;
 

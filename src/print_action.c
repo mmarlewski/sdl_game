@@ -6,7 +6,7 @@ void print_action(Action* action, int depth)
     for(int i = 0; i < depth; i++) printf("  ");
     printf("%s \n", action_type);
 
-    if(action->type != ACTION_TYPE__SEQUENCE && action->type != ACTION_TYPE__SIMULTANEOUS)
+    if(action->type != ACTION__SEQUENCE && action->type != ACTION__SIMULTANEOUS)
     {
         // comment this line if you need to look closely at each single action
         // return;
@@ -14,7 +14,7 @@ void print_action(Action* action, int depth)
 
     switch(action->type)
     {
-        case ACTION_TYPE__NONE:
+        case ACTION__NONE:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -22,7 +22,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__SEQUENCE:
+        case ACTION__SEQUENCE:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("[ \n");
@@ -34,7 +34,7 @@ void print_action(Action* action, int depth)
             printf("] \n");
         }
         break;
-        case ACTION_TYPE__SIMULTANEOUS:
+        case ACTION__SIMULTANEOUS:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("{ \n");
@@ -46,7 +46,7 @@ void print_action(Action* action, int depth)
             printf("} \n");
         }
         break;
-        case ACTION_TYPE__MOVE:
+        case ACTION__MOVE:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -58,7 +58,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION__CRASH:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -72,7 +72,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__FALL:
+        case ACTION__FALL:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -82,7 +82,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__DEATH:
+        case ACTION__DEATH:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -92,7 +92,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__BLOW_UP:
+        case ACTION__BLOW_UP:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -100,7 +100,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__THROW:
+        case ACTION__THROW:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -116,7 +116,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__LIFT:
+        case ACTION__LIFT:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -128,7 +128,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION__DROP:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -140,7 +140,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__CHANGE_FLOOR:
+        case ACTION__CHANGE_FLOOR:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -150,7 +150,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__CHANGE_OBJECT:
+        case ACTION__CHANGE_OBJECT:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -160,7 +160,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__ADD_OBJECT:
+        case ACTION__ADD_OBJECT:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
@@ -170,7 +170,7 @@ void print_action(Action* action, int depth)
             printf(") \n");
         }
         break;
-        case ACTION_TYPE__REMOVE_OBJECT:
+        case ACTION__REMOVE_OBJECT:
         {
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");

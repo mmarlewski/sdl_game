@@ -189,6 +189,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->pillar = load_texture_from_filepath(renderer, "./res/object/pillar.png");
     object->pillar_outline = load_texture_from_filepath(renderer, "./res/object/pillar_outline.png");
 
+    object->sarcophagus = load_texture_from_filepath(renderer, "./res/object/sarcophagus.png");
+    object->sarcophagus_outline = load_texture_from_filepath(renderer, "./res/object/sarcophagus_outline.png");
+
     object->pipe = load_texture_from_filepath(renderer, "./res/object/pipe.png");
     object->pipe_outline = load_texture_from_filepath(renderer, "./res/object/pipe_outline.png");
 

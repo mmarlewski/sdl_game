@@ -8,7 +8,7 @@ Action* new_action_none()
     action->tilemap_pos = vec2i(-1, -1);
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__NONE;
+    action->type = ACTION__NONE;
 
     return action;
 }
@@ -21,7 +21,7 @@ Action* new_action_sequence()
     action->tilemap_pos = vec2i(-1, -1);
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__SEQUENCE;
+    action->type = ACTION__SEQUENCE;
 
     action->sequence.action_list = new_list((void(*)(void*))&destroy_action);
     action->sequence.curr_action_list_elem = 0;
@@ -76,7 +76,7 @@ Action* new_action_simultaneous()
     action->tilemap_pos = vec2i(-1, -1);
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__SIMULTANEOUS;
+    action->type = ACTION__SIMULTANEOUS;
 
     action->simultaneous.action_list = new_list((void(*)(void*))&destroy_action);
 
@@ -120,7 +120,7 @@ Action* new_action_move(Vec2i tilemap_pos, int dir4)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__MOVE;
+    action->type = ACTION__MOVE;
 
     action->move.dir4 = dir4;
     action->move.object = 0;
@@ -136,7 +136,7 @@ Action* new_action_move_floating(Vec2i tilemap_pos, int dir4)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__MOVE_FLOATING;
+    action->type = ACTION__MOVE_FLOATING;
 
     action->move.dir4 = dir4;
     action->move.object = 0;
@@ -152,7 +152,7 @@ Action* new_action_move_flying(Vec2i tilemap_pos, int dir4)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__MOVE_FLYING;
+    action->type = ACTION__MOVE_FLYING;
 
     action->move.dir4 = dir4;
     action->move.object = 0;
@@ -168,7 +168,7 @@ Action* new_action_crash(Vec2i tilemap_pos, int dir4)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__CRASH;
+    action->type = ACTION__CRASH;
 
     action->crash.dir4 = dir4;
     action->crash.object_crushing = 0;
@@ -185,7 +185,7 @@ Action* new_action_fall(Object* object, Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__FALL;
+    action->type = ACTION__FALL;
 
     action->fall.object = object;
 
@@ -200,7 +200,7 @@ Action* new_action_death(Object* object, Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__DEATH;
+    action->type = ACTION__DEATH;
 
     action->death.object = object;
 
@@ -215,7 +215,7 @@ Action* new_action_blow_up(Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__BLOW_UP;
+    action->type = ACTION__BLOW_UP;
 
     return action;
 }
@@ -228,7 +228,7 @@ Action* new_action_throw( Vec2i tilemap_pos, int dir4, int distance)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__THROW;
+    action->type = ACTION__THROW;
 
     action->throw.dir4 = dir4;
     action->throw.distance = distance;
@@ -246,7 +246,7 @@ Action* new_action_lift( Vec2i tilemap_pos, int dir4)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__LIFT;
+    action->type = ACTION__LIFT;
 
     action->lift.dir4 = dir4;
     action->lift.object = 0;
@@ -262,7 +262,7 @@ Action* new_action_drop(Object* object, Vec2i tilemap_pos, int dir4)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__DROP;
+    action->type = ACTION__DROP;
 
     action->drop.object = object;
     action->drop.dir4 = dir4;
@@ -278,7 +278,7 @@ Action* new_action_change_floor(int new_floor_type, Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__CHANGE_FLOOR;
+    action->type = ACTION__CHANGE_FLOOR;
 
     action->change_floor.new_floor_type = new_floor_type;
 
@@ -293,7 +293,7 @@ Action* new_action_change_object(int new_object_type, Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__CHANGE_OBJECT;
+    action->type = ACTION__CHANGE_OBJECT;
 
     action->change_object.new_object_type = new_object_type;
 
@@ -308,7 +308,7 @@ Action* new_action_add_object(Object* new_object, Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__ADD_OBJECT;
+    action->type = ACTION__ADD_OBJECT;
 
     action->add_object.new_object = new_object;
 
@@ -323,7 +323,7 @@ Action* new_action_remove_object(Object* object_to_remove, Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__REMOVE_OBJECT;
+    action->type = ACTION__REMOVE_OBJECT;
 
     action->remove_object.object_to_remove = object_to_remove;
 
@@ -338,7 +338,7 @@ Action* new_action_melt(Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__MELT;
+    action->type = ACTION__MELT;
 
     return action;
 }
@@ -351,7 +351,7 @@ Action* new_action_break(Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__BREAK;
+    action->type = ACTION__BREAK;
 
     return action;
 }
@@ -364,19 +364,19 @@ Action* new_action_shake(Vec2i tilemap_pos)
     action->tilemap_pos = tilemap_pos;
     action->is_finished = 0;
     action->is_finished_at_start = 0;
-    action->type = ACTION_TYPE__SHAKE;
+    action->type = ACTION__SHAKE;
 
     return action;
 }
 
 void destroy_action(Action* action)
 {
-    if(action->type == ACTION_TYPE__SEQUENCE)
+    if(action->type == ACTION__SEQUENCE)
     {
         destroy_list(action->sequence.action_list);
     }
 
-    if(action->type == ACTION_TYPE__SIMULTANEOUS)
+    if(action->type == ACTION__SIMULTANEOUS)
     {
         destroy_list(action->simultaneous.action_list);
     }
@@ -390,27 +390,27 @@ char* get_action_name_from_type(int action_type)
 
     switch(action_type)
     {
-        case ACTION_TYPE__NONE:             name = "none";          break;
-        case ACTION_TYPE__SEQUENCE:         name = "sequence";      break;
-        case ACTION_TYPE__SIMULTANEOUS:     name = "simultaneous";  break;
-        case ACTION_TYPE__MOVE:             name = "move";          break;
-        case ACTION_TYPE__MOVE_FLOATING:    name = "move floating"; break;
-        case ACTION_TYPE__MOVE_FLYING:      name = "move flying";   break;
-        case ACTION_TYPE__CRASH:            name = "crash";         break;
-        case ACTION_TYPE__FALL:             name = "fall";          break;
-        case ACTION_TYPE__DEATH:            name = "death";         break;
-        case ACTION_TYPE__BLOW_UP:          name = "blow up";       break;
-        case ACTION_TYPE__THROW:            name = "throw";         break;
-        case ACTION_TYPE__LIFT:             name = "lift";          break;
-        case ACTION_TYPE__DROP:             name = "drop";          break;
-        case ACTION_TYPE__CHANGE_FLOOR:     name = "change floor";  break;
-        case ACTION_TYPE__CHANGE_OBJECT:    name = "change object"; break;
-        case ACTION_TYPE__ADD_OBJECT:       name = "add object";    break;
-        case ACTION_TYPE__REMOVE_OBJECT:    name = "remove object"; break;
-        case ACTION_TYPE__MELT:             name = "melt";          break;
-        case ACTION_TYPE__BREAK:            name = "break";         break;
-        case ACTION_TYPE__SHAKE:            name = "shake";         break;
-        case ACTION_TYPE__COUNT:            name = "count";         break;
+        case ACTION__NONE:             name = "none";          break;
+        case ACTION__SEQUENCE:         name = "sequence";      break;
+        case ACTION__SIMULTANEOUS:     name = "simultaneous";  break;
+        case ACTION__MOVE:             name = "move";          break;
+        case ACTION__MOVE_FLOATING:    name = "move floating"; break;
+        case ACTION__MOVE_FLYING:      name = "move flying";   break;
+        case ACTION__CRASH:            name = "crash";         break;
+        case ACTION__FALL:             name = "fall";          break;
+        case ACTION__DEATH:            name = "death";         break;
+        case ACTION__BLOW_UP:          name = "blow up";       break;
+        case ACTION__THROW:            name = "throw";         break;
+        case ACTION__LIFT:             name = "lift";          break;
+        case ACTION__DROP:             name = "drop";          break;
+        case ACTION__CHANGE_FLOOR:     name = "change floor";  break;
+        case ACTION__CHANGE_OBJECT:    name = "change object"; break;
+        case ACTION__ADD_OBJECT:       name = "add object";    break;
+        case ACTION__REMOVE_OBJECT:    name = "remove object"; break;
+        case ACTION__MELT:             name = "melt";          break;
+        case ACTION__BREAK:            name = "break";         break;
+        case ACTION__SHAKE:            name = "shake";         break;
+        case ACTION__COUNT:            name = "count";         break;
         default: break;
     }
 

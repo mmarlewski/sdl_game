@@ -6,12 +6,12 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
 
     switch(animation->type)
     {
-        case ANIMATION_TYPE__NONE:
+        case ANIMATION__NONE:
         {
             animation->is_finished = 1;
         }
         break;
-        case ANIMATION_TYPE__SEQUENCE:
+        case ANIMATION__SEQUENCE:
         {
             ListElem* curr_elem = animation->sequence.curr_animation_list_elem;
             Animation* curr_animation = (Animation*)curr_elem->data;
@@ -34,7 +34,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (!animation->sequence.curr_animation_list_elem);
         }
         break;
-        case ANIMATION_TYPE__SIMULTANEOUS:
+        case ANIMATION__SIMULTANEOUS:
         {
             int are_all_animations_finished = 1;
             List* animation_to_be_removed_list = new_list(0);
@@ -64,7 +64,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (are_all_animations_finished);
         }
         break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:
+        case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:
         {
             Animation_MoveSpriteInGamemapInLine animation_animation = animation->move_sprite_in_gamemap_in_line;
 
@@ -89,7 +89,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:
+        case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:
         {
             Animation_MoveSpriteInGamemapInArch animation_animation = animation->move_sprite_in_gamemap_in_arch;
 
@@ -114,7 +114,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:
+        case ANIMATION__SHOW_SPRITE_IN_GAMEMAP:
         {
             Animation_ShowSpriteInGamemap animation_animation = animation->show_sprite_in_gamemap;
 
@@ -125,7 +125,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:
+        case ANIMATION__ASCEND_SPRITE_IN_GAMEMAP:
         {
             Animation_AscendSpriteInGamemap animation_animation = animation->ascend_sprite_in_gamemap;
 
@@ -146,7 +146,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:
+        case ANIMATION__DESCEND_SPRITE_IN_GAMEMAP:
         {
             Animation_DescendSpriteInGamemap animation_animation = animation->descend_sprite_in_gamemap;
 
@@ -167,7 +167,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:
+        case ANIMATION__FALL_SPRITE_IN_GAMEMAP:
         {
             Animation_FallSpriteInGamemap animation_animation = animation->fall_sprite_in_gamemap;
 
@@ -188,7 +188,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE:
+        case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE:
         {
             Animation_MoveCameraInWorldInLine animation_animation = animation->move_camera_in_world_in_line;
 
@@ -207,7 +207,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH:
+        case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH:
         {
             Animation_MoveCameraInWorldInArch animation_animation = animation->move_camera_in_world_in_arch;
 
@@ -227,7 +227,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:
+        case ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:
         {
             Animation_MoveCameraInGamemapInLine animation_animation = animation->move_camera_in_gamemap_in_line;
 
@@ -246,7 +246,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:
+        case ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:
         {
             Animation_MoveCameraInGamemapInArch animation_animation = animation->move_camera_in_gamemap_in_arch;
 
@@ -268,12 +268,12 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
-        case ANIMATION_TYPE__PLAY_SOUND:
+        case ANIMATION__PLAY_SOUND:
         {
             animation->is_finished = 1;
         }
         break;
-        case ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR:
+        case ANIMATION__CHANGE_BACKGROUND_COLOR:
         {
             Animation_ChangeBackgroundColor animation_animation = animation->change_background_color;
 

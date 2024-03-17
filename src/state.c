@@ -51,7 +51,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->curr_ally_target_2_tilemap_pos = vec2i(0, 0);
     state->curr_skill_animation = 0;
 
-    state->hero_object = new_object(OBJECT_TYPE__HERO);
+    state->hero_object = new_object(OBJECT__HERO);
     state->hero_ap = ALLY_MAX_ACTION_POINTS;
     for(int i = 0; i < ITEM__COUNT; i++)
     {
@@ -63,7 +63,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     }
     state->hero_curr_item = ITEM__NONE;
 
-    state->minibot_object = new_object(OBJECT_TYPE__MINIBOT_ALLY);
+    state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
     state->was_minibot_launched = 0;
     state->was_throne_used = 0;
 
@@ -90,22 +90,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "6_1");
+    Room* room = get_room(state, "4_4");
 
     room_add_object_at(
         room,
         state->hero_object,
         vec2i(7,2)
-        );
-    room_add_object_at(
-        room,
-        new_object(OBJECT_TYPE__FLY),
-        vec2i(5,5)
-        );
-    room_add_object_at(
-        room,
-        new_object(OBJECT_TYPE__FLY),
-        vec2i(6,6)
         );
     set_curr_room(
         state,
@@ -125,7 +115,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -196,9 +186,9 @@ void change_gamestate(State* state, int new_gamestate)
         }
         hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
         printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
-        if(state->curr_ally->object->type == OBJECT_TYPE__HERO ||
-        state->curr_ally->object->type == OBJECT_TYPE__HERO_FLOATING ||
-        state->curr_ally->object->type == OBJECT_TYPE__HERO_FLYING)
+        if(state->curr_ally->object->type == OBJECT__HERO ||
+        state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+        state->curr_ally->object->type == OBJECT__HERO_FLYING)
         {
             printf("----------------------------------------\n");
             for(int i = 1; i < ITEM__COUNT; i++)
@@ -454,11 +444,11 @@ void hero_add_augmentation(State* state, int augmentation)
 
     if(hero_has_augmentation(state, AUGMENTATION__STRIDER_LEG))
     {
-        state->hero_object->type = OBJECT_TYPE__HERO_FLOATING;
+        state->hero_object->type = OBJECT__HERO_FLOATING;
     }
     if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
     {
-        state->hero_object->type = OBJECT_TYPE__HERO_FLYING;
+        state->hero_object->type = OBJECT__HERO_FLYING;
     }
 }
 
@@ -473,14 +463,14 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 {
     switch(object->type)
     {
-        case OBJECT_TYPE__GOLEM_POWERED:
+        case OBJECT__GOLEM_POWERED:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
         }
         break;
-        case OBJECT_TYPE__HERO:
-        case OBJECT_TYPE__HERO_FLOATING:
-        case OBJECT_TYPE__HERO_FLYING:
+        case OBJECT__HERO:
+        case OBJECT__HERO_FLOATING:
+        case OBJECT__HERO_FLYING:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
@@ -494,15 +484,15 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 
             // move
 
-            if(object->type == OBJECT_TYPE__HERO)
+            if(object->type == OBJECT__HERO)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             }
-            if(object->type == OBJECT_TYPE__HERO_FLOATING)
+            if(object->type == OBJECT__HERO_FLOATING)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE_FLOATING);
             }
-            if(object->type == OBJECT_TYPE__HERO_FLYING)
+            if(object->type == OBJECT__HERO_FLYING)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE_FLYING);
             }
@@ -628,7 +618,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             }
         }
         break;
-        case OBJECT_TYPE__MINIBOT_ALLY:
+        case OBJECT__MINIBOT_ALLY:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
@@ -637,7 +627,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
         }
         break;
-        case OBJECT_TYPE__MINIBOT_ALLY_CELL:
+        case OBJECT__MINIBOT_ALLY_CELL:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
@@ -647,7 +637,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
         }
         break;
-        case OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE:
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
@@ -657,7 +647,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
         }
         break;
-        case OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE:
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
@@ -769,22 +759,6 @@ void update_all_enemy_order(State* state)
             curr_enemy->order_number = curr_order_number;
             curr_order_number++;
         }
-    }
-}
-
-void update_enemy_attack_dir4(State* state, Enemy* enemy)
-{
-    if(enemy != 0)
-    {
-        enemy->object->attack_dir4 = rand() % 4 + 1;
-    }
-}
-
-void update_enemy_attack_targets(State* state, Enemy* enemy)
-{
-    if(enemy != 0)
-    {
-        object_enemy_prepare_attack(state, enemy);
     }
 }
 
@@ -1089,7 +1063,7 @@ void execute_mechanism(
     if(is_in_1)
     {
         if(in_1_is_object &&
-        ((in_1_object == 0 && in_1_type != OBJECT_TYPE__NONE) ||
+        ((in_1_object == 0 && in_1_type != OBJECT__NONE) ||
         (in_1_object != 0 && in_1_type != in_1_object->type)))
         {
             is_triggered = 0;
@@ -1105,7 +1079,7 @@ void execute_mechanism(
     if(is_in_2)
     {
         if(in_2_is_object &&
-        ((in_2_object == 0 && in_2_type != OBJECT_TYPE__NONE) ||
+        ((in_2_object == 0 && in_2_type != OBJECT__NONE) ||
         (in_2_object != 0 && in_2_type != in_2_object->type)))
         {
             is_triggered = 0;
@@ -1121,7 +1095,7 @@ void execute_mechanism(
     if(is_in_3)
     {
         if(in_3_is_object &&
-        ((in_3_object == 0 && in_3_type != OBJECT_TYPE__NONE) ||
+        ((in_3_object == 0 && in_3_type != OBJECT__NONE) ||
         (in_3_object != 0 && in_3_type != in_3_object->type)))
         {
             is_triggered = 0;
@@ -1140,7 +1114,7 @@ void execute_mechanism(
         {
             if(out_is_object)
             {
-                if(out_type == OBJECT_TYPE__NONE && out_object != 0)
+                if(out_type == OBJECT__NONE && out_object != 0)
                 {
                     room_remove_object(
                         out_room,
@@ -1148,11 +1122,11 @@ void execute_mechanism(
                         1
                         );
                 }
-                else if(out_type != OBJECT_TYPE__NONE && out_object != 0)
+                else if(out_type != OBJECT__NONE && out_object != 0)
                 {
                     out_object->type = out_type;
                 }
-                else if(out_type != OBJECT_TYPE__NONE && out_object == 0)
+                else if(out_type != OBJECT__NONE && out_object == 0)
                 {
                     room_add_object_at(
                         out_room,

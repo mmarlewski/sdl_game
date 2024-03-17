@@ -9,12 +9,12 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
 
     switch(action->type)
     {
-        case ACTION_TYPE__NONE:
+        case ACTION__NONE:
         {
             //
         }
         break;
-        case ACTION_TYPE__SEQUENCE:
+        case ACTION__SEQUENCE:
         {
             for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
@@ -23,7 +23,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
             }
         }
         break;
-        case ACTION_TYPE__SIMULTANEOUS:
+        case ACTION__SIMULTANEOUS:
         {
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
@@ -32,7 +32,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
             }
         }
         break;
-        case ACTION_TYPE__MOVE:
+        case ACTION__MOVE:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -45,7 +45,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION__CRASH:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -58,7 +58,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__FALL:
+        case ACTION__FALL:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -71,7 +71,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__DEATH:
+        case ACTION__DEATH:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -84,7 +84,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__BLOW_UP:
+        case ACTION__BLOW_UP:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -97,7 +97,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__THROW:
+        case ACTION__THROW:
         {
             Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
             Vec2f target_gamemap_pos = tilemap_pos_to_gamemap_pos(target_tilemap_pos);
@@ -125,7 +125,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__LIFT:
+        case ACTION__LIFT:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -138,7 +138,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION__DROP:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -151,7 +151,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__CHANGE_FLOOR:
+        case ACTION__CHANGE_FLOOR:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -164,7 +164,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__CHANGE_OBJECT:
+        case ACTION__CHANGE_OBJECT:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -177,7 +177,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__ADD_OBJECT:
+        case ACTION__ADD_OBJECT:
         {
             draw_texture_at_world_pos(
                 renderer,
@@ -190,7 +190,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 );
         }
         break;
-        case ACTION_TYPE__REMOVE_OBJECT:
+        case ACTION__REMOVE_OBJECT:
         {
             draw_texture_at_world_pos(
                 renderer,

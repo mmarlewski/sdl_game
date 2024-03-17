@@ -167,6 +167,9 @@ void floor_on_move_flying_end(State* state, Action* sequence, Action* action, in
 void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop_floating(State* state, Action* sequence, Action* action, int floor);
 void floor_on_drop_flying(State* state, Action* sequence, Action* action, int floor);
+void floor_on_melt(State* state, Action* sequence, Action* action, int floor);
+void floor_on_break(State* state, Action* sequence, Action* action, int floor);
+void floor_on_shake(State* state, Action* sequence, Action* action, int floor);
 void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
 Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
@@ -234,7 +237,8 @@ void skill_get_actions_and_draw(
 );
 
 void object_enemy_prepare_move(State* state, Enemy* enemy);
-void object_enemy_prepare_attack(State* state, Enemy* enemy);
+void update_enemy_attack_dir4(State* state, Enemy* enemy);
+void update_enemy_attack_targets(State* state, Enemy* enemy);
 
 char* get_gamestate_name(int gamestate);
 
@@ -253,14 +257,6 @@ void update_enemy_list(
 );
 void update_all_enemy_order(
     State* state
-);
-void update_enemy_attack_dir4(
-    State* state,
-    Enemy* enemy
-);
-void update_enemy_attack_targets(
-    State* state,
-    Enemy* enemy
 );
 void clear_enemy_attack_actions_and_draw(
     State* state,

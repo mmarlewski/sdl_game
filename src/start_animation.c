@@ -6,12 +6,12 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
 
     switch(animation->type)
     {
-        case ANIMATION_TYPE__NONE:
+        case ANIMATION__NONE:
         {
             //
         }
         break;
-        case ANIMATION_TYPE__SEQUENCE:
+        case ANIMATION__SEQUENCE:
         {
             animation->sequence.curr_animation_list_elem = animation->sequence.animation_list->head;
             ListElem* curr_elem = animation->sequence.curr_animation_list_elem;
@@ -27,7 +27,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             }
         }
         break;
-        case ANIMATION_TYPE__SIMULTANEOUS:
+        case ANIMATION__SIMULTANEOUS:
         {
             for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
@@ -39,7 +39,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             }
         }
         break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:
+        case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_LINE:
         {
             animation->move_sprite_in_gamemap_in_line.time = 0.0f;
 
@@ -51,7 +51,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:
+        case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:
         {
             animation->move_sprite_in_gamemap_in_arch.time = 0.0f;
 
@@ -63,7 +63,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__SHOW_SPRITE_IN_GAMEMAP:
+        case ANIMATION__SHOW_SPRITE_IN_GAMEMAP:
         {
             animation->show_sprite_in_gamemap.time = 0.0f;
 
@@ -75,7 +75,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__ASCEND_SPRITE_IN_GAMEMAP:
+        case ANIMATION__ASCEND_SPRITE_IN_GAMEMAP:
         {
             animation->ascend_sprite_in_gamemap.time = 0.0f;
 
@@ -87,7 +87,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__DESCEND_SPRITE_IN_GAMEMAP:
+        case ANIMATION__DESCEND_SPRITE_IN_GAMEMAP:
         {
 
             animation->descend_sprite_in_gamemap.time = 0.0f;
@@ -100,7 +100,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__FALL_SPRITE_IN_GAMEMAP:
+        case ANIMATION__FALL_SPRITE_IN_GAMEMAP:
         {
             animation->fall_sprite_in_gamemap.time = 0.0f;
 
@@ -112,7 +112,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_LINE:
+        case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE:
         {
             animation->move_camera_in_world_in_line.time = 0.0f;
 
@@ -126,7 +126,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             }
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_WORLD_IN_ARCH:
+        case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH:
         {
             animation->move_camera_in_world_in_arch.time = 0.0f;
 
@@ -140,22 +140,22 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             }
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:
+        case ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_LINE:
         {
             animation->move_camera_in_gamemap_in_line.time = 0.0f;
         }
         break;
-        case ANIMATION_TYPE__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:
+        case ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH:
         {
             animation->move_camera_in_gamemap_in_arch.time = 0.0f;
         }
         break;
-        case ANIMATION_TYPE__PLAY_SOUND:
+        case ANIMATION__PLAY_SOUND:
         {
             play_sound(animation->play_sound.sound);
         }
         break;
-        case ANIMATION_TYPE__CHANGE_BACKGROUND_COLOR:
+        case ANIMATION__CHANGE_BACKGROUND_COLOR:
         {
             change_background_color(state, animation->change_background_color.from_color);
         }

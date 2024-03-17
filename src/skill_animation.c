@@ -53,7 +53,7 @@ Animation* skill_get_animation(
                     textures
                 );
             }
-            else if(floor != FLOOR_TYPE__NONE && is_floor_manipulatable(floor))
+            else if(floor != FLOOR__NONE && is_floor_manipulatable(floor))
             {
                 skill_animation = floor_on_manipulation_get_animation(
                     state,

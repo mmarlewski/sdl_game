@@ -6,12 +6,12 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 
     switch(action->type)
     {
-        case ACTION_TYPE__NONE:
+        case ACTION__NONE:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__SEQUENCE:
+        case ACTION__SEQUENCE:
         {
             ListElem* curr_elem = action->sequence.curr_action_list_elem;
             Action* curr_action = (Action*)curr_elem->data;
@@ -36,7 +36,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = (!action->sequence.curr_action_list_elem);
         }
         break;
-        case ACTION_TYPE__SIMULTANEOUS:
+        case ACTION__SIMULTANEOUS:
         {
             int are_all_actions_finished = 1;
             List* action_to_be_removed_list = new_list(0);
@@ -66,79 +66,79 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = (are_all_actions_finished);
         }
         break;
-        case ACTION_TYPE__MOVE:
-        case ACTION_TYPE__MOVE_FLOATING:
-        case ACTION_TYPE__MOVE_FLYING:
+        case ACTION__MOVE:
+        case ACTION__MOVE_FLOATING:
+        case ACTION__MOVE_FLYING:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION__CRASH:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__FALL:
+        case ACTION__FALL:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__DEATH:
+        case ACTION__DEATH:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__BLOW_UP:
+        case ACTION__BLOW_UP:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__THROW:
+        case ACTION__THROW:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__LIFT:
+        case ACTION__LIFT:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION__DROP:
         {
             action->is_finished = (action->animation->is_finished);
         }
         break;
-        case ACTION_TYPE__CHANGE_FLOOR:
+        case ACTION__CHANGE_FLOOR:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__CHANGE_OBJECT:
+        case ACTION__CHANGE_OBJECT:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__ADD_OBJECT:
+        case ACTION__ADD_OBJECT:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__REMOVE_OBJECT:
+        case ACTION__REMOVE_OBJECT:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__MELT:
+        case ACTION__MELT:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__BREAK:
+        case ACTION__BREAK:
         {
             action->is_finished = 1;
         }
         break;
-        case ACTION_TYPE__SHAKE:
+        case ACTION__SHAKE:
         {
             action->is_finished = 1;
         }

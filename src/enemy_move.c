@@ -15,16 +15,16 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
 
     switch(enemy_object->type)
     {
-        case OBJECT_TYPE__GOAT:
-        case OBJECT_TYPE__BULL:
-        case OBJECT_TYPE__SPIDER:
-        case OBJECT_TYPE__FLY:
-        case OBJECT_TYPE__CHAMELEON:
-        case OBJECT_TYPE__SQUID:
-        case OBJECT_TYPE__MINIBOT_ENEMY:
-        case OBJECT_TYPE__MINIBOT_ENEMY_CELL:
-        case OBJECT_TYPE__MINIBOT_ENEMY_DYNAMITE:
-        case OBJECT_TYPE__MINIBOT_ENEMY_GEMSTONE:
+        case OBJECT__GOAT:
+        case OBJECT__BULL:
+        case OBJECT__SPIDER:
+        case OBJECT__FLY:
+        case OBJECT__CHAMELEON:
+        case OBJECT__SQUID:
+        case OBJECT__MINIBOT_ENEMY:
+        case OBJECT__MINIBOT_ENEMY_CELL:
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:
         {
             Vec2i tilemap_pos_up = enemy_object->tilemap_pos;
             Object* object_up = 0;

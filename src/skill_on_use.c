@@ -20,7 +20,7 @@ void skill_on_use(
         {
             if(target_2_object != 0)
             {
-                if(target_2_object->type == OBJECT_TYPE__THRONE)
+                if(target_2_object->type == OBJECT__THRONE)
                 {
                     state->was_throne_used = 1;
                 }
@@ -126,7 +126,7 @@ void skill_on_use(
             {
                 int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
-                if(floor != FLOOR_TYPE__NONE)
+                if(floor != FLOOR__NONE)
                 {
                     if(is_floor_exit(floor))
                     {
@@ -249,19 +249,19 @@ void skill_on_use(
                 item_count = get_floor_item_count(floor);
             }
 
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 state->hero_item_number[item_type] += item_count;
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY)
             {
                 switch(item_type)
                 {
-                    case ITEM__CELL: source_object->type = OBJECT_TYPE__MINIBOT_ALLY_CELL; break;
-                    case ITEM__DYNAMITE: source_object->type = OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE; break;
-                    case ITEM__GEMSTONE: source_object->type = OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE; break;
+                    case ITEM__CELL: source_object->type = OBJECT__MINIBOT_ALLY_CELL; break;
+                    case ITEM__DYNAMITE: source_object->type = OBJECT__MINIBOT_ALLY_DYNAMITE; break;
+                    case ITEM__GEMSTONE: source_object->type = OBJECT__MINIBOT_ALLY_GEMSTONE; break;
                     default:break;
                 }
             }
@@ -270,117 +270,117 @@ void skill_on_use(
         case SKILL__PUT_ITEM_CELL_CLOSE:
         case SKILL__PUT_ITEM_CELL_FAR:
         {
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__CELL] >= 1)
                 {
                     state->hero_item_number[ITEM__CELL]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
-                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
+                source_object->type = OBJECT__MINIBOT_ALLY;
             }
         }
         break;
         case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
         case SKILL__PUT_ITEM_DYNAMITE_FAR:
         {
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
                 {
                     state->hero_item_number[ITEM__DYNAMITE]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
-                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
+                source_object->type = OBJECT__MINIBOT_ALLY;
             }
         }
         break;
         case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
         case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
                 {
                     state->hero_item_number[ITEM__GEMSTONE]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
-                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
+                source_object->type = OBJECT__MINIBOT_ALLY;
             }
         }
         break;
         case SKILL__THROW_ITEM_CELL:
         {
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__CELL] >= 1)
                 {
                     state->hero_item_number[ITEM__CELL]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
-                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
+                source_object->type = OBJECT__MINIBOT_ALLY;
             }
         }
         break;
         case SKILL__THROW_ITEM_DYNAMITE:
         {
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
                 {
                     state->hero_item_number[ITEM__DYNAMITE]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
-                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
+                source_object->type = OBJECT__MINIBOT_ALLY;
             }
         }
         break;
         case SKILL__THROW_ITEM_GEMSTONE:
         {
-            if(source_object->type == OBJECT_TYPE__HERO ||
-            source_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            source_object->type == OBJECT_TYPE__HERO_FLYING)
+            if(source_object->type == OBJECT__HERO ||
+            source_object->type == OBJECT__HERO_FLOATING ||
+            source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
                 {
                     state->hero_item_number[ITEM__GEMSTONE]--;
                 }
             }
-            else if(source_object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
-                source_object->type = OBJECT_TYPE__MINIBOT_ALLY;
+                source_object->type = OBJECT__MINIBOT_ALLY;
             }
         }
         break;
@@ -393,9 +393,9 @@ void skill_on_use(
         case SKILL__MINIBOT_MERGE:
         {
             if(target_2_object != 0 &&
-            (target_2_object->type == OBJECT_TYPE__HERO ||
-            target_2_object->type == OBJECT_TYPE__HERO_FLOATING ||
-            target_2_object->type == OBJECT_TYPE__HERO_FLYING))
+            (target_2_object->type == OBJECT__HERO ||
+            target_2_object->type == OBJECT__HERO_FLOATING ||
+            target_2_object->type == OBJECT__HERO_FLYING))
             {
                 state->was_minibot_launched = 0;
 
@@ -405,19 +405,19 @@ void skill_on_use(
                     0
                     );
 
-                if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY)
+                if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY)
                 {
                     //
                 }
-                else if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY_CELL)
+                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL)
                 {
                     state->hero_item_number[ITEM__CELL]++;
                 }
-                else if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY_DYNAMITE)
+                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE)
                 {
                     state->hero_item_number[ITEM__DYNAMITE]++;
                 }
-                else if(state->curr_ally->object->type == OBJECT_TYPE__MINIBOT_ALLY_GEMSTONE)
+                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
                 {
                     state->hero_item_number[ITEM__GEMSTONE]++;
                 }

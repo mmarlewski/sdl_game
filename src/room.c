@@ -11,7 +11,7 @@ Room* new_empty_room(char* name)
     {
         for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
         {
-            room->floor_array[i][j] = FLOOR_TYPE__GRASS;
+            room->floor_array[i][j] = FLOOR__GRASS;
         }
     }
     room->object_list = new_list((void (*)(void *))&destroy_object);
@@ -29,14 +29,14 @@ void destroy_room(Room* room)
 
 int room_get_floor_at(Room* room, Vec2i tilemap_pos)
 {
-    if(room == 0) return FLOOR_TYPE__NONE;
+    if(room == 0) return FLOOR__NONE;
 
     if(is_tilemap_in_bounds(tilemap_pos))
     {
         return room->floor_array[tilemap_pos.y][tilemap_pos.x];
     }
 
-    return FLOOR_TYPE__NONE;
+    return FLOOR__NONE;
 }
 
 void room_change_floor_at(Room* room, int floor, Vec2i tilemap_pos)

@@ -8,39 +8,39 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 
     switch(action->type)
     {
-        case ACTION_TYPE__NONE:
+        case ACTION__NONE:
         {
             //
         }
         break;
-        case ACTION_TYPE__SEQUENCE:
+        case ACTION__SEQUENCE:
         {
             remove_all_list_elements(action->sequence.action_list, 1);
             action->sequence.curr_action_list_elem = 0;
         }
         break;
-        case ACTION_TYPE__SIMULTANEOUS:
+        case ACTION__SIMULTANEOUS:
         {
             remove_all_list_elements(action->simultaneous.action_list, 1);
         }
         break;
-        case ACTION_TYPE__MOVE:
-        case ACTION_TYPE__MOVE_FLOATING:
-        case ACTION_TYPE__MOVE_FLYING:
+        case ACTION__MOVE:
+        case ACTION__MOVE_FLOATING:
+        case ACTION__MOVE_FLYING:
         {
             action->move.object->tilemap_pos = vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
 
             int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
 
-            if(action->type == ACTION_TYPE__MOVE)
+            if(action->type == ACTION__MOVE)
             {
                 floor_on_move_end(state, sequence, action, floor);
             }
-            else if(action->type == ACTION_TYPE__MOVE_FLOATING)
+            else if(action->type == ACTION__MOVE_FLOATING)
             {
                 floor_on_move_floating_end(state, sequence, action, floor);
             }
-            else if(action->type == ACTION_TYPE__MOVE_FLYING)
+            else if(action->type == ACTION__MOVE_FLYING)
             {
                 floor_on_move_flying_end(state, sequence, action, floor);
             }
@@ -48,7 +48,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             action->move.object->is_visible = 1;
         }
         break;
-        case ACTION_TYPE__CRASH:
+        case ACTION__CRASH:
         {
             Action* crushed_action_sequence = new_action_sequence();
             Object* crushed_object = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
@@ -63,21 +63,21 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             action->crash.object_crushing->is_visible = 1;
         }
         break;
-        case ACTION_TYPE__FALL:
+        case ACTION__FALL:
         {
             add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->tilemap_pos));
 
             action->fall.object->is_visible = 0;
         }
         break;
-        case ACTION_TYPE__DEATH:
+        case ACTION__DEATH:
         {
             object_on_death(state, sequence, action, action->death.object);
 
             action->death.object->is_to_be_removed = 1;
         }
         break;
-        case ACTION_TYPE__BLOW_UP:
+        case ACTION__BLOW_UP:
         {
             Action* push_around = new_action_simultaneous();
 
@@ -147,7 +147,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                 );
         }
         break;
-        case ACTION_TYPE__THROW:
+        case ACTION__THROW:
         {
             Vec2i curr_tilemap_pos = action->throw.object_thrown->tilemap_pos;
             Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
@@ -159,14 +159,14 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             action->throw.object_thrown->is_visible = 1;
         }
         break;
-        case ACTION_TYPE__LIFT:
+        case ACTION__LIFT:
         {
             add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object_thrown, action->tilemap_pos, action->throw.dir4));
 
             action->throw.object_thrown->is_visible = 1;
         }
         break;
-        case ACTION_TYPE__DROP:
+        case ACTION__DROP:
         {
             object_on_drop(state, sequence, action, action->drop.object);
 
@@ -187,22 +187,22 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             }
         }
         break;
-        case ACTION_TYPE__CHANGE_FLOOR:
+        case ACTION__CHANGE_FLOOR:
         {
             //
         }
         break;
-        case ACTION_TYPE__CHANGE_OBJECT:
+        case ACTION__CHANGE_OBJECT:
         {
             //
         }
         break;
-        case ACTION_TYPE__ADD_OBJECT:
+        case ACTION__ADD_OBJECT:
         {
             //
         }
         break;
-        case ACTION_TYPE__REMOVE_OBJECT:
+        case ACTION__REMOVE_OBJECT:
         {
             if(action->remove_object.object_to_remove != 0)
             {
@@ -210,17 +210,17 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             }
         }
         break;
-        case ACTION_TYPE__MELT:
+        case ACTION__MELT:
         {
             //
         }
         break;
-        case ACTION_TYPE__BREAK:
+        case ACTION__BREAK:
         {
             //
         }
         break;
-        case ACTION_TYPE__SHAKE:
+        case ACTION__SHAKE:
         {
             //
         }
