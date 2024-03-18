@@ -349,7 +349,14 @@ int is_object_pull_towards(Object* object)
         case OBJECT__LEVER_STONE_UNPOWERED:            is = 1; break;
         case OBJECT__LEVER_STONE_POWERED:              is = 1; break;
 
-        default:                                            is = 0; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:     is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:    is = 1; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:          is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:       is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:      is = 1; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:            is = 1; break;
+
+        default:                                        is = 0; break;
     }
 
     return is;
@@ -433,7 +440,14 @@ int is_object_throw_over(Object* object)
         case OBJECT__EXIT_OBSIDIAN_UP:
         case OBJECT__EXIT_OBSIDIAN_RIGHT:
         case OBJECT__EXIT_OBSIDIAN_DOWN:
-        case OBJECT__EXIT_OBSIDIAN_LEFT:               is = 0; break;
+        case OBJECT__EXIT_OBSIDIAN_LEFT:
+
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:
+        case OBJECT__EXT_WALL_PART_VERTICAL:               is = 0; break;
 
         default:                                            is = 1; break;
     }
@@ -662,6 +676,13 @@ int is_object_manipulatable(Object* object)
         case OBJECT__LEVER_STONE_UNPOWERED:            is = 0; break;
         case OBJECT__LEVER_STONE_POWERED:              is = 0; break;
 
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:     is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:    is = 1; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:          is = 0; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:       is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:      is = 1; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:            is = 0; break;
+
         default: break;
     }
 
@@ -674,47 +695,6 @@ int is_object_movable(Object* object)
 
     switch(object->type)
     {
-        case OBJECT__WALL_ROCK:                        is = 0; break;
-        case OBJECT__WALL_STONE:                       is = 0; break;
-        case OBJECT__WALL_METAL:                       is = 0; break;
-        case OBJECT__WALL_MARBLE:                      is = 0; break;
-        case OBJECT__WALL_OBSIDIAN:                    is = 0; break;
-
-        case OBJECT__EXIT_ROCK_UP:                     is = 0; break;
-        case OBJECT__EXIT_ROCK_RIGHT:                  is = 0; break;
-        case OBJECT__EXIT_ROCK_DOWN:                   is = 0; break;
-        case OBJECT__EXIT_ROCK_LEFT:                   is = 0; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_UP:             is = 0; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_RIGHT:          is = 0; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_DOWN:           is = 0; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_LEFT:           is = 0; break;
-
-        case OBJECT__EXIT_STONE_UP:                    is = 0; break;
-        case OBJECT__EXIT_STONE_RIGHT:                 is = 0; break;
-        case OBJECT__EXIT_STONE_DOWN:                  is = 0; break;
-        case OBJECT__EXIT_STONE_LEFT:                  is = 0; break;
-        case OBJECT__EXIT_STONE_BLOCKED_UP:            is = 0; break;
-        case OBJECT__EXIT_STONE_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT__EXIT_STONE_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT__EXIT_STONE_BLOCKED_LEFT:          is = 0; break;
-
-        case OBJECT__EXIT_METAL_UP:                    is = 0; break;
-        case OBJECT__EXIT_METAL_RIGHT:                 is = 0; break;
-        case OBJECT__EXIT_METAL_DOWN:                  is = 0; break;
-        case OBJECT__EXIT_METAL_LEFT:                  is = 0; break;
-        case OBJECT__EXIT_METAL_ON_UP:                 is = 0; break;
-        case OBJECT__EXIT_METAL_ON_RIGHT:              is = 0; break;
-        case OBJECT__EXIT_METAL_ON_DOWN:               is = 0; break;
-        case OBJECT__EXIT_METAL_ON_LEFT:               is = 0; break;
-        case OBJECT__EXIT_METAL_OFF_UP:                is = 0; break;
-        case OBJECT__EXIT_METAL_OFF_RIGHT:             is = 0; break;
-        case OBJECT__EXIT_METAL_OFF_DOWN:              is = 0; break;
-        case OBJECT__EXIT_METAL_OFF_LEFT:              is = 0; break;
-        case OBJECT__EXIT_METAL_BLOCKED_UP:            is = 0; break;
-        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:         is = 0; break;
-        case OBJECT__EXIT_METAL_BLOCKED_DOWN:          is = 0; break;
-        case OBJECT__EXIT_METAL_BLOCKED_LEFT:          is = 0; break;
-
         case OBJECT__PILLAR:                           is = 0; break;
         case OBJECT__SARCOPHAGUS:                      is = 1; break;
 
@@ -980,6 +960,13 @@ int is_object_meltable(Object* object)
         case OBJECT__LEVER_METAL_ON:                   is = 1; break;
         case OBJECT__LEVER_STONE_UNPOWERED:            is = 0; break;
         case OBJECT__LEVER_STONE_POWERED:              is = 0; break;
+
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:     is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:    is = 1; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:          is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:       is = 1; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:      is = 1; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:            is = 1; break;
 
         default: break;
     }
@@ -1678,6 +1665,13 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__LEVER_STONE_UNPOWERED:            name = "lever stone unpowered"; break;
         case OBJECT__LEVER_STONE_POWERED:              name = "lever stone powered"; break;
 
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    name = "ext wall source on horizontal"; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   name = "ext wall source off horizontal"; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:         name = "ext wall part horizontal"; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      name = "ext wall source on vertical"; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     name = "ext wall source off vertical"; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:           name = "ext wall part vertical"; break;
+
         case OBJECT__STATION_FIST_HAND:                name = "station push hand"; break;
         case OBJECT__STATION_HOOK_HAND:                name = "station hook hand"; break;
         case OBJECT__STATION_CHAIN_HAND:               name = "station chain hand"; break;
@@ -1890,6 +1884,13 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__LEVER_METAL_ON:                   texture = textures->object.lever_metal_on; break;
         case OBJECT__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered; break;
         case OBJECT__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered; break;
+
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    texture = textures->object.ext_wall_source_on_horizontal; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   texture = textures->object.ext_wall_source_off_horizontal; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:         texture = textures->object.ext_wall_part_horizontal; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      texture = textures->object.ext_wall_source_on_vertical; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical; break;
 
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
@@ -2104,6 +2105,13 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered; break;
         case OBJECT__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered; break;
 
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    texture = textures->object.ext_wall_source_on_horizontal; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   texture = textures->object.ext_wall_source_off_horizontal; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:         texture = textures->object.ext_wall_part_horizontal; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      texture = textures->object.ext_wall_source_on_vertical; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical; break;
+
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
         case OBJECT__STATION_CHAIN_HAND:               texture = textures->object.station_chain_hand; break;
@@ -2317,6 +2325,13 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered_outline; break;
         case OBJECT__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered_outline; break;
 
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    texture = textures->object.ext_wall_source_on_horizontal_outline; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   texture = textures->object.ext_wall_source_off_horizontal_outline; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:         texture = textures->object.ext_wall_part_horizontal_outline; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      texture = textures->object.ext_wall_source_on_vertical_outline; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical_outline; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical_outline; break;
+
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;
         case OBJECT__STATION_CHAIN_HAND:               texture = textures->object.station_outline; break;
@@ -2529,6 +2544,13 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__LEVER_METAL_ON:                   texture = textures->object.lever_metal_on_outline; break;
         case OBJECT__LEVER_STONE_UNPOWERED:            texture = textures->object.lever_stone_unpowered_outline; break;
         case OBJECT__LEVER_STONE_POWERED:              texture = textures->object.lever_stone_powered_outline; break;
+
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    texture = textures->object.ext_wall_source_on_horizontal_outline; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   texture = textures->object.ext_wall_source_off_horizontal_outline; break;
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:         texture = textures->object.ext_wall_part_horizontal_outline; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      texture = textures->object.ext_wall_source_on_vertical_outline; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical_outline; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical_outline; break;
 
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;

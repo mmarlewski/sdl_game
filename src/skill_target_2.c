@@ -1038,7 +1038,8 @@ void skill_get_possible_target_2_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i <= SKILL_LAUNCH_MINIBOT_RANGE; i++)
+                int go_on = 1;
+                for(int i = 1; i <= SKILL_LAUNCH_MINIBOT_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         source_tilemap_pos,
@@ -1059,6 +1060,11 @@ void skill_get_possible_target_2_pos(
                                 target_2_pos_list,
                                 new_vec2i_from_vec2i(tilemap_pos)
                                 );
+                        }
+
+                        if(object != 0 && !is_object_throw_over(object))
+                        {
+                            go_on = 0;
                         }
                     }
                 }

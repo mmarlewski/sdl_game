@@ -97,6 +97,37 @@ void create_level(State* state)
 
     room_change_floor_at(
         room_0_0,
+        FLOOR__STONE_TRAP,
+        vec2i(1,3)
+        );
+    room_change_floor_at(
+        room_0_0,
+        FLOOR__STONE_TRAP,
+        vec2i(2,3)
+        );
+    room_change_floor_at(
+        room_0_0,
+        FLOOR__STONE_TRAP,
+        vec2i(3,3)
+        );
+    room_change_floor_at(
+        room_0_0,
+        FLOOR__STONE_TRAP,
+        vec2i(4,3)
+        );
+    room_change_floor_at(
+        room_0_0,
+        FLOOR__STONE_TRAP,
+        vec2i(5,3)
+        );
+    room_change_floor_at(
+        room_0_0,
+        FLOOR__STONE_TRAP,
+        vec2i(6,3)
+        );
+
+    room_change_floor_at(
+        room_0_0,
         FLOOR__OBSTACLE,
         vec2i(8,3)
         );
@@ -2197,6 +2228,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_1_3,
+        new_object(OBJECT__STATION_BOOT_LEG),
+        vec2i(2,7)
+        );
+
+    room_add_object_at(
+        room_1_3,
         new_object(OBJECT__EXIT_GOLD_UNLOCKED_DOWN),
         vec2i(1,0)
         );
@@ -2564,6 +2601,12 @@ void create_level(State* state)
     destroy_list(room_1_4_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_1_4,
+        new_object(OBJECT__STATION_TELEPORTATION_HEAD),
+        vec2i(7,7)
+        );
 
     room_add_object_at(
         room_1_4,
@@ -3062,6 +3105,11 @@ void create_level(State* state)
     room_change_floor_at(
         room_2_1,
         FLOOR__LAVA,
+        vec2i(2,5)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR__LAVA,
         vec2i(2,4)
         );
     room_change_floor_at(
@@ -3075,6 +3123,21 @@ void create_level(State* state)
         vec2i(2,2)
         );
 
+    room_change_floor_at(
+        room_2_1,
+        FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL,
+        vec2i(1,5)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR__LAVA,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_2_1,
+        FLOOR__LAVA,
+        vec2i(1,3)
+        );
     room_change_floor_at(
         room_2_1,
         FLOOR__LAVA,
@@ -3111,6 +3174,48 @@ void create_level(State* state)
     destroy_list(room_2_1_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__STATION_MINIBOT_TORSO),
+        vec2i(1,8)
+        );
+
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,9)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,8)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,7)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,6)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,5)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,4)
+        );
+    room_add_object_at(
+        room_2_1,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,3)
+        );
 
     room_add_object_at(
         room_2_1,
@@ -3238,6 +3343,12 @@ void create_level(State* state)
     destroy_list(room_2_2_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__STATION_SCISSOR_HAND),
+        vec2i(8,1)
+        );
 
     room_add_object_at(
         room_2_2,
@@ -4125,6 +4236,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_3_0,
+        new_object(OBJECT__STATION_SPRING_LEG),
+        vec2i(2,7)
+        );
+
+    room_add_object_at(
+        room_3_0,
         new_object(OBJECT__WALL_OBSIDIAN),
         vec2i(6,1)
         );
@@ -4700,6 +4817,12 @@ void create_level(State* state)
     destroy_list(room_3_3_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_3_3,
+        new_object(OBJECT__STATION_FIST_HAND),
+        vec2i(7,7)
+        );
 
     room_add_object_at(
         room_3_3,
@@ -5798,8 +5921,34 @@ void create_level(State* state)
 
     room_add_object_at(
         room_4_3,
-        new_object(OBJECT__PILLAR),
+        new_object(OBJECT__STATION_TRACK_LEG),
+        vec2i(6,2)
+        );
+
+    room_add_object_at(
+        room_4_3,
+        new_object(OBJECT__STALACTITE),
+        vec2i(6,4)
+        );
+    room_add_object_at(
+        room_4_3,
+        new_object(OBJECT__STALACTITE),
+        vec2i(6,5)
+        );
+    room_add_object_at(
+        room_4_3,
+        new_object(OBJECT__STALACTITE),
+        vec2i(6,6)
+        );
+    room_add_object_at(
+        room_4_3,
+        new_object(OBJECT__STALACTITE),
         vec2i(6,7)
+        );
+    room_add_object_at(
+        room_4_3,
+        new_object(OBJECT__STALACTITE),
+        vec2i(6,8)
         );
 
     room_add_object_at(
@@ -5984,14 +6133,6 @@ void create_level(State* state)
         vec2i(9,4)
         );
 
-    // enemies
-
-    room_add_object_at(
-        room_4_4,
-        new_object(OBJECT__TURRET_BOMB_DEPLOYED),
-        vec2i(2,2)
-        );
-
     // passages
 
     add_passage(state,new_passage(
@@ -6164,6 +6305,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_4_5,
+        new_object(OBJECT__STATION_STRIDER_LEG),
+        vec2i(7,7)
+        );
+
+    room_add_object_at(
+        room_4_5,
         new_object(OBJECT__CRATE_GEMSTONE_ITEM),
         vec2i(2,2)
         );
@@ -6276,22 +6423,38 @@ void create_level(State* state)
     room_add_object_at(
         room_5_0,
         new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(6,5)
+        );
+    room_add_object_at(
+        room_5_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(7,5)
+        );
+    room_add_object_at(
+        room_5_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(8,5)
+        );
+
+    room_add_object_at(
+        room_5_0,
+        new_object(OBJECT__EXT_WALL_PART_VERTICAL),
+        vec2i(5,1)
+        );
+    room_add_object_at(
+        room_5_0,
+        new_object(OBJECT__EXT_WALL_SOURCE_ON_VERTICAL),
+        vec2i(5,2)
+        );
+    room_add_object_at(
+        room_5_0,
+        new_object(OBJECT__EXT_WALL_PART_VERTICAL),
+        vec2i(5,3)
+        );
+    room_add_object_at(
+        room_5_0,
+        new_object(OBJECT__EXT_WALL_PART_VERTICAL),
         vec2i(5,4)
-        );
-    room_add_object_at(
-        room_5_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(6,4)
-        );
-    room_add_object_at(
-        room_5_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(7,4)
-        );
-    room_add_object_at(
-        room_5_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(8,4)
         );
 
     room_add_object_at(
@@ -7142,6 +7305,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_5_5,
+        new_object(OBJECT__STATION_WINGS_TORSO),
+        vec2i(8,7)
+        );
+
+    room_add_object_at(
+        room_5_5,
         new_object(OBJECT__WALL_MARBLE),
         vec2i(1,4)
         );
@@ -7315,6 +7484,22 @@ void create_level(State* state)
         room_6_0,
         new_object(OBJECT__WALL_OBSIDIAN),
         vec2i(5,1)
+        );
+
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__EXT_WALL_PART_HORIZONTAL),
+        vec2i(6,2)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL),
+        vec2i(7,2)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__EXT_WALL_PART_HORIZONTAL),
+        vec2i(8,2)
         );
 
     room_add_object_at(
@@ -8352,6 +8537,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_7_0,
+        new_object(OBJECT__STATION_MANIPULATION_HEAD),
+        vec2i(7,2)
+        );
+
+    room_add_object_at(
+        room_7_0,
         new_object(OBJECT__WALL_OBSIDIAN),
         vec2i(5,1)
         );
@@ -8791,6 +8982,12 @@ void create_level(State* state)
 
     room_add_object_at(
         room_7_2,
+        new_object(OBJECT__STATION_HOOK_HAND),
+        vec2i(1,8)
+        );
+
+    room_add_object_at(
+        room_7_2,
         new_object(OBJECT__STALACTITE),
         vec2i(1,1)
         );
@@ -8943,6 +9140,12 @@ void create_level(State* state)
     destroy_list(room_7_3_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_7_3,
+        new_object(OBJECT__STATION_CHAIN_HAND),
+        vec2i(6,1)
+        );
 
     room_add_object_at(
         room_7_3,
@@ -9663,198 +9866,6 @@ void create_level(State* state)
         vec2i(0,4),
         vec2i(8,4)
         ));
-
-    ///////////
-    // stations
-    ///////////
-
-    List* station_type_list = new_list((void (*)(void *))0);
-    List* station_room_name_list = new_list((void (*)(void *))0);
-    List* station_pos_list = new_list((void (*)(void *))&destroy_vec2i);
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_SPRING_LEG
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "3_0"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(2,7)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_MINIBOT_TORSO
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "2_1"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(1,8)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_SCISSOR_HAND
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "2_2"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(8,1)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_TRACK_LEG
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "3_3"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(7,7)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_FIST_HAND
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "4_3"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(6,2)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_STRIDER_LEG
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "4_5"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(7,7)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_WINGS_TORSO
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "5_5"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(8,7)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_MANIPULATION_HEAD
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "7_0"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(7,2)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_HOOK_HAND
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "7_2"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(1,8)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_CHAIN_HAND
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "7_3"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(6,1)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_TELEPORTATION_HEAD
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "1_4"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(7,7)
-        );
-
-    add_new_list_element_to_list_end(
-        station_type_list,
-        (void*)OBJECT__STATION_BOOT_LEG
-        );
-    add_new_list_element_to_list_end(
-        station_room_name_list,
-        "1_3"
-        );
-    add_new_list_element_to_list_end(
-        station_pos_list,
-        new_vec2i(2,7)
-        );
-
-    ListElem* curr_type_elem = station_type_list->head;
-    ListElem* curr_name_elem = station_room_name_list->head;
-    ListElem* curr_pos_elem = station_pos_list->head;
-
-    while(curr_name_elem != 0 && curr_pos_elem != 0)
-    {
-        int curr_type = (int)curr_type_elem->data;
-        char* curr_name = curr_name_elem->data;
-        Vec2i* curr_pos = curr_pos_elem->data;
-
-        room_add_object_at(
-            get_room(state, curr_name),
-            new_object(curr_type),
-            *curr_pos
-            );
-
-        curr_type_elem = curr_type_elem->next;
-        curr_name_elem = curr_name_elem->next;
-        curr_pos_elem = curr_pos_elem->next;
-    }
-
-    remove_all_list_elements(station_type_list, 0);
-    destroy_list(station_type_list);
-    remove_all_list_elements(station_room_name_list, 0);
-    destroy_list(station_room_name_list);
-    remove_all_list_elements(station_pos_list, 1);
-    destroy_list(station_pos_list);
 
     /////////////
     // mechanisms

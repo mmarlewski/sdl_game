@@ -4,12 +4,15 @@
 void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
 {
     floor->highlight = load_texture_from_filepath (renderer, "./res/floor/highlight.png");
+
     floor->rock = load_texture_from_filepath (renderer, "./res/floor/rock.png");
     floor->rock_crack_water = load_texture_from_filepath (renderer, "./res/floor/rock_crack_water.png");
     floor->rock_crack_lava = load_texture_from_filepath (renderer, "./res/floor/rock_crack_lava.png");
     floor->rock_crack_pit = load_texture_from_filepath (renderer, "./res/floor/rock_crack_pit.png");
+
     floor->stone = load_texture_from_filepath (renderer, "./res/floor/stone.png");
     floor->stone_trap = load_texture_from_filepath (renderer, "./res/floor/stone_trap.png");
+
     floor->metal = load_texture_from_filepath (renderer, "./res/floor/metal.png");
     floor->metal_spikes_on = load_texture_from_filepath (renderer, "./res/floor/metal_spikes_on.png");
     floor->metal_spikes_off = load_texture_from_filepath (renderer, "./res/floor/metal_spikes_off.png");
@@ -19,29 +22,48 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_cover_bottom = load_texture_from_filepath (renderer, "./res/floor/metal_cover_bottom.png");
     floor->metal_target_unchecked = load_texture_from_filepath (renderer, "./res/floor/metal_target_unchecked.png");
     floor->metal_target_checked = load_texture_from_filepath (renderer, "./res/floor/metal_target_checked.png");
+
     floor->metal_piston = load_texture_from_filepath (renderer, "./res/floor/metal_piston.png");
     floor->metal_piston_cell = load_texture_from_filepath (renderer, "./res/floor/metal_piston_cell.png");
     floor->metal_piston_dynamite = load_texture_from_filepath (renderer, "./res/floor/metal_piston_dynamite.png");
     floor->metal_piston_barrel = load_texture_from_filepath (renderer, "./res/floor/metal_piston_barrel.png");
     floor->metal_no_piston = load_texture_from_filepath (renderer, "./res/floor/metal_no_piston.png");
+
     floor->gold = load_texture_from_filepath (renderer, "./res/floor/gold.png");
+
     floor->marble = load_texture_from_filepath (renderer, "./res/floor/marble.png");
+
     floor->obsidian = load_texture_from_filepath (renderer, "./res/floor/obsidian.png");
+
     floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
+
     floor->pit = load_texture_from_filepath (renderer, "./res/floor/pit.png");
+
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
     floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
     floor->water_lily_pod_1 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_1.png");
     floor->water_lily_pod_2 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_2.png");
     floor->water_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_1.png");
     floor->water_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_2.png");
+
     floor->lava_1 = load_texture_from_filepath (renderer, "./res/floor/lava_1.png");
     floor->lava_2 = load_texture_from_filepath (renderer, "./res/floor/lava_2.png");
+
     floor->lava_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_1.png");
     floor->lava_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_2.png");
+
     floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
     floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
+
     floor->obstacle = load_texture_from_filepath (renderer, "./res/floor/obstacle.png");
+
+    floor->ext_bridge_source_on_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_on_horizontal.png");
+    floor->ext_bridge_source_off_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_off_horizontal.png");
+    floor->ext_bridge_part_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_part_horizontal.png");
+    floor->ext_bridge_source_on_vertical = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_on_vertical.png");
+    floor->ext_bridge_source_off_vertical = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_off_vertical.png");
+    floor->ext_bridge_part_vertical = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_part_vertical.png");
+
     floor->stone_stairs_below = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below.png");
     floor->stone_stairs_below_blocked = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below_blocked.png");
     floor->stone_stairs_above_unpowered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_unpowered.png");
@@ -509,6 +531,24 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->lever_stone_powered = load_texture_from_filepath(renderer, "./res/object/lever_stone_powered.png");
     object->lever_stone_powered_outline = load_texture_from_filepath(renderer, "./res/object/lever_stone_powered_outline.png");
+
+    object->ext_wall_source_on_horizontal = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_on_horizontal.png");
+    object->ext_wall_source_on_horizontal_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_on_horizontal_outline.png");
+
+    object->ext_wall_source_off_horizontal = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_off_horizontal.png");
+    object->ext_wall_source_off_horizontal_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_off_horizontal_outline.png");
+
+    object->ext_wall_part_horizontal = load_texture_from_filepath(renderer, "./res/object/ext_wall_part_horizontal.png");
+    object->ext_wall_part_horizontal_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_part_horizontal_outline.png");
+
+    object->ext_wall_source_on_vertical = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_on_vertical.png");
+    object->ext_wall_source_on_vertical_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_on_vertical_outline.png");
+
+    object->ext_wall_source_off_vertical = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_off_vertical.png");
+    object->ext_wall_source_off_vertical_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_source_off_vertical_outline.png");
+
+    object->ext_wall_part_vertical = load_texture_from_filepath(renderer, "./res/object/ext_wall_part_vertical.png");
+    object->ext_wall_part_vertical_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_part_vertical_outline.png");
 }
 
 void destroy_textures_object (Textures_Object* object)

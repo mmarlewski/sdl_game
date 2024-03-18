@@ -513,6 +513,17 @@ void floor_on_melt(State* state, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
+        case FLOOR__STONE_TRAP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__STONE,
+                    action->tilemap_pos
+                    )
+                );
+        }
+        break;
         default:
         break;
     }
@@ -703,6 +714,266 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
 {
     switch(floor)
     {
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL,
+                    tilemap_pos
+                    )
+                );
+
+            int left_go_on = 1;
+            int right_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__LEFT,
+                    i
+                    );
+                int left_floor = room_get_floor_at(
+                    state->curr_room,
+                    left_tilemap_pos
+                    );
+                if(left_floor == FLOOR__LAVA && left_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__EXT_BRIDGE_PART_HORIZONTAL,
+                            left_tilemap_pos
+                            )
+                        );
+                }
+                if(left_floor != FLOOR__LAVA)
+                {
+                    left_go_on = 0;
+                }
+
+                Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__RIGHT,
+                    i
+                    );
+                int right_floor = room_get_floor_at(
+                    state->curr_room,
+                    right_tilemap_pos
+                    );
+                if(right_floor == FLOOR__LAVA && right_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__EXT_BRIDGE_PART_HORIZONTAL,
+                            right_tilemap_pos
+                            )
+                        );
+                }
+                if(right_floor != FLOOR__LAVA)
+                {
+                    right_go_on = 0;
+                }
+            }
+        }
+        break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL,
+                    tilemap_pos
+                    )
+                );
+
+            int left_go_on = 1;
+            int right_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__LEFT,
+                    i
+                    );
+                int left_floor = room_get_floor_at(
+                    state->curr_room,
+                    left_tilemap_pos
+                    );
+                if(left_floor == FLOOR__EXT_BRIDGE_PART_HORIZONTAL &&
+                left_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__LAVA,
+                            left_tilemap_pos
+                            )
+                        );
+                }
+                if(left_floor != FLOOR__EXT_BRIDGE_PART_HORIZONTAL)
+                {
+                    left_go_on = 0;
+                }
+
+                Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__RIGHT,
+                    i
+                    );
+                int right_floor = room_get_floor_at(
+                    state->curr_room,
+                    right_tilemap_pos
+                    );
+                if(right_floor == FLOOR__EXT_BRIDGE_PART_HORIZONTAL &&
+                right_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__LAVA,
+                            right_tilemap_pos
+                            )
+                        );
+                }
+                if(right_floor != FLOOR__EXT_BRIDGE_PART_HORIZONTAL)
+                {
+                    right_go_on = 0;
+                }
+            }
+        }
+        break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL,
+                    tilemap_pos
+                    )
+                );
+
+            int up_go_on = 1;
+            int down_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__UP,
+                    i
+                    );
+                int up_floor = room_get_floor_at(
+                    state->curr_room,
+                    up_tilemap_pos
+                    );
+                if(up_floor == FLOOR__LAVA && up_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__EXT_BRIDGE_PART_VERTICAL,
+                            up_tilemap_pos
+                            )
+                        );
+                }
+                if(up_floor != FLOOR__LAVA)
+                {
+                    up_go_on = 0;
+                }
+
+                Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__DOWN,
+                    i
+                    );
+                int down_floor = room_get_floor_at(
+                    state->curr_room,
+                    down_tilemap_pos
+                    );
+                if(down_floor == FLOOR__LAVA && down_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__EXT_BRIDGE_PART_VERTICAL,
+                            down_tilemap_pos
+                            )
+                        );
+                }
+                if(down_floor != FLOOR__LAVA)
+                {
+                    down_go_on = 0;
+                }
+            }
+        }
+        break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL,
+                    tilemap_pos
+                    )
+                );
+
+            int up_go_on = 1;
+            int down_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__UP,
+                    i
+                    );
+                int up_floor = room_get_floor_at(
+                    state->curr_room,
+                    up_tilemap_pos
+                    );
+                if(up_floor == FLOOR__EXT_BRIDGE_PART_VERTICAL &&
+                up_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__LAVA,
+                            up_tilemap_pos
+                            )
+                        );
+                }
+                if(up_floor != FLOOR__EXT_BRIDGE_PART_VERTICAL)
+                {
+                    up_go_on = 0;
+                }
+
+                Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
+                    tilemap_pos,
+                    DIR4__DOWN,
+                    i
+                    );
+                int down_floor = room_get_floor_at(
+                    state->curr_room,
+                    down_tilemap_pos
+                    );
+                if(down_floor == FLOOR__EXT_BRIDGE_PART_VERTICAL &&
+                down_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__LAVA,
+                            down_tilemap_pos
+                            )
+                        );
+                }
+                if(down_floor != FLOOR__EXT_BRIDGE_PART_VERTICAL)
+                {
+                    down_go_on = 0;
+                }
+            }
+        }
+        break;
         case FLOOR__METAL_PISTON:
         {
             add_action_to_end_action_sequence(
@@ -1640,15 +1911,272 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
 {
     switch(object->type)
     {
-        case OBJECT__LEVER_METAL_OFF:
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:
         {
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(
-                    OBJECT__LEVER_METAL_ON,
+                    OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL,
                     object->tilemap_pos
                     )
                 );
+
+            int left_go_on = 1;
+            int right_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__LEFT,
+                    i
+                    );
+                Object* left_object = room_get_object_at(
+                    state->curr_room,
+                    left_tilemap_pos
+                    );
+                if(left_object == 0 && left_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_add_object(
+                            new_object(OBJECT__EXT_WALL_PART_HORIZONTAL),
+                            left_tilemap_pos
+                            )
+                        );
+                }
+                if(left_object != 0)
+                {
+                    left_go_on = 0;
+                }
+
+                Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__RIGHT,
+                    i
+                    );
+                Object* right_object = room_get_object_at(
+                    state->curr_room,
+                    right_tilemap_pos
+                    );
+                if(right_object == 0 && right_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_add_object(
+                            new_object(OBJECT__EXT_WALL_PART_HORIZONTAL),
+                            right_tilemap_pos
+                            )
+                        );
+                }
+                if(right_object != 0)
+                {
+                    right_go_on = 0;
+                }
+            }
+        }
+        break;
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL,
+                    object->tilemap_pos
+                    )
+                );
+
+            int left_go_on = 1;
+            int right_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__LEFT,
+                    i
+                    );
+                Object* left_object = room_get_object_at(
+                    state->curr_room,
+                    left_tilemap_pos
+                    );
+                if(left_object != 0 &&
+                left_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
+                left_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            left_object,
+                            left_tilemap_pos
+                            )
+                        );
+                }
+                if(left_object != 0 &&
+                left_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
+                {
+                    left_go_on = 0;
+                }
+
+                Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__RIGHT,
+                    i
+                    );
+                Object* right_object = room_get_object_at(
+                    state->curr_room,
+                    right_tilemap_pos
+                    );
+                if(right_object != 0 &&
+                right_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
+                right_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            right_object,
+                            right_tilemap_pos
+                            )
+                        );
+                }
+                if(right_object != 0 &&
+                right_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
+                {
+                    right_go_on = 0;
+                }
+            }
+        }
+        break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXT_WALL_SOURCE_ON_VERTICAL,
+                    object->tilemap_pos
+                    )
+                );
+
+            int up_go_on = 1;
+            int down_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__UP,
+                    i
+                    );
+                Object* up_object = room_get_object_at(
+                    state->curr_room,
+                    up_tilemap_pos
+                    );
+                if(up_object == 0 && up_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_add_object(
+                            new_object(OBJECT__EXT_WALL_PART_VERTICAL),
+                            up_tilemap_pos
+                            )
+                        );
+                }
+                if(up_object != 0)
+                {
+                    up_go_on = 0;
+                }
+
+                Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__DOWN,
+                    i
+                    );
+                Object* down_object = room_get_object_at(
+                    state->curr_room,
+                    down_tilemap_pos
+                    );
+                if(down_object == 0 && down_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_add_object(
+                            new_object(OBJECT__EXT_WALL_PART_VERTICAL),
+                            down_tilemap_pos
+                            )
+                        );
+                }
+                if(down_object != 0)
+                {
+                    down_go_on = 0;
+                }
+            }
+        }
+        break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL,
+                    object->tilemap_pos
+                    )
+                );
+
+            int up_go_on = 1;
+            int down_go_on = 1;
+            for(int i = 1; i < 10; i++)
+            {
+                Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__UP,
+                    i
+                    );
+                Object* up_object = room_get_object_at(
+                    state->curr_room,
+                    up_tilemap_pos
+                    );
+                if(up_object != 0 &&
+                up_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
+                up_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            up_object,
+                            up_tilemap_pos
+                            )
+                        );
+                }
+                if(up_object != 0 &&
+                up_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
+                {
+                    up_go_on = 0;
+                }
+
+                Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
+                    object->tilemap_pos,
+                    DIR4__DOWN,
+                    i
+                    );
+                Object* down_object = room_get_object_at(
+                    state->curr_room,
+                    down_tilemap_pos
+                    );
+                if(down_object != 0 &&
+                down_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
+                down_go_on)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            down_object,
+                            down_tilemap_pos
+                            )
+                        );
+                }
+                if(down_object != 0 &&
+                down_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
+                {
+                    down_go_on = 0;
+                }
+            }
         }
         break;
         case OBJECT__LEVER_METAL_ON:

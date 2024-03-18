@@ -60,6 +60,13 @@ typedef struct
 
     Texture* obstacle;
 
+    Texture* ext_bridge_source_on_horizontal;
+    Texture* ext_bridge_source_off_horizontal;
+    Texture* ext_bridge_part_horizontal;
+    Texture* ext_bridge_source_on_vertical;
+    Texture* ext_bridge_source_off_vertical;
+    Texture* ext_bridge_part_vertical;
+
     Texture* stone_stairs_below;
     Texture* stone_stairs_below_blocked;
     Texture* stone_stairs_above_unpowered;
@@ -494,6 +501,24 @@ typedef struct
 
     Texture* lever_stone_powered;
     Texture* lever_stone_powered_outline;
+
+    Texture* ext_wall_source_on_horizontal;
+    Texture* ext_wall_source_on_horizontal_outline;
+
+    Texture* ext_wall_source_off_horizontal;
+    Texture* ext_wall_source_off_horizontal_outline;
+
+    Texture* ext_wall_part_horizontal;
+    Texture* ext_wall_part_horizontal_outline;
+
+    Texture* ext_wall_source_on_vertical;
+    Texture* ext_wall_source_on_vertical_outline;
+
+    Texture* ext_wall_source_off_vertical;
+    Texture* ext_wall_source_off_vertical_outline;
+
+    Texture* ext_wall_part_vertical;
+    Texture* ext_wall_part_vertical_outline;
 
     Texture* station_fist_hand;
     Texture* station_hook_hand;

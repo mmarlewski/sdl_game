@@ -90,7 +90,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "4_4");
+    Room* room = get_room(state, "2_2");
 
     room_add_object_at(
         room,
@@ -115,7 +115,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);

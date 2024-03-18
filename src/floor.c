@@ -58,6 +58,12 @@ int is_floor_manipulatable(int floor)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW:            is = 0; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         is = 0; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           is = 0; break;
         default: break;
     }
 
@@ -112,6 +118,12 @@ int is_floor_traversable(int floor)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW:            is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           is = 1; break;
         default: break;
     }
 
@@ -165,6 +177,12 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW:            is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           is = 1; break;
         default: break;
     }
 
@@ -218,6 +236,12 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         is = 1; break;
         case FLOOR__METAL_STAIRS_BELOW:            is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      is = 1; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     is = 1; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           is = 1; break;
         default: break;
     }
 
@@ -673,6 +697,12 @@ char* get_name_from_floor(int floor)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        name = "metal stairs above off"; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         name = "metal stairs below on"; break;
         case FLOOR__METAL_STAIRS_BELOW:            name = "metal stairs below"; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    name = "ext bridge source on horizontal"; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   name = "ext bridge source off horizontal"; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         name = "ext bridge part horizontal"; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      name = "ext bridge source on vertical"; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     name = "ext bridge source off vertical"; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           name = "ext bridge part vertical"; break;
         default: break;
     }
 
@@ -727,6 +757,12 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        texture = textures->floor.metal_stairs_above_off; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         texture = textures->floor.metal_stairs_below_on; break;
         case FLOOR__METAL_STAIRS_BELOW:            texture = textures->floor.metal_stairs_below; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    texture = textures->floor.ext_bridge_source_on_horizontal; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   texture = textures->floor.ext_bridge_source_off_horizontal; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         texture = textures->floor.ext_bridge_part_horizontal; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      texture = textures->floor.ext_bridge_source_on_vertical; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     texture = textures->floor.ext_bridge_source_off_vertical; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           texture = textures->floor.ext_bridge_part_vertical; break;
         default: break;
     }
 
@@ -781,6 +817,12 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR__METAL_STAIRS_ABOVE_OFF:        texture = textures->floor.metal_stairs_above_off; break;
         case FLOOR__METAL_STAIRS_BELOW_ON:         texture = textures->floor.metal_stairs_below_on; break;
         case FLOOR__METAL_STAIRS_BELOW:            texture = textures->floor.metal_stairs_below; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL:    texture = textures->floor.ext_bridge_source_on_horizontal; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL:   texture = textures->floor.ext_bridge_source_off_horizontal; break;
+        case FLOOR__EXT_BRIDGE_PART_HORIZONTAL:         texture = textures->floor.ext_bridge_part_horizontal; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL:      texture = textures->floor.ext_bridge_source_on_vertical; break;
+        case FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL:     texture = textures->floor.ext_bridge_source_off_vertical; break;
+        case FLOOR__EXT_BRIDGE_PART_VERTICAL:           texture = textures->floor.ext_bridge_part_vertical; break;
         default: break;
     }
 
