@@ -3306,6 +3306,27 @@ void create_level(State* state)
 
     room_change_floor_at(
         room_2_2,
+        FLOOR__LAVA,
+        vec2i(3,3)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR__LAVA,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR__LAVA,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_2_2,
+        FLOOR__LAVA,
+        vec2i(3,6)
+        );
+
+    room_change_floor_at(
+        room_2_2,
         FLOOR__WATER,
         vec2i(4,0)
         );
@@ -3346,10 +3367,53 @@ void create_level(State* state)
 
     room_add_object_at(
         room_2_2,
-        new_object(OBJECT__STATION_SCISSOR_HAND),
+        new_object(OBJECT__HARPOON_GUN_DOWN),
+        vec2i(3,1)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__HARPOON_GUN_UP),
+        vec2i(3,8)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__DISPLAY),
+
+        vec2i(3,7)
+        );
+
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(7,1)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__DISPLAY_DAMAGED),
         vec2i(8,1)
         );
 
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__STATION_SCISSOR_HAND),
+        vec2i(6,6)
+        );
+
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,3)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,4)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(2,5)
+        );
     room_add_object_at(
         room_2_2,
         new_object(OBJECT__WALL_METAL),
@@ -3363,7 +3427,49 @@ void create_level(State* state)
     room_add_object_at(
         room_2_2,
         new_object(OBJECT__WALL_METAL),
-        vec2i(3,7)
+        vec2i(2,8)
+        );
+
+
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(4,3)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(4,4)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(4,5)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(4,6)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(5,6)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(5,7)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(6,7)
+        );
+    room_add_object_at(
+        room_2_2,
+        new_object(OBJECT__WALL_METAL),
+        vec2i(6,8)
         );
 
     room_add_object_at(

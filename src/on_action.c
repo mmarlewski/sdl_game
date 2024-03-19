@@ -1911,6 +1911,187 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
 {
     switch(object->type)
     {
+        case OBJECT__HARPOON_GUN_UP:
+        case OBJECT__HARPOON_GUN_RIGHT:
+        case OBJECT__HARPOON_GUN_DOWN:
+        case OBJECT__HARPOON_GUN_LEFT:
+        {
+            Vec2i source_tilemap_pos = object->tilemap_pos;
+            Vec2i target_tilemap_pos = object->tilemap_pos;
+
+            int dir4 = DIR4__NONE;
+            switch(object->type)
+            {
+                case OBJECT__HARPOON_GUN_UP: dir4 = DIR4__UP; break;
+                case OBJECT__HARPOON_GUN_RIGHT: dir4 = DIR4__RIGHT; break;
+                case OBJECT__HARPOON_GUN_DOWN: dir4 = DIR4__DOWN; break;
+                case OBJECT__HARPOON_GUN_LEFT: dir4 = DIR4__LEFT; break;
+                default: break;
+            }
+
+            int target_go_on = 1;
+            for(int i = 1; i < 10 && target_go_on; i++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    source_tilemap_pos,
+                    dir4,
+                    i
+                    );
+
+                Object* object = room_get_object_at(
+                    state->curr_room,
+                    tilemap_pos
+                    );
+
+                if(object != 0)
+                {
+                    target_go_on = 0;
+                    target_tilemap_pos = tilemap_pos;
+                }
+            }
+
+            Object* target_object = room_get_object_at(
+                state->curr_room,
+                target_tilemap_pos
+                );
+
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    target_tilemap_pos,
+                    source_tilemap_pos
+                    );
+
+            if(distance_info.dir4 != DIR4__NONE)
+            {
+                Vec2i prev_tilemap_pos = target_tilemap_pos;
+                Vec2i curr_tilemap_pos = target_tilemap_pos;
+                Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(
+                    curr_tilemap_pos,
+                    distance_info.dir4,
+                    1
+                    );
+
+                Object* prev_object = room_get_object_at(
+                    state->curr_room,
+                    prev_tilemap_pos
+                    );
+                Object* curr_object = room_get_object_at(
+                    state->curr_room,
+                    curr_tilemap_pos
+                    );
+                Object* next_object = room_get_object_at(
+                    state->curr_room,
+                    next_tilemap_pos
+                    );
+
+                int prev_floor = room_get_floor_at(
+                    state->curr_room,
+                    prev_tilemap_pos
+                    );
+                int curr_floor = room_get_floor_at(
+                    state->curr_room,
+                    curr_tilemap_pos
+                    );
+                int next_floor = room_get_floor_at(
+                    state->curr_room,
+                    next_tilemap_pos
+                    );
+
+                for(int i = 0; i < distance_info.abs_diff + 1; i++)
+                {
+                    // if pos before source_pos
+                    if(!vec2i_equals(curr_tilemap_pos, source_tilemap_pos))
+                    {
+                        Vec2i just_before_source_tilemap_pos =
+                            vec2i_move_in_dir4_by(
+                                source_tilemap_pos,
+                                get_opposite_dir4(distance_info.dir4),
+                                1
+                                );
+                        // if pos just before source_pos
+                        if(vec2i_equals(curr_tilemap_pos, just_before_source_tilemap_pos))
+                        {
+                            if(!is_object_floating(target_object) &&
+                            !is_object_flying(target_object))
+                            {
+                                add_action_to_end_action_sequence(
+                                    sequence,
+                                    new_action_move(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_floating(target_object))
+                            {
+                                add_action_to_end_action_sequence(
+                                    sequence,
+                                    new_action_move_floating(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                            else if(is_object_flying(target_object))
+                            {
+                                add_action_to_end_action_sequence(
+                                    sequence,
+                                    new_action_move_flying(
+                                        curr_tilemap_pos,
+                                        distance_info.dir4
+                                        )
+                                    );
+                            }
+                        }
+                        else
+                        {
+                            add_action_to_end_action_sequence(
+                                sequence,
+                                new_action_move_flying(
+                                    curr_tilemap_pos,
+                                    distance_info.dir4
+                                    )
+                                );
+                        }
+                    }
+
+                    prev_tilemap_pos = curr_tilemap_pos;
+                    curr_tilemap_pos = next_tilemap_pos;
+                    next_tilemap_pos = vec2i_move_in_dir4_by(
+                        curr_tilemap_pos,
+                        distance_info.dir4,
+                        1
+                        );
+
+                    prev_object = room_get_object_at(
+                        state->curr_room,
+                        prev_tilemap_pos
+                        );
+                    curr_object = room_get_object_at(
+                        state->curr_room,
+                        curr_tilemap_pos
+                        );
+                    next_object = room_get_object_at(
+                        state->curr_room,
+                        next_tilemap_pos
+                        );
+
+                    prev_floor = room_get_floor_at(
+                        state->curr_room,
+                        prev_tilemap_pos
+                        );
+                    curr_floor = room_get_floor_at(
+                        state->curr_room,
+                        curr_tilemap_pos
+                        );
+                    next_floor = room_get_floor_at(
+                        state->curr_room,
+                        next_tilemap_pos
+                        );
+                }
+            }
+        }
+        break;
         case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:
         {
             add_action_to_end_action_sequence(
@@ -2391,9 +2572,111 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
 
     switch(object->type)
     {
-        case OBJECT__PISTON:
+        case OBJECT__HARPOON_GUN_UP:
+        case OBJECT__HARPOON_GUN_RIGHT:
+        case OBJECT__HARPOON_GUN_DOWN:
+        case OBJECT__HARPOON_GUN_LEFT:
         {
-            //
+            Vec2i source_tilemap_pos = object->tilemap_pos;
+            Vec2i target_tilemap_pos = object->tilemap_pos;
+
+            int dir4 = DIR4__NONE;
+            switch(object->type)
+            {
+                case OBJECT__HARPOON_GUN_UP: dir4 = DIR4__UP; break;
+                case OBJECT__HARPOON_GUN_RIGHT: dir4 = DIR4__RIGHT; break;
+                case OBJECT__HARPOON_GUN_DOWN: dir4 = DIR4__DOWN; break;
+                case OBJECT__HARPOON_GUN_LEFT: dir4 = DIR4__LEFT; break;
+                default: break;
+            }
+
+            int go_on = 1;
+            for(int i = 1; i < 10 && go_on; i++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    source_tilemap_pos,
+                    dir4,
+                    i
+                    );
+
+                Object* object = room_get_object_at(
+                    state->curr_room,
+                    tilemap_pos
+                    );
+
+                if(object != 0)
+                {
+                    go_on = 0;
+                    target_tilemap_pos = tilemap_pos;
+                }
+            }
+
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_tilemap_pos
+                    );
+
+            Animation* animation_sequence = new_animation_sequence();
+
+            for(int i = 0; i < distance_info.abs_diff + 1; i++)
+            {
+                Animation* animation_simultaneous = new_animation_simultaneous();
+                Vec2i tilemap_pos = source_tilemap_pos;
+                float show_sprite_length_in_seconds = 0.1f;
+
+                for(int j = 0; j <= i; j++)
+                {
+                    if(vec2i_equals(tilemap_pos, source_tilemap_pos))
+                    {
+                        Texture* texture = get_texture_hook_start(textures, distance_info.dir4);
+
+                        add_animation_to_end_animation_simultaneous(
+                            animation_simultaneous,
+                            new_animation_show_sprite_in_gamemap(
+                                texture,
+                                tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                show_sprite_length_in_seconds
+                                )
+                            );
+                    }
+                    else if(vec2i_equals(tilemap_pos, target_tilemap_pos))
+                    {
+                        Texture* texture = get_texture_hook_end(textures, get_opposite_dir4(distance_info.dir4));
+
+                        add_animation_to_end_animation_simultaneous(
+                            animation_simultaneous,
+                            new_animation_show_sprite_in_gamemap(
+                                texture,
+                                tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                show_sprite_length_in_seconds
+                                )
+                            );
+                    }
+                    else
+                    {
+                        Texture* texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+
+                        add_animation_to_end_animation_simultaneous(
+                            animation_simultaneous,
+                            new_animation_show_sprite_in_gamemap(
+                                texture,
+                                tilemap_pos_to_gamemap_pos(tilemap_pos),
+                                show_sprite_length_in_seconds
+                                )
+                            );
+                    }
+
+                    tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
+                }
+
+                add_animation_to_end_animation_sequence(
+                    animation_sequence,
+                    animation_simultaneous
+                    );
+            }
+
+            animation = animation_sequence;
         }
         break;
         default:

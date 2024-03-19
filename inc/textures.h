@@ -520,6 +520,18 @@ typedef struct
     Texture* ext_wall_part_vertical;
     Texture* ext_wall_part_vertical_outline;
 
+    Texture* harpoon_gun_up;
+    Texture* harpoon_gun_up_outline;
+
+    Texture* harpoon_gun_right;
+    Texture* harpoon_gun_right_outline;
+
+    Texture* harpoon_gun_down;
+    Texture* harpoon_gun_down_outline;
+
+    Texture* harpoon_gun_left;
+    Texture* harpoon_gun_left_outline;
+
     Texture* station_fist_hand;
     Texture* station_hook_hand;
     Texture* station_chain_hand;

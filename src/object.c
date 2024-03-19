@@ -683,6 +683,11 @@ int is_object_manipulatable(Object* object)
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:      is = 1; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:            is = 0; break;
 
+        case OBJECT__HARPOON_GUN_UP:                    is = 1; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                 is = 1; break;
+        case OBJECT__HARPOON_GUN_DOWN:                  is = 1; break;
+        case OBJECT__HARPOON_GUN_LEFT:                  is = 1; break;
+
         default: break;
     }
 
@@ -802,6 +807,11 @@ int is_object_movable(Object* object)
         case OBJECT__STAIRS_ABOVE_ROCK:                is = 0; break;
         case OBJECT__STAIRS_ABOVE_METAL_ON:            is = 0; break;
         case OBJECT__STAIRS_ABOVE_METAL:               is = 0; break;
+
+        case OBJECT__HARPOON_GUN_UP:                    is = 1; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                 is = 1; break;
+        case OBJECT__HARPOON_GUN_DOWN:                  is = 1; break;
+        case OBJECT__HARPOON_GUN_LEFT:                  is = 1; break;
 
         default: break;
     }
@@ -967,6 +977,11 @@ int is_object_meltable(Object* object)
         case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:       is = 1; break;
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:      is = 1; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:            is = 1; break;
+
+        case OBJECT__HARPOON_GUN_UP:                    is = 1; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                 is = 1; break;
+        case OBJECT__HARPOON_GUN_DOWN:                  is = 1; break;
+        case OBJECT__HARPOON_GUN_LEFT:                  is = 1; break;
 
         default: break;
     }
@@ -1672,6 +1687,11 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     name = "ext wall source off vertical"; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           name = "ext wall part vertical"; break;
 
+        case OBJECT__HARPOON_GUN_UP:                    name = "harpoon gun up"; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                 name = "harpoon gun right"; break;
+        case OBJECT__HARPOON_GUN_DOWN:                  name = "harpoon gun down"; break;
+        case OBJECT__HARPOON_GUN_LEFT:                  name = "harpoon gun left"; break;
+
         case OBJECT__STATION_FIST_HAND:                name = "station push hand"; break;
         case OBJECT__STATION_HOOK_HAND:                name = "station hook hand"; break;
         case OBJECT__STATION_CHAIN_HAND:               name = "station chain hand"; break;
@@ -1891,6 +1911,11 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      texture = textures->object.ext_wall_source_on_vertical; break;
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical; break;
+
+        case OBJECT__HARPOON_GUN_UP:                   texture = textures->object.harpoon_gun_up; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                texture = textures->object.harpoon_gun_right; break;
+        case OBJECT__HARPOON_GUN_DOWN:                 texture = textures->object.harpoon_gun_down; break;
+        case OBJECT__HARPOON_GUN_LEFT:                 texture = textures->object.harpoon_gun_left; break;
 
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
@@ -2112,6 +2137,11 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical; break;
 
+        case OBJECT__HARPOON_GUN_UP:                   texture = textures->object.harpoon_gun_up; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                texture = textures->object.harpoon_gun_right; break;
+        case OBJECT__HARPOON_GUN_DOWN:                 texture = textures->object.harpoon_gun_down; break;
+        case OBJECT__HARPOON_GUN_LEFT:                 texture = textures->object.harpoon_gun_left; break;
+
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_fist_hand; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_hook_hand; break;
         case OBJECT__STATION_CHAIN_HAND:               texture = textures->object.station_chain_hand; break;
@@ -2332,6 +2362,11 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical_outline; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical_outline; break;
 
+        case OBJECT__HARPOON_GUN_UP:                   texture = textures->object.harpoon_gun_up_outline; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                texture = textures->object.harpoon_gun_right_outline; break;
+        case OBJECT__HARPOON_GUN_DOWN:                 texture = textures->object.harpoon_gun_down_outline; break;
+        case OBJECT__HARPOON_GUN_LEFT:                 texture = textures->object.harpoon_gun_left_outline; break;
+
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;
         case OBJECT__STATION_CHAIN_HAND:               texture = textures->object.station_outline; break;
@@ -2551,6 +2586,11 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      texture = textures->object.ext_wall_source_on_vertical_outline; break;
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     texture = textures->object.ext_wall_source_off_vertical_outline; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           texture = textures->object.ext_wall_part_vertical_outline; break;
+
+        case OBJECT__HARPOON_GUN_UP:                   texture = textures->object.harpoon_gun_up_outline; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                texture = textures->object.harpoon_gun_right_outline; break;
+        case OBJECT__HARPOON_GUN_DOWN:                 texture = textures->object.harpoon_gun_down_outline; break;
+        case OBJECT__HARPOON_GUN_LEFT:                 texture = textures->object.harpoon_gun_left_outline; break;
 
         case OBJECT__STATION_FIST_HAND:                texture = textures->object.station_outline; break;
         case OBJECT__STATION_HOOK_HAND:                texture = textures->object.station_outline; break;

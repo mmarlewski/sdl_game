@@ -549,6 +549,18 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->ext_wall_part_vertical = load_texture_from_filepath(renderer, "./res/object/ext_wall_part_vertical.png");
     object->ext_wall_part_vertical_outline = load_texture_from_filepath(renderer, "./res/object/ext_wall_part_vertical_outline.png");
+
+    object->harpoon_gun_up = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_up.png");
+    object->harpoon_gun_up_outline = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_up_outline.png");
+
+    object->harpoon_gun_right = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_right.png");
+    object->harpoon_gun_right_outline = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_right_outline.png");
+
+    object->harpoon_gun_down = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_down.png");
+    object->harpoon_gun_down_outline = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_down_outline.png");
+
+    object->harpoon_gun_left = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_left.png");
+    object->harpoon_gun_left_outline = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_left_outline.png");
 }
 
 void destroy_textures_object (Textures_Object* object)
