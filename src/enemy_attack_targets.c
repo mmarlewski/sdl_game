@@ -210,30 +210,27 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
         break;
         case OBJECT__FLY:
         {
-            Vec2i curr_tilemap_pos = enemy_object->tilemap_pos;
-            Object* curr_object = 0;
-
             int go_on = 1;
-            for(int i = 0; i < 10 && go_on; i++)
+            for(int i = 1; i < 10 && go_on; i++)
             {
-                curr_tilemap_pos = vec2i_move_in_dir4_by(
-                    curr_tilemap_pos,
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    enemy->object->tilemap_pos,
                     enemy->object->attack_dir4,
-                    1
+                    i
                     );
 
-                if(is_tilemap_in_bounds(curr_tilemap_pos))
+                if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    curr_object = room_get_object_at(
+                    Object* object = room_get_object_at(
                         state->curr_room,
-                        curr_tilemap_pos
+                        tilemap_pos
                         );
 
-                    if(curr_object != 0)
+                    if(object != 0)
                     {
                         enemy->skill = SKILL__SHOOT_PROJECTILE_FLY;
                         enemy->target_1_tilemap_pos = vec2i(0,0);
-                        enemy->target_2_tilemap_pos = curr_tilemap_pos;
+                        enemy->target_2_tilemap_pos = tilemap_pos;
                         go_on = 0;
                     }
                 }
@@ -242,7 +239,49 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                     enemy->skill = SKILL__SHOOT_PROJECTILE_FLY;
                     enemy->target_1_tilemap_pos = vec2i(0,0);
                     enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                        curr_tilemap_pos,
+                        tilemap_pos,
+                        get_opposite_dir4(
+                            enemy->object->attack_dir4
+                            ),
+                        1
+                        );
+                    go_on = 0;
+                }
+            }
+        }
+        break;
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+        {
+            int go_on = 1;
+            for(int i = 1; i < 10 && go_on; i++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    enemy->object->tilemap_pos,
+                    enemy->object->attack_dir4,
+                    i
+                    );
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(
+                        state->curr_room,
+                        tilemap_pos
+                        );
+
+                    if(object != 0)
+                    {
+                        enemy->skill = SKILL__SHOOT_PROJECTILE_SQUIRREL;
+                        enemy->target_1_tilemap_pos = vec2i(0,0);
+                        enemy->target_2_tilemap_pos = tilemap_pos;
+                        go_on = 0;
+                    }
+                }
+                else
+                {
+                    enemy->skill = SKILL__SHOOT_PROJECTILE_SQUIRREL;
+                    enemy->target_1_tilemap_pos = vec2i(0,0);
+                    enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
+                        tilemap_pos,
                         get_opposite_dir4(
                             enemy->object->attack_dir4
                             ),

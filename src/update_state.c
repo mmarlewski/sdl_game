@@ -134,6 +134,17 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         change_gamestate(state, GAMESTATE__GAME_WON);
     }
 
+    if(state->enemy_list->size == 0)
+    {
+        // restore all ally action points
+        for(ListElem* curr_elem = state->ally_list->head;
+        curr_elem != 0; curr_elem = curr_elem->next)
+        {
+            Ally* curr_ally = (Ally*) curr_elem->data;
+            restore_ally_action_points(state, curr_ally);
+        }
+    }
+
     switch(state->gamestate)
     {
         case GAMESTATE__NONE:

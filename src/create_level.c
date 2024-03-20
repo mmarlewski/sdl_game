@@ -7512,18 +7512,28 @@ void create_level(State* state)
     // floors
 
     add_floor_at_every_room_position(room_6_0, FLOOR__OBSIDIAN);
+
     room_change_floor_at(
         room_6_0,
         FLOOR__WATER,
         vec2i(0,0)
         );
 
+    for(int i = 1; i <= 8; i++)
+    {
+        room_change_floor_at(
+            room_6_0,
+            FLOOR__STONE_TRAP,
+            vec2i(1,i)
+            );
+    }
+
     // walls
 
     List* room_6_0_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
     add_new_list_element_to_list_end(
         room_6_0_wall_exclude_pos_list,
-        new_vec2i(3,9)
+        new_vec2i(2,9)
         );
     add_new_list_element_to_list_end(
         room_6_0_wall_exclude_pos_list,
@@ -7550,6 +7560,83 @@ void create_level(State* state)
     destroy_list(room_6_0_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,2)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,3)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,4)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,5)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,6)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,7)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,8)
+        );
+
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,8)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,7)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,6)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,5)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,4)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,3)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,2)
+        );
+    room_add_object_at(
+        room_6_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,1)
+        );
 
     room_add_object_at(
         room_6_0,
@@ -7611,7 +7698,7 @@ void create_level(State* state)
     room_add_object_at(
         room_6_0,
         new_object(OBJECT__EXIT_OBSIDIAN_UP),
-        vec2i(3,9)
+        vec2i(2,9)
         );
     room_add_object_at(
         room_6_0,
@@ -7620,7 +7707,7 @@ void create_level(State* state)
         );
     room_add_object_at(
         room_6_0,
-        new_object(OBJECT__EXIT_OBSIDIAN_DOWN),
+        new_object(OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN),
         vec2i(3,0)
         );
     room_add_object_at(
@@ -7639,8 +7726,8 @@ void create_level(State* state)
     add_passage(state,new_passage(
         "6_0",
         "7_0",
-        vec2i(3,9),
-        vec2i(3,1)
+        vec2i(2,9),
+        vec2i(2,1)
         ));
     add_passage(state,new_passage(
         "6_0",
@@ -8621,7 +8708,7 @@ void create_level(State* state)
     List* room_7_0_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
     add_new_list_element_to_list_end(
         room_7_0_wall_exclude_pos_list,
-        new_vec2i(3,0)
+        new_vec2i(2,0)
         );
     add_new_list_element_to_list_end(
         room_7_0_wall_exclude_pos_list,
@@ -8686,7 +8773,7 @@ void create_level(State* state)
     room_add_object_at(
         room_7_0,
         new_object(OBJECT__EXIT_OBSIDIAN_DOWN),
-        vec2i(3,0)
+        vec2i(2,0)
         );
     room_add_object_at(
         room_7_0,
@@ -8704,8 +8791,8 @@ void create_level(State* state)
     add_passage(state,new_passage(
         "7_0",
         "6_0",
-        vec2i(3,0),
-        vec2i(3,8)
+        vec2i(2,0),
+        vec2i(2,8)
         ));
     add_passage(state,new_passage(
         "7_0",

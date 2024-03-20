@@ -490,6 +490,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->turret_projectile_deployed_outline_1 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_outline_1.png");
     object->turret_projectile_deployed_outline_2 = load_texture_from_filepath(renderer, "./res/object/turret_projectile_deployed_outline_2.png");
 
+    object->squirrel_exit_obsidian_down_1 = load_texture_from_filepath(renderer, "./res/object/squirrel_exit_obsidian_down_1.png");
+    object->squirrel_exit_obsidian_down_2 = load_texture_from_filepath(renderer, "./res/object/squirrel_exit_obsidian_down_2.png");
+
     object->stairs_above_stone_powered = load_texture_from_filepath(renderer, "./res/object/stairs_above_stone_powered.png");
     object->stairs_above_stone_powered_outline = load_texture_from_filepath(renderer, "./res/object/stairs_above_stone_powered_outline.png");
 
@@ -872,6 +875,7 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->gemstone = load_texture_from_filepath (renderer, "./res/animation/gemstone.png");
     animation->minibot = load_texture_from_filepath (renderer, "./res/animation/minibot.png");
     animation->fly_projectile = load_texture_from_filepath (renderer, "./res/animation/fly_projectile.png");
+    animation->squirrel_projectile = load_texture_from_filepath (renderer, "./res/animation/squirrel_projectile.png");
 }
 
 void destroy_textures_animation (Textures_Animation* animation)

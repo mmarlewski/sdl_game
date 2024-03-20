@@ -31,6 +31,7 @@ int is_skill_two_target(int skill)
         case SKILL__THROW_ITEM_GEMSTONE:        is = 0; break;
 
         case SKILL__SHOOT_PROJECTILE_FLY:       is = 0; break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  is = 0; break;
 
         case SKILL__PUSH:               is = 1; break;
         case SKILL__THROW:              is = 1; break;
@@ -97,6 +98,7 @@ int get_skill_action_points(int skill)
         case SKILL__THROW_ITEM_GEMSTONE:        ap = 1; break;
 
         case SKILL__SHOOT_PROJECTILE_FLY:       ap = 1; break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  ap = 1; break;
 
         case SKILL__PUSH:               ap = 1; break;
         case SKILL__THROW:              ap = 1; break;
@@ -163,6 +165,7 @@ char* get_skill_name(int skill)
         case SKILL__THROW_ITEM_GEMSTONE:        name = "throw item gemstone"; break;
 
         case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile fly"; break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  name = "shoot projectile squirrel"; break;
 
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__THROW:              name = "throw"; break;

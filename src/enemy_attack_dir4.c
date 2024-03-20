@@ -20,6 +20,11 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             enemy->object->attack_dir4 = rand() % 4 + 1;
         }
         break;
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+        {
+            enemy->object->attack_dir4 = DIR4__DOWN;
+        }
+        break;
         default:
         break;
     }

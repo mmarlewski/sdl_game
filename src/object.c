@@ -142,6 +142,8 @@ int is_object_wall(Object* object)
         case OBJECT__EXIT_OBSIDIAN_RIGHT:
         case OBJECT__EXIT_OBSIDIAN_DOWN:
         case OBJECT__EXIT_OBSIDIAN_LEFT:
+
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
         {
             is = 1;
         }
@@ -184,6 +186,8 @@ int is_object_enemy(Object* object)
         case OBJECT__TURRET_PROJECTILE_STANDING:       is = 1; break;
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     is = 0; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       is = 1; break;
+
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      is = 1; break;
 
         default: break;
     }
@@ -447,7 +451,8 @@ int is_object_throw_over(Object* object)
         case OBJECT__EXT_WALL_PART_HORIZONTAL:
         case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:
-        case OBJECT__EXT_WALL_PART_VERTICAL:               is = 0; break;
+        case OBJECT__EXT_WALL_PART_VERTICAL:
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:           is = 0; break;
 
         default:                                            is = 1; break;
     }
@@ -959,6 +964,8 @@ int is_object_meltable(Object* object)
         case OBJECT__TURRET_PROJECTILE_STANDING:       is = 1; break;
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     is = 1; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       is = 1; break;
+
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      is = 1; break;
 
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       is = 0; break;
         case OBJECT__STAIRS_ABOVE_STONE:               is = 0; break;
@@ -1669,6 +1676,8 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     name = "turret projectile undeployed"; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       name = "turret projectile deployed"; break;
 
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      name = "squirrel exit obsidian down"; break;
+
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       name = "stairs above stone powered"; break;
         case OBJECT__STAIRS_ABOVE_STONE:               name = "stairs above stone"; break;
         case OBJECT__STAIRS_ABOVE_ROCK:                name = "stairs above rock"; break;
@@ -1893,6 +1902,8 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__TURRET_PROJECTILE_STANDING:       texture = textures->object.turret_projectile_standing_1; break;
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_1; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_1; break;
+
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      texture = textures->object.squirrel_exit_obsidian_down_1; break;
 
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered; break;
         case OBJECT__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone; break;
@@ -2119,6 +2130,8 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_2; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_2; break;
 
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      texture = textures->object.squirrel_exit_obsidian_down_2; break;
+
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered; break;
         case OBJECT__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone; break;
         case OBJECT__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock; break;
@@ -2344,6 +2357,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_outline_1; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_outline_1; break;
 
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      texture = textures->object.exit_obsidian_down_outline; break;
+
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered_outline; break;
         case OBJECT__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone_outline; break;
         case OBJECT__STAIRS_ABOVE_ROCK:                texture = textures->object.stairs_above_rock_outline; break;
@@ -2568,6 +2583,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__TURRET_PROJECTILE_STANDING:       texture = textures->object.turret_projectile_standing_outline_2; break;
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->object.turret_projectile_undeployed_outline_2; break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       texture = textures->object.turret_projectile_deployed_outline_2; break;
+
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      texture = textures->object.exit_obsidian_down_outline; break;
 
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       texture = textures->object.stairs_above_stone_powered_outline; break;
         case OBJECT__STAIRS_ABOVE_STONE:               texture = textures->object.stairs_above_stone_outline; break;

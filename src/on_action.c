@@ -1540,6 +1540,17 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
 {
     switch(object->type)
     {
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_OBSIDIAN_DOWN,
+                    object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT__EXIT_STONE_BLOCKED_UP:
         {
             add_action_to_end_action_sequence(

@@ -96,6 +96,7 @@ void skill_get_possible_target_1_pos(
         }
         break;
         case SKILL__SHOOT_PROJECTILE_FLY:
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:
         {
             //
         }

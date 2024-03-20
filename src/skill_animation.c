@@ -228,6 +228,16 @@ Animation* skill_get_animation(
                 );
         }
         break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:
+        {
+            skill_animation = new_animation_move_sprite_in_gamemap_in_line(
+                textures->animation.squirrel_projectile,
+                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                0.2f
+                );
+        }
+        break;
         case SKILL__DRAG_HOOK:
         case SKILL__DRAG_SPIDERWEB:
         case SKILL__DRAG_TENTACLE:

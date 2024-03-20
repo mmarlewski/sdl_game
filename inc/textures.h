@@ -475,6 +475,9 @@ typedef struct
     Texture* turret_projectile_deployed_outline_1;
     Texture* turret_projectile_deployed_outline_2;
 
+    Texture* squirrel_exit_obsidian_down_1;
+    Texture* squirrel_exit_obsidian_down_2;
+
     Texture* stairs_above_stone_powered;
     Texture* stairs_above_stone_powered_outline;
 
@@ -855,6 +858,7 @@ typedef struct
     Texture* gemstone;
     Texture* minibot;
     Texture* fly_projectile;
+    Texture* squirrel_projectile;
 
 } Textures_Animation;
 

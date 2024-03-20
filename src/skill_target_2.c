@@ -498,6 +498,7 @@ void skill_get_possible_target_2_pos(
         }
         break;
         case SKILL__SHOOT_PROJECTILE_FLY:
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
