@@ -14,7 +14,7 @@ Object* new_object(int type)
     object->is_to_be_removed = 0;
     object->type = type;
     object->tilemap_pos = vec2i(-1,-1);
-    object->action_points = 0;
+    object->action_points = ALLY_MAX_ACTION_POINTS;
     object->attack_dir4 = DIR4__NONE;
 
     return object;

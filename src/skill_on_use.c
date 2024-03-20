@@ -91,6 +91,7 @@ void skill_on_use(
                             {
                                 Ally* curr_ally = (Ally*) curr_elem->data;
                                 update_ally_skill_list(state, curr_ally);
+                                restore_ally_action_points(state, curr_ally);
                             }
 
                             // curr ally
@@ -189,6 +190,7 @@ void skill_on_use(
                                 {
                                     Ally* curr_ally = (Ally*) curr_elem->data;
                                     update_ally_skill_list(state, curr_ally);
+                                    restore_ally_action_points(state, curr_ally);
                                 }
 
                                 // curr ally

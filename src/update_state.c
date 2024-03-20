@@ -861,16 +861,20 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     colors
                     );
 
-                if(state->curr_ally_skill == SKILL__MOVE ||
-                state->curr_ally_skill == SKILL__MOVE_FLOATING ||
-                state->curr_ally_skill == SKILL__MOVE_FLYING)
+                if(state->enemy_list->size > 0)
                 {
-                    state->curr_ally->object->action_points -= state->ally_move_distance;
-                }
-                else
-                {
-                    state->curr_ally->object->action_points -=
-                        get_skill_action_points(state->curr_ally_skill);
+                    if(state->curr_ally_skill == SKILL__MOVE ||
+                    state->curr_ally_skill == SKILL__MOVE_FLOATING ||
+                    state->curr_ally_skill == SKILL__MOVE_FLYING)
+                    {
+                        state->curr_ally->object->action_points -=
+                            state->ally_move_distance;
+                    }
+                    else
+                    {
+                        state->curr_ally->object->action_points -=
+                            get_skill_action_points(state->curr_ally_skill);
+                    }
                 }
 
                 // objects to be removed

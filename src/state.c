@@ -149,7 +149,20 @@ void change_gamestate(State* state, int new_gamestate)
 {
     state->gamestate = new_gamestate;
 
-    printf("########################################\n");
+    for(int i = 0; i < 100; i++) printf("\n");
+    printf("----------------------------------------\n");
+    if(state->enemy_list->size > 0)
+    {
+        printf(" ╔═╗╔═╗╔╦╗╔╗ ╔═╗╔╦╗ \n");
+        printf(" ║  ║ ║║║║╠╩╗╠═╣ ║  \n");
+        printf(" ╚═╝╚═╝╩ ╩╚═╝╩ ╩ ╩  \n");
+    }
+    else
+    {
+        printf(" ╔═╗╦═╗╔═╗╔═╗ \n");
+        printf(" ╠╣ ╠╦╝║╣ ║╣  \n");
+        printf(" ╚  ╩╚═╚═╝╚═╝ \n");
+    }
     printf("----------------------------------------\n");
     printf("gamestate : %s \n", get_gamestate_name(state->gamestate));
     printf("----------------------------------------\n");
@@ -163,29 +176,32 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
     state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        int curr_ally_ap = state->curr_ally->object->action_points;
-        char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
-        hero_ap_bar[0] = '[';
-        for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i ++)
+        if(state->enemy_list->size > 0)
         {
-            char character = ' ';
-
-            if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-            state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+            int curr_ally_ap = state->curr_ally->object->action_points;
+            char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
+            hero_ap_bar[0] = '[';
+            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i ++)
             {
-                int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
-                if(i < curr_ally_ap - curr_skill_cost) character = '#';
-                else if(i < curr_ally_ap) character = '-';
-            }
-            else
-            {
-                character = (i < curr_ally_ap) ? '#' : ' ';
-            }
+                char character = ' ';
 
-            hero_ap_bar[i + 1] = character;
+                if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+                state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+                {
+                    int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
+                    if(i < curr_ally_ap - curr_skill_cost) character = '#';
+                    else if(i < curr_ally_ap) character = '-';
+                }
+                else
+                {
+                    character = (i < curr_ally_ap) ? '#' : ' ';
+                }
+
+                hero_ap_bar[i + 1] = character;
+            }
+            hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
+            printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
         }
-        hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
-        printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
         if(state->curr_ally->object->type == OBJECT__HERO ||
         state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
         state->curr_ally->object->type == OBJECT__HERO_FLYING)
