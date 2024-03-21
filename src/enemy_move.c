@@ -15,6 +15,60 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
 
     switch(enemy_object->type)
     {
+        case OBJECT__MOLE:
+        {
+            List* possible_burrow_tilemap_pos_list =
+                new_list((void (*)(void *)) &destroy_vec2i);
+
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i,j);
+                    Object* object = room_get_object_at(
+                        state->curr_room,
+                        tilemap_pos
+                        );
+                    int floor = room_get_floor_at(
+                        state->curr_room,
+                        tilemap_pos
+                        );
+
+                    if(is_floor_burrow(floor) && object == 0)
+                    {
+                        add_new_list_element_to_list_end(
+                            possible_burrow_tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
+
+            if(possible_burrow_tilemap_pos_list->size > 0)
+            {
+                int random_index = rand() % possible_burrow_tilemap_pos_list->size;
+                ListElem* random_list_elem = get_nth_list_element(
+                    possible_burrow_tilemap_pos_list,
+                    random_index
+                    );
+                Vec2i random_tilemap_pos = *(Vec2i*)random_list_elem->data;
+
+                add_action_to_end_action_sequence(
+                    enemy->action_sequence,
+                    new_action_change_object_tilemap_pos(
+                        enemy->object,
+                        random_tilemap_pos
+                        )
+                    );
+            }
+
+            remove_all_list_elements(
+                possible_burrow_tilemap_pos_list,
+                1
+                );
+            destroy_list(possible_burrow_tilemap_pos_list);
+        }
+        break;
         case OBJECT__GOAT:
         case OBJECT__BULL:
         case OBJECT__SPIDER:

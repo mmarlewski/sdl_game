@@ -41,6 +41,10 @@ typedef struct
 
     Texture* grass;
 
+    Texture* sand;
+
+    Texture* coins;
+
     Texture* pit;
 
     Texture* water_1;
@@ -394,6 +398,11 @@ typedef struct
     Texture* squid_2;
     Texture* squid_outline_1;
     Texture* squid_outline_2;
+
+    Texture* mole_1;
+    Texture* mole_2;
+    Texture* mole_outline_1;
+    Texture* mole_outline_2;
 
     Texture* minibot_enemy_1;
     Texture* minibot_enemy_2;

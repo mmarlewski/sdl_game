@@ -35,6 +35,8 @@ enum ACTION_TYPE
     ACTION__ADD_OBJECT,
     ACTION__REMOVE_OBJECT,
 
+    ACTION__CHANGE_OBJECT_TILEMAP_POS,
+
     ACTION__MELT,
     ACTION__BREAK,
     ACTION__SHAKE,
@@ -146,6 +148,13 @@ typedef struct
 
 typedef struct
 {
+    Object* object;
+    Vec2i new_tilemap_pos;
+
+} Action_ChangeObjectTilemapPos;
+
+typedef struct
+{
 
 } Action_Melt;
 
@@ -191,6 +200,8 @@ struct _Action
         Action_AddObject add_object;
         Action_RemoveObject remove_object;
 
+        Action_ChangeObjectTilemapPos change_object_tilemap_pos;
+
         Action_Melt melt;
         Action_Break breakk;
         Action_Shake shake;
@@ -232,6 +243,8 @@ Action* new_action_change_object(int new_object_type, Vec2i tilemap_pos);
 
 Action* new_action_add_object(Object* new_object, Vec2i tilemap_pos);
 Action* new_action_remove_object(Object* object_to_remove, Vec2i tilemap_pos);
+
+Action* new_action_change_object_tilemap_pos(Object* object, Vec2i new_tilemap_pos);
 
 Action* new_action_melt(Vec2i tilemap_pos);
 Action* new_action_break(Vec2i tilemap_pos);

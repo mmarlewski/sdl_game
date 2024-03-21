@@ -128,6 +128,11 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = 1;
         }
         break;
+        case ACTION__CHANGE_OBJECT_TILEMAP_POS:
+        {
+            action->is_finished = 1;
+        }
+        break;
         case ACTION__MELT:
         {
             action->is_finished = 1;

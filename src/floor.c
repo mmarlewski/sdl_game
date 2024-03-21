@@ -70,6 +70,20 @@ int is_floor_manipulatable(int floor)
     return is;
 }
 
+int is_floor_burrow(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR__SAND:       is = 1; break;
+        case FLOOR__COINS:      is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
 int is_floor_traversable(int floor)
 {
     int is = 0;
@@ -100,6 +114,8 @@ int is_floor_traversable(int floor)
         case FLOOR__MARBLE:                    is = 1; break;
         case FLOOR__OBSIDIAN:                  is = 1; break;
         case FLOOR__GRASS:                     is = 1; break;
+        case FLOOR__SAND:                      is = 1; break;
+        case FLOOR__COINS:                     is = 1; break;
         case FLOOR__PIT:                       is = 0; break;
         case FLOOR__WATER:                     is = 0; break;
         case FLOOR__WATER_LILY_POD:            is = 1; break;
@@ -160,6 +176,8 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__MARBLE:                    is = 1; break;
         case FLOOR__OBSIDIAN:                  is = 1; break;
         case FLOOR__GRASS:                     is = 1; break;
+        case FLOOR__SAND:                      is = 1; break;
+        case FLOOR__COINS:                     is = 1; break;
         case FLOOR__PIT:                       is = 0; break;
         case FLOOR__WATER:                     is = 1; break;
         case FLOOR__WATER_LILY_POD:            is = 1; break;
@@ -219,6 +237,8 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR__MARBLE:                    is = 1; break;
         case FLOOR__OBSIDIAN:                  is = 1; break;
         case FLOOR__GRASS:                     is = 1; break;
+        case FLOOR__SAND:                      is = 1; break;
+        case FLOOR__COINS:                     is = 1; break;
         case FLOOR__PIT:                       is = 1; break;
         case FLOOR__WATER:                     is = 1; break;
         case FLOOR__WATER_LILY_POD:            is = 1; break;
@@ -680,6 +700,8 @@ char* get_name_from_floor(int floor)
         case FLOOR__MARBLE:                    name = "marble"; break;
         case FLOOR__OBSIDIAN:                  name = "obsidian"; break;
         case FLOOR__GRASS:                     name = "grass"; break;
+        case FLOOR__SAND:                      name = "sand"; break;
+        case FLOOR__COINS:                     name = "coins"; break;
         case FLOOR__WATER:                     name = "water"; break;
         case FLOOR__WATER_LILY_POD:            name = "water lily pod"; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   name = "water stalactite fallen"; break;
@@ -739,6 +761,8 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR__MARBLE:                    texture = textures->floor.marble; break;
         case FLOOR__OBSIDIAN:                  texture = textures->floor.obsidian; break;
         case FLOOR__GRASS:                     texture = textures->floor.grass; break;
+        case FLOOR__SAND:                      texture = textures->floor.sand; break;
+        case FLOOR__COINS:                     texture = textures->floor.coins; break;
         case FLOOR__PIT:                       texture = textures->floor.pit; break;
         case FLOOR__WATER:                     texture = textures->floor.water_1; break;
         case FLOOR__WATER_LILY_POD:            texture = textures->floor.water_lily_pod_1; break;
@@ -799,6 +823,8 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR__MARBLE:                    texture = textures->floor.marble; break;
         case FLOOR__OBSIDIAN:                  texture = textures->floor.obsidian; break;
         case FLOOR__GRASS:                     texture = textures->floor.grass; break;
+        case FLOOR__SAND:                      texture = textures->floor.sand; break;
+        case FLOOR__COINS:                     texture = textures->floor.coins; break;
         case FLOOR__PIT:                       texture = textures->floor.pit; break;
         case FLOOR__WATER:                     texture = textures->floor.water_2; break;
         case FLOOR__WATER_LILY_POD:            texture = textures->floor.water_lily_pod_2; break;

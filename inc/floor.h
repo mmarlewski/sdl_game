@@ -39,6 +39,10 @@ enum FLOOR_TYPE
 
     FLOOR__GRASS,
 
+    FLOOR__SAND,
+
+    FLOOR__COINS,
+
     FLOOR__PIT,
 
     FLOOR__WATER,
@@ -75,6 +79,7 @@ enum FLOOR_TYPE
 
 int is_floor_exit(int floor);
 int is_floor_manipulatable(int floor);
+int is_floor_burrow(int floor);
 int is_floor_traversable(int floor);
 int is_floor_traversable_for_floating(int floor);
 int is_floor_traversable_for_flying(int floor);

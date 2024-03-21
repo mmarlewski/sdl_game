@@ -453,6 +453,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
         case OBJECT__TURRET_LASER_GROUNDED:
         case OBJECT__TURRET_LASER_STANDING:
         case OBJECT__TURRET_LASER_DEPLOYED:
+        case OBJECT__MOLE:
         {
             int min_diff = 10;
             int chosen_dir4 = DIR4__NONE;

@@ -37,6 +37,10 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
 
     floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
 
+    floor->sand = load_texture_from_filepath (renderer, "./res/floor/sand.png");
+
+    floor->coins = load_texture_from_filepath (renderer, "./res/floor/coins.png");
+
     floor->pit = load_texture_from_filepath (renderer, "./res/floor/pit.png");
 
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
@@ -409,6 +413,11 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->squid_2 = load_texture_from_filepath(renderer, "./res/object/squid_2.png");
     object->squid_outline_1 = load_texture_from_filepath(renderer, "./res/object/squid_outline_1.png");
     object->squid_outline_2 = load_texture_from_filepath(renderer, "./res/object/squid_outline_2.png");
+
+    object->mole_1 = load_texture_from_filepath(renderer, "./res/object/mole_1.png");
+    object->mole_2 = load_texture_from_filepath(renderer, "./res/object/mole_2.png");
+    object->mole_outline_1 = load_texture_from_filepath(renderer, "./res/object/mole_outline_1.png");
+    object->mole_outline_2 = load_texture_from_filepath(renderer, "./res/object/mole_outline_2.png");
 
     object->minibot_enemy_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_1.png");
     object->minibot_enemy_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_2.png");

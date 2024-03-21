@@ -210,6 +210,15 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             }
         }
         break;
+        case ACTION__CHANGE_OBJECT_TILEMAP_POS:
+        {
+            if(action->change_object_tilemap_pos.object != 0)
+            {
+                action->change_object_tilemap_pos.object->tilemap_pos =
+                    action->change_object_tilemap_pos.new_tilemap_pos;
+            }
+        }
+        break;
         case ACTION__MELT:
         {
             //

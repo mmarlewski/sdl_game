@@ -7989,6 +7989,18 @@ void create_level(State* state)
 
     add_floor_at_every_room_position(room_6_2, FLOOR__ROCK);
 
+    for(int i = 3; i <= 7; i++)
+    {
+        for(int j = 1; j <= 8; j++)
+        {
+            room_change_floor_at(
+                room_6_2,
+                FLOOR__SAND,
+                vec2i(i,j)
+                );
+        }
+    }
+
     room_change_floor_at(
         room_6_2,
         FLOOR__LAVA,
@@ -8063,6 +8075,111 @@ void create_level(State* state)
 
     room_add_object_at(
         room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(3,2)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(3,4)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(3,6)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(3,8)
+        );
+
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(4,1)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(4,3)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(4,5)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(4,7)
+        );
+
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(5,2)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(5,4)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(5,6)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(5,8)
+        );
+
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(6,1)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(6,3)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(6,5)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(6,7)
+        );
+
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(7,2)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(7,4)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(7,6)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__BALL),
+        vec2i(7,8)
+        );
+
+    room_add_object_at(
+        room_6_2,
         new_object(OBJECT__EXIT_ROCK_RIGHT),
         vec2i(0,5)
         );
@@ -8070,6 +8187,29 @@ void create_level(State* state)
         room_6_2,
         new_object(OBJECT__EXIT_ROCK_LEFT),
         vec2i(9,5)
+        );
+
+    // enemies
+
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__MOLE),
+        vec2i(3,1)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__MOLE),
+        vec2i(3,7)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__MOLE),
+        vec2i(7,1)
+        );
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__MOLE),
+        vec2i(7,7)
         );
 
     // passages

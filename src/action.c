@@ -330,6 +330,22 @@ Action* new_action_remove_object(Object* object_to_remove, Vec2i tilemap_pos)
     return action;
 }
 
+Action* new_action_change_object_tilemap_pos(Object* object, Vec2i new_tilemap_pos)
+{
+    Action* action = malloc(sizeof(* action));
+
+    action->animation = 0;
+    action->tilemap_pos = object->tilemap_pos;
+    action->is_finished = 0;
+    action->is_finished_at_start = 0;
+    action->type = ACTION__CHANGE_OBJECT_TILEMAP_POS;
+
+    action->change_object_tilemap_pos.object = object;
+    action->change_object_tilemap_pos.new_tilemap_pos = new_tilemap_pos;
+
+    return action;
+}
+
 Action* new_action_melt(Vec2i tilemap_pos)
 {
     Action* action = malloc(sizeof(* action));
@@ -407,6 +423,7 @@ char* get_action_name_from_type(int action_type)
         case ACTION__CHANGE_OBJECT:    name = "change object"; break;
         case ACTION__ADD_OBJECT:       name = "add object";    break;
         case ACTION__REMOVE_OBJECT:    name = "remove object"; break;
+        case ACTION__CHANGE_OBJECT_TILEMAP_POS: name = "change object tilemap pos"; break;
         case ACTION__MELT:             name = "melt";          break;
         case ACTION__BREAK:            name = "break";         break;
         case ACTION__SHAKE:            name = "shake";         break;

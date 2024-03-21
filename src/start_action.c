@@ -373,6 +373,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             //
         }
         break;
+        case ACTION__CHANGE_OBJECT_TILEMAP_POS:
+        {
+            //
+        }
+        break;
         case ACTION__MELT:
         {
             Object* melt_object = room_get_object_at(state->curr_room, action->tilemap_pos);

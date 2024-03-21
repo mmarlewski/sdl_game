@@ -166,6 +166,7 @@ int is_object_enemy(Object* object)
         case OBJECT__FLY:                              is = 1; break;
         case OBJECT__CHAMELEON:                        is = 1; break;
         case OBJECT__SQUID:                            is = 1; break;
+        case OBJECT__MOLE:                             is = 1; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;
         case OBJECT__MINIBOT_ENEMY_CELL:               is = 1; break;
@@ -323,6 +324,8 @@ int is_object_pull_towards(Object* object)
         case OBJECT__PISTON_BARREL:                    is = 1; break;
 
         case OBJECT__OBSTACLE:                         is = 1; break;
+
+        case OBJECT__MOLE:                             is = 1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            is = 1; break;
         case OBJECT__TURRET_BOMB_GROUNDED:             is = 1; break;
@@ -786,6 +789,7 @@ int is_object_movable(Object* object)
         case OBJECT__FLY:                              is = 1; break;
         case OBJECT__CHAMELEON:                        is = 1; break;
         case OBJECT__SQUID:                            is = 1; break;
+        case OBJECT__MOLE:                             is = 0; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;
         case OBJECT__MINIBOT_ENEMY_CELL:               is = 1; break;
@@ -944,6 +948,7 @@ int is_object_meltable(Object* object)
         case OBJECT__FLY:                              is = 1; break;
         case OBJECT__CHAMELEON:                        is = 1; break;
         case OBJECT__SQUID:                            is = 1; break;
+        case OBJECT__MOLE:                             is = 1; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;
         case OBJECT__MINIBOT_ENEMY_CELL:               is = 1; break;
@@ -1660,6 +1665,7 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__FLY:                              name = "fly"; break;
         case OBJECT__CHAMELEON:                        name = "chameleon"; break;
         case OBJECT__SQUID:                            name = "squid"; break;
+        case OBJECT__MOLE:                             name = "mole"; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            name = "turret laser grounded"; break;
         case OBJECT__TURRET_LASER_STANDING:            name = "turret laser standing"; break;
@@ -1887,6 +1893,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__FLY:                              texture = textures->object.fly_1; break;
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_1; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_1; break;
+        case OBJECT__MOLE:                             texture = textures->object.mole_1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_1; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_1; break;
@@ -2114,6 +2121,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__FLY:                              texture = textures->object.fly_2; break;
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_2; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_2; break;
+        case OBJECT__MOLE:                             texture = textures->object.mole_2; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_2; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_2; break;
@@ -2341,6 +2349,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__FLY:                              texture = textures->object.fly_outline_1; break;
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_outline_1; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_outline_1; break;
+        case OBJECT__MOLE:                             texture = textures->object.mole_outline_1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_outline_1; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_outline_1; break;
@@ -2568,6 +2577,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__FLY:                              texture = textures->object.fly_outline_2; break;
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_outline_2; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_outline_2; break;
+        case OBJECT__MOLE:                             texture = textures->object.mole_outline_2; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_outline_2; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_outline_2; break;
