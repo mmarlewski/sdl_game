@@ -714,6 +714,10 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->minus_1_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_1_gemstone.png");
     skill->minus_2_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_2_gemstone.png");
     skill->minus_3_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_3_gemstone.png");
+
+    skill->floor_environment_falling_stalactite = load_texture_from_filepath (renderer, "./res/skill/floor_environment_falling_stalactite.png");
+    skill->floor_environment_emerge_water = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_water.png");
+    skill->floor_environment_emerge_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_burrow.png");
 }
 
 void destroy_textures_skill (Textures_Skill* skill)

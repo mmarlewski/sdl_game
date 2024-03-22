@@ -765,8 +765,36 @@ void update_enemy_list(State* state)
 
 void update_all_enemy_order(State* state)
 {
-    int curr_order_number = 1;
+    List* environment_enemy_list_list =
+        new_list((void(*)(void*))destroy_vec2i);
+    List* non_environment_enemy_list_list =
+        new_list((void(*)(void*))destroy_vec2i);
+
     for(ListElem* curr_elem = state->enemy_list->head;
+    curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+        if(curr_enemy != 0)
+        {
+            if(is_object_environment(curr_enemy->object))
+            {
+                add_new_list_element_to_list_end(
+                    environment_enemy_list_list,
+                    curr_enemy
+                    );
+            }
+            else
+            {
+                add_new_list_element_to_list_end(
+                    non_environment_enemy_list_list,
+                    curr_enemy
+                    );
+            }
+        }
+    }
+
+    int curr_order_number = 1;
+    for(ListElem* curr_elem = environment_enemy_list_list->head;
     curr_elem != 0; curr_elem = curr_elem->next)
     {
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
@@ -776,6 +804,27 @@ void update_all_enemy_order(State* state)
             curr_order_number++;
         }
     }
+    for(ListElem* curr_elem = non_environment_enemy_list_list->head;
+    curr_elem != 0; curr_elem = curr_elem->next)
+    {
+        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+        if(curr_enemy != 0)
+        {
+            curr_enemy->order_number = curr_order_number;
+            curr_order_number++;
+        }
+    }
+
+    remove_all_list_elements(
+        environment_enemy_list_list,
+        0
+        );
+    destroy_list(environment_enemy_list_list);
+    remove_all_list_elements(
+        non_environment_enemy_list_list,
+        0
+        );
+    destroy_list(non_environment_enemy_list_list);
 }
 
 void clear_enemy_attack_actions_and_draw(

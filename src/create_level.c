@@ -864,6 +864,11 @@ void create_level(State* state)
         new_object(OBJECT__SQUID),
         vec2i(3,6)
         );
+    room_add_object_at(
+        room_0_2,
+        new_object(OBJECT__ENVIRONMENT_EMERGE_WATER),
+        vec2i(-1,-1)
+        );
 
     // passages
 
@@ -8088,21 +8093,11 @@ void create_level(State* state)
         new_object(OBJECT__BALL),
         vec2i(3,6)
         );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__BALL),
-        vec2i(3,8)
-        );
 
     room_add_object_at(
         room_6_2,
         new_object(OBJECT__BALL),
         vec2i(4,1)
-        );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__BALL),
-        vec2i(4,3)
         );
     room_add_object_at(
         room_6_2,
@@ -8128,19 +8123,9 @@ void create_level(State* state)
     room_add_object_at(
         room_6_2,
         new_object(OBJECT__BALL),
-        vec2i(5,6)
-        );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__BALL),
         vec2i(5,8)
         );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__BALL),
-        vec2i(6,1)
-        );
     room_add_object_at(
         room_6_2,
         new_object(OBJECT__BALL),
@@ -8171,11 +8156,6 @@ void create_level(State* state)
         room_6_2,
         new_object(OBJECT__BALL),
         vec2i(7,6)
-        );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__BALL),
-        vec2i(7,8)
         );
 
     room_add_object_at(
@@ -8210,6 +8190,12 @@ void create_level(State* state)
         room_6_2,
         new_object(OBJECT__MOLE),
         vec2i(7,7)
+        );
+
+    room_add_object_at(
+        room_6_2,
+        new_object(OBJECT__ENVIRONMENT_EMERGE_BURROW),
+        vec2i(-1,-1)
         );
 
     // passages
@@ -8912,6 +8898,101 @@ void create_level(State* state)
 
     room_add_object_at(
         room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(7,5)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(7,6)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(7,7)
+        );
+
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(5,6)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(5,7)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(5,8)
+        );
+
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(4,4)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(3,4)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(3,5)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(3,6)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(3,7)
+        );
+
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(1,2)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(2,2)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(3,2)
+        );
+
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(2,4)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM),
+        vec2i(1,6)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__VENDING_DYNAMITE),
+        vec2i(1,7)
+        );
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__VENDING_DYNAMITE),
+        vec2i(1,8)
+        );
+
+    room_add_object_at(
+        room_7_0,
         new_object(OBJECT__EXIT_OBSIDIAN_DOWN),
         vec2i(2,0)
         );
@@ -8924,6 +9005,14 @@ void create_level(State* state)
         room_7_0,
         new_object(OBJECT__EXIT_OBSIDIAN_LEFT),
         vec2i(9,6)
+        );
+
+    // enemies
+
+    room_add_object_at(
+        room_7_0,
+        new_object(OBJECT__ENVIRONMENT_FALLING_STALACTITE),
+        vec2i(-1,-1)
         );
 
     // passages

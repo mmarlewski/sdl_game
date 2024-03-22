@@ -190,6 +190,26 @@ int is_object_enemy(Object* object)
 
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      is = 1; break;
 
+        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_WATER:         is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_BURROW:        is = 1; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
+int is_object_environment(Object* object)
+{
+    int is = 0;
+
+    switch(object->type)
+    {
+        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_WATER:         is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_BURROW:        is = 1; break;
+
         default: break;
     }
 
@@ -1683,6 +1703,10 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:       name = "turret projectile deployed"; break;
 
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      name = "squirrel exit obsidian down"; break;
+
+        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   name = "environment falling stalactite"; break;
+        case OBJECT__ENVIRONMENT_EMERGE_WATER:         name = "environment emerge water"; break;
+        case OBJECT__ENVIRONMENT_EMERGE_BURROW:        name = "environment emerge burrow"; break;
 
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       name = "stairs above stone powered"; break;
         case OBJECT__STAIRS_ABOVE_STONE:               name = "stairs above stone"; break;

@@ -16,8 +16,7 @@ void skill_get_actions_and_draw(
     Textures* textures
 )
 {
-    if(!is_tilemap_in_bounds(source_tilemap_pos) ||
-    !is_tilemap_in_bounds(target_1_tilemap_pos) ||
+    if(!is_tilemap_in_bounds(target_1_tilemap_pos) ||
     !is_tilemap_in_bounds(target_2_tilemap_pos))
     {
         return;
@@ -3641,6 +3640,105 @@ void skill_get_actions_and_draw(
                 );
             add_new_list_element_to_list_end(
                 draw_effect_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE:
+        {
+            if(target_2_object != 0)
+            {
+                if(is_object_ally(target_2_object) ||
+                is_object_enemy(target_2_object))
+                {
+                    // actions
+                    add_action_to_end_action_sequence(
+                        action_sequence,
+                        new_action_death(
+                            target_2_object,
+                            target_2_tilemap_pos
+                            )
+                        );
+                }
+                else
+                {
+                    // actions
+                    add_action_to_end_action_sequence(
+                        action_sequence,
+                        new_action_remove_object(
+                            target_2_object,
+                            target_2_tilemap_pos
+                            )
+                        );
+                }
+            }
+
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_add_object(
+                    new_object(OBJECT__STALACTITE_FALLEN),
+                    target_2_tilemap_pos
+                    )
+                );
+
+            // draw below
+            add_new_list_element_to_list_end(
+                draw_below_texture_list,
+                textures->skill.floor_environment_falling_stalactite
+                );
+            add_new_list_element_to_list_end(
+                draw_below_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:
+        {
+            if(target_2_object == 0)
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_add_object(
+                        new_object(OBJECT__SQUID),
+                        target_2_tilemap_pos
+                        )
+                    );
+            }
+
+            // draw below
+            add_new_list_element_to_list_end(
+                draw_below_texture_list,
+                textures->skill.floor_environment_emerge_water
+                );
+            add_new_list_element_to_list_end(
+                draw_below_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:
+        {
+            if(target_2_object == 0)
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_add_object(
+                        new_object(OBJECT__MOLE),
+                        target_2_tilemap_pos
+                        )
+                    );
+            }
+
+            // draw below
+            add_new_list_element_to_list_end(
+                draw_below_texture_list,
+                textures->skill.floor_environment_emerge_burrow
+                );
+            add_new_list_element_to_list_end(
+                draw_below_tilemap_pos_list,
                 new_vec2i_from_vec2i(target_2_tilemap_pos)
                 );
         }

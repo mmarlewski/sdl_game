@@ -57,9 +57,13 @@ int is_skill_two_target(int skill)
         case SKILL__LAUNCH_MINIBOT:         is = 0; break;
         case SKILL__MINIBOT_MERGE:          is = 0; break;
 
-        case SKILL__TURRET_LASER:       is = 0; break;
-        case SKILL__TURRET_BOMB:        is = 0; break;
-        case SKILL__TURRET_PROJECTILE:  is = 0; break;
+        case SKILL__TURRET_LASER:           is = 0; break;
+        case SKILL__TURRET_BOMB:            is = 0; break;
+        case SKILL__TURRET_PROJECTILE:      is = 0; break;
+
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE: is = 0; break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:       is = 0; break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:      is = 0; break;
 
         default: break;
     }
@@ -124,9 +128,13 @@ int get_skill_action_points(int skill)
         case SKILL__LAUNCH_MINIBOT:         ap = 1; break;
         case SKILL__MINIBOT_MERGE:          ap = 1; break;
 
-        case SKILL__TURRET_LASER:       ap = 1; break;
-        case SKILL__TURRET_BOMB:        ap = 1; break;
-        case SKILL__TURRET_PROJECTILE:  ap = 1; break;
+        case SKILL__TURRET_LASER:           ap = 1; break;
+        case SKILL__TURRET_BOMB:            ap = 1; break;
+        case SKILL__TURRET_PROJECTILE:      ap = 1; break;
+
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE: ap = 0; break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:       ap = 0; break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:      ap = 0; break;
 
         default: break;
     }
@@ -194,6 +202,10 @@ char* get_skill_name(int skill)
         case SKILL__TURRET_LASER:       name = "turret laser"; break;
         case SKILL__TURRET_BOMB:        name = "turret bomb"; break;
         case SKILL__TURRET_PROJECTILE:  name = "turret projectile"; break;
+
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "environment falling stalactite"; break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "environment emerge water"; break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "environment emerge burrow"; break;
 
         default: break;
     }

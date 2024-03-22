@@ -273,9 +273,18 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 // start enemy turn
                 if(state->enemy_list->size > 0)
                 {
-                    state->curr_enemy_list_elem = state->enemy_list->head;
-                    state->curr_enemy = (Enemy*) state->curr_enemy_list_elem->data;
-                    state->enemy_action_sequence = (Action*) state->curr_enemy->action_sequence;
+                    // enemy with order number of 1
+                    for(ListElem* curr_elem = state->enemy_list->head;
+                    curr_elem != 0; curr_elem = curr_elem->next)
+                    {
+                        Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                        if(curr_enemy->order_number == 1)
+                        {
+                            state->curr_enemy_list_elem = curr_elem;
+                            state->curr_enemy = curr_enemy;
+                            state->enemy_action_sequence = (Action*) curr_enemy->action_sequence;
+                        }
+                    }
 
                     add_animation_to_animation_list(
                         state,
@@ -1041,19 +1050,28 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 }
 
                 // determine next enemy
+                int next_enemy_order_number = state->curr_enemy->order_number + 1;
+                ListElem* next_enemy_list_elem = 0;
                 int found_next_enemy = 0;
-                ListElem* next_enemy_list_elem = state->curr_enemy_list_elem->next;
-                while(!found_next_enemy && next_enemy_list_elem != 0)
+                while(!found_next_enemy &&
+                next_enemy_order_number <= state->enemy_list->size)
                 {
-                    Enemy* next_enemy = (Enemy*) next_enemy_list_elem->data;
-                    Object* next_enemy_object = next_enemy->object;
-                    if(!next_enemy_object->is_to_be_removed)
+                    for(ListElem* curr_elem = state->enemy_list->head;
+                    curr_elem != 0; curr_elem = curr_elem->next)
                     {
-                        found_next_enemy = 1;
-                    }
-                    else
-                    {
-                        next_enemy_list_elem = next_enemy_list_elem->next;
+                        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+                        if(curr_enemy->order_number == next_enemy_order_number)
+                        {
+                            if(curr_enemy->object->is_to_be_removed)
+                            {
+                                next_enemy_order_number++;
+                            }
+                            else
+                            {
+                                found_next_enemy = 1;
+                                next_enemy_list_elem = curr_elem;
+                            }
+                        }
                     }
                 }
 
@@ -1071,10 +1089,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 // start moving enemies from beginning
                 else
                 {
-                    state->curr_enemy_list_elem = state->enemy_list->head;
-                    state->curr_enemy = (Enemy*) state->curr_enemy_list_elem->data;
-                    state->enemy_action_sequence = (Action*) state->curr_enemy->action_sequence;
-
+                    // enemy with order number of 1
+                    for(ListElem* curr_elem = state->enemy_list->head;
+                    curr_elem != 0; curr_elem = curr_elem->next)
+                    {
+                        Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                        if(curr_enemy->order_number == 1)
+                        {
+                            state->curr_enemy_list_elem = curr_elem;
+                            state->curr_enemy = curr_enemy;
+                            state->enemy_action_sequence = (Action*) curr_enemy->action_sequence;
+                        }
+                    }
+                    
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
                     state->timer = 0.0f;
                     break;
@@ -1179,19 +1206,28 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 }
 
                 // determine next enemy
+                int next_enemy_order_number = state->curr_enemy->order_number + 1;
+                ListElem* next_enemy_list_elem = 0;
                 int found_next_enemy = 0;
-                ListElem* next_enemy_list_elem = state->curr_enemy_list_elem->next;
-                while(!found_next_enemy && next_enemy_list_elem != 0)
+                while(!found_next_enemy &&
+                next_enemy_order_number <= state->enemy_list->size)
                 {
-                    Enemy* next_enemy = (Enemy*) next_enemy_list_elem->data;
-                    Object* next_enemy_object = next_enemy->object;
-                    if(!next_enemy_object->is_to_be_removed)
+                    for(ListElem* curr_elem = state->enemy_list->head;
+                    curr_elem != 0; curr_elem = curr_elem->next)
                     {
-                        found_next_enemy = 1;
-                    }
-                    else
-                    {
-                        next_enemy_list_elem = next_enemy_list_elem->next;
+                        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+                        if(curr_enemy->order_number == next_enemy_order_number)
+                        {
+                            if(curr_enemy->object->is_to_be_removed)
+                            {
+                                next_enemy_order_number++;
+                            }
+                            else
+                            {
+                                found_next_enemy = 1;
+                                next_enemy_list_elem = curr_elem;
+                            }
+                        }
                     }
                 }
 

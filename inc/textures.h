@@ -699,6 +699,10 @@ typedef struct
     Texture* minus_2_gemstone;
     Texture* minus_3_gemstone;
 
+    Texture* floor_environment_falling_stalactite;
+    Texture* floor_environment_emerge_water;
+    Texture* floor_environment_emerge_burrow;
+
 } Textures_Skill;
 
 void load_textures_skill (Renderer* renderer, Textures_Skill* skill);

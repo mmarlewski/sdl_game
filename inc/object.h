@@ -183,6 +183,10 @@ enum OBJECT_TYPE
 
     OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN,
 
+    OBJECT__ENVIRONMENT_FALLING_STALACTITE,
+    OBJECT__ENVIRONMENT_EMERGE_WATER,
+    OBJECT__ENVIRONMENT_EMERGE_BURROW,
+
     OBJECT__STAIRS_ABOVE_STONE_POWERED,
     OBJECT__STAIRS_ABOVE_STONE,
     OBJECT__STAIRS_ABOVE_ROCK,
@@ -274,6 +278,7 @@ void destroy_ally(Ally* ally);
 int is_object_wall(Object* object);
 int is_object_enemy(Object* object);
 int is_object_ally(Object* object);
+int is_object_environment(Object* object);
 int is_object_exit(Object* object);
 int is_object_pull_towards(Object* object);
 int is_object_throw_over(Object* object);

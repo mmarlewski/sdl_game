@@ -622,6 +622,51 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
             }
         }
         break;
+        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:
+        {
+            if(enemy->object->attack_dir4 != -1)
+            {
+                Vec2i tilemap_pos = vec2i(
+                    enemy->object->attack_dir4 / 10,
+                    enemy->object->attack_dir4 % 10
+                    );
+
+                enemy->skill = SKILL__ENVIRONMENT_FALLING_STALACTITE;
+                enemy->target_1_tilemap_pos = tilemap_pos;
+                enemy->target_2_tilemap_pos = tilemap_pos;
+            }
+        }
+        break;
+        case OBJECT__ENVIRONMENT_EMERGE_WATER:
+        {
+            if(enemy->object->attack_dir4 != -1)
+            {
+                Vec2i tilemap_pos = vec2i(
+                    enemy->object->attack_dir4 / 10,
+                    enemy->object->attack_dir4 % 10
+                    );
+
+                enemy->skill = SKILL__ENVIRONMENT_EMERGE_WATER;
+                enemy->target_1_tilemap_pos = tilemap_pos;
+                enemy->target_2_tilemap_pos = tilemap_pos;
+            }
+        }
+        break;
+        case OBJECT__ENVIRONMENT_EMERGE_BURROW:
+        {
+            if(enemy->object->attack_dir4 != -1)
+            {
+                Vec2i tilemap_pos = vec2i(
+                    enemy->object->attack_dir4 / 10,
+                    enemy->object->attack_dir4 % 10
+                    );
+
+                enemy->skill = SKILL__ENVIRONMENT_EMERGE_BURROW;
+                enemy->target_1_tilemap_pos = tilemap_pos;
+                enemy->target_2_tilemap_pos = tilemap_pos;
+            }
+        }
+        break;
         default:
         break;
     }
