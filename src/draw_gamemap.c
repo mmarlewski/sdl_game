@@ -127,10 +127,17 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
     state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
-        Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
+        Object* hover_object = room_get_object_at(
+            state->curr_room,
+            state->mouse_tilemap_pos
+            );
+        Enemy* hover_enemy = get_enemy_of_object(
+            state,
+            hover_object
+            );
 
         if(hover_object != 0 &&
+        hover_enemy != 0 &&
         is_object_enemy(hover_object) &&
         !hover_object->is_to_be_removed &&
         hover_object->is_visible)
@@ -164,7 +171,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 {
                     Action* curr_action = curr_enemy->action_sequence;
 
-                    if(!curr_enemy->performed_attack)
+                    if(!curr_enemy->performed_attack &&
+                    !curr_enemy->object->is_to_be_removed)
                     {
                         if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
                         state->enemy_action_sequence == curr_action) &&

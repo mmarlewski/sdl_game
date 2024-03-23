@@ -193,6 +193,8 @@ int is_object_enemy(Object* object)
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:        is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIPE:          is = 1; break;
+        case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      is = 1; break;
 
         default: break;
     }
@@ -209,6 +211,8 @@ int is_object_environment(Object* object)
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:        is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIPE:          is = 1; break;
+        case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      is = 1; break;
 
         default: break;
     }
@@ -1707,6 +1711,8 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   name = "environment falling stalactite"; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         name = "environment emerge water"; break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:        name = "environment emerge burrow"; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIPE:          name = "environment emerge pipe"; break;
+        case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      name = "environment collapse burrow"; break;
 
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       name = "stairs above stone powered"; break;
         case OBJECT__STAIRS_ABOVE_STONE:               name = "stairs above stone"; break;

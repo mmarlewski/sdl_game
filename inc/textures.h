@@ -702,6 +702,8 @@ typedef struct
     Texture* floor_environment_falling_stalactite;
     Texture* floor_environment_emerge_water;
     Texture* floor_environment_emerge_burrow;
+    Texture* environment_emerge_pipe;
+    Texture* floor_environment_collapse_burrow;
 
 } Textures_Skill;
 
@@ -870,6 +872,7 @@ typedef struct
     Texture* dynamite;
     Texture* gemstone;
     Texture* minibot;
+    Texture* minibot_enemy;
     Texture* fly_projectile;
     Texture* squirrel_projectile;
 

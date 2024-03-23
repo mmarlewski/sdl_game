@@ -523,9 +523,48 @@ Animation* skill_get_animation(
             skill_animation = animation_sequence;
         }
         break;
-        case SKILL__MINIBOT_MERGE:
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:
         {
-            //
+            if(target_2_object != 0 && target_2_object->type == OBJECT__PIPE)
+            {
+                int is_able_to_emerge = 0;
+                int emerge_dir4 = DIR4__NONE;
+                for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        target_2_tilemap_pos,
+                        dir4,
+                        1
+                        );
+                    Object* object = room_get_object_at(
+                        state->curr_room,
+                        tilemap_pos
+                        );
+                    if(object == 0)
+                    {
+                        is_able_to_emerge = 1;
+                        emerge_dir4 = dir4;
+                    }
+                }
+                if(is_able_to_emerge)
+                {
+                    skill_animation = new_animation_move_sprite_in_gamemap_in_arch(
+                        textures->animation.minibot_enemy,
+                        tilemap_pos_to_gamemap_pos(
+                            target_2_tilemap_pos
+                            ),
+                        tilemap_pos_to_gamemap_pos(
+                            vec2i_move_in_dir4_by(
+                                target_2_tilemap_pos,
+                                emerge_dir4,
+                                1
+                                )
+                            ),
+                        ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                        1.0f
+                        );
+                }
+            }
         }
         break;
         default:

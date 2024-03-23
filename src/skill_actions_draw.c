@@ -3691,6 +3691,19 @@ void skill_get_actions_and_draw(
                 draw_below_tilemap_pos_list,
                 new_vec2i_from_vec2i(target_2_tilemap_pos)
                 );
+
+            if(target_2_object != 0)
+            {
+                // draw effect
+                add_new_list_element_to_list_end(
+                    draw_effect_texture_list,
+                    textures->skill.death_effect
+                    );
+                add_new_list_element_to_list_end(
+                    draw_effect_tilemap_pos_list,
+                    new_vec2i_from_vec2i(target_2_tilemap_pos)
+                    );
+            }
         }
         break;
         case SKILL__ENVIRONMENT_EMERGE_WATER:
@@ -3736,6 +3749,103 @@ void skill_get_actions_and_draw(
             add_new_list_element_to_list_end(
                 draw_below_texture_list,
                 textures->skill.floor_environment_emerge_burrow
+                );
+            add_new_list_element_to_list_end(
+                draw_below_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:
+        {
+            if(target_2_object != 0 && target_2_object->type == OBJECT__PIPE)
+            {
+                int is_able_to_emerge = 0;
+                int emerge_dir4 = DIR4__NONE;
+                for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        target_2_tilemap_pos,
+                        dir4,
+                        1
+                        );
+                    Object* object = room_get_object_at(
+                        state->curr_room,
+                        tilemap_pos
+                        );
+                    if(object == 0)
+                    {
+                        is_able_to_emerge = 1;
+                        emerge_dir4 = dir4;
+                    }
+                }
+                if(is_able_to_emerge)
+                {
+                    // actions
+                    add_action_to_end_action_sequence(
+                        action_sequence,
+                        new_action_add_object(
+                            new_object(OBJECT__MINIBOT_ENEMY),
+                            vec2i_move_in_dir4_by(
+                                target_2_tilemap_pos,
+                                emerge_dir4,
+                                1
+                                )
+                            )
+                        );
+                    add_action_to_end_action_sequence(
+                        action_sequence,
+                        new_action_drop(
+                            new_object(OBJECT__MINIBOT_ENEMY),
+                            vec2i_move_in_dir4_by(
+                                target_2_tilemap_pos,
+                                emerge_dir4,
+                                1
+                                ),
+                            emerge_dir4
+                            )
+                        );
+                }
+            }
+
+            // draw above
+            add_new_list_element_to_list_end(
+                draw_above_texture_list,
+                textures->skill.environment_emerge_pipe
+                );
+            add_new_list_element_to_list_end(
+                draw_above_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:
+        {
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_change_floor(
+                    FLOOR__PIT,
+                    target_2_tilemap_pos
+                    )
+                );
+
+            if(target_2_object != 0)
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_fall(
+                        target_2_object,
+                        target_2_tilemap_pos
+                        )
+                    );
+            }
+
+            // draw below
+            add_new_list_element_to_list_end(
+                draw_below_texture_list,
+                textures->skill.floor_environment_collapse_burrow
                 );
             add_new_list_element_to_list_end(
                 draw_below_tilemap_pos_list,

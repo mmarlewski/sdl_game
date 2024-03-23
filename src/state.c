@@ -381,18 +381,20 @@ Object* room_get_object_at(Room* room, Vec2i tilemap_pos)
 
     if(!is_tilemap_in_bounds(tilemap_pos)) return 0;
 
-    for(ListElem* curr_elem = room->object_list->head; curr_elem; curr_elem = curr_elem->next)
+    Object* object = 0;
+    for(ListElem* curr_elem = room->object_list->head;
+    curr_elem; curr_elem = curr_elem->next)
     {
         Object* curr_object = (Object*)curr_elem->data;
         if(!curr_object->is_to_be_removed &&
         curr_object->tilemap_pos.x == tilemap_pos.x &&
         curr_object->tilemap_pos.y == tilemap_pos.y)
         {
-            return curr_object;
+            object = curr_object;
         }
     }
 
-    return 0;
+    return object;
 }
 
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite)

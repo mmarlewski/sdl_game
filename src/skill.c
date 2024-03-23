@@ -64,6 +64,8 @@ int is_skill_two_target(int skill)
         case SKILL__ENVIRONMENT_FALLING_STALACTITE: is = 0; break;
         case SKILL__ENVIRONMENT_EMERGE_WATER:       is = 0; break;
         case SKILL__ENVIRONMENT_EMERGE_BURROW:      is = 0; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:        is = 0; break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    is = 0; break;
 
         default: break;
     }
@@ -135,6 +137,8 @@ int get_skill_action_points(int skill)
         case SKILL__ENVIRONMENT_FALLING_STALACTITE: ap = 0; break;
         case SKILL__ENVIRONMENT_EMERGE_WATER:       ap = 0; break;
         case SKILL__ENVIRONMENT_EMERGE_BURROW:      ap = 0; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:        ap = 0; break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    ap = 0; break;
 
         default: break;
     }
@@ -206,6 +210,8 @@ char* get_skill_name(int skill)
         case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "environment falling stalactite"; break;
         case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "environment emerge water"; break;
         case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "environment emerge burrow"; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "environment emerge pipe"; break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "environment collapse burrow"; break;
 
         default: break;
     }

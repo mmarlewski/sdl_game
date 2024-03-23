@@ -718,6 +718,8 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->floor_environment_falling_stalactite = load_texture_from_filepath (renderer, "./res/skill/floor_environment_falling_stalactite.png");
     skill->floor_environment_emerge_water = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_water.png");
     skill->floor_environment_emerge_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_burrow.png");
+    skill->environment_emerge_pipe = load_texture_from_filepath (renderer, "./res/skill/environment_emerge_pipe.png");
+    skill->floor_environment_collapse_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_collapse_burrow.png");
 }
 
 void destroy_textures_skill (Textures_Skill* skill)
@@ -887,6 +889,7 @@ void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
     animation->dynamite = load_texture_from_filepath (renderer, "./res/animation/dynamite.png");
     animation->gemstone = load_texture_from_filepath (renderer, "./res/animation/gemstone.png");
     animation->minibot = load_texture_from_filepath (renderer, "./res/animation/minibot.png");
+    animation->minibot_enemy = load_texture_from_filepath (renderer, "./res/animation/minibot_enemy.png");
     animation->fly_projectile = load_texture_from_filepath (renderer, "./res/animation/fly_projectile.png");
     animation->squirrel_projectile = load_texture_from_filepath (renderer, "./res/animation/squirrel_projectile.png");
 }
