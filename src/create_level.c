@@ -5518,6 +5518,26 @@ void create_level(State* state)
         FLOOR__WATER,
         vec2i(8,4)
         );
+    room_change_floor_at(
+        room_3_5,
+        FLOOR__WATER,
+        vec2i(8,3)
+        );
+    room_change_floor_at(
+        room_3_5,
+        FLOOR__WATER,
+        vec2i(8,2)
+        );
+    room_change_floor_at(
+        room_3_5,
+        FLOOR__WATER,
+        vec2i(8,1)
+        );
+    room_change_floor_at(
+        room_3_5,
+        FLOOR__WATER,
+        vec2i(8,0)
+        );
 
     // walls
 
@@ -6507,60 +6527,8 @@ void create_level(State* state)
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(8,8)
+        vec2i(0,4)
         );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,7)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,6)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,5)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,4)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,3)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,2)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(8,1)
-        );
-
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(7,4)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(7,3)
-        );
-    room_change_floor_at(
-        room_4_5,
-        FLOOR__WATER,
-        vec2i(7,2)
-        );
-
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
@@ -6569,43 +6537,182 @@ void create_level(State* state)
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(2,4)
+        vec2i(1,3)
         );
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(3,4)
+        vec2i(1,2)
         );
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(4,4)
+        vec2i(1,1)
         );
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(4,3)
+        vec2i(2,1)
         );
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(5,3)
+        vec2i(3,1)
         );
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(6,3)
+        vec2i(4,1)
         );
-
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
-        vec2i(0,4)
+        vec2i(5,1)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__WATER,
+        vec2i(6,1)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__WATER,
+        vec2i(7,1)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__WATER,
+        vec2i(8,1)
         );
     room_change_floor_at(
         room_4_5,
         FLOOR__WATER,
         vec2i(8,0)
+        );
+
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(5,4)
+        );
+
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(3,5)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(5,5)
+        );
+
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(1,6)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(2,6)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(3,6)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_WATER,
+        vec2i(5,6)
+        );
+
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_PIT,
+        vec2i(7,8)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_PIT,
+        vec2i(7,7)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_PIT,
+        vec2i(7,6)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_PIT,
+        vec2i(7,5)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_PIT,
+        vec2i(7,4)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__ROCK_CRACK_PIT,
+        vec2i(7,3)
+        );
+
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__PIT,
+        vec2i(8,8)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__PIT,
+        vec2i(8,7)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__PIT,
+        vec2i(8,6)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__PIT,
+        vec2i(8,5)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__PIT,
+        vec2i(8,4)
+        );
+    room_change_floor_at(
+        room_4_5,
+        FLOOR__PIT,
+        vec2i(8,3)
         );
 
     // walls
@@ -6635,13 +6742,75 @@ void create_level(State* state)
 
     room_add_object_at(
         room_4_5,
-        new_object(OBJECT__STATION_STRIDER_LEG),
-        vec2i(7,7)
+        new_object(OBJECT__STALAGMITE),
+        vec2i(3,5)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__STALAGMITE),
+        vec2i(4,5)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__STALAGMITE),
+        vec2i(5,5)
         );
 
     room_add_object_at(
         room_4_5,
-        new_object(OBJECT__CRATE_GEMSTONE_ITEM),
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(1,5)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(2,5)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(2,7)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(3,7)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(3,8)
+        );
+
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(6,3)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(6,4)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(6,5)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(6,6)
+        );
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__WALL_MARBLE),
+        vec2i(6,7)
+        );
+
+    room_add_object_at(
+        room_4_5,
+        new_object(OBJECT__STATION_STRIDER_LEG),
         vec2i(2,2)
         );
 
@@ -6659,14 +6828,6 @@ void create_level(State* state)
         room_4_5,
         new_object(OBJECT__EXIT_MARBLE_UP),
         vec2i(2,9)
-        );
-
-    // enemies
-
-    room_add_object_at(
-        room_4_5,
-        new_object(OBJECT__GOAT),
-        vec2i(2,7)
         );
 
     // passages
