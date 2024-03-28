@@ -2,13 +2,11 @@
 
 void update_enemy_attack_dir4(State* state, Enemy* enemy)
 {
-    Object* enemy_object = enemy->object;
-
     enemy->skill = SKILL__NONE;
     enemy->target_1_tilemap_pos = vec2i(0,0);
     enemy->target_2_tilemap_pos = vec2i(0,0);
 
-    switch(enemy_object->type)
+    switch(enemy->object->type)
     {
         case OBJECT__GOAT:
         case OBJECT__SPIDER:
@@ -17,7 +15,69 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         case OBJECT__CHAMELEON:
         case OBJECT__SQUID:
         {
-            enemy->object->attack_dir4 = rand() % 4 + 1;
+            int chosen_dir4 = DIR4__DOWN;
+            int max_score = 0;
+
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                int score = 0;
+                int go_on = 1;
+                for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        enemy->object->tilemap_pos,
+                        dir4,
+                        i
+                        );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
+                        int floor = room_get_floor_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
+
+                        if(object != 0)
+                        {
+                            go_on = 0;
+
+                            score = (TILEMAP_LENGTH - i) / 2;
+
+                            if(is_floor_traversable_for_object(floor, enemy->object)) score += 2;
+
+                            if(!is_object_wall(object)) score += 2;
+
+                            if(is_object_movable(object)) score += 2;
+
+                            if(is_object_ally(object)) score += 2;
+                        }
+                    }
+                }
+
+                printf("dir4: %i, score: %i \n",
+                    dir4,
+                    score
+                    );
+
+                if(score > max_score)
+                {
+                    max_score = score;
+                    chosen_dir4 = dir4;
+                }
+            }
+
+            printf("\ndir4: %i, score: %i \n",
+                chosen_dir4,
+                max_score
+                );
+
+            enemy->object->attack_dir4 = chosen_dir4;
+
+            // enemy->object->attack_dir4 = rand() % 4 + 1;
         }
         break;
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:

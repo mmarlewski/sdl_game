@@ -3808,6 +3808,16 @@ void skill_get_actions_and_draw(
                 }
             }
 
+            // draw below
+            add_new_list_element_to_list_end(
+                draw_below_texture_list,
+                textures->skill.floor_border_solid
+                );
+            add_new_list_element_to_list_end(
+                draw_below_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+
             // draw above
             add_new_list_element_to_list_end(
                 draw_above_texture_list,

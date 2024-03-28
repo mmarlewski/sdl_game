@@ -460,13 +460,17 @@ void hero_add_augmentation(State* state, int augmentation)
 
     state->hero_body_part_augmentation[body_part] = augmentation;
 
-    if(hero_has_augmentation(state, AUGMENTATION__STRIDER_LEG))
-    {
-        state->hero_object->type = OBJECT__HERO_FLOATING;
-    }
     if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
     {
         state->hero_object->type = OBJECT__HERO_FLYING;
+    }
+    else if(hero_has_augmentation(state, AUGMENTATION__STRIDER_LEG))
+    {
+        state->hero_object->type = OBJECT__HERO_FLOATING;
+    }
+    else
+    {
+        state->hero_object->type = OBJECT__HERO;
     }
 }
 
@@ -1031,6 +1035,16 @@ void remove_all_object_to_be_removed(State* state)
         remove_all_list_elements(object_to_be_removed_list, 0);
         destroy_list(object_to_be_removed_list);
     }
+}
+
+int is_floor_traversable_for_object(
+    int floor,
+    Object* object
+)
+{
+    return ((!is_object_floating(object) && !is_object_flying(object) && is_floor_traversable(floor)) ||
+    (is_object_floating(object) && is_floor_traversable_for_floating(floor)) ||
+    (is_object_flying(object) && is_floor_traversable_for_flying(floor)));
 }
 
 int is_floor_deadly_on_move_for_object(

@@ -48,13 +48,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         {
                             enemy->skill = SKILL__CHARGE;
                             enemy->target_1_tilemap_pos = vec2i(0,0);
-                            enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                                curr_tilemap_pos,
-                                get_opposite_dir4(
-                                    enemy->object->attack_dir4
-                                    ),
-                                1
-                                );
+                            enemy->target_2_tilemap_pos = curr_tilemap_pos;
                             go_on = 0;
                         }
                     }
@@ -181,13 +175,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         {
                             enemy->skill = SKILL__CHARGE;
                             enemy->target_1_tilemap_pos = vec2i(0,0);
-                            enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                                curr_tilemap_pos,
-                                get_opposite_dir4(
-                                    enemy->object->attack_dir4
-                                    ),
-                                1
-                                );
+                            enemy->target_2_tilemap_pos = curr_tilemap_pos;
                             go_on = 0;
                         }
                     }
@@ -421,30 +409,18 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         }
                         else
                         {
-                            enemy->skill = SKILL__CHARGE;
+                            enemy->skill = SKILL__NONE;
                             enemy->target_1_tilemap_pos = vec2i(0,0);
-                            enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                                curr_tilemap_pos,
-                                get_opposite_dir4(
-                                    enemy->object->attack_dir4
-                                    ),
-                                1
-                                );
+                            enemy->target_2_tilemap_pos = vec2i(0,0);
                             go_on = 0;
                         }
                     }
                 }
                 else
                 {
-                    enemy->skill = SKILL__CHARGE;
+                    enemy->skill = SKILL__NONE;
                     enemy->target_1_tilemap_pos = vec2i(0,0);
-                    enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                        curr_tilemap_pos,
-                        get_opposite_dir4(
-                            enemy->object->attack_dir4
-                            ),
-                        1
-                        );
+                    enemy->target_2_tilemap_pos = vec2i(0,0);
                     go_on = 0;
                 }
             }

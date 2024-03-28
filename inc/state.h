@@ -291,6 +291,10 @@ void remove_all_object_to_be_removed(
     State* state
 );
 
+int is_floor_traversable_for_object(
+    int floor,
+    Object* object
+);
 int is_floor_deadly_on_move_for_object(
     int floor,
     Object* object

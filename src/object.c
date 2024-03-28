@@ -143,6 +143,8 @@ int is_object_wall(Object* object)
         case OBJECT__EXIT_OBSIDIAN_DOWN:
         case OBJECT__EXIT_OBSIDIAN_LEFT:
 
+        case OBJECT__OBSTACLE:
+
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
         {
             is = 1;

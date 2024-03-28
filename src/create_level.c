@@ -9877,11 +9877,6 @@ void create_level(State* state)
     room_change_floor_at(
         room_7_3,
         FLOOR__ICE,
-        vec2i(8,4)
-        );
-    room_change_floor_at(
-        room_7_3,
-        FLOOR__ICE,
         vec2i(8,3)
         );
     room_change_floor_at(
@@ -9946,18 +9941,13 @@ void create_level(State* state)
     room_add_object_at(
         room_7_3,
         new_object(OBJECT__STATION_CHAIN_HAND),
-        vec2i(6,1)
+        vec2i(7,1)
         );
 
     room_add_object_at(
         room_7_3,
         new_object(OBJECT__WALL_ROCK),
-        vec2i(5,1)
-        );
-    room_add_object_at(
-        room_7_3,
-        new_object(OBJECT__WALL_ROCK),
-        vec2i(5,2)
+        vec2i(6,1)
         );
     room_add_object_at(
         room_7_3,

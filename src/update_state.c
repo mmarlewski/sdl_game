@@ -1101,7 +1101,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                             state->enemy_action_sequence = (Action*) curr_enemy->action_sequence;
                         }
                     }
-                    
+
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE);
                     state->timer = 0.0f;
                     break;
