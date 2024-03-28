@@ -666,6 +666,11 @@ typedef struct
     Texture* dots_arch_horizontal;
     Texture* dots_arch_vertical;
 
+    Texture* dir4_up;
+    Texture* dir4_right;
+    Texture* dir4_down;
+    Texture* dir4_left;
+
     Texture* immovable_effect;
     Texture* crash_effect;
     Texture* blow_up_effect;

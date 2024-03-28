@@ -49,6 +49,36 @@ void skill_get_actions_and_draw(
 
     switch (skill)
     {
+        case SKILL__EMPTY:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                    );
+
+            Texture* above_texture = 0;
+
+            switch(distance_info.dir4)
+            {
+                case DIR4__UP: above_texture = textures->skill.dir4_up; break;
+                case DIR4__RIGHT: above_texture = textures->skill.dir4_right; break;
+                case DIR4__DOWN: above_texture = textures->skill.dir4_down; break;
+                case DIR4__LEFT: above_texture = textures->skill.dir4_left; break;
+                default: break;
+            }
+
+            // draw above
+            add_new_list_element_to_list_end(
+                draw_above_texture_list,
+                above_texture
+                );
+            add_new_list_element_to_list_end(
+                draw_above_tilemap_pos_list,
+                new_vec2i_from_vec2i(source_tilemap_pos)
+                );
+        }
+        break;
         case SKILL__USE:
         {
             if(target_2_object != 0 &&

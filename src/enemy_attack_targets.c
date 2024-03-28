@@ -387,40 +387,30 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         {
                             enemy->skill = SKILL__DRAG_TENTACLE;
                             enemy->target_1_tilemap_pos = curr_tilemap_pos;
-                            enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                                enemy_object->tilemap_pos,
-                                enemy->object->attack_dir4,
-                                1
-                                );
+                            enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
                             go_on = 0;
                         }
                         else if(is_object_pull_towards(curr_object))
                         {
                             enemy->skill = SKILL__PULL_TENTACLE;
                             enemy->target_1_tilemap_pos = curr_tilemap_pos;
-                            enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(
-                                curr_tilemap_pos,
-                                get_opposite_dir4(
-                                    enemy->object->attack_dir4
-                                    ),
-                                1
-                                );
+                            enemy->target_2_tilemap_pos = curr_tilemap_pos;
                             go_on = 0;
                         }
                         else
                         {
-                            enemy->skill = SKILL__NONE;
+                            enemy->skill = SKILL__EMPTY;
                             enemy->target_1_tilemap_pos = vec2i(0,0);
-                            enemy->target_2_tilemap_pos = vec2i(0,0);
+                            enemy->target_2_tilemap_pos = curr_tilemap_pos;
                             go_on = 0;
                         }
                     }
                 }
                 else
                 {
-                    enemy->skill = SKILL__NONE;
+                    enemy->skill = SKILL__EMPTY;
                     enemy->target_1_tilemap_pos = vec2i(0,0);
-                    enemy->target_2_tilemap_pos = vec2i(0,0);
+                    enemy->target_2_tilemap_pos = curr_tilemap_pos;
                     go_on = 0;
                 }
             }
