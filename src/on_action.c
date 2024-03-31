@@ -132,6 +132,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR__WATER:
         case FLOOR__LAVA:
+        case FLOOR__METAL_HATCH_OPEN:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
             add_action_to_end_action_sequence(
@@ -1182,9 +1183,17 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
         case OBJECT__BALL_SPIKES:
         {
             if(action->crash.object_crushed->type != OBJECT__BARREL &&
-            action->crash.object_crushed->type != OBJECT__PISTON_BARREL)
+            action->crash.object_crushed->type != OBJECT__PISTON_BARREL &&
+            !is_object_wall(action->crash.object_crushed) &&
+            !is_object_exit(action->crash.object_crushed))
             {
-                add_action_to_end_action_sequence(sequence, new_action_death(action->crash.object_crushed, action->crash.object_crushed->tilemap_pos));
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_death(
+                        action->crash.object_crushed,
+                        action->crash.object_crushed->tilemap_pos
+                        )
+                    );
             }
         }
         break;
@@ -1293,10 +1302,30 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
             }
         }
         break;
+        case OBJECT__BALL:
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_move(
+                        vec2i_move_in_dir4_by(
+                            object->tilemap_pos,
+                            action->crash.dir4,
+                            i
+                            ),
+                        action->crash.dir4
+                        )
+                    );
+            }
+        }
+        break;
         case OBJECT__BALL_SPIKES:
         {
             if(action->crash.object_crushed->type != OBJECT__BARREL &&
-            action->crash.object_crushed->type != OBJECT__BARREL)
+            action->crash.object_crushed->type != OBJECT__BARREL &&
+            !is_object_wall(action->crash.object_crushed) &&
+            !is_object_exit(action->crash.object_crushed))
             {
                 add_action_to_end_action_sequence(
                     sequence,
@@ -1345,17 +1374,6 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     object->tilemap_pos
-                    )
-                );
-        }
-        break;
-        case OBJECT__BALL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_move(
-                    object->tilemap_pos,
-                    action->crash.dir4
                     )
                 );
         }
@@ -1450,18 +1468,24 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
         }
         break;
         case OBJECT__BALL:
-        {
-            if(action->drop.dir4 != DIR4__NONE)
-            {
-                add_action_to_end_action_sequence(sequence, new_action_move( action->tilemap_pos, action->drop.dir4));
-            }
-        }
-        break;
         case OBJECT__BALL_SPIKES:
         {
             if(action->drop.dir4 != DIR4__NONE)
             {
-                add_action_to_end_action_sequence(sequence, new_action_move( action->tilemap_pos, action->drop.dir4));
+                for(int i = 0; i < 5; i++)
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_move(
+                            vec2i_move_in_dir4_by(
+                                action->tilemap_pos,
+                                action->drop.dir4,
+                                i
+                                ),
+                            action->drop.dir4
+                            )
+                        );
+                }
             }
         }
         break;

@@ -162,7 +162,7 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__METAL_SPIKES_ON:           is = 0; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 1; break;
         case FLOOR__METAL:                     is = 1; break;
-        case FLOOR__METAL_HATCH_OPEN:          is = 0; break;
+        case FLOOR__METAL_HATCH_OPEN:          is = 1; break;
         case FLOOR__METAL_HATCH_CLOSED:        is = 1; break;
         case FLOOR__METAL_COVER_BOTTOM:        is = 1; break;
         case FLOOR__METAL_TARGET_UNCHECKED:    is = 1; break;

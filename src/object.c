@@ -814,7 +814,7 @@ int is_object_movable(Object* object)
         case OBJECT__BULL:                             is = 1; break;
         case OBJECT__FLY:                              is = 1; break;
         case OBJECT__CHAMELEON:                        is = 1; break;
-        case OBJECT__SQUID:                            is = 1; break;
+        case OBJECT__SQUID:                            is = 0; break;
         case OBJECT__MOLE:                             is = 0; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;

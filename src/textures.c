@@ -682,10 +682,10 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->dots_arch_horizontal = load_texture_from_filepath (renderer, "./res/skill/dots_arch_horizontal.png");
     skill->dots_arch_vertical = load_texture_from_filepath (renderer, "./res/skill/dots_arch_vertical.png");
 
-    skill->dir4_up = load_texture_from_filepath (renderer, "./res/skill/dir4_up.png");
-    skill->dir4_right = load_texture_from_filepath (renderer, "./res/skill/dir4_right.png");
-    skill->dir4_down = load_texture_from_filepath (renderer, "./res/skill/dir4_down.png");
-    skill->dir4_left = load_texture_from_filepath (renderer, "./res/skill/dir4_left.png");
+    skill->attack_dir4_up = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_up.png");
+    skill->attack_dir4_right = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_right.png");
+    skill->attack_dir4_down = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_down.png");
+    skill->attack_dir4_left = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_left.png");
 
     skill->immovable_effect = load_texture_from_filepath (renderer, "./res/skill/immovable_effect.png");
     skill->crash_effect = load_texture_from_filepath (renderer, "./res/skill/crash_effect.png");
@@ -700,6 +700,7 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
     skill->teleportation_effect = load_texture_from_filepath (renderer, "./res/skill/teleportation_effect.png");
 
     skill->no_positions = load_texture_from_filepath (renderer, "./res/skill/no_positions.png");
+    skill->no_attack = load_texture_from_filepath (renderer, "./res/skill/no_attack.png");
 
     skill->plus_1_cell = load_texture_from_filepath (renderer, "./res/skill/plus_1_cell.png");
     skill->plus_2_cell = load_texture_from_filepath (renderer, "./res/skill/plus_2_cell.png");

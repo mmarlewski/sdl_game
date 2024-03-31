@@ -8,7 +8,8 @@ int is_skill_two_target(int skill)
     {
         case SKILL__NONE:               is = 0; break;
 
-        case SKILL__EMPTY:              is = 0; break;
+        case SKILL__ATTACK_DIR:         is = 0; break;
+        case SKILL__NO_ATTACK:          is = 0; break;
 
         case SKILL__USE:                is = 0; break;
         case SKILL__MANIPULATION:       is = 0; break;
@@ -83,7 +84,8 @@ int get_skill_action_points(int skill)
     {
         case SKILL__NONE:               ap = 0; break;
 
-        case SKILL__EMPTY:              ap = 0; break;
+        case SKILL__ATTACK_DIR:         ap = 0; break;
+        case SKILL__NO_ATTACK:          ap = 0; break;
 
         case SKILL__USE:                ap = 1; break;
         case SKILL__MANIPULATION:       ap = 1; break;
@@ -158,7 +160,8 @@ char* get_skill_name(int skill)
     {
         case SKILL__NONE:               name = "none"; break;
 
-        case SKILL__EMPTY:              name = "empty"; break;
+        case SKILL__ATTACK_DIR:         name = "attack dir"; break;
+        case SKILL__NO_ATTACK:          name = "no attack"; break;
 
         case SKILL__USE:                name = "use"; break;
         case SKILL__MANIPULATION:       name = "manipulation"; break;

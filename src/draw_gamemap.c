@@ -150,15 +150,6 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 colors->yellow,
                 1.0f
                 );
-
-            draw_texture_list(
-                renderer,
-                state,
-                hover_enemy->draw_effect_texture_list,
-                hover_enemy->draw_effect_tilemap_pos_list,
-                colors->none,
-                0.75f
-                );
         }
         else
         {
@@ -340,15 +331,6 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 hover_enemy->draw_above_tilemap_pos_list,
                 colors->yellow,
                 1.0f
-                );
-
-            draw_texture_list(
-                renderer,
-                state,
-                hover_enemy->draw_effect_texture_list,
-                hover_enemy->draw_effect_tilemap_pos_list,
-                colors->none,
-                0.75f
                 );
         }
         else

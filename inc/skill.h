@@ -8,7 +8,8 @@ enum SKILL
 {
     SKILL__NONE,
 
-    SKILL__EMPTY,
+    SKILL__ATTACK_DIR,
+    SKILL__NO_ATTACK,
 
     SKILL__USE,
     SKILL__MANIPULATION,

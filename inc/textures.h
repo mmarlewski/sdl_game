@@ -666,10 +666,10 @@ typedef struct
     Texture* dots_arch_horizontal;
     Texture* dots_arch_vertical;
 
-    Texture* dir4_up;
-    Texture* dir4_right;
-    Texture* dir4_down;
-    Texture* dir4_left;
+    Texture* attack_dir4_up;
+    Texture* attack_dir4_right;
+    Texture* attack_dir4_down;
+    Texture* attack_dir4_left;
 
     Texture* immovable_effect;
     Texture* crash_effect;
@@ -684,6 +684,7 @@ typedef struct
     Texture* teleportation_effect;
 
     Texture* no_positions;
+    Texture* no_attack;
 
     Texture* plus_1_cell;
     Texture* plus_2_cell;
