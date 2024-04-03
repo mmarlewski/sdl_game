@@ -140,7 +140,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         hover_enemy != 0 &&
         is_object_enemy(hover_object) &&
         !hover_object->is_to_be_removed &&
-        hover_object->is_visible)
+        hover_object->is_visible &&
+        !hover_enemy->performed_attack)
         {
             draw_texture_list(
                 renderer,
@@ -320,9 +321,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
-        if(hover_enemy != 0 &&
-        !hover_enemy->object->is_to_be_removed &&
-        hover_enemy->object->is_visible)
+        if(hover_object != 0 &&
+        hover_enemy != 0 &&
+        is_object_enemy(hover_object) &&
+        !hover_object->is_to_be_removed &&
+        hover_object->is_visible &&
+        !hover_enemy->performed_attack)
         {
             draw_texture_list(
                 renderer,
@@ -735,9 +739,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
-        if(hover_enemy != 0 &&
-        !hover_enemy->object->is_to_be_removed &&
-        hover_enemy->object->is_visible)
+        if(hover_object != 0 &&
+        hover_enemy != 0 &&
+        is_object_enemy(hover_object) &&
+        !hover_object->is_to_be_removed &&
+        hover_object->is_visible &&
+        !hover_enemy->performed_attack)
         {
             draw_texture_list(
                 renderer,

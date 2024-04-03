@@ -114,7 +114,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                             tilemap_pos,
                             path_pos_list,
                             is_object_floating(enemy->object),
-                            is_object_floating(enemy->object)
+                            is_object_flying(enemy->object)
                             );
 
                         int distance = path_pos_list->size;
@@ -253,7 +253,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                         random_tilemap_pos,
                         path_pos_list,
                         is_object_floating(enemy->object),
-                        is_object_floating(enemy->object)
+                        is_object_flying(enemy->object)
                         );
 
                     if(path_pos_list->size > 0)

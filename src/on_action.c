@@ -131,7 +131,95 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         }
         break;
         case FLOOR__WATER:
+        {
+            if(action->move.object->type == OBJECT__COLUMN)
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                            )
+                        )
+                    );
+                add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__WATER_COLUMN,
+                    vec2i_move_in_dir4_by(
+                        action->tilemap_pos,
+                        action->move.dir4,
+                        1
+                        )
+                    )
+                );
+            }
+            else
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                            )
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR__LAVA:
+        {
+            if(action->move.object->type == OBJECT__COLUMN)
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                            )
+                        )
+                    );
+                add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__LAVA_COLUMN,
+                    vec2i_move_in_dir4_by(
+                        action->tilemap_pos,
+                        action->move.dir4,
+                        1
+                        )
+                    )
+                );
+            }
+            else
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                            )
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR__METAL_HATCH_OPEN:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -150,11 +238,24 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         break;
         case FLOOR__PIT:
         {
-            remove_all_actions_after_curr_action_action_sequence(sequence);
-            add_action_to_end_action_sequence(
+            if(action->move.object->type == OBJECT__COLUMN)
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                            )
+                        )
+                    );
+                add_action_to_end_action_sequence(
                 sequence,
-                new_action_fall(
-                    action->move.object,
+                new_action_change_floor(
+                    FLOOR__PIT_COLUMN,
                     vec2i_move_in_dir4_by(
                         action->tilemap_pos,
                         action->move.dir4,
@@ -162,6 +263,22 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                         )
                     )
                 );
+            }
+            else
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                            )
+                        )
+                    );
+            }
         }
         break;
         default:
@@ -365,16 +482,96 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
         }
         break;
         case FLOOR__WATER:
+        {
+            if(action->drop.object->type == OBJECT__COLUMN)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__WATER_COLUMN,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+            else
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR__LAVA:
+        {
+            if(action->drop.object->type == OBJECT__COLUMN)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__LAVA_COLUMN,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+            else
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+        }
+        break;
         case FLOOR__PIT:
         {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_fall(
-                    action->drop.object,
-                    action->tilemap_pos
-                    )
-                );
+            if(action->drop.object->type == OBJECT__COLUMN)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__PIT_COLUMN,
+                        action->tilemap_pos
+                        )
+                    );
+            }
+            else
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_fall(
+                        action->drop.object,
+                        action->tilemap_pos
+                        )
+                    );
+            }
         }
         break;
         default:

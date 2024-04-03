@@ -42,6 +42,7 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->coins = load_texture_from_filepath (renderer, "./res/floor/coins.png");
 
     floor->pit = load_texture_from_filepath (renderer, "./res/floor/pit.png");
+    floor->pit_column = load_texture_from_filepath (renderer, "./res/floor/pit_column.png");
 
     floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
     floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
@@ -49,12 +50,15 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->water_lily_pod_2 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_2.png");
     floor->water_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_1.png");
     floor->water_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_2.png");
+    floor->water_column_1 = load_texture_from_filepath (renderer, "./res/floor/water_column_1.png");
+    floor->water_column_2 = load_texture_from_filepath (renderer, "./res/floor/water_column_2.png");
 
     floor->lava_1 = load_texture_from_filepath (renderer, "./res/floor/lava_1.png");
     floor->lava_2 = load_texture_from_filepath (renderer, "./res/floor/lava_2.png");
-
     floor->lava_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_1.png");
     floor->lava_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_2.png");
+    floor->lava_column_1 = load_texture_from_filepath (renderer, "./res/floor/lava_column_1.png");
+    floor->lava_column_2 = load_texture_from_filepath (renderer, "./res/floor/lava_column_2.png");
 
     floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
     floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
@@ -310,6 +314,9 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
 
     object->barrel = load_texture_from_filepath(renderer, "./res/object/barrel.png");
     object->barrel_outline = load_texture_from_filepath(renderer, "./res/object/barrel_outline.png");
+
+    object->column = load_texture_from_filepath(renderer, "./res/object/column.png");
+    object->column_outline = load_texture_from_filepath(renderer, "./res/object/column_outline.png");
 
     object->spring = load_texture_from_filepath(renderer, "./res/object/spring.png");
     object->spring_outline = load_texture_from_filepath(renderer, "./res/object/spring_outline.png");

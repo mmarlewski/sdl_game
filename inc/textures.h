@@ -46,6 +46,7 @@ typedef struct
     Texture* coins;
 
     Texture* pit;
+    Texture* pit_column;
 
     Texture* water_1;
     Texture* water_2;
@@ -53,11 +54,15 @@ typedef struct
     Texture* water_lily_pod_2;
     Texture* water_stalactite_fallen_1;
     Texture* water_stalactite_fallen_2;
+    Texture* water_column_1;
+    Texture* water_column_2;
 
     Texture* lava_1;
     Texture* lava_2;
     Texture* lava_stalactite_fallen_1;
     Texture* lava_stalactite_fallen_2;
+    Texture* lava_column_1;
+    Texture* lava_column_2;
 
     Texture* ice;
     Texture* ice_crack_water;
@@ -295,6 +300,9 @@ typedef struct
 
     Texture* barrel;
     Texture* barrel_outline;
+
+    Texture* column;
+    Texture* column_outline;
 
     Texture* spring;
     Texture* spring_outline;

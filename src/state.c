@@ -487,6 +487,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
     {
         case OBJECT__GOLEM_POWERED:
         {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__STOMP);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
         }
         break;

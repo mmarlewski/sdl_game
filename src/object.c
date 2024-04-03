@@ -784,6 +784,8 @@ int is_object_movable(Object* object)
 
         case OBJECT__BARREL:                           is = 1; break;
 
+        case OBJECT__COLUMN:                           is = 1; break;
+
         case OBJECT__PISTON:                           is = 0; break;
         case OBJECT__PISTON_CELL:                      is = 0; break;
         case OBJECT__PISTON_DYNAMITE:                  is = 0; break;
@@ -1123,6 +1125,8 @@ int is_object_breakable(Object* object)
         case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
 
         case OBJECT__BARREL:                           is = 0; break;
+
+        case OBJECT__COLUMN:                           is = 1; break;
 
         case OBJECT__PISTON:                           is = 0; break;
         case OBJECT__PISTON_CELL:                      is = 0; break;
@@ -1667,6 +1671,8 @@ char* get_name_from_object_type(int object_type)
 
         case OBJECT__BARREL:                           name = "barrel"; break;
 
+        case OBJECT__COLUMN:                           name = "column"; break;
+
         case OBJECT__PISTON:                           name = "piston"; break;
         case OBJECT__PISTON_CELL:                      name = "piston cell"; break;
         case OBJECT__PISTON_DYNAMITE:                  name = "piston dynamite"; break;
@@ -1899,6 +1905,8 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT__BARREL:                           texture = textures->object.barrel; break;
 
+        case OBJECT__COLUMN:                           texture = textures->object.column; break;
+
         case OBJECT__PISTON:                           texture = textures->object.piston; break;
         case OBJECT__PISTON_CELL:                      texture = textures->object.piston_cell; break;
         case OBJECT__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite; break;
@@ -2126,6 +2134,8 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:    texture = textures->object.vending_dynamite_damaged_item; break;
 
         case OBJECT__BARREL:                           texture = textures->object.barrel; break;
+
+        case OBJECT__COLUMN:                           texture = textures->object.column; break;
 
         case OBJECT__PISTON:                           texture = textures->object.piston; break;
         case OBJECT__PISTON_CELL:                      texture = textures->object.piston_cell; break;
@@ -2355,6 +2365,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__BARREL:                           texture = textures->object.barrel_outline; break;
 
+        case OBJECT__COLUMN:                           texture = textures->object.column_outline; break;
+
         case OBJECT__PISTON:                           texture = textures->object.piston_outline; break;
         case OBJECT__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
         case OBJECT__PISTON_DYNAMITE:                  texture = textures->object.piston_dynamite_outline; break;
@@ -2582,6 +2594,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:    texture = textures->object.vending_dynamite_damaged_item_outline; break;
 
         case OBJECT__BARREL:                           texture = textures->object.barrel_outline; break;
+
+        case OBJECT__COLUMN:                           texture = textures->object.column_outline; break;
 
         case OBJECT__PISTON:                           texture = textures->object.piston_outline; break;
         case OBJECT__PISTON_CELL:                      texture = textures->object.piston_cell_outline; break;
