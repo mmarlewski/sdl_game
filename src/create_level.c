@@ -1058,6 +1058,33 @@ void create_level(State* state)
         vec2i(2,9)
         );
 
+    room_change_floor_at(
+        room_0_3,
+        FLOOR__METAL_PISTON,
+        vec2i(1,4)
+        );
+    room_change_floor_at(
+        room_0_3,
+        FLOOR__METAL_PISTON,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_0_3,
+        FLOOR__METAL_PISTON,
+        vec2i(3,4)
+        );
+    room_change_floor_at(
+        room_0_3,
+        FLOOR__METAL_PISTON,
+        vec2i(4,4)
+        );
+
+    room_change_floor_at(
+        room_0_3,
+        FLOOR__METAL_PISTON_MIMIC,
+        vec2i(6,5)
+        );
+
     // walls
 
     List* room_0_3_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
@@ -1094,6 +1121,53 @@ void create_level(State* state)
     destroy_list(room_0_3_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__PISTON),
+        vec2i(1,4)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__PISTON),
+        vec2i(2,4)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__PISTON),
+        vec2i(3,4)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__PISTON),
+        vec2i(4,4)
+        );
+
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(5,5)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(8,5)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(6,8)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(2,1)
+        );
+    room_add_object_at(
+        room_0_3,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(7,2)
+        );
 
     room_add_object_at(
         room_0_3,
@@ -1617,6 +1691,77 @@ void create_level(State* state)
         vec2i(8,5)
         );
 
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_RIGHT,
+        vec2i(2,2)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_RIGHT,
+        vec2i(3,2)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_DOWN,
+        vec2i(4,2)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_DOWN,
+        vec2i(4,3)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_DOWN,
+        vec2i(4,4)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_DOWN,
+        vec2i(4,5)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_DOWN,
+        vec2i(4,6)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_LEFT,
+        vec2i(4,7)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_LEFT,
+        vec2i(3,7)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_UP,
+        vec2i(2,7)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_UP,
+        vec2i(2,6)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_UP,
+        vec2i(2,5)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_UP,
+        vec2i(2,4)
+        );
+    room_change_floor_at(
+        room_1_0,
+        FLOOR__CONV_BELT_UP,
+        vec2i(2,3)
+        );
+
     // walls
 
     List* room_1_0_wall_exclude_pos_list = new_list((void (*)(void *))&destroy_vec2i);
@@ -1645,6 +1790,43 @@ void create_level(State* state)
     destroy_list(room_1_0_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__ENVIRONMENT_CONV_BELT),
+        vec2i(-1,-1)
+        );
+
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,2)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__BARREL),
+        vec2i(3,7)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__BARREL),
+        vec2i(2,3)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__BARREL),
+        vec2i(4,3)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__BARREL),
+        vec2i(2,6)
+        );
+    room_add_object_at(
+        room_1_0,
+        new_object(OBJECT__BARREL),
+        vec2i(4,6)
+        );
 
     room_add_object_at(
         room_1_0,
@@ -2343,6 +2525,58 @@ void create_level(State* state)
 
     room_add_object_at(
         room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,2)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,3)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,4)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,5)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,6)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,7)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__BARREL),
+        vec2i(7,8)
+        );
+
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__DISPLAY),
+        vec2i(8,6)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__DISPLAY),
+        vec2i(8,7)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__DISPLAY),
+        vec2i(8,8)
+        );
+
+    room_add_object_at(
+        room_1_2,
         new_object(OBJECT__EXIT_GOLD_UNLOCKED_DOWN),
         vec2i(1,0)
         );
@@ -2365,6 +2599,39 @@ void create_level(State* state)
         room_1_2,
         new_object(OBJECT__EXIT_GOLD_UNLOCKED_UP),
         vec2i(4,9)
+        );
+
+    // enemies
+
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__SHARK),
+        vec2i(2,2)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__SHARK_FIN),
+        vec2i(4,1)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__SHARK),
+        vec2i(6,2)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__SHARK_FIN),
+        vec2i(1,4)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__SHARK),
+        vec2i(4,3)
+        );
+    room_add_object_at(
+        room_1_2,
+        new_object(OBJECT__SHARK_FIN),
+        vec2i(7,1)
         );
 
     // passages
@@ -8652,6 +8919,38 @@ void create_level(State* state)
 
     room_add_object_at(
         room_5_5,
+        new_object(OBJECT__BARREL),
+        vec2i(5,5)
+        );
+    room_add_object_at(
+        room_5_5,
+        new_object(OBJECT__BARREL),
+        vec2i(5,4)
+        );
+    room_add_object_at(
+        room_5_5,
+        new_object(OBJECT__BARREL),
+        vec2i(5,3)
+        );
+    room_add_object_at(
+        room_5_5,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(6,4)
+        );
+    room_add_object_at(
+        room_5_5,
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        vec2i(6,3)
+        );
+
+    room_add_object_at(
+        room_5_5,
+        new_object(OBJECT__DISPLAY),
+        vec2i(1,5)
+        );
+
+    room_add_object_at(
+        room_5_5,
         new_object(OBJECT__WALL_MARBLE),
         vec2i(1,4)
         );
@@ -8705,6 +9004,14 @@ void create_level(State* state)
         room_5_5,
         new_object(OBJECT__EXIT_MARBLE_UP),
         vec2i(8,9)
+        );
+
+    // enemies
+
+    room_add_object_at(
+        room_5_5,
+        new_object(OBJECT__FLY),
+        vec2i(2,7)
         );
 
     // passages
@@ -10114,6 +10421,14 @@ void create_level(State* state)
         room_6_5,
         new_object(OBJECT__EXIT_MARBLE_UP),
         vec2i(7,9)
+        );
+
+    // enemies
+
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__ENVIRONMENT_EMERGE_PIT),
+        vec2i(-1,-1)
         );
 
     // passages

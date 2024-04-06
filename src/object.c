@@ -169,6 +169,9 @@ int is_object_enemy(Object* object)
         case OBJECT__CHAMELEON:                        is = 1; break;
         case OBJECT__SQUID:                            is = 1; break;
         case OBJECT__MOLE:                             is = 1; break;
+        case OBJECT__MIMIC:                            is = 1; break;
+        case OBJECT__SHARK:                            is = 1; break;
+        case OBJECT__SHARK_FIN:                        is = 1; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;
         case OBJECT__MINIBOT_ENEMY_CELL:               is = 1; break;
@@ -194,9 +197,11 @@ int is_object_enemy(Object* object)
 
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIT:           is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:        is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_PIPE:          is = 1; break;
         case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      is = 1; break;
+        case OBJECT__ENVIRONMENT_CONV_BELT:            is = 1; break;
 
         default: break;
     }
@@ -212,9 +217,11 @@ int is_object_environment(Object* object)
     {
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         is = 1; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIT:           is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:        is = 1; break;
         case OBJECT__ENVIRONMENT_EMERGE_PIPE:          is = 1; break;
         case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      is = 1; break;
+        case OBJECT__ENVIRONMENT_CONV_BELT:            is = 1; break;
 
         default: break;
     }
@@ -547,6 +554,8 @@ int is_object_floating(Object* object)
     {
         case OBJECT__SQUID:                            is = 1; break;
         case OBJECT__HERO_FLOATING:                    is = 1; break;
+        case OBJECT__SHARK:                            is = 1; break;
+        case OBJECT__SHARK_FIN:                        is = 1; break;
 
         default: break;
     }
@@ -663,8 +672,6 @@ int is_object_manipulatable(Object* object)
         case OBJECT__VENDING_DYNAMITE_ITEM:            is = 0; break;
         case OBJECT__VENDING_DYNAMITE_DAMAGED:         is = 0; break;
         case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:    is = 0; break;
-
-        case OBJECT__BARREL:                           is = 1; break;
 
         case OBJECT__PISTON:                           is = 1; break;
         case OBJECT__PISTON_CELL:                      is = 1; break;
@@ -818,6 +825,9 @@ int is_object_movable(Object* object)
         case OBJECT__CHAMELEON:                        is = 1; break;
         case OBJECT__SQUID:                            is = 0; break;
         case OBJECT__MOLE:                             is = 0; break;
+        case OBJECT__MIMIC:                            is = 1; break;
+        case OBJECT__SHARK:                            is = 0; break;
+        case OBJECT__SHARK_FIN:                        is = 0; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;
         case OBJECT__MINIBOT_ENEMY_CELL:               is = 1; break;
@@ -977,6 +987,9 @@ int is_object_meltable(Object* object)
         case OBJECT__CHAMELEON:                        is = 1; break;
         case OBJECT__SQUID:                            is = 1; break;
         case OBJECT__MOLE:                             is = 1; break;
+        case OBJECT__MIMIC:                            is = 1; break;
+        case OBJECT__SHARK:                            is = 1; break;
+        case OBJECT__SHARK_FIN:                        is = 1; break;
 
         case OBJECT__MINIBOT_ENEMY:                    is = 1; break;
         case OBJECT__MINIBOT_ENEMY_CELL:               is = 1; break;
@@ -1698,6 +1711,9 @@ char* get_name_from_object_type(int object_type)
         case OBJECT__CHAMELEON:                        name = "chameleon"; break;
         case OBJECT__SQUID:                            name = "squid"; break;
         case OBJECT__MOLE:                             name = "mole"; break;
+        case OBJECT__MIMIC:                            name = "mimic"; break;
+        case OBJECT__SHARK:                            name = "shark"; break;
+        case OBJECT__SHARK_FIN:                        name = "shark fin"; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            name = "turret laser grounded"; break;
         case OBJECT__TURRET_LASER_STANDING:            name = "turret laser standing"; break;
@@ -1718,9 +1734,11 @@ char* get_name_from_object_type(int object_type)
 
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   name = "environment falling stalactite"; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         name = "environment emerge water"; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIT:           name = "environment emerge pit"; break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:        name = "environment emerge burrow"; break;
         case OBJECT__ENVIRONMENT_EMERGE_PIPE:          name = "environment emerge pipe"; break;
         case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      name = "environment collapse burrow"; break;
+        case OBJECT__ENVIRONMENT_CONV_BELT:            name = "environment conv belt"; break;
 
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:       name = "stairs above stone powered"; break;
         case OBJECT__STAIRS_ABOVE_STONE:               name = "stairs above stone"; break;
@@ -1934,6 +1952,9 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_1; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_1; break;
         case OBJECT__MOLE:                             texture = textures->object.mole_1; break;
+        case OBJECT__MIMIC:                            texture = textures->object.mimic_1; break;
+        case OBJECT__SHARK:                            texture = textures->object.shark_1; break;
+        case OBJECT__SHARK_FIN:                        texture = textures->object.shark_fin_1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_1; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_1; break;
@@ -2164,6 +2185,9 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_2; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_2; break;
         case OBJECT__MOLE:                             texture = textures->object.mole_2; break;
+        case OBJECT__MIMIC:                            texture = textures->object.mimic_2; break;
+        case OBJECT__SHARK:                            texture = textures->object.shark_2; break;
+        case OBJECT__SHARK_FIN:                        texture = textures->object.shark_fin_2; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_2; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_2; break;
@@ -2394,6 +2418,9 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_outline_1; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_outline_1; break;
         case OBJECT__MOLE:                             texture = textures->object.mole_outline_1; break;
+        case OBJECT__MIMIC:                            texture = textures->object.mimic_outline_1; break;
+        case OBJECT__SHARK:                            texture = textures->object.shark_outline_1; break;
+        case OBJECT__SHARK_FIN:                        texture = textures->object.shark_fin_outline_1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_outline_1; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_outline_1; break;
@@ -2624,6 +2651,9 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__CHAMELEON:                        texture = textures->object.chameleon_outline_2; break;
         case OBJECT__SQUID:                            texture = textures->object.squid_outline_2; break;
         case OBJECT__MOLE:                             texture = textures->object.mole_outline_2; break;
+        case OBJECT__MIMIC:                            texture = textures->object.mimic_outline_2; break;
+        case OBJECT__SHARK:                            texture = textures->object.shark_outline_2; break;
+        case OBJECT__SHARK_FIN:                        texture = textures->object.shark_fin_outline_2; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->object.turret_laser_grounded_outline_2; break;
         case OBJECT__TURRET_LASER_STANDING:            texture = textures->object.turret_laser_standing_outline_2; break;

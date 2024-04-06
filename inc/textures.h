@@ -31,6 +31,7 @@ typedef struct
     Texture* metal_piston_cell;
     Texture* metal_piston_dynamite;
     Texture* metal_piston_barrel;
+    Texture* metal_piston_mimic;
     Texture* metal_no_piston;
 
     Texture* gold;
@@ -68,6 +69,11 @@ typedef struct
     Texture* ice_crack_water;
 
     Texture* obstacle;
+
+    Texture* conv_belt_up;
+    Texture* conv_belt_right;
+    Texture* conv_belt_down;
+    Texture* conv_belt_left;
 
     Texture* ext_bridge_source_on_horizontal;
     Texture* ext_bridge_source_off_horizontal;
@@ -412,6 +418,21 @@ typedef struct
     Texture* mole_outline_1;
     Texture* mole_outline_2;
 
+    Texture* mimic_1;
+    Texture* mimic_2;
+    Texture* mimic_outline_1;
+    Texture* mimic_outline_2;
+
+    Texture* shark_1;
+    Texture* shark_2;
+    Texture* shark_outline_1;
+    Texture* shark_outline_2;
+
+    Texture* shark_fin_1;
+    Texture* shark_fin_2;
+    Texture* shark_fin_outline_1;
+    Texture* shark_fin_outline_2;
+
     Texture* minibot_enemy_1;
     Texture* minibot_enemy_2;
     Texture* minibot_enemy_outline_1;
@@ -715,6 +736,7 @@ typedef struct
 
     Texture* floor_environment_falling_stalactite;
     Texture* floor_environment_emerge_water;
+    Texture* floor_environment_emerge_pit;
     Texture* floor_environment_emerge_burrow;
     Texture* environment_emerge_pipe;
     Texture* floor_environment_collapse_burrow;

@@ -27,6 +27,7 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->metal_piston_cell = load_texture_from_filepath (renderer, "./res/floor/metal_piston_cell.png");
     floor->metal_piston_dynamite = load_texture_from_filepath (renderer, "./res/floor/metal_piston_dynamite.png");
     floor->metal_piston_barrel = load_texture_from_filepath (renderer, "./res/floor/metal_piston_barrel.png");
+    floor->metal_piston_mimic = load_texture_from_filepath (renderer, "./res/floor/metal_piston_mimic.png");
     floor->metal_no_piston = load_texture_from_filepath (renderer, "./res/floor/metal_no_piston.png");
 
     floor->gold = load_texture_from_filepath (renderer, "./res/floor/gold.png");
@@ -64,6 +65,11 @@ void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
     floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
 
     floor->obstacle = load_texture_from_filepath (renderer, "./res/floor/obstacle.png");
+
+    floor->conv_belt_up = load_texture_from_filepath (renderer, "./res/floor/conv_belt_up.png");
+    floor->conv_belt_right = load_texture_from_filepath (renderer, "./res/floor/conv_belt_right.png");
+    floor->conv_belt_down = load_texture_from_filepath (renderer, "./res/floor/conv_belt_down.png");
+    floor->conv_belt_left = load_texture_from_filepath (renderer, "./res/floor/conv_belt_left.png");
 
     floor->ext_bridge_source_on_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_on_horizontal.png");
     floor->ext_bridge_source_off_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_off_horizontal.png");
@@ -426,6 +432,21 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->mole_outline_1 = load_texture_from_filepath(renderer, "./res/object/mole_outline_1.png");
     object->mole_outline_2 = load_texture_from_filepath(renderer, "./res/object/mole_outline_2.png");
 
+    object->mimic_1 = load_texture_from_filepath(renderer, "./res/object/mimic_1.png");
+    object->mimic_2 = load_texture_from_filepath(renderer, "./res/object/mimic_2.png");
+    object->mimic_outline_1 = load_texture_from_filepath(renderer, "./res/object/mimic_outline_1.png");
+    object->mimic_outline_2 = load_texture_from_filepath(renderer, "./res/object/mimic_outline_2.png");
+
+    object->shark_1 = load_texture_from_filepath(renderer, "./res/object/shark_1.png");
+    object->shark_2 = load_texture_from_filepath(renderer, "./res/object/shark_2.png");
+    object->shark_outline_1 = load_texture_from_filepath(renderer, "./res/object/shark_outline_1.png");
+    object->shark_outline_2 = load_texture_from_filepath(renderer, "./res/object/shark_outline_2.png");
+
+    object->shark_fin_1 = load_texture_from_filepath(renderer, "./res/object/shark_fin_1.png");
+    object->shark_fin_2 = load_texture_from_filepath(renderer, "./res/object/shark_fin_2.png");
+    object->shark_fin_outline_1 = load_texture_from_filepath(renderer, "./res/object/shark_fin_outline_1.png");
+    object->shark_fin_outline_2 = load_texture_from_filepath(renderer, "./res/object/shark_fin_outline_2.png");
+
     object->minibot_enemy_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_1.png");
     object->minibot_enemy_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_2.png");
     object->minibot_enemy_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_outline_1.png");
@@ -730,6 +751,7 @@ void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
 
     skill->floor_environment_falling_stalactite = load_texture_from_filepath (renderer, "./res/skill/floor_environment_falling_stalactite.png");
     skill->floor_environment_emerge_water = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_water.png");
+    skill->floor_environment_emerge_pit = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_pit.png");
     skill->floor_environment_emerge_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_burrow.png");
     skill->environment_emerge_pipe = load_texture_from_filepath (renderer, "./res/skill/environment_emerge_pipe.png");
     skill->floor_environment_collapse_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_collapse_burrow.png");

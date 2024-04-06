@@ -70,12 +70,35 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
             destroy_list(possible_burrow_tilemap_pos_list);
         }
         break;
+        case OBJECT__SHARK:
+        {
+            add_action_to_end_action_sequence(
+                enemy->action_sequence,
+                new_action_change_object(
+                    OBJECT__SHARK_FIN,
+                    enemy->object->tilemap_pos
+                    )
+                );
+        }
+        break;
+        case OBJECT__SHARK_FIN:
+        {
+            add_action_to_end_action_sequence(
+                enemy->action_sequence,
+                new_action_change_object(
+                    OBJECT__SHARK,
+                    enemy->object->tilemap_pos
+                    )
+                );
+        }
+        break;
         case OBJECT__GOAT:
         case OBJECT__BULL:
         case OBJECT__SPIDER:
         case OBJECT__FLY:
         case OBJECT__CHAMELEON:
         case OBJECT__SQUID:
+        case OBJECT__MIMIC:
         case OBJECT__MINIBOT_ENEMY:
         case OBJECT__MINIBOT_ENEMY_CELL:
         case OBJECT__MINIBOT_ENEMY_DYNAMITE:
@@ -145,6 +168,10 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                     enemy->object->type == OBJECT__FLY)
                                     {
                                         mul = k;
+                                    }
+                                    else if(enemy->object->type == OBJECT__MIMIC)
+                                    {
+                                        if(k == 1) mul = 10;
                                     }
 
                                     Vec2i neighbor_tilemap_pos = vec2i_move_in_dir4_by(

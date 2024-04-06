@@ -3687,6 +3687,86 @@ void skill_get_actions_and_draw(
                 );
         }
         break;
+        case SKILL__KILL_AROUND:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    source_tilemap_pos,
+                    dir4,
+                    1
+                    );
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(
+                        state->curr_room,
+                        tilemap_pos
+                        );
+
+                    if(object != 0)
+                    {
+                        if(object->type == OBJECT__BARREL)
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_blow_up(
+                                    tilemap_pos
+                                    )
+                                );
+                        }
+                        else if(is_object_wall(object) || is_object_exit(object))
+                        {
+                            //
+                        }
+                        else if(is_object_ally(object) || is_object_enemy(object))
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_death(
+                                    object,
+                                    tilemap_pos
+                                    )
+                                );
+                        }
+                        else
+                        {
+                            // actions
+                            add_action_to_end_action_sequence(
+                                action_sequence,
+                                new_action_remove_object(
+                                    object,
+                                    tilemap_pos
+                                    )
+                                );
+                        }
+                    }
+
+                    // draw below
+                    add_new_list_element_to_list_end(
+                        draw_below_texture_list,
+                        textures->skill.floor_danger
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_below_tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                        );
+
+                    // draw effect
+                    add_new_list_element_to_list_end(
+                        draw_effect_texture_list,
+                        textures->skill.death_effect
+                        );
+                    add_new_list_element_to_list_end(
+                        draw_effect_tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                }
+            }
+        }
+        break;
         case SKILL__ENVIRONMENT_FALLING_STALACTITE:
         {
             if(target_2_object != 0)
@@ -3767,6 +3847,31 @@ void skill_get_actions_and_draw(
             add_new_list_element_to_list_end(
                 draw_below_texture_list,
                 textures->skill.floor_environment_emerge_water
+                );
+            add_new_list_element_to_list_end(
+                draw_below_tilemap_pos_list,
+                new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_PIT:
+        {
+            if(target_2_object == 0)
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_add_object(
+                        new_object(OBJECT__FLY),
+                        target_2_tilemap_pos
+                        )
+                    );
+            }
+
+            // draw below
+            add_new_list_element_to_list_end(
+                draw_below_texture_list,
+                textures->skill.floor_environment_emerge_pit
                 );
             add_new_list_element_to_list_end(
                 draw_below_tilemap_pos_list,
@@ -3903,6 +4008,298 @@ void skill_get_actions_and_draw(
             add_new_list_element_to_list_end(
                 draw_below_tilemap_pos_list,
                 new_vec2i_from_vec2i(target_2_tilemap_pos)
+                );
+        }
+        break;
+        case SKILL__ENVIRONMENT_CONV_BELT:
+        {
+            Action* action_simultaneous = new_action_simultaneous();
+
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i,j);
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        int floor = room_get_floor_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                            );
+
+                        if(floor == FLOOR__CONV_BELT_UP)
+                        {
+                            // draw below
+                            add_new_list_element_to_list_end(
+                                draw_below_texture_list,
+                                textures->skill.arrow_thin_down_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_below_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.arrow_thin_down_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            if(object != 0)
+                            {
+                                if(is_object_flying(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_flying(
+                                                tilemap_pos,
+                                                DIR4__UP
+                                                )
+                                            )
+                                        );
+                                }
+                                else if(is_object_floating(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_floating(
+                                                tilemap_pos,
+                                                DIR4__UP
+                                                )
+                                            )
+                                        );
+                                }
+                                else
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move(
+                                                tilemap_pos,
+                                                DIR4__UP
+                                                )
+                                            )
+                                        );
+                                }
+                            }
+                        }
+                        else if(floor == FLOOR__CONV_BELT_RIGHT)
+                        {
+                            // draw below
+                            add_new_list_element_to_list_end(
+                                draw_below_texture_list,
+                                textures->skill.arrow_thin_left_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_below_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.arrow_thin_left_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            if(object != 0)
+                            {
+                                if(is_object_flying(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_flying(
+                                                tilemap_pos,
+                                                DIR4__RIGHT
+                                                )
+                                            )
+                                        );
+                                }
+                                else if(is_object_floating(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_floating(
+                                                tilemap_pos,
+                                                DIR4__RIGHT
+                                                )
+                                            )
+                                        );
+                                }
+                                else
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move(
+                                                tilemap_pos,
+                                                DIR4__RIGHT
+                                                )
+                                            )
+                                        );
+                                }
+                            }
+                        }
+                        else if(floor == FLOOR__CONV_BELT_DOWN)
+                        {
+                            // draw below
+                            add_new_list_element_to_list_end(
+                                draw_below_texture_list,
+                                textures->skill.arrow_thin_up_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_below_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.arrow_thin_up_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            if(object != 0)
+                            {
+                                if(is_object_flying(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_flying(
+                                                tilemap_pos,
+                                                DIR4__DOWN
+                                                )
+                                            )
+                                        );
+                                }
+                                else if(is_object_floating(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_floating(
+                                                tilemap_pos,
+                                                DIR4__DOWN
+                                                )
+                                            )
+                                        );
+                                }
+                                else
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move(
+                                                tilemap_pos,
+                                                DIR4__DOWN
+                                                )
+                                            )
+                                        );
+                                }
+                            }
+                        }
+                        else if(floor == FLOOR__CONV_BELT_LEFT)
+                        {
+                            // draw below
+                            add_new_list_element_to_list_end(
+                                draw_below_texture_list,
+                                textures->skill.arrow_thin_right_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_below_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.arrow_thin_right_end
+                                );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                                );
+
+                            if(object != 0)
+                            {
+                                if(is_object_flying(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_flying(
+                                                tilemap_pos,
+                                                DIR4__LEFT
+                                                )
+                                            )
+                                        );
+                                }
+                                else if(is_object_floating(object))
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move_floating(
+                                                tilemap_pos,
+                                                DIR4__LEFT
+                                                )
+                                            )
+                                        );
+                                }
+                                else
+                                {
+                                    // actions
+                                    add_action_sequence_to_action_simultaneous(
+                                        action_simultaneous,
+                                        new_action_sequence_of_1(
+                                            new_action_move(
+                                                tilemap_pos,
+                                                DIR4__LEFT
+                                                )
+                                            )
+                                        );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                action_simultaneous
                 );
         }
         break;

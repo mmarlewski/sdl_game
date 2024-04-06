@@ -1216,6 +1216,24 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 );
         }
         break;
+        case FLOOR__METAL_PISTON_MIMIC:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__METAL_NO_PISTON,
+                    tilemap_pos
+                    )
+                );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    new_object(OBJECT__MIMIC),
+                    tilemap_pos
+                    )
+                );
+        }
+        break;
         case FLOOR__METAL_SPIKES_OFF:
         {
             add_action_to_end_action_sequence(sequence, new_action_change_floor(FLOOR__METAL_SPIKES_ON, tilemap_pos));
@@ -1372,9 +1390,15 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
 {
     switch(object->type)
     {
-        case OBJECT__PILLAR:
+        case OBJECT__DISPLAY:
         {
-            //
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__DISPLAY_DAMAGED_ITEM,
+                    object->tilemap_pos
+                    )
+                );
         }
         break;
         case OBJECT__BALL_SPIKES:
@@ -1396,7 +1420,13 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
         break;
         case OBJECT__BARREL:
         {
-            add_action_to_end_action_sequence(sequence, new_action_death(object, object->tilemap_pos));
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(
+                    object,
+                    object->tilemap_pos
+                    )
+                );
         }
         break;
         case OBJECT__PISTON_BARREL:

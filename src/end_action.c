@@ -81,64 +81,57 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             Action* push_around = new_action_simultaneous();
 
-            Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__UP, 1);
-            Object* up_object = room_get_object_at(state->curr_room, up_tilemap_pos);
-            if(up_object != 0 && is_object_movable(up_object))
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                add_action_sequence_to_action_simultaneous(
-                    push_around,
-                    new_action_sequence_of_1(
-                        new_action_move(
-                            up_tilemap_pos,
-                            DIR4__UP
-                            )
-                        )
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    action->tilemap_pos,
+                    dir4,
+                    1
                     );
-            }
+                Object* object = room_get_object_at(
+                    state->curr_room,
+                    tilemap_pos
+                    );
 
-            Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__RIGHT, 1);
-            Object* right_object = room_get_object_at(state->curr_room, right_tilemap_pos);
-            if(right_object != 0 && is_object_movable(right_object))
-            {
-                add_action_sequence_to_action_simultaneous(
-                    push_around,
-                    new_action_sequence_of_1(
-                        new_action_move(
-                            right_tilemap_pos,
-                            DIR4__RIGHT
-                            )
-                        )
-                    );
-            }
-
-            Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__DOWN, 1);
-            Object* down_object = room_get_object_at(state->curr_room, down_tilemap_pos);
-            if(down_object != 0 && is_object_movable(down_object))
-            {
-                add_action_sequence_to_action_simultaneous(
-                    push_around,
-                    new_action_sequence_of_1(
-                        new_action_move(
-                            down_tilemap_pos,
-                            DIR4__DOWN
-                            )
-                        )
-                    );
-            }
-
-            Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, DIR4__LEFT, 1);
-            Object* left_object = room_get_object_at(state->curr_room, left_tilemap_pos);
-            if(left_object != 0 && is_object_movable(left_object))
-            {
-                add_action_sequence_to_action_simultaneous(
-                    push_around,
-                    new_action_sequence_of_1(
-                        new_action_move(
-                            left_tilemap_pos,
-                            DIR4__LEFT
-                            )
-                        )
-                    );
+                if(object != 0 && is_object_movable(object))
+                {
+                    if(is_object_flying(object))
+                    {
+                        add_action_sequence_to_action_simultaneous(
+                            push_around,
+                            new_action_sequence_of_1(
+                                new_action_move_flying(
+                                    tilemap_pos,
+                                    dir4
+                                    )
+                                )
+                            );
+                    }
+                    else if(is_object_floating(object))
+                    {
+                        add_action_sequence_to_action_simultaneous(
+                            push_around,
+                            new_action_sequence_of_1(
+                                new_action_move_floating(
+                                    tilemap_pos,
+                                    dir4
+                                    )
+                                )
+                            );
+                    }
+                    else
+                    {
+                        add_action_sequence_to_action_simultaneous(
+                            push_around,
+                            new_action_sequence_of_1(
+                                new_action_move(
+                                    tilemap_pos,
+                                    dir4
+                                    )
+                                )
+                            );
+                    }
+                }
             }
 
             add_action_after_curr_action_action_sequence(

@@ -42,6 +42,7 @@ int is_floor_manipulatable(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 1; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__WATER:                     is = 0; break;
@@ -109,6 +110,7 @@ int is_floor_traversable(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 1; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 1; break;
         case FLOOR__GOLD:                      is = 1; break;
         case FLOOR__MARBLE:                    is = 1; break;
@@ -128,6 +130,10 @@ int is_floor_traversable(int floor)
         case FLOOR__ICE:                       is = 1; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
         case FLOOR__OBSTACLE:                  is = 1; break;
+        case FLOOR__CONV_BELT_UP:              is = 1; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 1; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 1; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 1; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 1; break;
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:is = 1; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 1; break;
@@ -174,6 +180,7 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 1; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 1; break;
         case FLOOR__GOLD:                      is = 1; break;
         case FLOOR__MARBLE:                    is = 1; break;
@@ -192,6 +199,11 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__LAVA_COLUMN:               is = 1; break;
         case FLOOR__ICE:                       is = 1; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
+        case FLOOR__OBSTACLE:                  is = 1; break;
+        case FLOOR__CONV_BELT_UP:              is = 1; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 1; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 1; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 1; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 1; break;
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:is = 1; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 1; break;
@@ -238,6 +250,7 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 1; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 1; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 1; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 1; break;
         case FLOOR__GOLD:                      is = 1; break;
         case FLOOR__MARBLE:                    is = 1; break;
@@ -256,6 +269,11 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR__LAVA_COLUMN:               is = 1; break;
         case FLOOR__ICE:                       is = 1; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
+        case FLOOR__OBSTACLE:                  is = 1; break;
+        case FLOOR__CONV_BELT_UP:              is = 1; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 1; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 1; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 1; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 1; break;
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:is = 1; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 1; break;
@@ -299,6 +317,7 @@ int is_floor_deadly_on_move(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__PIT:                       is = 1; break;
@@ -311,6 +330,11 @@ int is_floor_deadly_on_move(int floor)
         case FLOOR__LAVA_COLUMN:               is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
+        case FLOOR__OBSTACLE:                  is = 0; break;
+        case FLOOR__CONV_BELT_UP:              is = 0; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 0; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 0; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 0; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_POWERED:    is = 0; break;
@@ -347,6 +371,7 @@ int is_floor_deadly_on_move_for_floating(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__PIT:                       is = 1; break;
@@ -359,6 +384,11 @@ int is_floor_deadly_on_move_for_floating(int floor)
         case FLOOR__LAVA_COLUMN:               is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
+        case FLOOR__OBSTACLE:                  is = 0; break;
+        case FLOOR__CONV_BELT_UP:              is = 0; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 0; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 0; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 0; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_POWERED:    is = 0; break;
@@ -395,6 +425,7 @@ int is_floor_deadly_on_move_for_flying(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__PIT:                       is = 0; break;
@@ -407,6 +438,11 @@ int is_floor_deadly_on_move_for_flying(int floor)
         case FLOOR__LAVA_COLUMN:               is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
+        case FLOOR__OBSTACLE:                  is = 0; break;
+        case FLOOR__CONV_BELT_UP:              is = 0; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 0; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 0; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 0; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_POWERED:    is = 0; break;
@@ -444,6 +480,7 @@ int is_floor_deadly_on_drop(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__PIT:                       is = 1; break;
@@ -456,6 +493,11 @@ int is_floor_deadly_on_drop(int floor)
         case FLOOR__LAVA_COLUMN:               is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
+        case FLOOR__OBSTACLE:                  is = 0; break;
+        case FLOOR__CONV_BELT_UP:              is = 0; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 0; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 0; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 0; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_POWERED:    is = 0; break;
@@ -493,6 +535,7 @@ int is_floor_deadly_on_drop_for_floating(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__PIT:                       is = 1; break;
@@ -505,6 +548,11 @@ int is_floor_deadly_on_drop_for_floating(int floor)
         case FLOOR__LAVA_COLUMN:               is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
+        case FLOOR__OBSTACLE:                  is = 0; break;
+        case FLOOR__CONV_BELT_UP:              is = 0; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 0; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 0; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 0; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_POWERED:    is = 0; break;
@@ -542,6 +590,7 @@ int is_floor_deadly_on_drop_for_flying(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__PIT:                       is = 0; break;
@@ -554,6 +603,11 @@ int is_floor_deadly_on_drop_for_flying(int floor)
         case FLOOR__LAVA_COLUMN:               is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
+        case FLOOR__OBSTACLE:                  is = 0; break;
+        case FLOOR__CONV_BELT_UP:              is = 0; break;
+        case FLOOR__CONV_BELT_RIGHT:           is = 0; break;
+        case FLOOR__CONV_BELT_DOWN:            is = 0; break;
+        case FLOOR__CONV_BELT_LEFT:            is = 0; break;
         case FLOOR__STONE_STAIRS_BELOW:        is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  is = 0; break;
         case FLOOR__STONE_STAIRS_ABOVE_POWERED:    is = 0; break;
@@ -589,6 +643,7 @@ int get_floor_item_type(int floor)
         case FLOOR__METAL_PISTON_CELL:         item = ITEM__NONE; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     item = ITEM__NONE; break;
         case FLOOR__METAL_PISTON_BARREL:       item = ITEM__NONE; break;
+        case FLOOR__METAL_PISTON_MIMIC:        item = ITEM__NONE; break;
         case FLOOR__METAL_NO_PISTON:           item = ITEM__NONE; break;
         case FLOOR__GRASS:                     item = ITEM__NONE; break;
         case FLOOR__WATER:                     item = ITEM__NONE; break;
@@ -632,6 +687,7 @@ int get_floor_item_count(int floor)
         case FLOOR__METAL_PISTON_CELL:         count = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     count = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       count = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        count = 0; break;
         case FLOOR__METAL_NO_PISTON:           count = 0; break;
         case FLOOR__GRASS:                     count = 0; break;
         case FLOOR__WATER:                     count = 0; break;
@@ -675,6 +731,7 @@ int is_floor_put_item(int floor)
         case FLOOR__METAL_PISTON_CELL:         is = 0; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     is = 0; break;
         case FLOOR__METAL_PISTON_BARREL:       is = 0; break;
+        case FLOOR__METAL_PISTON_MIMIC:        is = 0; break;
         case FLOOR__METAL_NO_PISTON:           is = 0; break;
         case FLOOR__GRASS:                     is = 0; break;
         case FLOOR__WATER:                     is = 0; break;
@@ -722,6 +779,7 @@ char* get_name_from_floor(int floor)
         case FLOOR__METAL_PISTON_CELL:         name = "metal piston cell"; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     name = "metal piston dynamite"; break;
         case FLOOR__METAL_PISTON_BARREL:       name = "metal piston barrel"; break;
+        case FLOOR__METAL_PISTON_MIMIC:        name = "metal piston mimic"; break;
         case FLOOR__METAL_NO_PISTON:           name = "metal no piston"; break;
         case FLOOR__GOLD:                      name = "gold"; break;
         case FLOOR__MARBLE:                    name = "marble"; break;
@@ -741,6 +799,10 @@ char* get_name_from_floor(int floor)
         case FLOOR__ICE:                       name = "ice"; break;
         case FLOOR__ICE_CRACK_WATER:           name = "ice crack water"; break;
         case FLOOR__OBSTACLE:                  name = "obstacle"; break;
+        case FLOOR__CONV_BELT_UP:              name = "conv belt up"; break;
+        case FLOOR__CONV_BELT_RIGHT:           name = "conv belt right"; break;
+        case FLOOR__CONV_BELT_DOWN:            name = "conv belt down"; break;
+        case FLOOR__CONV_BELT_LEFT:            name = "conv belt left"; break;
         case FLOOR__STONE_STAIRS_BELOW:        name = "stone stairs below"; break;
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:name = "stone stairs below blocked"; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  name = "stone stairs above unpowered"; break;
@@ -787,6 +849,7 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR__METAL_PISTON_CELL:         texture = textures->floor.metal_piston_cell; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     texture = textures->floor.metal_piston_dynamite; break;
         case FLOOR__METAL_PISTON_BARREL:       texture = textures->floor.metal_piston_barrel; break;
+        case FLOOR__METAL_PISTON_MIMIC:        texture = textures->floor.metal_piston_mimic; break;
         case FLOOR__METAL_NO_PISTON:           texture = textures->floor.metal_no_piston; break;
         case FLOOR__GOLD:                      texture = textures->floor.gold; break;
         case FLOOR__MARBLE:                    texture = textures->floor.marble; break;
@@ -806,6 +869,10 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR__ICE:                       texture = textures->floor.ice; break;
         case FLOOR__ICE_CRACK_WATER:           texture = textures->floor.ice_crack_water; break;
         case FLOOR__OBSTACLE:                  texture = textures->floor.obstacle; break;
+        case FLOOR__CONV_BELT_UP:              texture = textures->floor.conv_belt_up; break;
+        case FLOOR__CONV_BELT_RIGHT:           texture = textures->floor.conv_belt_right; break;
+        case FLOOR__CONV_BELT_DOWN:            texture = textures->floor.conv_belt_down; break;
+        case FLOOR__CONV_BELT_LEFT:            texture = textures->floor.conv_belt_left; break;
         case FLOOR__STONE_STAIRS_BELOW:        texture = textures->floor.stone_stairs_below; break;
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:texture = textures->floor.stone_stairs_below_blocked; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  texture = textures->floor.stone_stairs_above_unpowered; break;
@@ -852,6 +919,7 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR__METAL_PISTON_CELL:         texture = textures->floor.metal_piston_cell; break;
         case FLOOR__METAL_PISTON_DYNAMITE:     texture = textures->floor.metal_piston_dynamite; break;
         case FLOOR__METAL_PISTON_BARREL:       texture = textures->floor.metal_piston_barrel; break;
+        case FLOOR__METAL_PISTON_MIMIC:        texture = textures->floor.metal_piston_mimic; break;
         case FLOOR__METAL_NO_PISTON:           texture = textures->floor.metal_no_piston; break;
         case FLOOR__GOLD:                      texture = textures->floor.gold; break;
         case FLOOR__MARBLE:                    texture = textures->floor.marble; break;
@@ -871,6 +939,10 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR__ICE:                       texture = textures->floor.ice; break;
         case FLOOR__ICE_CRACK_WATER:           texture = textures->floor.ice_crack_water; break;
         case FLOOR__OBSTACLE:                  texture = textures->floor.obstacle; break;
+        case FLOOR__CONV_BELT_UP:              texture = textures->floor.conv_belt_up; break;
+        case FLOOR__CONV_BELT_RIGHT:           texture = textures->floor.conv_belt_right; break;
+        case FLOOR__CONV_BELT_DOWN:            texture = textures->floor.conv_belt_down; break;
+        case FLOOR__CONV_BELT_LEFT:            texture = textures->floor.conv_belt_left; break;
         case FLOOR__STONE_STAIRS_BELOW:        texture = textures->floor.stone_stairs_below; break;
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:texture = textures->floor.stone_stairs_below_blocked; break;
         case FLOOR__STONE_STAIRS_ABOVE_UNPOWERED:  texture = textures->floor.stone_stairs_above_unpowered; break;

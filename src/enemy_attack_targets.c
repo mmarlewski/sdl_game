@@ -460,6 +460,27 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
             }
         }
         break;
+        case OBJECT__MIMIC:
+        {
+            enemy->skill = SKILL__KILL_AROUND;
+            enemy->target_1_tilemap_pos = enemy_object->tilemap_pos;
+            enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
+        }
+        break;
+        case OBJECT__SHARK:
+        {
+            enemy->skill = SKILL__KILL_AROUND;
+            enemy->target_1_tilemap_pos = enemy_object->tilemap_pos;
+            enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
+        }
+        break;
+        case OBJECT__SHARK_FIN:
+        {
+            enemy->skill = SKILL__NO_ATTACK;
+            enemy->target_1_tilemap_pos = enemy_object->tilemap_pos;
+            enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
+        }
+        break;
         case OBJECT__TURRET_LASER_GROUNDED:
         case OBJECT__TURRET_LASER_STANDING:
         case OBJECT__TURRET_LASER_DEPLOYED:
@@ -662,6 +683,21 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
             }
         }
         break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIT:
+        {
+            if(enemy->object->attack_dir4 != -1)
+            {
+                Vec2i tilemap_pos = vec2i(
+                    enemy->object->attack_dir4 / 10,
+                    enemy->object->attack_dir4 % 10
+                    );
+
+                enemy->skill = SKILL__ENVIRONMENT_EMERGE_PIT;
+                enemy->target_1_tilemap_pos = tilemap_pos;
+                enemy->target_2_tilemap_pos = tilemap_pos;
+            }
+        }
+        break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:
         {
             if(enemy->object->attack_dir4 != -1)
@@ -702,6 +738,21 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                     );
 
                 enemy->skill = SKILL__ENVIRONMENT_COLLAPSE_BURROW;
+                enemy->target_1_tilemap_pos = tilemap_pos;
+                enemy->target_2_tilemap_pos = tilemap_pos;
+            }
+        }
+        break;
+        case OBJECT__ENVIRONMENT_CONV_BELT:
+        {
+            if(enemy->object->attack_dir4 != -1)
+            {
+                Vec2i tilemap_pos = vec2i(
+                    enemy->object->attack_dir4 / 10,
+                    enemy->object->attack_dir4 % 10
+                    );
+
+                enemy->skill = SKILL__ENVIRONMENT_CONV_BELT;
                 enemy->target_1_tilemap_pos = tilemap_pos;
                 enemy->target_2_tilemap_pos = tilemap_pos;
             }
