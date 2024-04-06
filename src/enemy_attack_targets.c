@@ -481,6 +481,16 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
             enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
         }
         break;
+        case OBJECT__MINIBOT_ENEMY:
+        case OBJECT__MINIBOT_ENEMY_CELL:
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:
+        {
+            enemy->skill = SKILL__NO_ATTACK;
+            enemy->target_1_tilemap_pos = enemy_object->tilemap_pos;
+            enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
+        }
+        break;
         case OBJECT__TURRET_LASER_GROUNDED:
         case OBJECT__TURRET_LASER_STANDING:
         case OBJECT__TURRET_LASER_DEPLOYED:

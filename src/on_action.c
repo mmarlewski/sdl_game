@@ -3481,7 +3481,7 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_change_object(
-                        OBJECT__EXIT_GOLD_LOCKED_LEFT,
+                        OBJECT__EXIT_GOLD_UNLOCKED_LEFT,
                         object->tilemap_pos
                         )
                     );

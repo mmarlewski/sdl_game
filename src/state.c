@@ -90,12 +90,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "5_0");
+    Room* room = get_room(state, "7_2");
 
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(1,1)
+        vec2i(7,2)
         );
     set_curr_room(
         state,
@@ -106,16 +106,16 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         room
         );
 
-    state->hero_item_number[ITEM__CELL] = 1;
-    state->hero_item_number[ITEM__DYNAMITE] = 1;
-    state->hero_item_number[ITEM__GEMSTONE] = 1;
+    state->hero_item_number[ITEM__CELL] = 0;
+    state->hero_item_number[ITEM__DYNAMITE] = 0;
+    state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
-    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
