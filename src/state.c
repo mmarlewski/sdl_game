@@ -181,7 +181,7 @@ void change_gamestate(State* state, int new_gamestate)
             int curr_ally_ap = state->curr_ally->object->action_points;
             char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
             hero_ap_bar[0] = '[';
-            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i ++)
+            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
             {
                 char character = ' ';
 
@@ -281,6 +281,22 @@ void change_gamestate(State* state, int new_gamestate)
             }
         }
         printf("----------------------------------------\n");
+        if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
+        state->enemy_list->size > 0)
+        {
+            printf("key ENTER : end turn \n");
+            printf("----------------------------------------\n");
+        }
+        if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
+        {
+            printf("key ESC   : go back \n");
+            printf("----------------------------------------\n");
+        }
+        if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+        {
+            printf("key ESC   : go back \n");
+            printf("----------------------------------------\n");
+        }
     }
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||

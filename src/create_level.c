@@ -2145,7 +2145,7 @@ void create_level(State* state)
         );
     room_add_object_at(
         room_1_1,
-        new_object(OBJECT__WALL_GOLD),
+        new_object(OBJECT__COLUMN),
         vec2i(4,5)
         );
 
@@ -2224,6 +2224,11 @@ void create_level(State* state)
         room_1_1,
         new_object(OBJECT__COLUMN),
         vec2i(4,6)
+        );
+    room_add_object_at(
+        room_1_1,
+        new_object(OBJECT__BARREL),
+        vec2i(3,5)
         );
     room_add_object_at(
         room_1_1,

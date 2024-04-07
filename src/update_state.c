@@ -967,7 +967,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:
         {
-            if(state->timer > 1.0f)
+            if(state->timer > ENEMY_PAUSE_LENGTH_IN_SECONDS)
             {
                 state->timer = 0.0f;
 
@@ -1124,7 +1124,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:
         {
-            if(state->timer > 1.0f)
+            if(state->timer > ENEMY_PAUSE_LENGTH_IN_SECONDS)
             {
                 state->timer = 0.0f;
 
@@ -1191,7 +1191,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:
         {
-            if(state->timer > 1.0f)
+            if(state->timer > ENEMY_PAUSE_LENGTH_IN_SECONDS)
             {
                 state->timer = 0.0f;
 
