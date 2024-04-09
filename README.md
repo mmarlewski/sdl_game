@@ -32,16 +32,16 @@
 ### Recordings
 
 <p float="center">
-  <img src="./doc/rec_1.gif" width="500" />
-  <img src="./doc/rec_2.gif" width="500" /> 
-  <img src="./doc/rec_3.gif" width="500" />
-  <img src="./doc/rec_4.gif" width="500" />
-  <img src="./doc/rec_5.gif" width="500" />
-  <img src="./doc/rec_6.gif" width="500" />
-  <img src="./doc/rec_7.gif" width="500" />
-  <img src="./doc/rec_8.gif" width="500" />
-  <img src="./doc/rec_9.gif" width="500" />
-  <img src="./doc/rec_10.gif" width="500" />
-  <img src="./doc/rec_11.gif" width="500" />
-  <img src="./doc/rec_12.gif" width="500" />
+  <img src="./doc/rec_1.gif" />
+  <img src="./doc/rec_2.gif" /> 
+  <img src="./doc/rec_3.gif" />
+  <img src="./doc/rec_4.gif" />
+  <img src="./doc/rec_5.gif" />
+  <img src="./doc/rec_6.gif" />
+  <img src="./doc/rec_7.gif" />
+  <img src="./doc/rec_8.gif" />
+  <img src="./doc/rec_9.gif" />
+  <img src="./doc/rec_10.gif" />
+  <img src="./doc/rec_11.gif" />
+  <img src="./doc/rec_12.gif" />
 </p>
