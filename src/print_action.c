@@ -145,7 +145,7 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("floor type:     %s \n", get_name_from_floor(action->change_floor.new_floor_type));
+            printf("floor type:     %s \n", get_debug_name_from_floor(action->change_floor.new_floor_type));
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }
@@ -155,7 +155,7 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object type:    %s \n", get_name_from_object_type(action->change_object.new_object_type));
+            printf("object type:    %s \n", get_debug_name_from_object_type(action->change_object.new_object_type));
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }
@@ -165,7 +165,7 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object type:    %s \n", get_name_from_object_type(action->add_object.new_object->type));
+            printf("object type:    %s \n", get_debug_name_from_object_type(action->add_object.new_object->type));
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }
@@ -175,7 +175,7 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object type:    %s \n", get_name_from_object_type(action->remove_object.object_to_remove->type));
+            printf("object type:    %s \n", get_debug_name_from_object_type(action->remove_object.object_to_remove->type));
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }

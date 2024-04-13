@@ -90,7 +90,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "7_2");
+    Room* room = get_room(state, "6_2");
 
     room_add_object_at(
         room,
@@ -106,16 +106,16 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         room
         );
 
-    state->hero_item_number[ITEM__CELL] = 0;
-    state->hero_item_number[ITEM__DYNAMITE] = 0;
-    state->hero_item_number[ITEM__GEMSTONE] = 0;
+    state->hero_item_number[ITEM__CELL] = 1;
+    state->hero_item_number[ITEM__DYNAMITE] = 1;
+    state->hero_item_number[ITEM__GEMSTONE] = 1;
 
-    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
+    hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
+    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -168,7 +168,7 @@ void change_gamestate(State* state, int new_gamestate)
     printf("----------------------------------------\n");
     printf("curr room : %s \n", state->curr_room->name);
     printf("----------------------------------------\n");
-    printf("curr ally : %s \n", get_name_from_object_type(state->curr_ally_object->type));
+    printf("curr ally : %s \n", get_debug_name_from_object_type(state->curr_ally_object->type));
     printf("----------------------------------------\n");
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
@@ -262,7 +262,7 @@ void change_gamestate(State* state, int new_gamestate)
                     default: break;
                 }
                 int curr_skill_cost = get_skill_action_points(curr_skill);
-                char* curr_skill_name = get_skill_name(curr_skill);
+                char* curr_skill_name = get_debug_skill_name(curr_skill);
                 if(curr_skill_cost == -1)
                 {
                     printf("key %-1c : ? : %-10s \n",
@@ -304,7 +304,7 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
     state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        printf("curr skill: %s \n", get_skill_name(state->curr_ally_skill));
+        printf("curr skill: %s \n", get_debug_skill_name(state->curr_ally_skill));
         printf("----------------------------------------\n");
     }
 
@@ -315,9 +315,9 @@ void change_gamestate(State* state, int new_gamestate)
     state->gamestate == GAMESTATE__ENEMY_MOVING ||
     state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
     {
-        printf("curr enemy: %s \n", get_name_from_object_type(state->curr_enemy->object->type));
+        printf("curr enemy: %s \n", get_debug_name_from_object_type(state->curr_enemy->object->type));
         printf("----------------------------------------\n");
-        printf("curr skill: %s \n", get_skill_name(state->curr_enemy->skill));
+        printf("curr skill: %s \n", get_debug_skill_name(state->curr_enemy->skill));
         printf("----------------------------------------\n");
     }
 }

@@ -103,7 +103,8 @@ int get_floor_item_type(int floor);
 int get_floor_item_count(int floor);
 int is_floor_put_item(int floor);
 
-char* get_name_from_floor(int floor);
+char* get_in_game_name_from_floor(int floor);
+char* get_debug_name_from_floor(int floor);
 Texture* get_texture_1_from_floor_type(int type, Textures* textures);
 Texture* get_texture_2_from_floor_type(int type, Textures* textures);
 

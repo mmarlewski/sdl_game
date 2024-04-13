@@ -20,7 +20,7 @@ void draw_texture_at_screen_pos(
     Vec3i color,
     float transparency,
     Vec2i screen_pos,
-    float camera_zoom)
+    int scale)
 {
     if(!texture) return;
 
@@ -28,12 +28,16 @@ void draw_texture_at_screen_pos(
     dest.x = screen_pos.x;
     dest.y = screen_pos.y;
 	SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
-    dest.w *= camera_zoom;
-    dest.h *= camera_zoom;
+    dest.w *= scale;
+    dest.h *= scale;
 
     if(color.x != -1 && color.y != -1 && color.z != -1)
     {
         SDL_SetTextureColorMod(texture, color.x, color.y, color.z);
+    }
+    else
+    {
+        SDL_SetTextureColorMod(texture, 255, 255, 255);
     }
 
     SDL_SetTextureAlphaMod(texture,255 * transparency);
@@ -50,8 +54,29 @@ void draw_texture_at_world_pos(
     Vec2f camera_pos,
     float camera_zoom)
 {
+    if(!texture) return;
+
     Vec2i screen_pos = world_pos_to_screen_pos(world_pos, camera_pos, camera_zoom);
-    draw_texture_at_screen_pos (renderer, texture, color, transparency, screen_pos, camera_zoom);
+
+    SDL_Rect dest;
+    dest.x = screen_pos.x;
+    dest.y = screen_pos.y;
+	SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
+    dest.w *= camera_zoom;
+    dest.h *= camera_zoom;
+
+    if(color.x != -1 && color.y != -1 && color.z != -1)
+    {
+        SDL_SetTextureColorMod(texture, color.x, color.y, color.z);
+    }
+    else
+    {
+        SDL_SetTextureColorMod(texture, 255, 255, 255);
+    }
+
+    SDL_SetTextureAlphaMod(texture,255 * transparency);
+	SDL_RenderCopy(renderer, texture, 0, &dest);
+    SDL_SetTextureAlphaMod(texture,255);
 }
 
 void draw_texture_at_gamemap_pos(

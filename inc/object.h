@@ -304,10 +304,12 @@ int get_object_item_type(Object* object);
 int get_object_item_count(Object* object);
 int is_object_put_item(Object* object);
 
-char* get_name_from_object_type(int object_type);
+char* get_in_game_name_from_object_type(int object_type);
+char* get_debug_name_from_object_type(int object_type);
 Texture* get_texture_1_from_object(Object* object, Textures* textures);
 Texture* get_texture_2_from_object(Object* object, Textures* textures);
 Texture* get_texture_1_outline_from_object(Object* object, Textures* textures);
 Texture* get_texture_2_outline_from_object(Object* object, Textures* textures);
+Texture* get_hud_texture_from_object(Object* object, Textures* textures);
 
 #endif

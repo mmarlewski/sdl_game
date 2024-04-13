@@ -934,6 +934,83 @@ void destroy_textures_animation (Textures_Animation* animation)
     // later
 }
 
+void load_textures_hud (Renderer* renderer, Textures_Hud* hud)
+{
+    hud->no_augmentation = load_texture_from_filepath(renderer, "./res/hud/no_augmentation.png");
+    hud->fist_hand = load_texture_from_filepath(renderer, "./res/hud/fist_hand.png");
+    hud->hook_hand = load_texture_from_filepath(renderer, "./res/hud/hook_hand.png");
+    hud->chain_hand = load_texture_from_filepath(renderer, "./res/hud/chain_hand.png");
+    hud->scissor_hand = load_texture_from_filepath(renderer, "./res/hud/scissor_hand.png");
+    hud->spring_leg = load_texture_from_filepath(renderer, "./res/hud/spring_leg.png");
+    hud->strider_leg = load_texture_from_filepath(renderer, "./res/hud/strider_leg.png");
+    hud->track_leg = load_texture_from_filepath(renderer, "./res/hud/track_leg.png");
+    hud->boot_leg = load_texture_from_filepath(renderer, "./res/hud/boot_leg.png");
+    hud->minibot_torso = load_texture_from_filepath(renderer, "./res/hud/minibot_torso.png");
+    hud->wings_torso = load_texture_from_filepath(renderer, "./res/hud/wings_torso.png");
+    hud->manipulation_head = load_texture_from_filepath(renderer, "./res/hud/manipulation_head.png");
+    hud->teleportation_head = load_texture_from_filepath(renderer, "./res/hud/teleportation_head.png");
+
+    hud->use = load_texture_from_filepath(renderer, "./res/hud/use.png");
+    hud->manipulation = load_texture_from_filepath(renderer, "./res/hud/manipulation.png");
+    hud->teleportation = load_texture_from_filepath(renderer, "./res/hud/teleportation.png");
+    hud->move = load_texture_from_filepath(renderer, "./res/hud/move.png");
+    hud->pick_item = load_texture_from_filepath(renderer, "./res/hud/pick_item.png");
+    hud->put_item_cell = load_texture_from_filepath(renderer, "./res/hud/put_item_cell.png");
+    hud->put_item_dynamite = load_texture_from_filepath(renderer, "./res/hud/put_item_dynamite.png");
+    hud->put_item_gemstone = load_texture_from_filepath(renderer, "./res/hud/put_item_gemstone.png");
+    hud->throw_item_cell = load_texture_from_filepath(renderer, "./res/hud/throw_item_cell.png");
+    hud->throw_item_dynamite = load_texture_from_filepath(renderer, "./res/hud/throw_item_dynamite.png");
+    hud->throw_item_gemstone = load_texture_from_filepath(renderer, "./res/hud/throw_item_gemstone.png");
+    hud->shoot_projectile = load_texture_from_filepath(renderer, "./res/hud/shoot_projectile.png");
+    hud->push = load_texture_from_filepath(renderer, "./res/hud/push.png");
+    hud->throw = load_texture_from_filepath(renderer, "./res/hud/throw.png");
+    hud->pull = load_texture_from_filepath(renderer, "./res/hud/pull.png");
+    hud->drag = load_texture_from_filepath(renderer, "./res/hud/drag.png");
+    hud->jump = load_texture_from_filepath(renderer, "./res/hud/jump.png");
+    hud->charge = load_texture_from_filepath(renderer, "./res/hud/charge.png");
+    hud->stomp = load_texture_from_filepath(renderer, "./res/hud/stomp.png");
+    hud->drag_and_throw = load_texture_from_filepath(renderer, "./res/hud/drag_and_throw.png");
+    hud->charge_and_push = load_texture_from_filepath(renderer, "./res/hud/charge_and_push.png");
+    hud->charge_and_throw = load_texture_from_filepath(renderer, "./res/hud/charge_and_throw.png");
+    hud->charge_and_jump = load_texture_from_filepath(renderer, "./res/hud/charge_and_jump.png");
+    hud->jump_and_carry = load_texture_from_filepath(renderer, "./res/hud/jump_and_carry.png");
+    hud->jump_and_stomp = load_texture_from_filepath(renderer, "./res/hud/jump_and_stomp.png");
+    hud->launch_minibot = load_texture_from_filepath(renderer, "./res/hud/launch_minibot.png");
+    hud->minibot_merge = load_texture_from_filepath(renderer, "./res/hud/minibot_merge.png");
+    hud->turret_laser = load_texture_from_filepath(renderer, "./res/hud/turret_laser.png");
+    hud->turret_bomb = load_texture_from_filepath(renderer, "./res/hud/turret_bomb.png");
+    hud->turret_projectile = load_texture_from_filepath(renderer, "./res/hud/turret_projectile.png");
+    hud->kill_around = load_texture_from_filepath(renderer, "./res/hud/kill_around.png");
+
+    hud->hero = load_texture_from_filepath(renderer, "./res/hud/hero.png");
+    hud->golem = load_texture_from_filepath(renderer, "./res/hud/golem.png");
+    hud->goat = load_texture_from_filepath(renderer, "./res/hud/goat.png");
+    hud->spider = load_texture_from_filepath(renderer, "./res/hud/spider.png");
+    hud->bull = load_texture_from_filepath(renderer, "./res/hud/bull.png");
+    hud->fly = load_texture_from_filepath(renderer, "./res/hud/fly.png");
+    hud->chameleon = load_texture_from_filepath(renderer, "./res/hud/chameleon.png");
+    hud->squid = load_texture_from_filepath(renderer, "./res/hud/squid.png");
+    hud->mole = load_texture_from_filepath(renderer, "./res/hud/mole.png");
+    hud->mimic = load_texture_from_filepath(renderer, "./res/hud/mimic.png");
+    hud->shark = load_texture_from_filepath(renderer, "./res/hud/shark.png");
+    hud->shark_fin = load_texture_from_filepath(renderer, "./res/hud/shark_fin.png");
+    hud->tturret_laser = load_texture_from_filepath(renderer, "./res/hud/tturret_laser.png");
+    hud->tturret_bomb = load_texture_from_filepath(renderer, "./res/hud/tturret_bomb.png");
+    hud->tturret_projectile = load_texture_from_filepath(renderer, "./res/hud/tturret_projectile.png");
+    hud->squirrel = load_texture_from_filepath(renderer, "./res/hud/squirrel.png");
+    hud->minibot_ally = load_texture_from_filepath(renderer, "./res/hud/minibot_ally.png");
+    hud->minibot_enemy = load_texture_from_filepath(renderer, "./res/hud/minibot_enemy.png");
+    hud->environment = load_texture_from_filepath(renderer, "./res/hud/environment.png");
+
+    hud->cell = load_texture_from_filepath(renderer, "./res/hud/cell.png");
+    hud->dynamite = load_texture_from_filepath(renderer, "./res/hud/dynamite.png");
+    hud->gemstone = load_texture_from_filepath(renderer, "./res/hud/gemstone.png");
+}
+void destroy_textures_hud (Textures_Hud* hud)
+{
+    // later
+}
+
 void load_textures (Renderer* renderer, Textures* textures)
 {
     textures->shadow = load_texture_from_filepath (renderer, "./res/shadow.png");
@@ -943,6 +1020,7 @@ void load_textures (Renderer* renderer, Textures* textures)
     load_textures_order_number(renderer,&textures->order_number);
     load_textures_skill(renderer,&textures->skill);
     load_textures_animation(renderer,&textures->animation);
+    load_textures_hud(renderer,&textures->hud);
 }
 
 void destroy_textures (Textures* textures)
@@ -952,6 +1030,7 @@ void destroy_textures (Textures* textures)
     destroy_textures_order_number (&textures->order_number);
     destroy_textures_skill(&textures->skill);
     destroy_textures_animation(&textures->animation);
+    destroy_textures_hud(&textures->hud);
 }
 
 Texture* get_texture_throw(Textures* textures, int dir4)

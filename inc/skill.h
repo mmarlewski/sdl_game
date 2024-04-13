@@ -3,6 +3,7 @@
 
 #include "../inc/common.h"
 #include "../inc/vec.h"
+#include "../inc/textures.h"
 
 enum SKILL
 {
@@ -79,6 +80,8 @@ enum SKILL
 
 int is_skill_two_target(int skill);
 int get_skill_action_points(int skill);
-char* get_skill_name(int skill);
+char* get_in_game_skill_name(int skill);
+char* get_debug_skill_name(int skill);
+Texture* get_skill_hud_texture(int skill, Textures* textures);
 
 #endif

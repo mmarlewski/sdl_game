@@ -81,6 +81,7 @@ void render (Renderer* renderer, State* state, Input* input, Textures* textures,
 	SDL_RenderClear (renderer);
 
     draw_gamemap(renderer, state, textures, colors);
+    draw_hud(renderer, state, textures, colors);
 
     SDL_RenderPresent (renderer);
 }

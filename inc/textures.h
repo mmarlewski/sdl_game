@@ -919,6 +919,83 @@ void destroy_textures_animation (Textures_Animation* animation);
 
 typedef struct
 {
+    Texture* no_augmentation;
+    Texture* fist_hand;
+    Texture* hook_hand;
+    Texture* chain_hand;
+    Texture* scissor_hand;
+    Texture* spring_leg;
+    Texture* strider_leg;
+    Texture* track_leg;
+    Texture* boot_leg;
+    Texture* minibot_torso;
+    Texture* wings_torso;
+    Texture* manipulation_head;
+    Texture* teleportation_head;
+
+    Texture* use;
+    Texture* manipulation;
+    Texture* teleportation;
+    Texture* move;
+    Texture* pick_item;
+    Texture* put_item_cell;
+    Texture* put_item_dynamite;
+    Texture* put_item_gemstone;
+    Texture* throw_item_cell;
+    Texture* throw_item_dynamite;
+    Texture* throw_item_gemstone;
+    Texture* shoot_projectile;
+    Texture* push;
+    Texture* throw;
+    Texture* pull;
+    Texture* drag;
+    Texture* jump;
+    Texture* charge;
+    Texture* stomp;
+    Texture* drag_and_throw;
+    Texture* charge_and_push;
+    Texture* charge_and_throw;
+    Texture* charge_and_jump;
+    Texture* jump_and_carry;
+    Texture* jump_and_stomp;
+    Texture* launch_minibot;
+    Texture* minibot_merge;
+    Texture* turret_laser;
+    Texture* turret_bomb;
+    Texture* turret_projectile;
+    Texture* kill_around;
+
+    Texture* golem;
+    Texture* hero;
+    Texture* goat;
+    Texture* spider;
+    Texture* bull;
+    Texture* fly;
+    Texture* chameleon;
+    Texture* squid;
+    Texture* mole;
+    Texture* mimic;
+    Texture* shark;
+    Texture* shark_fin;
+    Texture* tturret_laser;
+    Texture* tturret_bomb;
+    Texture* tturret_projectile;
+    Texture* squirrel;
+    Texture* minibot_ally;
+    Texture* minibot_enemy;
+    Texture* environment;
+
+    Texture* cell;
+    Texture* dynamite;
+    Texture* gemstone;
+
+} Textures_Hud;
+
+void load_textures_hud (Renderer* renderer, Textures_Hud* hud);
+void destroy_textures_hud (Textures_Hud* hud);
+
+typedef struct
+{
     Texture* shadow;
 
     Textures_Floor floor;
@@ -926,6 +1003,7 @@ typedef struct
     Textures_OrderNumber order_number;
     Textures_Skill skill;
     Textures_Animation animation;
+    Textures_Hud hud;
 
 } Textures;
 
