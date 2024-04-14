@@ -65,23 +65,32 @@ void init_sdl (Window** window, Renderer** renderer)
         2,
         2048
         );
+
+    // ttf
+
+    if(TTF_Init() < 0)
+    {
+        printf("can't init ttf: %s \n", SDL_GetError());
+        exit(1);
+    }
 }
 
 void destroy_sdl (Window* window, Renderer* renderer)
 {
     Mix_CloseAudio();
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
-void render (Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors)
+void render (Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors, Fonts* fonts)
 {
     SDL_SetRenderDrawColor (renderer, state->background_color.x,state->background_color.y,state->background_color.z, 255);
 	SDL_RenderClear (renderer);
 
-    draw_gamemap(renderer, state, textures, colors);
-    draw_hud(renderer, state, textures, colors);
+    draw_gamemap(renderer, state, textures, colors, fonts);
+    draw_hud(renderer, state, textures, colors, fonts);
 
     SDL_RenderPresent (renderer);
 }
@@ -108,6 +117,7 @@ int main (int argc, char* argv[])
     Sounds sounds;
     Musics musics;
     Colors colors;
+    Fonts fonts;
 
     int prev_time = 0;
     int curr_time = 0;
@@ -120,6 +130,7 @@ int main (int argc, char* argv[])
     load_sounds (&sounds);
     load_musics (&musics);
     load_colors (&colors);
+    load_fonts(&fonts);
 
     init_state (&state, &textures, &sounds, &musics, &colors);
 
@@ -137,13 +148,14 @@ int main (int argc, char* argv[])
 
         update_input (&input);
         update_state (&input, &state, delta_time, &textures, &sounds, &musics, &colors);
-        render (renderer, &state, &input, &textures, &colors);
+        render (renderer, &state, &input, &textures, &colors, &fonts);
     }
 
     destroy_textures(&textures);
     destroy_sounds(&sounds);
     destroy_musics(&musics);
     destroy_colors(&colors);
+    destroy_fonts(&fonts);
 
     destroy_sdl (window, renderer);
 

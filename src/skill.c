@@ -166,9 +166,9 @@ char* get_in_game_skill_name(int skill)
 
     switch(skill)
     {
-        case SKILL__NONE:                       name = "none"; break;
+        case SKILL__NONE:                       name = "--"; break;
 
-        case SKILL__ATTACK_DIR:                 name = "attack dir"; break;
+        case SKILL__ATTACK_DIR:                 name = "---"; break;
         case SKILL__NO_ATTACK:                  name = "no attack"; break;
 
         case SKILL__USE:                        name = "use"; break;
@@ -176,41 +176,41 @@ char* get_in_game_skill_name(int skill)
         case SKILL__TELEPORTATION:              name = "teleportation"; break;
 
         case SKILL__MOVE:                       name = "move"; break;
-        case SKILL__MOVE_FLOATING:              name = "move floating"; break;
-        case SKILL__MOVE_FLYING:                name = "move flying"; break;
+        case SKILL__MOVE_FLOATING:              name = "move"; break;
+        case SKILL__MOVE_FLYING:                name = "move"; break;
 
-        case SKILL__PICK_ITEM_CLOSE:            name = "pick item close"; break;
-        case SKILL__PICK_ITEM_FAR:              name = "pick item far"; break;
+        case SKILL__PICK_ITEM_CLOSE:            name = "pick item"; break;
+        case SKILL__PICK_ITEM_FAR:              name = "pick item"; break;
 
-        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put item cell close"; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell far"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put item dynamite close"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite far"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put item gemstone close"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone far"; break;
+        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put item cell"; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put item dynamite"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put item gemstone"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone"; break;
 
         case SKILL__THROW_ITEM_CELL:            name = "throw item cell"; break;
         case SKILL__THROW_ITEM_DYNAMITE:        name = "throw item dynamite"; break;
         case SKILL__THROW_ITEM_GEMSTONE:        name = "throw item gemstone"; break;
 
-        case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile fly"; break;
-        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  name = "shoot projectile squirrel"; break;
+        case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile"; break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  name = "shoot projectile"; break;
 
         case SKILL__PUSH:                       name = "push"; break;
         case SKILL__THROW:                      name = "throw"; break;
-        case SKILL__PULL_HOOK:                  name = "pull hook"; break;
-        case SKILL__PULL_SPIDERWEB:             name = "pull spiderweb"; break;
-        case SKILL__PULL_TENTACLE:              name = "pull tentacle"; break;
-        case SKILL__PULL_TONGUE:                name = "pull tongue"; break;
-        case SKILL__DRAG_HOOK:                  name = "drag hook"; break;
-        case SKILL__DRAG_SPIDERWEB:             name = "drag spiderweb"; break;
-        case SKILL__DRAG_TENTACLE:              name = "drag tentacle"; break;
+        case SKILL__PULL_HOOK:                  name = "pull"; break;
+        case SKILL__PULL_SPIDERWEB:             name = "pull"; break;
+        case SKILL__PULL_TENTACLE:              name = "pull"; break;
+        case SKILL__PULL_TONGUE:                name = "pull"; break;
+        case SKILL__DRAG_HOOK:                  name = "drag"; break;
+        case SKILL__DRAG_SPIDERWEB:             name = "drag"; break;
+        case SKILL__DRAG_TENTACLE:              name = "drag"; break;
         case SKILL__JUMP:                       name = "jump"; break;
         case SKILL__CHARGE:                     name = "charge"; break;
         case SKILL__STOMP:                      name = "stomp"; break;
 
-        case SKILL__DRAG_AND_THROW_HOOK:        name = "drag and throw hook"; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      name = "drag and throw tongue"; break;
+        case SKILL__DRAG_AND_THROW_HOOK:        name = "drag and throw"; break;
+        case SKILL__DRAG_AND_THROW_TONGUE:      name = "drag and throw"; break;
         case SKILL__CHARGE_AND_PUSH:            name = "charge and push"; break;
         case SKILL__CHARGE_AND_THROW:           name = "charge and throw"; break;
         case SKILL__CHARGE_AND_JUMP:            name = "charge and jump"; break;
@@ -226,13 +226,13 @@ char* get_in_game_skill_name(int skill)
 
         case SKILL__KILL_AROUND:                name = "kill around"; break;
 
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "environment falling stalactite"; break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "environment emerge water"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:         name = "environment emerge pit"; break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "environment emerge burrow"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "environment emerge pipe"; break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "environment collapse burrow"; break;
-        case SKILL__ENVIRONMENT_CONV_BELT:          name = "environment conv belt"; break;
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "environment"; break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "environment"; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIT:         name = "environment"; break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "environment"; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "environment"; break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "environment"; break;
+        case SKILL__ENVIRONMENT_CONV_BELT:          name = "environment"; break;
 
         default: break;
     }

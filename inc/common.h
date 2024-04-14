@@ -5,15 +5,21 @@
 #include <math.h>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
 // printf("here ok \n");
 
 // typedefs
 
 typedef SDL_Renderer Renderer;
+
 typedef SDL_Window Window;
+
+typedef SDL_Surface Surface;
 
 typedef SDL_Texture Texture;
 
@@ -21,10 +27,12 @@ typedef Mix_Chunk Sound;
 
 typedef Mix_Music Music;
 
+typedef TTF_Font Font;
+
 // defines
 
-#define SCREEN_WIDTH 1200
-#define SCREEN_HEIGHT 750
+#define SCREEN_WIDTH 1300
+#define SCREEN_HEIGHT 900
 
 #define FPS_CAP 60.0f
 #define FPS_CAP_IN_MILISECONDS (1000.0f / FPS_CAP)

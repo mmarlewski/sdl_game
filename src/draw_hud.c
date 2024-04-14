@@ -1,7 +1,77 @@
 #include "../inc/game.h"
+#include <string.h>
 
-void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors)
+void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
+    // gamestate
+
+    char* gamestate_text = get_gamestate_in_game_name(state->gamestate);
+
+    draw_font_at_screen_pos(
+        gamestate_text,
+        renderer,
+        fonts->font_50,
+        colors->white,
+        1.0f,
+        vec2i(600 - strlen(gamestate_text) * 10,10),
+        1
+        );
+
+    // ap bar
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        if(state->enemy_list->size > 0)
+        {
+            int curr_ally_ap = state->curr_ally->object->action_points;
+            char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
+            hero_ap_bar[0] = '[';
+            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
+            {
+                char character = ' ';
+
+                if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+                state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+                {
+                    int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
+                    if(i < curr_ally_ap - curr_skill_cost) character = '#';
+                    else if(i < curr_ally_ap) character = '-';
+                }
+                else
+                {
+                    character = (i < curr_ally_ap) ? '#' : ' ';
+                }
+
+                hero_ap_bar[i + 1] = character;
+            }
+            hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
+
+            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
+            {
+                Vec3i color = colors->none;
+
+                switch(hero_ap_bar[i + 1])
+                {
+                    case '#': color = colors->blue; break;
+                    case '-': color = colors->red; break;
+                    case ' ': color = colors->black; break;
+                    default: color = colors->black; break;
+                }
+
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->hud.bar_part,
+                    color,
+                    1.0f,
+                    vec2i(550 + 32 * i,100),
+                    1
+                    );
+            }
+        }
+    }
+
     // augmentations
 
     if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
@@ -90,6 +160,71 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(158, 116),
             scale
             );
+
+        int is_mouse_on_texture = 0;
+        int mouse_augmentation = AUGMENTATION__NONE;
+
+        if(state->mouse_screen_pos.x >= 10 &&
+        state->mouse_screen_pos.x <= 10 + 64 &&
+        state->mouse_screen_pos.y >= 42 &&
+        state->mouse_screen_pos.y <= 42 + 64)
+        {
+            is_mouse_on_texture = 1;
+            mouse_augmentation = left_hand_augmentation;
+        }
+        if(state->mouse_screen_pos.x >= 84 &&
+        state->mouse_screen_pos.x <= 84 + 64 &&
+        state->mouse_screen_pos.y >= 10 &&
+        state->mouse_screen_pos.y <= 10 + 64)
+        {
+            is_mouse_on_texture = 1;
+            mouse_augmentation = head_augmentation;
+        }
+        if(state->mouse_screen_pos.x >= 158 &&
+        state->mouse_screen_pos.x <= 158 + 64 &&
+        state->mouse_screen_pos.y >= 42 &&
+        state->mouse_screen_pos.y <= 42 + 64)
+        {
+            is_mouse_on_texture = 1;
+            mouse_augmentation = right_hand_augmentation;
+        }
+        if(state->mouse_screen_pos.x >= 10 &&
+        state->mouse_screen_pos.x <= 10 + 64 &&
+        state->mouse_screen_pos.y >= 116 &&
+        state->mouse_screen_pos.y <= 116 + 64)
+        {
+            is_mouse_on_texture = 1;
+            mouse_augmentation = left_leg_augmentation;
+        }
+        if(state->mouse_screen_pos.x >= 84 &&
+        state->mouse_screen_pos.x <= 84 + 64 &&
+        state->mouse_screen_pos.y >= 84 &&
+        state->mouse_screen_pos.y <= 84 + 64)
+        {
+            is_mouse_on_texture = 1;
+            mouse_augmentation = torso_augmentation;
+        }
+        if(state->mouse_screen_pos.x >= 158 &&
+        state->mouse_screen_pos.x <= 158 + 64 &&
+        state->mouse_screen_pos.y >= 116 &&
+        state->mouse_screen_pos.y <= 116 + 64)
+        {
+            is_mouse_on_texture = 1;
+            mouse_augmentation = right_leg_augmentation;
+        }
+
+        if(is_mouse_on_texture)
+        {
+            draw_font_at_screen_pos(
+                get_augmentation_name(mouse_augmentation),
+                renderer,
+                fonts->font_30,
+                colors->white,
+                1.0f,
+                vec2i(10,180),
+                1
+                );
+        }
     }
 
     // items
@@ -108,7 +243,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.cell,
             colors->none,
             1.0f,
-            vec2i(10, 190 + 74),
+            vec2i(10, 120 + 74),
             4
             );
         draw_texture_at_screen_pos(
@@ -116,7 +251,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             get_texture_order_number(textures, state->hero_item_number[ITEM__CELL]),
             colors->none,
             1.0f,
-            vec2i(32, 190 + 74),
+            vec2i(32, 120 + 74),
             2
             );
 
@@ -125,7 +260,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.dynamite,
             colors->none,
             1.0f,
-            vec2i(10, 264 + 74),
+            vec2i(10, 194 + 74),
             4
             );
         draw_texture_at_screen_pos(
@@ -133,7 +268,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE]),
             colors->none,
             1.0f,
-            vec2i(32, 264 + 74),
+            vec2i(32, 194 + 74),
             2
             );
 
@@ -142,7 +277,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.gemstone,
             colors->none,
             1.0f,
-            vec2i(10, 338 + 74),
+            vec2i(10, 268 + 74),
             4
             );
         draw_texture_at_screen_pos(
@@ -150,7 +285,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE]),
             colors->none,
             1.0f,
-            vec2i(32, 338 + 74),
+            vec2i(32, 268 + 74),
             2
             );
     }
@@ -173,7 +308,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             object_texture,
             colors->none,
             1.0f,
-            vec2i(10, 600),
+            vec2i(10, 600 + 150),
             4
             );
     }
@@ -191,7 +326,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             object_texture,
             colors->none,
             1.0f,
-            vec2i(10, 600),
+            vec2i(10, 600 + 150),
             4
             );
     }
@@ -200,45 +335,58 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
     {
-        for(int i = 0; i < 10; i++)
+        if(state->curr_ally->object->action_points > 0)
         {
-            for(int j = 0; j < 2; j++)
+            draw_font_at_screen_pos(
+                get_in_game_name_from_object_type(state->curr_ally->object->type),
+                renderer,
+                fonts->font_30,
+                colors->white,
+                1.0f,
+                vec2i(10,550 + 150),
+                1
+                );
+
+            for(int i = 0; i < 10; i++)
             {
-                int index = i * 2 + j;
-
-                if(index < state->curr_ally->skill_list->size)
+                for(int j = 0; j < 2; j++)
                 {
-                    ListElem* skill_list_elem =
-                        get_nth_list_element(
-                            state->curr_ally->skill_list,
-                            index
-                            );
+                    int index = i * 2 + j;
 
-                    if(skill_list_elem != 0)
+                    if(index < state->curr_ally->skill_list->size)
                     {
-                        int skill = (int)skill_list_elem->data;
+                        ListElem* skill_list_elem =
+                            get_nth_list_element(
+                                state->curr_ally->skill_list,
+                                index
+                                );
 
-                        Texture* skill_texture = get_skill_hud_texture(
-                            skill,
-                            textures
-                            );
-
-                        if(skill_texture == 0)
+                        if(skill_list_elem != 0)
                         {
-                            skill_texture = textures->hud.no_augmentation;
-                        }
+                            int skill = (int)skill_list_elem->data;
 
-                        draw_texture_at_screen_pos(
-                            renderer,
-                            skill_texture,
-                            colors->none,
-                            1.0f,
-                            vec2i(
-                                138 + 10 * (i+1) + 64 * i,
-                                600 + 10 * j + 64 * j
-                                ),
-                            2
-                            );
+                            Texture* skill_texture = get_skill_hud_texture(
+                                skill,
+                                textures
+                                );
+
+                            if(skill_texture == 0)
+                            {
+                                skill_texture = textures->hud.no_augmentation;
+                            }
+
+                            draw_texture_at_screen_pos(
+                                renderer,
+                                skill_texture,
+                                colors->none,
+                                1.0f,
+                                vec2i(
+                                    138 + 10 * (i+1) + 64 * i,
+                                    600 + 10 * j + 64 * j + 150
+                                    ),
+                                2
+                                );
+                        }
                     }
                 }
             }
@@ -251,6 +399,16 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     {
         int skill = state->curr_ally_skill;
 
+        draw_font_at_screen_pos(
+            get_in_game_skill_name(skill),
+            renderer,
+            fonts->font_30,
+            colors->white,
+            1.0f,
+            vec2i(10,550 + 150),
+            1
+            );
+
         Texture* skill_texture = get_skill_hud_texture(
             skill,
             textures
@@ -261,7 +419,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             skill_texture,
             colors->none,
             1.0f,
-            vec2i(148,600),
+            vec2i(148,600 + 150),
             4
             );
     }
@@ -271,6 +429,16 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     {
         int skill = state->curr_enemy->skill;
 
+        draw_font_at_screen_pos(
+            get_in_game_skill_name(skill),
+            renderer,
+            fonts->font_30,
+            colors->white,
+            1.0f,
+            vec2i(10,550 + 150),
+            1
+            );
+
         Texture* skill_texture = get_skill_hud_texture(
             skill,
             textures
@@ -281,7 +449,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             skill_texture,
             colors->none,
             1.0f,
-            vec2i(148,600),
+            vec2i(148,600 + 150),
             4
             );
     }
@@ -312,13 +480,23 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     texture,
                     colors->none,
                     1.0f,
-                    vec2i(1050, 600),
+                    vec2i(1050 + 100, 600 + 150),
                     2
                     );
             }
 
             if(object != 0)
             {
+                draw_font_at_screen_pos(
+                    get_in_game_name_from_object_type(object->type),
+                    renderer,
+                    fonts->font_30,
+                    colors->white,
+                    1.0f,
+                    vec2i(900 + 100,550 + 150),
+                    1
+                    );
+
                 Texture* texture = get_texture_1_from_object(object, textures);
                 Texture* texture_outline = get_texture_1_outline_from_object(object, textures);
 
@@ -327,7 +505,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     texture,
                     colors->none,
                     1.0f,
-                    vec2i(900, 600),
+                    vec2i(900 + 100, 600 + 150),
                     2
                     );
 
@@ -338,7 +516,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         texture_outline,
                         colors->green,
                         1.0f,
-                        vec2i(900, 600),
+                        vec2i(900 + 100, 600 + 150),
                         2
                         );
                 }
@@ -350,7 +528,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         texture_outline,
                         colors->red,
                         1.0f,
-                        vec2i(900, 600),
+                        vec2i(900 + 100, 600 + 150),
                         2
                         );
                 }
@@ -366,6 +544,15 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
     state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.end_turn,
+            colors->none,
+            1.0f,
+            vec2i(1200 - 64 - 10 + 100, 10),
+            2
+            );
+
         int go_on = 1;
         for(int i = 1; i < 10 && go_on; i++)
         {
@@ -399,8 +586,8 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     colors->none,
                     1.0f,
                     vec2i(
-                        1200 - 10 - 64 - 10 - 64 - 16,
-                        10 * i + 64 * (i - 1)
+                        1200 - 10 - 64 - 10 - 64 - 16 + 100,
+                        10 + 64 + 10 * i + 64 * (i - 1)
                         ),
                     2
                     );
@@ -411,8 +598,8 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     colors->none,
                     1.0f,
                     vec2i(
-                        1200 - 10 - 64,
-                        10 * i + 64 * (i - 1)
+                        1200 - 10 - 64 + 100,
+                        10 + 64 + 10 * i + 64 * (i - 1)
                         ),
                     2
                     );

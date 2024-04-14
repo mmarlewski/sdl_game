@@ -260,7 +260,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             }
 
             // end ally turn
-            if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER])
+            if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||
+            (input->was_mouse_left && !input->is_mouse_left &&
+            state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
+            state->mouse_screen_pos.x <= 1200 - 64 - 10 + 64 + 100 &&
+            state->mouse_screen_pos.y >= 10 &&
+            state->mouse_screen_pos.y <= 10 + 64))
             {
                 // restore all ally action points
                 for(ListElem* curr_elem = state->ally_list->head;
@@ -314,6 +319,33 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             // choose skill
 
             int skill = SKILL__NONE;
+
+            if(input->was_mouse_left && !input->is_mouse_left)
+            {
+                for(int i = 0; i < 10; i++)
+                {
+                    for(int j = 0; j < 2; j++)
+                    {
+                        int index = i * 2 + j;
+
+                        if(state->mouse_screen_pos.x >= 138 + 10 * (i+1) + 64 * i &&
+                        state->mouse_screen_pos.x <= 138 + 10 * (i+1) + 64 * i + 64 &&
+                        state->mouse_screen_pos.y >= 600 + 150 + 10 * j + 64 * j &&
+                        state->mouse_screen_pos.y <= 600 + 150 + 10 * j + 64 * j + 64)
+                        {
+                            ListElem* skill_elem = get_nth_list_element(
+                                state->curr_ally->skill_list,
+                                index
+                                );
+
+                            if(skill_elem != 0)
+                            {
+                                skill = (int)skill_elem->data;
+                            }
+                        }
+                    }
+                }
+            }
 
             if(input->was_key[KEY__Q] && !input->is_key[KEY__Q])
             {
@@ -687,7 +719,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         case GAMESTATE__ALLY_CHOOSING_TARGET_1:
         {
             // go back
-            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC])
+            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC] ||
+            input->was_mouse_right && !input->is_mouse_right)
             {
                 remove_all_actions_from_action_sequence(
                     state->ally_action_sequence
@@ -744,7 +777,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         case GAMESTATE__ALLY_CHOOSING_TARGET_2:
         {
             // go back
-            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC])
+            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC] ||
+            input->was_mouse_right && !input->is_mouse_right)
             {
                 state->selected_tilemap_pos = vec2i(-1, -1);
 

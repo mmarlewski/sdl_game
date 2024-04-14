@@ -26,7 +26,7 @@ D_FILES = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.d,$(C_FILES))
 all : $(BIN_FILE)
 
 $(BIN_FILE) : $(O_FILES)
-	$(CC) -lm -lSDL2 -lSDL2_image -lSDL2_mixer -o $@ $^
+	$(CC) -lm -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -o $@ $^
 
 # only want the .c file dependency here, thus $< instead of $^.
 $(BUILD_DIR)/%.o : $(SRC_DIR)/%.c

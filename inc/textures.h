@@ -989,6 +989,9 @@ typedef struct
     Texture* dynamite;
     Texture* gemstone;
 
+    Texture* end_turn;
+    Texture* bar_part;
+
 } Textures_Hud;
 
 void load_textures_hud (Renderer* renderer, Textures_Hud* hud);

@@ -90,7 +90,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "6_2");
+    Room* room = get_room(state, "7_2");
 
     room_add_object_at(
         room,
@@ -164,7 +164,7 @@ void change_gamestate(State* state, int new_gamestate)
         printf(" ╚  ╩╚═╚═╝╚═╝ \n");
     }
     printf("----------------------------------------\n");
-    printf("gamestate : %s \n", get_gamestate_name(state->gamestate));
+    printf("gamestate : %s \n", get_gamestate_debug_name(state->gamestate));
     printf("----------------------------------------\n");
     printf("curr room : %s \n", state->curr_room->name);
     printf("----------------------------------------\n");
@@ -444,7 +444,33 @@ void execute_action_sequence(State* state, Action* action_sequence, Textures* te
     start_action(state, action_sequence, action_sequence, textures, sounds, musics, colors);
 }
 
-char* get_gamestate_name(int gamestate)
+char* get_gamestate_in_game_name(int gamestate)
+{
+    char* name = "";
+
+    switch(gamestate)
+    {
+        case GAMESTATE__NONE:                       name = "---";               break;
+        case GAMESTATE__ALLY_CHOOSING_SKILL:        name = "choose skill";      break;
+        case GAMESTATE__ALLY_CHOOSING_TARGET_1:     name = "choose target";     break;
+        case GAMESTATE__ALLY_CHOOSING_TARGET_2:     name = "choose target";     break;
+        case GAMESTATE__ALLY_EXECUTING_ANIMATION:   name = "";                  break;
+        case GAMESTATE__ALLY_EXECUTING_SKILL:       name = "";                  break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:  name = "-enemy turn-";      break;
+        case GAMESTATE__ENEMY_EXECUTING_ANIMATION:  name = "-enemy turn-";      break;
+        case GAMESTATE__ENEMY_EXECUTING_ATTACK:     name = "-enemy turn-";      break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "-enemy turn-";      break;
+        case GAMESTATE__ENEMY_MOVING:               name = "-enemy turn-";      break;
+        case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "-enemy turn-";      break;
+        case GAMESTATE__GAME_OVER:                  name = "game over";         break;
+        case GAMESTATE__GAME_WON:                   name = "game won";          break;
+        default: break;
+    }
+
+    return name;
+}
+
+char* get_gamestate_debug_name(int gamestate)
 {
     char* name = "";
 

@@ -1,7 +1,7 @@
 #include "../inc/game.h"
 #include <limits.h>
 
-void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors)
+void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
     // shadow
 
