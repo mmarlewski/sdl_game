@@ -20,6 +20,10 @@
 - clone repository
 - run ``` make && ./sdl_game ```
 
+### How to run (Web)
+- install and activate emsdk (https://emscripten.org/docs/getting_started/downloads.html)
+- run script in 'emscripten.txt' to compile project into html, js and wasm files and then run in the browser (change 'firefox' to your specific browser)
+
 ### Inspired by
 - Into the Breach : telegraphed attack to take advantage of enemy actions and 8x8 grid rooms
 - metroidvanias : approach to level exploration (certain level chunks inaccessible without appropriate skill, new skills gained from objects spread throughout the level)
@@ -27,7 +31,6 @@
 
 ### To do
 - make it run on Windows
-- add HUD (right now all the info is being printed on console)
 
 ### Recordings
 

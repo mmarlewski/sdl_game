@@ -157,7 +157,10 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
         break;
         case ANIMATION__CHANGE_BACKGROUND_COLOR:
         {
-            change_background_color(state, animation->change_background_color.from_color);
+            change_background_color(
+                state,
+                animation->change_background_color.from_color
+                );
         }
         break;
     }

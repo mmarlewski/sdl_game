@@ -18,11 +18,11 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     // camera
 
-    if(input->is_mouse_scrolling)
-    {
-        float change_camera_zoom_by = input->mouse_scrolled * state->camera_zoom * delta_time * 10.0f;
-        state->camera_zoom += change_camera_zoom_by;
-    }
+    // if(input->is_mouse_scrolling)
+    // {
+    //     float change_camera_zoom_by = input->mouse_scrolled * state->camera_zoom * delta_time * 10.0f;
+    //     state->camera_zoom += change_camera_zoom_by;
+    // }
 
     // mouse
 
@@ -44,30 +44,30 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
     // dragging
 
-    if(!input->was_mouse_left && input->is_mouse_left)
-    {
-        state->mouse_is_dragging = 1;
-        state->mouse_drag_origin_world_pos = state->mouse_world_pos;
-    }
-    else if(input->was_mouse_left && !input->is_mouse_left)
-    {
-        state->mouse_is_dragging = 0;
-    }
-    else if(input->is_mouse_left)
-    {
-        Vec2f drag_world_diff;
-        Vec2f new_camera_world_pos;
+    // if(!input->was_mouse_left && input->is_mouse_left)
+    // {
+    //     state->mouse_is_dragging = 1;
+    //     state->mouse_drag_origin_world_pos = state->mouse_world_pos;
+    // }
+    // else if(input->was_mouse_left && !input->is_mouse_left)
+    // {
+    //     state->mouse_is_dragging = 0;
+    // }
+    // else if(input->is_mouse_left)
+    // {
+    //     Vec2f drag_world_diff;
+    //     Vec2f new_camera_world_pos;
 
-        drag_world_diff.x = state->mouse_world_pos.x - state->camera_world_pos.x;
-        drag_world_diff.y = state->mouse_world_pos.y - state->camera_world_pos.y;
+    //     drag_world_diff.x = state->mouse_world_pos.x - state->camera_world_pos.x;
+    //     drag_world_diff.y = state->mouse_world_pos.y - state->camera_world_pos.y;
 
-        new_camera_world_pos.x = state->mouse_drag_origin_world_pos.x - drag_world_diff.x;
-        new_camera_world_pos.y = state->mouse_drag_origin_world_pos.y - drag_world_diff.y;
+    //     new_camera_world_pos.x = state->mouse_drag_origin_world_pos.x - drag_world_diff.x;
+    //     new_camera_world_pos.y = state->mouse_drag_origin_world_pos.y - drag_world_diff.y;
 
-        state->camera_world_pos = new_camera_world_pos;
-    }
+    //     state->camera_world_pos = new_camera_world_pos;
+    // }
 
-    state->show_all_order_numbers = input->is_key[KEY__2];
+    // state->show_all_order_numbers = input->is_key[KEY__2];
 
     // animations
 
@@ -330,8 +330,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                         if(state->mouse_screen_pos.x >= 138 + 10 * (i+1) + 64 * i &&
                         state->mouse_screen_pos.x <= 138 + 10 * (i+1) + 64 * i + 64 &&
-                        state->mouse_screen_pos.y >= 600 + 150 + 10 * j + 64 * j &&
-                        state->mouse_screen_pos.y <= 600 + 150 + 10 * j + 64 * j + 64)
+                        state->mouse_screen_pos.y >= 600 + 50 + 10 * j + 64 * j &&
+                        state->mouse_screen_pos.y <= 600 + 50 + 10 * j + 64 * j + 64)
                         {
                             ListElem* skill_elem = get_nth_list_element(
                                 state->curr_ally->skill_list,

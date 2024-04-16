@@ -5,6 +5,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 {
     state->is_game_running = 1;
     state->time = 0.0f;
+    state->delta_time = 0.0f;
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
     state->background_color = colors->ally_background;
@@ -90,12 +91,12 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     create_level(state);
 
-    Room* room = get_room(state, "7_2");
+    Room* room = get_room(state, "7_3");
 
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(7,2)
+        vec2i(1,1)
         );
     set_curr_room(
         state,

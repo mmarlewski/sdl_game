@@ -1,2 +1,13 @@
 
+# build files
 /build/
+
+# linux output
+sdl_game
+
+# emscripten output
+index.html
+index.js
+index.wasm
+index.data
+sdl_game.zip

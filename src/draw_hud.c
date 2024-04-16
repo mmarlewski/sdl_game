@@ -1,8 +1,23 @@
 #include "../inc/game.h"
+#include <SDL2/SDL_stdinc.h>
 #include <string.h>
 
 void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
+    // fps
+
+    // char fps_text[100];
+    // sprintf(fps_text, "fps: %i", (int)(1 / state->delta_time));
+    // draw_font_at_screen_pos(
+    //     fps_text,
+    //     renderer,
+    //     fonts->font_30,
+    //     colors->white,
+    //     1.0f,
+    //     vec2i(300,10),
+    //     1
+    //     );
+
     // gamestate
 
     char* gamestate_text = get_gamestate_in_game_name(state->gamestate);
@@ -243,7 +258,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.cell,
             colors->none,
             1.0f,
-            vec2i(10, 120 + 74),
+            vec2i(10, 120 + 100),
             4
             );
         draw_texture_at_screen_pos(
@@ -251,7 +266,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             get_texture_order_number(textures, state->hero_item_number[ITEM__CELL]),
             colors->none,
             1.0f,
-            vec2i(32, 120 + 74),
+            vec2i(32, 120 + 100),
             2
             );
 
@@ -260,7 +275,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.dynamite,
             colors->none,
             1.0f,
-            vec2i(10, 194 + 74),
+            vec2i(10, 194 + 100),
             4
             );
         draw_texture_at_screen_pos(
@@ -268,7 +283,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE]),
             colors->none,
             1.0f,
-            vec2i(32, 194 + 74),
+            vec2i(32, 194 + 100),
             2
             );
 
@@ -277,7 +292,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.gemstone,
             colors->none,
             1.0f,
-            vec2i(10, 268 + 74),
+            vec2i(10, 268 + 100),
             4
             );
         draw_texture_at_screen_pos(
@@ -285,7 +300,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE]),
             colors->none,
             1.0f,
-            vec2i(32, 268 + 74),
+            vec2i(32, 268 + 100),
             2
             );
     }
@@ -308,7 +323,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             object_texture,
             colors->none,
             1.0f,
-            vec2i(10, 600 + 150),
+            vec2i(10, 600 + 50),
             4
             );
     }
@@ -326,7 +341,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             object_texture,
             colors->none,
             1.0f,
-            vec2i(10, 600 + 150),
+            vec2i(10, 600 + 50),
             4
             );
     }
@@ -343,7 +358,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 fonts->font_30,
                 colors->white,
                 1.0f,
-                vec2i(10,550 + 150),
+                vec2i(10,550 + 50),
                 1
                 );
 
@@ -382,7 +397,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                                 1.0f,
                                 vec2i(
                                     138 + 10 * (i+1) + 64 * i,
-                                    600 + 10 * j + 64 * j + 150
+                                    600 + 10 * j + 64 * j + 50
                                     ),
                                 2
                                 );
@@ -405,7 +420,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             fonts->font_30,
             colors->white,
             1.0f,
-            vec2i(10,550 + 150),
+            vec2i(10,550 + 50),
             1
             );
 
@@ -419,7 +434,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             skill_texture,
             colors->none,
             1.0f,
-            vec2i(148,600 + 150),
+            vec2i(148,600 + 50),
             4
             );
     }
@@ -435,7 +450,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             fonts->font_30,
             colors->white,
             1.0f,
-            vec2i(10,550 + 150),
+            vec2i(10,550 + 50),
             1
             );
 
@@ -449,7 +464,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             skill_texture,
             colors->none,
             1.0f,
-            vec2i(148,600 + 150),
+            vec2i(148,600 + 50),
             4
             );
     }
@@ -480,7 +495,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     texture,
                     colors->none,
                     1.0f,
-                    vec2i(1050 + 100, 600 + 150),
+                    vec2i(1050 + 100, 600 + 50),
                     2
                     );
             }
@@ -493,7 +508,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     fonts->font_30,
                     colors->white,
                     1.0f,
-                    vec2i(900 + 100,550 + 150),
+                    vec2i(900 + 100,550 + 50),
                     1
                     );
 
@@ -505,7 +520,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     texture,
                     colors->none,
                     1.0f,
-                    vec2i(900 + 100, 600 + 150),
+                    vec2i(900 + 100, 600 + 50),
                     2
                     );
 
@@ -516,7 +531,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         texture_outline,
                         colors->green,
                         1.0f,
-                        vec2i(900 + 100, 600 + 150),
+                        vec2i(900 + 100, 600 + 50),
                         2
                         );
                 }
@@ -528,7 +543,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         texture_outline,
                         colors->red,
                         1.0f,
-                        vec2i(900 + 100, 600 + 150),
+                        vec2i(900 + 100, 600 + 50),
                         2
                         );
                 }

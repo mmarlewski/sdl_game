@@ -1,4 +1,5 @@
 #include "../inc/game.h"
+#include <SDL2/SDL_video.h>
 
 void init_sdl (Window** window, Renderer** renderer)
 {
@@ -106,23 +107,56 @@ void draw_rectangle (Renderer* renderer, Vec2f start, Vec2f dims)
     SDL_RenderDrawRectF (renderer, &rect);
 }
 
+Window* window;
+Renderer* renderer;
+Input input;
+State state;
+
+Textures textures;
+Sounds sounds;
+Musics musics;
+Colors colors;
+Fonts fonts;
+
+int prev_time = 0;
+int curr_time = 0;
+float delta_time = 0.0f;
+
+// for Emscripten
+static void mainloop()
+{
+    if (!state.is_game_running)
+    {
+        destroy_textures(&textures);
+        destroy_sounds(&sounds);
+        destroy_musics(&musics);
+        destroy_colors(&colors);
+        destroy_fonts(&fonts);
+        destroy_sdl (window, renderer);
+
+        #ifdef __EMSCRIPTEN__
+        emscripten_cancel_main_loop();
+        #else
+        exit(0);
+        #endif
+    }
+
+    prev_time = curr_time;
+    curr_time = SDL_GetPerformanceCounter ();
+    delta_time = (float)(curr_time - prev_time) / SDL_GetPerformanceFrequency ();
+    if (delta_time < FPS_CAP_IN_MILISECONDS)
+    {
+        SDL_Delay (FPS_CAP_IN_MILISECONDS - delta_time);
+    }
+    state.delta_time = delta_time;
+
+    update_input (&input);
+    update_state (&input, &state, delta_time, &textures, &sounds, &musics, &colors);
+    render (renderer, &state, &input, &textures, &colors, &fonts);
+}
+
 int main (int argc, char* argv[])
 {
-    Window* window;
-    Renderer* renderer;
-    Input input;
-    State state;
-
-    Textures textures;
-    Sounds sounds;
-    Musics musics;
-    Colors colors;
-    Fonts fonts;
-
-    int prev_time = 0;
-    int curr_time = 0;
-    float delta_time = 0.0f;
-
     init_sdl (&window, &renderer);
     init_input (&input);
 
@@ -134,30 +168,11 @@ int main (int argc, char* argv[])
 
     init_state (&state, &textures, &sounds, &musics, &colors);
 
-    while (state.is_game_running)
-    {
-        prev_time = curr_time;
-        curr_time = SDL_GetPerformanceCounter ();
-        delta_time = (float)(curr_time - prev_time) / SDL_GetPerformanceFrequency ();
-        if (delta_time < FPS_CAP_IN_MILISECONDS)
-        {
-            SDL_Delay (FPS_CAP_IN_MILISECONDS - delta_time);
-        }
-
-        // game loop
-
-        update_input (&input);
-        update_state (&input, &state, delta_time, &textures, &sounds, &musics, &colors);
-        render (renderer, &state, &input, &textures, &colors, &fonts);
-    }
-
-    destroy_textures(&textures);
-    destroy_sounds(&sounds);
-    destroy_musics(&musics);
-    destroy_colors(&colors);
-    destroy_fonts(&fonts);
-
-    destroy_sdl (window, renderer);
+    #ifdef __EMSCRIPTEN__
+    emscripten_set_main_loop(mainloop, 0, 1);
+    #else
+    while (1) { mainloop(); }
+    #endif
 
     return 0;
 }

@@ -281,6 +281,7 @@ Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_colo
 
     animation->is_finished = 0;
     animation->type = ANIMATION__CHANGE_BACKGROUND_COLOR;
+    animation->change_background_color.time = 0.0f;
     animation->change_background_color.from_color = from_color;
     animation->change_background_color.to_color = to_color;
     animation->change_background_color.seconds = seconds;

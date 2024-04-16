@@ -2,6 +2,8 @@
 #define COMMON_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 #include <SDL2/SDL.h>
@@ -10,6 +12,10 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 
 // printf("here ok \n");
 
@@ -32,7 +38,7 @@ typedef TTF_Font Font;
 // defines
 
 #define SCREEN_WIDTH 1300
-#define SCREEN_HEIGHT 900
+#define SCREEN_HEIGHT 800
 
 #define FPS_CAP 60.0f
 #define FPS_CAP_IN_MILISECONDS (1000.0f / FPS_CAP)

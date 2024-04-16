@@ -18,6 +18,8 @@
 #include "../inc/sounds.h"
 #include "../inc/musics.h"
 #include "../inc/colors.h"
+#include "../inc/font.h"
+#include "../inc/fonts.h"
 #include "../inc/augmentation.h"
 #include "../inc/item.h"
 #include "../inc/room.h"
@@ -50,6 +52,7 @@ typedef struct
 {
     int is_game_running;
     float time;
+    float delta_time;
     int gamestate;
     float timer;
     Vec3i background_color;
