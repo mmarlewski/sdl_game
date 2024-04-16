@@ -4,6 +4,34 @@
 
 void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
+    // game over
+
+    if(state->gamestate == GAMESTATE__GAME_OVER)
+    {
+        SDL_SetRenderDrawColor(
+            renderer,
+            colors->red.x,
+            colors->red.y,
+            colors->red.z,
+            255
+            );
+        SDL_RenderClear(renderer);
+    }
+
+    // game won
+
+    if(state->gamestate == GAMESTATE__GAME_WON)
+    {
+        SDL_SetRenderDrawColor(
+            renderer,
+            colors->orange.x,
+            colors->orange.y,
+            colors->orange.z,
+            255
+            );
+        SDL_RenderClear(renderer);
+    }
+
     // fps
 
     // char fps_text[100];
