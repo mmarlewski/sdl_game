@@ -18,6 +18,10 @@ typedef struct
     Vec3i ally_background;
     Vec3i enemy_background;
 
+    Vec3i game_start_background;
+    Vec3i game_over_background;
+    Vec3i game_won_background;
+
     Vec3i grey;
     Vec3i black;
     Vec3i white;

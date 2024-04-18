@@ -89,6 +89,8 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     middle_world_iso_pos.y += TILE_LENGTH * 0.5f;
     state->camera_world_pos = middle_world_iso_pos;
 
+    remove_all_list_elements(state->room_list, 1);
+
     create_level(state);
 
     Room* room = get_room(state, "7_2");
@@ -110,6 +112,15 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__CELL] = 0;
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
+
+    // state->hero_item_number[ITEM__CELL] = 1;
+    // state->hero_item_number[ITEM__DYNAMITE] = 1;
+    // state->hero_item_number[ITEM__GEMSTONE] = 1;
+
+    for(int body_part = 1; body_part < BODY_PART__COUNT; body_part++)
+    {
+        state->hero_body_part_augmentation[body_part] = AUGMENTATION__NONE;
+    }
 
     // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
@@ -463,6 +474,7 @@ char* get_gamestate_in_game_name(int gamestate)
         case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "-enemy turn-";      break;
         case GAMESTATE__ENEMY_MOVING:               name = "-enemy turn-";      break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "-enemy turn-";      break;
+        case GAMESTATE__GAME_START:                 name = "game prototype"; break;
         case GAMESTATE__GAME_OVER:                  name = "game over";         break;
         case GAMESTATE__GAME_WON:                   name = "game won";          break;
         default: break;
@@ -489,6 +501,7 @@ char* get_gamestate_debug_name(int gamestate)
         case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "enemy pause before move";   break;
         case GAMESTATE__ENEMY_MOVING:               name = "enemy moving";              break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "enemy pause before target"; break;
+        case GAMESTATE__GAME_START:                 name = "game start";                 break;
         case GAMESTATE__GAME_OVER:                  name = "game over";                 break;
         case GAMESTATE__GAME_WON:                   name = "game won";                  break;
         default: break;

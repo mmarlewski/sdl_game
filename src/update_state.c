@@ -3,6 +3,60 @@
 
 void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
+    if(state->gamestate == GAMESTATE__GAME_START)
+    {
+        if(input->was_mouse_left && !input->is_mouse_left &&
+        state->mouse_screen_pos.x >= 600 &&
+        state->mouse_screen_pos.x <= 600 + 128 &&
+        state->mouse_screen_pos.y >= 300 &&
+        state->mouse_screen_pos.y <= 300 + 64)
+        {
+            init_state(
+                state,
+                textures,
+                sounds,
+                musics,
+                colors
+                );
+        }
+    }
+
+    if(state->gamestate == GAMESTATE__GAME_OVER)
+    {
+        if(input->was_mouse_left && !input->is_mouse_left &&
+        state->mouse_screen_pos.x >= 600 &&
+        state->mouse_screen_pos.x <= 600 + 128 &&
+        state->mouse_screen_pos.y >= 300 &&
+        state->mouse_screen_pos.y <= 300 + 64)
+        {
+            init_state(
+                state,
+                textures,
+                sounds,
+                musics,
+                colors
+                );
+        }
+    }
+
+    if(state->gamestate == GAMESTATE__GAME_WON)
+    {
+        if(input->was_mouse_left && !input->is_mouse_left &&
+        state->mouse_screen_pos.x >= 600 &&
+        state->mouse_screen_pos.x <= 600 + 128 &&
+        state->mouse_screen_pos.y >= 300 &&
+        state->mouse_screen_pos.y <= 300 + 64)
+        {
+            init_state(
+                state,
+                textures,
+                sounds,
+                musics,
+                colors
+                );
+        }
+    }
+
     // quit
 
     if(input->is_quit)
@@ -344,309 +398,6 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                             }
                         }
                     }
-                }
-            }
-
-            if(input->was_key[KEY__Q] && !input->is_key[KEY__Q])
-            {
-                if(state->curr_ally->skill_list->size >= 1)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 0);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__W] && !input->is_key[KEY__W])
-            {
-                if(state->curr_ally->skill_list->size >= 2)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 1);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__E] && !input->is_key[KEY__E])
-            {
-                if(state->curr_ally->skill_list->size >= 3)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 2);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__R] && !input->is_key[KEY__R])
-            {
-                if(state->curr_ally->skill_list->size >= 4)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 3);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__T] && !input->is_key[KEY__T])
-            {
-                if(state->curr_ally->skill_list->size >= 5)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 4);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__Y] && !input->is_key[KEY__Y])
-            {
-                if(state->curr_ally->skill_list->size >= 6)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 5);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__U] && !input->is_key[KEY__U])
-            {
-                if(state->curr_ally->skill_list->size >= 7)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 6);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__I] && !input->is_key[KEY__I])
-            {
-                if(state->curr_ally->skill_list->size >= 8)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 7);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__O] && !input->is_key[KEY__O])
-            {
-                if(state->curr_ally->skill_list->size >= 9)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 8);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__P] && !input->is_key[KEY__P])
-            {
-                if(state->curr_ally->skill_list->size >= 10)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 9);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__A] && !input->is_key[KEY__A])
-            {
-                if(state->curr_ally->skill_list->size >= 11)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 10);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__S] && !input->is_key[KEY__S])
-            {
-                if(state->curr_ally->skill_list->size >= 12)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 11);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__D] && !input->is_key[KEY__D])
-            {
-                if(state->curr_ally->skill_list->size >= 13)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 12);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__F] && !input->is_key[KEY__F])
-            {
-                if(state->curr_ally->skill_list->size >= 14)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 13);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__G] && !input->is_key[KEY__G])
-            {
-                if(state->curr_ally->skill_list->size >= 15)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 14);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__H] && !input->is_key[KEY__H])
-            {
-                if(state->curr_ally->skill_list->size >= 16)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 15);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__J] && !input->is_key[KEY__J])
-            {
-                if(state->curr_ally->skill_list->size >= 17)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 16);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__K] && !input->is_key[KEY__K])
-            {
-                if(state->curr_ally->skill_list->size >= 18)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 17);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__L] && !input->is_key[KEY__L])
-            {
-                if(state->curr_ally->skill_list->size >= 19)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 18);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__Z] && !input->is_key[KEY__Z])
-            {
-                if(state->curr_ally->skill_list->size >= 20)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 19);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__X] && !input->is_key[KEY__X])
-            {
-                if(state->curr_ally->skill_list->size >= 21)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 20);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__C] && !input->is_key[KEY__C])
-            {
-                if(state->curr_ally->skill_list->size >= 22)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 21);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__V] && !input->is_key[KEY__V])
-            {
-                if(state->curr_ally->skill_list->size >= 23)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 22);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__B] && !input->is_key[KEY__B])
-            {
-                if(state->curr_ally->skill_list->size >= 24)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 23);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__N] && !input->is_key[KEY__N])
-            {
-                if(state->curr_ally->skill_list->size >= 25)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 24);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-            if(input->was_key[KEY__M] && !input->is_key[KEY__M])
-            {
-                if(state->curr_ally->skill_list->size >= 26)
-                {
-                    ListElem* list_elem = get_nth_list_element(state->curr_ally->skill_list, 25);
-                    if(list_elem != 0)
-                    {
-                        skill = (int) list_elem->data;
-                    }
-                }
-            }
-
-            // do nothing
-            if(input->was_key[KEY__0] && !input->is_key[KEY__0])
-            {
-                if(state->curr_ally->object->action_points > 0)
-                {
-                    state->curr_ally->object->action_points -= 1;
-
-                    state->selected_tilemap_pos = vec2i(-1, -1);
-
-                    execute_action_sequence(state, state->ally_action_sequence, textures, sounds, musics, colors);
-
-                    change_gamestate(state, GAMESTATE__ALLY_EXECUTING_SKILL);
-                    break;
                 }
             }
 

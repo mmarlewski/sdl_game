@@ -1007,6 +1007,8 @@ void load_textures_hud (Renderer* renderer, Textures_Hud* hud)
     hud->gemstone = load_texture_from_filepath(renderer, "./res/hud/gemstone.png");
 
     hud->end_turn = load_texture_from_filepath(renderer, "./res/hud/end_turn.png");
+    hud->start_again = load_texture_from_filepath(renderer, "./res/hud/start_again.png");
+    hud->start_game = load_texture_from_filepath(renderer, "./res/hud/start_game.png");
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");
 }
 void destroy_textures_hud (Textures_Hud* hud)

@@ -990,6 +990,8 @@ typedef struct
     Texture* gemstone;
 
     Texture* end_turn;
+    Texture* start_again;
+    Texture* start_game;
     Texture* bar_part;
 
 } Textures_Hud;

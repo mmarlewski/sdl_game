@@ -168,6 +168,8 @@ int main (int argc, char* argv[])
 
     init_state (&state, &textures, &sounds, &musics, &colors);
 
+    state.gamestate = GAMESTATE__GAME_START;
+
     #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(mainloop, 0, 1);
     #else

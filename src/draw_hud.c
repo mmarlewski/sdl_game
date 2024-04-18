@@ -4,18 +4,68 @@
 
 void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
+    // game start
+
+    if(state->gamestate == GAMESTATE__GAME_START)
+    {
+        SDL_SetRenderDrawColor(
+            renderer,
+            colors->game_start_background.x,
+            colors->game_start_background.y,
+            colors->game_start_background.z,
+            255
+            );
+        SDL_RenderClear(renderer);
+
+        draw_font_at_screen_pos(
+            "Fallen Stalactite",
+            renderer,
+            fonts->stepalange_150,
+            colors->white,
+            1.0f,
+            vec2i(200,100),
+            1
+            );
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.start_game,
+            colors->none,
+            1.0f,
+            vec2i(600, 300),
+            2.0f
+            );
+    }
+
     // game over
 
     if(state->gamestate == GAMESTATE__GAME_OVER)
     {
         SDL_SetRenderDrawColor(
             renderer,
-            colors->red.x,
-            colors->red.y,
-            colors->red.z,
+            colors->game_over_background.x,
+            colors->game_over_background.y,
+            colors->game_over_background.z,
             255
             );
         SDL_RenderClear(renderer);
+
+        draw_font_at_screen_pos(
+            "Game Over",
+            renderer,
+            fonts->stepalange_100,
+            colors->white,
+            1.0f,
+            vec2i(450,100),
+            1
+            );
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.start_again,
+            colors->none,
+            1.0f,
+            vec2i(600, 300),
+            2.0f
+            );
     }
 
     // game won
@@ -24,12 +74,30 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     {
         SDL_SetRenderDrawColor(
             renderer,
-            colors->orange.x,
-            colors->orange.y,
-            colors->orange.z,
+            colors->game_won_background.x,
+            colors->game_won_background.y,
+            colors->game_won_background.z,
             255
             );
         SDL_RenderClear(renderer);
+
+        draw_font_at_screen_pos(
+            "You Won!",
+            renderer,
+            fonts->stepalange_100,
+            colors->white,
+            1.0f,
+            vec2i(500,100),
+            1
+            );
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.start_again,
+            colors->none,
+            1.0f,
+            vec2i(600, 300),
+            2.0f
+            );
     }
 
     // fps
@@ -48,17 +116,22 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     // gamestate
 
-    char* gamestate_text = get_gamestate_in_game_name(state->gamestate);
+    if(state->gamestate != GAMESTATE__GAME_START &&
+    state->gamestate != GAMESTATE__GAME_OVER &&
+    state->gamestate != GAMESTATE__GAME_WON)
+    {
+        char* gamestate_text = get_gamestate_in_game_name(state->gamestate);
 
-    draw_font_at_screen_pos(
-        gamestate_text,
-        renderer,
-        fonts->font_50,
-        colors->white,
-        1.0f,
-        vec2i(600 - strlen(gamestate_text) * 10,10),
-        1
-        );
+        draw_font_at_screen_pos(
+            gamestate_text,
+            renderer,
+            fonts->bit_operator_50,
+            colors->white,
+            1.0f,
+            vec2i(600 - strlen(gamestate_text) * 10,10),
+            1
+            );
+    }
 
     // ap bar
 
@@ -261,7 +334,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             draw_font_at_screen_pos(
                 get_augmentation_name(mouse_augmentation),
                 renderer,
-                fonts->font_30,
+                fonts->bit_operator_30,
                 colors->white,
                 1.0f,
                 vec2i(10,180),
@@ -383,7 +456,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             draw_font_at_screen_pos(
                 get_in_game_name_from_object_type(state->curr_ally->object->type),
                 renderer,
-                fonts->font_30,
+                fonts->bit_operator_30,
                 colors->white,
                 1.0f,
                 vec2i(10,550 + 50),
@@ -445,7 +518,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         draw_font_at_screen_pos(
             get_in_game_skill_name(skill),
             renderer,
-            fonts->font_30,
+            fonts->bit_operator_30,
             colors->white,
             1.0f,
             vec2i(10,550 + 50),
@@ -475,7 +548,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         draw_font_at_screen_pos(
             get_in_game_skill_name(skill),
             renderer,
-            fonts->font_30,
+            fonts->bit_operator_30,
             colors->white,
             1.0f,
             vec2i(10,550 + 50),
@@ -533,7 +606,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 draw_font_at_screen_pos(
                     get_in_game_name_from_object_type(object->type),
                     renderer,
-                    fonts->font_30,
+                    fonts->bit_operator_30,
                     colors->white,
                     1.0f,
                     vec2i(900 + 100,550 + 50),
@@ -579,13 +652,10 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         }
     }
 
-    // attack order
+    // end turn
 
-    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
-    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
-    state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
-    state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
+    state->enemy_list->size > 0)
     {
         draw_texture_at_screen_pos(
             renderer,
@@ -595,7 +665,16 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(1200 - 64 - 10 + 100, 10),
             2
             );
+    }
 
+    // attack order
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+    state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
+    state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
+    {
         int go_on = 1;
         for(int i = 1; i < 10 && go_on; i++)
         {
