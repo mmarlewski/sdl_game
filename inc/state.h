@@ -244,7 +244,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy);
 void update_enemy_attack_dir4(State* state, Enemy* enemy);
 void update_enemy_attack_targets(State* state, Enemy* enemy);
 
-char* get_gamestate_in_game_name(int gamestate);
 char* get_gamestate_debug_name(int gamestate);
 
 void hero_add_augmentation(State* state, int augmentation);

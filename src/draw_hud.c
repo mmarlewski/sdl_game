@@ -120,7 +120,34 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     state->gamestate != GAMESTATE__GAME_OVER &&
     state->gamestate != GAMESTATE__GAME_WON)
     {
-        char* gamestate_text = get_gamestate_in_game_name(state->gamestate);
+        char* gamestate_text = "";
+
+        switch(state->gamestate)
+        {
+            case GAMESTATE__ALLY_CHOOSING_SKILL:
+            {
+                if(state->curr_ally->object->action_points > 0)
+                {
+                    gamestate_text = "choose skill";
+                }
+                else
+                {
+                    gamestate_text = "end turn !";
+                }
+            }
+            break;
+            case GAMESTATE__ALLY_CHOOSING_TARGET_1:     gamestate_text = "choose target"; break;
+            case GAMESTATE__ALLY_CHOOSING_TARGET_2:     gamestate_text = "choose target"; break;
+            case GAMESTATE__ALLY_EXECUTING_ANIMATION:   gamestate_text = ""; break;
+            case GAMESTATE__ALLY_EXECUTING_SKILL:       gamestate_text = ""; break;
+            case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:  gamestate_text = "-enemy turn-"; break;
+            case GAMESTATE__ENEMY_EXECUTING_ANIMATION:  gamestate_text = "-enemy turn-"; break;
+            case GAMESTATE__ENEMY_EXECUTING_ATTACK:     gamestate_text = "-enemy turn-"; break;
+            case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    gamestate_text = "-enemy turn-"; break;
+            case GAMESTATE__ENEMY_MOVING:               gamestate_text = "-enemy turn-"; break;
+            case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  gamestate_text = "-enemy turn-"; break;
+            default: break;
+        }
 
         draw_font_at_screen_pos(
             gamestate_text,
@@ -152,6 +179,12 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
                 {
                     int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
+                    if(state->curr_ally_skill == SKILL__MOVE ||
+                    state->curr_ally_skill == SKILL__MOVE_FLOATING ||
+                    state->curr_ally_skill == SKILL__MOVE_FLYING)
+                    {
+                        curr_skill_cost = state->ally_move_distance;
+                    }
                     if(i < curr_ally_ap - curr_skill_cost) character = '#';
                     else if(i < curr_ally_ap) character = '-';
                 }

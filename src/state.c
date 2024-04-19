@@ -113,9 +113,9 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    // state->hero_item_number[ITEM__CELL] = 1;
-    // state->hero_item_number[ITEM__DYNAMITE] = 1;
-    // state->hero_item_number[ITEM__GEMSTONE] = 1;
+    // state->hero_item_number[ITEM__CELL] = 5;
+    // state->hero_item_number[ITEM__DYNAMITE] = 5;
+    // state->hero_item_number[ITEM__GEMSTONE] = 5;
 
     for(int body_part = 1; body_part < BODY_PART__COUNT; body_part++)
     {
@@ -127,7 +127,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -454,33 +454,6 @@ void execute_action_sequence(State* state, Action* action_sequence, Textures* te
     action_sequence->is_finished = 0;
 
     start_action(state, action_sequence, action_sequence, textures, sounds, musics, colors);
-}
-
-char* get_gamestate_in_game_name(int gamestate)
-{
-    char* name = "";
-
-    switch(gamestate)
-    {
-        case GAMESTATE__NONE:                       name = "---";               break;
-        case GAMESTATE__ALLY_CHOOSING_SKILL:        name = "choose skill";      break;
-        case GAMESTATE__ALLY_CHOOSING_TARGET_1:     name = "choose target";     break;
-        case GAMESTATE__ALLY_CHOOSING_TARGET_2:     name = "choose target";     break;
-        case GAMESTATE__ALLY_EXECUTING_ANIMATION:   name = "";                  break;
-        case GAMESTATE__ALLY_EXECUTING_SKILL:       name = "";                  break;
-        case GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK:  name = "-enemy turn-";      break;
-        case GAMESTATE__ENEMY_EXECUTING_ANIMATION:  name = "-enemy turn-";      break;
-        case GAMESTATE__ENEMY_EXECUTING_ATTACK:     name = "-enemy turn-";      break;
-        case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "-enemy turn-";      break;
-        case GAMESTATE__ENEMY_MOVING:               name = "-enemy turn-";      break;
-        case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "-enemy turn-";      break;
-        case GAMESTATE__GAME_START:                 name = "game prototype"; break;
-        case GAMESTATE__GAME_OVER:                  name = "game over";         break;
-        case GAMESTATE__GAME_WON:                   name = "game won";          break;
-        default: break;
-    }
-
-    return name;
 }
 
 char* get_gamestate_debug_name(int gamestate)

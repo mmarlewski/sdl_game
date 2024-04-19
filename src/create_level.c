@@ -253,7 +253,17 @@ void create_level(State* state)
         new_object(OBJECT__WALL_OBSIDIAN),
         vec2i(6,8)
         );
+    room_add_object_at(
+        room_0_0,
+        new_object(OBJECT__WALL_OBSIDIAN),
+        vec2i(6,6)
+        );
 
+    room_add_object_at(
+        room_0_0,
+        new_object(OBJECT__VENDING_CELL),
+        vec2i(4,5)
+        );
     room_add_object_at(
         room_0_0,
         new_object(OBJECT__LEVER_STONE_UNPOWERED),
@@ -1155,7 +1165,7 @@ void create_level(State* state)
         );
     room_add_object_at(
         room_0_3,
-        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+        new_object(OBJECT__CRATE_CELL_ITEM),
         vec2i(6,8)
         );
     room_add_object_at(
@@ -1619,6 +1629,27 @@ void create_level(State* state)
     destroy_list(room_0_5_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_0_5,
+        new_object(OBJECT__PILLAR),
+        vec2i(1,1)
+        );
+    room_add_object_at(
+        room_0_5,
+        new_object(OBJECT__PILLAR),
+        vec2i(3,1)
+        );
+    room_add_object_at(
+        room_0_5,
+        new_object(OBJECT__PILLAR),
+        vec2i(4,1)
+        );
+    room_add_object_at(
+        room_0_5,
+        new_object(OBJECT__PILLAR),
+        vec2i(5,1)
+        );
 
     room_add_object_at(
         room_0_5,
@@ -5063,12 +5094,7 @@ void create_level(State* state)
     room_change_floor_at(
         room_3_0,
         FLOOR__COINS,
-        vec2i(6,8)
-        );
-    room_change_floor_at(
-        room_3_0,
-        FLOOR__COINS,
-        vec2i(8,8)
+        vec2i(7,8)
         );
     room_change_floor_at(
         room_3_0,
@@ -5113,12 +5139,7 @@ void create_level(State* state)
     room_change_floor_at(
         room_3_0,
         FLOOR__COINS,
-        vec2i(1,1)
-        );
-    room_change_floor_at(
-        room_3_0,
-        FLOOR__COINS,
-        vec2i(3,1)
+        vec2i(2,1)
         );
     room_change_floor_at(
         room_3_0,
@@ -9372,7 +9393,7 @@ void create_level(State* state)
     room_add_object_at(
         room_6_0,
         new_object(OBJECT__MINIBOT_ENEMY_CELL),
-        vec2i(7,5)
+        vec2i(7,7)
         );
 
     // passages

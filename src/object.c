@@ -1914,15 +1914,15 @@ char* get_in_game_name_from_object_type(int object_type)
 
         case OBJECT__OBSTACLE:                         name = "obstacle"; break;
 
-        case OBJECT__VENDING_CELL:                     name = "vending cell"; break;
-        case OBJECT__VENDING_CELL_ITEM:                name = "vending cell"; break;
-        case OBJECT__VENDING_CELL_DAMAGED:             name = "vending cell"; break;
-        case OBJECT__VENDING_CELL_DAMAGED_ITEM:        name = "vending cell"; break;
+        case OBJECT__VENDING_CELL:                     name = "vending machine"; break;
+        case OBJECT__VENDING_CELL_ITEM:                name = "vending machine"; break;
+        case OBJECT__VENDING_CELL_DAMAGED:             name = "vending machine"; break;
+        case OBJECT__VENDING_CELL_DAMAGED_ITEM:        name = "vending machine"; break;
 
-        case OBJECT__VENDING_DYNAMITE:                 name = "vending dynamite"; break;
-        case OBJECT__VENDING_DYNAMITE_ITEM:            name = "vending dynamite"; break;
-        case OBJECT__VENDING_DYNAMITE_DAMAGED:         name = "vending dynamite"; break;
-        case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:    name = "vending dynamite"; break;
+        case OBJECT__VENDING_DYNAMITE:                 name = "vending machine"; break;
+        case OBJECT__VENDING_DYNAMITE_ITEM:            name = "vending machine"; break;
+        case OBJECT__VENDING_DYNAMITE_DAMAGED:         name = "vending machine"; break;
+        case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:    name = "vending machine"; break;
 
         case OBJECT__BARREL:                           name = "barrel"; break;
 
