@@ -90,6 +90,23 @@ void render (Renderer* renderer, State* state, Input* input, Textures* textures,
     SDL_SetRenderDrawColor (renderer, state->background_color.x,state->background_color.y,state->background_color.z, 255);
 	SDL_RenderClear (renderer);
 
+    for(int i = 0; i < 5; i++)
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            int scale = 8;
+
+            draw_texture_at_screen_pos(
+                renderer,
+                state->background_texture,
+                state->background_color,
+                1.0f,
+                vec2i(64 * scale * i, 64 * scale * j),
+                scale
+                );
+        }
+    }
+
     draw_gamemap(renderer, state, textures, colors, fonts);
     draw_hud(renderer, state, textures, colors, fonts);
 

@@ -68,13 +68,13 @@ void add_walls_around_room(Room* room, int wall_type, List* exclude_tilemap_pos_
     }
 }
 
-void create_level(State* state)
+void create_level(State* state, Textures* textures)
 {
     ///////////
     // room_0_0
     ///////////
 
-    Room* room_0_0 = new_empty_room("0_0");
+    Room* room_0_0 = new_empty_room("0_0", textures->background_obsidian);
     add_room(
         state,
         room_0_0
@@ -316,7 +316,7 @@ void create_level(State* state)
     // room_0_1
     ///////////
 
-    Room* room_0_1 = new_empty_room("0_1");
+    Room* room_0_1 = new_empty_room("0_1", textures->background_gold);
     add_room(
         state,
         room_0_1
@@ -590,7 +590,7 @@ void create_level(State* state)
     // room_0_2
     ///////////
 
-    Room* room_0_2 = new_empty_room("0_2");
+    Room* room_0_2 = new_empty_room("0_2", textures->background_gold);
     add_room(
         state,
         room_0_2
@@ -997,7 +997,7 @@ void create_level(State* state)
     // room_0_3
     ///////////
 
-    Room* room_0_3 = new_empty_room("0_3");
+    Room* room_0_3 = new_empty_room("0_3", textures->background_gold);
     add_room(
         state,
         room_0_3
@@ -1289,7 +1289,7 @@ void create_level(State* state)
     // room_0_4
     ///////////
 
-    Room* room_0_4 = new_empty_room("0_4");
+    Room* room_0_4 = new_empty_room("0_4", textures->background_gold);
     add_room(
         state,
         room_0_4
@@ -1446,7 +1446,7 @@ void create_level(State* state)
     // room_0_5
     ///////////
 
-    Room* room_0_5 = new_empty_room("0_5");
+    Room* room_0_5 = new_empty_room("0_5", textures->background_marble);
     add_room(
         state,
         room_0_5
@@ -1692,7 +1692,7 @@ void create_level(State* state)
     // room_1_0
     ///////////
 
-    Room* room_1_0 = new_empty_room("1_0");
+    Room* room_1_0 = new_empty_room("1_0", textures->background_obsidian);
     add_room(
         state,
         room_1_0
@@ -1952,7 +1952,7 @@ void create_level(State* state)
     // room_1_1
     ///////////
 
-    Room* room_1_1 = new_empty_room("1_1");
+    Room* room_1_1 = new_empty_room("1_1", textures->background_gold);
     add_room(
         state,
         room_1_1
@@ -2360,7 +2360,7 @@ void create_level(State* state)
     // room_1_2
     ///////////
 
-    Room* room_1_2 = new_empty_room("1_2");
+    Room* room_1_2 = new_empty_room("1_2", textures->background_gold);
     add_room(
         state,
         room_1_2
@@ -2707,7 +2707,7 @@ void create_level(State* state)
     // room_1_3
     ///////////
 
-    Room* room_1_3 = new_empty_room("1_3");
+    Room* room_1_3 = new_empty_room("1_3", textures->background_gold);
     add_room(
         state,
         room_1_3
@@ -3006,7 +3006,7 @@ void create_level(State* state)
     // room_1_4
     ///////////
 
-    Room* room_1_4 = new_empty_room("1_4");
+    Room* room_1_4 = new_empty_room("1_4", textures->background_gold);
     add_room(
         state,
         room_1_4
@@ -3352,7 +3352,7 @@ void create_level(State* state)
     // room_1_5
     ///////////
 
-    Room* room_1_5 = new_empty_room("1_5");
+    Room* room_1_5 = new_empty_room("1_5", textures->background_marble);
     add_room(
         state,
         room_1_5
@@ -3562,7 +3562,7 @@ void create_level(State* state)
     // room_2_0
     ///////////
 
-    Room* room_2_0 = new_empty_room("2_0");
+    Room* room_2_0 = new_empty_room("2_0", textures->background_obsidian);
     add_room(
         state,
         room_2_0
@@ -3792,7 +3792,7 @@ void create_level(State* state)
     // room_2_1
     ///////////
 
-    Room* room_2_1 = new_empty_room("2_1");
+    Room* room_2_1 = new_empty_room("2_1", textures->background_metal);
     add_room(
         state,
         room_2_1
@@ -4017,7 +4017,7 @@ void create_level(State* state)
     // room_2_2
     ///////////
 
-    Room* room_2_2 = new_empty_room("2_2");
+    Room* room_2_2 = new_empty_room("2_2", textures->background_metal);
     add_room(
         state,
         room_2_2
@@ -4278,7 +4278,7 @@ void create_level(State* state)
     // room_2_3
     ///////////
 
-    Room* room_2_3 = new_empty_room("2_3");
+    Room* room_2_3 = new_empty_room("2_3", textures->background_stone);
     add_room(
         state,
         room_2_3
@@ -4520,7 +4520,7 @@ void create_level(State* state)
     // room_2_4
     ///////////
 
-    Room* room_2_4 = new_empty_room("2_4");
+    Room* room_2_4 = new_empty_room("2_4", textures->background_stone);
     add_room(
         state,
         room_2_4
@@ -4876,7 +4876,7 @@ void create_level(State* state)
     // room_2_5
     ///////////
 
-    Room* room_2_5 = new_empty_room("2_5");
+    Room* room_2_5 = new_empty_room("2_5", textures->background_marble);
     add_room(
         state,
         room_2_5
@@ -5081,7 +5081,7 @@ void create_level(State* state)
     // room_3_0
     ///////////
 
-    Room* room_3_0 = new_empty_room("3_0");
+    Room* room_3_0 = new_empty_room("3_0", textures->background_obsidian);
     add_room(
         state,
         room_3_0
@@ -5377,7 +5377,7 @@ void create_level(State* state)
     // room_3_1
     ///////////
 
-    Room* room_3_1 = new_empty_room("3_1");
+    Room* room_3_1 = new_empty_room("3_1", textures->background_metal);
     add_room(
         state,
         room_3_1
@@ -5614,7 +5614,7 @@ void create_level(State* state)
     // room_3_2
     ///////////
 
-    Room* room_3_2 = new_empty_room("3_2");
+    Room* room_3_2 = new_empty_room("3_2", textures->background_metal);
     add_room(
         state,
         room_3_2
@@ -5755,7 +5755,7 @@ void create_level(State* state)
     // room_3_3
     ///////////
 
-    Room* room_3_3 = new_empty_room("3_3");
+    Room* room_3_3 = new_empty_room("3_3", textures->background_stone);
     add_room(
         state,
         room_3_3
@@ -5962,7 +5962,7 @@ void create_level(State* state)
     // room_3_4
     ///////////
 
-    Room* room_3_4 = new_empty_room("3_4");
+    Room* room_3_4 = new_empty_room("3_4", textures->background_stone);
     add_room(
         state,
         room_3_4
@@ -6264,7 +6264,7 @@ void create_level(State* state)
     // room_3_5
     ///////////
 
-    Room* room_3_5 = new_empty_room("3_5");
+    Room* room_3_5 = new_empty_room("3_5", textures->background_marble);
     add_room(
         state,
         room_3_5
@@ -6423,7 +6423,7 @@ void create_level(State* state)
     // room_4_0
     ///////////
 
-    Room* room_4_0 = new_empty_room("4_0");
+    Room* room_4_0 = new_empty_room("4_0", textures->background_obsidian);
     add_room(
         state,
         room_4_0
@@ -6587,7 +6587,7 @@ void create_level(State* state)
     // room_4_1
     ///////////
 
-    Room* room_4_1 = new_empty_room("4_1");
+    Room* room_4_1 = new_empty_room("4_1", textures->background_metal);
     add_room(
         state,
         room_4_1
@@ -6824,7 +6824,7 @@ void create_level(State* state)
     // room_4_2
     ///////////
 
-    Room* room_4_2 = new_empty_room("4_2");
+    Room* room_4_2 = new_empty_room("4_2", textures->background_metal);
     add_room(
         state,
         room_4_2
@@ -6991,7 +6991,7 @@ void create_level(State* state)
     // room_4_3
     ///////////
 
-    Room* room_4_3 = new_empty_room("4_3");
+    Room* room_4_3 = new_empty_room("4_3", textures->background_stone);
     add_room(
         state,
         room_4_3
@@ -7190,7 +7190,7 @@ void create_level(State* state)
     // room_4_4
     ///////////
 
-    Room* room_4_4 = new_empty_room("4_4");
+    Room* room_4_4 = new_empty_room("4_4", textures->background_stone);
     add_room(
         state,
         room_4_4
@@ -7509,7 +7509,7 @@ void create_level(State* state)
     // room_4_5
     ///////////
 
-    Room* room_4_5 = new_empty_room("4_5");
+    Room* room_4_5 = new_empty_room("4_5", textures->background_marble);
     add_room(
         state,
         room_4_5
@@ -7850,7 +7850,7 @@ void create_level(State* state)
     // room_5_0
     ///////////
 
-    Room* room_5_0 = new_empty_room("5_0");
+    Room* room_5_0 = new_empty_room("5_0", textures->background_obsidian);
     add_room(
         state,
         room_5_0
@@ -8039,7 +8039,7 @@ void create_level(State* state)
     // room_5_1
     ///////////
 
-    Room* room_5_1 = new_empty_room("5_1");
+    Room* room_5_1 = new_empty_room("5_1", textures->background_metal);
     add_room(
         state,
         room_5_1
@@ -8267,7 +8267,7 @@ void create_level(State* state)
     // room_5_2
     ///////////
 
-    Room* room_5_2 = new_empty_room("5_2");
+    Room* room_5_2 = new_empty_room("5_2", textures->background_metal);
     add_room(
         state,
         room_5_2
@@ -8417,7 +8417,7 @@ void create_level(State* state)
     // room_5_3
     ///////////
 
-    Room* room_5_3 = new_empty_room("5_3");
+    Room* room_5_3 = new_empty_room("5_3", textures->background_stone);
     add_room(
         state,
         room_5_3
@@ -8655,7 +8655,7 @@ void create_level(State* state)
     // room_5_4
     ///////////
 
-    Room* room_5_4 = new_empty_room("5_4");
+    Room* room_5_4 = new_empty_room("5_4", textures->background_stone);
     add_room(
         state,
         room_5_4
@@ -8911,7 +8911,7 @@ void create_level(State* state)
     // room_5_5
     ///////////
 
-    Room* room_5_5 = new_empty_room("5_5");
+    Room* room_5_5 = new_empty_room("5_5", textures->background_marble);
     add_room(
         state,
         room_5_5
@@ -9178,7 +9178,7 @@ void create_level(State* state)
     // room_6_0
     ///////////
 
-    Room* room_6_0 = new_empty_room("6_0");
+    Room* room_6_0 = new_empty_room("6_0", textures->background_obsidian);
     add_room(
         state,
         room_6_0
@@ -9433,7 +9433,7 @@ void create_level(State* state)
     // room_6_1
     ///////////
 
-    Room* room_6_1 = new_empty_room("6_1");
+    Room* room_6_1 = new_empty_room("6_1", textures->background_rock);
     add_room(
         state,
         room_6_1
@@ -9654,7 +9654,7 @@ void create_level(State* state)
     // room_6_2
     ///////////
 
-    Room* room_6_2 = new_empty_room("6_2");
+    Room* room_6_2 = new_empty_room("6_2", textures->background_rock);
     add_room(
         state,
         room_6_2
@@ -9862,7 +9862,7 @@ void create_level(State* state)
     // room_6_3
     ///////////
 
-    Room* room_6_3 = new_empty_room("6_3");
+    Room* room_6_3 = new_empty_room("6_3", textures->background_rock);
     add_room(
         state,
         room_6_3
@@ -10126,7 +10126,7 @@ void create_level(State* state)
     // room_6_4
     ///////////
 
-    Room* room_6_4 = new_empty_room("6_4");
+    Room* room_6_4 = new_empty_room("6_4", textures->background_rock);
     add_room(
         state,
         room_6_4
@@ -10330,7 +10330,7 @@ void create_level(State* state)
     // room_6_5
     ///////////
 
-    Room* room_6_5 = new_empty_room("6_5");
+    Room* room_6_5 = new_empty_room("6_5", textures->background_marble);
     add_room(
         state,
         room_6_5
@@ -10570,7 +10570,7 @@ void create_level(State* state)
     // room_7_0
     ///////////
 
-    Room* room_7_0 = new_empty_room("7_0");
+    Room* room_7_0 = new_empty_room("7_0", textures->background_obsidian);
     add_room(
         state,
         room_7_0
@@ -10792,7 +10792,7 @@ void create_level(State* state)
     // room_7_1
     ///////////
 
-    Room* room_7_1 = new_empty_room("7_1");
+    Room* room_7_1 = new_empty_room("7_1", textures->background_rock);
     add_room(
         state,
         room_7_1
@@ -11007,7 +11007,7 @@ void create_level(State* state)
     // room_7_2
     ///////////
 
-    Room* room_7_2 = new_empty_room("7_2");
+    Room* room_7_2 = new_empty_room("7_2", textures->background_rock);
     add_room(
         state,
         room_7_2
@@ -11217,7 +11217,7 @@ void create_level(State* state)
     // room_7_3
     ///////////
 
-    Room* room_7_3 = new_empty_room("7_3");
+    Room* room_7_3 = new_empty_room("7_3", textures->background_rock);
     add_room(
         state,
         room_7_3
@@ -11382,7 +11382,7 @@ void create_level(State* state)
     // room_7_4
     ///////////
 
-    Room* room_7_4 = new_empty_room("7_4");
+    Room* room_7_4 = new_empty_room("7_4", textures->background_rock);
     add_room(
         state,
         room_7_4
@@ -11781,7 +11781,7 @@ void create_level(State* state)
     // room_7_5
     ///////////
 
-    Room* room_7_5 = new_empty_room("7_5");
+    Room* room_7_5 = new_empty_room("7_5", textures->background_marble);
     add_room(
         state,
         room_7_5

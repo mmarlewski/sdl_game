@@ -11,6 +11,7 @@ typedef struct
     char* name;
     int floor_array[TILEMAP_LENGTH][TILEMAP_LENGTH];
     List* object_list;
+    Texture* background_texture;
 
 } Room;
 
@@ -23,7 +24,7 @@ typedef struct
 
 } Passage;
 
-Room* new_empty_room(char* name);
+Room* new_empty_room(char* name, Texture* background_texture);
 void destroy_room(Room* room);
 int room_get_floor_at(Room* room, Vec2i tilemap_pos);
 void room_change_floor_at(Room* room, int floor, Vec2i tilemap_pos);

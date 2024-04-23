@@ -2,7 +2,7 @@
 #include "../inc/object.h"
 #include "../inc/floor.h"
 
-Room* new_empty_room(char* name)
+Room* new_empty_room(char* name, Texture* background_texture)
 {
     Room* room = malloc(sizeof(*room));
 
@@ -15,6 +15,7 @@ Room* new_empty_room(char* name)
         }
     }
     room->object_list = new_list((void (*)(void *))&destroy_object);
+    room->background_texture = background_texture;
 
     return room;
 }

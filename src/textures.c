@@ -1019,6 +1019,12 @@ void destroy_textures_hud (Textures_Hud* hud)
 void load_textures (Renderer* renderer, Textures* textures)
 {
     textures->shadow = load_texture_from_filepath (renderer, "./res/shadow.png");
+    textures->background_rock = load_texture_from_filepath (renderer, "./res/background_rock.png");
+    textures->background_stone = load_texture_from_filepath (renderer, "./res/background_stone.png");
+    textures->background_metal = load_texture_from_filepath (renderer, "./res/background_metal.png");
+    textures->background_marble = load_texture_from_filepath (renderer, "./res/background_marble.png");
+    textures->background_obsidian = load_texture_from_filepath (renderer, "./res/background_obsidian.png");
+    textures->background_gold = load_texture_from_filepath (renderer, "./res/background_gold.png");
 
     load_textures_floor(renderer,&textures->floor);
     load_textures_object(renderer,&textures->object);

@@ -50,6 +50,7 @@ void skill_on_use(
                                 state->curr_ally->object,
                                 0);
                             set_curr_room(state, room);
+                            state->background_texture = state->curr_room->background_texture;
                             room_add_object_at(
                                 room,
                                 state->curr_ally->object,
@@ -148,6 +149,7 @@ void skill_on_use(
                                     state->curr_ally->object,
                                     0);
                                 set_curr_room(state, room);
+                                state->background_texture = state->curr_room->background_texture;
                                 room_add_object_at(
                                     room,
                                     state->curr_ally->object,

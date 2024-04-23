@@ -226,13 +226,13 @@ char* get_in_game_skill_name(int skill)
 
         case SKILL__KILL_AROUND:                name = "kill around"; break;
 
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "environment"; break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "environment"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:         name = "environment"; break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "environment"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "environment"; break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "environment"; break;
-        case SKILL__ENVIRONMENT_CONV_BELT:          name = "environment"; break;
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "stalactite falling !"; break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "enemy emerge !"; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIT:         name = "enemy emerge !"; break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "enemy emerge !"; break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "enemy emerge !"; break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "floor collapsing !"; break;
+        case SKILL__ENVIRONMENT_CONV_BELT:          name = "conveyor belt !"; break;
 
         default: break;
     }

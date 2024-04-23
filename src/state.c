@@ -9,6 +9,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
     state->background_color = colors->ally_background;
+    state->background_texture = textures->background_rock;
 
     state->camera_world_pos = vec2f(0, 0);
     state->camera_zoom = 2.0f;
@@ -91,7 +92,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
 
     remove_all_list_elements(state->room_list, 1);
 
-    create_level(state);
+    create_level(state, textures);
 
     Room* room = get_room(state, "7_2");
 
@@ -104,6 +105,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
         state,
         room
         );
+    state->background_texture = state->curr_room->background_texture;
     add_new_list_element_to_list_end(
         state->visited_room_list,
         room
@@ -127,7 +129,7 @@ void init_state (State* state, Textures* textures, Sounds* sounds, Musics* music
     // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);

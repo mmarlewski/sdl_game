@@ -1002,6 +1002,12 @@ void destroy_textures_hud (Textures_Hud* hud);
 typedef struct
 {
     Texture* shadow;
+    Texture* background_rock;
+    Texture* background_stone;
+    Texture* background_metal;
+    Texture* background_marble;
+    Texture* background_obsidian;
+    Texture* background_gold;
 
     Textures_Floor floor;
     Textures_Object object;
