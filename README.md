@@ -1,5 +1,7 @@
 
-# SDL game prototype
+# Fallen Stalactite
+
+https://marcin12345.itch.io/fallen-stalactite
 
 ### About
 - Explore an open world consisting of 48 unique rooms.
@@ -28,9 +30,6 @@
 - Into the Breach : telegraphed attack to take advantage of enemy actions and 8x8 grid rooms
 - metroidvanias : approach to level exploration (certain level chunks inaccessible without appropriate skill, new skills gained from objects spread throughout the level)
 - immersive sims : interacting with the environment in systemic ways (meltable objects can be melted with cell item by the player or with lasers by enemy turrets, water and lava tiles accessible to floating enemies or hero with floating ability, pits can be crossed by jumping, being thrown by enemy, pulling yourself to another object with chain or by flying with flying ability)
-
-### To do
-- make it run on Windows
 
 ### Recordings
 
