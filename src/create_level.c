@@ -1830,32 +1830,32 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_1_0,
-        new_object(OBJECT__BARREL),
+        new_object(OBJECT__COLUMN),
         vec2i(3,2)
         );
     room_add_object_at(
         room_1_0,
-        new_object(OBJECT__BARREL),
+        new_object(OBJECT__COLUMN),
         vec2i(3,7)
         );
     room_add_object_at(
         room_1_0,
-        new_object(OBJECT__BARREL),
+        new_object(OBJECT__COLUMN),
         vec2i(2,3)
         );
     room_add_object_at(
         room_1_0,
-        new_object(OBJECT__BARREL),
+        new_object(OBJECT__COLUMN),
         vec2i(4,3)
         );
     room_add_object_at(
         room_1_0,
-        new_object(OBJECT__BARREL),
+        new_object(OBJECT__COLUMN),
         vec2i(2,6)
         );
     room_add_object_at(
         room_1_0,
-        new_object(OBJECT__BARREL),
+        new_object(OBJECT__COLUMN),
         vec2i(4,6)
         );
 
