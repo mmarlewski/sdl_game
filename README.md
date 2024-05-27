@@ -1,6 +1,8 @@
 
 # Fallen Stalactite
 
+![image](banner.png)
+
 https://marcin12345.itch.io/fallen-stalactite
 
 ### About
