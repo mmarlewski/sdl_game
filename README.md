@@ -1,7 +1,7 @@
 
 # Fallen Stalactite
 
-![image](banner.png)
+![image](logo.png)
 
 https://marcin12345.itch.io/fallen-stalactite
 
