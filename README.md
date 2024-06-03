@@ -18,19 +18,24 @@ https://marcin12345.itch.io/fallen-stalactite
 - Add new augmentations to your body to unlock new skills and skill synergies.
 - Decide between mutually exclusive augmentations and choose your way of approaching the world (jumping or floating on water, pushing or throwing objects, pulling  or putting items into far away objects, manipulating mechanical objects or teleporting freely in room).
 
-### How to run (Linux)
-- (project uses **make**, **gcc** and dynamically links to **SDL2**)
-- install SDL 2.0 (https://wiki.libsdl.org/SDL2/Installation)
-- clone repository
-- run ``` make && ./sdl_game ```
-
-### How to run (Web)
-- install and activate emsdk (https://emscripten.org/docs/getting_started/downloads.html)
-- run script in 'emscripten.txt' to compile project into html, js and wasm files and then run in the browser (change 'firefox' to your specific browser)
+### How to run
+- you will need to install SDL2, SDL2_image, SDL2_mixer and SDL2_ttf (from a package manager or from source)
+- SDL source code: https://github.com/libsdl-org/SDL
+- general installation guide: https://wiki.libsdl.org/SDL2/Installation
+##### Linux
+- tutorial video: https://www.youtube.com/watch?v=P3_xhDIP7bc&list=PLvv0ScY6vfd-p1gSnbQhY7vMe2rng0IL0&index=2
+- run: `gcc ./src/*.c  -lm -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -o sdl_game && ./sdl_game`
+- there is also Makefile available: `make && ./sdl_game`
+##### Windows
+- install MinGW: https://sourceforge.net/projects/mingw-w64
+- tutorial video: https://www.youtube.com/watch?v=DQ-NBjBFLJ4&list=PLvv0ScY6vfd-p1gSnbQhY7vMe2rng0IL0&index=3
+##### Web
+- install and activate emsdk: https://emscripten.org/docs/getting_started/downloads.html
+- run: `emcc -sWASM=1 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' -sUSE_SDL_MIXER=2 -sUSE_SDL_TTF=2 -o index.html --shell-file template.html ./src/*.c --preload-file ./res --use-preload-plugins -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=1gb -O0 && emrun --browser firefox index.html` (change 'firefox' to your specific browser)
 
 ### Inspired by
 - Into the Breach : telegraphed attack to take advantage of enemy actions and 8x8 grid rooms
-- metroidvanias : approach to level exploration (certain level chunks inaccessible without appropriate skill, new skills gained from objects spread throughout the level)
+- metroidvanias : approach to level exploration (certain level chunks inaccessible without appropriate power-ups, new power-ups spread throughout the level)
 - immersive sims : interacting with the environment in systemic ways (meltable objects can be melted with cell item by the player or with lasers by enemy turrets, water and lava tiles accessible to floating enemies or hero with floating ability, pits can be crossed by jumping, being thrown by enemy, pulling yourself to another object with chain or by flying with flying ability)
 
 ### Recordings
