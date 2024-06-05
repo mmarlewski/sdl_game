@@ -15,7 +15,7 @@ Node* new_node(Vec2i tilemap_pos)
 {
     Node* node = malloc(sizeof(*node));
 
-    node->parent = 0;
+    node->parent = NULL;
     node->tilemap_pos = tilemap_pos;
     node->g_val = 0;
     node->h_val = 0;
@@ -31,7 +31,7 @@ void destroy_node(Node* node)
 int is_node_tilemap_pos_in_list(List* list, Node* node)
 {
     Vec2i tilemap_pos = node->tilemap_pos;
-    for(ListElem* curr_elem = list->head; curr_elem != 0; curr_elem = curr_elem->next)
+    for(ListElem* curr_elem = list->head; curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Node* curr_node = (Node*) curr_elem->data;
         Vec2i curr_tilemap_pos = curr_node->tilemap_pos;
@@ -45,7 +45,7 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
 {
     if(!is_tilemap_in_bounds(start_tilemap_pos) ||
        !is_tilemap_in_bounds(end_tilemap_pos) ||
-       room_get_object_at(state->curr_room, end_tilemap_pos) != 0) return;
+       room_get_object_at(state->curr_room, end_tilemap_pos) != NULL) return;
 
     List* open = new_list((void(*)(void*))destroy_node);
     List* closed = new_list((void(*)(void*))destroy_node);
@@ -53,18 +53,18 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
     add_new_list_element_to_list_end(open, new_node(start_tilemap_pos));
 
     int count = 0;
-    int found = 0;
-    Node* curr_node = 0;
+    int found = FALSE;
+    Node* curr_node = NULL;
     while(open->size > 0)
     {
         count++;
         if(count > 100)
         {
-            found = 0;
+            found = FALSE;
             break;
         }
         curr_node = (Node*) open->head->data;
-        for(ListElem* elem = open->head; elem != 0; elem = elem->next)
+        for(ListElem* elem = open->head; elem != NULL; elem = elem->next)
         {
             Node* node = (Node*) elem->data;
             if(node->g_val + node->h_val < curr_node->g_val + curr_node->h_val)
@@ -94,14 +94,14 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
         Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, DIR4__LEFT, 1);
         add_new_list_element_to_list_end(neighbors, new_node(left_tilemap_pos));
 
-        for(ListElem* elem = neighbors->head; elem != 0; elem = elem->next)
+        for(ListElem* elem = neighbors->head; elem != NULL; elem = elem->next)
         {
             Node* node = (Node*) elem->data;
             Vec2i tilemap_pos = node->tilemap_pos;
             int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
             if(!is_node_tilemap_pos_in_list(closed, node) &&
-               room_get_object_at(state->curr_room, tilemap_pos) == 0)
+               room_get_object_at(state->curr_room, tilemap_pos) == NULL)
             {
                 if((is_flying && is_floor_traversable_for_flying(floor)) ||
                    (is_floating && is_floor_traversable_for_floating(floor)) ||
@@ -134,7 +134,7 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
     if(!found) return;
 
     Node* path_node = curr_node;
-    while(path_node != 0)
+    while(path_node != NULL)
     {
         Vec2i* new_tilemap_pos = new_vec2i_from_vec2i(path_node->tilemap_pos);
         add_new_list_element_to_list_end(path, new_tilemap_pos);

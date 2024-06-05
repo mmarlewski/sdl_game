@@ -4,7 +4,7 @@ Animation* new_animation_none()
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__NONE;
 
     return animation;
@@ -14,11 +14,11 @@ Animation* new_animation_sequence()
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__SEQUENCE;
 
     animation->sequence.animation_list = new_list((void(*)(void*)) & destroy_animation);
-    animation->sequence.curr_animation_list_elem = 0;
+    animation->sequence.curr_animation_list_elem = NULL;
 
     return animation;
 }
@@ -56,7 +56,7 @@ Animation* new_animation_simultaneous()
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__SIMULTANEOUS;
 
     animation->simultaneous.animation_list = new_list((void(*)(void*)) & destroy_animation);
@@ -97,11 +97,11 @@ Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, Vec2f 
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_LINE;
 
     animation->move_sprite_in_gamemap_in_line.time = 0.0f;
-    animation->move_sprite_in_gamemap_in_line.sprite = 0;
+    animation->move_sprite_in_gamemap_in_line.sprite = NULL;
 
     animation->move_sprite_in_gamemap_in_line.texture = texture;
     animation->move_sprite_in_gamemap_in_line.from_gamemap_pos = from_gamemap_pos;
@@ -115,11 +115,11 @@ Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, Vec2f 
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH;
 
     animation->move_sprite_in_gamemap_in_arch.time = 0.0f;
-    animation->move_sprite_in_gamemap_in_arch.sprite = 0;
+    animation->move_sprite_in_gamemap_in_arch.sprite = NULL;
 
     animation->move_sprite_in_gamemap_in_arch.texture = texture;
     animation->move_sprite_in_gamemap_in_arch.from_gamemap_pos = from_gamemap_pos;
@@ -134,11 +134,11 @@ Animation* new_animation_show_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__SHOW_SPRITE_IN_GAMEMAP;
 
     animation->show_sprite_in_gamemap.time = 0.0f;
-    animation->show_sprite_in_gamemap.sprite = 0;
+    animation->show_sprite_in_gamemap.sprite = NULL;
 
     animation->show_sprite_in_gamemap.texture = texture;
     animation->show_sprite_in_gamemap.gamemap_pos = gamemap_pos;
@@ -151,11 +151,11 @@ Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, Vec2f gamema
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__ASCEND_SPRITE_IN_GAMEMAP;
 
     animation->ascend_sprite_in_gamemap.time = 0.0f;
-    animation->ascend_sprite_in_gamemap.sprite = 0;
+    animation->ascend_sprite_in_gamemap.sprite = NULL;
 
     animation->ascend_sprite_in_gamemap.texture = texture;
     animation->ascend_sprite_in_gamemap.gamemap_pos = gamemap_pos;
@@ -169,11 +169,11 @@ Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, Vec2f gamem
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__DESCEND_SPRITE_IN_GAMEMAP;
 
     animation->descend_sprite_in_gamemap.time = 0.0f;
-    animation->descend_sprite_in_gamemap.sprite = 0;
+    animation->descend_sprite_in_gamemap.sprite = NULL;
 
     animation->descend_sprite_in_gamemap.texture = texture;
     animation->descend_sprite_in_gamemap.gamemap_pos = gamemap_pos;
@@ -187,11 +187,11 @@ Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__FALL_SPRITE_IN_GAMEMAP;
 
     animation->fall_sprite_in_gamemap.time = 0.0f;
-    animation->fall_sprite_in_gamemap.sprite = 0;
+    animation->fall_sprite_in_gamemap.sprite = NULL;
 
     animation->fall_sprite_in_gamemap.texture = texture;
     animation->fall_sprite_in_gamemap.gamemap_pos = gamemap_pos;
@@ -205,7 +205,7 @@ Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE;
 
     animation->move_camera_in_world_in_line.time = 0.0f;
@@ -221,7 +221,7 @@ Animation* new_animation_move_camera_in_world_in_arch(Vec2f from_world_pos, Vec2
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH;
 
     animation->move_camera_in_world_in_arch.time = 0.0f;
@@ -237,7 +237,7 @@ Animation* new_animation_move_camera_in_gamemap_in_line(Vec2f from_gamemap_pos, 
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_LINE;
 
     animation->move_camera_in_gamemap_in_line.time = 0.0f;
@@ -252,7 +252,7 @@ Animation* new_animation_move_camera_in_gamemap_in_arch(Vec2f from_gamemap_pos, 
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH;
 
     animation->move_camera_in_gamemap_in_arch.time = 0.0f;
@@ -268,7 +268,7 @@ Animation* new_animation_play_sound(Sound* sound)
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__PLAY_SOUND;
     animation->play_sound.sound = sound;
 
@@ -279,7 +279,7 @@ Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_colo
 {
     Animation* animation = malloc(sizeof(*animation));
 
-    animation->is_finished = 0;
+    animation->is_finished = FALSE;
     animation->type = ANIMATION__CHANGE_BACKGROUND_COLOR;
     animation->change_background_color.time = 0.0f;
     animation->change_background_color.from_color = from_color;

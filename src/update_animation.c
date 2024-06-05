@@ -8,7 +8,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
     {
         case ANIMATION__NONE:
         {
-            animation->is_finished = 1;
+            animation->is_finished = TRUE;
         }
         break;
         case ANIMATION__SEQUENCE:
@@ -24,7 +24,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
                 ListElem* next_elem = curr_elem->next;
                 animation->sequence.curr_animation_list_elem = next_elem;
 
-                if(next_elem != 0)
+                if(next_elem != NULL)
                 {
                     Animation* next_animation = (Animation*) next_elem->data;
                     start_animation(state, next_animation, textures, sounds, musics, colors);
@@ -36,7 +36,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
         break;
         case ANIMATION__SIMULTANEOUS:
         {
-            int are_all_animations_finished = 1;
+            int are_all_animations_finished = TRUE;
             List* animation_to_be_removed_list = new_list(0);
 
             for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem; curr_elem = curr_elem->next)
@@ -50,7 +50,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
                 else
                 {
                     update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
-                    are_all_animations_finished = 0;
+                    are_all_animations_finished = FALSE;
                 }
             }
 
@@ -270,7 +270,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
         break;
         case ANIMATION__PLAY_SOUND:
         {
-            animation->is_finished = 1;
+            animation->is_finished = TRUE;
         }
         break;
         case ANIMATION__CHANGE_BACKGROUND_COLOR:

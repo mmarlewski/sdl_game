@@ -310,7 +310,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             scale
         );
 
-        int is_mouse_on_texture = 0;
+        int is_mouse_on_texture = FALSE;
         int mouse_augmentation = AUGMENTATION__NONE;
 
         if(state->mouse_screen_pos.x >= 10 &&
@@ -318,7 +318,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 42 &&
            state->mouse_screen_pos.y <= 42 + 64)
         {
-            is_mouse_on_texture = 1;
+            is_mouse_on_texture = TRUE;
             mouse_augmentation = left_hand_augmentation;
         }
         if(state->mouse_screen_pos.x >= 84 &&
@@ -326,7 +326,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 10 &&
            state->mouse_screen_pos.y <= 10 + 64)
         {
-            is_mouse_on_texture = 1;
+            is_mouse_on_texture = TRUE;
             mouse_augmentation = head_augmentation;
         }
         if(state->mouse_screen_pos.x >= 158 &&
@@ -334,7 +334,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 42 &&
            state->mouse_screen_pos.y <= 42 + 64)
         {
-            is_mouse_on_texture = 1;
+            is_mouse_on_texture = TRUE;
             mouse_augmentation = right_hand_augmentation;
         }
         if(state->mouse_screen_pos.x >= 10 &&
@@ -342,7 +342,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 116 &&
            state->mouse_screen_pos.y <= 116 + 64)
         {
-            is_mouse_on_texture = 1;
+            is_mouse_on_texture = TRUE;
             mouse_augmentation = left_leg_augmentation;
         }
         if(state->mouse_screen_pos.x >= 84 &&
@@ -350,7 +350,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 84 &&
            state->mouse_screen_pos.y <= 84 + 64)
         {
-            is_mouse_on_texture = 1;
+            is_mouse_on_texture = TRUE;
             mouse_augmentation = torso_augmentation;
         }
         if(state->mouse_screen_pos.x >= 158 &&
@@ -358,7 +358,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 116 &&
            state->mouse_screen_pos.y <= 116 + 64)
         {
-            is_mouse_on_texture = 1;
+            is_mouse_on_texture = TRUE;
             mouse_augmentation = right_leg_augmentation;
         }
 
@@ -510,7 +510,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                                 index
                             );
 
-                        if(skill_list_elem != 0)
+                        if(skill_list_elem != NULL)
                         {
                             int skill = (int) skill_list_elem->data;
 
@@ -519,7 +519,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                                 textures
                             );
 
-                            if(skill_texture == 0)
+                            if(skill_texture == NULL)
                             {
                                 skill_texture = textures->hud.no_augmentation;
                             }
@@ -634,7 +634,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 );
             }
 
-            if(object != 0)
+            if(object != NULL)
             {
                 draw_font_at_screen_pos(
                     get_in_game_name_from_object_type(object->type),
@@ -708,13 +708,13 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
        state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
        state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
     {
-        int go_on = 1;
+        int go_on = TRUE;
         for(int i = 1; i < 10 && go_on; i++)
         {
-            Object* object = 0;
+            Object* object = NULL;
 
             for(ListElem* curr_elem = state->enemy_list->head;
-                curr_elem != 0; curr_elem = curr_elem->next)
+                curr_elem != NULL; curr_elem = curr_elem->next)
             {
                 Enemy* curr_enemy = curr_elem->data;
 
@@ -724,9 +724,9 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 }
             }
 
-            if(object == 0)
+            if(object == NULL)
             {
-                go_on = 0;
+                go_on = FALSE;
             }
             else
             {

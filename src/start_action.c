@@ -16,14 +16,14 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             ListElem* curr_elem = action->sequence.action_list->head;
             action->sequence.curr_action_list_elem = curr_elem;
 
-            if(curr_elem != 0)
+            if(curr_elem != NULL)
             {
                 Action* curr_action = (Action*) curr_elem->data;
                 start_action(state, action, curr_action, textures, sounds, musics, colors);
             }
             else
             {
-                action->is_finished = 1;
+                action->is_finished = TRUE;
             }
         }
         break;
@@ -45,11 +45,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             action->move.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
-            if(action->move.object == 0 ||
+            if(action->move.object == NULL ||
                !is_tilemap_in_bounds(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)))
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -65,8 +65,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, crash);
 
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
             }
             else
             {
@@ -94,7 +94,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     floor_on_move_flying_start(state, sequence, action, floor);
                 }
 
-                action->move.object->is_visible = 0;
+                action->move.object->is_visible = FALSE;
             }
         }
         break;
@@ -103,11 +103,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->crash.object_crushing = room_get_object_at(state->curr_room, action->tilemap_pos);
             action->crash.object_crushed = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
 
-            if(action->crash.object_crushing == 0 ||
-               action->crash.object_crushed == 0)
+            if(action->crash.object_crushing == NULL ||
+               action->crash.object_crushed == NULL)
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -138,15 +138,15 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
 
-            action->crash.object_crushing->is_visible = 0;
+            action->crash.object_crushing->is_visible = FALSE;
         }
         break;
         case ACTION__FALL:
         {
-            if(action->fall.object == 0)
+            if(action->fall.object == NULL)
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -162,15 +162,15 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->animation = animation;
             add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
 
-            action->fall.object->is_visible = 0;
+            action->fall.object->is_visible = FALSE;
         }
         break;
         case ACTION__DEATH:
         {
-            if(action->death.object == 0)
+            if(action->death.object == NULL)
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -241,22 +241,22 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             action->throw.object_thrown = room_get_object_at(state->curr_room, action->tilemap_pos);
             action->throw.object_on_target = room_get_object_at(state->curr_room, target_tilemap_pos);
 
-            if(action->throw.object_on_target != 0 ||
+            if(action->throw.object_on_target != NULL ||
                !is_tilemap_in_bounds(target_tilemap_pos))
             {
                 Action* lift = new_action_lift(action->tilemap_pos, action->throw.dir4);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, lift);
 
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
-            if(action->throw.object_thrown == 0)
+            if(action->throw.object_thrown == NULL)
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -277,17 +277,17 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
 
-            action->throw.object_thrown->is_visible = 0;
+            action->throw.object_thrown->is_visible = FALSE;
         }
         break;
         case ACTION__LIFT:
         {
             action->lift.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
-            if(action->lift.object == 0)
+            if(action->lift.object == NULL)
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -305,15 +305,15 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
 
-            action->lift.object->is_visible = 0;
+            action->lift.object->is_visible = FALSE;
         }
         break;
         case ACTION__DROP:
         {
-            if(action->drop.object == 0)
+            if(action->drop.object == NULL)
             {
-                action->is_finished = 1;
-                action->is_finished_at_start = 1;
+                action->is_finished = TRUE;
+                action->is_finished_at_start = TRUE;
                 break;
             }
 
@@ -350,7 +350,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION__CHANGE_OBJECT:
         {
             Object* object = room_get_object_at(state->curr_room, action->tilemap_pos);
-            if(object != 0)
+            if(object != NULL)
             {
                 object->type = action->change_object.new_object_type;
             }
@@ -358,7 +358,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__ADD_OBJECT:
         {
-            if(action->add_object.new_object != 0)
+            if(action->add_object.new_object != NULL)
             {
                 room_add_object_at(
                     state->curr_room,
@@ -383,7 +383,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Object* melt_object = room_get_object_at(state->curr_room, action->tilemap_pos);
             int melt_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
-            if(melt_object != 0)
+            if(melt_object != NULL)
             {
                 object_on_melt(state, sequence, action, melt_object);
             }
@@ -398,7 +398,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Object* break_object = room_get_object_at(state->curr_room, action->tilemap_pos);
             int break_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
-            if(break_object != 0)
+            if(break_object != NULL)
             {
                 object_on_break(state, sequence, action, break_object);
             }
@@ -413,7 +413,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             Object* shake_object = room_get_object_at(state->curr_room, action->tilemap_pos);
             int shake_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
-            if(shake_object != 0)
+            if(shake_object != NULL)
             {
                 object_on_shake(state, sequence, action, shake_object);
             }

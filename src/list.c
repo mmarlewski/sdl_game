@@ -5,8 +5,8 @@ List* new_list(void(*destroy)(void* data))
     List* list = malloc(sizeof(*list));
 
     list->size = 0;
-    list->head = 0;
-    list->tail = 0;
+    list->head = NULL;
+    list->tail = NULL;
     list->destroy = destroy;
 
     return list;
@@ -25,23 +25,23 @@ void add_new_list_element_after_element(List* list, ListElem* element, void* dat
 
     if(list->size == 0)
     {
-        new_element->next = 0;
-        new_element->prev = 0;
+        new_element->next = NULL;
+        new_element->prev = NULL;
         list->head = new_element;
         list->tail = new_element;
     }
-    else if(element == 0)
+    else if(element == NULL)
     {
         list->head->prev = new_element;
         new_element->next = list->head;
-        new_element->prev = 0;
+        new_element->prev = NULL;
         list->head = new_element;
     }
     else
     {
         new_element->next = element->next;
         new_element->prev = element;
-        if(element->next == 0)
+        if(element->next == NULL)
         {
             list->tail = new_element;
         }
@@ -63,15 +63,15 @@ void add_new_list_element_before_element(List* list, ListElem* element, void* da
 
     if(list->size == 0)
     {
-        new_element->next = 0;
-        new_element->prev = 0;
+        new_element->next = NULL;
+        new_element->prev = NULL;
         list->head = new_element;
         list->tail = new_element;
     }
-    else if(element == 0)
+    else if(element == NULL)
     {
         list->tail->next = new_element;
-        new_element->next = 0;
+        new_element->next = NULL;
         new_element->prev = list->tail;
         list->tail = new_element;
     }
@@ -79,7 +79,7 @@ void add_new_list_element_before_element(List* list, ListElem* element, void* da
     {
         new_element->next = element;
         new_element->prev = element->prev;
-        if(element->prev == 0)
+        if(element->prev == NULL)
         {
             list->head = new_element;
         }
@@ -104,20 +104,20 @@ void remove_list_element(List* list, ListElem* element, int destroy_data)
     {
         list->head = element->next;
 
-        if(list->head == 0)
+        if(list->head == NULL)
         {
-            list->tail = 0;
+            list->tail = NULL;
         }
         else
         {
-            element->next->prev = 0;
+            element->next->prev = NULL;
         }
     }
     else
     {
         element->prev->next = element->next;
 
-        if(element->next == 0)
+        if(element->next == NULL)
         {
             list->tail = element->prev;
         }
@@ -127,7 +127,7 @@ void remove_list_element(List* list, ListElem* element, int destroy_data)
         }
     }
 
-    if(destroy_data && list->destroy != 0)
+    if(destroy_data && list->destroy != NULL)
     {
         list->destroy(element->data);
     }
@@ -151,19 +151,19 @@ void remove_list_element_of_data(List* list, void* data, int destroy_data)
 
 void remove_all_list_elements_after_element(List* list, ListElem* element, int destroy_data)
 {
-    if(element == 0) return;
+    if(element == NULL) return;
 
     ListElem* curr_element = element->next;
 
-    if(curr_element != 0)
+    if(curr_element != NULL)
     {
-        element->next = 0;
+        element->next = NULL;
         list->tail = element;
 
-        while(curr_element != 0)
+        while(curr_element != NULL)
         {
             ListElem* next_element = curr_element->next;
-            if(destroy_data && list->destroy != 0)
+            if(destroy_data && list->destroy != NULL)
             {
                 list->destroy(curr_element->data);
             }
@@ -178,10 +178,10 @@ void remove_all_list_elements(List* list, int destroy_data)
 {
     ListElem* curr_element = list->head;
 
-    while(curr_element != 0)
+    while(curr_element != NULL)
     {
         ListElem* next_element = curr_element->next;
-        if(destroy_data && list->destroy != 0)
+        if(destroy_data && list->destroy != NULL)
         {
             list->destroy(curr_element->data);
         }
@@ -190,13 +190,13 @@ void remove_all_list_elements(List* list, int destroy_data)
     }
 
     list->size = 0;
-    list->head = 0;
-    list->tail = 0;
+    list->head = NULL;
+    list->tail = NULL;
 }
 
 int is_element_in_list(List* list, ListElem* element)
 {
-    for(ListElem* elem = list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = list->head; elem != NULL; elem = elem->next)
     {
         if(elem == element) return 1;
     }
@@ -205,7 +205,7 @@ int is_element_in_list(List* list, ListElem* element)
 
 int is_data_in_list(List* list, void* data)
 {
-    for(ListElem* elem = list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = list->head; elem != NULL; elem = elem->next)
     {
         if(elem->data == data) return 1;
     }
@@ -216,18 +216,18 @@ void reverse_list(List* list)
 {
     if(list->size <= 1) return;
 
-    ListElem* prev_elem = 0;
+    ListElem* prev_elem = NULL;
     ListElem* curr_elem = list->head;
-    ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
+    ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (NULL);
 
-    while(curr_elem != 0)
+    while(curr_elem != NULL)
     {
         curr_elem->prev = next_elem;
         curr_elem->next = prev_elem;
 
         prev_elem = curr_elem;
         curr_elem = next_elem;
-        next_elem = (curr_elem) ? (curr_elem->next) : (0);
+        next_elem = (curr_elem) ? (curr_elem->next) : (NULL);
     }
 
     ListElem* temp = list->head;
@@ -240,7 +240,7 @@ ListElem* get_nth_list_element(List* list, int n)
     ListElem* list_elem = list->head;
     int count = 0;
 
-    while(list_elem != 0)
+    while(list_elem != NULL)
     {
         if(count == n)
         {
@@ -256,7 +256,7 @@ ListElem* get_nth_list_element(List* list, int n)
 
 ListElem* get_list_element_of_data(List* list, void* data)
 {
-    for(ListElem* elem = list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = list->head; elem != NULL; elem = elem->next)
     {
         if(elem->data == data) return elem;
     }
@@ -267,7 +267,7 @@ void print_list(List* list)
 {
     printf("printing list: %p of size: %i \n", list, list->size);
 
-    for(ListElem* element = list->head; element != 0; element = element->next)
+    for(ListElem* element = list->head; element != NULL; element = element->next)
     {
         printf("data: %p \n", element->data);
     }

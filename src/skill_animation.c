@@ -44,7 +44,7 @@ Animation* skill_get_animation(
             Object* object = target_2_object;
             int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
 
-            if(object != 0 && is_object_manipulatable(object))
+            if(object != NULL && is_object_manipulatable(object))
             {
                 skill_animation = object_on_manipulate_get_animation(
                     state,
@@ -265,7 +265,7 @@ Animation* skill_get_animation(
                 {
                     if(vec2i_equals(tilemap_pos, source_tilemap_pos))
                     {
-                        Texture* texture = 0;
+                        Texture* texture = NULL;
                         switch(skill)
                         {
                             case SKILL__DRAG_HOOK:
@@ -300,7 +300,7 @@ Animation* skill_get_animation(
                     }
                     else if(vec2i_equals(tilemap_pos, target_1_tilemap_pos))
                     {
-                        Texture* texture = 0;
+                        Texture* texture = NULL;
                         switch(skill)
                         {
                             case SKILL__DRAG_HOOK:
@@ -335,7 +335,7 @@ Animation* skill_get_animation(
                     }
                     else
                     {
-                        Texture* texture = 0;
+                        Texture* texture = NULL;
                         switch(skill)
                         {
                             case SKILL__DRAG_HOOK:
@@ -525,9 +525,9 @@ Animation* skill_get_animation(
         break;
         case SKILL__ENVIRONMENT_EMERGE_PIPE:
         {
-            if(target_2_object != 0 && target_2_object->type == OBJECT__PIPE)
+            if(target_2_object != NULL && target_2_object->type == OBJECT__PIPE)
             {
-                int is_able_to_emerge = 0;
+                int is_able_to_emerge = FALSE;
                 int emerge_dir4 = DIR4__NONE;
                 for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                 {
@@ -540,9 +540,9 @@ Animation* skill_get_animation(
                         state->curr_room,
                         tilemap_pos
                     );
-                    if(object == 0)
+                    if(object == NULL)
                     {
-                        is_able_to_emerge = 1;
+                        is_able_to_emerge = TRUE;
                         emerge_dir4 = dir4;
                     }
                 }

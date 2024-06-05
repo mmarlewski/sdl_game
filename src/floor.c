@@ -897,11 +897,11 @@ char* get_debug_name_from_floor(int floor)
 
 Texture* get_texture_1_from_floor_type(int type, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(type)
     {
-        case FLOOR__NONE:                      texture = 0; break;
+        case FLOOR__NONE:                      texture = NULL; break;
         case FLOOR__ROCK:                      texture = textures->floor.rock; break;
         case FLOOR__ROCK_CRACK_WATER:          texture = textures->floor.rock_crack_water; break;
         case FLOOR__ROCK_CRACK_LAVA:           texture = textures->floor.rock_crack_lava; break;
@@ -967,11 +967,11 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
 
 Texture* get_texture_2_from_floor_type(int type, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(type)
     {
-        case FLOOR__NONE:                      texture = 0; break;
+        case FLOOR__NONE:                      texture = NULL; break;
         case FLOOR__ROCK:                      texture = textures->floor.rock; break;
         case FLOOR__ROCK_CRACK_WATER:          texture = textures->floor.rock_crack_water; break;
         case FLOOR__ROCK_CRACK_LAVA:           texture = textures->floor.rock_crack_lava; break;

@@ -35,7 +35,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(is_floor_burrow(floor) && object == 0)
+                    if(is_floor_burrow(floor) && object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             possible_burrow_tilemap_pos_list,
@@ -125,7 +125,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
 
                     int score = 0;
 
-                    if((object == 0 || object == enemy->object) &&
+                    if((object == NULL || object == enemy->object) &&
                        is_floor_traversable_for_object(floor, enemy->object) &&
                        (enemy->object->type != OBJECT__SQUID || floor == FLOOR__WATER))
                     {
@@ -153,7 +153,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
 
                             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                             {
-                                int go_on = 1;
+                                int go_on = TRUE;
                                 for(int k = 1; k <= 5 && go_on; k++)
                                 {
                                     int mul = 1;
@@ -184,9 +184,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                         neighbor_tilemap_pos
                                     );
 
-                                    if(neighbor_object != 0)
+                                    if(neighbor_object != NULL)
                                     {
-                                        go_on = 0;
+                                        go_on = FALSE;
 
                                         if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 2 * mul;
 
@@ -237,12 +237,12 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
             // choose
 
             int top = 3;
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 0; i < top && go_on; i++)
             {
                 if(score_array[i] == 0)
                 {
-                    go_on = 0;
+                    go_on = FALSE;
                     top = i;
                 }
             }
@@ -287,7 +287,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                     {
                         for(int i = 0; i < path_pos_list->size; i++)
                         {
-                            ListElem* prev_elem = 0;
+                            ListElem* prev_elem = NULL;
                             ListElem* curr_elem = path_pos_list->head;
                             ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
 
@@ -295,9 +295,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                             Vec2i* curr_tilemap_pos = (curr_elem) ? (curr_elem->data) : (0);
                             Vec2i* next_tilemap_pos = (next_elem) ? (next_elem->data) : (0);
 
-                            while(curr_elem != 0)
+                            while(curr_elem != NULL)
                             {
-                                if(next_elem != 0)
+                                if(next_elem != NULL)
                                 {
                                     if(enemy_move_skill == SKILL__MOVE)
                                     {

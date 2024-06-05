@@ -16,7 +16,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         case ACTION__SEQUENCE:
         {
             remove_all_list_elements(action->sequence.action_list, 1);
-            action->sequence.curr_action_list_elem = 0;
+            action->sequence.curr_action_list_elem = NULL;
         }
         break;
         case ACTION__SIMULTANEOUS:
@@ -45,42 +45,42 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                 floor_on_move_flying_end(state, sequence, action, floor);
             }
 
-            action->move.object->is_visible = 1;
+            action->move.object->is_visible = TRUE;
         }
         break;
         case ACTION__CRASH:
         {
             Action* crushed_action_sequence = new_action_sequence();
             Object* crushed_object = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
-            if(crushed_object != 0)
+            if(crushed_object != NULL)
             {
                 object_on_crashed(state, crushed_action_sequence, action, crushed_object);
             }
 
             Action* crushing_action_sequence = new_action_sequence();
             Object* crushing_object = action->crash.object_crushing;
-            if(crushing_object != 0)
+            if(crushing_object != NULL)
             {
                 object_on_crashing(state, crushing_action_sequence, action, crushing_object);
             }
 
             add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
 
-            action->crash.object_crushing->is_visible = 1;
+            action->crash.object_crushing->is_visible = TRUE;
         }
         break;
         case ACTION__FALL:
         {
             add_action_after_curr_action_action_sequence(sequence, new_action_death(action->fall.object, action->tilemap_pos));
 
-            action->fall.object->is_visible = 0;
+            action->fall.object->is_visible = FALSE;
         }
         break;
         case ACTION__DEATH:
         {
             object_on_death(state, sequence, action, action->death.object);
 
-            action->death.object->is_to_be_removed = 1;
+            action->death.object->is_to_be_removed = TRUE;
         }
         break;
         case ACTION__BLOW_UP:
@@ -99,7 +99,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                     tilemap_pos
                 );
 
-                if(object != 0 && is_object_movable(object))
+                if(object != NULL && is_object_movable(object))
                 {
                     if(is_object_flying(object))
                     {
@@ -155,14 +155,14 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
 
             add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object_thrown, next_tilemap_pos, action->throw.dir4));
 
-            action->throw.object_thrown->is_visible = 1;
+            action->throw.object_thrown->is_visible = TRUE;
         }
         break;
         case ACTION__LIFT:
         {
             add_action_after_curr_action_action_sequence(sequence, new_action_drop(action->throw.object_thrown, action->tilemap_pos, action->throw.dir4));
 
-            action->throw.object_thrown->is_visible = 1;
+            action->throw.object_thrown->is_visible = TRUE;
         }
         break;
         case ACTION__DROP:
@@ -203,15 +203,15 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         break;
         case ACTION__REMOVE_OBJECT:
         {
-            if(action->remove_object.object_to_remove != 0)
+            if(action->remove_object.object_to_remove != NULL)
             {
-                action->remove_object.object_to_remove->is_to_be_removed = 1;
+                action->remove_object.object_to_remove->is_to_be_removed = TRUE;
             }
         }
         break;
         case ACTION__CHANGE_OBJECT_TILEMAP_POS:
         {
-            if(action->change_object_tilemap_pos.object != 0)
+            if(action->change_object_tilemap_pos.object != NULL)
             {
                 action->change_object_tilemap_pos.object->tilemap_pos =
                     action->change_object_tilemap_pos.new_tilemap_pos;

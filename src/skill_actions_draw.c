@@ -57,7 +57,7 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
-            Texture* above_texture = 0;
+            Texture* above_texture = NULL;
 
             switch(distance_info.dir4)
             {
@@ -94,7 +94,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__USE:
         {
-            if(target_2_object != 0 &&
+            if(target_2_object != NULL &&
                (is_object_station(target_2_object) ||
                 is_object_exit(target_2_object)))
             {
@@ -124,7 +124,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__MANIPULATION:
         {
-            if(target_2_object != 0 &&
+            if(target_2_object != NULL &&
                is_object_manipulatable(target_2_object))
             {
                 // actions
@@ -170,7 +170,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__TELEPORTATION:
         {
-            if(target_2_object == 0)
+            if(target_2_object == NULL)
             {
                 // draw effect
                 add_new_list_element_to_list_end(
@@ -188,7 +188,7 @@ void skill_get_actions_and_draw(
         case SKILL__MOVE_FLOATING:
         case SKILL__MOVE_FLYING:
         {
-            if(source_object != 0 && target_2_object == 0)
+            if(source_object != NULL && target_2_object == NULL)
             {
                 List* path_tilemap_pos_list = new_list(
                     (void(*)(void*))destroy_vec2i
@@ -206,7 +206,7 @@ void skill_get_actions_and_draw(
 
                 if(path_tilemap_pos_list->size > 0)
                 {
-                    ListElem* prev_elem = 0;
+                    ListElem* prev_elem = NULL;
                     ListElem* curr_elem = path_tilemap_pos_list->head;
                     ListElem* next_elem = (curr_elem) ? (curr_elem->next) : (0);
 
@@ -214,9 +214,9 @@ void skill_get_actions_and_draw(
                     Vec2i* curr_tilemap_pos = (curr_elem) ? (curr_elem->data) : (0);
                     Vec2i* next_tilemap_pos = (next_elem) ? (next_elem->data) : (0);
 
-                    while(curr_elem != 0)
+                    while(curr_elem != NULL)
                     {
-                        if(next_elem != 0)
+                        if(next_elem != NULL)
                         {
                             if(skill == SKILL__MOVE)
                             {
@@ -262,9 +262,9 @@ void skill_get_actions_and_draw(
                             }
                         }
 
-                        Texture* arrow_texture = 0;
+                        Texture* arrow_texture = NULL;
 
-                        if(prev_elem == 0)
+                        if(prev_elem == NULL)
                         {
                             arrow_texture = get_texture_arrow_thin_start(
                                 textures,
@@ -274,7 +274,7 @@ void skill_get_actions_and_draw(
                                 ).dir4
                             );
                         }
-                        else if(next_elem == 0)
+                        else if(next_elem == NULL)
                         {
                             arrow_texture = get_texture_arrow_thin_end(
                                 textures,
@@ -340,7 +340,7 @@ void skill_get_actions_and_draw(
         case SKILL__PICK_ITEM_CLOSE:
         case SKILL__PICK_ITEM_FAR:
         {
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // actions
                 object_on_pick_item(
@@ -420,7 +420,7 @@ void skill_get_actions_and_draw(
                 item_type = ITEM__GEMSTONE;
             }
 
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // actions
                 object_on_put_item(
@@ -482,7 +482,7 @@ void skill_get_actions_and_draw(
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Texture* dots_arch_texture = 0;
+                    Texture* dots_arch_texture = NULL;
                     if(distance_info.dir4 == DIR4__RIGHT ||
                        distance_info.dir4 == DIR4__LEFT)
                     {
@@ -522,7 +522,7 @@ void skill_get_actions_and_draw(
                 new_vec2i_from_vec2i(source_tilemap_pos)
             );
 
-            if(target_2_object != 0 &&
+            if(target_2_object != NULL &&
                is_object_meltable(target_2_object))
             {
                 // draw effect
@@ -555,7 +555,7 @@ void skill_get_actions_and_draw(
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Texture* dots_arch_texture = 0;
+                    Texture* dots_arch_texture = NULL;
                     if(distance_info.dir4 == DIR4__RIGHT ||
                        distance_info.dir4 == DIR4__LEFT)
                     {
@@ -595,7 +595,7 @@ void skill_get_actions_and_draw(
                 new_vec2i_from_vec2i(source_tilemap_pos)
             );
 
-            if(target_2_object != 0 &&
+            if(target_2_object != NULL &&
                is_object_breakable(target_2_object))
             {
                 // draw effect
@@ -628,7 +628,7 @@ void skill_get_actions_and_draw(
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Texture* dots_arch_texture = 0;
+                    Texture* dots_arch_texture = NULL;
                     if(distance_info.dir4 == DIR4__RIGHT ||
                        distance_info.dir4 == DIR4__LEFT)
                     {
@@ -668,7 +668,7 @@ void skill_get_actions_and_draw(
                 new_vec2i_from_vec2i(source_tilemap_pos)
             );
 
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // draw effect
                 add_new_list_element_to_list_end(
@@ -701,7 +701,7 @@ void skill_get_actions_and_draw(
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Texture* dots_line_texture = 0;
+                    Texture* dots_line_texture = NULL;
                     if(distance_info.dir4 == DIR4__RIGHT ||
                        distance_info.dir4 == DIR4__LEFT)
                     {
@@ -731,7 +731,7 @@ void skill_get_actions_and_draw(
                 new_action_shake(target_2_tilemap_pos)
             );
 
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // draw effect
                 add_new_list_element_to_list_end(
@@ -750,7 +750,7 @@ void skill_get_actions_and_draw(
         case SKILL__DRAG_SPIDERWEB:
         case SKILL__DRAG_TENTACLE:
         {
-            if(target_1_object != 0 &&
+            if(target_1_object != NULL &&
                is_object_movable(target_1_object))
             {
                 DistanceInfo distance_info =
@@ -797,10 +797,10 @@ void skill_get_actions_and_draw(
                         next_tilemap_pos
                     );
 
-                    int go_on = 1;
+                    int go_on = TRUE;
                     for(int i = 0; i < distance_info.abs_diff + 1 && go_on; i++)
                     {
-                        Texture* arrow_texture = 0;
+                        Texture* arrow_texture = NULL;
 
                         if(vec2i_equals(curr_tilemap_pos, target_1_tilemap_pos))
                         {
@@ -810,13 +810,13 @@ void skill_get_actions_and_draw(
                                     distance_info.dir4
                                 );
                         }
-                        else if(curr_object != 0 ||
+                        else if(curr_object != NULL ||
                                 is_floor_deadly_on_move_for_object(
                                     curr_floor,
                                     target_1_object)
                                 )
                         {
-                            go_on = 0;
+                            go_on = FALSE;
 
                             arrow_texture =
                                 get_texture_arrow_thick_end(
@@ -970,7 +970,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__THROW:
         {
-            if(target_1_object != 0 &&
+            if(target_1_object != NULL &&
                is_object_movable(target_1_object))
             {
                 DistanceInfo distance_info =
@@ -982,7 +982,7 @@ void skill_get_actions_and_draw(
                 if(distance_info.dir4 != DIR4__NONE)
                 {
                     // lift
-                    if(target_2_object != 0)
+                    if(target_2_object != NULL)
                     {
                         // actions
                         add_action_to_end_action_sequence(
@@ -1121,10 +1121,10 @@ void skill_get_actions_and_draw(
                     next_tilemap_pos
                 );
 
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 0; i < distance_info.abs_diff + 1 && go_on; i++)
                 {
-                    Texture* arrow_texture = 0;
+                    Texture* arrow_texture = NULL;
 
                     if(vec2i_equals(curr_tilemap_pos, source_tilemap_pos))
                     {
@@ -1134,10 +1134,10 @@ void skill_get_actions_and_draw(
                                 distance_info.dir4
                             );
                     }
-                    else if(curr_object != 0 ||
+                    else if(curr_object != NULL ||
                             is_floor_deadly_on_move_for_flying(curr_floor))
                     {
-                        go_on = 0;
+                        go_on = FALSE;
 
                         arrow_texture =
                             get_texture_arrow_thick_end(
@@ -1336,7 +1336,7 @@ void skill_get_actions_and_draw(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 // lift
-                if(target_2_object != 0)
+                if(target_2_object != NULL)
                 {
                     // actions
                     add_action_to_end_action_sequence(
@@ -1471,10 +1471,10 @@ void skill_get_actions_and_draw(
                     next_tilemap_pos
                 );
 
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 0; i < distance_info.abs_diff + 1 && go_on; i++)
                 {
-                    Texture* arrow_texture = 0;
+                    Texture* arrow_texture = NULL;
 
                     if(vec2i_equals(curr_tilemap_pos, source_tilemap_pos))
                     {
@@ -1484,13 +1484,13 @@ void skill_get_actions_and_draw(
                                 distance_info.dir4
                             );
                     }
-                    else if(curr_object != 0 ||
+                    else if(curr_object != NULL ||
                             is_floor_deadly_on_move_for_object(
                                 curr_floor,
                                 source_object)
                             )
                     {
-                        go_on = 0;
+                        go_on = FALSE;
 
                         arrow_texture =
                             get_texture_arrow_thin_end(
@@ -1642,7 +1642,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__STOMP:
         {
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // actions
                 object_on_stomp(
@@ -1702,7 +1702,7 @@ void skill_get_actions_and_draw(
         case SKILL__DRAG_AND_THROW_HOOK:
         case SKILL__DRAG_AND_THROW_TONGUE:
         {
-            if(target_1_object != 0 &&
+            if(target_1_object != NULL &&
                is_object_movable(target_1_object))
             {
                 DistanceInfo drag_distance_info =
@@ -1756,10 +1756,10 @@ void skill_get_actions_and_draw(
                         drag_next_tilemap_pos
                     );
 
-                    int drag_go_on = 1;
+                    int drag_go_on = TRUE;
                     for(int i = 0; i < drag_distance_info.abs_diff && drag_go_on; i++)
                     {
-                        Texture* drag_arrow_texture = 0;
+                        Texture* drag_arrow_texture = NULL;
 
                         if(vec2i_equals(drag_curr_tilemap_pos, target_1_tilemap_pos))
                         {
@@ -1769,13 +1769,13 @@ void skill_get_actions_and_draw(
                                     drag_distance_info.dir4
                                 );
                         }
-                        else if(curr_object != 0 ||
+                        else if(curr_object != NULL ||
                                 is_floor_deadly_on_move_for_object(
                                     curr_floor,
                                     target_1_object)
                                 )
                         {
-                            drag_go_on = 0;
+                            drag_go_on = FALSE;
 
                             drag_arrow_texture =
                                 get_texture_arrow_thin_end(
@@ -1935,7 +1935,7 @@ void skill_get_actions_and_draw(
                         if(throw_distance_info.dir4 != DIR4__NONE)
                         {
                             // lift
-                            if(target_2_object != 0)
+                            if(target_2_object != NULL)
                             {
                                 // actions
                                 add_action_to_end_action_sequence(
@@ -2079,10 +2079,10 @@ void skill_get_actions_and_draw(
                     charge_next_tilemap_pos
                 );
 
-                int charge_go_on = 1;
+                int charge_go_on = TRUE;
                 for(int i = 0; i < charge_distance_info.abs_diff && charge_go_on; i++)
                 {
-                    Texture* charge_arrow_texture = 0;
+                    Texture* charge_arrow_texture = NULL;
 
                     if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
                     {
@@ -2092,13 +2092,13 @@ void skill_get_actions_and_draw(
                                 charge_distance_info.dir4
                             );
                     }
-                    else if(charge_curr_object != 0 ||
+                    else if(charge_curr_object != NULL ||
                             is_floor_deadly_on_move_for_object(
                                 charge_curr_floor,
                                 source_object)
                             )
                     {
-                        charge_go_on = 0;
+                        charge_go_on = FALSE;
 
                         charge_arrow_texture =
                             get_texture_arrow_thin_end(
@@ -2223,7 +2223,7 @@ void skill_get_actions_and_draw(
 
                 if(charge_go_on)
                 {
-                    if(target_1_object != 0 &&
+                    if(target_1_object != NULL &&
                        is_object_movable(target_1_object))
                     {
                         DistanceInfo push_distance_info =
@@ -2270,10 +2270,10 @@ void skill_get_actions_and_draw(
                                 push_next_tilemap_pos
                             );
 
-                            int push_go_on = 1;
+                            int push_go_on = TRUE;
                             for(int i = 0; i < push_distance_info.abs_diff + 1 && push_go_on; i++)
                             {
-                                Texture* push_arrow_texture = 0;
+                                Texture* push_arrow_texture = NULL;
 
                                 if(vec2i_equals(push_curr_tilemap_pos, target_1_tilemap_pos))
                                 {
@@ -2283,13 +2283,13 @@ void skill_get_actions_and_draw(
                                             push_distance_info.dir4
                                         );
                                 }
-                                else if(push_curr_object != 0 ||
+                                else if(push_curr_object != NULL ||
                                         is_floor_deadly_on_move_for_object(
                                             push_curr_floor,
                                             target_1_object)
                                         )
                                 {
-                                    push_go_on = 0;
+                                    push_go_on = FALSE;
 
                                     push_arrow_texture =
                                         get_texture_arrow_thin_end(
@@ -2469,10 +2469,10 @@ void skill_get_actions_and_draw(
                     charge_next_tilemap_pos
                 );
 
-                int charge_go_on = 1;
+                int charge_go_on = TRUE;
                 for(int i = 0; i < charge_distance_info.abs_diff && charge_go_on; i++)
                 {
-                    Texture* charge_arrow_texture = 0;
+                    Texture* charge_arrow_texture = NULL;
 
                     if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
                     {
@@ -2482,13 +2482,13 @@ void skill_get_actions_and_draw(
                                 charge_distance_info.dir4
                             );
                     }
-                    else if(charge_curr_object != 0 ||
+                    else if(charge_curr_object != NULL ||
                             is_floor_deadly_on_move_for_object(
                                 charge_curr_floor,
                                 source_object)
                             )
                     {
-                        charge_go_on = 0;
+                        charge_go_on = FALSE;
 
                         charge_arrow_texture =
                             get_texture_arrow_thin_end(
@@ -2622,7 +2622,7 @@ void skill_get_actions_and_draw(
                     if(throw_distance_info.dir4 != DIR4__NONE)
                     {
                         // lift
-                        if(target_2_object != 0)
+                        if(target_2_object != NULL)
                         {
                             // actions
                             add_action_to_end_action_sequence(
@@ -2759,10 +2759,10 @@ void skill_get_actions_and_draw(
                     charge_next_tilemap_pos
                 );
 
-                int charge_go_on = 1;
+                int charge_go_on = TRUE;
                 for(int i = 0; i < charge_distance_info.abs_diff + 1 && charge_go_on; i++)
                 {
-                    Texture* charge_arrow_texture = 0;
+                    Texture* charge_arrow_texture = NULL;
 
                     if(vec2i_equals(charge_curr_tilemap_pos, source_tilemap_pos))
                     {
@@ -2772,13 +2772,13 @@ void skill_get_actions_and_draw(
                                 charge_distance_info.dir4
                             );
                     }
-                    else if(charge_curr_object != 0 ||
+                    else if(charge_curr_object != NULL ||
                             is_floor_deadly_on_move_for_object(
                                 charge_curr_floor,
                                 source_object)
                             )
                     {
-                        charge_go_on = 0;
+                        charge_go_on = FALSE;
 
                         charge_arrow_texture =
                             get_texture_arrow_thin_end(
@@ -2912,7 +2912,7 @@ void skill_get_actions_and_draw(
                     if(throw_distance_info.dir4 != DIR4__NONE)
                     {
                         // lift
-                        if(target_2_object != 0)
+                        if(target_2_object != NULL)
                         {
                             // actions
                             add_action_to_end_action_sequence(
@@ -3040,7 +3040,7 @@ void skill_get_actions_and_draw(
                 // source_object
 
                 // lift
-                if(target_2_object != 0)
+                if(target_2_object != NULL)
                 {
                     // actions
                     add_action_sequence_to_action_simultaneous(
@@ -3134,7 +3134,7 @@ void skill_get_actions_and_draw(
                 // target_1_object
 
                 // lift
-                if(carry_target_2_object != 0)
+                if(carry_target_2_object != NULL)
                 {
                     // actions
                     add_action_sequence_to_action_simultaneous(
@@ -3244,7 +3244,7 @@ void skill_get_actions_and_draw(
             if(distance_info.dir4 != DIR4__NONE)
             {
                 // lift
-                if(target_2_object != 0)
+                if(target_2_object != NULL)
                 {
                     // actions
                     add_action_to_end_action_sequence(
@@ -3300,7 +3300,7 @@ void skill_get_actions_and_draw(
                                 tilemap_pos
                             );
 
-                            if(object != 0)
+                            if(object != NULL)
                             {
                                 // actions
                                 object_on_stomp(
@@ -3387,7 +3387,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__LAUNCH_MINIBOT:
         {
-            if(target_2_object == 0)
+            if(target_2_object == NULL)
             {
                 DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(
                     source_tilemap_pos,
@@ -3481,7 +3481,7 @@ void skill_get_actions_and_draw(
                             new_vec2i_from_vec2i(tilemap_pos)
                         );
 
-                        if(object != 0 && is_object_meltable(object))
+                        if(object != NULL && is_object_meltable(object))
                         {
                             // actions
                             add_action_to_end_action_sequence(
@@ -3522,7 +3522,7 @@ void skill_get_actions_and_draw(
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Texture* dots_arch_texture = 0;
+                    Texture* dots_arch_texture = NULL;
                     if(distance_info.dir4 == DIR4__RIGHT ||
                        distance_info.dir4 == DIR4__LEFT)
                     {
@@ -3562,7 +3562,7 @@ void skill_get_actions_and_draw(
             //     new_vec2i_from_vec2i(target_2_tilemap_pos)
             //     );
 
-            if(target_2_object != 0 && is_object_breakable(target_2_object))
+            if(target_2_object != NULL && is_object_breakable(target_2_object))
             {
                 // draw effect
                 add_new_list_element_to_list_end(
@@ -3636,7 +3636,7 @@ void skill_get_actions_and_draw(
 
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Texture* dots_line_texture = 0;
+                    Texture* dots_line_texture = NULL;
                     if(distance_info.dir4 == DIR4__RIGHT ||
                        distance_info.dir4 == DIR4__LEFT)
                     {
@@ -3704,7 +3704,7 @@ void skill_get_actions_and_draw(
                         tilemap_pos
                     );
 
-                    if(object != 0)
+                    if(object != NULL)
                     {
                         if(object->type == OBJECT__BARREL)
                         {
@@ -3769,7 +3769,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__ENVIRONMENT_FALLING_STALACTITE:
         {
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 if(is_object_ally(target_2_object) ||
                    is_object_enemy(target_2_object))
@@ -3815,7 +3815,7 @@ void skill_get_actions_and_draw(
                 new_vec2i_from_vec2i(target_2_tilemap_pos)
             );
 
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // draw effect
                 add_new_list_element_to_list_end(
@@ -3831,7 +3831,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__ENVIRONMENT_EMERGE_WATER:
         {
-            if(target_2_object == 0)
+            if(target_2_object == NULL)
             {
                 // actions
                 add_action_to_end_action_sequence(
@@ -3856,7 +3856,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__ENVIRONMENT_EMERGE_PIT:
         {
-            if(target_2_object == 0)
+            if(target_2_object == NULL)
             {
                 // actions
                 add_action_to_end_action_sequence(
@@ -3881,7 +3881,7 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__ENVIRONMENT_EMERGE_BURROW:
         {
-            if(target_2_object == 0)
+            if(target_2_object == NULL)
             {
                 // actions
                 add_action_to_end_action_sequence(
@@ -3906,9 +3906,9 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__ENVIRONMENT_EMERGE_PIPE:
         {
-            if(target_2_object != 0 && target_2_object->type == OBJECT__PIPE)
+            if(target_2_object != NULL && target_2_object->type == OBJECT__PIPE)
             {
-                int is_able_to_emerge = 0;
+                int is_able_to_emerge = FALSE;
                 int emerge_dir4 = DIR4__NONE;
                 for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                 {
@@ -3921,9 +3921,9 @@ void skill_get_actions_and_draw(
                         state->curr_room,
                         tilemap_pos
                     );
-                    if(object == 0)
+                    if(object == NULL)
                     {
-                        is_able_to_emerge = 1;
+                        is_able_to_emerge = TRUE;
                         emerge_dir4 = dir4;
                     }
                 }
@@ -3988,7 +3988,7 @@ void skill_get_actions_and_draw(
                 )
             );
 
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 // actions
                 add_action_to_end_action_sequence(
@@ -4054,7 +4054,7 @@ void skill_get_actions_and_draw(
                                 new_vec2i_from_vec2i(tilemap_pos)
                             );
 
-                            if(object != 0)
+                            if(object != NULL)
                             {
                                 if(is_object_flying(object))
                                 {
@@ -4119,7 +4119,7 @@ void skill_get_actions_and_draw(
                                 new_vec2i_from_vec2i(tilemap_pos)
                             );
 
-                            if(object != 0)
+                            if(object != NULL)
                             {
                                 if(is_object_flying(object))
                                 {
@@ -4184,7 +4184,7 @@ void skill_get_actions_and_draw(
                                 new_vec2i_from_vec2i(tilemap_pos)
                             );
 
-                            if(object != 0)
+                            if(object != NULL)
                             {
                                 if(is_object_flying(object))
                                 {
@@ -4249,7 +4249,7 @@ void skill_get_actions_and_draw(
                                 new_vec2i_from_vec2i(tilemap_pos)
                             );
 
-                            if(object != 0)
+                            if(object != NULL)
                             {
                                 if(is_object_flying(object))
                                 {

@@ -10,8 +10,8 @@ Object* new_object(int type)
 {
     Object* object = malloc(sizeof(*object));
 
-    object->is_visible = 1;
-    object->is_to_be_removed = 0;
+    object->is_visible = TRUE;
+    object->is_to_be_removed = FALSE;
     object->type = type;
     object->tilemap_pos = vec2i(-1, -1);
     object->action_points = ALLY_MAX_ACTION_POINTS;
@@ -2037,7 +2037,7 @@ char* get_in_game_name_from_object_type(int object_type)
 
 Texture* get_texture_1_from_object(Object* object, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(object->type)
     {
@@ -2270,7 +2270,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
 Texture* get_texture_2_from_object(Object* object, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(object->type)
     {
@@ -2503,7 +2503,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
 Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(object->type)
     {
@@ -2736,7 +2736,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
 Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(object->type)
     {
@@ -2970,7 +2970,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
 Texture* get_hud_texture_from_object(Object* object, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(object->type)
     {

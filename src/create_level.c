@@ -61,7 +61,7 @@ void add_walls_around_room(Room* room, int wall_type, List* exclude_tilemap_pos_
     }
 
     for(ListElem* curr_elem = exclude_tilemap_pos_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+        curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Vec2i* curr_tilemap_pos = (Vec2i*) curr_elem->data;
         room_remove_object_at(room, *curr_tilemap_pos, 1);

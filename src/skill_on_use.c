@@ -18,11 +18,11 @@ void skill_on_use(
     {
         case SKILL__USE:
         {
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 if(target_2_object->type == OBJECT__THRONE)
                 {
-                    state->was_throne_used = 1;
+                    state->was_throne_used = TRUE;
                 }
                 else if(is_object_station(target_2_object))
                 {
@@ -38,11 +38,11 @@ void skill_on_use(
                         target_2_tilemap_pos
                     );
 
-                    if(passage != 0)
+                    if(passage != NULL)
                     {
                         Room* room = get_room(state, passage->to_room_name);
 
-                        if(room != 0)
+                        if(room != NULL)
                         {
                             // travel
                             room_remove_object(
@@ -73,7 +73,7 @@ void skill_on_use(
                             update_enemy_list(state);
                             update_all_enemy_order(state);
                             for(ListElem* curr_elem = state->enemy_list->head;
-                                curr_elem != 0; curr_elem = curr_elem->next)
+                                curr_elem != NULL; curr_elem = curr_elem->next)
                             {
                                 Enemy* curr_enemy = (Enemy*) curr_elem->data;
                                 if(!was_room_already_visited)
@@ -88,28 +88,28 @@ void skill_on_use(
                             // all allies
                             update_ally_list(state);
                             for(ListElem* curr_elem = state->ally_list->head;
-                                curr_elem != 0; curr_elem = curr_elem->next)
+                                curr_elem != NULL; curr_elem = curr_elem->next)
                             {
                                 Ally* curr_ally = (Ally*) curr_elem->data;
                                 update_ally_skill_list(state, curr_ally);
                             }
 
                             // curr ally
-                            int was_prev_ally_chosen = 0;
+                            int was_prev_ally_chosen = FALSE;
                             for(ListElem* curr_elem = state->ally_list->head;
-                                !was_prev_ally_chosen && curr_elem != 0;
+                                !was_prev_ally_chosen && curr_elem != NULL;
                                 curr_elem = curr_elem->next)
                             {
                                 Ally* curr_ally = (Ally*) curr_elem->data;
-                                if(curr_ally != 0)
+                                if(curr_ally != NULL)
                                 {
-                                    if(curr_ally->object != 0 &&
+                                    if(curr_ally->object != NULL &&
                                        curr_ally->object == state->curr_ally_object)
                                     {
                                         state->curr_ally_list_elem = curr_elem;
                                         state->curr_ally = curr_ally;
                                         state->curr_ally_object = curr_ally->object;
-                                        was_prev_ally_chosen = 1;
+                                        was_prev_ally_chosen = TRUE;
                                     }
                                 }
                             }
@@ -137,11 +137,11 @@ void skill_on_use(
                             target_2_tilemap_pos
                         );
 
-                        if(passage != 0)
+                        if(passage != NULL)
                         {
                             Room* room = get_room(state, passage->to_room_name);
 
-                            if(room != 0)
+                            if(room != NULL)
                             {
                                 // travel
                                 room_remove_object(
@@ -172,7 +172,7 @@ void skill_on_use(
                                 update_enemy_list(state);
                                 update_all_enemy_order(state);
                                 for(ListElem* curr_elem = state->enemy_list->head;
-                                    curr_elem != 0; curr_elem = curr_elem->next)
+                                    curr_elem != NULL; curr_elem = curr_elem->next)
                                 {
                                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                                     if(!was_room_already_visited)
@@ -187,28 +187,28 @@ void skill_on_use(
                                 // all allies
                                 update_ally_list(state);
                                 for(ListElem* curr_elem = state->ally_list->head;
-                                    curr_elem != 0; curr_elem = curr_elem->next)
+                                    curr_elem != NULL; curr_elem = curr_elem->next)
                                 {
                                     Ally* curr_ally = (Ally*) curr_elem->data;
                                     update_ally_skill_list(state, curr_ally);
                                 }
 
                                 // curr ally
-                                int was_prev_ally_chosen = 0;
+                                int was_prev_ally_chosen = FALSE;
                                 for(ListElem* curr_elem = state->ally_list->head;
-                                    !was_prev_ally_chosen && curr_elem != 0;
+                                    !was_prev_ally_chosen && curr_elem != NULL;
                                     curr_elem = curr_elem->next)
                                 {
                                     Ally* curr_ally = (Ally*) curr_elem->data;
-                                    if(curr_ally != 0)
+                                    if(curr_ally != NULL)
                                     {
-                                        if(curr_ally->object != 0 &&
+                                        if(curr_ally->object != NULL &&
                                            curr_ally->object == state->curr_ally_object)
                                         {
                                             state->curr_ally_list_elem = curr_elem;
                                             state->curr_ally = curr_ally;
                                             state->curr_ally_object = curr_ally->object;
-                                            was_prev_ally_chosen = 1;
+                                            was_prev_ally_chosen = TRUE;
                                         }
                                     }
                                 }
@@ -227,7 +227,7 @@ void skill_on_use(
         break;
         case SKILL__TELEPORTATION:
         {
-            if(target_2_object == 0)
+            if(target_2_object == NULL)
             {
                 source_object->tilemap_pos = target_2_tilemap_pos;
             }
@@ -239,7 +239,7 @@ void skill_on_use(
             int item_type = 0;
             int item_count = 0;
 
-            if(target_2_object != 0)
+            if(target_2_object != NULL)
             {
                 item_type = get_object_item_type(target_2_object);
                 item_count = get_object_item_count(target_2_object);
@@ -388,18 +388,18 @@ void skill_on_use(
         break;
         case SKILL__LAUNCH_MINIBOT:
         {
-            state->was_minibot_launched = 1;
+            state->was_minibot_launched = TRUE;
             state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
         }
         break;
         case SKILL__MINIBOT_MERGE:
         {
-            if(target_2_object != 0 &&
+            if(target_2_object != NULL &&
                (target_2_object->type == OBJECT__HERO ||
                 target_2_object->type == OBJECT__HERO_FLOATING ||
                 target_2_object->type == OBJECT__HERO_FLYING))
             {
-                state->was_minibot_launched = 0;
+                state->was_minibot_launched = FALSE;
 
                 room_remove_object(
                     state->curr_room,

@@ -14,7 +14,7 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
         case ANIMATION__SEQUENCE:
         {
             remove_all_list_elements(animation->sequence.animation_list, 1);
-            animation->sequence.curr_animation_list_elem = 0;
+            animation->sequence.curr_animation_list_elem = NULL;
         }
         break;
         case ANIMATION__SIMULTANEOUS:

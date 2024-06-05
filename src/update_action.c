@@ -8,7 +8,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
     {
         case ACTION__NONE:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__SEQUENCE:
@@ -22,7 +22,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
                 ListElem* next_elem = curr_elem->next;
                 action->sequence.curr_action_list_elem = next_elem;
 
-                if(next_elem != 0)
+                if(next_elem != NULL)
                 {
                     Action* next_action = (Action*) next_elem->data;
                     start_action(state, action, next_action, textures, sounds, musics, colors);
@@ -38,7 +38,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
         break;
         case ACTION__SIMULTANEOUS:
         {
-            int are_all_actions_finished = 1;
+            int are_all_actions_finished = TRUE;
             List* action_to_be_removed_list = new_list(0);
 
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
@@ -52,7 +52,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
                 else
                 {
                     update_action(state, curr_action, curr_action, delta_time, textures, sounds, musics, colors);
-                    are_all_actions_finished = 0;
+                    are_all_actions_finished = FALSE;
                 }
             }
 
@@ -110,42 +110,42 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
         break;
         case ACTION__CHANGE_FLOOR:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__CHANGE_OBJECT:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__ADD_OBJECT:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__REMOVE_OBJECT:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__CHANGE_OBJECT_TILEMAP_POS:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__MELT:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__BREAK:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         case ACTION__SHAKE:
         {
-            action->is_finished = 1;
+            action->is_finished = TRUE;
         }
         break;
         default:

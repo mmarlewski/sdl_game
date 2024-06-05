@@ -23,13 +23,13 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             }
             else
             {
-                animation->is_finished = 1;
+                animation->is_finished = TRUE;
             }
         }
         break;
         case ANIMATION__SIMULTANEOUS:
         {
-            for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
             {
                 if(curr_elem)
                 {

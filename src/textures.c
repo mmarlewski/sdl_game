@@ -1046,7 +1046,7 @@ void destroy_textures(Textures* textures)
 
 Texture* get_texture_throw(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1062,7 +1062,7 @@ Texture* get_texture_throw(Textures* textures, int dir4)
 
 Texture* get_texture_lift(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1100,7 +1100,7 @@ Texture* get_texture_order_number(Textures* textures, int num)
 
 Texture* get_texture_arrow_thin_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1116,7 +1116,7 @@ Texture* get_texture_arrow_thin_start(Textures* textures, int dir4)
 
 Texture* get_texture_arrow_thin_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1132,7 +1132,7 @@ Texture* get_texture_arrow_thin_end(Textures* textures, int dir4)
 
 Texture* get_texture_arrow_thin_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1192,7 +1192,7 @@ Texture* get_texture_arrow_thin_from_to(Textures* textures, int dir4_from, int d
 
 Texture* get_texture_arrow_thick_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1208,7 +1208,7 @@ Texture* get_texture_arrow_thick_start(Textures* textures, int dir4)
 
 Texture* get_texture_arrow_thick_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1224,7 +1224,7 @@ Texture* get_texture_arrow_thick_end(Textures* textures, int dir4)
 
 Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1284,7 +1284,7 @@ Texture* get_texture_arrow_thick_from_to(Textures* textures, int dir4_from, int 
 
 Texture* get_texture_item(Textures* textures, int item, int number)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(item)
     {
@@ -1339,7 +1339,7 @@ Texture* get_texture_item(Textures* textures, int item, int number)
 
 Texture* get_texture_hook_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1355,7 +1355,7 @@ Texture* get_texture_hook_start(Textures* textures, int dir4)
 
 Texture* get_texture_hook_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1371,7 +1371,7 @@ Texture* get_texture_hook_end(Textures* textures, int dir4)
 
 Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1431,7 +1431,7 @@ Texture* get_texture_hook_from_to(Textures* textures, int dir4_from, int dir4_to
 
 Texture* get_texture_spiderweb_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1447,7 +1447,7 @@ Texture* get_texture_spiderweb_start(Textures* textures, int dir4)
 
 Texture* get_texture_spiderweb_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1463,7 +1463,7 @@ Texture* get_texture_spiderweb_end(Textures* textures, int dir4)
 
 Texture* get_texture_spiderweb_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1523,7 +1523,7 @@ Texture* get_texture_spiderweb_from_to(Textures* textures, int dir4_from, int di
 
 Texture* get_texture_tentacle_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1539,7 +1539,7 @@ Texture* get_texture_tentacle_start(Textures* textures, int dir4)
 
 Texture* get_texture_tentacle_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1555,7 +1555,7 @@ Texture* get_texture_tentacle_end(Textures* textures, int dir4)
 
 Texture* get_texture_tentacle_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1615,7 +1615,7 @@ Texture* get_texture_tentacle_from_to(Textures* textures, int dir4_from, int dir
 
 Texture* get_texture_tongue_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1631,7 +1631,7 @@ Texture* get_texture_tongue_start(Textures* textures, int dir4)
 
 Texture* get_texture_tongue_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1647,7 +1647,7 @@ Texture* get_texture_tongue_end(Textures* textures, int dir4)
 
 Texture* get_texture_tongue_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1707,7 +1707,7 @@ Texture* get_texture_tongue_from_to(Textures* textures, int dir4_from, int dir4_
 
 Texture* get_texture_scissor_start(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1723,7 +1723,7 @@ Texture* get_texture_scissor_start(Textures* textures, int dir4)
 
 Texture* get_texture_scissor_end(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {
@@ -1739,7 +1739,7 @@ Texture* get_texture_scissor_end(Textures* textures, int dir4)
 
 Texture* get_texture_scissor_from_to(Textures* textures, int dir4_from, int dir4_to)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4_from)
     {
@@ -1799,7 +1799,7 @@ Texture* get_texture_scissor_from_to(Textures* textures, int dir4_from, int dir4
 
 Texture* get_texture_laser(Textures* textures, int dir4)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(dir4)
     {

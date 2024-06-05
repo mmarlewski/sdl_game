@@ -922,8 +922,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 )
             );
 
-            int left_go_on = 1;
-            int right_go_on = 1;
+            int left_go_on = TRUE;
+            int right_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
@@ -947,7 +947,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(left_floor != FLOOR__LAVA)
                 {
-                    left_go_on = 0;
+                    left_go_on = FALSE;
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
@@ -971,7 +971,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(right_floor != FLOOR__LAVA)
                 {
-                    right_go_on = 0;
+                    right_go_on = FALSE;
                 }
             }
         }
@@ -986,8 +986,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 )
             );
 
-            int left_go_on = 1;
-            int right_go_on = 1;
+            int left_go_on = TRUE;
+            int right_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
@@ -1012,7 +1012,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(left_floor != FLOOR__EXT_BRIDGE_PART_HORIZONTAL)
                 {
-                    left_go_on = 0;
+                    left_go_on = FALSE;
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
@@ -1037,7 +1037,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(right_floor != FLOOR__EXT_BRIDGE_PART_HORIZONTAL)
                 {
-                    right_go_on = 0;
+                    right_go_on = FALSE;
                 }
             }
         }
@@ -1052,8 +1052,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 )
             );
 
-            int up_go_on = 1;
-            int down_go_on = 1;
+            int up_go_on = TRUE;
+            int down_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
@@ -1077,7 +1077,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(up_floor != FLOOR__LAVA)
                 {
-                    up_go_on = 0;
+                    up_go_on = FALSE;
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
@@ -1101,7 +1101,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(down_floor != FLOOR__LAVA)
                 {
-                    down_go_on = 0;
+                    down_go_on = FALSE;
                 }
             }
         }
@@ -1116,8 +1116,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 )
             );
 
-            int up_go_on = 1;
-            int down_go_on = 1;
+            int up_go_on = TRUE;
+            int down_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
@@ -1142,7 +1142,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(up_floor != FLOOR__EXT_BRIDGE_PART_VERTICAL)
                 {
-                    up_go_on = 0;
+                    up_go_on = FALSE;
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
@@ -1167,7 +1167,7 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 }
                 if(down_floor != FLOOR__EXT_BRIDGE_PART_VERTICAL)
                 {
-                    down_go_on = 0;
+                    down_go_on = FALSE;
                 }
             }
         }
@@ -2191,7 +2191,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 default: break;
             }
 
-            int target_go_on = 1;
+            int target_go_on = TRUE;
             for(int i = 1; i < 10 && target_go_on; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -2205,9 +2205,9 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     tilemap_pos
                 );
 
-                if(object != 0)
+                if(object != NULL)
                 {
-                    target_go_on = 0;
+                    target_go_on = FALSE;
                     target_tilemap_pos = tilemap_pos;
                 }
             }
@@ -2364,8 +2364,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 )
             );
 
-            int left_go_on = 1;
-            int right_go_on = 1;
+            int left_go_on = TRUE;
+            int right_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2377,7 +2377,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     left_tilemap_pos
                 );
-                if(left_object == 0 && left_go_on)
+                if(left_object == NULL && left_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
@@ -2387,9 +2387,9 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(left_object != 0)
+                if(left_object != NULL)
                 {
-                    left_go_on = 0;
+                    left_go_on = FALSE;
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2401,7 +2401,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     right_tilemap_pos
                 );
-                if(right_object == 0 && right_go_on)
+                if(right_object == NULL && right_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
@@ -2411,9 +2411,9 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(right_object != 0)
+                if(right_object != NULL)
                 {
-                    right_go_on = 0;
+                    right_go_on = FALSE;
                 }
             }
         }
@@ -2428,8 +2428,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 )
             );
 
-            int left_go_on = 1;
-            int right_go_on = 1;
+            int left_go_on = TRUE;
+            int right_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i left_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2441,7 +2441,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     left_tilemap_pos
                 );
-                if(left_object != 0 &&
+                if(left_object != NULL &&
                    left_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
                    left_go_on)
                 {
@@ -2453,10 +2453,10 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(left_object != 0 &&
+                if(left_object != NULL &&
                    left_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
                 {
-                    left_go_on = 0;
+                    left_go_on = FALSE;
                 }
 
                 Vec2i right_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2468,7 +2468,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     right_tilemap_pos
                 );
-                if(right_object != 0 &&
+                if(right_object != NULL &&
                    right_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
                    right_go_on)
                 {
@@ -2480,10 +2480,10 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(right_object != 0 &&
+                if(right_object != NULL &&
                    right_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
                 {
-                    right_go_on = 0;
+                    right_go_on = FALSE;
                 }
             }
         }
@@ -2498,8 +2498,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 )
             );
 
-            int up_go_on = 1;
-            int down_go_on = 1;
+            int up_go_on = TRUE;
+            int down_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2511,7 +2511,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     up_tilemap_pos
                 );
-                if(up_object == 0 && up_go_on)
+                if(up_object == NULL && up_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
@@ -2521,9 +2521,9 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(up_object != 0)
+                if(up_object != NULL)
                 {
-                    up_go_on = 0;
+                    up_go_on = FALSE;
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2535,7 +2535,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     down_tilemap_pos
                 );
-                if(down_object == 0 && down_go_on)
+                if(down_object == NULL && down_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
@@ -2545,9 +2545,9 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(down_object != 0)
+                if(down_object != NULL)
                 {
-                    down_go_on = 0;
+                    down_go_on = FALSE;
                 }
             }
         }
@@ -2562,8 +2562,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 )
             );
 
-            int up_go_on = 1;
-            int down_go_on = 1;
+            int up_go_on = TRUE;
+            int down_go_on = TRUE;
             for(int i = 1; i < 10; i++)
             {
                 Vec2i up_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2575,7 +2575,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     up_tilemap_pos
                 );
-                if(up_object != 0 &&
+                if(up_object != NULL &&
                    up_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
                    up_go_on)
                 {
@@ -2587,10 +2587,10 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(up_object != 0 &&
+                if(up_object != NULL &&
                    up_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
                 {
-                    up_go_on = 0;
+                    up_go_on = FALSE;
                 }
 
                 Vec2i down_tilemap_pos = vec2i_move_in_dir4_by(
@@ -2602,7 +2602,7 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     state->curr_room,
                     down_tilemap_pos
                 );
-                if(down_object != 0 &&
+                if(down_object != NULL &&
                    down_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
                    down_go_on)
                 {
@@ -2614,10 +2614,10 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         )
                     );
                 }
-                if(down_object != 0 &&
+                if(down_object != NULL &&
                    down_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
                 {
-                    down_go_on = 0;
+                    down_go_on = FALSE;
                 }
             }
         }
@@ -2852,7 +2852,7 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                 default: break;
             }
 
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < 10 && go_on; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -2866,9 +2866,9 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                     tilemap_pos
                 );
 
-                if(object != 0)
+                if(object != NULL)
                 {
-                    go_on = 0;
+                    go_on = FALSE;
                     target_tilemap_pos = tilemap_pos;
                 }
             }

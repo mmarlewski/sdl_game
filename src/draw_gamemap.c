@@ -31,7 +31,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             world_iso_pos.y += TILE_LENGTH * 0.25f;
 
             int floor = state->curr_room->floor_array[i][j];
-            Texture* tile_floor_texture = 0;
+            Texture* tile_floor_texture = NULL;
             if(sin(state->time * 3) > 0)
             {
                 tile_floor_texture =
@@ -62,7 +62,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
     {
         for(ListElem* curr_elem = state->possible_target_1_tilemap_pos_list->head;
-            curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != NULL; curr_elem = curr_elem->next)
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -83,7 +83,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
-            curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != NULL; curr_elem = curr_elem->next)
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -136,8 +136,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             hover_object
         );
 
-        if(hover_object != 0 &&
-           hover_enemy != 0 &&
+        if(hover_object != NULL &&
+           hover_enemy != NULL &&
            is_object_enemy(hover_object) &&
            !hover_object->is_to_be_removed &&
            hover_object->is_visible &&
@@ -154,12 +154,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
         else
         {
-            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*) curr_elem->data;
                 Enemy* curr_enemy = get_enemy_of_object(state, curr_object);
 
-                if(curr_enemy != 0)
+                if(curr_enemy != NULL)
                 {
                     Action* curr_action = curr_enemy->action_sequence;
 
@@ -190,7 +190,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     {
         Enemy* curr_enemy = state->curr_enemy;
 
-        if(curr_enemy != 0 &&
+        if(curr_enemy != NULL &&
            !curr_enemy->object->is_to_be_removed &&
            curr_enemy->object->is_visible)
         {
@@ -232,7 +232,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             // objects
 
-            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
             {
                 Object* curr_object = (Object*) curr_elem->data;
                 Enemy* curr_enemy = get_enemy_of_object(state, curr_object);
@@ -242,7 +242,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                    curr_object->tilemap_pos.x == j &&
                    curr_object->tilemap_pos.y == i)
                 {
-                    Texture* texture = 0;
+                    Texture* texture = NULL;
                     if(sin(state->time * 3) > 0)
                     {
                         texture = get_texture_1_from_object(curr_object, textures);
@@ -262,7 +262,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         state->camera_zoom
                     );
 
-                    if(curr_enemy != 0 &&
+                    if(curr_enemy != NULL &&
                        state->show_all_order_numbers)
                     {
                         draw_texture_at_world_pos(
@@ -280,7 +280,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             // sprites
 
-            for(ListElem* curr_elem = state->sprite_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->sprite_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
             {
                 Sprite* curr_sprite = (Sprite*) curr_elem->data;
                 Vec2i curr_sprite_tilemap_pos = vec2i(
@@ -321,8 +321,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
-        if(hover_object != 0 &&
-           hover_enemy != 0 &&
+        if(hover_object != NULL &&
+           hover_enemy != NULL &&
            is_object_enemy(hover_object) &&
            !hover_object->is_to_be_removed &&
            hover_object->is_visible &&
@@ -339,12 +339,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
         else
         {
-            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
+            for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
             {
                 Object* hover_object = (Object*) curr_elem->data;
                 Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
-                if(hover_enemy != 0)
+                if(hover_enemy != NULL)
                 {
                     Action* hover_action = hover_enemy->action_sequence;
 
@@ -374,7 +374,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     {
         Enemy* curr_enemy = state->curr_enemy;
 
-        if(curr_enemy != 0 &&
+        if(curr_enemy != NULL &&
            !curr_enemy->object->is_to_be_removed &&
            curr_enemy->object->is_visible)
         {
@@ -417,26 +417,26 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
     {
         for(ListElem* curr_object_elem = state->curr_room->object_list->head;
-            curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
+            curr_object_elem != NULL; curr_object_elem = curr_object_elem->next)
         {
             Object* curr_object = curr_object_elem->data;
 
-            int is_object_on_possible_target_1_pos = 0;
+            int is_object_on_possible_target_1_pos = FALSE;
 
             for(ListElem* curr_pos_elem = state->possible_target_1_tilemap_pos_list->head;
-                curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
+                curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
             {
                 Vec2i* curr_pos = curr_pos_elem->data;
 
                 if(vec2i_equals(curr_object->tilemap_pos, *curr_pos))
                 {
-                    is_object_on_possible_target_1_pos = 1;
+                    is_object_on_possible_target_1_pos = TRUE;
                 }
             }
 
             if(is_object_on_possible_target_1_pos)
             {
-                Texture* texture_outline = 0;
+                Texture* texture_outline = NULL;
                 if(sin(state->time * 3) > 0)
                 {
                     texture_outline = get_texture_1_outline_from_object(
@@ -468,9 +468,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         //     state->curr_room,
         //     state->curr_ally_target_1_tilemap_pos
         //     );
-        // if(target_1_object != 0 && is_skill_two_target(state->curr_ally_skill))
+        // if(target_1_object != NULL && is_skill_two_target(state->curr_ally_skill))
         // {
-        //     Texture* texture_outline = 0;
+        //     Texture* texture_outline = NULL;
         //         if(sin(state->time * 3) > 0)
         //         {
         //             texture_outline = get_texture_1_outline_from_object(
@@ -493,26 +493,26 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         // }
 
         for(ListElem* curr_object_elem = state->curr_room->object_list->head;
-            curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
+            curr_object_elem != NULL; curr_object_elem = curr_object_elem->next)
         {
             Object* curr_object = curr_object_elem->data;
 
-            int is_object_on_possible_target_2_pos = 0;
+            int is_object_on_possible_target_2_pos = FALSE;
 
             for(ListElem* curr_pos_elem = state->possible_target_2_tilemap_pos_list->head;
-                curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
+                curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
             {
                 Vec2i* curr_pos = curr_pos_elem->data;
 
                 if(vec2i_equals(curr_object->tilemap_pos, *curr_pos))
                 {
-                    is_object_on_possible_target_2_pos = 1;
+                    is_object_on_possible_target_2_pos = TRUE;
                 }
             }
 
             if(is_object_on_possible_target_2_pos)
             {
-                Texture* texture_outline = 0;
+                Texture* texture_outline = NULL;
                 if(sin(state->time * 3) > 0)
                 {
                     texture_outline = get_texture_1_outline_from_object(
@@ -541,7 +541,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
-        if(hover_object != 0 &&
+        if(hover_object != NULL &&
            !hover_object->is_to_be_removed &&
            hover_object->is_visible)
         {
@@ -550,7 +550,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
             Vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
 
-            Texture* texture_outline = 0;
+            Texture* texture_outline = NULL;
             if(sin(state->time * 3) > 0)
             {
                 texture_outline = get_texture_1_outline_from_object(hover_object, textures);
@@ -569,7 +569,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->camera_zoom
             );
 
-            if(hover_enemy != 0)
+            if(hover_enemy != NULL)
             {
                 draw_texture_at_world_pos(
                     renderer,
@@ -591,7 +591,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     {
         Enemy* enemy = state->curr_enemy;
 
-        if(enemy != 0 &&
+        if(enemy != NULL &&
            !enemy->object->is_to_be_removed &&
            enemy->object->is_visible)
         {
@@ -600,7 +600,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             Vec2f selected_world_cart_pos = gamemap_pos_to_world_pos(selected_gamemap_pos);
             Vec2f selected_world_iso_pos = cart_pos_to_iso_pos(selected_world_cart_pos);
 
-            Texture* texture_outline = 0;
+            Texture* texture_outline = NULL;
             if(sin(state->time * 3) > 0)
             {
                 texture_outline = get_texture_1_outline_from_object(enemy->object, textures);
@@ -644,9 +644,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             state->selected_tilemap_pos
         );
 
-        if(selected_object != 0)
+        if(selected_object != NULL)
         {
-            Texture* texture_outline = 0;
+            Texture* texture_outline = NULL;
             if(sin(state->time * 3) > 0)
             {
                 texture_outline = get_texture_1_outline_from_object(selected_object, textures);
@@ -674,7 +674,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
-        Texture* texture_outline = 0;
+        Texture* texture_outline = NULL;
         if(sin(state->time * 3) > 0)
         {
             texture_outline = get_texture_1_outline_from_object(state->curr_ally_object, textures);
@@ -739,8 +739,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
-        if(hover_object != 0 &&
-           hover_enemy != 0 &&
+        if(hover_object != NULL &&
+           hover_enemy != NULL &&
            is_object_enemy(hover_object) &&
            !hover_object->is_to_be_removed &&
            hover_object->is_visible &&

@@ -1,6 +1,6 @@
 #include "../inc/music.h"
 
-int is_music_paused = 0;
+int is_music_paused = FALSE;
 float music_volume = 1.0f;
 
 Music* get_music_from_filepath(char* filepath)
@@ -29,13 +29,13 @@ int get_is_music_paused()
 
 void pause_music()
 {
-    is_music_paused = 1;
+    is_music_paused = TRUE;
     Mix_PauseMusic();
 }
 
 void resume_music()
 {
-    is_music_paused = 0;
+    is_music_paused = FALSE;
     Mix_ResumeMusic();
 }
 

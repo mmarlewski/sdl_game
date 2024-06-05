@@ -37,6 +37,9 @@ typedef TTF_Font Font;
 
 // defines
 
+#define FALSE 0
+#define TRUE 1
+
 #define SCREEN_WIDTH 1300
 #define SCREEN_HEIGHT 800
 

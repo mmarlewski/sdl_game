@@ -323,7 +323,7 @@ char* get_debug_skill_name(int skill)
 
 Texture* get_skill_hud_texture(int skill, Textures* textures)
 {
-    Texture* texture = 0;
+    Texture* texture = NULL;
 
     switch(skill)
     {

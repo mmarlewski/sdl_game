@@ -3,7 +3,7 @@
 
 void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
-    state->is_game_running = 1;
+    state->is_game_running = TRUE;
     state->time = 0.0f;
     state->delta_time = 0.0f;
     state->gamestate = GAMESTATE__NONE;
@@ -19,39 +19,39 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->mouse_gamemap_pos = vec2f(0, 0);
     state->mouse_tilemap_pos = vec2i(0, 0);
 
-    state->mouse_is_dragging = 0;
+    state->mouse_is_dragging = FALSE;
     state->mouse_drag_origin_world_pos = vec2f(0, 0);
 
-    state->is_executing_actions = 0;
-    state->enemy_action_sequence = 0;
+    state->is_executing_actions = FALSE;
+    state->enemy_action_sequence = NULL;
     state->ally_action_sequence = new_action_sequence();
 
     state->room_list = new_list((void (*)(void*)) & destroy_room);
     state->visited_room_list = new_list((void (*)(void*)) & destroy_room);
     state->passage_list = new_list((void (*)(void*)) & destroy_passage);
-    state->curr_room = 0;
+    state->curr_room = NULL;
 
     state->animation_list = new_list((void (*)(void*)) & destroy_animation);
     state->sprite_list = new_list((void (*)(void*)) & destroy_sprite);
 
     state->possible_target_1_tilemap_pos_list = new_list((void(*)(void*)) & destroy_vec2i);
     state->possible_target_2_tilemap_pos_list = new_list((void(*)(void*)) & destroy_vec2i);
-    state->show_all_order_numbers = 0;
+    state->show_all_order_numbers = FALSE;
     state->selected_tilemap_pos = vec2i(0, 0);
 
     state->enemy_list = new_list((void (*)(void*)) & destroy_enemy);
-    state->curr_enemy_list_elem = 0;
-    state->curr_enemy = 0;
+    state->curr_enemy_list_elem = NULL;
+    state->curr_enemy = NULL;
 
     state->ally_list = new_list((void (*)(void*)) & destroy_ally);
-    state->curr_ally_list_elem = 0;
-    state->curr_ally = 0;
-    state->curr_ally_object = 0;
+    state->curr_ally_list_elem = NULL;
+    state->curr_ally = NULL;
+    state->curr_ally_object = NULL;
     state->curr_ally_skill = SKILL__NONE;
     state->ally_move_distance = 0;
     state->curr_ally_target_1_tilemap_pos = vec2i(0, 0);
     state->curr_ally_target_2_tilemap_pos = vec2i(0, 0);
-    state->curr_skill_animation = 0;
+    state->curr_skill_animation = NULL;
 
     state->hero_object = new_object(OBJECT__HERO);
     state->hero_ap = ALLY_MAX_ACTION_POINTS;
@@ -66,8 +66,8 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->hero_curr_item = ITEM__NONE;
 
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
-    state->was_minibot_launched = 0;
-    state->was_throne_used = 0;
+    state->was_minibot_launched = FALSE;
+    state->was_throne_used = FALSE;
 
     state->curr_ally_draw_below_texture_list = new_list((void (*)(void*)) 0);
     state->curr_ally_draw_below_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -134,7 +134,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     update_enemy_list(state);
     update_all_enemy_order(state);
     for(ListElem* curr_elem = state->enemy_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+        curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
         update_enemy_attack_dir4(state, curr_enemy);
@@ -145,7 +145,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
 
     update_ally_list(state);
     for(ListElem* curr_elem = state->ally_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+        curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Ally* curr_ally = (Ally*) curr_elem->data;
         update_ally_skill_list(state, curr_ally);
@@ -241,7 +241,7 @@ void change_gamestate(State* state, int new_gamestate)
         for(int i = 0; i < state->curr_ally->skill_list->size; i++)
         {
             ListElem* curr_elem = get_nth_list_element(state->curr_ally->skill_list, i);
-            if(curr_elem != 0)
+            if(curr_elem != NULL)
             {
                 int curr_skill = (int) curr_elem->data;
                 char key_char = KEY__NONE;
@@ -354,9 +354,9 @@ Room* get_room(State* state, char* name)
 {
     List* room_list = state->room_list;
 
-    for(ListElem* elem = room_list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = room_list->head; elem != NULL; elem = elem->next)
     {
-        if(elem != 0)
+        if(elem != NULL)
         {
             Room* room = (Room*) elem->data;
 
@@ -386,12 +386,12 @@ Passage* get_passage(State* state, char* from_room_name, Vec2i from_tilemap_pos)
 {
     List* passage_list = state->passage_list;
 
-    for(ListElem* elem = passage_list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = passage_list->head; elem != NULL; elem = elem->next)
     {
-        if(elem != 0)
+        if(elem != NULL)
         {
             Passage* passage = (Passage*) elem->data;
-            if(passage != 0)
+            if(passage != NULL)
             {
                 if(strcmp(passage->from_room_name, from_room_name) == 0 &&
                    vec2i_equals(passage->from_tilemap_pos, from_tilemap_pos))
@@ -407,11 +407,11 @@ Passage* get_passage(State* state, char* from_room_name, Vec2i from_tilemap_pos)
 
 Object* room_get_object_at(Room* room, Vec2i tilemap_pos)
 {
-    if(room == 0) return 0;
+    if(room == NULL) return 0;
 
     if(!is_tilemap_in_bounds(tilemap_pos)) return 0;
 
-    Object* object = 0;
+    Object* object = NULL;
     for(ListElem* curr_elem = room->object_list->head;
         curr_elem; curr_elem = curr_elem->next)
     {
@@ -452,8 +452,8 @@ void remove_all_actions_from_action_sequence(Action* action_sequence)
 
 void execute_action_sequence(State* state, Action* action_sequence, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
-    state->is_executing_actions = 1;
-    action_sequence->is_finished = 0;
+    state->is_executing_actions = TRUE;
+    action_sequence->is_finished = FALSE;
 
     start_action(state, action_sequence, action_sequence, textures, sounds, musics, colors);
 }
@@ -719,7 +719,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 
 Enemy* get_enemy_of_object(State* state, Object* object)
 {
-    for(ListElem* elem = state->enemy_list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = state->enemy_list->head; elem != NULL; elem = elem->next)
     {
         Enemy* enemy = (Enemy*) elem->data;
 
@@ -734,7 +734,7 @@ Enemy* get_enemy_of_object(State* state, Object* object)
 
 Ally* get_ally_of_object(State* state, Object* object)
 {
-    for(ListElem* elem = state->ally_list->head; elem != 0; elem = elem->next)
+    for(ListElem* elem = state->ally_list->head; elem != NULL; elem = elem->next)
     {
         Ally* ally = (Ally*) elem->data;
 
@@ -759,7 +759,7 @@ void draw_texture_list(
     ListElem* texture_elem = texture_list->head;
     ListElem* tilemap_pos_elem = tilemap_pos_list->head;
 
-    while(texture_elem != 0 && tilemap_pos_elem != 0)
+    while(texture_elem != NULL && tilemap_pos_elem != NULL)
     {
         Texture* texture = (Texture*) texture_elem->data;
         Vec2i* tilemap_pos = (Vec2i*) tilemap_pos_elem->data;
@@ -783,15 +783,15 @@ void draw_texture_list(
 
 void update_enemy_list(State* state)
 {
-    if(state->curr_room != 0)
+    if(state->curr_room != NULL)
     {
         remove_all_list_elements(state->enemy_list, 1);
         for(ListElem* curr_elem = state->curr_room->object_list->head;
-            curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != NULL; curr_elem = curr_elem->next)
         {
             Object* curr_object = (Object*) curr_elem->data;
 
-            if(curr_object != 0 && is_object_enemy(curr_object))
+            if(curr_object != NULL && is_object_enemy(curr_object))
             {
                 add_new_list_element_to_list_end(
                     state->enemy_list,
@@ -810,10 +810,10 @@ void update_all_enemy_order(State* state)
         new_list((void(*)(void*))destroy_vec2i);
 
     for(ListElem* curr_elem = state->enemy_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+        curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
-        if(curr_enemy != 0)
+        if(curr_enemy != NULL)
         {
             if(is_object_environment(curr_enemy->object))
             {
@@ -834,20 +834,20 @@ void update_all_enemy_order(State* state)
 
     int curr_order_number = 1;
     for(ListElem* curr_elem = environment_enemy_list_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+        curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
-        if(curr_enemy != 0)
+        if(curr_enemy != NULL)
         {
             curr_enemy->order_number = curr_order_number;
             curr_order_number++;
         }
     }
     for(ListElem* curr_elem = non_environment_enemy_list_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+        curr_elem != NULL; curr_elem = curr_elem->next)
     {
         Enemy* curr_enemy = (Enemy*) curr_elem->data;
-        if(curr_enemy != 0)
+        if(curr_enemy != NULL)
         {
             curr_enemy->order_number = curr_order_number;
             curr_order_number++;
@@ -871,7 +871,7 @@ void clear_enemy_attack_actions_and_draw(
     Enemy* enemy
 )
 {
-    if(enemy != 0)
+    if(enemy != NULL)
     {
         remove_all_actions_from_action_sequence(
             enemy->action_sequence
@@ -909,7 +909,7 @@ void get_enemy_attack_actions_and_draw(
     Textures* textures
 )
 {
-    if(enemy != 0)
+    if(enemy != NULL)
     {
         skill_get_actions_and_draw(
             state,
@@ -933,15 +933,15 @@ void get_enemy_attack_actions_and_draw(
 
 void update_ally_list(State* state)
 {
-    if(state->curr_room != 0)
+    if(state->curr_room != NULL)
     {
         remove_all_list_elements(state->ally_list, 1);
         for(ListElem* curr_elem = state->curr_room->object_list->head;
-            curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != NULL; curr_elem = curr_elem->next)
         {
             Object* curr_object = (Object*) curr_elem->data;
 
-            if(curr_object != 0 && is_object_ally(curr_object))
+            if(curr_object != NULL && is_object_ally(curr_object))
             {
                 add_new_list_element_to_list_end(
                     state->ally_list,
@@ -954,7 +954,7 @@ void update_ally_list(State* state)
 
 void update_ally_skill_list(State* state, Ally* ally)
 {
-    if(ally != 0)
+    if(ally != NULL)
     {
         remove_all_list_elements(ally->skill_list, 0);
         get_object_skills(
@@ -967,7 +967,7 @@ void update_ally_skill_list(State* state, Ally* ally)
 
 void restore_ally_action_points(State* state, Ally* ally)
 {
-    if(ally != 0)
+    if(ally != NULL)
     {
         ally->object->action_points = ALLY_MAX_ACTION_POINTS;
     }
@@ -978,7 +978,7 @@ void clear_curr_ally_attack_actions_and_draw(
     State* state
 )
 {
-    if(state->curr_ally != 0)
+    if(state->curr_ally != NULL)
     {
         remove_all_actions_from_action_sequence(
             state->ally_action_sequence
@@ -1015,7 +1015,7 @@ void get_curr_ally_attack_actions_and_draw(
     Textures* textures
 )
 {
-    if(state->curr_ally != 0)
+    if(state->curr_ally != NULL)
     {
         skill_get_actions_and_draw(
             state,
@@ -1039,27 +1039,27 @@ void get_curr_ally_attack_actions_and_draw(
 
 void remove_all_object_to_be_removed(State* state)
 {
-    if(state->curr_room != 0)
+    if(state->curr_room != NULL)
     {
         List* object_to_be_removed_list = new_list((void (*)(void*)) & destroy_object);
 
         for(ListElem* curr_elem = state->curr_room->object_list->head;
-            curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != NULL; curr_elem = curr_elem->next)
         {
             Object* curr_object = (Object*) curr_elem->data;
 
-            if(curr_object != 0 && curr_object->is_to_be_removed)
+            if(curr_object != NULL && curr_object->is_to_be_removed)
             {
                 add_new_list_element_to_list_end(object_to_be_removed_list, curr_object);
             }
         }
 
         for(ListElem* curr_elem = object_to_be_removed_list->head;
-            curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != NULL; curr_elem = curr_elem->next)
         {
             Object* curr_object = (Object*) curr_elem->data;
 
-            if(curr_object != 0)
+            if(curr_object != NULL)
             {
                 room_remove_object(state->curr_room, curr_object, 1);
             }
@@ -1118,11 +1118,11 @@ void execute_all_mechanisms(
 )
 {
     for(ListElem* curr_mechanism_elem = state->mechanism_list->head;
-        curr_mechanism_elem != 0; curr_mechanism_elem = curr_mechanism_elem->next)
+        curr_mechanism_elem != NULL; curr_mechanism_elem = curr_mechanism_elem->next)
     {
         Mechanism* curr_mechanism = curr_mechanism_elem->data;
 
-        if(curr_mechanism != 0)
+        if(curr_mechanism != NULL)
         {
             execute_mechanism(state, curr_mechanism);
         }
@@ -1134,7 +1134,7 @@ void execute_mechanism(
     Mechanism* mechanism
 )
 {
-    if(mechanism == 0) return;
+    if(mechanism == NULL) return;
 
     int is_in_1 = mechanism->is_in_1;
     char* in_1_room_name = mechanism->in_1_room_name;
@@ -1172,53 +1172,53 @@ void execute_mechanism(
     Object* out_object = room_get_object_at(out_room, out_tilemap_pos);
     int out_floor = room_get_floor_at(out_room, out_tilemap_pos);
 
-    int is_triggered = 1;
+    int is_triggered = TRUE;
 
     if(is_in_1)
     {
         if(in_1_is_object &&
-           ((in_1_object == 0 && in_1_type != OBJECT__NONE) ||
-            (in_1_object != 0 && in_1_type != in_1_object->type)))
+           ((in_1_object == NULL && in_1_type != OBJECT__NONE) ||
+            (in_1_object != NULL && in_1_type != in_1_object->type)))
         {
-            is_triggered = 0;
+            is_triggered = FALSE;
         }
 
         if(!in_1_is_object &&
            in_1_type != in_1_floor)
         {
-            is_triggered = 0;
+            is_triggered = FALSE;
         }
     }
 
     if(is_in_2)
     {
         if(in_2_is_object &&
-           ((in_2_object == 0 && in_2_type != OBJECT__NONE) ||
-            (in_2_object != 0 && in_2_type != in_2_object->type)))
+           ((in_2_object == NULL && in_2_type != OBJECT__NONE) ||
+            (in_2_object != NULL && in_2_type != in_2_object->type)))
         {
-            is_triggered = 0;
+            is_triggered = FALSE;
         }
 
         if(!in_2_is_object &&
            in_2_type != in_2_floor)
         {
-            is_triggered = 0;
+            is_triggered = FALSE;
         }
     }
 
     if(is_in_3)
     {
         if(in_3_is_object &&
-           ((in_3_object == 0 && in_3_type != OBJECT__NONE) ||
-            (in_3_object != 0 && in_3_type != in_3_object->type)))
+           ((in_3_object == NULL && in_3_type != OBJECT__NONE) ||
+            (in_3_object != NULL && in_3_type != in_3_object->type)))
         {
-            is_triggered = 0;
+            is_triggered = FALSE;
         }
 
         if(!in_3_is_object &&
            in_3_type != in_3_floor)
         {
-            is_triggered = 0;
+            is_triggered = FALSE;
         }
     }
 
@@ -1228,7 +1228,7 @@ void execute_mechanism(
         {
             if(out_is_object)
             {
-                if(out_type == OBJECT__NONE && out_object != 0)
+                if(out_type == OBJECT__NONE && out_object != NULL)
                 {
                     room_remove_object(
                         out_room,
@@ -1236,11 +1236,11 @@ void execute_mechanism(
                         1
                     );
                 }
-                else if(out_type != OBJECT__NONE && out_object != 0)
+                else if(out_type != OBJECT__NONE && out_object != NULL)
                 {
                     out_object->type = out_type;
                 }
-                else if(out_type != OBJECT__NONE && out_object == 0)
+                else if(out_type != OBJECT__NONE && out_object == NULL)
                 {
                     room_add_object_at(
                         out_room,

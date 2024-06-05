@@ -17,7 +17,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int score = 0;
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -39,12 +39,12 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
 
                         if(!is_floor_traversable_for_object(floor, enemy->object))
                         {
-                            go_on = 0;
+                            go_on = FALSE;
                         }
 
-                        if(object != 0)
+                        if(object != NULL)
                         {
-                            go_on = 0;
+                            go_on = FALSE;
 
                             score = (TILEMAP_LENGTH - i) / 2;
 
@@ -87,7 +87,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int score = 0;
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -107,9 +107,9 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                             tilemap_pos
                         );
 
-                        if(object != 0)
+                        if(object != NULL)
                         {
-                            go_on = 0;
+                            go_on = FALSE;
 
                             score = i / 2;
 
@@ -168,7 +168,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object == 0)
+                    if(object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             possible_emerge_tilemap_pos_list,
@@ -220,7 +220,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(floor == FLOOR__WATER && object == 0)
+                    if(floor == FLOOR__WATER && object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             possible_emerge_tilemap_pos_list,
@@ -272,7 +272,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(floor == FLOOR__PIT && object == 0)
+                    if(floor == FLOOR__PIT && object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             possible_emerge_tilemap_pos_list,
@@ -324,7 +324,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(is_floor_burrow(floor) && object == 0)
+                    if(is_floor_burrow(floor) && object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             possible_emerge_tilemap_pos_list,
@@ -376,7 +376,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0 && object->type == OBJECT__PIPE)
+                    if(object != NULL && object->type == OBJECT__PIPE)
                     {
                         add_new_list_element_to_list_end(
                             possible_emerge_tilemap_pos_list,

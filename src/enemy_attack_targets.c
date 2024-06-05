@@ -12,7 +12,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
     {
         case OBJECT__GOAT:
         {
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < SKILL_CHARGE_RANGE && go_on; i++)
             {
                 Vec2i curr_tilemap_pos = vec2i_move_in_dir4_by(
@@ -28,7 +28,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         curr_tilemap_pos
                     );
 
-                    if(curr_object != 0)
+                    if(curr_object != NULL)
                     {
                         if(is_object_movable(curr_object))
                         {
@@ -39,14 +39,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                                 enemy->object->attack_dir4,
                                 1
                             );
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                         else
                         {
                             enemy->skill = SKILL__CHARGE;
                             enemy->target_1_tilemap_pos = vec2i(0, 0);
                             enemy->target_2_tilemap_pos = curr_tilemap_pos;
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -61,14 +61,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         ),
                         1
                     );
-                    go_on = 0;
+                    go_on = FALSE;
                 }
             }
         }
         break;
         case OBJECT__SPIDER:
         {
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < SKILL_CHARGE_RANGE && go_on; i++)
             {
                 Vec2i curr_tilemap_pos = vec2i_move_in_dir4_by(
@@ -84,21 +84,21 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         curr_tilemap_pos
                     );
 
-                    if(curr_object != 0)
+                    if(curr_object != NULL)
                     {
                         if(is_object_movable(curr_object))
                         {
                             enemy->skill = SKILL__DRAG_SPIDERWEB;
                             enemy->target_1_tilemap_pos = curr_tilemap_pos;
                             enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                         else if(is_object_pull_towards(curr_object))
                         {
                             enemy->skill = SKILL__PULL_SPIDERWEB;
                             enemy->target_1_tilemap_pos = curr_tilemap_pos;
                             enemy->target_2_tilemap_pos = curr_tilemap_pos;
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                         else
                         {
@@ -109,7 +109,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                                 enemy->object->attack_dir4,
                                 1
                             );
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -122,14 +122,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         enemy->object->attack_dir4,
                         1
                     );
-                    go_on = 0;
+                    go_on = FALSE;
                 }
             }
         }
         break;
         case OBJECT__BULL:
         {
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < SKILL_CHARGE_RANGE && go_on; i++)
             {
                 Vec2i curr_tilemap_pos = vec2i_move_in_dir4_by(
@@ -145,7 +145,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         curr_tilemap_pos
                     );
 
-                    if(curr_object != 0)
+                    if(curr_object != NULL)
                     {
                         if(is_object_movable(curr_object))
                         {
@@ -169,34 +169,34 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                             );
 
                             if(is_tilemap_in_bounds(drop_tilemap_pos_2) &&
-                               drop_object_2 == 0)
+                               drop_object_2 == NULL)
                             {
                                 enemy->skill = SKILL__CHARGE_AND_THROW;
                                 enemy->target_1_tilemap_pos = curr_tilemap_pos;
                                 enemy->target_2_tilemap_pos = drop_tilemap_pos_2;
-                                go_on = 0;
+                                go_on = FALSE;
                             }
                             else if(is_tilemap_in_bounds(drop_tilemap_pos_1) &&
-                                    drop_object_1 == 0)
+                                    drop_object_1 == NULL)
                             {
                                 enemy->skill = SKILL__CHARGE_AND_THROW;
                                 enemy->target_1_tilemap_pos = curr_tilemap_pos;
                                 enemy->target_2_tilemap_pos = drop_tilemap_pos_1;
-                                go_on = 0;
+                                go_on = FALSE;
                             }
                             else if(i > 1)
                             {
                                 enemy->skill = SKILL__CHARGE;
                                 enemy->target_1_tilemap_pos = vec2i(0, 0);
                                 enemy->target_2_tilemap_pos = curr_tilemap_pos;
-                                go_on = 0;
+                                go_on = FALSE;
                             }
                             else
                             {
                                 enemy->skill = SKILL__ATTACK_DIR;
                                 enemy->target_1_tilemap_pos = curr_tilemap_pos;
                                 enemy->target_2_tilemap_pos = drop_tilemap_pos_1;
-                                go_on = 0;
+                                go_on = FALSE;
                             }
                         }
                         else
@@ -204,7 +204,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                             enemy->skill = SKILL__CHARGE;
                             enemy->target_1_tilemap_pos = vec2i(0, 0);
                             enemy->target_2_tilemap_pos = curr_tilemap_pos;
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -219,14 +219,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         ),
                         1
                     );
-                    go_on = 0;
+                    go_on = FALSE;
                 }
             }
         }
         break;
         case OBJECT__FLY:
         {
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < 10 && go_on; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -242,12 +242,12 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0)
+                    if(object != NULL)
                     {
                         enemy->skill = SKILL__SHOOT_PROJECTILE_FLY;
                         enemy->target_1_tilemap_pos = vec2i(0, 0);
                         enemy->target_2_tilemap_pos = tilemap_pos;
-                        go_on = 0;
+                        go_on = FALSE;
                     }
                 }
                 else
@@ -261,14 +261,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         ),
                         1
                     );
-                    go_on = 0;
+                    go_on = FALSE;
                 }
             }
         }
         break;
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
         {
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < 10 && go_on; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -284,12 +284,12 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0)
+                    if(object != NULL)
                     {
                         enemy->skill = SKILL__SHOOT_PROJECTILE_SQUIRREL;
                         enemy->target_1_tilemap_pos = vec2i(0, 0);
                         enemy->target_2_tilemap_pos = tilemap_pos;
-                        go_on = 0;
+                        go_on = FALSE;
                     }
                 }
                 else
@@ -303,14 +303,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         ),
                         1
                     );
-                    go_on = 0;
+                    go_on = FALSE;
                 }
             }
         }
         break;
         case OBJECT__CHAMELEON:
         {
-            int go_on = 1;
+            int go_on = TRUE;
             for(int i = 1; i < SKILL_CHARGE_RANGE && go_on; i++)
             {
                 Vec2i curr_tilemap_pos = vec2i_move_in_dir4_by(
@@ -326,7 +326,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         curr_tilemap_pos
                     );
 
-                    if(curr_object != 0)
+                    if(curr_object != NULL)
                     {
                         if(is_object_movable(curr_object))
                         {
@@ -339,7 +339,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                                 ),
                                 1
                             );
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                         else if(is_object_pull_towards(curr_object))
                         {
@@ -352,7 +352,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                                 ),
                                 1
                             );
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                         else
                         {
@@ -363,7 +363,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                                 enemy->object->attack_dir4,
                                 1
                             );
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -376,7 +376,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         enemy->object->attack_dir4,
                         1
                     );
-                    go_on = 0;
+                    go_on = FALSE;
                 }
             }
         }
@@ -401,7 +401,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0 && is_object_movable(object))
+                    if(object != NULL && is_object_movable(object))
                     {
                         if(i < min_diff)
                         {
@@ -422,7 +422,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
             }
             else
             {
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i < SKILL_CHARGE_RANGE && go_on; i++)
                 {
                     Vec2i curr_tilemap_pos = vec2i_move_in_dir4_by(
@@ -438,14 +438,14 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                             curr_tilemap_pos
                         );
 
-                        if(curr_object != 0)
+                        if(curr_object != NULL)
                         {
                             if(is_object_movable(curr_object))
                             {
                                 enemy->skill = SKILL__DRAG_TENTACLE;
                                 enemy->target_1_tilemap_pos = curr_tilemap_pos;
                                 enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
-                                go_on = 0;
+                                go_on = FALSE;
                             }
                         }
                     }
@@ -454,7 +454,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         enemy->skill = SKILL__ATTACK_DIR;
                         enemy->target_1_tilemap_pos = vec2i(0, 0);
                         enemy->target_2_tilemap_pos = curr_tilemap_pos;
-                        go_on = 0;
+                        go_on = FALSE;
                     }
                 }
             }
@@ -514,7 +514,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0 && is_object_meltable(object))
+                    if(object != NULL && is_object_meltable(object))
                     {
                         if(i < min_diff)
                         {
@@ -554,7 +554,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i < 10 && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -568,7 +568,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0 && is_object_breakable(object))
+                    if(object != NULL && is_object_breakable(object))
                     {
                         if(i < min_diff)
                         {
@@ -577,9 +577,9 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         }
                     }
 
-                    if(object != 0 && !is_object_throw_over(object))
+                    if(object != NULL && !is_object_throw_over(object))
                     {
-                        go_on = 0;
+                        go_on = FALSE;
                     }
                 }
             }
@@ -613,7 +613,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i < 10 && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -627,7 +627,7 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != 0 && !is_object_wall(object))
+                    if(object != NULL && !is_object_wall(object))
                     {
                         if(i < min_diff)
                         {
@@ -636,9 +636,9 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         }
                     }
 
-                    if(object != 0)
+                    if(object != NULL)
                     {
-                        go_on = 0;
+                        go_on = FALSE;
                     }
                 }
             }

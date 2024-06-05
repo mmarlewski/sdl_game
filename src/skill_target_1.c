@@ -119,7 +119,7 @@ void skill_get_possible_target_1_pos(
                         tilemap_pos
                     );
 
-                    if(object != 0 &&
+                    if(object != NULL &&
                        is_object_movable(object))
                     {
                         add_new_list_element_to_list_end(
@@ -154,7 +154,7 @@ void skill_get_possible_target_1_pos(
                             tilemap_pos
                         );
 
-                        if(object != 0 && is_object_movable(object))
+                        if(object != NULL && is_object_movable(object))
                         {
                             add_new_list_element_to_list_end(
                                 target_1_pos_list,
@@ -173,7 +173,7 @@ void skill_get_possible_target_1_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i <= SKILL_PULL_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -189,7 +189,7 @@ void skill_get_possible_target_1_pos(
                             tilemap_pos
                         );
 
-                        if(object != 0 &&
+                        if(object != NULL &&
                            is_object_pull_towards(object))
                         {
                             add_new_list_element_to_list_end(
@@ -198,9 +198,9 @@ void skill_get_possible_target_1_pos(
                             );
                         }
 
-                        if(object != 0)
+                        if(object != NULL)
                         {
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -227,7 +227,7 @@ void skill_get_possible_target_1_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i <= SKILL_CHARGE_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -243,7 +243,7 @@ void skill_get_possible_target_1_pos(
                             tilemap_pos
                         );
 
-                        if(object != 0 &&
+                        if(object != NULL &&
                            is_object_movable(object))
                         {
                             add_new_list_element_to_list_end(
@@ -252,9 +252,9 @@ void skill_get_possible_target_1_pos(
                             );
                         }
 
-                        if(object != 0)
+                        if(object != NULL)
                         {
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -265,7 +265,7 @@ void skill_get_possible_target_1_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                int go_on = 1;
+                int go_on = TRUE;
                 for(int i = 1; i <= SKILL_CHARGE_RANGE && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -281,7 +281,7 @@ void skill_get_possible_target_1_pos(
                             tilemap_pos
                         );
 
-                        if(object == 0)
+                        if(object == NULL)
                         {
                             add_new_list_element_to_list_end(
                                 target_1_pos_list,
@@ -289,9 +289,9 @@ void skill_get_possible_target_1_pos(
                             );
                         }
 
-                        if(object != 0)
+                        if(object != NULL)
                         {
-                            go_on = 0;
+                            go_on = FALSE;
                         }
                     }
                 }
@@ -315,7 +315,7 @@ void skill_get_possible_target_1_pos(
                         tilemap_pos
                     );
 
-                    if(object != 0 &&
+                    if(object != NULL &&
                        is_object_movable(object))
                     {
                         add_new_list_element_to_list_end(
