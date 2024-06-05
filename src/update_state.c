@@ -1,15 +1,15 @@
 #include "../inc/state.h"
 #include <stdlib.h>
 
-void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
+void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     if(state->gamestate == GAMESTATE__GAME_START)
     {
         if(input->was_mouse_left && !input->is_mouse_left &&
-        state->mouse_screen_pos.x >= 600 &&
-        state->mouse_screen_pos.x <= 600 + 128 &&
-        state->mouse_screen_pos.y >= 300 &&
-        state->mouse_screen_pos.y <= 300 + 64)
+           state->mouse_screen_pos.x >= 600 &&
+           state->mouse_screen_pos.x <= 600 + 128 &&
+           state->mouse_screen_pos.y >= 300 &&
+           state->mouse_screen_pos.y <= 300 + 64)
         {
             init_state(
                 state,
@@ -17,17 +17,17 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 sounds,
                 musics,
                 colors
-                );
+            );
         }
     }
 
     if(state->gamestate == GAMESTATE__GAME_OVER)
     {
         if(input->was_mouse_left && !input->is_mouse_left &&
-        state->mouse_screen_pos.x >= 600 &&
-        state->mouse_screen_pos.x <= 600 + 128 &&
-        state->mouse_screen_pos.y >= 300 &&
-        state->mouse_screen_pos.y <= 300 + 64)
+           state->mouse_screen_pos.x >= 600 &&
+           state->mouse_screen_pos.x <= 600 + 128 &&
+           state->mouse_screen_pos.y >= 300 &&
+           state->mouse_screen_pos.y <= 300 + 64)
         {
             init_state(
                 state,
@@ -35,17 +35,17 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 sounds,
                 musics,
                 colors
-                );
+            );
         }
     }
 
     if(state->gamestate == GAMESTATE__GAME_WON)
     {
         if(input->was_mouse_left && !input->is_mouse_left &&
-        state->mouse_screen_pos.x >= 600 &&
-        state->mouse_screen_pos.x <= 600 + 128 &&
-        state->mouse_screen_pos.y >= 300 &&
-        state->mouse_screen_pos.y <= 300 + 64)
+           state->mouse_screen_pos.x >= 600 &&
+           state->mouse_screen_pos.x <= 600 + 128 &&
+           state->mouse_screen_pos.y >= 300 &&
+           state->mouse_screen_pos.y <= 300 + 64)
         {
             init_state(
                 state,
@@ -53,7 +53,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 sounds,
                 musics,
                 colors
-                );
+            );
         }
     }
 
@@ -128,9 +128,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
     List* animation_to_be_removed_list = new_list(0);
 
     for(ListElem* curr_elem = state->animation_list->head;
-    curr_elem; curr_elem = curr_elem->next)
+        curr_elem; curr_elem = curr_elem->next)
     {
-        Animation* curr_animation = (Animation*)curr_elem->data;
+        Animation* curr_animation = (Animation*) curr_elem->data;
         if(curr_animation->is_finished)
         {
             end_animation(
@@ -140,11 +140,11 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 sounds,
                 musics,
                 colors
-                );
+            );
             add_new_list_element_to_list_end(
                 animation_to_be_removed_list,
                 curr_animation
-                );
+            );
         }
         else
         {
@@ -156,18 +156,18 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 sounds,
                 musics,
                 colors
-                );
+            );
         }
     }
 
     for(ListElem* curr_elem = animation_to_be_removed_list->head;
-    curr_elem; curr_elem = curr_elem->next)
+        curr_elem; curr_elem = curr_elem->next)
     {
         remove_list_element_of_data(
             state->animation_list,
             curr_elem->data,
             1
-            );
+        );
     }
 
     destroy_list(animation_to_be_removed_list);
@@ -175,14 +175,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
     // gamestate
 
     if(state->gamestate != GAMESTATE__GAME_OVER &&
-    state->hero_object->is_to_be_removed)
+       state->hero_object->is_to_be_removed)
     {
         // game over
         change_gamestate(state, GAMESTATE__GAME_OVER);
     }
 
     if(state->gamestate != GAMESTATE__GAME_WON &&
-    state->was_throne_used)
+       state->was_throne_used)
     {
         // game over
         change_gamestate(state, GAMESTATE__GAME_WON);
@@ -192,7 +192,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
     {
         // restore all ally action points
         for(ListElem* curr_elem = state->ally_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != 0; curr_elem = curr_elem->next)
         {
             Ally* curr_ally = (Ally*) curr_elem->data;
             restore_ally_action_points(state, curr_ally);
@@ -315,15 +315,15 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             // end ally turn
             if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||
-            (input->was_mouse_left && !input->is_mouse_left &&
-            state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
-            state->mouse_screen_pos.x <= 1200 - 64 - 10 + 64 + 100 &&
-            state->mouse_screen_pos.y >= 10 &&
-            state->mouse_screen_pos.y <= 10 + 64))
+               (input->was_mouse_left && !input->is_mouse_left &&
+                state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
+                state->mouse_screen_pos.x <= 1200 - 64 - 10 + 64 + 100 &&
+                state->mouse_screen_pos.y >= 10 &&
+                state->mouse_screen_pos.y <= 10 + 64))
             {
                 // restore all ally action points
                 for(ListElem* curr_elem = state->ally_list->head;
-                curr_elem != 0; curr_elem = curr_elem->next)
+                    curr_elem != 0; curr_elem = curr_elem->next)
                 {
                     Ally* curr_ally = (Ally*) curr_elem->data;
                     restore_ally_action_points(state, curr_ally);
@@ -334,9 +334,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     // enemy with order number of 1
                     for(ListElem* curr_elem = state->enemy_list->head;
-                    curr_elem != 0; curr_elem = curr_elem->next)
+                        curr_elem != 0; curr_elem = curr_elem->next)
                     {
-                        Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                        Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         if(curr_enemy->order_number == 1)
                         {
                             state->curr_enemy_list_elem = curr_elem;
@@ -351,12 +351,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                             colors->ally_background,
                             colors->enemy_background,
                             0.25f
-                            ),
+                        ),
                         textures,
                         sounds,
                         musics,
                         colors
-                        );
+                    );
 
                     change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
                     state->timer = 0.0f;
@@ -382,19 +382,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     {
                         int index = i * 2 + j;
 
-                        if(state->mouse_screen_pos.x >= 138 + 10 * (i+1) + 64 * i &&
-                        state->mouse_screen_pos.x <= 138 + 10 * (i+1) + 64 * i + 64 &&
-                        state->mouse_screen_pos.y >= 600 + 50 + 10 * j + 64 * j &&
-                        state->mouse_screen_pos.y <= 600 + 50 + 10 * j + 64 * j + 64)
+                        if(state->mouse_screen_pos.x >= 138 + 10 * (i + 1) + 64 * i &&
+                           state->mouse_screen_pos.x <= 138 + 10 * (i + 1) + 64 * i + 64 &&
+                           state->mouse_screen_pos.y >= 600 + 50 + 10 * j + 64 * j &&
+                           state->mouse_screen_pos.y <= 600 + 50 + 10 * j + 64 * j + 64)
                         {
                             ListElem* skill_elem = get_nth_list_element(
                                 state->curr_ally->skill_list,
                                 index
-                                );
+                            );
 
                             if(skill_elem != 0)
                             {
-                                skill = (int)skill_elem->data;
+                                skill = (int) skill_elem->data;
                             }
                         }
                     }
@@ -405,8 +405,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
             // if curr ally has enough action points
             if(state->curr_ally->object->action_points > 0 &&
-            state->curr_ally->object->action_points >= get_skill_action_points(skill) &&
-            skill != SKILL__NONE)
+               state->curr_ally->object->action_points >= get_skill_action_points(skill) &&
+               skill != SKILL__NONE)
             {
                 // go to choosing target 1
                 if(is_skill_two_target(skill))
@@ -419,7 +419,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         skill,
                         state->curr_ally->object->tilemap_pos,
                         state->possible_target_1_tilemap_pos_list
-                        );
+                    );
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_1);
                     break;
@@ -437,13 +437,13 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->curr_ally->object->tilemap_pos,
                         state->curr_ally_target_1_tilemap_pos,
                         state->possible_target_2_tilemap_pos_list
-                        );
+                    );
 
                     // selected position
                     int is_mouse_pos_in_possible_target_2_pos = 0;
                     for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
-                    !is_mouse_pos_in_possible_target_2_pos && curr_elem != 0;
-                    curr_elem = curr_elem->next)
+                        !is_mouse_pos_in_possible_target_2_pos && curr_elem != 0;
+                        curr_elem = curr_elem->next)
                     {
                         Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -458,7 +458,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     // new actions and draw
                     if(is_mouse_pos_in_possible_target_2_pos)
                     {
-                        get_curr_ally_attack_actions_and_draw(state,textures);
+                        get_curr_ally_attack_actions_and_draw(state, textures);
                     }
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
@@ -470,12 +470,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         case GAMESTATE__ALLY_CHOOSING_TARGET_1:
         {
             // go back
-            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC] ||
-            input->was_mouse_right && !input->is_mouse_right)
+            if(input->was_key[KEY__ESC] && !input->is_key[KEY__ESC] ||
+               input->was_mouse_right && !input->is_mouse_right)
             {
                 remove_all_actions_from_action_sequence(
                     state->ally_action_sequence
-                    );
+                );
 
                 change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                 break;
@@ -484,8 +484,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             // selected position
             int is_mouse_pos_in_possible_target_1_pos = 0;
             for(ListElem* curr_elem = state->possible_target_1_tilemap_pos_list->head;
-            !is_mouse_pos_in_possible_target_1_pos && curr_elem != 0;
-            curr_elem = curr_elem->next)
+                !is_mouse_pos_in_possible_target_1_pos && curr_elem != 0;
+                curr_elem = curr_elem->next)
             {
                 Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -513,7 +513,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->curr_ally->object->tilemap_pos,
                         state->curr_ally_target_1_tilemap_pos,
                         state->possible_target_2_tilemap_pos_list
-                        );
+                    );
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
                     break;
@@ -528,14 +528,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
         case GAMESTATE__ALLY_CHOOSING_TARGET_2:
         {
             // go back
-            if (input->was_key[KEY__ESC] && !input->is_key[KEY__ESC] ||
-            input->was_mouse_right && !input->is_mouse_right)
+            if(input->was_key[KEY__ESC] && !input->is_key[KEY__ESC] ||
+               input->was_mouse_right && !input->is_mouse_right)
             {
                 state->selected_tilemap_pos = vec2i(-1, -1);
 
                 remove_all_actions_from_action_sequence(
                     state->ally_action_sequence
-                    );
+                );
 
                 if(is_skill_two_target(state->curr_ally_skill))
                 {
@@ -554,8 +554,8 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             // selected position
             int is_mouse_pos_in_possible_target_2_pos = 0;
             for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
-            !is_mouse_pos_in_possible_target_2_pos && curr_elem != 0;
-            curr_elem = curr_elem->next)
+                !is_mouse_pos_in_possible_target_2_pos && curr_elem != 0;
+                curr_elem = curr_elem->next)
             {
                 Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -567,7 +567,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
             int is_new_selected_pos = !vec2i_equals(
                 state->selected_tilemap_pos,
                 state->mouse_tilemap_pos
-                );
+            );
 
             // new actions and draw
             if(is_new_selected_pos)
@@ -580,11 +580,11 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
 
                     state->curr_ally_target_2_tilemap_pos = state->selected_tilemap_pos;
 
-                    get_curr_ally_attack_actions_and_draw(state,textures);
+                    get_curr_ally_attack_actions_and_draw(state, textures);
                 }
                 else
                 {
-                    state->selected_tilemap_pos = vec2i(-1,-1);
+                    state->selected_tilemap_pos = vec2i(-1, -1);
                 }
             }
 
@@ -603,7 +603,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->curr_ally_target_2_tilemap_pos,
                         textures,
                         colors
-                        );
+                    );
 
                     add_animation_to_animation_list(
                         state,
@@ -622,7 +622,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                         state->curr_ally_target_2_tilemap_pos,
                         textures,
                         colors
-                        );
+                    );
 
                     state->curr_skill_animation = animation;
 
@@ -645,7 +645,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
 
                 change_gamestate(state, GAMESTATE__ALLY_EXECUTING_SKILL);
                 break;
@@ -664,13 +664,13 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
 
                 if(state->enemy_list->size > 0)
                 {
                     if(state->curr_ally_skill == SKILL__MOVE ||
-                    state->curr_ally_skill == SKILL__MOVE_FLOATING ||
-                    state->curr_ally_skill == SKILL__MOVE_FLYING)
+                       state->curr_ally_skill == SKILL__MOVE_FLOATING ||
+                       state->curr_ally_skill == SKILL__MOVE_FLYING)
                     {
                         state->curr_ally->object->action_points -=
                             state->ally_move_distance;
@@ -689,18 +689,18 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 update_enemy_list(state);
                 update_all_enemy_order(state);
                 for(ListElem* curr_elem = state->enemy_list->head;
-                curr_elem != 0; curr_elem = curr_elem->next)
+                    curr_elem != 0; curr_elem = curr_elem->next)
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     update_enemy_attack_targets(state, curr_enemy);
                     clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                    get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
+                    get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
                 }
 
                 // all allies
                 update_ally_list(state);
                 for(ListElem* curr_elem = state->ally_list->head;
-                curr_elem != 0; curr_elem = curr_elem->next)
+                    curr_elem != 0; curr_elem = curr_elem->next)
                 {
                     Ally* curr_ally = (Ally*) curr_elem->data;
                     update_ally_skill_list(state, curr_ally);
@@ -709,14 +709,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 // curr allies
                 int was_prev_ally_chosen = 0;
                 for(ListElem* curr_elem = state->ally_list->head;
-                !was_prev_ally_chosen && curr_elem != 0;
-                curr_elem = curr_elem->next)
+                    !was_prev_ally_chosen && curr_elem != 0;
+                    curr_elem = curr_elem->next)
                 {
                     Ally* curr_ally = (Ally*) curr_elem->data;
                     if(curr_ally != 0)
                     {
                         if(curr_ally->object != 0 &&
-                        curr_ally->object == state->curr_ally_object)
+                           curr_ally->object == state->curr_ally_object)
                         {
                             state->curr_ally_list_elem = curr_elem;
                             state->curr_ally = curr_ally;
@@ -746,7 +746,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
             }
         }
         break;
@@ -764,7 +764,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     state->curr_enemy->target_2_tilemap_pos,
                     textures,
                     colors
-                    );
+                );
 
                 add_animation_to_animation_list(
                     state,
@@ -797,7 +797,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
 
                 change_gamestate(state, GAMESTATE__ENEMY_EXECUTING_ATTACK);
                 break;
@@ -818,19 +818,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
 
                 // update enemy attacks and draw
                 for(ListElem* curr_elem = state->enemy_list->head;
-                curr_elem != 0; curr_elem = curr_elem->next)
+                    curr_elem != 0; curr_elem = curr_elem->next)
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     if(!curr_enemy->object->is_to_be_removed &&
-                    !curr_enemy->performed_attack)
+                       !curr_enemy->performed_attack)
                     {
-                        update_enemy_attack_targets(state,  curr_enemy);
+                        update_enemy_attack_targets(state, curr_enemy);
                         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
                     }
                 }
 
@@ -839,10 +839,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 ListElem* next_enemy_list_elem = 0;
                 int found_next_enemy = 0;
                 while(!found_next_enemy &&
-                next_enemy_order_number <= state->enemy_list->size)
+                      next_enemy_order_number <= state->enemy_list->size)
                 {
                     for(ListElem* curr_elem = state->enemy_list->head;
-                    curr_elem != 0; curr_elem = curr_elem->next)
+                        curr_elem != 0; curr_elem = curr_elem->next)
                     {
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         if(curr_enemy->order_number == next_enemy_order_number)
@@ -876,9 +876,9 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 {
                     // enemy with order number of 1
                     for(ListElem* curr_elem = state->enemy_list->head;
-                    curr_elem != 0; curr_elem = curr_elem->next)
+                        curr_elem != 0; curr_elem = curr_elem->next)
                     {
-                        Enemy* curr_enemy = (Enemy*)curr_elem->data;
+                        Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         if(curr_enemy->order_number == 1)
                         {
                             state->curr_enemy_list_elem = curr_elem;
@@ -903,7 +903,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
             }
         }
         break;
@@ -938,19 +938,19 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
 
                 // update enemy attacks and draw
                 for(ListElem* curr_elem = state->enemy_list->head;
-                curr_elem != 0; curr_elem = curr_elem->next)
+                    curr_elem != 0; curr_elem = curr_elem->next)
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     if(!curr_enemy->object->is_to_be_removed &&
-                    !curr_enemy->performed_attack)
+                       !curr_enemy->performed_attack)
                     {
-                        update_enemy_attack_targets(state,  curr_enemy);
+                        update_enemy_attack_targets(state, curr_enemy);
                         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
                     }
                 }
 
@@ -970,7 +970,7 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     sounds,
                     musics,
                     colors
-                    );
+                );
             }
         }
         break;
@@ -983,10 +983,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 // if enemy didn't die when moving
                 if(!state->curr_enemy->object->is_to_be_removed)
                 {
-                    update_enemy_attack_dir4(state,  state->curr_enemy);
-                    update_enemy_attack_targets(state,  state->curr_enemy);
+                    update_enemy_attack_dir4(state, state->curr_enemy);
+                    update_enemy_attack_targets(state, state->curr_enemy);
                     clear_enemy_attack_actions_and_draw(state, state->curr_enemy);
-                    get_enemy_attack_actions_and_draw(state, state->curr_enemy,textures);
+                    get_enemy_attack_actions_and_draw(state, state->curr_enemy, textures);
                     state->curr_enemy->performed_attack = 0;
                 }
 
@@ -995,10 +995,10 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                 ListElem* next_enemy_list_elem = 0;
                 int found_next_enemy = 0;
                 while(!found_next_enemy &&
-                next_enemy_order_number <= state->enemy_list->size)
+                      next_enemy_order_number <= state->enemy_list->size)
                 {
                     for(ListElem* curr_elem = state->enemy_list->head;
-                    curr_elem != 0; curr_elem = curr_elem->next)
+                        curr_elem != 0; curr_elem = curr_elem->next)
                     {
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         if(curr_enemy->order_number == next_enemy_order_number)
@@ -1037,18 +1037,18 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     update_enemy_list(state);
                     update_all_enemy_order(state);
                     for(ListElem* curr_elem = state->enemy_list->head;
-                    curr_elem != 0; curr_elem = curr_elem->next)
+                        curr_elem != 0; curr_elem = curr_elem->next)
                     {
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         update_enemy_attack_targets(state, curr_enemy);
                         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
                     }
 
                     // all allies
                     update_ally_list(state);
                     for(ListElem* curr_elem = state->ally_list->head;
-                    curr_elem != 0; curr_elem = curr_elem->next)
+                        curr_elem != 0; curr_elem = curr_elem->next)
                     {
                         Ally* curr_ally = (Ally*) curr_elem->data;
                         update_ally_skill_list(state, curr_ally);
@@ -1057,14 +1057,14 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                     // curr ally
                     int was_prev_ally_chosen = 0;
                     for(ListElem* curr_elem = state->ally_list->head;
-                    !was_prev_ally_chosen && curr_elem != 0;
-                    curr_elem = curr_elem->next)
+                        !was_prev_ally_chosen && curr_elem != 0;
+                        curr_elem = curr_elem->next)
                     {
                         Ally* curr_ally = (Ally*) curr_elem->data;
                         if(curr_ally != 0)
                         {
                             if(curr_ally->object != 0 &&
-                            curr_ally->object == state->curr_ally_object)
+                               curr_ally->object == state->curr_ally_object)
                             {
                                 state->curr_ally_list_elem = curr_elem;
                                 state->curr_ally = curr_ally;
@@ -1086,12 +1086,12 @@ void update_state (Input* input, State* state, float delta_time, Textures* textu
                             colors->enemy_background,
                             colors->ally_background,
                             0.25f
-                            ),
+                        ),
                         textures,
                         sounds,
                         musics,
                         colors
-                        );
+                    );
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                     break;

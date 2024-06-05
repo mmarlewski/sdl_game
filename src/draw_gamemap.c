@@ -13,18 +13,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         vec2f(
             -(GAMEMAP_WIDTH * 0.5f) + (TILE_LENGTH * 0.5f),
             (TILE_LENGTH * 0.5f)
-            ),
+        ),
         state->camera_world_pos,
         state->camera_zoom
-        );
+    );
 
     // floors, highlights
 
-    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
+    for(int i = 0; i < TILEMAP_LENGTH; i++)
     {
-        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
+        for(int j = 0; j < TILEMAP_LENGTH; j++)
         {
-            Vec2i tilemap_pos = vec2i(j,i);
+            Vec2i tilemap_pos = vec2i(j, i);
             Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
             Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
@@ -53,7 +53,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
@@ -62,7 +62,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
     {
         for(ListElem* curr_elem = state->possible_target_1_tilemap_pos_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != 0; curr_elem = curr_elem->next)
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -74,7 +74,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 *tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
@@ -83,7 +83,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
-        curr_elem != 0; curr_elem = curr_elem->next)
+            curr_elem != 0; curr_elem = curr_elem->next)
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
@@ -95,14 +95,14 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 *tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
     // selected floor
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         if(is_tilemap_in_bounds(state->selected_tilemap_pos))
         {
@@ -114,34 +114,34 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->selected_tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
     // enemy skill draw below
 
     if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
-    state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
-    state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-    state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
+       state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
+       state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
+       state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
+       state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
+       state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         Object* hover_object = room_get_object_at(
             state->curr_room,
             state->mouse_tilemap_pos
-            );
+        );
         Enemy* hover_enemy = get_enemy_of_object(
             state,
             hover_object
-            );
+        );
 
         if(hover_object != 0 &&
-        hover_enemy != 0 &&
-        is_object_enemy(hover_object) &&
-        !hover_object->is_to_be_removed &&
-        hover_object->is_visible &&
-        !hover_enemy->performed_attack)
+           hover_enemy != 0 &&
+           is_object_enemy(hover_object) &&
+           !hover_object->is_to_be_removed &&
+           hover_object->is_visible &&
+           !hover_enemy->performed_attack)
         {
             draw_texture_list(
                 renderer,
@@ -150,7 +150,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 hover_enemy->draw_below_tilemap_pos_list,
                 colors->yellow,
                 1.0f
-                );
+            );
         }
         else
         {
@@ -164,12 +164,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     Action* curr_action = curr_enemy->action_sequence;
 
                     if(!curr_enemy->performed_attack &&
-                    !curr_enemy->object->is_to_be_removed)
+                       !curr_enemy->object->is_to_be_removed)
                     {
                         if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-                        state->enemy_action_sequence == curr_action) &&
-                        !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-                        state->enemy_action_sequence == curr_action))
+                             state->enemy_action_sequence == curr_action) &&
+                           !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
+                             state->enemy_action_sequence == curr_action))
                         {
                             draw_texture_list(
                                 renderer,
@@ -178,7 +178,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                                 curr_enemy->draw_below_tilemap_pos_list,
                                 colors->red,
                                 1.0f
-                                );
+                            );
                         }
                     }
                 }
@@ -191,8 +191,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* curr_enemy = state->curr_enemy;
 
         if(curr_enemy != 0 &&
-        !curr_enemy->object->is_to_be_removed &&
-        curr_enemy->object->is_visible)
+           !curr_enemy->object->is_to_be_removed &&
+           curr_enemy->object->is_visible)
         {
             draw_texture_list(
                 renderer,
@@ -201,7 +201,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 curr_enemy->draw_below_tilemap_pos_list,
                 colors->yellow,
                 1.0f
-                );
+            );
         }
     }
 
@@ -216,16 +216,16 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             state->curr_ally_draw_below_tilemap_pos_list,
             colors->green,
             1.0f
-            );
+        );
     }
 
     // objects, sprites
 
-    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
+    for(int i = 0; i < TILEMAP_LENGTH; i++)
     {
-        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
+        for(int j = 0; j < TILEMAP_LENGTH; j++)
         {
-            Vec2i tilemap_pos = vec2i(j,i);
+            Vec2i tilemap_pos = vec2i(j, i);
             Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
             Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
             Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
@@ -234,13 +234,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
-                Object* curr_object = (Object*)curr_elem->data;
+                Object* curr_object = (Object*) curr_elem->data;
                 Enemy* curr_enemy = get_enemy_of_object(state, curr_object);
 
                 if(!curr_object->is_to_be_removed &&
-                curr_object->is_visible &&
-                curr_object->tilemap_pos.x == j &&
-                curr_object->tilemap_pos.y == i)
+                   curr_object->is_visible &&
+                   curr_object->tilemap_pos.x == j &&
+                   curr_object->tilemap_pos.y == i)
                 {
                     Texture* texture = 0;
                     if(sin(state->time * 3) > 0)
@@ -260,10 +260,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         world_iso_pos,
                         state->camera_world_pos,
                         state->camera_zoom
-                        );
+                    );
 
                     if(curr_enemy != 0 &&
-                    state->show_all_order_numbers)
+                       state->show_all_order_numbers)
                     {
                         draw_texture_at_world_pos(
                             renderer,
@@ -273,7 +273,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                             world_iso_pos,
                             state->camera_world_pos,
                             state->camera_zoom
-                            );
+                        );
                     }
                 }
             }
@@ -282,15 +282,15 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             for(ListElem* curr_elem = state->sprite_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
-                Sprite* curr_sprite = (Sprite*)curr_elem->data;
+                Sprite* curr_sprite = (Sprite*) curr_elem->data;
                 Vec2i curr_sprite_tilemap_pos = vec2i(
                     floor(curr_sprite->gamemap_pos.x + 0.4f),
                     floor(curr_sprite->gamemap_pos.y + 0.4f)
-                    );
+                );
 
                 if(curr_sprite_tilemap_pos.x == tilemap_pos.x && curr_sprite_tilemap_pos.y == tilemap_pos.y)
                 {
-                    Vec2f gamemap_pos = vec2f(curr_sprite->gamemap_pos.x,curr_sprite->gamemap_pos.y);
+                    Vec2f gamemap_pos = vec2f(curr_sprite->gamemap_pos.x, curr_sprite->gamemap_pos.y);
                     Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
                     Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
                     world_iso_pos.y += curr_sprite->gamemap_pos.z * (TILE_LENGTH * 0.5f);
@@ -303,7 +303,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         world_iso_pos,
                         state->camera_world_pos,
                         state->camera_zoom
-                        );
+                    );
                 }
             }
         }
@@ -312,21 +312,21 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     // enemy skill draw above
 
     if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
-    state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
-    state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-    state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
+       state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
+       state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
+       state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
+       state->gamestate != GAMESTATE__ENEMY_EXECUTING_ATTACK &&
+       state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
-        hover_enemy != 0 &&
-        is_object_enemy(hover_object) &&
-        !hover_object->is_to_be_removed &&
-        hover_object->is_visible &&
-        !hover_enemy->performed_attack)
+           hover_enemy != 0 &&
+           is_object_enemy(hover_object) &&
+           !hover_object->is_to_be_removed &&
+           hover_object->is_visible &&
+           !hover_enemy->performed_attack)
         {
             draw_texture_list(
                 renderer,
@@ -335,13 +335,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 hover_enemy->draw_above_tilemap_pos_list,
                 colors->yellow,
                 1.0f
-                );
+            );
         }
         else
         {
             for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != 0; curr_elem = curr_elem->next)
             {
-                Object* hover_object = (Object*)curr_elem->data;
+                Object* hover_object = (Object*) curr_elem->data;
                 Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
                 if(hover_enemy != 0)
@@ -351,9 +351,9 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     if(!hover_enemy->performed_attack)
                     {
                         if(!(state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK &&
-                        state->enemy_action_sequence == hover_action) &&
-                        !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
-                        state->enemy_action_sequence == hover_action))
+                             state->enemy_action_sequence == hover_action) &&
+                           !(state->gamestate == GAMESTATE__ENEMY_MOVING &&
+                             state->enemy_action_sequence == hover_action))
                         {
                             draw_texture_list(
                                 renderer,
@@ -362,7 +362,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                                 hover_enemy->draw_above_tilemap_pos_list,
                                 colors->red,
                                 1.0f
-                                );
+                            );
                         }
                     }
                 }
@@ -375,8 +375,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* curr_enemy = state->curr_enemy;
 
         if(curr_enemy != 0 &&
-        !curr_enemy->object->is_to_be_removed &&
-        curr_enemy->object->is_visible)
+           !curr_enemy->object->is_to_be_removed &&
+           curr_enemy->object->is_visible)
         {
             draw_texture_list(
                 renderer,
@@ -385,7 +385,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 curr_enemy->draw_above_tilemap_pos_list,
                 colors->yellow,
                 1.0f
-                );
+            );
 
             draw_texture_list(
                 renderer,
@@ -394,7 +394,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 curr_enemy->draw_effect_tilemap_pos_list,
                 colors->none,
                 0.75f
-                );
+            );
         }
     }
 
@@ -409,7 +409,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             state->curr_ally_draw_above_tilemap_pos_list,
             colors->green,
             1.0f
-            );
+        );
     }
 
     // orange outline
@@ -417,14 +417,14 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
     {
         for(ListElem* curr_object_elem = state->curr_room->object_list->head;
-        curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
+            curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
         {
             Object* curr_object = curr_object_elem->data;
 
             int is_object_on_possible_target_1_pos = 0;
 
             for(ListElem* curr_pos_elem = state->possible_target_1_tilemap_pos_list->head;
-            curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
+                curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
             {
                 Vec2i* curr_pos = curr_pos_elem->data;
 
@@ -493,14 +493,14 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         // }
 
         for(ListElem* curr_object_elem = state->curr_room->object_list->head;
-        curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
+            curr_object_elem != 0; curr_object_elem = curr_object_elem->next)
         {
             Object* curr_object = curr_object_elem->data;
 
             int is_object_on_possible_target_2_pos = 0;
 
             for(ListElem* curr_pos_elem = state->possible_target_2_tilemap_pos_list->head;
-            curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
+                curr_pos_elem != 0; curr_pos_elem = curr_pos_elem->next)
             {
                 Vec2i* curr_pos = curr_pos_elem->data;
 
@@ -542,8 +542,8 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
-        !hover_object->is_to_be_removed &&
-        hover_object->is_visible)
+           !hover_object->is_to_be_removed &&
+           hover_object->is_visible)
         {
             Vec2i selected_tilemap_pos = state->mouse_tilemap_pos;
             Vec2f selected_gamemap_pos = tilemap_pos_to_gamemap_pos(selected_tilemap_pos);
@@ -567,7 +567,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 selected_world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
 
             if(hover_enemy != 0)
             {
@@ -579,7 +579,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     selected_world_iso_pos,
                     state->camera_world_pos,
                     state->camera_zoom
-                    );
+                );
             }
         }
     }
@@ -587,13 +587,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     // red outline
 
     if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
-    state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE)
+       state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE)
     {
         Enemy* enemy = state->curr_enemy;
 
         if(enemy != 0 &&
-        !enemy->object->is_to_be_removed &&
-        enemy->object->is_visible)
+           !enemy->object->is_to_be_removed &&
+           enemy->object->is_visible)
         {
             Vec2i selected_tilemap_pos = enemy->object->tilemap_pos;
             Vec2f selected_gamemap_pos = tilemap_pos_to_gamemap_pos(selected_tilemap_pos);
@@ -617,7 +617,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 selected_world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
 
             if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
             {
@@ -629,7 +629,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     selected_world_iso_pos,
                     state->camera_world_pos,
                     state->camera_zoom
-                    );
+                );
             }
         }
     }
@@ -637,12 +637,12 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     // yellow outline
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
         Object* selected_object = room_get_object_at(
             state->curr_room,
             state->selected_tilemap_pos
-            );
+        );
 
         if(selected_object != 0)
         {
@@ -664,34 +664,34 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->selected_tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
     // green outline
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
-    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
-            Texture* texture_outline = 0;
-            if(sin(state->time * 3) > 0)
-            {
-                texture_outline = get_texture_1_outline_from_object(state->curr_ally_object, textures);
-            }
-            else
-            {
-                texture_outline = get_texture_2_outline_from_object(state->curr_ally_object, textures);
-            }
-            draw_texture_at_tilemap_pos(
-                renderer,
-                texture_outline,
-                colors->green,
-                1.0f,
-                state->curr_ally_object->tilemap_pos,
-                state->camera_world_pos,
-                state->camera_zoom
-                );
+        Texture* texture_outline = 0;
+        if(sin(state->time * 3) > 0)
+        {
+            texture_outline = get_texture_1_outline_from_object(state->curr_ally_object, textures);
+        }
+        else
+        {
+            texture_outline = get_texture_2_outline_from_object(state->curr_ally_object, textures);
+        }
+        draw_texture_at_tilemap_pos(
+            renderer,
+            texture_outline,
+            colors->green,
+            1.0f,
+            state->curr_ally_object->tilemap_pos,
+            state->camera_world_pos,
+            state->camera_zoom
+        );
     }
 
     // no positions
@@ -708,7 +708,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->curr_ally->object->tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
@@ -724,27 +724,27 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 state->curr_ally->object->tilemap_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
     }
 
     // enemy skill draw effect
 
     if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
-    state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
-    state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
-    state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
+       state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
+       state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
+       state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
+       state->gamestate != GAMESTATE__ALLY_EXECUTING_SKILL)
     {
         Object* hover_object = room_get_object_at(state->curr_room, state->mouse_tilemap_pos);
         Enemy* hover_enemy = get_enemy_of_object(state, hover_object);
 
         if(hover_object != 0 &&
-        hover_enemy != 0 &&
-        is_object_enemy(hover_object) &&
-        !hover_object->is_to_be_removed &&
-        hover_object->is_visible &&
-        !hover_enemy->performed_attack)
+           hover_enemy != 0 &&
+           is_object_enemy(hover_object) &&
+           !hover_object->is_to_be_removed &&
+           hover_object->is_visible &&
+           !hover_enemy->performed_attack)
         {
             draw_texture_list(
                 renderer,
@@ -753,7 +753,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                 hover_enemy->draw_effect_tilemap_pos_list,
                 colors->none,
                 0.75f
-                );
+            );
         }
     }
 
@@ -768,6 +768,6 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             state->curr_ally_draw_effect_tilemap_pos_list,
             colors->none,
             0.75f
-            );
+        );
     }
 }

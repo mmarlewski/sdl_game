@@ -225,10 +225,10 @@ Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
 Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
-Action* new_action_move( Vec2i tilemap_pos, int dir4);
-Action* new_action_move_floating( Vec2i tilemap_pos, int dir4);
-Action* new_action_move_flying( Vec2i tilemap_pos, int dir4);
-Action* new_action_crash( Vec2i tilemap_pos, int dir4);
+Action* new_action_move(Vec2i tilemap_pos, int dir4);
+Action* new_action_move_floating(Vec2i tilemap_pos, int dir4);
+Action* new_action_move_flying(Vec2i tilemap_pos, int dir4);
+Action* new_action_crash(Vec2i tilemap_pos, int dir4);
 
 Action* new_action_fall(Object* object, Vec2i tilemap_pos);
 Action* new_action_death(Object* object, Vec2i tilemap_pos);

@@ -18,7 +18,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             for(ListElem* curr_elem = action->sequence.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                Action* curr_action = (Action*)curr_elem->data;
+                Action* curr_action = (Action*) curr_elem->data;
                 draw_action(renderer, state, curr_action, color, textures, colors);
             }
         }
@@ -27,7 +27,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         {
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                Action* curr_action = (Action*)curr_elem->data;
+                Action* curr_action = (Action*) curr_elem->data;
                 draw_action(renderer, state, curr_action, color, textures, colors);
             }
         }
@@ -42,7 +42,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__CRASH:
@@ -55,7 +55,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__FALL:
@@ -68,7 +68,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__DEATH:
@@ -81,7 +81,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__BLOW_UP:
@@ -94,7 +94,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__THROW:
@@ -112,7 +112,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
 
             draw_texture_at_world_pos(
                 renderer,
@@ -122,7 +122,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 target_world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__LIFT:
@@ -135,7 +135,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__DROP:
@@ -148,7 +148,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__CHANGE_FLOOR:
@@ -161,7 +161,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__CHANGE_OBJECT:
@@ -174,7 +174,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__ADD_OBJECT:
@@ -187,7 +187,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         case ACTION__REMOVE_OBJECT:
@@ -200,7 +200,7 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
                 world_iso_pos,
                 state->camera_world_pos,
                 state->camera_zoom
-                );
+            );
         }
         break;
         default:

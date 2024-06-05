@@ -2,7 +2,7 @@
 
 float sound_volume = 1.0f;
 
-Sound* get_sound_from_filepath ( char* filepath)
+Sound* get_sound_from_filepath(char* filepath)
 {
     Sound* sound;
 
@@ -11,7 +11,7 @@ Sound* get_sound_from_filepath ( char* filepath)
     return sound;
 }
 
-void destroy_sound (Sound* sound)
+void destroy_sound(Sound* sound)
 {
     Mix_FreeChunk(sound);
 }

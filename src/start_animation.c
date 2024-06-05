@@ -18,7 +18,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
 
             if(curr_elem)
             {
-                Animation* curr_animation = (Animation*)curr_elem->data;
+                Animation* curr_animation = (Animation*) curr_elem->data;
                 start_animation(state, curr_animation, textures, sounds, musics, colors);
             }
             else
@@ -33,7 +33,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             {
                 if(curr_elem)
                 {
-                    Animation* curr_animation = (Animation*)curr_elem->data;
+                    Animation* curr_animation = (Animation*) curr_elem->data;
                     start_animation(state, curr_animation, textures, sounds, musics, colors);
                 }
             }
@@ -160,7 +160,7 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             change_background_color(
                 state,
                 animation->change_background_color.from_color
-                );
+            );
         }
         break;
     }

@@ -13,7 +13,7 @@ Object* new_object(int type)
     object->is_visible = 1;
     object->is_to_be_removed = 0;
     object->type = type;
-    object->tilemap_pos = vec2i(-1,-1);
+    object->tilemap_pos = vec2i(-1, -1);
     object->action_points = ALLY_MAX_ACTION_POINTS;
     object->attack_dir4 = DIR4__NONE;
 
@@ -37,12 +37,12 @@ Enemy* new_enemy(Object* object)
     enemy->performed_attack = 0;
     enemy->order_number = 0;
 
-    enemy->draw_below_texture_list = new_list((void (*)(void *)) 0);
-    enemy->draw_below_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
-    enemy->draw_above_texture_list = new_list((void (*)(void *)) 0);
-    enemy->draw_above_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
-    enemy->draw_effect_texture_list = new_list((void (*)(void *)) 0);
-    enemy->draw_effect_tilemap_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
+    enemy->draw_below_texture_list = new_list((void (*)(void*)) 0);
+    enemy->draw_below_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+    enemy->draw_above_texture_list = new_list((void (*)(void*)) 0);
+    enemy->draw_above_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+    enemy->draw_effect_texture_list = new_list((void (*)(void*)) 0);
+    enemy->draw_effect_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
 
     return enemy;
 }
@@ -58,7 +58,7 @@ Ally* new_ally(Object* object)
     Ally* ally = malloc(sizeof(*ally));
 
     ally->object = object;
-    ally->skill_list = new_list((void (*)(void *))0);
+    ally->skill_list = new_list((void (*)(void*))0);
 
     return ally;
 }

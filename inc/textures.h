@@ -94,8 +94,8 @@ typedef struct
 
 } Textures_Floor;
 
-void load_textures_floor (Renderer* renderer, Textures_Floor* floor);
-void destroy_textures_floor (Textures_Floor* floor);
+void load_textures_floor(Renderer* renderer, Textures_Floor* floor);
+void destroy_textures_floor(Textures_Floor* floor);
 
 typedef struct
 {
@@ -590,8 +590,8 @@ typedef struct
 
 } Textures_Object;
 
-void load_textures_object (Renderer* renderer, Textures_Object* object);
-void destroy_textures_object (Textures_Object* object);
+void load_textures_object(Renderer* renderer, Textures_Object* object);
+void destroy_textures_object(Textures_Object* object);
 
 typedef struct
 {
@@ -608,8 +608,8 @@ typedef struct
 
 } Textures_OrderNumber;
 
-void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order_number);
-void destroy_textures_order_number (Textures_OrderNumber* order_number);
+void load_textures_order_number(Renderer* renderer, Textures_OrderNumber* order_number);
+void destroy_textures_order_number(Textures_OrderNumber* order_number);
 
 typedef struct
 {
@@ -743,8 +743,8 @@ typedef struct
 
 } Textures_Skill;
 
-void load_textures_skill (Renderer* renderer, Textures_Skill* skill);
-void destroy_textures_skill (Textures_Skill* skill);
+void load_textures_skill(Renderer* renderer, Textures_Skill* skill);
+void destroy_textures_skill(Textures_Skill* skill);
 
 typedef struct
 {
@@ -914,8 +914,8 @@ typedef struct
 
 } Textures_Animation;
 
-void load_textures_animation (Renderer* renderer, Textures_Animation* animation);
-void destroy_textures_animation (Textures_Animation* animation);
+void load_textures_animation(Renderer* renderer, Textures_Animation* animation);
+void destroy_textures_animation(Textures_Animation* animation);
 
 typedef struct
 {
@@ -996,8 +996,8 @@ typedef struct
 
 } Textures_Hud;
 
-void load_textures_hud (Renderer* renderer, Textures_Hud* hud);
-void destroy_textures_hud (Textures_Hud* hud);
+void load_textures_hud(Renderer* renderer, Textures_Hud* hud);
+void destroy_textures_hud(Textures_Hud* hud);
 
 typedef struct
 {
@@ -1018,8 +1018,8 @@ typedef struct
 
 } Textures;
 
-void load_textures (Renderer* renderer, Textures* textures);
-void destroy_textures (Textures* textures);
+void load_textures(Renderer* renderer, Textures* textures);
+void destroy_textures(Textures* textures);
 
 Texture* get_texture_throw(Textures* textures, int dir4);
 Texture* get_texture_lift(Textures* textures, int dir4);

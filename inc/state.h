@@ -122,8 +122,8 @@ typedef struct
 
 } State;
 
-void init_state (State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
-void update_state (Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void create_level(State* state, Textures* textures);
 
@@ -140,16 +140,9 @@ void change_background_color(State* state, Vec3i new_background_color);
 void add_sprite_to_gamemap_sprites(State* state, Sprite* new_sprite);
 void remove_sprite_from_gamemap_sprites(State* state, Sprite* sprite);
 
-void draw_texture_list(
-    Renderer* renderer,
-    State* state,
-    List* texture_list,
-    List* tilemap_pos_list,
-    Vec3i color,
-    float transparency
-    );
+void draw_texture_list(Renderer* renderer, State* state, List* texture_list, List* tilemap_pos_list, Vec3i color, float transparency);
 
-void add_animation_to_animation_list(State* state, Animation* animation, Textures *textures, Sounds *sounds, Musics *musics, Colors *colors);
+void add_animation_to_animation_list(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void start_animation(State* state, Animation* animation, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_animation(State* state, Animation* animation, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
@@ -194,52 +187,11 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
 void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
 
-void skill_on_use(
-    State* state,
-    int skill,
-    Vec2i source_tilemap_pos,
-    Vec2i target_1_tilemap_pos,
-    Vec2i target_2_tilemap_pos,
-    Textures* textures,
-    Colors* colors
-);
-void skill_get_possible_target_1_pos(
-    State* state,
-    int skill,
-    Vec2i source_tilemap_pos,
-    List* target_1_pos_list
-);
-void skill_get_possible_target_2_pos(
-    State* state,
-    int skill,
-    Vec2i source_tilemap_pos,
-    Vec2i target_1_tilemap_pos,
-    List* target_2_pos_list
-);
-Animation* skill_get_animation(
-    State* state,
-    int skill,
-    Vec2i source_tilemap_pos,
-    Vec2i target_1_tilemap_pos,
-    Vec2i target_2_tilemap_pos,
-    Textures* textures,
-    Colors* colors
-);
-void skill_get_actions_and_draw(
-    State* state,
-    int skill,
-    Vec2i source_tilemap_pos,
-    Vec2i target_1_tilemap_pos,
-    Vec2i target_2_tilemap_pos,
-    Action* action_sequence,
-    List* draw_below_texture_list,
-    List* draw_below_tilemap_pos_list,
-    List* draw_above_texture_list,
-    List* draw_above_tilemap_pos_list,
-    List* draw_effect_texture_list,
-    List* draw_effect_tilemap_pos_list,
-    Textures* textures
-);
+void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
+void skill_get_possible_target_1_pos(State* state, int skill, Vec2i source_tilemap_pos, List* target_1_pos_list);
+void skill_get_possible_target_2_pos(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, List* target_2_pos_list);
+Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
+void skill_get_actions_and_draw(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Action* action_sequence, List* draw_below_texture_list, List* draw_below_tilemap_pos_list, List* draw_above_texture_list, List* draw_above_tilemap_pos_list, List* draw_effect_texture_list, List* draw_effect_tilemap_pos_list, Textures* textures);
 
 void object_enemy_prepare_move(State* state, Enemy* enemy);
 void update_enemy_attack_dir4(State* state, Enemy* enemy);
@@ -257,70 +209,27 @@ Ally* get_ally_of_object(State* state, Object* object);
 
 void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, List* path, int is_floating, int is_flying);
 
-void update_enemy_list(
-    State* state
-);
-void update_all_enemy_order(
-    State* state
-);
-void clear_enemy_attack_actions_and_draw(
-    State* state,
-    Enemy* enemy
-);
-void get_enemy_attack_actions_and_draw(
-    State* state,
-    Enemy* enemy,
-    Textures* textures
-);
+void update_enemy_list(State* state);
+void update_all_enemy_order(State* state);
+void clear_enemy_attack_actions_and_draw(State* state, Enemy* enemy);
+void get_enemy_attack_actions_and_draw(State* state, Enemy* enemy, Textures* textures);
 
-void update_ally_list(
-    State* state
-);
-void update_ally_skill_list(
-    State* state,
-    Ally* ally
-);
-void restore_ally_action_points(
-    State* state,
-    Ally* ally
-);
-void clear_curr_ally_attack_actions_and_draw(
-    State* state
-);
-void get_curr_ally_attack_actions_and_draw(
-    State* state,
-    Textures* textures
-);
+void update_ally_list(State* state);
+void update_ally_skill_list(State* state, Ally* ally);
+void restore_ally_action_points(State* state, Ally* ally);
+void clear_curr_ally_attack_actions_and_draw(State* state);
+void get_curr_ally_attack_actions_and_draw(State* state, Textures* textures);
 
-void remove_all_object_to_be_removed(
-    State* state
-);
+void remove_all_object_to_be_removed(State* state);
 
-int is_floor_traversable_for_object(
-    int floor,
-    Object* object
-);
-int is_floor_deadly_on_move_for_object(
-    int floor,
-    Object* object
-);
-int is_floor_deadly_on_drop_for_object(
-    int floor,
-    Object* object
-);
+int is_floor_traversable_for_object(int floor, Object* object);
+int is_floor_deadly_on_move_for_object(int floor, Object* object);
+int is_floor_deadly_on_drop_for_object(int floor, Object* object);
 
 // mechanism
 
-void add_mechanism(
-    State* state,
-    Mechanism* mechanism
-);
-void execute_all_mechanisms(
-    State* state
-);
-void execute_mechanism(
-    State* state,
-    Mechanism* mechanism
-);
+void add_mechanism(State* state, Mechanism* mechanism);
+void execute_all_mechanisms(State* state);
+void execute_mechanism(State* state, Mechanism* mechanism);
 
 #endif

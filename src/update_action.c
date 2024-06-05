@@ -14,7 +14,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
         case ACTION__SEQUENCE:
         {
             ListElem* curr_elem = action->sequence.curr_action_list_elem;
-            Action* curr_action = (Action*)curr_elem->data;
+            Action* curr_action = (Action*) curr_elem->data;
 
             if(curr_action->is_finished)
             {
@@ -24,7 +24,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 
                 if(next_elem != 0)
                 {
-                    Action* next_action = (Action*)next_elem->data;
+                    Action* next_action = (Action*) next_elem->data;
                     start_action(state, action, next_action, textures, sounds, musics, colors);
                 }
             }
@@ -43,7 +43,7 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
 
             for(ListElem* curr_elem = action->simultaneous.action_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                Action* curr_action = (Action*)curr_elem->data;
+                Action* curr_action = (Action*) curr_elem->data;
                 if(curr_action->is_finished)
                 {
                     end_action(state, curr_action, curr_action, textures, sounds, musics, colors);

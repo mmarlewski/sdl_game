@@ -13,31 +13,31 @@ Animation* skill_get_animation(
     Object* source_object = room_get_object_at(
         state->curr_room,
         source_tilemap_pos
-        );
+    );
     int source_floor = room_get_floor_at(
         state->curr_room,
         source_tilemap_pos
-        );
+    );
     Object* target_1_object = room_get_object_at(
         state->curr_room,
         target_1_tilemap_pos
-        );
+    );
     int target_1_floor = room_get_floor_at(
         state->curr_room,
         target_1_tilemap_pos
-        );
+    );
     Object* target_2_object = room_get_object_at(
         state->curr_room,
         target_2_tilemap_pos
-        );
+    );
     int target_2_floor = room_get_floor_at(
         state->curr_room,
         target_2_tilemap_pos
-        );
+    );
 
     Animation* skill_animation = new_animation_none();
 
-    switch (skill)
+    switch(skill)
     {
         case SKILL__MANIPULATION:
         {
@@ -90,8 +90,8 @@ Animation* skill_get_animation(
                                 get_texture_scissor_start(textures, distance_info.dir4),
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
                     else if(vec2i_equals(tilemap_pos, target_2_tilemap_pos))
                     {
@@ -101,19 +101,19 @@ Animation* skill_get_animation(
                                 get_texture_scissor_end(textures, get_opposite_dir4(distance_info.dir4)),
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
                     else
                     {
                         add_animation_to_end_animation_simultaneous(
                             animation_simultaneous,
                             new_animation_show_sprite_in_gamemap(
-                                get_texture_scissor_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4),
+                                get_texture_scissor_from_to(textures, get_opposite_dir4(distance_info.dir4), distance_info.dir4),
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
 
                     tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
@@ -122,7 +122,7 @@ Animation* skill_get_animation(
                 add_animation_to_end_animation_sequence(
                     animation_sequence,
                     animation_simultaneous
-                    );
+                );
             }
 
             skill_animation = animation_sequence;
@@ -140,8 +140,8 @@ Animation* skill_get_animation(
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                     1.0f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -149,8 +149,8 @@ Animation* skill_get_animation(
                     textures->skill.melt_effect,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             skill_animation = animation_sequence;
         }
@@ -167,8 +167,8 @@ Animation* skill_get_animation(
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                     1.0f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -176,8 +176,8 @@ Animation* skill_get_animation(
                     textures->animation.blow_up_1,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -185,8 +185,8 @@ Animation* skill_get_animation(
                     textures->animation.blow_up_2,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             skill_animation = animation_sequence;
         }
@@ -203,8 +203,8 @@ Animation* skill_get_animation(
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                     1.0f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -212,8 +212,8 @@ Animation* skill_get_animation(
                     textures->skill.shake_effect,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             skill_animation = animation_sequence;
         }
@@ -225,7 +225,7 @@ Animation* skill_get_animation(
                 tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                 0.2f
-                );
+            );
         }
         break;
         case SKILL__SHOOT_PROJECTILE_SQUIRREL:
@@ -235,7 +235,7 @@ Animation* skill_get_animation(
                 tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                 0.2f
-                );
+            );
         }
         break;
         case SKILL__DRAG_HOOK:
@@ -266,7 +266,7 @@ Animation* skill_get_animation(
                     if(vec2i_equals(tilemap_pos, source_tilemap_pos))
                     {
                         Texture* texture = 0;
-                        switch (skill)
+                        switch(skill)
                         {
                             case SKILL__DRAG_HOOK:
                             case SKILL__DRAG_AND_THROW_HOOK:
@@ -295,13 +295,13 @@ Animation* skill_get_animation(
                                 texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
                     else if(vec2i_equals(tilemap_pos, target_1_tilemap_pos))
                     {
                         Texture* texture = 0;
-                        switch (skill)
+                        switch(skill)
                         {
                             case SKILL__DRAG_HOOK:
                             case SKILL__DRAG_AND_THROW_HOOK:
@@ -330,30 +330,30 @@ Animation* skill_get_animation(
                                 texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
                     else
                     {
                         Texture* texture = 0;
-                        switch (skill)
+                        switch(skill)
                         {
                             case SKILL__DRAG_HOOK:
                             case SKILL__DRAG_AND_THROW_HOOK:
                             case SKILL__PULL_HOOK:
-                            texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4), distance_info.dir4);
                             break;
                             case SKILL__DRAG_SPIDERWEB:
                             case SKILL__PULL_SPIDERWEB:
-                            texture = get_texture_spiderweb_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            texture = get_texture_spiderweb_from_to(textures, get_opposite_dir4(distance_info.dir4), distance_info.dir4);
                             break;
                             case SKILL__DRAG_TENTACLE:
                             case SKILL__PULL_TENTACLE:
-                            texture = get_texture_tentacle_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            texture = get_texture_tentacle_from_to(textures, get_opposite_dir4(distance_info.dir4), distance_info.dir4);
                             break;
                             case SKILL__DRAG_AND_THROW_TONGUE:
                             case SKILL__PULL_TONGUE:
-                            texture = get_texture_tongue_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                            texture = get_texture_tongue_from_to(textures, get_opposite_dir4(distance_info.dir4), distance_info.dir4);
                             break;
                             default:
                             break;
@@ -365,8 +365,8 @@ Animation* skill_get_animation(
                                 texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
 
                     tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
@@ -375,7 +375,7 @@ Animation* skill_get_animation(
                 add_animation_to_end_animation_sequence(
                     animation_sequence,
                     animation_simultaneous
-                    );
+                );
             }
 
             skill_animation = animation_sequence;
@@ -389,7 +389,7 @@ Animation* skill_get_animation(
                 tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                 ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                 1.0f
-                );
+            );
         }
         break;
         case SKILL__TURRET_LASER:
@@ -402,7 +402,7 @@ Animation* skill_get_animation(
                     source_tilemap_pos,
                     distance_info.dir4,
                     OBJECT_TURRET_RANGE
-                    );
+                );
 
             Animation* animation_simultaneous = new_animation_simultaneous();
             Vec2i tilemap_pos = source_tilemap_pos;
@@ -418,8 +418,8 @@ Animation* skill_get_animation(
                             get_texture_laser(textures, distance_info.dir4),
                             tilemap_pos_to_gamemap_pos(tilemap_pos),
                             show_sprite_length_in_seconds
-                            )
-                        );
+                        )
+                    );
                 }
                 else if(vec2i_equals(tilemap_pos, range_end_tilemap_pos))
                 {
@@ -429,8 +429,8 @@ Animation* skill_get_animation(
                             get_texture_laser(textures, get_opposite_dir4(distance_info.dir4)),
                             tilemap_pos_to_gamemap_pos(tilemap_pos),
                             show_sprite_length_in_seconds
-                            )
-                        );
+                        )
+                    );
                 }
                 else if(distance_info.dir4 == DIR4__UP || distance_info.dir4 == DIR4__DOWN)
                 {
@@ -440,8 +440,8 @@ Animation* skill_get_animation(
                             textures->animation.laser_vertical,
                             tilemap_pos_to_gamemap_pos(tilemap_pos),
                             show_sprite_length_in_seconds
-                            )
-                        );
+                        )
+                    );
                 }
                 else if(distance_info.dir4 == DIR4__RIGHT || distance_info.dir4 == DIR4__LEFT)
                 {
@@ -451,8 +451,8 @@ Animation* skill_get_animation(
                             textures->animation.laser_horizontal,
                             tilemap_pos_to_gamemap_pos(tilemap_pos),
                             show_sprite_length_in_seconds
-                            )
-                        );
+                        )
+                    );
                 }
 
                 tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
@@ -473,8 +473,8 @@ Animation* skill_get_animation(
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                     1.0f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -482,8 +482,8 @@ Animation* skill_get_animation(
                     textures->animation.blow_up_1,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -491,8 +491,8 @@ Animation* skill_get_animation(
                     textures->animation.blow_up_2,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             skill_animation = animation_sequence;
         }
@@ -508,8 +508,8 @@ Animation* skill_get_animation(
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.2f
-                    )
-                );
+                )
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -517,8 +517,8 @@ Animation* skill_get_animation(
                     textures->skill.shake_effect,
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     0.1f
-                    )
-                );
+                )
+            );
 
             skill_animation = animation_sequence;
         }
@@ -535,11 +535,11 @@ Animation* skill_get_animation(
                         target_2_tilemap_pos,
                         dir4,
                         1
-                        );
+                    );
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     if(object == 0)
                     {
                         is_able_to_emerge = 1;
@@ -552,17 +552,17 @@ Animation* skill_get_animation(
                         textures->animation.minibot_enemy,
                         tilemap_pos_to_gamemap_pos(
                             target_2_tilemap_pos
-                            ),
+                        ),
                         tilemap_pos_to_gamemap_pos(
                             vec2i_move_in_dir4_by(
                                 target_2_tilemap_pos,
                                 emerge_dir4,
                                 1
-                                )
-                            ),
+                            )
+                        ),
                         ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                         1.0f
-                        );
+                    );
                 }
             }
         }

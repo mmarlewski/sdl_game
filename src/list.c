@@ -2,19 +2,19 @@
 
 List* new_list(void(*destroy)(void* data))
 {
-	List* list = malloc(sizeof(*list));
+    List* list = malloc(sizeof(*list));
 
-	list->size = 0;
-	list->head = 0;
-	list->tail = 0;
+    list->size = 0;
+    list->head = 0;
+    list->tail = 0;
     list->destroy = destroy;
 
-	return list;
+    return list;
 }
 
 void destroy_list(List* list)
 {
-	free(list);
+    free(list);
 }
 
 // if element is 0: add after list head
@@ -100,39 +100,39 @@ void add_new_list_element_to_list_end(List* list, void* data)
 
 void remove_list_element(List* list, ListElem* element, int destroy_data)
 {
-	if(element == list->head)
-	{
+    if(element == list->head)
+    {
         list->head = element->next;
 
-		if(list->head == 0)
-		{
-			list->tail = 0;
-		}
-		else
-		{
-			element->next->prev = 0;
-		}
-	}
-	else
-	{
-		element->prev->next = element->next;
+        if(list->head == 0)
+        {
+            list->tail = 0;
+        }
+        else
+        {
+            element->next->prev = 0;
+        }
+    }
+    else
+    {
+        element->prev->next = element->next;
 
-		if(element->next == 0)
-		{
-			list->tail = element->prev;
-		}
-		else
-		{
-			element->next->prev = element->prev;
-		}
-	}
+        if(element->next == 0)
+        {
+            list->tail = element->prev;
+        }
+        else
+        {
+            element->next->prev = element->prev;
+        }
+    }
 
     if(destroy_data && list->destroy != 0)
     {
         list->destroy(element->data);
     }
 
-	free(element);
+    free(element);
 
     list->size--;
 }
@@ -165,7 +165,7 @@ void remove_all_list_elements_after_element(List* list, ListElem* element, int d
             ListElem* next_element = curr_element->next;
             if(destroy_data && list->destroy != 0)
             {
-                 list->destroy(curr_element->data);
+                list->destroy(curr_element->data);
             }
             free(curr_element);
             curr_element = next_element;
@@ -178,7 +178,7 @@ void remove_all_list_elements(List* list, int destroy_data)
 {
     ListElem* curr_element = list->head;
 
-	while(curr_element != 0)
+    while(curr_element != 0)
     {
         ListElem* next_element = curr_element->next;
         if(destroy_data && list->destroy != 0)

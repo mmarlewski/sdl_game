@@ -119,7 +119,7 @@ DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 void get_line_from_tilemap_pos_in_dir4(Vec2i from_tilemap_pos, int dir4, int length, List* list)
 {
     Vec2i tilemap_pos = from_tilemap_pos;
-    for (int i = 0; i < length; i++)
+    for(int i = 0; i < length; i++)
     {
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
@@ -130,13 +130,13 @@ void get_line_from_tilemap_pos_to_tilemap_pos(Vec2i from_tilemap_pos, Vec2i to_t
 {
     int distance = fmax(abs(to_tilemap_pos.x - from_tilemap_pos.x), abs(to_tilemap_pos.y - from_tilemap_pos.y));
 
-    for (int i = 0; i < distance; i++)
+    for(int i = 0; i < distance; i++)
     {
         Vec2i new_tilemap_pos =
             vec2i(
-                round(from_tilemap_pos.x + ((float)i / distance) * (to_tilemap_pos.x - from_tilemap_pos.x)),
-                round(from_tilemap_pos.y + ((float)i / distance) * (to_tilemap_pos.y - from_tilemap_pos.y))
-                );
+                round(from_tilemap_pos.x + ((float) i / distance) * (to_tilemap_pos.x - from_tilemap_pos.x)),
+                round(from_tilemap_pos.y + ((float) i / distance) * (to_tilemap_pos.y - from_tilemap_pos.y))
+            );
 
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(new_tilemap_pos));
     }
@@ -144,28 +144,28 @@ void get_line_from_tilemap_pos_to_tilemap_pos(Vec2i from_tilemap_pos, Vec2i to_t
 
 void get_square_perimeter_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list)
 {
-    if (radius < 0) return;
+    if(radius < 0) return;
 
     Vec2i tilemap_pos = center_tilemap_pos;
     tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, radius);
     tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, radius);
 
-    for (int i = 0; i < radius * 2; i++)
+    for(int i = 0; i < radius * 2; i++)
     {
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__RIGHT, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
-    for (int i = 0; i < radius * 2; i++)
+    for(int i = 0; i < radius * 2; i++)
     {
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__DOWN, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
-    for (int i = 0; i < radius * 2; i++)
+    for(int i = 0; i < radius * 2; i++)
     {
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__LEFT, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
     }
-    for (int i = 0; i < radius * 2; i++)
+    for(int i = 0; i < radius * 2; i++)
     {
         tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, DIR4__UP, 1);
         add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(tilemap_pos));
@@ -174,11 +174,11 @@ void get_square_perimeter_tilemap_pos(Vec2i center_tilemap_pos, int radius, List
 
 void get_square_area_tilemap_pos(Vec2i center_tilemap_pos, int radius, List* list)
 {
-    if (radius < 0) return;
+    if(radius < 0) return;
 
     add_new_list_element_to_list_end(list, new_vec2i_from_vec2i(center_tilemap_pos));
 
-    for (int i = 0; i < radius; i++)
+    for(int i = 0; i < radius; i++)
     {
         get_square_perimeter_tilemap_pos(center_tilemap_pos, i, list);
     }

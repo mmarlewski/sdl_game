@@ -3,7 +3,7 @@
 int is_music_paused = 0;
 float music_volume = 1.0f;
 
-Music* get_music_from_filepath ( char* filepath)
+Music* get_music_from_filepath(char* filepath)
 {
     Music* music;
 
@@ -12,7 +12,7 @@ Music* get_music_from_filepath ( char* filepath)
     return music;
 }
 
-void destroy_music (Music* music)
+void destroy_music(Music* music)
 {
     Mix_FreeMusic(music);
 }

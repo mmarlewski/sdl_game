@@ -3,8 +3,8 @@
 void update_enemy_attack_dir4(State* state, Enemy* enemy)
 {
     enemy->skill = SKILL__NONE;
-    enemy->target_1_tilemap_pos = vec2i(0,0);
-    enemy->target_2_tilemap_pos = vec2i(0,0);
+    enemy->target_1_tilemap_pos = vec2i(0, 0);
+    enemy->target_2_tilemap_pos = vec2i(0, 0);
 
     switch(enemy->object->type)
     {
@@ -24,18 +24,18 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         enemy->object->tilemap_pos,
                         dir4,
                         i
-                        );
+                    );
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
                         Object* object = room_get_object_at(
                             state->curr_room,
                             tilemap_pos
-                            );
+                        );
                         int floor = room_get_floor_at(
                             state->curr_room,
                             tilemap_pos
-                            );
+                        );
 
                         if(!is_floor_traversable_for_object(floor, enemy->object))
                         {
@@ -58,9 +58,9 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 }
 
                 printf("dir4: %i, score: %i \n",
-                    dir4,
-                    score
-                    );
+                       dir4,
+                       score
+                );
 
                 if(score > max_score)
                 {
@@ -70,9 +70,9 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             }
 
             printf("\ndir4: %i, score: %i \n",
-                chosen_dir4,
-                max_score
-                );
+                   chosen_dir4,
+                   max_score
+            );
 
             enemy->object->attack_dir4 = chosen_dir4;
         }
@@ -94,18 +94,18 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         enemy->object->tilemap_pos,
                         dir4,
                         i
-                        );
+                    );
 
                     if(is_tilemap_in_bounds(tilemap_pos))
                     {
                         Object* object = room_get_object_at(
                             state->curr_room,
                             tilemap_pos
-                            );
+                        );
                         int floor = room_get_floor_at(
                             state->curr_room,
                             tilemap_pos
-                            );
+                        );
 
                         if(object != 0)
                         {
@@ -125,9 +125,9 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 }
 
                 printf("dir4: %i, score: %i \n",
-                    dir4,
-                    score
-                    );
+                       dir4,
+                       score
+                );
 
                 if(score > max_score)
                 {
@@ -137,9 +137,9 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             }
 
             printf("\ndir4: %i, score: %i \n",
-                chosen_dir4,
-                max_score
-                );
+                   chosen_dir4,
+                   max_score
+            );
 
             enemy->object->attack_dir4 = chosen_dir4;
         }
@@ -152,21 +152,21 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:
         {
             List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(object == 0)
                     {
@@ -184,7 +184,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_emerge_tilemap_pos_list,
                     random_index
-                    );
+                );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
@@ -197,28 +197,28 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             remove_all_list_elements(
                 possible_emerge_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_emerge_tilemap_pos_list);
         }
         break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:
         {
             List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(floor == FLOOR__WATER && object == 0)
                     {
@@ -236,7 +236,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_emerge_tilemap_pos_list,
                     random_index
-                    );
+                );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
@@ -249,28 +249,28 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             remove_all_list_elements(
                 possible_emerge_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_emerge_tilemap_pos_list);
         }
         break;
         case OBJECT__ENVIRONMENT_EMERGE_PIT:
         {
             List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(floor == FLOOR__PIT && object == 0)
                     {
@@ -288,7 +288,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_emerge_tilemap_pos_list,
                     random_index
-                    );
+                );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
@@ -301,28 +301,28 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             remove_all_list_elements(
                 possible_emerge_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_emerge_tilemap_pos_list);
         }
         break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:
         {
             List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(is_floor_burrow(floor) && object == 0)
                     {
@@ -340,7 +340,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_emerge_tilemap_pos_list,
                     random_index
-                    );
+                );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
@@ -353,28 +353,28 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             remove_all_list_elements(
                 possible_emerge_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_emerge_tilemap_pos_list);
         }
         break;
         case OBJECT__ENVIRONMENT_EMERGE_PIPE:
         {
             List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(object != 0 && object->type == OBJECT__PIPE)
                     {
@@ -392,7 +392,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_emerge_tilemap_pos_list,
                     random_index
-                    );
+                );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
@@ -405,28 +405,28 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             remove_all_list_elements(
                 possible_emerge_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_emerge_tilemap_pos_list);
         }
         break;
         case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:
         {
             List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(is_floor_burrow(floor))
                     {
@@ -444,7 +444,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_emerge_tilemap_pos_list,
                     random_index
-                    );
+                );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
@@ -457,7 +457,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             remove_all_list_elements(
                 possible_emerge_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_emerge_tilemap_pos_list);
         }
         break;

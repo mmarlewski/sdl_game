@@ -30,7 +30,7 @@ typedef struct
 
 } Colors;
 
-void load_colors (Colors* colors);
-void destroy_colors (Colors* colors);
+void load_colors(Colors* colors);
+void destroy_colors(Colors* colors);
 
 #endif

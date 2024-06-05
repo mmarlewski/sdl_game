@@ -28,7 +28,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         case ACTION__MOVE_FLOATING:
         case ACTION__MOVE_FLYING:
         {
-            action->move.object->tilemap_pos = vec2i_move_in_dir4_by(action->move.object->tilemap_pos,action->move.dir4,1);
+            action->move.object->tilemap_pos = vec2i_move_in_dir4_by(action->move.object->tilemap_pos, action->move.dir4, 1);
 
             int floor = room_get_floor_at(state->curr_room, action->move.object->tilemap_pos);
 
@@ -93,11 +93,11 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                     action->tilemap_pos,
                     dir4,
                     1
-                    );
+                );
                 Object* object = room_get_object_at(
                     state->curr_room,
                     tilemap_pos
-                    );
+                );
 
                 if(object != 0 && is_object_movable(object))
                 {
@@ -109,9 +109,9 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                                 new_action_move_flying(
                                     tilemap_pos,
                                     dir4
-                                    )
                                 )
-                            );
+                            )
+                        );
                     }
                     else if(is_object_floating(object))
                     {
@@ -121,9 +121,9 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                                 new_action_move_floating(
                                     tilemap_pos,
                                     dir4
-                                    )
                                 )
-                            );
+                            )
+                        );
                     }
                     else
                     {
@@ -133,9 +133,9 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                                 new_action_move(
                                     tilemap_pos,
                                     dir4
-                                    )
                                 )
-                            );
+                            )
+                        );
                     }
                 }
             }
@@ -143,7 +143,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             add_action_after_curr_action_action_sequence(
                 sequence,
                 push_around
-                );
+            );
         }
         break;
         case ACTION__THROW:
@@ -172,7 +172,7 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             int floor = room_get_floor_at(state->curr_room, action->drop.object->tilemap_pos);
 
             if(!is_object_floating(action->drop.object) &&
-            !is_object_flying(action->drop.object))
+               !is_object_flying(action->drop.object))
             {
                 floor_on_drop(state, sequence, action, floor);
             }

@@ -14,7 +14,7 @@ void skill_on_use(
     Object* target_1_object = room_get_object_at(state->curr_room, target_1_tilemap_pos);
     Object* target_2_object = room_get_object_at(state->curr_room, target_2_tilemap_pos);
 
-    switch (skill)
+    switch(skill)
     {
         case SKILL__USE:
         {
@@ -36,7 +36,7 @@ void skill_on_use(
                         state,
                         state->curr_room->name,
                         target_2_tilemap_pos
-                        );
+                    );
 
                     if(passage != 0)
                     {
@@ -60,20 +60,20 @@ void skill_on_use(
                             int was_room_already_visited = is_data_in_list(
                                 state->visited_room_list,
                                 room
-                                );
+                            );
                             if(!was_room_already_visited)
                             {
                                 add_new_list_element_to_list_end(
                                     state->visited_room_list,
                                     room
-                                    );
+                                );
                             }
 
                             // all enemies
                             update_enemy_list(state);
                             update_all_enemy_order(state);
                             for(ListElem* curr_elem = state->enemy_list->head;
-                            curr_elem != 0; curr_elem = curr_elem->next)
+                                curr_elem != 0; curr_elem = curr_elem->next)
                             {
                                 Enemy* curr_enemy = (Enemy*) curr_elem->data;
                                 if(!was_room_already_visited)
@@ -82,13 +82,13 @@ void skill_on_use(
                                 }
                                 update_enemy_attack_targets(state, curr_enemy);
                                 clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                                get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
+                                get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
                             }
 
                             // all allies
                             update_ally_list(state);
                             for(ListElem* curr_elem = state->ally_list->head;
-                            curr_elem != 0; curr_elem = curr_elem->next)
+                                curr_elem != 0; curr_elem = curr_elem->next)
                             {
                                 Ally* curr_ally = (Ally*) curr_elem->data;
                                 update_ally_skill_list(state, curr_ally);
@@ -97,14 +97,14 @@ void skill_on_use(
                             // curr ally
                             int was_prev_ally_chosen = 0;
                             for(ListElem* curr_elem = state->ally_list->head;
-                            !was_prev_ally_chosen && curr_elem != 0;
-                            curr_elem = curr_elem->next)
+                                !was_prev_ally_chosen && curr_elem != 0;
+                                curr_elem = curr_elem->next)
                             {
                                 Ally* curr_ally = (Ally*) curr_elem->data;
                                 if(curr_ally != 0)
                                 {
                                     if(curr_ally->object != 0 &&
-                                    curr_ally->object == state->curr_ally_object)
+                                       curr_ally->object == state->curr_ally_object)
                                     {
                                         state->curr_ally_list_elem = curr_elem;
                                         state->curr_ally = curr_ally;
@@ -135,7 +135,7 @@ void skill_on_use(
                             state,
                             state->curr_room->name,
                             target_2_tilemap_pos
-                            );
+                        );
 
                         if(passage != 0)
                         {
@@ -159,20 +159,20 @@ void skill_on_use(
                                 int was_room_already_visited = is_data_in_list(
                                     state->visited_room_list,
                                     room
-                                    );
+                                );
                                 if(!was_room_already_visited)
                                 {
                                     add_new_list_element_to_list_end(
                                         state->visited_room_list,
                                         room
-                                        );
+                                    );
                                 }
 
                                 // all enemies
                                 update_enemy_list(state);
                                 update_all_enemy_order(state);
                                 for(ListElem* curr_elem = state->enemy_list->head;
-                                curr_elem != 0; curr_elem = curr_elem->next)
+                                    curr_elem != 0; curr_elem = curr_elem->next)
                                 {
                                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                                     if(!was_room_already_visited)
@@ -181,13 +181,13 @@ void skill_on_use(
                                     }
                                     update_enemy_attack_targets(state, curr_enemy);
                                     clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                                    get_enemy_attack_actions_and_draw(state, curr_enemy,textures);
+                                    get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
                                 }
 
                                 // all allies
                                 update_ally_list(state);
                                 for(ListElem* curr_elem = state->ally_list->head;
-                                curr_elem != 0; curr_elem = curr_elem->next)
+                                    curr_elem != 0; curr_elem = curr_elem->next)
                                 {
                                     Ally* curr_ally = (Ally*) curr_elem->data;
                                     update_ally_skill_list(state, curr_ally);
@@ -196,14 +196,14 @@ void skill_on_use(
                                 // curr ally
                                 int was_prev_ally_chosen = 0;
                                 for(ListElem* curr_elem = state->ally_list->head;
-                                !was_prev_ally_chosen && curr_elem != 0;
-                                curr_elem = curr_elem->next)
+                                    !was_prev_ally_chosen && curr_elem != 0;
+                                    curr_elem = curr_elem->next)
                                 {
                                     Ally* curr_ally = (Ally*) curr_elem->data;
                                     if(curr_ally != 0)
                                     {
                                         if(curr_ally->object != 0 &&
-                                        curr_ally->object == state->curr_ally_object)
+                                           curr_ally->object == state->curr_ally_object)
                                         {
                                             state->curr_ally_list_elem = curr_elem;
                                             state->curr_ally = curr_ally;
@@ -252,8 +252,8 @@ void skill_on_use(
             }
 
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 state->hero_item_number[item_type] += item_count;
             }
@@ -273,8 +273,8 @@ void skill_on_use(
         case SKILL__PUT_ITEM_CELL_FAR:
         {
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__CELL] >= 1)
                 {
@@ -282,8 +282,8 @@ void skill_on_use(
                 }
             }
             else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
                 source_object->type = OBJECT__MINIBOT_ALLY;
             }
@@ -293,8 +293,8 @@ void skill_on_use(
         case SKILL__PUT_ITEM_DYNAMITE_FAR:
         {
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
                 {
@@ -302,8 +302,8 @@ void skill_on_use(
                 }
             }
             else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
                 source_object->type = OBJECT__MINIBOT_ALLY;
             }
@@ -313,8 +313,8 @@ void skill_on_use(
         case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
                 {
@@ -322,8 +322,8 @@ void skill_on_use(
                 }
             }
             else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
                 source_object->type = OBJECT__MINIBOT_ALLY;
             }
@@ -332,8 +332,8 @@ void skill_on_use(
         case SKILL__THROW_ITEM_CELL:
         {
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__CELL] >= 1)
                 {
@@ -341,8 +341,8 @@ void skill_on_use(
                 }
             }
             else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
                 source_object->type = OBJECT__MINIBOT_ALLY;
             }
@@ -351,8 +351,8 @@ void skill_on_use(
         case SKILL__THROW_ITEM_DYNAMITE:
         {
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
                 {
@@ -360,8 +360,8 @@ void skill_on_use(
                 }
             }
             else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
                 source_object->type = OBJECT__MINIBOT_ALLY;
             }
@@ -370,8 +370,8 @@ void skill_on_use(
         case SKILL__THROW_ITEM_GEMSTONE:
         {
             if(source_object->type == OBJECT__HERO ||
-            source_object->type == OBJECT__HERO_FLOATING ||
-            source_object->type == OBJECT__HERO_FLYING)
+               source_object->type == OBJECT__HERO_FLOATING ||
+               source_object->type == OBJECT__HERO_FLYING)
             {
                 if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
                 {
@@ -379,8 +379,8 @@ void skill_on_use(
                 }
             }
             else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-            source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-            source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
             {
                 source_object->type = OBJECT__MINIBOT_ALLY;
             }
@@ -395,9 +395,9 @@ void skill_on_use(
         case SKILL__MINIBOT_MERGE:
         {
             if(target_2_object != 0 &&
-            (target_2_object->type == OBJECT__HERO ||
-            target_2_object->type == OBJECT__HERO_FLOATING ||
-            target_2_object->type == OBJECT__HERO_FLYING))
+               (target_2_object->type == OBJECT__HERO ||
+                target_2_object->type == OBJECT__HERO_FLOATING ||
+                target_2_object->type == OBJECT__HERO_FLYING))
             {
                 state->was_minibot_launched = 0;
 
@@ -405,7 +405,7 @@ void skill_on_use(
                     state->curr_room,
                     state->minibot_object,
                     0
-                    );
+                );
 
                 if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY)
                 {

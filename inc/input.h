@@ -80,7 +80,7 @@ typedef struct
 
 } Input;
 
-void init_input (Input* input);
-void update_input (Input* input);
+void init_input(Input* input);
+void update_input(Input* input);
 
 #endif

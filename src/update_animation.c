@@ -14,7 +14,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
         case ANIMATION__SEQUENCE:
         {
             ListElem* curr_elem = animation->sequence.curr_animation_list_elem;
-            Animation* curr_animation = (Animation*)curr_elem->data;
+            Animation* curr_animation = (Animation*) curr_elem->data;
 
             update_animation(state, curr_animation, delta_time, textures, sounds, musics, colors);
 
@@ -26,7 +26,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
 
                 if(next_elem != 0)
                 {
-                    Animation* next_animation = (Animation*)next_elem->data;
+                    Animation* next_animation = (Animation*) next_elem->data;
                     start_animation(state, next_animation, textures, sounds, musics, colors);
                 }
             }
@@ -41,7 +41,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
 
             for(ListElem* curr_elem = animation->simultaneous.animation_list->head; curr_elem; curr_elem = curr_elem->next)
             {
-                Animation* curr_animation = (Animation*)curr_elem->data;
+                Animation* curr_animation = (Animation*) curr_elem->data;
                 if(curr_animation->is_finished)
                 {
                     end_animation(state, curr_animation, textures, sounds, musics, colors);
@@ -70,17 +70,17 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
 
             float time_ratio = animation_animation.time / animation_animation.seconds;
             Vec2f gamemap_diff = vec2f(
-            animation_animation.to_gamemap_pos.x - animation_animation.from_gamemap_pos.x,
-            animation_animation.to_gamemap_pos.y - animation_animation.from_gamemap_pos.y
+                animation_animation.to_gamemap_pos.x - animation_animation.from_gamemap_pos.x,
+                animation_animation.to_gamemap_pos.y - animation_animation.from_gamemap_pos.y
             );
             Vec2f sprite_gamemap_pos = vec2f(
-            animation_animation.from_gamemap_pos.x + gamemap_diff.x * time_ratio,
-            animation_animation.from_gamemap_pos.y + gamemap_diff.y * time_ratio
+                animation_animation.from_gamemap_pos.x + gamemap_diff.x * time_ratio,
+                animation_animation.from_gamemap_pos.y + gamemap_diff.y * time_ratio
             );
             animation_animation.sprite->gamemap_pos = vec3f(
-            sprite_gamemap_pos.x,
-            sprite_gamemap_pos.y,
-            0.0f
+                sprite_gamemap_pos.x,
+                sprite_gamemap_pos.y,
+                0.0f
             );
             animation_animation.time += delta_time;
 
@@ -218,7 +218,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             Vec2f camera_world_pos;
             camera_world_pos.x = animation_animation.from_world_pos.x + world_diff.x * time_ratio;
             camera_world_pos.y = animation_animation.from_world_pos.y + world_diff.y * time_ratio;
-            camera_world_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
+            camera_world_pos.y -= sin(3.14f * time_ratio) * TILE_LENGTH * 0.5f * animation_animation.sin_mul;
             state->camera_world_pos = camera_world_pos;
             animation_animation.time += delta_time;
 
@@ -259,7 +259,7 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             camera_gamemap_pos.y = animation_animation.from_gamemap_pos.y + gamemap_diff.y * time_ratio;
             Vec2f camera_world_pos;
             camera_world_pos = cart_pos_to_iso_pos(gamemap_pos_to_world_pos(camera_gamemap_pos));
-            camera_world_pos.y -= sin(3.14f * time_ratio) *  TILE_LENGTH * 0.5f * animation_animation.sin_mul;
+            camera_world_pos.y -= sin(3.14f * time_ratio) * TILE_LENGTH * 0.5f * animation_animation.sin_mul;
             state->camera_world_pos = camera_world_pos;
             animation_animation.time += delta_time;
 

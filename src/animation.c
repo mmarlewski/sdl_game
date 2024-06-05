@@ -2,7 +2,7 @@
 
 Animation* new_animation_none()
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__NONE;
@@ -12,12 +12,12 @@ Animation* new_animation_none()
 
 Animation* new_animation_sequence()
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__SEQUENCE;
 
-    animation->sequence.animation_list = new_list((void(*)(void*))&destroy_animation);
+    animation->sequence.animation_list = new_list((void(*)(void*)) & destroy_animation);
     animation->sequence.curr_animation_list_elem = 0;
 
     return animation;
@@ -54,12 +54,12 @@ void add_animation_to_end_animation_sequence(Animation* animation_sequence, Anim
 
 Animation* new_animation_simultaneous()
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__SIMULTANEOUS;
 
-    animation->simultaneous.animation_list = new_list((void(*)(void*))&destroy_animation);
+    animation->simultaneous.animation_list = new_list((void(*)(void*)) & destroy_animation);
 
     return animation;
 }
@@ -95,7 +95,7 @@ void add_animation_to_end_animation_simultaneous(Animation* animation_simultaneo
 
 Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_LINE;
@@ -113,7 +113,7 @@ Animation* new_animation_move_sprite_in_gamemap_in_line(Texture* texture, Vec2f 
 
 Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds, float sin_mul)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH;
@@ -132,7 +132,7 @@ Animation* new_animation_move_sprite_in_gamemap_in_arch(Texture* texture, Vec2f 
 
 Animation* new_animation_show_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__SHOW_SPRITE_IN_GAMEMAP;
@@ -149,7 +149,7 @@ Animation* new_animation_show_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
 
 Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__ASCEND_SPRITE_IN_GAMEMAP;
@@ -167,7 +167,7 @@ Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, Vec2f gamema
 
 Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__DESCEND_SPRITE_IN_GAMEMAP;
@@ -185,7 +185,7 @@ Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, Vec2f gamem
 
 Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__FALL_SPRITE_IN_GAMEMAP;
@@ -203,7 +203,7 @@ Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
 
 Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, int start_from_curr)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE;
@@ -219,7 +219,7 @@ Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2
 
 Animation* new_animation_move_camera_in_world_in_arch(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, float sin_mul, int start_from_curr)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH;
@@ -235,7 +235,7 @@ Animation* new_animation_move_camera_in_world_in_arch(Vec2f from_world_pos, Vec2
 }
 Animation* new_animation_move_camera_in_gamemap_in_line(Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_LINE;
@@ -250,7 +250,7 @@ Animation* new_animation_move_camera_in_gamemap_in_line(Vec2f from_gamemap_pos, 
 
 Animation* new_animation_move_camera_in_gamemap_in_arch(Vec2f from_gamemap_pos, Vec2f to_gamemap_pos, float seconds, float sin_mul)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__MOVE_CAMERA_IN_GAMEMAP_IN_ARCH;
@@ -266,7 +266,7 @@ Animation* new_animation_move_camera_in_gamemap_in_arch(Vec2f from_gamemap_pos, 
 
 Animation* new_animation_play_sound(Sound* sound)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__PLAY_SOUND;
@@ -277,7 +277,7 @@ Animation* new_animation_play_sound(Sound* sound)
 
 Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_color, float seconds)
 {
-    Animation* animation = malloc(sizeof(* animation));
+    Animation* animation = malloc(sizeof(*animation));
 
     animation->is_finished = 0;
     animation->type = ANIMATION__CHANGE_BACKGROUND_COLOR;
@@ -299,15 +299,15 @@ Animation* new_animation_camera_shake(int times, float distance, float seconds)
 
     for(int i = 0; i < times; i++)
     {
-        Animation* camera_move_1 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f),to_left_world_pos,seconds_quarter,1);
-        Animation* camera_move_2 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f),to_right_world_pos,seconds_quarter,1);
-        Animation* camera_move_3 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f),to_right_world_pos,seconds_quarter,1);
-        Animation* camera_move_4 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f),to_left_world_pos,seconds_quarter,1);
+        Animation* camera_move_1 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f), to_left_world_pos, seconds_quarter, 1);
+        Animation* camera_move_2 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f), to_right_world_pos, seconds_quarter, 1);
+        Animation* camera_move_3 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f), to_right_world_pos, seconds_quarter, 1);
+        Animation* camera_move_4 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f), to_left_world_pos, seconds_quarter, 1);
 
-        add_animation_to_end_animation_sequence(camera_shake,camera_move_1);
-        add_animation_to_end_animation_sequence(camera_shake,camera_move_2);
-        add_animation_to_end_animation_sequence(camera_shake,camera_move_3);
-        add_animation_to_end_animation_sequence(camera_shake,camera_move_4);
+        add_animation_to_end_animation_sequence(camera_shake, camera_move_1);
+        add_animation_to_end_animation_sequence(camera_shake, camera_move_2);
+        add_animation_to_end_animation_sequence(camera_shake, camera_move_3);
+        add_animation_to_end_animation_sequence(camera_shake, camera_move_4);
     }
 
     return camera_shake;
@@ -317,8 +317,8 @@ Animation* new_animation_background_flash(Vec3i from_color, Vec3i to_color, floa
 {
     Animation* background_flash = new_animation_sequence();
 
-    add_animation_to_end_animation_sequence(background_flash,new_animation_change_background_color(from_color, to_color, seconds_in));
-    add_animation_to_end_animation_sequence(background_flash,new_animation_change_background_color(to_color, from_color, seconds_out));
+    add_animation_to_end_animation_sequence(background_flash, new_animation_change_background_color(from_color, to_color, seconds_in));
+    add_animation_to_end_animation_sequence(background_flash, new_animation_change_background_color(to_color, from_color, seconds_out));
 
     return background_flash;
 }

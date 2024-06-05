@@ -20,10 +20,10 @@ typedef struct
     Sound* blow_up;
 
     Sound* floor_trap;
-    
+
 } Sounds;
 
-void load_sounds (Sounds* sounds);
-void destroy_sounds (Sounds* sounds);
+void load_sounds(Sounds* sounds);
+void destroy_sounds(Sounds* sounds);
 
 #endif

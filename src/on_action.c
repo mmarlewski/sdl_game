@@ -11,8 +11,8 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
                 new_action_change_floor(
                     FLOOR__METAL_TARGET_UNCHECKED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_WATER:
@@ -51,8 +51,8 @@ void floor_on_move_floating_start(State* state, Action* sequence, Action* action
                 new_action_change_floor(
                     FLOOR__METAL_TARGET_UNCHECKED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_WATER:
@@ -100,8 +100,8 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                 new_action_change_floor(
                     FLOOR__METAL_TARGET_CHECKED,
                     vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_SPIKES_ON:
@@ -121,13 +121,13 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
         case FLOOR__ICE:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
-            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
-            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR__WATER:
@@ -143,17 +143,17 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                             action->tilemap_pos,
                             action->move.dir4,
                             1
-                            )
                         )
-                    );
+                    )
+                );
                 add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_floor(
-                    FLOOR__WATER_COLUMN,
-                    vec2i_move_in_dir4_by(
-                        action->tilemap_pos,
-                        action->move.dir4,
-                        1
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__WATER_COLUMN,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
                         )
                     )
                 );
@@ -169,9 +169,9 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                             action->tilemap_pos,
                             action->move.dir4,
                             1
-                            )
                         )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -188,17 +188,17 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                             action->tilemap_pos,
                             action->move.dir4,
                             1
-                            )
                         )
-                    );
+                    )
+                );
                 add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_floor(
-                    FLOOR__LAVA_COLUMN,
-                    vec2i_move_in_dir4_by(
-                        action->tilemap_pos,
-                        action->move.dir4,
-                        1
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__LAVA_COLUMN,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
                         )
                     )
                 );
@@ -214,9 +214,9 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                             action->tilemap_pos,
                             action->move.dir4,
                             1
-                            )
                         )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -231,9 +231,9 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                         action->tilemap_pos,
                         action->move.dir4,
                         1
-                        )
                     )
-                );
+                )
+            );
         }
         break;
         case FLOOR__PIT:
@@ -249,17 +249,17 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                             action->tilemap_pos,
                             action->move.dir4,
                             1
-                            )
                         )
-                    );
+                    )
+                );
                 add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_floor(
-                    FLOOR__PIT_COLUMN,
-                    vec2i_move_in_dir4_by(
-                        action->tilemap_pos,
-                        action->move.dir4,
-                        1
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__PIT_COLUMN,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
                         )
                     )
                 );
@@ -275,9 +275,9 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
                             action->tilemap_pos,
                             action->move.dir4,
                             1
-                            )
                         )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -297,8 +297,8 @@ void floor_on_move_floating_end(State* state, Action* sequence, Action* action, 
                 new_action_change_floor(
                     FLOOR__METAL_TARGET_CHECKED,
                     vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_SPIKES_ON:
@@ -317,13 +317,13 @@ void floor_on_move_floating_end(State* state, Action* sequence, Action* action, 
         case FLOOR__ICE:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
-            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
-            add_action_to_end_action_sequence(sequence, new_action_move( vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
+            add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR__PIT:
@@ -337,9 +337,9 @@ void floor_on_move_floating_end(State* state, Action* sequence, Action* action, 
                         action->tilemap_pos,
                         action->move.dir4,
                         1
-                        )
                     )
-                );
+                )
+            );
         }
         break;
         default:
@@ -362,123 +362,123 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
     {
         case FLOOR__METAL_TARGET_UNCHECKED:
         {
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_change_floor(
-                        FLOOR__METAL_TARGET_CHECKED,
-                        action->tilemap_pos
-                        )
-                    );
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__METAL_TARGET_CHECKED,
+                    action->tilemap_pos
+                )
+            );
         }
         break;
         case FLOOR__METAL_SPIKES_ON:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_death(
-                        action->move.object,
-                        action->tilemap_pos
-                        )
-                    );
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_death(
+                    action->move.object,
+                    action->tilemap_pos
+                )
+            );
         }
         break;
         case FLOOR__STONE_TRAP:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_death(
-                        action->move.object,
-                        action->tilemap_pos
-                        )
-                    );
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_change_floor(
-                        FLOOR__STONE,
-                        action->tilemap_pos
-                        )
-                    );
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_death(
+                    action->move.object,
+                    action->tilemap_pos
+                )
+            );
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__STONE,
+                    action->tilemap_pos
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_WATER:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__WATER,
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__WATER,
+                action->tilemap_pos
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
                     action->tilemap_pos
-                    );
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->drop.object,
-                        action->tilemap_pos
-                        )
-                    );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_LAVA:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__LAVA,
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__LAVA,
+                action->tilemap_pos
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
                     action->tilemap_pos
-                    );
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->drop.object,
-                        action->tilemap_pos
-                        )
-                    );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_PIT:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__PIT,
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__PIT,
+                action->tilemap_pos
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
                     action->tilemap_pos
-                    );
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->drop.object,
-                        action->tilemap_pos
-                        )
-                    );
+                )
+            );
         }
         break;
         case FLOOR__ICE:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_move(
-                        action->tilemap_pos,
-                        action->drop.dir4
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_move(
+                    action->tilemap_pos,
+                    action->drop.dir4
+                )
+            );
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__WATER,
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__WATER,
+                action->tilemap_pos
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
                     action->tilemap_pos
-                    );
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->drop.object,
-                        action->tilemap_pos
-                        )
-                    );
+                )
+            );
         }
         break;
         case FLOOR__WATER:
@@ -490,15 +490,15 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     new_action_remove_object(
                         action->drop.object,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_change_floor(
                         FLOOR__WATER_COLUMN,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             else
             {
@@ -507,8 +507,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     new_action_fall(
                         action->drop.object,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -521,15 +521,15 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     new_action_remove_object(
                         action->drop.object,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_change_floor(
                         FLOOR__LAVA_COLUMN,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             else
             {
@@ -538,8 +538,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     new_action_fall(
                         action->drop.object,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -552,15 +552,15 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     new_action_remove_object(
                         action->drop.object,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_change_floor(
                         FLOOR__PIT_COLUMN,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             else
             {
@@ -569,8 +569,8 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
                     new_action_fall(
                         action->drop.object,
                         action->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -585,101 +585,101 @@ void floor_on_drop_floating(State* state, Action* sequence, Action* action, int 
     {
         case FLOOR__METAL_TARGET_UNCHECKED:
         {
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_change_floor(
-                        FLOOR__METAL_TARGET_CHECKED,
-                        action->tilemap_pos
-                        )
-                    );
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__METAL_TARGET_CHECKED,
+                    action->tilemap_pos
+                )
+            );
         }
         break;
         case FLOOR__METAL_SPIKES_ON:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_death(
-                        action->move.object,
-                        action->tilemap_pos
-                        )
-                    );
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_death(
+                    action->move.object,
+                    action->tilemap_pos
+                )
+            );
         }
         break;
         case FLOOR__STONE_TRAP:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_death(
-                        action->move.object,
-                        action->tilemap_pos
-                        )
-                    );
-                add_action_after_curr_action_action_sequence(
-                    sequence,
-                    new_action_change_floor(
-                        FLOOR__STONE,
-                        action->tilemap_pos
-                        )
-                    );
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_death(
+                    action->move.object,
+                    action->tilemap_pos
+                )
+            );
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__STONE,
+                    action->tilemap_pos
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_WATER:
         {
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__WATER,
-                    action->tilemap_pos
-                    );
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__WATER,
+                action->tilemap_pos
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_LAVA:
         {
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__LAVA,
-                    action->tilemap_pos
-                    );
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__LAVA,
+                action->tilemap_pos
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_PIT:
         {
-                remove_all_actions_after_curr_action_action_sequence(sequence);
-                room_change_floor_at(
-                    state->curr_room,
-                    FLOOR__PIT,
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            room_change_floor_at(
+                state->curr_room,
+                FLOOR__PIT,
+                action->tilemap_pos
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_fall(
+                    action->drop.object,
                     action->tilemap_pos
-                    );
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_fall(
-                        action->drop.object,
-                        action->tilemap_pos
-                        )
-                    );
+                )
+            );
         }
         break;
         case FLOOR__ICE:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_move(
-                        action->tilemap_pos,
-                        action->drop.dir4
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_move(
+                    action->tilemap_pos,
+                    action->drop.dir4
+                )
+            );
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_move(
-                        action->tilemap_pos,
-                        action->drop.dir4
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_move(
+                    action->tilemap_pos,
+                    action->drop.dir4
+                )
+            );
         }
         break;
         case FLOOR__PIT:
@@ -689,8 +689,8 @@ void floor_on_drop_floating(State* state, Action* sequence, Action* action, int 
                 new_action_fall(
                     action->drop.object,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -718,8 +718,8 @@ void floor_on_melt(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__STONE,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -738,8 +738,8 @@ void floor_on_break(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__WATER,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_LAVA:
@@ -749,8 +749,8 @@ void floor_on_break(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__LAVA,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_PIT:
@@ -760,8 +760,8 @@ void floor_on_break(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__PIT,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -780,8 +780,8 @@ void floor_on_shake(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__WATER,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_LAVA:
@@ -791,8 +791,8 @@ void floor_on_shake(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__LAVA,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_PIT:
@@ -802,8 +802,8 @@ void floor_on_shake(State* state, Action* sequence, Action* action, int floor)
                 new_action_change_floor(
                     FLOOR__PIT,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -822,8 +822,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__STONE_STAIRS_BELOW,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__WATER_LILY_POD:
@@ -833,8 +833,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__WATER,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__STONE_TRAP:
@@ -844,8 +844,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__STONE,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ICE:
@@ -855,8 +855,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__ICE_CRACK_WATER,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
@@ -866,8 +866,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__WATER,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_WATER:
@@ -877,8 +877,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__WATER,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_LAVA:
@@ -888,8 +888,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__LAVA,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__ROCK_CRACK_PIT:
@@ -899,8 +899,8 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
                 new_action_change_floor(
                     FLOOR__PIT,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -919,8 +919,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__EXT_BRIDGE_SOURCE_ON_HORIZONTAL,
                     tilemap_pos
-                    )
-                );
+                )
+            );
 
             int left_go_on = 1;
             int right_go_on = 1;
@@ -930,11 +930,11 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__LEFT,
                     i
-                    );
+                );
                 int left_floor = room_get_floor_at(
                     state->curr_room,
                     left_tilemap_pos
-                    );
+                );
                 if(left_floor == FLOOR__LAVA && left_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -942,8 +942,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                         new_action_change_floor(
                             FLOOR__EXT_BRIDGE_PART_HORIZONTAL,
                             left_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(left_floor != FLOOR__LAVA)
                 {
@@ -954,11 +954,11 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__RIGHT,
                     i
-                    );
+                );
                 int right_floor = room_get_floor_at(
                     state->curr_room,
                     right_tilemap_pos
-                    );
+                );
                 if(right_floor == FLOOR__LAVA && right_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -966,8 +966,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                         new_action_change_floor(
                             FLOOR__EXT_BRIDGE_PART_HORIZONTAL,
                             right_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(right_floor != FLOOR__LAVA)
                 {
@@ -983,8 +983,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__EXT_BRIDGE_SOURCE_OFF_HORIZONTAL,
                     tilemap_pos
-                    )
-                );
+                )
+            );
 
             int left_go_on = 1;
             int right_go_on = 1;
@@ -994,21 +994,21 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__LEFT,
                     i
-                    );
+                );
                 int left_floor = room_get_floor_at(
                     state->curr_room,
                     left_tilemap_pos
-                    );
+                );
                 if(left_floor == FLOOR__EXT_BRIDGE_PART_HORIZONTAL &&
-                left_go_on)
+                   left_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_change_floor(
                             FLOOR__LAVA,
                             left_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(left_floor != FLOOR__EXT_BRIDGE_PART_HORIZONTAL)
                 {
@@ -1019,21 +1019,21 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__RIGHT,
                     i
-                    );
+                );
                 int right_floor = room_get_floor_at(
                     state->curr_room,
                     right_tilemap_pos
-                    );
+                );
                 if(right_floor == FLOOR__EXT_BRIDGE_PART_HORIZONTAL &&
-                right_go_on)
+                   right_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_change_floor(
                             FLOOR__LAVA,
                             right_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(right_floor != FLOOR__EXT_BRIDGE_PART_HORIZONTAL)
                 {
@@ -1049,8 +1049,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__EXT_BRIDGE_SOURCE_ON_VERTICAL,
                     tilemap_pos
-                    )
-                );
+                )
+            );
 
             int up_go_on = 1;
             int down_go_on = 1;
@@ -1060,11 +1060,11 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__UP,
                     i
-                    );
+                );
                 int up_floor = room_get_floor_at(
                     state->curr_room,
                     up_tilemap_pos
-                    );
+                );
                 if(up_floor == FLOOR__LAVA && up_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -1072,8 +1072,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                         new_action_change_floor(
                             FLOOR__EXT_BRIDGE_PART_VERTICAL,
                             up_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(up_floor != FLOOR__LAVA)
                 {
@@ -1084,11 +1084,11 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__DOWN,
                     i
-                    );
+                );
                 int down_floor = room_get_floor_at(
                     state->curr_room,
                     down_tilemap_pos
-                    );
+                );
                 if(down_floor == FLOOR__LAVA && down_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -1096,8 +1096,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                         new_action_change_floor(
                             FLOOR__EXT_BRIDGE_PART_VERTICAL,
                             down_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(down_floor != FLOOR__LAVA)
                 {
@@ -1113,8 +1113,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__EXT_BRIDGE_SOURCE_OFF_VERTICAL,
                     tilemap_pos
-                    )
-                );
+                )
+            );
 
             int up_go_on = 1;
             int down_go_on = 1;
@@ -1124,21 +1124,21 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__UP,
                     i
-                    );
+                );
                 int up_floor = room_get_floor_at(
                     state->curr_room,
                     up_tilemap_pos
-                    );
+                );
                 if(up_floor == FLOOR__EXT_BRIDGE_PART_VERTICAL &&
-                up_go_on)
+                   up_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_change_floor(
                             FLOOR__LAVA,
                             up_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(up_floor != FLOOR__EXT_BRIDGE_PART_VERTICAL)
                 {
@@ -1149,21 +1149,21 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                     tilemap_pos,
                     DIR4__DOWN,
                     i
-                    );
+                );
                 int down_floor = room_get_floor_at(
                     state->curr_room,
                     down_tilemap_pos
-                    );
+                );
                 if(down_floor == FLOOR__EXT_BRIDGE_PART_VERTICAL &&
-                down_go_on)
+                   down_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_change_floor(
                             FLOOR__LAVA,
                             down_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(down_floor != FLOOR__EXT_BRIDGE_PART_VERTICAL)
                 {
@@ -1179,8 +1179,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_add_object(
                     new_object(OBJECT__PISTON),
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_PISTON_CELL:
@@ -1190,8 +1190,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_add_object(
                     new_object(OBJECT__PISTON_CELL),
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_PISTON_DYNAMITE:
@@ -1201,8 +1201,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_add_object(
                     new_object(OBJECT__PISTON_DYNAMITE),
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_PISTON_BARREL:
@@ -1212,8 +1212,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_add_object(
                     new_object(OBJECT__PISTON_BARREL),
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_PISTON_MIMIC:
@@ -1223,15 +1223,15 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     tilemap_pos
-                    )
-                );
+                )
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_add_object(
                     new_object(OBJECT__MIMIC),
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_SPIKES_OFF:
@@ -1261,8 +1261,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_add_object(
                     new_object(OBJECT__STAIRS_ABOVE_METAL_ON),
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_STAIRS_BELOW_OFF:
@@ -1272,8 +1272,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__METAL_STAIRS_BELOW_ON,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case FLOOR__METAL_STAIRS_BELOW_ON:
@@ -1283,8 +1283,8 @@ void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tile
                 new_action_change_floor(
                     FLOOR__METAL_STAIRS_BELOW_OFF,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1346,8 +1346,8 @@ void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap
                 new_action_change_floor(
                     FLOOR__STONE_STAIRS_ABOVE_UNPOWERED,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1368,16 +1368,16 @@ void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_
                     new_action_change_floor(
                         FLOOR__STONE_STAIRS_ABOVE_POWERED,
                         tilemap_pos
-                        )
-                    );
+                    )
+                );
 
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_add_object(
                         new_object(OBJECT__STAIRS_ABOVE_STONE_POWERED),
                         tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -1397,24 +1397,24 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
                 new_action_change_object(
                     OBJECT__DISPLAY_DAMAGED_ITEM,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__BALL_SPIKES:
         {
             if(action->crash.object_crushed->type != OBJECT__BARREL &&
-            action->crash.object_crushed->type != OBJECT__PISTON_BARREL &&
-            !is_object_wall(action->crash.object_crushed) &&
-            !is_object_exit(action->crash.object_crushed))
+               action->crash.object_crushed->type != OBJECT__PISTON_BARREL &&
+               !is_object_wall(action->crash.object_crushed) &&
+               !is_object_exit(action->crash.object_crushed))
             {
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_death(
                         action->crash.object_crushed,
                         action->crash.object_crushed->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -1425,8 +1425,8 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_BARREL:
@@ -1436,16 +1436,16 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1462,7 +1462,7 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
             int floor = room_get_floor_at(
                 state->curr_room,
                 object->tilemap_pos
-                );
+            );
 
             switch(floor)
             {
@@ -1473,16 +1473,16 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                         new_action_change_floor(
                             FLOOR__WATER_STALACTITE_FALLEN,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
 
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             object,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
                 case FLOOR__LAVA:
@@ -1492,16 +1492,16 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                         new_action_change_floor(
                             FLOOR__LAVA_STALACTITE_FALLEN,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
 
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             object,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
                 case FLOOR__PIT:
@@ -1511,8 +1511,8 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                         new_action_remove_object(
                             object,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
                 default:
@@ -1522,8 +1522,8 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                         new_action_change_object(
                             OBJECT__STALACTITE_FALLEN_ITEM,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
             }
@@ -1540,27 +1540,27 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                             object->tilemap_pos,
                             action->crash.dir4,
                             i
-                            ),
+                        ),
                         action->crash.dir4
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
         case OBJECT__BALL_SPIKES:
         {
             if(action->crash.object_crushed->type != OBJECT__BARREL &&
-            action->crash.object_crushed->type != OBJECT__BARREL &&
-            !is_object_wall(action->crash.object_crushed) &&
-            !is_object_exit(action->crash.object_crushed))
+               action->crash.object_crushed->type != OBJECT__BARREL &&
+               !is_object_wall(action->crash.object_crushed) &&
+               !is_object_exit(action->crash.object_crushed))
             {
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_death(
                         action->crash.object_crushing,
                         action->crash.object_crushed->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -1571,8 +1571,8 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                 new_action_change_object(
                     OBJECT__DISPLAY_DAMAGED_ITEM,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__BARREL:
@@ -1582,8 +1582,8 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_BARREL:
@@ -1593,16 +1593,16 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1625,8 +1625,8 @@ void object_on_death(State* state, Action* sequence, Action* action, Object* obj
                 sequence,
                 new_action_blow_up(
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_BARREL:
@@ -1635,16 +1635,16 @@ void object_on_death(State* state, Action* sequence, Action* action, Object* obj
                 sequence,
                 new_action_blow_up(
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1661,7 +1661,7 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
-                );
+            );
         }
         break;
         case OBJECT__BARREL:
@@ -1671,8 +1671,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_BARREL:
@@ -1682,16 +1682,16 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__BALL:
@@ -1708,10 +1708,10 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                                 action->tilemap_pos,
                                 action->drop.dir4,
                                 i
-                                ),
+                            ),
                             action->drop.dir4
-                            )
-                        );
+                        )
+                    );
                 }
             }
         }
@@ -1723,8 +1723,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__TURRET_LASER_UNDEPLOYED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__TURRET_BOMB_DEPLOYED:
@@ -1734,8 +1734,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__TURRET_BOMB_UNDEPLOYED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__TURRET_PROJECTILE_DEPLOYED:
@@ -1745,8 +1745,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__TURRET_PROJECTILE_UNDEPLOYED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__TURRET_LASER_UNDEPLOYED:
@@ -1756,8 +1756,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__TURRET_LASER_DEPLOYED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__TURRET_BOMB_UNDEPLOYED:
@@ -1767,8 +1767,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__TURRET_BOMB_DEPLOYED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:
@@ -1778,8 +1778,8 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__TURRET_PROJECTILE_DEPLOYED,
                     action->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1798,8 +1798,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__EXIT_OBSIDIAN_DOWN,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_BLOCKED_UP:
@@ -1809,8 +1809,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__EXIT_STONE_UP,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_BLOCKED_RIGHT:
@@ -1820,8 +1820,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__EXIT_STONE_RIGHT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_BLOCKED_DOWN:
@@ -1831,8 +1831,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__EXIT_STONE_DOWN,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__SAFE:
@@ -1840,7 +1840,7 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__SAFE_DAMAGED_ITEM, object->tilemap_pos)
-                );
+            );
         }
         break;
         case OBJECT__VENDING_CELL:
@@ -1850,8 +1850,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__VENDING_CELL_DAMAGED_ITEM,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__VENDING_CELL_ITEM:
@@ -1861,8 +1861,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__VENDING_CELL_DAMAGED_ITEM,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__VENDING_DYNAMITE:
@@ -1872,8 +1872,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__VENDING_DYNAMITE_ITEM:
@@ -1883,8 +1883,8 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 new_action_change_object(
                     OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -1894,7 +1894,7 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_death(object, object->tilemap_pos)
-                    );
+                );
             }
         }
         break;
@@ -1912,8 +1912,8 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_STONE_LEFT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_ROCK_BLOCKED_UP:
@@ -1923,8 +1923,8 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_ROCK_UP,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_ROCK_BLOCKED_RIGHT:
@@ -1934,8 +1934,8 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_ROCK_RIGHT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_ROCK_BLOCKED_DOWN:
@@ -1945,8 +1945,8 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_ROCK_DOWN,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__ROCK:
@@ -1954,7 +1954,7 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__ROCK_DAMAGED_ITEM, object->tilemap_pos)
-                );
+            );
         }
         break;
         default:
@@ -1964,7 +1964,7 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
                 add_action_to_end_action_sequence(
                     sequence,
                     new_action_death(object, object->tilemap_pos)
-                    );
+                );
             }
         }
         break;
@@ -1982,8 +1982,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_ROCK_LEFT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_BLOCKED_UP:
@@ -1993,8 +1993,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_METAL_UP,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
@@ -2004,8 +2004,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_METAL_RIGHT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_BLOCKED_DOWN:
@@ -2015,8 +2015,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_METAL_DOWN,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_BLOCKED_LEFT:
@@ -2026,8 +2026,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_change_object(
                     OBJECT__EXIT_METAL_LEFT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__DISPLAY:
@@ -2035,7 +2035,7 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
-                );
+            );
         }
         break;
         case OBJECT__BARREL:
@@ -2045,8 +2045,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_BARREL:
@@ -2056,16 +2056,16 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__STALACTITE:
@@ -2081,16 +2081,16 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                         new_action_change_floor(
                             FLOOR__WATER_STALACTITE_FALLEN,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
 
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             object,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
                 case FLOOR__LAVA:
@@ -2100,16 +2100,16 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                         new_action_change_floor(
                             FLOOR__LAVA_STALACTITE_FALLEN,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
 
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             object,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
                 case FLOOR__PIT:
@@ -2119,8 +2119,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                         new_action_remove_object(
                             object,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
                 default:
@@ -2130,8 +2130,8 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
                         new_action_change_object(
                             OBJECT__STALACTITE_FALLEN_ITEM,
                             object->tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 break;
             }
@@ -2160,8 +2160,8 @@ void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilem
                 new_action_death(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -2198,12 +2198,12 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     source_tilemap_pos,
                     dir4,
                     i
-                    );
+                );
 
                 Object* object = room_get_object_at(
                     state->curr_room,
                     tilemap_pos
-                    );
+                );
 
                 if(object != 0)
                 {
@@ -2215,13 +2215,13 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
             Object* target_object = room_get_object_at(
                 state->curr_room,
                 target_tilemap_pos
-                );
+            );
 
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(
                     target_tilemap_pos,
                     source_tilemap_pos
-                    );
+                );
 
             if(distance_info.dir4 != DIR4__NONE)
             {
@@ -2231,33 +2231,33 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     curr_tilemap_pos,
                     distance_info.dir4,
                     1
-                    );
+                );
 
                 Object* prev_object = room_get_object_at(
                     state->curr_room,
                     prev_tilemap_pos
-                    );
+                );
                 Object* curr_object = room_get_object_at(
                     state->curr_room,
                     curr_tilemap_pos
-                    );
+                );
                 Object* next_object = room_get_object_at(
                     state->curr_room,
                     next_tilemap_pos
-                    );
+                );
 
                 int prev_floor = room_get_floor_at(
                     state->curr_room,
                     prev_tilemap_pos
-                    );
+                );
                 int curr_floor = room_get_floor_at(
                     state->curr_room,
                     curr_tilemap_pos
-                    );
+                );
                 int next_floor = room_get_floor_at(
                     state->curr_room,
                     next_tilemap_pos
-                    );
+                );
 
                 for(int i = 0; i < distance_info.abs_diff + 1; i++)
                 {
@@ -2269,20 +2269,20 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                                 source_tilemap_pos,
                                 get_opposite_dir4(distance_info.dir4),
                                 1
-                                );
+                            );
                         // if pos just before source_pos
                         if(vec2i_equals(curr_tilemap_pos, just_before_source_tilemap_pos))
                         {
                             if(!is_object_floating(target_object) &&
-                            !is_object_flying(target_object))
+                               !is_object_flying(target_object))
                             {
                                 add_action_to_end_action_sequence(
                                     sequence,
                                     new_action_move(
                                         curr_tilemap_pos,
                                         distance_info.dir4
-                                        )
-                                    );
+                                    )
+                                );
                             }
                             else if(is_object_floating(target_object))
                             {
@@ -2291,8 +2291,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                                     new_action_move_floating(
                                         curr_tilemap_pos,
                                         distance_info.dir4
-                                        )
-                                    );
+                                    )
+                                );
                             }
                             else if(is_object_flying(target_object))
                             {
@@ -2301,8 +2301,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                                     new_action_move_flying(
                                         curr_tilemap_pos,
                                         distance_info.dir4
-                                        )
-                                    );
+                                    )
+                                );
                             }
                         }
                         else
@@ -2312,8 +2312,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                                 new_action_move_flying(
                                     curr_tilemap_pos,
                                     distance_info.dir4
-                                    )
-                                );
+                                )
+                            );
                         }
                     }
 
@@ -2323,33 +2323,33 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         curr_tilemap_pos,
                         distance_info.dir4,
                         1
-                        );
+                    );
 
                     prev_object = room_get_object_at(
                         state->curr_room,
                         prev_tilemap_pos
-                        );
+                    );
                     curr_object = room_get_object_at(
                         state->curr_room,
                         curr_tilemap_pos
-                        );
+                    );
                     next_object = room_get_object_at(
                         state->curr_room,
                         next_tilemap_pos
-                        );
+                    );
 
                     prev_floor = room_get_floor_at(
                         state->curr_room,
                         prev_tilemap_pos
-                        );
+                    );
                     curr_floor = room_get_floor_at(
                         state->curr_room,
                         curr_tilemap_pos
-                        );
+                    );
                     next_floor = room_get_floor_at(
                         state->curr_room,
                         next_tilemap_pos
-                        );
+                    );
                 }
             }
         }
@@ -2361,8 +2361,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             int left_go_on = 1;
             int right_go_on = 1;
@@ -2372,11 +2372,11 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__LEFT,
                     i
-                    );
+                );
                 Object* left_object = room_get_object_at(
                     state->curr_room,
                     left_tilemap_pos
-                    );
+                );
                 if(left_object == 0 && left_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -2384,8 +2384,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         new_action_add_object(
                             new_object(OBJECT__EXT_WALL_PART_HORIZONTAL),
                             left_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(left_object != 0)
                 {
@@ -2396,11 +2396,11 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__RIGHT,
                     i
-                    );
+                );
                 Object* right_object = room_get_object_at(
                     state->curr_room,
                     right_tilemap_pos
-                    );
+                );
                 if(right_object == 0 && right_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -2408,8 +2408,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         new_action_add_object(
                             new_object(OBJECT__EXT_WALL_PART_HORIZONTAL),
                             right_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(right_object != 0)
                 {
@@ -2425,8 +2425,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             int left_go_on = 1;
             int right_go_on = 1;
@@ -2436,25 +2436,25 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__LEFT,
                     i
-                    );
+                );
                 Object* left_object = room_get_object_at(
                     state->curr_room,
                     left_tilemap_pos
-                    );
+                );
                 if(left_object != 0 &&
-                left_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
-                left_go_on)
+                   left_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
+                   left_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             left_object,
                             left_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(left_object != 0 &&
-                left_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
+                   left_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
                 {
                     left_go_on = 0;
                 }
@@ -2463,25 +2463,25 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__RIGHT,
                     i
-                    );
+                );
                 Object* right_object = room_get_object_at(
                     state->curr_room,
                     right_tilemap_pos
-                    );
+                );
                 if(right_object != 0 &&
-                right_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
-                right_go_on)
+                   right_object->type == OBJECT__EXT_WALL_PART_HORIZONTAL &&
+                   right_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             right_object,
                             right_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(right_object != 0 &&
-                right_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
+                   right_object->type != OBJECT__EXT_WALL_PART_HORIZONTAL)
                 {
                     right_go_on = 0;
                 }
@@ -2495,8 +2495,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXT_WALL_SOURCE_ON_VERTICAL,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             int up_go_on = 1;
             int down_go_on = 1;
@@ -2506,11 +2506,11 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__UP,
                     i
-                    );
+                );
                 Object* up_object = room_get_object_at(
                     state->curr_room,
                     up_tilemap_pos
-                    );
+                );
                 if(up_object == 0 && up_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -2518,8 +2518,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         new_action_add_object(
                             new_object(OBJECT__EXT_WALL_PART_VERTICAL),
                             up_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(up_object != 0)
                 {
@@ -2530,11 +2530,11 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__DOWN,
                     i
-                    );
+                );
                 Object* down_object = room_get_object_at(
                     state->curr_room,
                     down_tilemap_pos
-                    );
+                );
                 if(down_object == 0 && down_go_on)
                 {
                     add_action_to_end_action_sequence(
@@ -2542,8 +2542,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                         new_action_add_object(
                             new_object(OBJECT__EXT_WALL_PART_VERTICAL),
                             down_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(down_object != 0)
                 {
@@ -2559,8 +2559,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             int up_go_on = 1;
             int down_go_on = 1;
@@ -2570,25 +2570,25 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__UP,
                     i
-                    );
+                );
                 Object* up_object = room_get_object_at(
                     state->curr_room,
                     up_tilemap_pos
-                    );
+                );
                 if(up_object != 0 &&
-                up_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
-                up_go_on)
+                   up_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
+                   up_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             up_object,
                             up_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(up_object != 0 &&
-                up_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
+                   up_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
                 {
                     up_go_on = 0;
                 }
@@ -2597,25 +2597,25 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                     object->tilemap_pos,
                     DIR4__DOWN,
                     i
-                    );
+                );
                 Object* down_object = room_get_object_at(
                     state->curr_room,
                     down_tilemap_pos
-                    );
+                );
                 if(down_object != 0 &&
-                down_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
-                down_go_on)
+                   down_object->type == OBJECT__EXT_WALL_PART_VERTICAL &&
+                   down_go_on)
                 {
                     add_action_to_end_action_sequence(
                         sequence,
                         new_action_remove_object(
                             down_object,
                             down_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 if(down_object != 0 &&
-                down_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
+                   down_object->type != OBJECT__EXT_WALL_PART_VERTICAL)
                 {
                     down_go_on = 0;
                 }
@@ -2629,8 +2629,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__LEVER_METAL_OFF,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_ON_UP:
@@ -2640,8 +2640,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_OFF_UP,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_ON_RIGHT:
@@ -2651,8 +2651,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_OFF_RIGHT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_ON_DOWN:
@@ -2662,8 +2662,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_OFF_DOWN,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_ON_LEFT:
@@ -2673,8 +2673,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_OFF_LEFT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_OFF_UP:
@@ -2684,8 +2684,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_ON_UP,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_OFF_RIGHT:
@@ -2695,8 +2695,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_ON_RIGHT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_OFF_DOWN:
@@ -2706,8 +2706,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_ON_DOWN,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_METAL_OFF_LEFT:
@@ -2717,8 +2717,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_change_object(
                     OBJECT__EXIT_METAL_ON_LEFT,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON:
@@ -2728,16 +2728,16 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_remove_object(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_PISTON,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_CELL:
@@ -2747,16 +2747,16 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_remove_object(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_PISTON_CELL,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_DYNAMITE:
@@ -2766,16 +2766,16 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_remove_object(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_PISTON_DYNAMITE,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__PISTON_BARREL:
@@ -2785,26 +2785,26 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_remove_object(
                     object,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
 
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_PISTON_BARREL,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__BALL:
         {
-            add_action_to_end_action_sequence(sequence,new_action_change_object(OBJECT__BALL_SPIKES, object->tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change_object(OBJECT__BALL_SPIKES, object->tilemap_pos));
         }
         break;
         case OBJECT__BALL_SPIKES:
         {
-            add_action_to_end_action_sequence(sequence,new_action_change_object(OBJECT__BALL, object->tilemap_pos));
+            add_action_to_end_action_sequence(sequence, new_action_change_object(OBJECT__BALL, object->tilemap_pos));
         }
         break;
         case OBJECT__BARREL:
@@ -2819,8 +2819,8 @@ void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i 
                 new_action_remove_object(
                     object,
                     tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         default:
@@ -2859,12 +2859,12 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                     source_tilemap_pos,
                     dir4,
                     i
-                    );
+                );
 
                 Object* object = room_get_object_at(
                     state->curr_room,
                     tilemap_pos
-                    );
+                );
 
                 if(object != 0)
                 {
@@ -2877,7 +2877,7 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                 get_distance_info_from_vec2i_to_vec2i(
                     source_tilemap_pos,
                     target_tilemap_pos
-                    );
+                );
 
             Animation* animation_sequence = new_animation_sequence();
 
@@ -2899,8 +2899,8 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                                 texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
                     else if(vec2i_equals(tilemap_pos, target_tilemap_pos))
                     {
@@ -2912,12 +2912,12 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                                 texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
                     else
                     {
-                        Texture* texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4),distance_info.dir4);
+                        Texture* texture = get_texture_hook_from_to(textures, get_opposite_dir4(distance_info.dir4), distance_info.dir4);
 
                         add_animation_to_end_animation_simultaneous(
                             animation_simultaneous,
@@ -2925,8 +2925,8 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                                 texture,
                                 tilemap_pos_to_gamemap_pos(tilemap_pos),
                                 show_sprite_length_in_seconds
-                                )
-                            );
+                            )
+                        );
                     }
 
                     tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
@@ -2935,7 +2935,7 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
                 add_animation_to_end_animation_sequence(
                     animation_sequence,
                     animation_simultaneous
-                    );
+                );
             }
 
             animation = animation_sequence;
@@ -2959,8 +2959,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__GOLEM_HALF_POWERED,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__GOLEM_HALF_POWERED:
@@ -2970,8 +2970,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__GOLEM_UNPOWERED,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__LEVER_STONE_POWERED:
@@ -2981,8 +2981,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__LEVER_STONE_UNPOWERED,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__MINIBOT_ALLY_CELL:
@@ -2992,8 +2992,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__MINIBOT_ALLY,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__MINIBOT_ALLY_DYNAMITE:
@@ -3003,8 +3003,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__MINIBOT_ALLY,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__MINIBOT_ALLY_GEMSTONE:
@@ -3014,8 +3014,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__MINIBOT_ALLY,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__MINIBOT_ENEMY_CELL:
@@ -3025,8 +3025,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__MINIBOT_ENEMY,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__MINIBOT_ENEMY_DYNAMITE:
@@ -3036,8 +3036,8 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__MINIBOT_ENEMY,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__MINIBOT_ENEMY_GEMSTONE:
@@ -3047,214 +3047,214 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
                 new_action_change_object(
                     OBJECT__MINIBOT_ENEMY,
                     object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_POWERED_UP:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__EXIT_STONE_UNPOWERED_UP,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_STONE_UNPOWERED_UP,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_POWERED_RIGHT:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__EXIT_STONE_UNPOWERED_RIGHT,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_STONE_UNPOWERED_RIGHT,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_POWERED_DOWN:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__EXIT_STONE_UNPOWERED_DOWN,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_STONE_UNPOWERED_DOWN,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__EXIT_STONE_POWERED_LEFT:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__EXIT_STONE_UNPOWERED_LEFT,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_STONE_UNPOWERED_LEFT,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__CRATE_CELL_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__CRATE_CELL,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__CRATE_CELL,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__CRATE_DYNAMITE_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__CRATE_DYNAMITE,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__CRATE_DYNAMITE,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__CRATE_GEMSTONE_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__CRATE_GEMSTONE,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__CRATE_GEMSTONE,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__STALACTITE_FALLEN_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__STALACTITE_FALLEN,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__STALACTITE_FALLEN,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__ROCK_DAMAGED_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__ROCK_DAMAGED,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__ROCK_DAMAGED,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__SAFE_DAMAGED_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__SAFE_DAMAGED,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__SAFE_DAMAGED,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__DISPLAY_DAMAGED_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__DISPLAY_DAMAGED,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__DISPLAY_DAMAGED,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__VENDING_CELL_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__VENDING_CELL,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__VENDING_CELL,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__VENDING_CELL_DAMAGED_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__VENDING_CELL_DAMAGED,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__VENDING_CELL_DAMAGED,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__VENDING_DYNAMITE_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__VENDING_DYNAMITE,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__VENDING_DYNAMITE,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__VENDING_DYNAMITE_DAMAGED,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__VENDING_DYNAMITE_DAMAGED,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__STAIRS_ABOVE_STONE_POWERED:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_floor(
-                        FLOOR__STONE_STAIRS_ABOVE_UNPOWERED,
-                        tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__STONE_STAIRS_ABOVE_UNPOWERED,
+                    tilemap_pos
+                )
+            );
 
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_remove_object(
-                        object,
-                        tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_remove_object(
+                    object,
+                    tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__PISTON_CELL:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__PISTON,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__PISTON,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         case OBJECT__PISTON_DYNAMITE:
         {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_change_object(
-                        OBJECT__PISTON,
-                        object->tilemap_pos
-                        )
-                    );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__PISTON,
+                    object->tilemap_pos
+                )
+            );
         }
         break;
         default:
@@ -3275,8 +3275,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__GOLEM_HALF_POWERED,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3289,8 +3289,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__GOLEM_POWERED,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3303,8 +3303,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__LEVER_STONE_POWERED,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3317,8 +3317,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__MINIBOT_ALLY_CELL,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             if(item_type == ITEM__DYNAMITE)
             {
@@ -3327,8 +3327,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__MINIBOT_ALLY_DYNAMITE,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             if(item_type == ITEM__GEMSTONE)
             {
@@ -3337,8 +3337,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__MINIBOT_ALLY_GEMSTONE,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3351,8 +3351,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__MINIBOT_ENEMY_CELL,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             if(item_type == ITEM__DYNAMITE)
             {
@@ -3361,8 +3361,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__MINIBOT_ENEMY_DYNAMITE,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
             if(item_type == ITEM__GEMSTONE)
             {
@@ -3371,8 +3371,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__MINIBOT_ENEMY_GEMSTONE,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3385,8 +3385,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_STONE_POWERED_UP,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3399,8 +3399,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_STONE_POWERED_RIGHT,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3413,8 +3413,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_STONE_POWERED_DOWN,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3427,8 +3427,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_STONE_POWERED_LEFT,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3441,8 +3441,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_GOLD_UNLOCKED_UP,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3455,8 +3455,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_GOLD_UNLOCKED_RIGHT,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3469,8 +3469,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_GOLD_UNLOCKED_DOWN,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3483,8 +3483,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__EXIT_GOLD_UNLOCKED_LEFT,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3497,8 +3497,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__VENDING_CELL_ITEM,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;
@@ -3511,8 +3511,8 @@ void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i ti
                     new_action_change_object(
                         OBJECT__VENDING_DYNAMITE_ITEM,
                         object->tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
         }
         break;

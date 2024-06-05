@@ -81,7 +81,7 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
             change_background_color(
                 state,
                 animation->change_background_color.to_color
-                );
+            );
         }
         break;
     }

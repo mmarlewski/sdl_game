@@ -1,99 +1,99 @@
 #include "../inc/textures.h"
 #include "../inc/item.h"
 
-void load_textures_floor (Renderer* renderer, Textures_Floor* floor)
+void load_textures_floor(Renderer* renderer, Textures_Floor* floor)
 {
-    floor->highlight = load_texture_from_filepath (renderer, "./res/floor/highlight.png");
+    floor->highlight = load_texture_from_filepath(renderer, "./res/floor/highlight.png");
 
-    floor->rock = load_texture_from_filepath (renderer, "./res/floor/rock.png");
-    floor->rock_crack_water = load_texture_from_filepath (renderer, "./res/floor/rock_crack_water.png");
-    floor->rock_crack_lava = load_texture_from_filepath (renderer, "./res/floor/rock_crack_lava.png");
-    floor->rock_crack_pit = load_texture_from_filepath (renderer, "./res/floor/rock_crack_pit.png");
+    floor->rock = load_texture_from_filepath(renderer, "./res/floor/rock.png");
+    floor->rock_crack_water = load_texture_from_filepath(renderer, "./res/floor/rock_crack_water.png");
+    floor->rock_crack_lava = load_texture_from_filepath(renderer, "./res/floor/rock_crack_lava.png");
+    floor->rock_crack_pit = load_texture_from_filepath(renderer, "./res/floor/rock_crack_pit.png");
 
-    floor->stone = load_texture_from_filepath (renderer, "./res/floor/stone.png");
-    floor->stone_trap = load_texture_from_filepath (renderer, "./res/floor/stone_trap.png");
+    floor->stone = load_texture_from_filepath(renderer, "./res/floor/stone.png");
+    floor->stone_trap = load_texture_from_filepath(renderer, "./res/floor/stone_trap.png");
 
-    floor->metal = load_texture_from_filepath (renderer, "./res/floor/metal.png");
-    floor->metal_spikes_on = load_texture_from_filepath (renderer, "./res/floor/metal_spikes_on.png");
-    floor->metal_spikes_off = load_texture_from_filepath (renderer, "./res/floor/metal_spikes_off.png");
-    floor->metal_hatch_open_1 = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_open_1.png");
-    floor->metal_hatch_open_2 = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_open_2.png");
-    floor->metal_hatch_closed = load_texture_from_filepath (renderer, "./res/floor/metal_hatch_closed.png");
-    floor->metal_cover_bottom = load_texture_from_filepath (renderer, "./res/floor/metal_cover_bottom.png");
-    floor->metal_target_unchecked = load_texture_from_filepath (renderer, "./res/floor/metal_target_unchecked.png");
-    floor->metal_target_checked = load_texture_from_filepath (renderer, "./res/floor/metal_target_checked.png");
+    floor->metal = load_texture_from_filepath(renderer, "./res/floor/metal.png");
+    floor->metal_spikes_on = load_texture_from_filepath(renderer, "./res/floor/metal_spikes_on.png");
+    floor->metal_spikes_off = load_texture_from_filepath(renderer, "./res/floor/metal_spikes_off.png");
+    floor->metal_hatch_open_1 = load_texture_from_filepath(renderer, "./res/floor/metal_hatch_open_1.png");
+    floor->metal_hatch_open_2 = load_texture_from_filepath(renderer, "./res/floor/metal_hatch_open_2.png");
+    floor->metal_hatch_closed = load_texture_from_filepath(renderer, "./res/floor/metal_hatch_closed.png");
+    floor->metal_cover_bottom = load_texture_from_filepath(renderer, "./res/floor/metal_cover_bottom.png");
+    floor->metal_target_unchecked = load_texture_from_filepath(renderer, "./res/floor/metal_target_unchecked.png");
+    floor->metal_target_checked = load_texture_from_filepath(renderer, "./res/floor/metal_target_checked.png");
 
-    floor->metal_piston = load_texture_from_filepath (renderer, "./res/floor/metal_piston.png");
-    floor->metal_piston_cell = load_texture_from_filepath (renderer, "./res/floor/metal_piston_cell.png");
-    floor->metal_piston_dynamite = load_texture_from_filepath (renderer, "./res/floor/metal_piston_dynamite.png");
-    floor->metal_piston_barrel = load_texture_from_filepath (renderer, "./res/floor/metal_piston_barrel.png");
-    floor->metal_piston_mimic = load_texture_from_filepath (renderer, "./res/floor/metal_piston_mimic.png");
-    floor->metal_no_piston = load_texture_from_filepath (renderer, "./res/floor/metal_no_piston.png");
+    floor->metal_piston = load_texture_from_filepath(renderer, "./res/floor/metal_piston.png");
+    floor->metal_piston_cell = load_texture_from_filepath(renderer, "./res/floor/metal_piston_cell.png");
+    floor->metal_piston_dynamite = load_texture_from_filepath(renderer, "./res/floor/metal_piston_dynamite.png");
+    floor->metal_piston_barrel = load_texture_from_filepath(renderer, "./res/floor/metal_piston_barrel.png");
+    floor->metal_piston_mimic = load_texture_from_filepath(renderer, "./res/floor/metal_piston_mimic.png");
+    floor->metal_no_piston = load_texture_from_filepath(renderer, "./res/floor/metal_no_piston.png");
 
-    floor->gold = load_texture_from_filepath (renderer, "./res/floor/gold.png");
+    floor->gold = load_texture_from_filepath(renderer, "./res/floor/gold.png");
 
-    floor->marble = load_texture_from_filepath (renderer, "./res/floor/marble.png");
+    floor->marble = load_texture_from_filepath(renderer, "./res/floor/marble.png");
 
-    floor->obsidian = load_texture_from_filepath (renderer, "./res/floor/obsidian.png");
+    floor->obsidian = load_texture_from_filepath(renderer, "./res/floor/obsidian.png");
 
-    floor->grass = load_texture_from_filepath (renderer, "./res/floor/grass.png");
+    floor->grass = load_texture_from_filepath(renderer, "./res/floor/grass.png");
 
-    floor->sand = load_texture_from_filepath (renderer, "./res/floor/sand.png");
+    floor->sand = load_texture_from_filepath(renderer, "./res/floor/sand.png");
 
-    floor->coins = load_texture_from_filepath (renderer, "./res/floor/coins.png");
+    floor->coins = load_texture_from_filepath(renderer, "./res/floor/coins.png");
 
-    floor->pit = load_texture_from_filepath (renderer, "./res/floor/pit.png");
-    floor->pit_column = load_texture_from_filepath (renderer, "./res/floor/pit_column.png");
+    floor->pit = load_texture_from_filepath(renderer, "./res/floor/pit.png");
+    floor->pit_column = load_texture_from_filepath(renderer, "./res/floor/pit_column.png");
 
-    floor->water_1 = load_texture_from_filepath (renderer, "./res/floor/water_1.png");
-    floor->water_2 = load_texture_from_filepath (renderer, "./res/floor/water_2.png");
-    floor->water_lily_pod_1 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_1.png");
-    floor->water_lily_pod_2 = load_texture_from_filepath (renderer, "./res/floor/water_lily_pod_2.png");
-    floor->water_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_1.png");
-    floor->water_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/water_stalactite_fallen_2.png");
-    floor->water_column_1 = load_texture_from_filepath (renderer, "./res/floor/water_column_1.png");
-    floor->water_column_2 = load_texture_from_filepath (renderer, "./res/floor/water_column_2.png");
+    floor->water_1 = load_texture_from_filepath(renderer, "./res/floor/water_1.png");
+    floor->water_2 = load_texture_from_filepath(renderer, "./res/floor/water_2.png");
+    floor->water_lily_pod_1 = load_texture_from_filepath(renderer, "./res/floor/water_lily_pod_1.png");
+    floor->water_lily_pod_2 = load_texture_from_filepath(renderer, "./res/floor/water_lily_pod_2.png");
+    floor->water_stalactite_fallen_1 = load_texture_from_filepath(renderer, "./res/floor/water_stalactite_fallen_1.png");
+    floor->water_stalactite_fallen_2 = load_texture_from_filepath(renderer, "./res/floor/water_stalactite_fallen_2.png");
+    floor->water_column_1 = load_texture_from_filepath(renderer, "./res/floor/water_column_1.png");
+    floor->water_column_2 = load_texture_from_filepath(renderer, "./res/floor/water_column_2.png");
 
-    floor->lava_1 = load_texture_from_filepath (renderer, "./res/floor/lava_1.png");
-    floor->lava_2 = load_texture_from_filepath (renderer, "./res/floor/lava_2.png");
-    floor->lava_stalactite_fallen_1 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_1.png");
-    floor->lava_stalactite_fallen_2 = load_texture_from_filepath (renderer, "./res/floor/lava_stalactite_fallen_2.png");
-    floor->lava_column_1 = load_texture_from_filepath (renderer, "./res/floor/lava_column_1.png");
-    floor->lava_column_2 = load_texture_from_filepath (renderer, "./res/floor/lava_column_2.png");
+    floor->lava_1 = load_texture_from_filepath(renderer, "./res/floor/lava_1.png");
+    floor->lava_2 = load_texture_from_filepath(renderer, "./res/floor/lava_2.png");
+    floor->lava_stalactite_fallen_1 = load_texture_from_filepath(renderer, "./res/floor/lava_stalactite_fallen_1.png");
+    floor->lava_stalactite_fallen_2 = load_texture_from_filepath(renderer, "./res/floor/lava_stalactite_fallen_2.png");
+    floor->lava_column_1 = load_texture_from_filepath(renderer, "./res/floor/lava_column_1.png");
+    floor->lava_column_2 = load_texture_from_filepath(renderer, "./res/floor/lava_column_2.png");
 
-    floor->ice = load_texture_from_filepath (renderer, "./res/floor/ice.png");
-    floor->ice_crack_water = load_texture_from_filepath (renderer, "./res/floor/ice_crack_water.png");
+    floor->ice = load_texture_from_filepath(renderer, "./res/floor/ice.png");
+    floor->ice_crack_water = load_texture_from_filepath(renderer, "./res/floor/ice_crack_water.png");
 
-    floor->obstacle = load_texture_from_filepath (renderer, "./res/floor/obstacle.png");
+    floor->obstacle = load_texture_from_filepath(renderer, "./res/floor/obstacle.png");
 
-    floor->conv_belt_up = load_texture_from_filepath (renderer, "./res/floor/conv_belt_up.png");
-    floor->conv_belt_right = load_texture_from_filepath (renderer, "./res/floor/conv_belt_right.png");
-    floor->conv_belt_down = load_texture_from_filepath (renderer, "./res/floor/conv_belt_down.png");
-    floor->conv_belt_left = load_texture_from_filepath (renderer, "./res/floor/conv_belt_left.png");
+    floor->conv_belt_up = load_texture_from_filepath(renderer, "./res/floor/conv_belt_up.png");
+    floor->conv_belt_right = load_texture_from_filepath(renderer, "./res/floor/conv_belt_right.png");
+    floor->conv_belt_down = load_texture_from_filepath(renderer, "./res/floor/conv_belt_down.png");
+    floor->conv_belt_left = load_texture_from_filepath(renderer, "./res/floor/conv_belt_left.png");
 
-    floor->ext_bridge_source_on_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_on_horizontal.png");
-    floor->ext_bridge_source_off_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_off_horizontal.png");
-    floor->ext_bridge_part_horizontal = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_part_horizontal.png");
-    floor->ext_bridge_source_on_vertical = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_on_vertical.png");
-    floor->ext_bridge_source_off_vertical = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_source_off_vertical.png");
-    floor->ext_bridge_part_vertical = load_texture_from_filepath (renderer, "./res/floor/ext_bridge_part_vertical.png");
+    floor->ext_bridge_source_on_horizontal = load_texture_from_filepath(renderer, "./res/floor/ext_bridge_source_on_horizontal.png");
+    floor->ext_bridge_source_off_horizontal = load_texture_from_filepath(renderer, "./res/floor/ext_bridge_source_off_horizontal.png");
+    floor->ext_bridge_part_horizontal = load_texture_from_filepath(renderer, "./res/floor/ext_bridge_part_horizontal.png");
+    floor->ext_bridge_source_on_vertical = load_texture_from_filepath(renderer, "./res/floor/ext_bridge_source_on_vertical.png");
+    floor->ext_bridge_source_off_vertical = load_texture_from_filepath(renderer, "./res/floor/ext_bridge_source_off_vertical.png");
+    floor->ext_bridge_part_vertical = load_texture_from_filepath(renderer, "./res/floor/ext_bridge_part_vertical.png");
 
-    floor->stone_stairs_below = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below.png");
-    floor->stone_stairs_below_blocked = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_below_blocked.png");
-    floor->stone_stairs_above_unpowered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_unpowered.png");
-    floor->stone_stairs_above_powered = load_texture_from_filepath (renderer, "./res/floor/stone_stairs_above_powered.png");
-    floor->rock_stairs_below = load_texture_from_filepath (renderer, "./res/floor/rock_stairs_below.png");
-    floor->metal_stairs_below_off = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_below_off.png");
-    floor->metal_stairs_above_off = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_above_off.png");
-    floor->metal_stairs_below_on = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_below_on.png");
-    floor->metal_stairs_below = load_texture_from_filepath (renderer, "./res/floor/metal_stairs_below.png");
+    floor->stone_stairs_below = load_texture_from_filepath(renderer, "./res/floor/stone_stairs_below.png");
+    floor->stone_stairs_below_blocked = load_texture_from_filepath(renderer, "./res/floor/stone_stairs_below_blocked.png");
+    floor->stone_stairs_above_unpowered = load_texture_from_filepath(renderer, "./res/floor/stone_stairs_above_unpowered.png");
+    floor->stone_stairs_above_powered = load_texture_from_filepath(renderer, "./res/floor/stone_stairs_above_powered.png");
+    floor->rock_stairs_below = load_texture_from_filepath(renderer, "./res/floor/rock_stairs_below.png");
+    floor->metal_stairs_below_off = load_texture_from_filepath(renderer, "./res/floor/metal_stairs_below_off.png");
+    floor->metal_stairs_above_off = load_texture_from_filepath(renderer, "./res/floor/metal_stairs_above_off.png");
+    floor->metal_stairs_below_on = load_texture_from_filepath(renderer, "./res/floor/metal_stairs_below_on.png");
+    floor->metal_stairs_below = load_texture_from_filepath(renderer, "./res/floor/metal_stairs_below.png");
 }
-void destroy_textures_floor (Textures_Floor* floor)
+void destroy_textures_floor(Textures_Floor* floor)
 {
     // later
 }
 
-void load_textures_object (Renderer* renderer, Textures_Object* object)
+void load_textures_object(Renderer* renderer, Textures_Object* object)
 {
     object->wall_rock = load_texture_from_filepath(renderer, "./res/object/wall_rock.png");
     object->wall_stone = load_texture_from_filepath(renderer, "./res/object/wall_stone.png");
@@ -603,12 +603,12 @@ void load_textures_object (Renderer* renderer, Textures_Object* object)
     object->harpoon_gun_left_outline = load_texture_from_filepath(renderer, "./res/object/harpoon_gun_left_outline.png");
 }
 
-void destroy_textures_object (Textures_Object* object)
+void destroy_textures_object(Textures_Object* object)
 {
     // later
 }
 
-void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order_number)
+void load_textures_order_number(Renderer* renderer, Textures_OrderNumber* order_number)
 {
     order_number->num_1 = load_texture_from_filepath(renderer, "./res/order_number/num_1.png");
     order_number->num_2 = load_texture_from_filepath(renderer, "./res/order_number/num_2.png");
@@ -616,325 +616,325 @@ void load_textures_order_number (Renderer* renderer, Textures_OrderNumber* order
     order_number->num_4 = load_texture_from_filepath(renderer, "./res/order_number/num_4.png");
     order_number->num_5 = load_texture_from_filepath(renderer, "./res/order_number/num_5.png");
     order_number->num_6 = load_texture_from_filepath(renderer, "./res/order_number/num_6.png");
-    order_number->num_7= load_texture_from_filepath(renderer, "./res/order_number/num_7.png");
+    order_number->num_7 = load_texture_from_filepath(renderer, "./res/order_number/num_7.png");
     order_number->num_8 = load_texture_from_filepath(renderer, "./res/order_number/num_8.png");
     order_number->num_9 = load_texture_from_filepath(renderer, "./res/order_number/num_9.png");
     order_number->num_0 = load_texture_from_filepath(renderer, "./res/order_number/num_0.png");
 }
-void destroy_textures_order_number (Textures_OrderNumber* order_number)
+void destroy_textures_order_number(Textures_OrderNumber* order_number)
 {
     // later
 }
 
-void load_textures_skill (Renderer* renderer, Textures_Skill* skill)
+void load_textures_skill(Renderer* renderer, Textures_Skill* skill)
 {
-    skill->throw_up = load_texture_from_filepath (renderer, "./res/skill/throw_up.png");
-    skill->throw_right = load_texture_from_filepath (renderer, "./res/skill/throw_right.png");
-    skill->throw_down = load_texture_from_filepath (renderer, "./res/skill/throw_down.png");
-    skill->throw_left = load_texture_from_filepath (renderer, "./res/skill/throw_left.png");
+    skill->throw_up = load_texture_from_filepath(renderer, "./res/skill/throw_up.png");
+    skill->throw_right = load_texture_from_filepath(renderer, "./res/skill/throw_right.png");
+    skill->throw_down = load_texture_from_filepath(renderer, "./res/skill/throw_down.png");
+    skill->throw_left = load_texture_from_filepath(renderer, "./res/skill/throw_left.png");
 
-    skill->lift_none = load_texture_from_filepath (renderer, "./res/skill/lift_none.png");
-    skill->lift_up = load_texture_from_filepath (renderer, "./res/skill/lift_up.png");
-    skill->lift_right = load_texture_from_filepath (renderer, "./res/skill/lift_right.png");
-    skill->lift_down = load_texture_from_filepath (renderer, "./res/skill/lift_down.png");
-    skill->lift_left = load_texture_from_filepath (renderer, "./res/skill/lift_left.png");
+    skill->lift_none = load_texture_from_filepath(renderer, "./res/skill/lift_none.png");
+    skill->lift_up = load_texture_from_filepath(renderer, "./res/skill/lift_up.png");
+    skill->lift_right = load_texture_from_filepath(renderer, "./res/skill/lift_right.png");
+    skill->lift_down = load_texture_from_filepath(renderer, "./res/skill/lift_down.png");
+    skill->lift_left = load_texture_from_filepath(renderer, "./res/skill/lift_left.png");
 
-    skill->fall = load_texture_from_filepath (renderer, "./res/skill/fall.png");
-    skill->drop = load_texture_from_filepath (renderer, "./res/skill/drop.png");
-    skill->change = load_texture_from_filepath (renderer, "./res/skill/change.png");
+    skill->fall = load_texture_from_filepath(renderer, "./res/skill/fall.png");
+    skill->drop = load_texture_from_filepath(renderer, "./res/skill/drop.png");
+    skill->change = load_texture_from_filepath(renderer, "./res/skill/change.png");
 
-    skill->floor_border_solid = load_texture_from_filepath (renderer, "./res/skill/floor_border_solid.png");
-    skill->floor_border_dashed = load_texture_from_filepath (renderer, "./res/skill/floor_border_dashed.png");
-    skill->floor_border_dotted = load_texture_from_filepath (renderer, "./res/skill/floor_border_dotted.png");
-    skill->floor_danger = load_texture_from_filepath (renderer, "./res/skill/floor_danger.png");
+    skill->floor_border_solid = load_texture_from_filepath(renderer, "./res/skill/floor_border_solid.png");
+    skill->floor_border_dashed = load_texture_from_filepath(renderer, "./res/skill/floor_border_dashed.png");
+    skill->floor_border_dotted = load_texture_from_filepath(renderer, "./res/skill/floor_border_dotted.png");
+    skill->floor_danger = load_texture_from_filepath(renderer, "./res/skill/floor_danger.png");
 
-    skill->arrow_thin_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_start.png");
-    skill->arrow_thin_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_end.png");
-    skill->arrow_thin_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_up.png");
-    skill->arrow_thin_up_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_right.png");
-    skill->arrow_thin_up_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_down.png");
-    skill->arrow_thin_up_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_up_left.png");
+    skill->arrow_thin_up_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_up_start.png");
+    skill->arrow_thin_up_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_up_end.png");
+    skill->arrow_thin_up_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_up_up.png");
+    skill->arrow_thin_up_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_up_right.png");
+    skill->arrow_thin_up_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_up_down.png");
+    skill->arrow_thin_up_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_up_left.png");
 
-    skill->arrow_thin_right_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_start.png");
-    skill->arrow_thin_right_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_end.png");
-    skill->arrow_thin_right_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_up.png");
-    skill->arrow_thin_right_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_right.png");
-    skill->arrow_thin_right_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_down.png");
-    skill->arrow_thin_right_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_right_left.png");
+    skill->arrow_thin_right_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_right_start.png");
+    skill->arrow_thin_right_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_right_end.png");
+    skill->arrow_thin_right_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_right_up.png");
+    skill->arrow_thin_right_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_right_right.png");
+    skill->arrow_thin_right_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_right_down.png");
+    skill->arrow_thin_right_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_right_left.png");
 
-    skill->arrow_thin_down_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_start.png");
-    skill->arrow_thin_down_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_end.png");
-    skill->arrow_thin_down_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_up.png");
-    skill->arrow_thin_down_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_right.png");
-    skill->arrow_thin_down_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_down.png");
-    skill->arrow_thin_down_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_down_left.png");
+    skill->arrow_thin_down_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_down_start.png");
+    skill->arrow_thin_down_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_down_end.png");
+    skill->arrow_thin_down_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_down_up.png");
+    skill->arrow_thin_down_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_down_right.png");
+    skill->arrow_thin_down_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_down_down.png");
+    skill->arrow_thin_down_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_down_left.png");
 
-    skill->arrow_thin_left_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_start.png");
-    skill->arrow_thin_left_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_end.png");
-    skill->arrow_thin_left_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_up.png");
-    skill->arrow_thin_left_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_right.png");
-    skill->arrow_thin_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_down.png");
-    skill->arrow_thin_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thin_left_left.png");
+    skill->arrow_thin_left_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_left_start.png");
+    skill->arrow_thin_left_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_left_end.png");
+    skill->arrow_thin_left_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_left_up.png");
+    skill->arrow_thin_left_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_left_right.png");
+    skill->arrow_thin_left_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_left_down.png");
+    skill->arrow_thin_left_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thin_left_left.png");
 
-    skill->arrow_thick_up_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_start.png");
-    skill->arrow_thick_up_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_end.png");
-    skill->arrow_thick_up_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_up.png");
-    skill->arrow_thick_up_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_right.png");
-    skill->arrow_thick_up_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_down.png");
-    skill->arrow_thick_up_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_up_left.png");
+    skill->arrow_thick_up_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_up_start.png");
+    skill->arrow_thick_up_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_up_end.png");
+    skill->arrow_thick_up_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_up_up.png");
+    skill->arrow_thick_up_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_up_right.png");
+    skill->arrow_thick_up_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_up_down.png");
+    skill->arrow_thick_up_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_up_left.png");
 
-    skill->arrow_thick_right_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_start.png");
-    skill->arrow_thick_right_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_end.png");
-    skill->arrow_thick_right_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_up.png");
-    skill->arrow_thick_right_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_right.png");
-    skill->arrow_thick_right_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_down.png");
-    skill->arrow_thick_right_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_right_left.png");
+    skill->arrow_thick_right_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_right_start.png");
+    skill->arrow_thick_right_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_right_end.png");
+    skill->arrow_thick_right_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_right_up.png");
+    skill->arrow_thick_right_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_right_right.png");
+    skill->arrow_thick_right_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_right_down.png");
+    skill->arrow_thick_right_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_right_left.png");
 
-    skill->arrow_thick_down_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_start.png");
-    skill->arrow_thick_down_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_end.png");
-    skill->arrow_thick_down_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_up.png");
-    skill->arrow_thick_down_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_right.png");
-    skill->arrow_thick_down_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_down.png");
-    skill->arrow_thick_down_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_down_left.png");
+    skill->arrow_thick_down_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_down_start.png");
+    skill->arrow_thick_down_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_down_end.png");
+    skill->arrow_thick_down_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_down_up.png");
+    skill->arrow_thick_down_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_down_right.png");
+    skill->arrow_thick_down_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_down_down.png");
+    skill->arrow_thick_down_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_down_left.png");
 
-    skill->arrow_thick_left_start = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_start.png");
-    skill->arrow_thick_left_end = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_end.png");
-    skill->arrow_thick_left_up = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_up.png");
-    skill->arrow_thick_left_right = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_right.png");
-    skill->arrow_thick_left_down = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_down.png");
-    skill->arrow_thick_left_left = load_texture_from_filepath (renderer, "./res/skill/arrow_thick_left_left.png");
+    skill->arrow_thick_left_start = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_left_start.png");
+    skill->arrow_thick_left_end = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_left_end.png");
+    skill->arrow_thick_left_up = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_left_up.png");
+    skill->arrow_thick_left_right = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_left_right.png");
+    skill->arrow_thick_left_down = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_left_down.png");
+    skill->arrow_thick_left_left = load_texture_from_filepath(renderer, "./res/skill/arrow_thick_left_left.png");
 
-    skill->dots_line_horizontal = load_texture_from_filepath (renderer, "./res/skill/dots_line_horizontal.png");
-    skill->dots_line_vertical = load_texture_from_filepath (renderer, "./res/skill/dots_line_vertical.png");
+    skill->dots_line_horizontal = load_texture_from_filepath(renderer, "./res/skill/dots_line_horizontal.png");
+    skill->dots_line_vertical = load_texture_from_filepath(renderer, "./res/skill/dots_line_vertical.png");
 
-    skill->dots_arch_horizontal = load_texture_from_filepath (renderer, "./res/skill/dots_arch_horizontal.png");
-    skill->dots_arch_vertical = load_texture_from_filepath (renderer, "./res/skill/dots_arch_vertical.png");
+    skill->dots_arch_horizontal = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal.png");
+    skill->dots_arch_vertical = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical.png");
 
-    skill->attack_dir4_up = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_up.png");
-    skill->attack_dir4_right = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_right.png");
-    skill->attack_dir4_down = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_down.png");
-    skill->attack_dir4_left = load_texture_from_filepath (renderer, "./res/skill/attack_dir4_left.png");
+    skill->attack_dir4_up = load_texture_from_filepath(renderer, "./res/skill/attack_dir4_up.png");
+    skill->attack_dir4_right = load_texture_from_filepath(renderer, "./res/skill/attack_dir4_right.png");
+    skill->attack_dir4_down = load_texture_from_filepath(renderer, "./res/skill/attack_dir4_down.png");
+    skill->attack_dir4_left = load_texture_from_filepath(renderer, "./res/skill/attack_dir4_left.png");
 
-    skill->immovable_effect = load_texture_from_filepath (renderer, "./res/skill/immovable_effect.png");
-    skill->crash_effect = load_texture_from_filepath (renderer, "./res/skill/crash_effect.png");
-    skill->blow_up_effect = load_texture_from_filepath (renderer, "./res/skill/blow_up_effect.png");
-    skill->death_effect = load_texture_from_filepath (renderer, "./res/skill/death_effect.png");
-    skill->break_effect = load_texture_from_filepath (renderer, "./res/skill/break_effect.png");
-    skill->melt_effect = load_texture_from_filepath (renderer, "./res/skill/melt_effect.png");
-    skill->shake_effect = load_texture_from_filepath (renderer, "./res/skill/shake_effect.png");
-    skill->stomp_effect = load_texture_from_filepath (renderer, "./res/skill/stomp_effect.png");
-    skill->use_effect = load_texture_from_filepath (renderer, "./res/skill/use_effect.png");
-    skill->manipulation_effect = load_texture_from_filepath (renderer, "./res/skill/manipulation_effect.png");
-    skill->teleportation_effect = load_texture_from_filepath (renderer, "./res/skill/teleportation_effect.png");
+    skill->immovable_effect = load_texture_from_filepath(renderer, "./res/skill/immovable_effect.png");
+    skill->crash_effect = load_texture_from_filepath(renderer, "./res/skill/crash_effect.png");
+    skill->blow_up_effect = load_texture_from_filepath(renderer, "./res/skill/blow_up_effect.png");
+    skill->death_effect = load_texture_from_filepath(renderer, "./res/skill/death_effect.png");
+    skill->break_effect = load_texture_from_filepath(renderer, "./res/skill/break_effect.png");
+    skill->melt_effect = load_texture_from_filepath(renderer, "./res/skill/melt_effect.png");
+    skill->shake_effect = load_texture_from_filepath(renderer, "./res/skill/shake_effect.png");
+    skill->stomp_effect = load_texture_from_filepath(renderer, "./res/skill/stomp_effect.png");
+    skill->use_effect = load_texture_from_filepath(renderer, "./res/skill/use_effect.png");
+    skill->manipulation_effect = load_texture_from_filepath(renderer, "./res/skill/manipulation_effect.png");
+    skill->teleportation_effect = load_texture_from_filepath(renderer, "./res/skill/teleportation_effect.png");
 
-    skill->no_positions = load_texture_from_filepath (renderer, "./res/skill/no_positions.png");
-    skill->no_attack = load_texture_from_filepath (renderer, "./res/skill/no_attack.png");
+    skill->no_positions = load_texture_from_filepath(renderer, "./res/skill/no_positions.png");
+    skill->no_attack = load_texture_from_filepath(renderer, "./res/skill/no_attack.png");
 
-    skill->plus_1_cell = load_texture_from_filepath (renderer, "./res/skill/plus_1_cell.png");
-    skill->plus_2_cell = load_texture_from_filepath (renderer, "./res/skill/plus_2_cell.png");
-    skill->plus_3_cell = load_texture_from_filepath (renderer, "./res/skill/plus_3_cell.png");
-    skill->minus_1_cell = load_texture_from_filepath (renderer, "./res/skill/minus_1_cell.png");
-    skill->minus_2_cell = load_texture_from_filepath (renderer, "./res/skill/minus_2_cell.png");
-    skill->minus_3_cell = load_texture_from_filepath (renderer, "./res/skill/minus_3_cell.png");
-    skill->plus_1_dynamite = load_texture_from_filepath (renderer, "./res/skill/plus_1_dynamite.png");
-    skill->plus_2_dynamite = load_texture_from_filepath (renderer, "./res/skill/plus_2_dynamite.png");
-    skill->plus_3_dynamite = load_texture_from_filepath (renderer, "./res/skill/plus_3_dynamite.png");
-    skill->minus_1_dynamite = load_texture_from_filepath (renderer, "./res/skill/minus_1_dynamite.png");
-    skill->minus_2_dynamite = load_texture_from_filepath (renderer, "./res/skill/minus_2_dynamite.png");
-    skill->minus_3_dynamite = load_texture_from_filepath (renderer, "./res/skill/minus_3_dynamite.png");
-    skill->plus_1_gemstone = load_texture_from_filepath (renderer, "./res/skill/plus_1_gemstone.png");
-    skill->plus_2_gemstone = load_texture_from_filepath (renderer, "./res/skill/plus_2_gemstone.png");
-    skill->plus_3_gemstone = load_texture_from_filepath (renderer, "./res/skill/plus_3_gemstone.png");
-    skill->minus_1_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_1_gemstone.png");
-    skill->minus_2_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_2_gemstone.png");
-    skill->minus_3_gemstone = load_texture_from_filepath (renderer, "./res/skill/minus_3_gemstone.png");
+    skill->plus_1_cell = load_texture_from_filepath(renderer, "./res/skill/plus_1_cell.png");
+    skill->plus_2_cell = load_texture_from_filepath(renderer, "./res/skill/plus_2_cell.png");
+    skill->plus_3_cell = load_texture_from_filepath(renderer, "./res/skill/plus_3_cell.png");
+    skill->minus_1_cell = load_texture_from_filepath(renderer, "./res/skill/minus_1_cell.png");
+    skill->minus_2_cell = load_texture_from_filepath(renderer, "./res/skill/minus_2_cell.png");
+    skill->minus_3_cell = load_texture_from_filepath(renderer, "./res/skill/minus_3_cell.png");
+    skill->plus_1_dynamite = load_texture_from_filepath(renderer, "./res/skill/plus_1_dynamite.png");
+    skill->plus_2_dynamite = load_texture_from_filepath(renderer, "./res/skill/plus_2_dynamite.png");
+    skill->plus_3_dynamite = load_texture_from_filepath(renderer, "./res/skill/plus_3_dynamite.png");
+    skill->minus_1_dynamite = load_texture_from_filepath(renderer, "./res/skill/minus_1_dynamite.png");
+    skill->minus_2_dynamite = load_texture_from_filepath(renderer, "./res/skill/minus_2_dynamite.png");
+    skill->minus_3_dynamite = load_texture_from_filepath(renderer, "./res/skill/minus_3_dynamite.png");
+    skill->plus_1_gemstone = load_texture_from_filepath(renderer, "./res/skill/plus_1_gemstone.png");
+    skill->plus_2_gemstone = load_texture_from_filepath(renderer, "./res/skill/plus_2_gemstone.png");
+    skill->plus_3_gemstone = load_texture_from_filepath(renderer, "./res/skill/plus_3_gemstone.png");
+    skill->minus_1_gemstone = load_texture_from_filepath(renderer, "./res/skill/minus_1_gemstone.png");
+    skill->minus_2_gemstone = load_texture_from_filepath(renderer, "./res/skill/minus_2_gemstone.png");
+    skill->minus_3_gemstone = load_texture_from_filepath(renderer, "./res/skill/minus_3_gemstone.png");
 
-    skill->floor_environment_falling_stalactite = load_texture_from_filepath (renderer, "./res/skill/floor_environment_falling_stalactite.png");
-    skill->floor_environment_emerge_water = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_water.png");
-    skill->floor_environment_emerge_pit = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_pit.png");
-    skill->floor_environment_emerge_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_emerge_burrow.png");
-    skill->environment_emerge_pipe = load_texture_from_filepath (renderer, "./res/skill/environment_emerge_pipe.png");
-    skill->floor_environment_collapse_burrow = load_texture_from_filepath (renderer, "./res/skill/floor_environment_collapse_burrow.png");
+    skill->floor_environment_falling_stalactite = load_texture_from_filepath(renderer, "./res/skill/floor_environment_falling_stalactite.png");
+    skill->floor_environment_emerge_water = load_texture_from_filepath(renderer, "./res/skill/floor_environment_emerge_water.png");
+    skill->floor_environment_emerge_pit = load_texture_from_filepath(renderer, "./res/skill/floor_environment_emerge_pit.png");
+    skill->floor_environment_emerge_burrow = load_texture_from_filepath(renderer, "./res/skill/floor_environment_emerge_burrow.png");
+    skill->environment_emerge_pipe = load_texture_from_filepath(renderer, "./res/skill/environment_emerge_pipe.png");
+    skill->floor_environment_collapse_burrow = load_texture_from_filepath(renderer, "./res/skill/floor_environment_collapse_burrow.png");
 }
 
-void destroy_textures_skill (Textures_Skill* skill)
-{
-    // later
-}
-
-void load_textures_animation (Renderer* renderer, Textures_Animation* animation)
-{
-    animation->blow_up_1 = load_texture_from_filepath (renderer, "./res/animation/blow_up_1.png");
-    animation->blow_up_2 = load_texture_from_filepath (renderer, "./res/animation/blow_up_2.png");
-
-    animation->death_1 = load_texture_from_filepath (renderer, "./res/animation/death_1.png");
-    animation->death_2 = load_texture_from_filepath (renderer, "./res/animation/death_2.png");
-
-    animation->drop_1 = load_texture_from_filepath (renderer, "./res/animation/drop_1.png");
-    animation->drop_2 = load_texture_from_filepath (renderer, "./res/animation/drop_2.png");
-
-    animation->hook_up_start = load_texture_from_filepath (renderer, "./res/animation/hook_up_start.png");
-    animation->hook_up_end = load_texture_from_filepath (renderer, "./res/animation/hook_up_end.png");
-    animation->hook_up_up = load_texture_from_filepath (renderer, "./res/animation/hook_up_up.png");
-    animation->hook_up_right = load_texture_from_filepath (renderer, "./res/animation/hook_up_right.png");
-    animation->hook_up_down = load_texture_from_filepath (renderer, "./res/animation/hook_up_down.png");
-    animation->hook_up_left = load_texture_from_filepath (renderer, "./res/animation/hook_up_left.png");
-
-    animation->hook_right_start = load_texture_from_filepath (renderer, "./res/animation/hook_right_start.png");
-    animation->hook_right_end = load_texture_from_filepath (renderer, "./res/animation/hook_right_end.png");
-    animation->hook_right_up = load_texture_from_filepath (renderer, "./res/animation/hook_right_up.png");
-    animation->hook_right_right = load_texture_from_filepath (renderer, "./res/animation/hook_right_right.png");
-    animation->hook_right_down = load_texture_from_filepath (renderer, "./res/animation/hook_right_down.png");
-    animation->hook_right_left = load_texture_from_filepath (renderer, "./res/animation/hook_right_left.png");
-
-    animation->hook_down_start = load_texture_from_filepath (renderer, "./res/animation/hook_down_start.png");
-    animation->hook_down_end = load_texture_from_filepath (renderer, "./res/animation/hook_down_end.png");
-    animation->hook_down_up = load_texture_from_filepath (renderer, "./res/animation/hook_down_up.png");
-    animation->hook_down_right = load_texture_from_filepath (renderer, "./res/animation/hook_down_right.png");
-    animation->hook_down_down = load_texture_from_filepath (renderer, "./res/animation/hook_down_down.png");
-    animation->hook_down_left = load_texture_from_filepath (renderer, "./res/animation/hook_down_left.png");
-
-    animation->hook_left_start = load_texture_from_filepath (renderer, "./res/animation/hook_left_start.png");
-    animation->hook_left_end = load_texture_from_filepath (renderer, "./res/animation/hook_left_end.png");
-    animation->hook_left_up = load_texture_from_filepath (renderer, "./res/animation/hook_left_up.png");
-    animation->hook_left_right = load_texture_from_filepath (renderer, "./res/animation/hook_left_right.png");
-    animation->hook_left_down = load_texture_from_filepath (renderer, "./res/animation/hook_left_down.png");
-    animation->hook_left_left = load_texture_from_filepath (renderer, "./res/animation/hook_left_left.png");
-
-    animation->spiderweb_up_start = load_texture_from_filepath (renderer, "./res/animation/spiderweb_up_start.png");
-    animation->spiderweb_up_end = load_texture_from_filepath (renderer, "./res/animation/spiderweb_up_end.png");
-    animation->spiderweb_up_up = load_texture_from_filepath (renderer, "./res/animation/spiderweb_up_up.png");
-    animation->spiderweb_up_right = load_texture_from_filepath (renderer, "./res/animation/spiderweb_up_right.png");
-    animation->spiderweb_up_down = load_texture_from_filepath (renderer, "./res/animation/spiderweb_up_down.png");
-    animation->spiderweb_up_left = load_texture_from_filepath (renderer, "./res/animation/spiderweb_up_left.png");
-
-    animation->spiderweb_right_start = load_texture_from_filepath (renderer, "./res/animation/spiderweb_right_start.png");
-    animation->spiderweb_right_end = load_texture_from_filepath (renderer, "./res/animation/spiderweb_right_end.png");
-    animation->spiderweb_right_up = load_texture_from_filepath (renderer, "./res/animation/spiderweb_right_up.png");
-    animation->spiderweb_right_right = load_texture_from_filepath (renderer, "./res/animation/spiderweb_right_right.png");
-    animation->spiderweb_right_down = load_texture_from_filepath (renderer, "./res/animation/spiderweb_right_down.png");
-    animation->spiderweb_right_left = load_texture_from_filepath (renderer, "./res/animation/spiderweb_right_left.png");
-
-    animation->spiderweb_down_start = load_texture_from_filepath (renderer, "./res/animation/spiderweb_down_start.png");
-    animation->spiderweb_down_end = load_texture_from_filepath (renderer, "./res/animation/spiderweb_down_end.png");
-    animation->spiderweb_down_up = load_texture_from_filepath (renderer, "./res/animation/spiderweb_down_up.png");
-    animation->spiderweb_down_right = load_texture_from_filepath (renderer, "./res/animation/spiderweb_down_right.png");
-    animation->spiderweb_down_down = load_texture_from_filepath (renderer, "./res/animation/spiderweb_down_down.png");
-    animation->spiderweb_down_left = load_texture_from_filepath (renderer, "./res/animation/spiderweb_down_left.png");
-
-    animation->spiderweb_left_start = load_texture_from_filepath (renderer, "./res/animation/spiderweb_left_start.png");
-    animation->spiderweb_left_end = load_texture_from_filepath (renderer, "./res/animation/spiderweb_left_end.png");
-    animation->spiderweb_left_up = load_texture_from_filepath (renderer, "./res/animation/spiderweb_left_up.png");
-    animation->spiderweb_left_right = load_texture_from_filepath (renderer, "./res/animation/spiderweb_left_right.png");
-    animation->spiderweb_left_down = load_texture_from_filepath (renderer, "./res/animation/spiderweb_left_down.png");
-    animation->spiderweb_left_left = load_texture_from_filepath (renderer, "./res/animation/spiderweb_left_left.png");
-
-    animation->tentacle_up_start = load_texture_from_filepath (renderer, "./res/animation/tentacle_up_start.png");
-    animation->tentacle_up_end = load_texture_from_filepath (renderer, "./res/animation/tentacle_up_end.png");
-    animation->tentacle_up_up = load_texture_from_filepath (renderer, "./res/animation/tentacle_up_up.png");
-    animation->tentacle_up_right = load_texture_from_filepath (renderer, "./res/animation/tentacle_up_right.png");
-    animation->tentacle_up_down = load_texture_from_filepath (renderer, "./res/animation/tentacle_up_down.png");
-    animation->tentacle_up_left = load_texture_from_filepath (renderer, "./res/animation/tentacle_up_left.png");
-
-    animation->tentacle_right_start = load_texture_from_filepath (renderer, "./res/animation/tentacle_right_start.png");
-    animation->tentacle_right_end = load_texture_from_filepath (renderer, "./res/animation/tentacle_right_end.png");
-    animation->tentacle_right_up = load_texture_from_filepath (renderer, "./res/animation/tentacle_right_up.png");
-    animation->tentacle_right_right = load_texture_from_filepath (renderer, "./res/animation/tentacle_right_right.png");
-    animation->tentacle_right_down = load_texture_from_filepath (renderer, "./res/animation/tentacle_right_down.png");
-    animation->tentacle_right_left = load_texture_from_filepath (renderer, "./res/animation/tentacle_right_left.png");
-
-    animation->tentacle_down_start = load_texture_from_filepath (renderer, "./res/animation/tentacle_down_start.png");
-    animation->tentacle_down_end = load_texture_from_filepath (renderer, "./res/animation/tentacle_down_end.png");
-    animation->tentacle_down_up = load_texture_from_filepath (renderer, "./res/animation/tentacle_down_up.png");
-    animation->tentacle_down_right = load_texture_from_filepath (renderer, "./res/animation/tentacle_down_right.png");
-    animation->tentacle_down_down = load_texture_from_filepath (renderer, "./res/animation/tentacle_down_down.png");
-    animation->tentacle_down_left = load_texture_from_filepath (renderer, "./res/animation/tentacle_down_left.png");
-
-    animation->tentacle_left_start = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_start.png");
-    animation->tentacle_left_end = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_end.png");
-    animation->tentacle_left_up = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_up.png");
-    animation->tentacle_left_right = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_right.png");
-    animation->tentacle_left_down = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_down.png");
-    animation->tentacle_left_left = load_texture_from_filepath (renderer, "./res/animation/tentacle_left_left.png");
-
-    animation->tongue_up_start = load_texture_from_filepath (renderer, "./res/animation/tongue_up_start.png");
-    animation->tongue_up_end = load_texture_from_filepath (renderer, "./res/animation/tongue_up_end.png");
-    animation->tongue_up_up = load_texture_from_filepath (renderer, "./res/animation/tongue_up_up.png");
-    animation->tongue_up_right = load_texture_from_filepath (renderer, "./res/animation/tongue_up_right.png");
-    animation->tongue_up_down = load_texture_from_filepath (renderer, "./res/animation/tongue_up_down.png");
-    animation->tongue_up_left = load_texture_from_filepath (renderer, "./res/animation/tongue_up_left.png");
-
-    animation->tongue_right_start = load_texture_from_filepath (renderer, "./res/animation/tongue_right_start.png");
-    animation->tongue_right_end = load_texture_from_filepath (renderer, "./res/animation/tongue_right_end.png");
-    animation->tongue_right_up = load_texture_from_filepath (renderer, "./res/animation/tongue_right_up.png");
-    animation->tongue_right_right = load_texture_from_filepath (renderer, "./res/animation/tongue_right_right.png");
-    animation->tongue_right_down = load_texture_from_filepath (renderer, "./res/animation/tongue_right_down.png");
-    animation->tongue_right_left = load_texture_from_filepath (renderer, "./res/animation/tongue_right_left.png");
-
-    animation->tongue_down_start = load_texture_from_filepath (renderer, "./res/animation/tongue_down_start.png");
-    animation->tongue_down_end = load_texture_from_filepath (renderer, "./res/animation/tongue_down_end.png");
-    animation->tongue_down_up = load_texture_from_filepath (renderer, "./res/animation/tongue_down_up.png");
-    animation->tongue_down_right = load_texture_from_filepath (renderer, "./res/animation/tongue_down_right.png");
-    animation->tongue_down_down = load_texture_from_filepath (renderer, "./res/animation/tongue_down_down.png");
-    animation->tongue_down_left = load_texture_from_filepath (renderer, "./res/animation/tongue_down_left.png");
-
-    animation->tongue_left_start = load_texture_from_filepath (renderer, "./res/animation/tongue_left_start.png");
-    animation->tongue_left_end = load_texture_from_filepath (renderer, "./res/animation/tongue_left_end.png");
-    animation->tongue_left_up = load_texture_from_filepath (renderer, "./res/animation/tongue_left_up.png");
-    animation->tongue_left_right = load_texture_from_filepath (renderer, "./res/animation/tongue_left_right.png");
-    animation->tongue_left_down = load_texture_from_filepath (renderer, "./res/animation/tongue_left_down.png");
-    animation->tongue_left_left = load_texture_from_filepath (renderer, "./res/animation/tongue_left_left.png");
-
-    animation->scissor_up_start = load_texture_from_filepath (renderer, "./res/animation/scissor_up_start.png");
-    animation->scissor_up_end = load_texture_from_filepath (renderer, "./res/animation/scissor_up_end.png");
-    animation->scissor_up_up = load_texture_from_filepath (renderer, "./res/animation/scissor_up_up.png");
-    animation->scissor_up_right = load_texture_from_filepath (renderer, "./res/animation/scissor_up_right.png");
-    animation->scissor_up_down = load_texture_from_filepath (renderer, "./res/animation/scissor_up_down.png");
-    animation->scissor_up_left = load_texture_from_filepath (renderer, "./res/animation/scissor_up_left.png");
-
-    animation->scissor_right_start = load_texture_from_filepath (renderer, "./res/animation/scissor_right_start.png");
-    animation->scissor_right_end = load_texture_from_filepath (renderer, "./res/animation/scissor_right_end.png");
-    animation->scissor_right_up = load_texture_from_filepath (renderer, "./res/animation/scissor_right_up.png");
-    animation->scissor_right_right = load_texture_from_filepath (renderer, "./res/animation/scissor_right_right.png");
-    animation->scissor_right_down = load_texture_from_filepath (renderer, "./res/animation/scissor_right_down.png");
-    animation->scissor_right_left = load_texture_from_filepath (renderer, "./res/animation/scissor_right_left.png");
-
-    animation->scissor_down_start = load_texture_from_filepath (renderer, "./res/animation/scissor_down_start.png");
-    animation->scissor_down_end = load_texture_from_filepath (renderer, "./res/animation/scissor_down_end.png");
-    animation->scissor_down_up = load_texture_from_filepath (renderer, "./res/animation/scissor_down_up.png");
-    animation->scissor_down_right = load_texture_from_filepath (renderer, "./res/animation/scissor_down_right.png");
-    animation->scissor_down_down = load_texture_from_filepath (renderer, "./res/animation/scissor_down_down.png");
-    animation->scissor_down_left = load_texture_from_filepath (renderer, "./res/animation/scissor_down_left.png");
-
-    animation->scissor_left_start = load_texture_from_filepath (renderer, "./res/animation/scissor_left_start.png");
-    animation->scissor_left_end = load_texture_from_filepath (renderer, "./res/animation/scissor_left_end.png");
-    animation->scissor_left_up = load_texture_from_filepath (renderer, "./res/animation/scissor_left_up.png");
-    animation->scissor_left_right = load_texture_from_filepath (renderer, "./res/animation/scissor_left_right.png");
-    animation->scissor_left_down = load_texture_from_filepath (renderer, "./res/animation/scissor_left_down.png");
-    animation->scissor_left_left = load_texture_from_filepath (renderer, "./res/animation/scissor_left_left.png");
-
-    animation->laser_up = load_texture_from_filepath (renderer, "./res/animation/laser_up.png");
-    animation->laser_right = load_texture_from_filepath (renderer, "./res/animation/laser_right.png");
-    animation->laser_down = load_texture_from_filepath (renderer, "./res/animation/laser_down.png");
-    animation->laser_left = load_texture_from_filepath (renderer, "./res/animation/laser_left.png");
-    animation->laser_vertical = load_texture_from_filepath (renderer, "./res/animation/laser_vertical.png");
-    animation->laser_horizontal = load_texture_from_filepath (renderer, "./res/animation/laser_horizontal.png");
-
-    animation->cell = load_texture_from_filepath (renderer, "./res/animation/cell.png");
-    animation->dynamite = load_texture_from_filepath (renderer, "./res/animation/dynamite.png");
-    animation->gemstone = load_texture_from_filepath (renderer, "./res/animation/gemstone.png");
-    animation->minibot = load_texture_from_filepath (renderer, "./res/animation/minibot.png");
-    animation->minibot_enemy = load_texture_from_filepath (renderer, "./res/animation/minibot_enemy.png");
-    animation->fly_projectile = load_texture_from_filepath (renderer, "./res/animation/fly_projectile.png");
-    animation->squirrel_projectile = load_texture_from_filepath (renderer, "./res/animation/squirrel_projectile.png");
-}
-
-void destroy_textures_animation (Textures_Animation* animation)
+void destroy_textures_skill(Textures_Skill* skill)
 {
     // later
 }
 
-void load_textures_hud (Renderer* renderer, Textures_Hud* hud)
+void load_textures_animation(Renderer* renderer, Textures_Animation* animation)
+{
+    animation->blow_up_1 = load_texture_from_filepath(renderer, "./res/animation/blow_up_1.png");
+    animation->blow_up_2 = load_texture_from_filepath(renderer, "./res/animation/blow_up_2.png");
+
+    animation->death_1 = load_texture_from_filepath(renderer, "./res/animation/death_1.png");
+    animation->death_2 = load_texture_from_filepath(renderer, "./res/animation/death_2.png");
+
+    animation->drop_1 = load_texture_from_filepath(renderer, "./res/animation/drop_1.png");
+    animation->drop_2 = load_texture_from_filepath(renderer, "./res/animation/drop_2.png");
+
+    animation->hook_up_start = load_texture_from_filepath(renderer, "./res/animation/hook_up_start.png");
+    animation->hook_up_end = load_texture_from_filepath(renderer, "./res/animation/hook_up_end.png");
+    animation->hook_up_up = load_texture_from_filepath(renderer, "./res/animation/hook_up_up.png");
+    animation->hook_up_right = load_texture_from_filepath(renderer, "./res/animation/hook_up_right.png");
+    animation->hook_up_down = load_texture_from_filepath(renderer, "./res/animation/hook_up_down.png");
+    animation->hook_up_left = load_texture_from_filepath(renderer, "./res/animation/hook_up_left.png");
+
+    animation->hook_right_start = load_texture_from_filepath(renderer, "./res/animation/hook_right_start.png");
+    animation->hook_right_end = load_texture_from_filepath(renderer, "./res/animation/hook_right_end.png");
+    animation->hook_right_up = load_texture_from_filepath(renderer, "./res/animation/hook_right_up.png");
+    animation->hook_right_right = load_texture_from_filepath(renderer, "./res/animation/hook_right_right.png");
+    animation->hook_right_down = load_texture_from_filepath(renderer, "./res/animation/hook_right_down.png");
+    animation->hook_right_left = load_texture_from_filepath(renderer, "./res/animation/hook_right_left.png");
+
+    animation->hook_down_start = load_texture_from_filepath(renderer, "./res/animation/hook_down_start.png");
+    animation->hook_down_end = load_texture_from_filepath(renderer, "./res/animation/hook_down_end.png");
+    animation->hook_down_up = load_texture_from_filepath(renderer, "./res/animation/hook_down_up.png");
+    animation->hook_down_right = load_texture_from_filepath(renderer, "./res/animation/hook_down_right.png");
+    animation->hook_down_down = load_texture_from_filepath(renderer, "./res/animation/hook_down_down.png");
+    animation->hook_down_left = load_texture_from_filepath(renderer, "./res/animation/hook_down_left.png");
+
+    animation->hook_left_start = load_texture_from_filepath(renderer, "./res/animation/hook_left_start.png");
+    animation->hook_left_end = load_texture_from_filepath(renderer, "./res/animation/hook_left_end.png");
+    animation->hook_left_up = load_texture_from_filepath(renderer, "./res/animation/hook_left_up.png");
+    animation->hook_left_right = load_texture_from_filepath(renderer, "./res/animation/hook_left_right.png");
+    animation->hook_left_down = load_texture_from_filepath(renderer, "./res/animation/hook_left_down.png");
+    animation->hook_left_left = load_texture_from_filepath(renderer, "./res/animation/hook_left_left.png");
+
+    animation->spiderweb_up_start = load_texture_from_filepath(renderer, "./res/animation/spiderweb_up_start.png");
+    animation->spiderweb_up_end = load_texture_from_filepath(renderer, "./res/animation/spiderweb_up_end.png");
+    animation->spiderweb_up_up = load_texture_from_filepath(renderer, "./res/animation/spiderweb_up_up.png");
+    animation->spiderweb_up_right = load_texture_from_filepath(renderer, "./res/animation/spiderweb_up_right.png");
+    animation->spiderweb_up_down = load_texture_from_filepath(renderer, "./res/animation/spiderweb_up_down.png");
+    animation->spiderweb_up_left = load_texture_from_filepath(renderer, "./res/animation/spiderweb_up_left.png");
+
+    animation->spiderweb_right_start = load_texture_from_filepath(renderer, "./res/animation/spiderweb_right_start.png");
+    animation->spiderweb_right_end = load_texture_from_filepath(renderer, "./res/animation/spiderweb_right_end.png");
+    animation->spiderweb_right_up = load_texture_from_filepath(renderer, "./res/animation/spiderweb_right_up.png");
+    animation->spiderweb_right_right = load_texture_from_filepath(renderer, "./res/animation/spiderweb_right_right.png");
+    animation->spiderweb_right_down = load_texture_from_filepath(renderer, "./res/animation/spiderweb_right_down.png");
+    animation->spiderweb_right_left = load_texture_from_filepath(renderer, "./res/animation/spiderweb_right_left.png");
+
+    animation->spiderweb_down_start = load_texture_from_filepath(renderer, "./res/animation/spiderweb_down_start.png");
+    animation->spiderweb_down_end = load_texture_from_filepath(renderer, "./res/animation/spiderweb_down_end.png");
+    animation->spiderweb_down_up = load_texture_from_filepath(renderer, "./res/animation/spiderweb_down_up.png");
+    animation->spiderweb_down_right = load_texture_from_filepath(renderer, "./res/animation/spiderweb_down_right.png");
+    animation->spiderweb_down_down = load_texture_from_filepath(renderer, "./res/animation/spiderweb_down_down.png");
+    animation->spiderweb_down_left = load_texture_from_filepath(renderer, "./res/animation/spiderweb_down_left.png");
+
+    animation->spiderweb_left_start = load_texture_from_filepath(renderer, "./res/animation/spiderweb_left_start.png");
+    animation->spiderweb_left_end = load_texture_from_filepath(renderer, "./res/animation/spiderweb_left_end.png");
+    animation->spiderweb_left_up = load_texture_from_filepath(renderer, "./res/animation/spiderweb_left_up.png");
+    animation->spiderweb_left_right = load_texture_from_filepath(renderer, "./res/animation/spiderweb_left_right.png");
+    animation->spiderweb_left_down = load_texture_from_filepath(renderer, "./res/animation/spiderweb_left_down.png");
+    animation->spiderweb_left_left = load_texture_from_filepath(renderer, "./res/animation/spiderweb_left_left.png");
+
+    animation->tentacle_up_start = load_texture_from_filepath(renderer, "./res/animation/tentacle_up_start.png");
+    animation->tentacle_up_end = load_texture_from_filepath(renderer, "./res/animation/tentacle_up_end.png");
+    animation->tentacle_up_up = load_texture_from_filepath(renderer, "./res/animation/tentacle_up_up.png");
+    animation->tentacle_up_right = load_texture_from_filepath(renderer, "./res/animation/tentacle_up_right.png");
+    animation->tentacle_up_down = load_texture_from_filepath(renderer, "./res/animation/tentacle_up_down.png");
+    animation->tentacle_up_left = load_texture_from_filepath(renderer, "./res/animation/tentacle_up_left.png");
+
+    animation->tentacle_right_start = load_texture_from_filepath(renderer, "./res/animation/tentacle_right_start.png");
+    animation->tentacle_right_end = load_texture_from_filepath(renderer, "./res/animation/tentacle_right_end.png");
+    animation->tentacle_right_up = load_texture_from_filepath(renderer, "./res/animation/tentacle_right_up.png");
+    animation->tentacle_right_right = load_texture_from_filepath(renderer, "./res/animation/tentacle_right_right.png");
+    animation->tentacle_right_down = load_texture_from_filepath(renderer, "./res/animation/tentacle_right_down.png");
+    animation->tentacle_right_left = load_texture_from_filepath(renderer, "./res/animation/tentacle_right_left.png");
+
+    animation->tentacle_down_start = load_texture_from_filepath(renderer, "./res/animation/tentacle_down_start.png");
+    animation->tentacle_down_end = load_texture_from_filepath(renderer, "./res/animation/tentacle_down_end.png");
+    animation->tentacle_down_up = load_texture_from_filepath(renderer, "./res/animation/tentacle_down_up.png");
+    animation->tentacle_down_right = load_texture_from_filepath(renderer, "./res/animation/tentacle_down_right.png");
+    animation->tentacle_down_down = load_texture_from_filepath(renderer, "./res/animation/tentacle_down_down.png");
+    animation->tentacle_down_left = load_texture_from_filepath(renderer, "./res/animation/tentacle_down_left.png");
+
+    animation->tentacle_left_start = load_texture_from_filepath(renderer, "./res/animation/tentacle_left_start.png");
+    animation->tentacle_left_end = load_texture_from_filepath(renderer, "./res/animation/tentacle_left_end.png");
+    animation->tentacle_left_up = load_texture_from_filepath(renderer, "./res/animation/tentacle_left_up.png");
+    animation->tentacle_left_right = load_texture_from_filepath(renderer, "./res/animation/tentacle_left_right.png");
+    animation->tentacle_left_down = load_texture_from_filepath(renderer, "./res/animation/tentacle_left_down.png");
+    animation->tentacle_left_left = load_texture_from_filepath(renderer, "./res/animation/tentacle_left_left.png");
+
+    animation->tongue_up_start = load_texture_from_filepath(renderer, "./res/animation/tongue_up_start.png");
+    animation->tongue_up_end = load_texture_from_filepath(renderer, "./res/animation/tongue_up_end.png");
+    animation->tongue_up_up = load_texture_from_filepath(renderer, "./res/animation/tongue_up_up.png");
+    animation->tongue_up_right = load_texture_from_filepath(renderer, "./res/animation/tongue_up_right.png");
+    animation->tongue_up_down = load_texture_from_filepath(renderer, "./res/animation/tongue_up_down.png");
+    animation->tongue_up_left = load_texture_from_filepath(renderer, "./res/animation/tongue_up_left.png");
+
+    animation->tongue_right_start = load_texture_from_filepath(renderer, "./res/animation/tongue_right_start.png");
+    animation->tongue_right_end = load_texture_from_filepath(renderer, "./res/animation/tongue_right_end.png");
+    animation->tongue_right_up = load_texture_from_filepath(renderer, "./res/animation/tongue_right_up.png");
+    animation->tongue_right_right = load_texture_from_filepath(renderer, "./res/animation/tongue_right_right.png");
+    animation->tongue_right_down = load_texture_from_filepath(renderer, "./res/animation/tongue_right_down.png");
+    animation->tongue_right_left = load_texture_from_filepath(renderer, "./res/animation/tongue_right_left.png");
+
+    animation->tongue_down_start = load_texture_from_filepath(renderer, "./res/animation/tongue_down_start.png");
+    animation->tongue_down_end = load_texture_from_filepath(renderer, "./res/animation/tongue_down_end.png");
+    animation->tongue_down_up = load_texture_from_filepath(renderer, "./res/animation/tongue_down_up.png");
+    animation->tongue_down_right = load_texture_from_filepath(renderer, "./res/animation/tongue_down_right.png");
+    animation->tongue_down_down = load_texture_from_filepath(renderer, "./res/animation/tongue_down_down.png");
+    animation->tongue_down_left = load_texture_from_filepath(renderer, "./res/animation/tongue_down_left.png");
+
+    animation->tongue_left_start = load_texture_from_filepath(renderer, "./res/animation/tongue_left_start.png");
+    animation->tongue_left_end = load_texture_from_filepath(renderer, "./res/animation/tongue_left_end.png");
+    animation->tongue_left_up = load_texture_from_filepath(renderer, "./res/animation/tongue_left_up.png");
+    animation->tongue_left_right = load_texture_from_filepath(renderer, "./res/animation/tongue_left_right.png");
+    animation->tongue_left_down = load_texture_from_filepath(renderer, "./res/animation/tongue_left_down.png");
+    animation->tongue_left_left = load_texture_from_filepath(renderer, "./res/animation/tongue_left_left.png");
+
+    animation->scissor_up_start = load_texture_from_filepath(renderer, "./res/animation/scissor_up_start.png");
+    animation->scissor_up_end = load_texture_from_filepath(renderer, "./res/animation/scissor_up_end.png");
+    animation->scissor_up_up = load_texture_from_filepath(renderer, "./res/animation/scissor_up_up.png");
+    animation->scissor_up_right = load_texture_from_filepath(renderer, "./res/animation/scissor_up_right.png");
+    animation->scissor_up_down = load_texture_from_filepath(renderer, "./res/animation/scissor_up_down.png");
+    animation->scissor_up_left = load_texture_from_filepath(renderer, "./res/animation/scissor_up_left.png");
+
+    animation->scissor_right_start = load_texture_from_filepath(renderer, "./res/animation/scissor_right_start.png");
+    animation->scissor_right_end = load_texture_from_filepath(renderer, "./res/animation/scissor_right_end.png");
+    animation->scissor_right_up = load_texture_from_filepath(renderer, "./res/animation/scissor_right_up.png");
+    animation->scissor_right_right = load_texture_from_filepath(renderer, "./res/animation/scissor_right_right.png");
+    animation->scissor_right_down = load_texture_from_filepath(renderer, "./res/animation/scissor_right_down.png");
+    animation->scissor_right_left = load_texture_from_filepath(renderer, "./res/animation/scissor_right_left.png");
+
+    animation->scissor_down_start = load_texture_from_filepath(renderer, "./res/animation/scissor_down_start.png");
+    animation->scissor_down_end = load_texture_from_filepath(renderer, "./res/animation/scissor_down_end.png");
+    animation->scissor_down_up = load_texture_from_filepath(renderer, "./res/animation/scissor_down_up.png");
+    animation->scissor_down_right = load_texture_from_filepath(renderer, "./res/animation/scissor_down_right.png");
+    animation->scissor_down_down = load_texture_from_filepath(renderer, "./res/animation/scissor_down_down.png");
+    animation->scissor_down_left = load_texture_from_filepath(renderer, "./res/animation/scissor_down_left.png");
+
+    animation->scissor_left_start = load_texture_from_filepath(renderer, "./res/animation/scissor_left_start.png");
+    animation->scissor_left_end = load_texture_from_filepath(renderer, "./res/animation/scissor_left_end.png");
+    animation->scissor_left_up = load_texture_from_filepath(renderer, "./res/animation/scissor_left_up.png");
+    animation->scissor_left_right = load_texture_from_filepath(renderer, "./res/animation/scissor_left_right.png");
+    animation->scissor_left_down = load_texture_from_filepath(renderer, "./res/animation/scissor_left_down.png");
+    animation->scissor_left_left = load_texture_from_filepath(renderer, "./res/animation/scissor_left_left.png");
+
+    animation->laser_up = load_texture_from_filepath(renderer, "./res/animation/laser_up.png");
+    animation->laser_right = load_texture_from_filepath(renderer, "./res/animation/laser_right.png");
+    animation->laser_down = load_texture_from_filepath(renderer, "./res/animation/laser_down.png");
+    animation->laser_left = load_texture_from_filepath(renderer, "./res/animation/laser_left.png");
+    animation->laser_vertical = load_texture_from_filepath(renderer, "./res/animation/laser_vertical.png");
+    animation->laser_horizontal = load_texture_from_filepath(renderer, "./res/animation/laser_horizontal.png");
+
+    animation->cell = load_texture_from_filepath(renderer, "./res/animation/cell.png");
+    animation->dynamite = load_texture_from_filepath(renderer, "./res/animation/dynamite.png");
+    animation->gemstone = load_texture_from_filepath(renderer, "./res/animation/gemstone.png");
+    animation->minibot = load_texture_from_filepath(renderer, "./res/animation/minibot.png");
+    animation->minibot_enemy = load_texture_from_filepath(renderer, "./res/animation/minibot_enemy.png");
+    animation->fly_projectile = load_texture_from_filepath(renderer, "./res/animation/fly_projectile.png");
+    animation->squirrel_projectile = load_texture_from_filepath(renderer, "./res/animation/squirrel_projectile.png");
+}
+
+void destroy_textures_animation(Textures_Animation* animation)
+{
+    // later
+}
+
+void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
 {
     hud->no_augmentation = load_texture_from_filepath(renderer, "./res/hud/no_augmentation.png");
     hud->fist_hand = load_texture_from_filepath(renderer, "./res/hud/fist_hand.png");
@@ -1011,34 +1011,34 @@ void load_textures_hud (Renderer* renderer, Textures_Hud* hud)
     hud->start_game = load_texture_from_filepath(renderer, "./res/hud/start_game.png");
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");
 }
-void destroy_textures_hud (Textures_Hud* hud)
+void destroy_textures_hud(Textures_Hud* hud)
 {
     // later
 }
 
-void load_textures (Renderer* renderer, Textures* textures)
+void load_textures(Renderer* renderer, Textures* textures)
 {
-    textures->shadow = load_texture_from_filepath (renderer, "./res/shadow.png");
-    textures->background_rock = load_texture_from_filepath (renderer, "./res/background_rock.png");
-    textures->background_stone = load_texture_from_filepath (renderer, "./res/background_stone.png");
-    textures->background_metal = load_texture_from_filepath (renderer, "./res/background_metal.png");
-    textures->background_marble = load_texture_from_filepath (renderer, "./res/background_marble.png");
-    textures->background_obsidian = load_texture_from_filepath (renderer, "./res/background_obsidian.png");
-    textures->background_gold = load_texture_from_filepath (renderer, "./res/background_gold.png");
+    textures->shadow = load_texture_from_filepath(renderer, "./res/shadow.png");
+    textures->background_rock = load_texture_from_filepath(renderer, "./res/background_rock.png");
+    textures->background_stone = load_texture_from_filepath(renderer, "./res/background_stone.png");
+    textures->background_metal = load_texture_from_filepath(renderer, "./res/background_metal.png");
+    textures->background_marble = load_texture_from_filepath(renderer, "./res/background_marble.png");
+    textures->background_obsidian = load_texture_from_filepath(renderer, "./res/background_obsidian.png");
+    textures->background_gold = load_texture_from_filepath(renderer, "./res/background_gold.png");
 
-    load_textures_floor(renderer,&textures->floor);
-    load_textures_object(renderer,&textures->object);
-    load_textures_order_number(renderer,&textures->order_number);
-    load_textures_skill(renderer,&textures->skill);
-    load_textures_animation(renderer,&textures->animation);
-    load_textures_hud(renderer,&textures->hud);
+    load_textures_floor(renderer, &textures->floor);
+    load_textures_object(renderer, &textures->object);
+    load_textures_order_number(renderer, &textures->order_number);
+    load_textures_skill(renderer, &textures->skill);
+    load_textures_animation(renderer, &textures->animation);
+    load_textures_hud(renderer, &textures->hud);
 }
 
-void destroy_textures (Textures* textures)
+void destroy_textures(Textures* textures)
 {
-    destroy_textures_floor (&textures->floor);
-    destroy_textures_object (&textures->object);
-    destroy_textures_order_number (&textures->order_number);
+    destroy_textures_floor(&textures->floor);
+    destroy_textures_object(&textures->object);
+    destroy_textures_order_number(&textures->order_number);
     destroy_textures_skill(&textures->skill);
     destroy_textures_animation(&textures->animation);
     destroy_textures_hud(&textures->hud);
@@ -1292,12 +1292,12 @@ Texture* get_texture_item(Textures* textures, int item, int number)
         {
             switch(number)
             {
-                case -3:texture = textures->skill.minus_3_cell;break;
-                case -2:texture = textures->skill.minus_2_cell;break;
-                case -1:texture = textures->skill.minus_1_cell;break;
-                case 1:texture = textures->skill.plus_1_cell;break;
-                case 2:texture = textures->skill.plus_2_cell;break;
-                case 3:texture = textures->skill.plus_3_cell;break;
+                case -3:texture = textures->skill.minus_3_cell; break;
+                case -2:texture = textures->skill.minus_2_cell; break;
+                case -1:texture = textures->skill.minus_1_cell; break;
+                case 1:texture = textures->skill.plus_1_cell; break;
+                case 2:texture = textures->skill.plus_2_cell; break;
+                case 3:texture = textures->skill.plus_3_cell; break;
                 default:break;
             }
         }
@@ -1306,12 +1306,12 @@ Texture* get_texture_item(Textures* textures, int item, int number)
         {
             switch(number)
             {
-                case -3:texture = textures->skill.minus_3_dynamite;break;
-                case -2:texture = textures->skill.minus_2_dynamite;break;
-                case -1:texture = textures->skill.minus_1_dynamite;break;
-                case 1:texture = textures->skill.plus_1_dynamite;break;
-                case 2:texture = textures->skill.plus_2_dynamite;break;
-                case 3:texture = textures->skill.plus_3_dynamite;break;
+                case -3:texture = textures->skill.minus_3_dynamite; break;
+                case -2:texture = textures->skill.minus_2_dynamite; break;
+                case -1:texture = textures->skill.minus_1_dynamite; break;
+                case 1:texture = textures->skill.plus_1_dynamite; break;
+                case 2:texture = textures->skill.plus_2_dynamite; break;
+                case 3:texture = textures->skill.plus_3_dynamite; break;
                 default:break;
             }
         }
@@ -1320,12 +1320,12 @@ Texture* get_texture_item(Textures* textures, int item, int number)
         {
             switch(number)
             {
-                case -3:texture = textures->skill.minus_3_gemstone;break;
-                case -2:texture = textures->skill.minus_2_gemstone;break;
-                case -1:texture = textures->skill.minus_1_gemstone;break;
-                case 1:texture = textures->skill.plus_1_gemstone;break;
-                case 2:texture = textures->skill.plus_2_gemstone;break;
-                case 3:texture = textures->skill.plus_3_gemstone;break;
+                case -3:texture = textures->skill.minus_3_gemstone; break;
+                case -2:texture = textures->skill.minus_2_gemstone; break;
+                case -1:texture = textures->skill.minus_1_gemstone; break;
+                case 1:texture = textures->skill.plus_1_gemstone; break;
+                case 2:texture = textures->skill.plus_2_gemstone; break;
+                case 3:texture = textures->skill.plus_3_gemstone; break;
                 default:break;
             }
         }

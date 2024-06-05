@@ -1,7 +1,7 @@
 #include "../inc/input.h"
 #include <SDL2/SDL_scancode.h>
 
-void init_input (Input* input)
+void init_input(Input* input)
 {
     input->is_quit = 0;
 
@@ -25,7 +25,7 @@ void init_input (Input* input)
     input->mouse_scrolled = 0;
 }
 
-void update_input (Input* input)
+void update_input(Input* input)
 {
     SDL_Event event;
 
@@ -44,7 +44,7 @@ void update_input (Input* input)
     input->was_mouse_middle = input->is_mouse_middle;
     input->was_mouse_right = input->is_mouse_right;
 
-    while (SDL_PollEvent(&event))
+    while(SDL_PollEvent(&event))
     {
         // event types
 
@@ -54,7 +54,7 @@ void update_input (Input* input)
         SDL_MouseMotionEvent mouse_motion_event = event.motion;
         SDL_MouseWheelEvent mouse_wheel_event = event.wheel;
 
-        switch (event.type)
+        switch(event.type)
         {
             case SDL_QUIT:
 
@@ -63,7 +63,7 @@ void update_input (Input* input)
             break;
             case SDL_KEYDOWN:
 
-            switch (keyboard_event.keysym.scancode)
+            switch(keyboard_event.keysym.scancode)
             {
                 case SDL_SCANCODE_ESCAPE:   input->is_key[KEY__ESC] = 1;     break;
                 case SDL_SCANCODE_RETURN:   input->is_key[KEY__ENTER] = 1;   break;
@@ -117,10 +117,10 @@ void update_input (Input* input)
                 default: break;
             }
 
-			break;
-			case SDL_KEYUP:
+            break;
+            case SDL_KEYUP:
 
-            switch (keyboard_event.keysym.scancode)
+            switch(keyboard_event.keysym.scancode)
             {
                 case SDL_SCANCODE_ESCAPE:   input->is_key[KEY__ESC] = 0;     break;
                 case SDL_SCANCODE_RETURN:   input->is_key[KEY__ENTER] = 0;   break;
@@ -174,7 +174,7 @@ void update_input (Input* input)
                 default: break;
             }
 
-			break;
+            break;
             case SDL_MOUSEMOTION:
 
             input->mouse_x = mouse_motion_event.x;

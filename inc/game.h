@@ -24,10 +24,10 @@
 #include "../inc/font.h"
 #include "../inc/fonts.h"
 
-void init_sdl (Window** window, Renderer** renderer);
-void destroy_sdl (Window* window, Renderer* renderer);
+void init_sdl(Window** window, Renderer** renderer);
+void destroy_sdl(Window* window, Renderer* renderer);
 
-void render (Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors, Fonts* fonts);
+void render(Renderer* renderer, State* state, Input* input, Textures* textures, Colors* colors, Fonts* fonts);
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts);
 void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts);

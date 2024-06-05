@@ -27,7 +27,7 @@ void draw_texture_at_screen_pos(
     SDL_Rect dest;
     dest.x = screen_pos.x;
     dest.y = screen_pos.y;
-	SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
+    SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
     dest.w *= scale;
     dest.h *= scale;
 
@@ -40,9 +40,9 @@ void draw_texture_at_screen_pos(
         SDL_SetTextureColorMod(texture, 255, 255, 255);
     }
 
-    SDL_SetTextureAlphaMod(texture,255 * transparency);
-	SDL_RenderCopy(renderer, texture, 0, &dest);
-    SDL_SetTextureAlphaMod(texture,255);
+    SDL_SetTextureAlphaMod(texture, 255 * transparency);
+    SDL_RenderCopy(renderer, texture, 0, &dest);
+    SDL_SetTextureAlphaMod(texture, 255);
 }
 
 void draw_texture_at_world_pos(
@@ -61,7 +61,7 @@ void draw_texture_at_world_pos(
     SDL_Rect dest;
     dest.x = screen_pos.x;
     dest.y = screen_pos.y;
-	SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
+    SDL_QueryTexture(texture, 0, 0, &dest.w, &dest.h);
     dest.w *= camera_zoom;
     dest.h *= camera_zoom;
 
@@ -74,9 +74,9 @@ void draw_texture_at_world_pos(
         SDL_SetTextureColorMod(texture, 255, 255, 255);
     }
 
-    SDL_SetTextureAlphaMod(texture,255 * transparency);
-	SDL_RenderCopy(renderer, texture, 0, &dest);
-    SDL_SetTextureAlphaMod(texture,255);
+    SDL_SetTextureAlphaMod(texture, 255 * transparency);
+    SDL_RenderCopy(renderer, texture, 0, &dest);
+    SDL_SetTextureAlphaMod(texture, 255);
 }
 
 void draw_texture_at_gamemap_pos(
@@ -90,7 +90,7 @@ void draw_texture_at_gamemap_pos(
 {
     Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
     Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
-    draw_texture_at_world_pos (renderer, texture, color, transparency, world_iso_pos, camera_pos, camera_zoom);
+    draw_texture_at_world_pos(renderer, texture, color, transparency, world_iso_pos, camera_pos, camera_zoom);
 }
 
 void draw_texture_at_tilemap_pos(
@@ -103,5 +103,5 @@ void draw_texture_at_tilemap_pos(
     float camera_zoom)
 {
     Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(tilemap_pos);
-    draw_texture_at_gamemap_pos (renderer, texture, color, transparency, gamemap_pos, camera_pos, camera_zoom);
+    draw_texture_at_gamemap_pos(renderer, texture, color, transparency, gamemap_pos, camera_pos, camera_zoom);
 }

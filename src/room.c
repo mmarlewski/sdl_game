@@ -7,14 +7,14 @@ Room* new_empty_room(char* name, Texture* background_texture)
     Room* room = malloc(sizeof(*room));
 
     room->name = name;
-    for(int i = 0 ; i < TILEMAP_LENGTH ; i++)
+    for(int i = 0; i < TILEMAP_LENGTH; i++)
     {
-        for(int j = 0 ; j < TILEMAP_LENGTH ; j++)
+        for(int j = 0; j < TILEMAP_LENGTH; j++)
         {
             room->floor_array[i][j] = FLOOR__GRASS;
         }
     }
-    room->object_list = new_list((void (*)(void *))&destroy_object);
+    room->object_list = new_list((void (*)(void*)) & destroy_object);
     room->background_texture = background_texture;
 
     return room;

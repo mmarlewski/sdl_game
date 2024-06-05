@@ -19,21 +19,21 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
         case OBJECT__MOLE:
         {
             List* possible_burrow_tilemap_pos_list =
-                new_list((void (*)(void *)) &destroy_vec2i);
+                new_list((void (*)(void*)) & destroy_vec2i);
 
             for(int i = 0; i < TILEMAP_LENGTH; i++)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     if(is_floor_burrow(floor) && object == 0)
                     {
@@ -51,22 +51,22 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                 ListElem* random_list_elem = get_nth_list_element(
                     possible_burrow_tilemap_pos_list,
                     random_index
-                    );
-                Vec2i random_tilemap_pos = *(Vec2i*)random_list_elem->data;
+                );
+                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
                 add_action_to_end_action_sequence(
                     enemy->action_sequence,
                     new_action_change_object_tilemap_pos(
                         enemy->object,
                         random_tilemap_pos
-                        )
-                    );
+                    )
+                );
             }
 
             remove_all_list_elements(
                 possible_burrow_tilemap_pos_list,
                 1
-                );
+            );
             destroy_list(possible_burrow_tilemap_pos_list);
         }
         break;
@@ -77,8 +77,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                 new_action_change_object(
                     OBJECT__SHARK_FIN,
                     enemy->object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__SHARK_FIN:
@@ -88,8 +88,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                 new_action_change_object(
                     OBJECT__SHARK,
                     enemy->object->tilemap_pos
-                    )
-                );
+                )
+            );
         }
         break;
         case OBJECT__GOAT:
@@ -113,23 +113,23 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
             {
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
-                    Vec2i tilemap_pos = vec2i(i,j);
+                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
                     int floor = room_get_floor_at(
                         state->curr_room,
                         tilemap_pos
-                        );
+                    );
 
                     int score = 0;
 
                     if((object == 0 || object == enemy->object) &&
-                    is_floor_traversable_for_object(floor,enemy->object) &&
-                    (enemy->object->type != OBJECT__SQUID || floor == FLOOR__WATER))
+                       is_floor_traversable_for_object(floor, enemy->object) &&
+                       (enemy->object->type != OBJECT__SQUID || floor == FLOOR__WATER))
                     {
-                        List* path_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
+                        List* path_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
 
                         find_path(
                             state,
@@ -138,12 +138,12 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                             path_pos_list,
                             is_object_floating(enemy->object),
                             is_object_flying(enemy->object)
-                            );
+                        );
 
                         int distance = path_pos_list->size;
 
                         if(distance >= 1 && distance <= 10 ||
-                        object == enemy->object)
+                           object == enemy->object)
                         {
                             score = distance / 2;
 
@@ -159,13 +159,13 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                     int mul = 1;
 
                                     if(enemy->object->type == OBJECT__GOAT ||
-                                    enemy->object->type == OBJECT__BULL)
+                                       enemy->object->type == OBJECT__BULL)
                                     {
                                         mul = (5 - k);
                                     }
                                     else if(enemy->object->type == OBJECT__SPIDER ||
-                                    enemy->object->type == OBJECT__CHAMELEON ||
-                                    enemy->object->type == OBJECT__FLY)
+                                            enemy->object->type == OBJECT__CHAMELEON ||
+                                            enemy->object->type == OBJECT__FLY)
                                     {
                                         mul = k;
                                     }
@@ -178,11 +178,11 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                         tilemap_pos,
                                         dir4,
                                         k
-                                        );
+                                    );
                                     Object* neighbor_object = room_get_object_at(
                                         state->curr_room,
                                         neighbor_tilemap_pos
-                                        );
+                                    );
 
                                     if(neighbor_object != 0)
                                     {
@@ -208,10 +208,10 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                     score_array[i * TILEMAP_LENGTH + j] = score;
 
                     printf("x: %i, y: %i, score: %i \n",
-                        tilemap_pos.x,
-                        tilemap_pos.y,
-                        score
-                        );
+                           tilemap_pos.x,
+                           tilemap_pos.y,
+                           score
+                    );
                 }
             }
 
@@ -249,16 +249,16 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
 
             if(top > 0)
             {
-                int random_index = (int)state->time % top;
+                int random_index = (int) state->time % top;
                 int random_score = score_array[random_index];
                 Vec2i random_tilemap_pos = tilemap_pos_array[random_index];
 
                 printf("\n");
                 printf("x: %i, y: %i, score: %i \n",
-                    random_tilemap_pos.x,
-                    random_tilemap_pos.y,
-                    random_score
-                    );
+                       random_tilemap_pos.x,
+                       random_tilemap_pos.y,
+                       random_score
+                );
 
                 if(enemy->object->type == OBJECT__SQUID)
                 {
@@ -267,12 +267,12 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                         new_action_change_object_tilemap_pos(
                             enemy->object,
                             random_tilemap_pos
-                            )
-                        );
+                        )
+                    );
                 }
                 else
                 {
-                    List* path_pos_list = new_list((void (*)(void *)) &destroy_vec2i);
+                    List* path_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
 
                     find_path(
                         state,
@@ -281,7 +281,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                         path_pos_list,
                         is_object_floating(enemy->object),
                         is_object_flying(enemy->object)
-                        );
+                    );
 
                     if(path_pos_list->size > 0)
                     {
@@ -308,9 +308,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                                 get_distance_info_from_vec2i_to_vec2i(
                                                     *curr_tilemap_pos,
                                                     *next_tilemap_pos
-                                                    ).dir4
-                                                )
-                                            );
+                                                ).dir4
+                                            )
+                                        );
                                     }
                                     else if(enemy_move_skill == SKILL__MOVE_FLOATING)
                                     {
@@ -321,9 +321,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                                 get_distance_info_from_vec2i_to_vec2i(
                                                     *curr_tilemap_pos,
                                                     *next_tilemap_pos
-                                                    ).dir4
-                                                )
-                                            );
+                                                ).dir4
+                                            )
+                                        );
                                     }
                                     else if(enemy_move_skill == SKILL__MOVE_FLYING)
                                     {
@@ -334,9 +334,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                                 get_distance_info_from_vec2i_to_vec2i(
                                                     *curr_tilemap_pos,
                                                     *next_tilemap_pos
-                                                    ).dir4
-                                                )
-                                            );
+                                                ).dir4
+                                            )
+                                        );
                                     }
                                 }
 

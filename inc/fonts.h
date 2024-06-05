@@ -13,7 +13,7 @@ typedef struct
 
 } Fonts;
 
-void load_fonts (Fonts* fonts);
-void destroy_fonts (Fonts* fonts);
+void load_fonts(Fonts* fonts);
+void destroy_fonts(Fonts* fonts);
 
 #endif

@@ -4,7 +4,7 @@ int get_augmentation_body_part(int augmentation)
 {
     int body_part = BODY_PART__NONE;
 
-    switch (augmentation)
+    switch(augmentation)
     {
         case AUGMENTATION__FIST_HAND:           body_part = BODY_PART__LEFT_HAND; break;
         case AUGMENTATION__HOOK_HAND:           body_part = BODY_PART__LEFT_HAND; break;
@@ -28,7 +28,7 @@ char* get_body_part_name(int body_part)
 {
     char* name = "";
 
-    switch (body_part)
+    switch(body_part)
     {
         case BODY_PART__NONE:           name = "none"; break;
         case BODY_PART__LEFT_HAND:      name = "left hand"; break;
@@ -47,7 +47,7 @@ char* get_augmentation_name(int augmentation)
 {
     char* name = "";
 
-    switch (augmentation)
+    switch(augmentation)
     {
         case AUGMENTATION__NONE:                name = "none"; break;
         case AUGMENTATION__FIST_HAND:           name = "fist hand"; break;

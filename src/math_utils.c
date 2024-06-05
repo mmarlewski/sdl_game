@@ -4,8 +4,8 @@ Vec2f screen_pos_to_world_pos(Vec2i screen_pos, Vec2f camera_pos, float camera_z
 {
     Vec2f world_pos;
 
-    world_pos.x = ( screen_pos.x + camera_pos.x * camera_zoom - SCREEN_WIDTH * 0.5f ) / camera_zoom;
-    world_pos.y = ( screen_pos.y + camera_pos.y * camera_zoom - SCREEN_HEIGHT * 0.5f ) / camera_zoom;
+    world_pos.x = (screen_pos.x + camera_pos.x * camera_zoom - SCREEN_WIDTH * 0.5f) / camera_zoom;
+    world_pos.y = (screen_pos.y + camera_pos.y * camera_zoom - SCREEN_HEIGHT * 0.5f) / camera_zoom;
 
     return world_pos;
 }
