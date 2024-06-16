@@ -621,6 +621,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         state->curr_ally_target_1_tilemap_pos,
                         state->curr_ally_target_2_tilemap_pos,
                         textures,
+                        sounds,
+                        musics,
                         colors
                     );
 

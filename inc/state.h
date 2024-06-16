@@ -187,7 +187,7 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
 void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
 void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
 
-void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
+void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void skill_get_possible_target_1_pos(State* state, int skill, Vec2i source_tilemap_pos, List* target_1_pos_list);
 void skill_get_possible_target_2_pos(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, List* target_2_pos_list);
 Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);

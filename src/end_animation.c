@@ -51,6 +51,16 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
             remove_sprite_from_gamemap_sprites(state, animation->fall_sprite_in_gamemap.sprite);
         }
         break;
+        case ANIMATION__FADE_IN_SPRITE_IN_GAMEMAP:
+        {
+            remove_sprite_from_gamemap_sprites(state, animation->fall_sprite_in_gamemap.sprite);
+        }
+        break;
+        case ANIMATION__FADE_OUT_SPRITE_IN_GAMEMAP:
+        {
+            remove_sprite_from_gamemap_sprites(state, animation->fall_sprite_in_gamemap.sprite);
+        }
+        break;
         case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE:
         {
             //

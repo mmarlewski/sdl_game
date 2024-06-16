@@ -7,6 +7,8 @@ void skill_on_use(
     Vec2i target_1_tilemap_pos,
     Vec2i target_2_tilemap_pos,
     Textures* textures,
+    Sounds* sounds,
+    Musics* musics,
     Colors* colors
 )
 {
@@ -67,6 +69,59 @@ void skill_on_use(
                                     state->visited_room_list,
                                     room
                                 );
+                            }
+
+                            // hint animation
+                            if(!was_room_already_visited)
+                            {
+                                if(strcmp(room->name,"7_3") == 0)
+                                {
+                                    add_animation_to_animation_list(
+                                        state,
+                                        new_animation_flash_sprite_in_gamemap(
+                                            textures->object.station_outline,
+                                            vec2f(7,1),
+                                            1.5f,
+                                            2
+                                        ),
+                                        textures,
+                                        sounds,
+                                        musics,
+                                        colors
+                                    );
+                                }
+                                else if(strcmp(room->name,"6_3") == 0)
+                                {
+                                    add_animation_to_animation_list(
+                                        state,
+                                        new_animation_flash_sprite_in_gamemap(
+                                            textures->object.crate_dynamite_item_outline,
+                                            vec2f(2,2),
+                                            1.5f,
+                                            2
+                                        ),
+                                        textures,
+                                        sounds,
+                                        musics,
+                                        colors
+                                    );
+                                }
+                                else if(strcmp(room->name,"6_1") == 0)
+                                {
+                                    add_animation_to_animation_list(
+                                        state,
+                                        new_animation_flash_sprite_in_gamemap(
+                                            textures->object.stalactite_outline,
+                                            vec2f(2,2),
+                                            1.5f,
+                                            2
+                                        ),
+                                        textures,
+                                        sounds,
+                                        musics,
+                                        colors
+                                    );
+                                }
                             }
 
                             // all enemies

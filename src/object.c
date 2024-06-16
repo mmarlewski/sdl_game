@@ -1880,8 +1880,8 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__PIPE:                             name = "pipe"; break;
 
         case OBJECT__STALACTITE:                       name = "stalactite"; break;
-        case OBJECT__STALACTITE_FALLEN:                name = "stalactite"; break;
-        case OBJECT__STALACTITE_FALLEN_ITEM:           name = "stalactite"; break;
+        case OBJECT__STALACTITE_FALLEN:                name = "fallen stalactite"; break;
+        case OBJECT__STALACTITE_FALLEN_ITEM:           name = "fallen stalactite"; break;
 
         case OBJECT__STALAGMITE:                       name = "stalagmite"; break;
 

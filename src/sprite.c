@@ -6,6 +6,7 @@ Sprite* new_sprite(Texture* texture)
 
     sprite->texture = texture;
     sprite->gamemap_pos = vec3f(0.0f, 0.0f, 0.0f);
+    sprite->transparency = 1.0f;
 
     return sprite;
 }

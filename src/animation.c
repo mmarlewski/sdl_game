@@ -201,6 +201,70 @@ Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
     return animation;
 }
 
+Animation* new_animation_fade_in_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds)
+{
+    Animation* animation = malloc(sizeof(*animation));
+
+    animation->is_finished = FALSE;
+    animation->type = ANIMATION__FADE_IN_SPRITE_IN_GAMEMAP;
+
+    animation->fade_in_sprite_in_gamemap.time = 0.0f;
+    animation->fade_in_sprite_in_gamemap.sprite = NULL;
+
+    animation->fade_in_sprite_in_gamemap.texture = texture;
+    animation->fade_in_sprite_in_gamemap.gamemap_pos = gamemap_pos;
+    animation->fade_in_sprite_in_gamemap.seconds = seconds;
+
+    return animation;
+}
+
+Animation* new_animation_fade_out_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds)
+{
+    Animation* animation = malloc(sizeof(*animation));
+
+    animation->is_finished = FALSE;
+    animation->type = ANIMATION__FADE_OUT_SPRITE_IN_GAMEMAP;
+
+    animation->fade_out_sprite_in_gamemap.time = 0.0f;
+    animation->fade_out_sprite_in_gamemap.sprite = NULL;
+
+    animation->fade_out_sprite_in_gamemap.texture = texture;
+    animation->fade_out_sprite_in_gamemap.gamemap_pos = gamemap_pos;
+    animation->fade_out_sprite_in_gamemap.seconds = seconds;
+
+    return animation;
+}
+
+Animation* new_animation_flash_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds_of_flash, int number_of_flashes)
+{
+    Animation* animation = new_animation_sequence();
+
+    if(number_of_flashes > 0)
+    {
+        for(int i = 0; i < number_of_flashes; i++)
+        {
+            add_animation_to_end_animation_sequence(
+                animation,
+                new_animation_fade_in_sprite_in_gamemap(
+                    texture,
+                    gamemap_pos,
+                    seconds_of_flash / 2
+                    )
+                );
+            add_animation_to_end_animation_sequence(
+                animation,
+                new_animation_fade_out_sprite_in_gamemap(
+                    texture,
+                    gamemap_pos,
+                    seconds_of_flash / 2
+                    )
+                );
+        }
+    }
+
+    return animation;
+}
+
 Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, int start_from_curr)
 {
     Animation* animation = malloc(sizeof(*animation));

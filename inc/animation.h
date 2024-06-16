@@ -22,6 +22,9 @@ enum ANIMATION_TYPE
     ANIMATION__DESCEND_SPRITE_IN_GAMEMAP,
     ANIMATION__FALL_SPRITE_IN_GAMEMAP,
 
+    ANIMATION__FADE_IN_SPRITE_IN_GAMEMAP,
+    ANIMATION__FADE_OUT_SPRITE_IN_GAMEMAP,
+
     ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE,
     ANIMATION__MOVE_CAMERA_IN_WORLD_IN_ARCH,
 
@@ -127,6 +130,28 @@ typedef struct
 typedef struct
 {
     float time;
+    Sprite* sprite;
+
+    Texture* texture;
+    Vec2f gamemap_pos;
+    float seconds;
+
+} Animation_FadeInSpriteInGamemap;
+
+typedef struct
+{
+    float time;
+    Sprite* sprite;
+
+    Texture* texture;
+    Vec2f gamemap_pos;
+    float seconds;
+
+} Animation_FadeOutSpriteInGamemap;
+
+typedef struct
+{
+    float time;
 
     Vec2f from_world_pos;
     Vec2f to_world_pos;
@@ -204,6 +229,9 @@ struct _Animation
         Animation_DescendSpriteInGamemap descend_sprite_in_gamemap;
         Animation_FallSpriteInGamemap fall_sprite_in_gamemap;
 
+        Animation_FadeInSpriteInGamemap fade_in_sprite_in_gamemap;
+        Animation_FadeOutSpriteInGamemap fade_out_sprite_in_gamemap;
+
         Animation_MoveCameraInWorldInLine move_camera_in_world_in_line;
         Animation_MoveCameraInWorldInArch move_camera_in_world_in_arch;
 
@@ -237,6 +265,10 @@ Animation* new_animation_show_sprite_in_gamemap(Texture* texture, Vec2f gamemap_
 Animation* new_animation_ascend_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds);
 Animation* new_animation_descend_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds);
 Animation* new_animation_fall_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float length, float seconds);
+
+Animation* new_animation_fade_in_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds);
+Animation* new_animation_fade_out_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds);
+Animation* new_animation_flash_sprite_in_gamemap(Texture* texture, Vec2f gamemap_pos, float seconds_of_flash, int number_of_flashes);
 
 Animation* new_animation_move_camera_in_world_in_line(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, int start_from_curr);
 Animation* new_animation_move_camera_in_world_in_arch(Vec2f from_world_pos, Vec2f to_world_pos, float seconds, float sin_mul, int start_from_curr);

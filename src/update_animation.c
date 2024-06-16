@@ -188,6 +188,32 @@ void update_animation(State* state, Animation* animation, float delta_time, Text
             animation->is_finished = (animation_animation.time > animation_animation.seconds);
         }
         break;
+        case ANIMATION__FADE_IN_SPRITE_IN_GAMEMAP:
+        {
+            Animation_FadeInSpriteInGamemap animation_animation = animation->fade_in_sprite_in_gamemap;
+
+            float time_ratio = animation_animation.time / animation_animation.seconds;
+            animation_animation.sprite->transparency = time_ratio;
+            animation_animation.time += delta_time;
+
+            animation->fade_in_sprite_in_gamemap = animation_animation;
+
+            animation->is_finished = (animation_animation.time > animation_animation.seconds);
+        }
+        break;
+        case ANIMATION__FADE_OUT_SPRITE_IN_GAMEMAP:
+        {
+            Animation_FadeOutSpriteInGamemap animation_animation = animation->fade_out_sprite_in_gamemap;
+
+            float time_ratio = animation_animation.time / animation_animation.seconds;
+            animation_animation.sprite->transparency = 1 - time_ratio;
+            animation_animation.time += delta_time;
+
+            animation->fade_out_sprite_in_gamemap = animation_animation;
+
+            animation->is_finished = (animation_animation.time > animation_animation.seconds);
+        }
+        break;
         case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE:
         {
             Animation_MoveCameraInWorldInLine animation_animation = animation->move_camera_in_world_in_line;

@@ -111,6 +111,31 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
         room
     );
 
+    Animation* animation_fade_in = new_animation_fade_in_sprite_in_gamemap(
+                    textures->object.station_outline,
+                    vec2f(1,8),
+                    0.5f
+                    );
+    Animation* animation_fade_out = new_animation_fade_out_sprite_in_gamemap(
+                    textures->object.station_outline,
+                    vec2f(1,8),
+                    0.5f
+                    );
+
+    add_animation_to_animation_list(
+        state,
+        new_animation_flash_sprite_in_gamemap(
+            textures->object.exit_stone_right_outline,
+            vec2f(9,5),
+            1.5f,
+            2
+        ),
+        textures,
+        sounds,
+        musics,
+        colors
+    );
+
     state->hero_item_number[ITEM__CELL] = 0;
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;

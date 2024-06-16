@@ -10,6 +10,7 @@ struct _Sprite
 {
     Texture* texture;
     Vec3f gamemap_pos;
+    float transparency;
 };
 
 Sprite* new_sprite(Texture* texture);

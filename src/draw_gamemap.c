@@ -299,7 +299,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         renderer,
                         curr_sprite->texture,
                         colors->none,
-                        1.0f,
+                        curr_sprite->transparency,
                         world_iso_pos,
                         state->camera_world_pos,
                         state->camera_zoom

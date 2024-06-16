@@ -112,6 +112,31 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
             add_sprite_to_gamemap_sprites(state, sprite);
         }
         break;
+        case ANIMATION__FADE_IN_SPRITE_IN_GAMEMAP:
+        {
+            animation->fade_in_sprite_in_gamemap.time = 0.0f;
+
+            Sprite* sprite = new_sprite(animation->fade_in_sprite_in_gamemap.texture);
+            sprite->gamemap_pos.x = animation->fade_in_sprite_in_gamemap.gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->fade_in_sprite_in_gamemap.gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
+            animation->fade_in_sprite_in_gamemap.sprite = sprite;
+            add_sprite_to_gamemap_sprites(state, sprite);
+            sprite->transparency = 0.0f;
+        }
+        break;
+        case ANIMATION__FADE_OUT_SPRITE_IN_GAMEMAP:
+        {
+            animation->fade_out_sprite_in_gamemap.time = 0.0f;
+
+            Sprite* sprite = new_sprite(animation->fade_out_sprite_in_gamemap.texture);
+            sprite->gamemap_pos.x = animation->fade_out_sprite_in_gamemap.gamemap_pos.x;
+            sprite->gamemap_pos.y = animation->fade_out_sprite_in_gamemap.gamemap_pos.y;
+            sprite->gamemap_pos.z = 0.0f;
+            animation->fade_out_sprite_in_gamemap.sprite = sprite;
+            add_sprite_to_gamemap_sprites(state, sprite);
+        }
+        break;
         case ANIMATION__MOVE_CAMERA_IN_WORLD_IN_LINE:
         {
             animation->move_camera_in_world_in_line.time = 0.0f;
