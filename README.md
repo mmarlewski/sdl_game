@@ -27,8 +27,11 @@ https://marcin12345.itch.io/fallen-stalactite
 - run: `gcc ./src/*.c  -lm -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -o sdl_game && ./sdl_game`
 - there is also Makefile available: `make && ./sdl_game`
 ##### Windows
-- install MinGW: https://sourceforge.net/projects/mingw-w64
+- download MinGW: https://sourceforge.net/projects/mingw-w64
+- (what to actually download: https://www.youtube.com/watch?v=1TPmiiAqmlc)
 - tutorial video: https://www.youtube.com/watch?v=DQ-NBjBFLJ4&list=PLvv0ScY6vfd-p1gSnbQhY7vMe2rng0IL0&index=3
+- download mingw; add mingw\bin to your PATH variable; download devel, mingw version of SDL2, SDL2_image, SDL2_mixer and SDL2_ttf; extract their bin, include, lib and share files to the mingw folder
+- run: `gcc ./src/*.c -o sdl_game.exe -IC:/mingw64/include -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf && sdl_game.exe`
 ##### Web
 - install and activate emsdk: https://emscripten.org/docs/getting_started/downloads.html
 - run: `emcc -sWASM=1 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' -sUSE_SDL_MIXER=2 -sUSE_SDL_TTF=2 -o index.html --shell-file template.html ./src/*.c --preload-file ./res --use-preload-plugins -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=1gb -O0 && emrun --browser firefox index.html` (change 'firefox' to your specific browser)
