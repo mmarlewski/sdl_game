@@ -207,11 +207,11 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                     tilemap_pos_array[i * TILEMAP_LENGTH + j] = tilemap_pos;
                     score_array[i * TILEMAP_LENGTH + j] = score;
 
-                    printf("x: %i, y: %i, score: %i \n",
-                           tilemap_pos.x,
-                           tilemap_pos.y,
-                           score
-                    );
+                    // printf("x: %i, y: %i, score: %i \n",
+                    //        tilemap_pos.x,
+                    //        tilemap_pos.y,
+                    //        score
+                    // );
                 }
             }
 
@@ -253,12 +253,12 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                 int random_score = score_array[random_index];
                 Vec2i random_tilemap_pos = tilemap_pos_array[random_index];
 
-                printf("\n");
-                printf("x: %i, y: %i, score: %i \n",
-                       random_tilemap_pos.x,
-                       random_tilemap_pos.y,
-                       random_score
-                );
+                // printf("\n");
+                // printf("x: %i, y: %i, score: %i \n",
+                //        random_tilemap_pos.x,
+                //        random_tilemap_pos.y,
+                //        random_score
+                // );
 
                 if(enemy->object->type == OBJECT__SQUID)
                 {

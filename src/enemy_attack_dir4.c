@@ -57,10 +57,10 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                     }
                 }
 
-                printf("dir4: %i, score: %i \n",
-                       dir4,
-                       score
-                );
+                // printf("dir4: %i, score: %i \n",
+                //        dir4,
+                //        score
+                // );
 
                 if(score > max_score)
                 {
@@ -69,10 +69,10 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 }
             }
 
-            printf("\ndir4: %i, score: %i \n",
-                   chosen_dir4,
-                   max_score
-            );
+            // printf("\ndir4: %i, score: %i \n",
+            //        chosen_dir4,
+            //        max_score
+            // );
 
             enemy->object->attack_dir4 = chosen_dir4;
         }
@@ -124,10 +124,10 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                     }
                 }
 
-                printf("dir4: %i, score: %i \n",
-                       dir4,
-                       score
-                );
+                // printf("dir4: %i, score: %i \n",
+                //        dir4,
+                //        score
+                // );
 
                 if(score > max_score)
                 {
@@ -136,10 +136,10 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                 }
             }
 
-            printf("\ndir4: %i, score: %i \n",
-                   chosen_dir4,
-                   max_score
-            );
+            // printf("\ndir4: %i, score: %i \n",
+            //        chosen_dir4,
+            //        max_score
+            // );
 
             enemy->object->attack_dir4 = chosen_dir4;
         }

@@ -188,177 +188,177 @@ void change_gamestate(State* state, int new_gamestate)
 {
     state->gamestate = new_gamestate;
 
-    for(int i = 0; i < 100; i++) printf("\n");
-    printf("----------------------------------------\n");
-    if(state->enemy_list->size > 0)
-    {
-        printf(" ╔═╗╔═╗╔╦╗╔╗ ╔═╗╔╦╗ \n");
-        printf(" ║  ║ ║║║║╠╩╗╠═╣ ║  \n");
-        printf(" ╚═╝╚═╝╩ ╩╚═╝╩ ╩ ╩  \n");
-    }
-    else
-    {
-        printf(" ╔═╗╦═╗╔═╗╔═╗ \n");
-        printf(" ╠╣ ╠╦╝║╣ ║╣  \n");
-        printf(" ╚  ╩╚═╚═╝╚═╝ \n");
-    }
-    printf("----------------------------------------\n");
-    printf("gamestate : %s \n", get_gamestate_debug_name(state->gamestate));
-    printf("----------------------------------------\n");
-    printf("curr room : %s \n", state->curr_room->name);
-    printf("----------------------------------------\n");
-    printf("curr ally : %s \n", get_debug_name_from_object_type(state->curr_ally_object->type));
-    printf("----------------------------------------\n");
+    // for(int i = 0; i < 100; i++) printf("\n");
+    // printf("----------------------------------------\n");
+    // if(state->enemy_list->size > 0)
+    // {
+    //     printf(" ╔═╗╔═╗╔╦╗╔╗ ╔═╗╔╦╗ \n");
+    //     printf(" ║  ║ ║║║║╠╩╗╠═╣ ║  \n");
+    //     printf(" ╚═╝╚═╝╩ ╩╚═╝╩ ╩ ╩  \n");
+    // }
+    // else
+    // {
+    //     printf(" ╔═╗╦═╗╔═╗╔═╗ \n");
+    //     printf(" ╠╣ ╠╦╝║╣ ║╣  \n");
+    //     printf(" ╚  ╩╚═╚═╝╚═╝ \n");
+    // }
+    // printf("----------------------------------------\n");
+    // printf("gamestate : %s \n", get_gamestate_debug_name(state->gamestate));
+    // printf("----------------------------------------\n");
+    // printf("curr room : %s \n", state->curr_room->name);
+    // printf("----------------------------------------\n");
+    // printf("curr ally : %s \n", get_debug_name_from_object_type(state->curr_ally_object->type));
+    // printf("----------------------------------------\n");
 
-    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
-       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
-       state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
-    {
-        if(state->enemy_list->size > 0)
-        {
-            int curr_ally_ap = state->curr_ally->object->action_points;
-            char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
-            hero_ap_bar[0] = '[';
-            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
-            {
-                char character = ' ';
+    // if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    //    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    //    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+    //    state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
+    // {
+    //     if(state->enemy_list->size > 0)
+    //     {
+    //         int curr_ally_ap = state->curr_ally->object->action_points;
+    //         char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
+    //         hero_ap_bar[0] = '[';
+    //         for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
+    //         {
+    //             char character = ' ';
 
-                if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-                   state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
-                {
-                    int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
-                    if(i < curr_ally_ap - curr_skill_cost) character = '#';
-                    else if(i < curr_ally_ap) character = '-';
-                }
-                else
-                {
-                    character = (i < curr_ally_ap) ? '#' : ' ';
-                }
+    //             if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    //                state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    //             {
+    //                 int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
+    //                 if(i < curr_ally_ap - curr_skill_cost) character = '#';
+    //                 else if(i < curr_ally_ap) character = '-';
+    //             }
+    //             else
+    //             {
+    //                 character = (i < curr_ally_ap) ? '#' : ' ';
+    //             }
 
-                hero_ap_bar[i + 1] = character;
-            }
-            hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
-            printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
-        }
-        if(state->curr_ally->object->type == OBJECT__HERO ||
-           state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
-           state->curr_ally->object->type == OBJECT__HERO_FLYING)
-        {
-            printf("----------------------------------------\n");
-            for(int i = 1; i < ITEM__COUNT; i++)
-            {
-                printf("%-10s: %i \n",
-                       get_name_from_item(i),
-                       state->hero_item_number[i]
-                );
-            }
-            printf("----------------------------------------\n");
-            for(int i = 1; i < BODY_PART__COUNT; i++)
-            {
-                printf("%-10s: %-10s \n",
-                       get_body_part_name(i),
-                       get_augmentation_name(state->hero_body_part_augmentation[i])
-                );
-            }
-        }
-        printf("----------------------------------------\n");
-        for(int i = 0; i < state->curr_ally->skill_list->size; i++)
-        {
-            ListElem* curr_elem = get_nth_list_element(state->curr_ally->skill_list, i);
-            if(curr_elem != NULL)
-            {
-                int curr_skill = (int) curr_elem->data;
-                char key_char = KEY__NONE;
-                switch(i)
-                {
-                    case 0:  key_char = 'Q'; break;
-                    case 1:  key_char = 'W'; break;
-                    case 2:  key_char = 'E'; break;
-                    case 3:  key_char = 'R'; break;
-                    case 4:  key_char = 'T'; break;
-                    case 5:  key_char = 'Y'; break;
-                    case 6:  key_char = 'U'; break;
-                    case 7:  key_char = 'I'; break;
-                    case 8:  key_char = 'O'; break;
-                    case 9:  key_char = 'P'; break;
-                    case 10: key_char = 'A'; break;
-                    case 11: key_char = 'S'; break;
-                    case 12: key_char = 'D'; break;
-                    case 13: key_char = 'F'; break;
-                    case 14: key_char = 'G'; break;
-                    case 15: key_char = 'H'; break;
-                    case 16: key_char = 'J'; break;
-                    case 17: key_char = 'K'; break;
-                    case 18: key_char = 'L'; break;
-                    case 19: key_char = 'Z'; break;
-                    case 20: key_char = 'X'; break;
-                    case 21: key_char = 'C'; break;
-                    case 22: key_char = 'V'; break;
-                    case 23: key_char = 'B'; break;
-                    case 24: key_char = 'N'; break;
-                    case 25: key_char = 'M'; break;
-                    default: break;
-                }
-                int curr_skill_cost = get_skill_action_points(curr_skill);
-                char* curr_skill_name = get_debug_skill_name(curr_skill);
-                if(curr_skill_cost == -1)
-                {
-                    printf("key %-1c : ? : %-10s \n",
-                           key_char,
-                           curr_skill_name
-                    );
-                }
-                else
-                {
-                    printf("key %-1c : %i : %-10s \n",
-                           key_char,
-                           curr_skill_cost,
-                           curr_skill_name
-                    );
-                }
-            }
-        }
-        printf("----------------------------------------\n");
-        if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
-           state->enemy_list->size > 0)
-        {
-            printf("key ENTER : end turn \n");
-            printf("----------------------------------------\n");
-        }
-        if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
-        {
-            printf("key ESC   : go back \n");
-            printf("----------------------------------------\n");
-        }
-        if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
-        {
-            printf("key ESC   : go back \n");
-            printf("----------------------------------------\n");
-        }
-    }
+    //             hero_ap_bar[i + 1] = character;
+    //         }
+    //         hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
+    //         printf("hero ap   : %s %i / %i \n", hero_ap_bar, curr_ally_ap, ALLY_MAX_ACTION_POINTS);
+    //     }
+    //     if(state->curr_ally->object->type == OBJECT__HERO ||
+    //        state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+    //        state->curr_ally->object->type == OBJECT__HERO_FLYING)
+    //     {
+    //         printf("----------------------------------------\n");
+    //         for(int i = 1; i < ITEM__COUNT; i++)
+    //         {
+    //             printf("%-10s: %i \n",
+    //                    get_name_from_item(i),
+    //                    state->hero_item_number[i]
+    //             );
+    //         }
+    //         printf("----------------------------------------\n");
+    //         for(int i = 1; i < BODY_PART__COUNT; i++)
+    //         {
+    //             printf("%-10s: %-10s \n",
+    //                    get_body_part_name(i),
+    //                    get_augmentation_name(state->hero_body_part_augmentation[i])
+    //             );
+    //         }
+    //     }
+    //     printf("----------------------------------------\n");
+    //     for(int i = 0; i < state->curr_ally->skill_list->size; i++)
+    //     {
+    //         ListElem* curr_elem = get_nth_list_element(state->curr_ally->skill_list, i);
+    //         if(curr_elem != NULL)
+    //         {
+    //             int curr_skill = (int) curr_elem->data;
+    //             char key_char = KEY__NONE;
+    //             switch(i)
+    //             {
+    //                 case 0:  key_char = 'Q'; break;
+    //                 case 1:  key_char = 'W'; break;
+    //                 case 2:  key_char = 'E'; break;
+    //                 case 3:  key_char = 'R'; break;
+    //                 case 4:  key_char = 'T'; break;
+    //                 case 5:  key_char = 'Y'; break;
+    //                 case 6:  key_char = 'U'; break;
+    //                 case 7:  key_char = 'I'; break;
+    //                 case 8:  key_char = 'O'; break;
+    //                 case 9:  key_char = 'P'; break;
+    //                 case 10: key_char = 'A'; break;
+    //                 case 11: key_char = 'S'; break;
+    //                 case 12: key_char = 'D'; break;
+    //                 case 13: key_char = 'F'; break;
+    //                 case 14: key_char = 'G'; break;
+    //                 case 15: key_char = 'H'; break;
+    //                 case 16: key_char = 'J'; break;
+    //                 case 17: key_char = 'K'; break;
+    //                 case 18: key_char = 'L'; break;
+    //                 case 19: key_char = 'Z'; break;
+    //                 case 20: key_char = 'X'; break;
+    //                 case 21: key_char = 'C'; break;
+    //                 case 22: key_char = 'V'; break;
+    //                 case 23: key_char = 'B'; break;
+    //                 case 24: key_char = 'N'; break;
+    //                 case 25: key_char = 'M'; break;
+    //                 default: break;
+    //             }
+    //             int curr_skill_cost = get_skill_action_points(curr_skill);
+    //             char* curr_skill_name = get_debug_skill_name(curr_skill);
+    //             if(curr_skill_cost == -1)
+    //             {
+    //                 printf("key %-1c : ? : %-10s \n",
+    //                        key_char,
+    //                        curr_skill_name
+    //                 );
+    //             }
+    //             else
+    //             {
+    //                 printf("key %-1c : %i : %-10s \n",
+    //                        key_char,
+    //                        curr_skill_cost,
+    //                        curr_skill_name
+    //                 );
+    //             }
+    //         }
+    //     }
+    //     printf("----------------------------------------\n");
+    //     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
+    //        state->enemy_list->size > 0)
+    //     {
+    //         printf("key ENTER : end turn \n");
+    //         printf("----------------------------------------\n");
+    //     }
+    //     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
+    //     {
+    //         printf("key ESC   : go back \n");
+    //         printf("----------------------------------------\n");
+    //     }
+    //     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    //     {
+    //         printf("key ESC   : go back \n");
+    //         printf("----------------------------------------\n");
+    //     }
+    // }
 
-    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
-       state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
-       state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
-    {
-        printf("curr skill: %s \n", get_debug_skill_name(state->curr_ally_skill));
-        printf("----------------------------------------\n");
-    }
+    // if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    //    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+    //    state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
+    //    state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
+    // {
+    //     printf("curr skill: %s \n", get_debug_skill_name(state->curr_ally_skill));
+    //     printf("----------------------------------------\n");
+    // }
 
-    if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
-       state->gamestate == GAMESTATE__ENEMY_EXECUTING_ANIMATION ||
-       state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK ||
-       state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE ||
-       state->gamestate == GAMESTATE__ENEMY_MOVING ||
-       state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
-    {
-        printf("curr enemy: %s \n", get_debug_name_from_object_type(state->curr_enemy->object->type));
-        printf("----------------------------------------\n");
-        printf("curr skill: %s \n", get_debug_skill_name(state->curr_enemy->skill));
-        printf("----------------------------------------\n");
-    }
+    // if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK ||
+    //    state->gamestate == GAMESTATE__ENEMY_EXECUTING_ANIMATION ||
+    //    state->gamestate == GAMESTATE__ENEMY_EXECUTING_ATTACK ||
+    //    state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE ||
+    //    state->gamestate == GAMESTATE__ENEMY_MOVING ||
+    //    state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET)
+    // {
+    //     printf("curr enemy: %s \n", get_debug_name_from_object_type(state->curr_enemy->object->type));
+    //     printf("----------------------------------------\n");
+    //     printf("curr skill: %s \n", get_debug_skill_name(state->curr_enemy->skill));
+    //     printf("----------------------------------------\n");
+    // }
 }
 
 void change_background_color(State* state, Vec3i new_background_color)
