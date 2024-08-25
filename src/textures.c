@@ -707,8 +707,50 @@ void load_textures_skill(Renderer* renderer, Textures_Skill* skill)
     skill->dots_line_horizontal = load_texture_from_filepath(renderer, "./res/skill/dots_line_horizontal.png");
     skill->dots_line_vertical = load_texture_from_filepath(renderer, "./res/skill/dots_line_vertical.png");
 
-    skill->dots_arch_horizontal = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal.png");
-    skill->dots_arch_vertical = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical.png");
+    skill->dots_arch_horizontal_1_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_1_1.png");
+    skill->dots_arch_horizontal_2_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_2_1.png");
+    skill->dots_arch_horizontal_2_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_2_2.png");
+    skill->dots_arch_horizontal_3_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_3_1.png");
+    skill->dots_arch_horizontal_3_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_3_2.png");
+    skill->dots_arch_horizontal_3_3 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_3_3.png");
+    skill->dots_arch_horizontal_6_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_6_1.png");
+    skill->dots_arch_horizontal_6_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_6_2.png");
+    skill->dots_arch_horizontal_6_3 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_6_3.png");
+    skill->dots_arch_horizontal_6_4 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_6_4.png");
+    skill->dots_arch_horizontal_6_5 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_6_5.png");
+    skill->dots_arch_horizontal_6_6 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_6_6.png");
+    skill->dots_arch_horizontal_10_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_1.png");
+    skill->dots_arch_horizontal_10_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_2.png");
+    skill->dots_arch_horizontal_10_3 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_3.png");
+    skill->dots_arch_horizontal_10_4 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_4.png");
+    skill->dots_arch_horizontal_10_5 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_5.png");
+    skill->dots_arch_horizontal_10_6 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_6.png");
+    skill->dots_arch_horizontal_10_7 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_7.png");
+    skill->dots_arch_horizontal_10_8 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_8.png");
+    skill->dots_arch_horizontal_10_9 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_9.png");
+    skill->dots_arch_horizontal_10_10 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_horizontal_10_10.png");
+    skill->dots_arch_vertical_1_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_1_1.png");
+    skill->dots_arch_vertical_2_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_2_1.png");
+    skill->dots_arch_vertical_2_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_2_2.png");
+    skill->dots_arch_vertical_3_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_3_1.png");
+    skill->dots_arch_vertical_3_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_3_2.png");
+    skill->dots_arch_vertical_3_3 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_3_3.png");
+    skill->dots_arch_vertical_6_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_6_1.png");
+    skill->dots_arch_vertical_6_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_6_2.png");
+    skill->dots_arch_vertical_6_3 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_6_3.png");
+    skill->dots_arch_vertical_6_4 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_6_4.png");
+    skill->dots_arch_vertical_6_5 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_6_5.png");
+    skill->dots_arch_vertical_6_6 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_6_6.png");
+    skill->dots_arch_vertical_10_1 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_1.png");
+    skill->dots_arch_vertical_10_2 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_2.png");
+    skill->dots_arch_vertical_10_3 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_3.png");
+    skill->dots_arch_vertical_10_4 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_4.png");
+    skill->dots_arch_vertical_10_5 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_5.png");
+    skill->dots_arch_vertical_10_6 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_6.png");
+    skill->dots_arch_vertical_10_7 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_7.png");
+    skill->dots_arch_vertical_10_8 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_8.png");
+    skill->dots_arch_vertical_10_9 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_9.png");
+    skill->dots_arch_vertical_10_10 = load_texture_from_filepath(renderer, "./res/skill/dots_arch_vertical_10_10.png");
 
     skill->attack_dir4_up = load_texture_from_filepath(renderer, "./res/skill/attack_dir4_up.png");
     skill->attack_dir4_right = load_texture_from_filepath(renderer, "./res/skill/attack_dir4_right.png");
@@ -1808,6 +1850,298 @@ Texture* get_texture_laser(Textures* textures, int dir4)
         case DIR4__DOWN: texture = textures->animation.laser_down; break;
         case DIR4__LEFT: texture = textures->animation.laser_left; break;
         default: break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_dots_arch_horizontal(Textures* textures, int length, int i)
+{
+    Texture* texture = NULL;
+
+    switch(length)
+    {
+        case 10:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_10_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_10_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_10_3; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_10_4; break;
+                case 5: texture = textures->skill.dots_arch_horizontal_10_5; break;
+                case 6: texture = textures->skill.dots_arch_horizontal_10_6; break;
+                case 7: texture = textures->skill.dots_arch_horizontal_10_7; break;
+                case 8: texture = textures->skill.dots_arch_horizontal_10_8; break;
+                case 9: texture = textures->skill.dots_arch_horizontal_10_9; break;
+                case 10: texture = textures->skill.dots_arch_horizontal_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 9:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_10_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_10_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_10_3; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_10_4; break;
+                case 5: texture = textures->skill.dots_arch_horizontal_10_5; break;
+                case 6: texture = textures->skill.dots_arch_horizontal_10_7; break;
+                case 7: texture = textures->skill.dots_arch_horizontal_10_8; break;
+                case 8: texture = textures->skill.dots_arch_horizontal_10_9; break;
+                case 9: texture = textures->skill.dots_arch_horizontal_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 8:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_10_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_10_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_10_3; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_10_4; break;
+                case 5: texture = textures->skill.dots_arch_horizontal_10_5; break;
+                case 6: texture = textures->skill.dots_arch_horizontal_10_7; break;
+                case 7: texture = textures->skill.dots_arch_horizontal_10_9; break;
+                case 8: texture = textures->skill.dots_arch_horizontal_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 7:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_10_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_10_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_10_3; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_10_5; break;
+                case 5: texture = textures->skill.dots_arch_horizontal_10_7; break;
+                case 6: texture = textures->skill.dots_arch_horizontal_10_9; break;
+                case 7: texture = textures->skill.dots_arch_horizontal_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 6:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_6_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_6_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_6_3; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_6_4; break;
+                case 5: texture = textures->skill.dots_arch_horizontal_6_5; break;
+                case 6: texture = textures->skill.dots_arch_horizontal_6_6; break;
+                default: break;
+            }
+        }
+        break;
+        case 5:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_6_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_6_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_6_3; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_6_5; break;
+                case 5: texture = textures->skill.dots_arch_horizontal_6_6; break;
+                default: break;
+            }
+        }
+        break;
+        case 4:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_6_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_6_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_6_5; break;
+                case 4: texture = textures->skill.dots_arch_horizontal_6_6; break;
+                default: break;
+            }
+        }
+        break;
+        case 3:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_3_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_3_2; break;
+                case 3: texture = textures->skill.dots_arch_horizontal_3_3; break;
+                default: break;
+            }
+        }
+        break;
+        case 2:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_2_1; break;
+                case 2: texture = textures->skill.dots_arch_horizontal_2_2; break;
+                default: break;
+            }
+        }
+        break;
+        case 1:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_horizontal_1_1; break;
+                default: break;
+            }
+        }
+        break;
+    }
+
+    return texture;
+}
+
+Texture* get_texture_dots_arch_vertical(Textures* textures, int length, int i)
+{
+    Texture* texture = NULL;
+
+    switch(length)
+    {
+        case 10:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_10_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_10_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_10_3; break;
+                case 4: texture = textures->skill.dots_arch_vertical_10_4; break;
+                case 5: texture = textures->skill.dots_arch_vertical_10_5; break;
+                case 6: texture = textures->skill.dots_arch_vertical_10_6; break;
+                case 7: texture = textures->skill.dots_arch_vertical_10_7; break;
+                case 8: texture = textures->skill.dots_arch_vertical_10_8; break;
+                case 9: texture = textures->skill.dots_arch_vertical_10_9; break;
+                case 10: texture = textures->skill.dots_arch_vertical_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 9:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_10_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_10_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_10_3; break;
+                case 4: texture = textures->skill.dots_arch_vertical_10_4; break;
+                case 5: texture = textures->skill.dots_arch_vertical_10_5; break;
+                case 6: texture = textures->skill.dots_arch_vertical_10_7; break;
+                case 7: texture = textures->skill.dots_arch_vertical_10_8; break;
+                case 8: texture = textures->skill.dots_arch_vertical_10_9; break;
+                case 9: texture = textures->skill.dots_arch_vertical_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 8:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_10_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_10_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_10_3; break;
+                case 4: texture = textures->skill.dots_arch_vertical_10_4; break;
+                case 5: texture = textures->skill.dots_arch_vertical_10_5; break;
+                case 6: texture = textures->skill.dots_arch_vertical_10_7; break;
+                case 7: texture = textures->skill.dots_arch_vertical_10_9; break;
+                case 8: texture = textures->skill.dots_arch_vertical_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 7:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_10_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_10_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_10_3; break;
+                case 4: texture = textures->skill.dots_arch_vertical_10_5; break;
+                case 5: texture = textures->skill.dots_arch_vertical_10_7; break;
+                case 6: texture = textures->skill.dots_arch_vertical_10_9; break;
+                case 7: texture = textures->skill.dots_arch_vertical_10_10; break;
+                default: break;
+            }
+        }
+        break;
+        case 6:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_6_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_6_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_6_3; break;
+                case 4: texture = textures->skill.dots_arch_vertical_6_4; break;
+                case 5: texture = textures->skill.dots_arch_vertical_6_5; break;
+                case 6: texture = textures->skill.dots_arch_vertical_6_6; break;
+                default: break;
+            }
+        }
+        break;
+        case 5:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_6_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_6_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_6_3; break;
+                case 4: texture = textures->skill.dots_arch_vertical_6_5; break;
+                case 5: texture = textures->skill.dots_arch_vertical_6_6; break;
+                default: break;
+            }
+        }
+        break;
+        case 4:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_6_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_6_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_6_5; break;
+                case 4: texture = textures->skill.dots_arch_vertical_6_6; break;
+                default: break;
+            }
+        }
+        break;
+        case 3:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_3_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_3_2; break;
+                case 3: texture = textures->skill.dots_arch_vertical_3_3; break;
+                default: break;
+            }
+        }
+        break;
+        case 2:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_2_1; break;
+                case 2: texture = textures->skill.dots_arch_vertical_2_2; break;
+                default: break;
+            }
+        }
+        break;
+        case 1:
+        {
+            switch(i)
+            {
+                case 1: texture = textures->skill.dots_arch_vertical_1_1; break;
+                default: break;
+            }
+        }
+        break;
     }
 
     return texture;

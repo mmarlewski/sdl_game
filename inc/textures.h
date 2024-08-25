@@ -692,8 +692,50 @@ typedef struct
     Texture* dots_line_horizontal;
     Texture* dots_line_vertical;
 
-    Texture* dots_arch_horizontal;
-    Texture* dots_arch_vertical;
+    Texture* dots_arch_horizontal_1_1;
+    Texture* dots_arch_horizontal_2_1;
+    Texture* dots_arch_horizontal_2_2;
+    Texture* dots_arch_horizontal_3_1;
+    Texture* dots_arch_horizontal_3_2;
+    Texture* dots_arch_horizontal_3_3;
+    Texture* dots_arch_horizontal_6_1;
+    Texture* dots_arch_horizontal_6_2;
+    Texture* dots_arch_horizontal_6_3;
+    Texture* dots_arch_horizontal_6_4;
+    Texture* dots_arch_horizontal_6_5;
+    Texture* dots_arch_horizontal_6_6;
+    Texture* dots_arch_horizontal_10_1;
+    Texture* dots_arch_horizontal_10_2;
+    Texture* dots_arch_horizontal_10_3;
+    Texture* dots_arch_horizontal_10_4;
+    Texture* dots_arch_horizontal_10_5;
+    Texture* dots_arch_horizontal_10_6;
+    Texture* dots_arch_horizontal_10_7;
+    Texture* dots_arch_horizontal_10_8;
+    Texture* dots_arch_horizontal_10_9;
+    Texture* dots_arch_horizontal_10_10;
+    Texture* dots_arch_vertical_1_1;
+    Texture* dots_arch_vertical_2_1;
+    Texture* dots_arch_vertical_2_2;
+    Texture* dots_arch_vertical_3_1;
+    Texture* dots_arch_vertical_3_2;
+    Texture* dots_arch_vertical_3_3;
+    Texture* dots_arch_vertical_6_1;
+    Texture* dots_arch_vertical_6_2;
+    Texture* dots_arch_vertical_6_3;
+    Texture* dots_arch_vertical_6_4;
+    Texture* dots_arch_vertical_6_5;
+    Texture* dots_arch_vertical_6_6;
+    Texture* dots_arch_vertical_10_1;
+    Texture* dots_arch_vertical_10_2;
+    Texture* dots_arch_vertical_10_3;
+    Texture* dots_arch_vertical_10_4;
+    Texture* dots_arch_vertical_10_5;
+    Texture* dots_arch_vertical_10_6;
+    Texture* dots_arch_vertical_10_7;
+    Texture* dots_arch_vertical_10_8;
+    Texture* dots_arch_vertical_10_9;
+    Texture* dots_arch_vertical_10_10;
 
     Texture* attack_dir4_up;
     Texture* attack_dir4_right;
@@ -1057,5 +1099,8 @@ Texture* get_texture_scissor_end(Textures* textures, int dir4);
 Texture* get_texture_scissor_from_to(Textures* textures, int dir4_from, int dir4_to);
 
 Texture* get_texture_laser(Textures* textures, int dir4);
+
+Texture* get_texture_dots_arch_horizontal(Textures* textures, int length, int i);
+Texture* get_texture_dots_arch_vertical(Textures* textures, int length, int i);
 
 #endif

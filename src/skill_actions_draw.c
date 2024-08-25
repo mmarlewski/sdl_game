@@ -472,7 +472,7 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
-            for(int i = 1; i < distance_info.abs_diff; i++)
+            for(int i = 0; i < distance_info.abs_diff + 1; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                     source_tilemap_pos,
@@ -483,15 +483,13 @@ void skill_get_actions_and_draw(
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
                     Texture* dots_arch_texture = NULL;
-                    if(distance_info.dir4 == DIR4__RIGHT ||
-                       distance_info.dir4 == DIR4__LEFT)
+
+                    switch(distance_info.dir4)
                     {
-                        dots_arch_texture = textures->skill.dots_arch_horizontal;
-                    }
-                    if(distance_info.dir4 == DIR4__UP ||
-                       distance_info.dir4 == DIR4__DOWN)
-                    {
-                        dots_arch_texture = textures->skill.dots_arch_vertical;
+                        case DIR4__UP: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break; break;
+                        case DIR4__RIGHT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, i + 1); break;
+                        case DIR4__DOWN: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, i + 1); break; break;
+                        case DIR4__LEFT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break;
                     }
 
                     // draw above
@@ -499,7 +497,8 @@ void skill_get_actions_and_draw(
                         draw_above_texture_list,
                         dots_arch_texture
                     );
-                    add_new_list_element_to_list_end(
+                    add_new_list_element_to_list_end
+                    (
                         draw_above_tilemap_pos_list,
                         new_vec2i_from_vec2i(tilemap_pos)
                     );
@@ -545,7 +544,7 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
-            for(int i = 1; i < distance_info.abs_diff; i++)
+            for(int i = 0; i < distance_info.abs_diff + 1; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                     source_tilemap_pos,
@@ -556,15 +555,13 @@ void skill_get_actions_and_draw(
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
                     Texture* dots_arch_texture = NULL;
-                    if(distance_info.dir4 == DIR4__RIGHT ||
-                       distance_info.dir4 == DIR4__LEFT)
+                    
+                    switch(distance_info.dir4)
                     {
-                        dots_arch_texture = textures->skill.dots_arch_horizontal;
-                    }
-                    if(distance_info.dir4 == DIR4__UP ||
-                       distance_info.dir4 == DIR4__DOWN)
-                    {
-                        dots_arch_texture = textures->skill.dots_arch_vertical;
+                        case DIR4__UP: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break; break;
+                        case DIR4__RIGHT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, i + 1); break;
+                        case DIR4__DOWN: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, i + 1); break; break;
+                        case DIR4__LEFT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break;
                     }
 
                     // draw above
@@ -618,7 +615,7 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
-            for(int i = 1; i < distance_info.abs_diff; i++)
+            for(int i = 0; i < distance_info.abs_diff + 1; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                     source_tilemap_pos,
@@ -629,15 +626,13 @@ void skill_get_actions_and_draw(
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
                     Texture* dots_arch_texture = NULL;
-                    if(distance_info.dir4 == DIR4__RIGHT ||
-                       distance_info.dir4 == DIR4__LEFT)
+                    
+                    switch(distance_info.dir4)
                     {
-                        dots_arch_texture = textures->skill.dots_arch_horizontal;
-                    }
-                    if(distance_info.dir4 == DIR4__UP ||
-                       distance_info.dir4 == DIR4__DOWN)
-                    {
-                        dots_arch_texture = textures->skill.dots_arch_vertical;
+                        case DIR4__UP: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break; break;
+                        case DIR4__RIGHT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, i + 1); break;
+                        case DIR4__DOWN: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, i + 1); break; break;
+                        case DIR4__LEFT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break;
                     }
 
                     // draw above
@@ -3394,6 +3389,39 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
+                for(int i = 0; i < distance_info.abs_diff + 1; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        distance_info.dir4,
+                        i
+                    );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Texture* dots_arch_texture = NULL;
+
+                        switch(distance_info.dir4)
+                        {
+                            case DIR4__UP: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break; break;
+                            case DIR4__RIGHT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, i + 1); break;
+                            case DIR4__DOWN: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, i + 1); break; break;
+                            case DIR4__LEFT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break;
+                        }
+
+                        // draw above
+                        add_new_list_element_to_list_end(
+                            draw_above_texture_list,
+                            dots_arch_texture
+                        );
+                        add_new_list_element_to_list_end
+                        (
+                            draw_above_tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+
                 // actions
                 add_action_after_curr_action_action_sequence(
                     action_sequence,
@@ -3512,7 +3540,7 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
-            for(int i = 1; i < distance_info.abs_diff; i++)
+            for(int i = 0; i < distance_info.abs_diff + 1; i++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                     source_tilemap_pos,
@@ -3523,15 +3551,13 @@ void skill_get_actions_and_draw(
                 if(is_tilemap_in_bounds(tilemap_pos))
                 {
                     Texture* dots_arch_texture = NULL;
-                    if(distance_info.dir4 == DIR4__RIGHT ||
-                       distance_info.dir4 == DIR4__LEFT)
+                    
+                    switch(distance_info.dir4)
                     {
-                        dots_arch_texture = textures->skill.dots_arch_horizontal;
-                    }
-                    if(distance_info.dir4 == DIR4__UP ||
-                       distance_info.dir4 == DIR4__DOWN)
-                    {
-                        dots_arch_texture = textures->skill.dots_arch_vertical;
+                        case DIR4__UP: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break; break;
+                        case DIR4__RIGHT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, i + 1); break;
+                        case DIR4__DOWN: dots_arch_texture = get_texture_dots_arch_vertical(textures, distance_info.abs_diff + 1, i + 1); break; break;
+                        case DIR4__LEFT: dots_arch_texture = get_texture_dots_arch_horizontal(textures, distance_info.abs_diff + 1, distance_info.abs_diff - i + 1); break;
                     }
 
                     // draw above
