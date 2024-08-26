@@ -1,12 +1,15 @@
 
-# build files
+# build
 *.o
 *.d
 
-# linux output
+# linux
 sdl_game
 
-# emscripten output
+# windows
+sdl_game.exe
+
+# web
 index.html
 index.js
 index.wasm

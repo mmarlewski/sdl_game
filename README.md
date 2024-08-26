@@ -35,6 +35,7 @@ https://marcin12345.itch.io/fallen-stalactite
 ##### Web
 - install and activate emsdk: https://emscripten.org/docs/getting_started/downloads.html
 - run: `emcc -sWASM=1 -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' -sUSE_SDL_MIXER=2 -sUSE_SDL_TTF=2 -o index.html --shell-file template.html ./src/*.c --preload-file ./res --use-preload-plugins -sALLOW_MEMORY_GROWTH=1 -sMAXIMUM_MEMORY=1gb -O0 && emrun --browser firefox index.html` (change 'firefox' to your specific browser)
+- zip files: index.html, index.js, index.wasm, index.data and template.html into sdl_game.zip and then upload zip to itch.io (note for me so i don't forget)
 
 ### Inspired by
 - Into the Breach : telegraphed attack to take advantage of enemy actions and 8x8 grid rooms
