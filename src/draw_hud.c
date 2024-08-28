@@ -700,6 +700,21 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
     }
 
+    // show attack order
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
+       state->enemy_list->size > 0)
+    {
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.show_attack_order,
+            colors->none,
+            1.0f,
+            vec2i(1200 - 64 - 10 + 100, 10 + 64 + 10),
+            2
+        );
+    }
+
     // attack order
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
@@ -742,7 +757,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     1.0f,
                     vec2i(
                         1200 - 10 - 64 - 10 - 64 - 16 + 100,
-                        10 + 64 + 10 * i + 64 * (i - 1)
+                        10 + 64 + 10 * i + 64 * (i - 1) + 64 + 10
                     ),
                     2
                 );
@@ -754,7 +769,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     1.0f,
                     vec2i(
                         1200 - 10 - 64 + 100,
-                        10 + 64 + 10 * i + 64 * (i - 1)
+                        10 + 64 + 10 * i + 64 * (i - 1) + 64 + 10
                     ),
                     2
                 );

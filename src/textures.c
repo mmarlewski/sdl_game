@@ -351,6 +351,9 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
     object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
 
+    object->sign_mole_warning = load_texture_from_filepath(renderer, "./res/object/sign_mole_warning.png");
+    object->sign_mole_warning_outline = load_texture_from_filepath(renderer, "./res/object/sign_mole_warning_outline.png");
+
     object->golem_unpowered = load_texture_from_filepath(renderer, "./res/object/golem_unpowered.png");
     object->golem_unpowered_outline = load_texture_from_filepath(renderer, "./res/object/golem_unpowered_outline.png");
 
@@ -1042,13 +1045,20 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->squirrel = load_texture_from_filepath(renderer, "./res/hud/squirrel.png");
     hud->minibot_ally = load_texture_from_filepath(renderer, "./res/hud/minibot_ally.png");
     hud->minibot_enemy = load_texture_from_filepath(renderer, "./res/hud/minibot_enemy.png");
-    hud->environment = load_texture_from_filepath(renderer, "./res/hud/environment.png");
+    hud->environment_falling_stalactite = load_texture_from_filepath(renderer, "./res/hud/environment_falling_stalactite.png");
+    hud->environment_emerge_water = load_texture_from_filepath(renderer, "./res/hud/environment_emerge_water.png");
+    hud->environment_emerge_pit = load_texture_from_filepath(renderer, "./res/hud/environment_emerge_pit.png");
+    hud->environment_emerge_burrow = load_texture_from_filepath(renderer, "./res/hud/environment_emerge_burrow.png");
+    hud->environment_emerge_pipe = load_texture_from_filepath(renderer, "./res/hud/environment_emerge_pipe.png");
+    hud->environment_collapse_burrow = load_texture_from_filepath(renderer, "./res/hud/environment_collapse_burrow.png");
+    hud->environment_conv_belt = load_texture_from_filepath(renderer, "./res/hud/environment_conv_belt.png");
 
     hud->cell = load_texture_from_filepath(renderer, "./res/hud/cell.png");
     hud->dynamite = load_texture_from_filepath(renderer, "./res/hud/dynamite.png");
     hud->gemstone = load_texture_from_filepath(renderer, "./res/hud/gemstone.png");
 
     hud->end_turn = load_texture_from_filepath(renderer, "./res/hud/end_turn.png");
+    hud->show_attack_order = load_texture_from_filepath(renderer, "./res/hud/show_attack_order.png");
     hud->start_again = load_texture_from_filepath(renderer, "./res/hud/start_again.png");
     hud->start_game = load_texture_from_filepath(renderer, "./res/hud/start_game.png");
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");

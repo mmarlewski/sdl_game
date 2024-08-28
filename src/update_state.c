@@ -121,7 +121,17 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     //     state->camera_world_pos = new_camera_world_pos;
     // }
 
-    // state->show_all_order_numbers = input->is_key[KEY__2];
+    if(state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
+        state->mouse_screen_pos.x <= 1200 - 64 - 10 + 100 + 64 &&
+        state->mouse_screen_pos.y >= 64 + 10 + 10 &&
+        state->mouse_screen_pos.y <= 64 + 10 + 10 + 64)
+    {
+        state->show_all_order_numbers = TRUE;
+    }
+    else
+    {
+        state->show_all_order_numbers = FALSE;
+    }
 
     // animations
 

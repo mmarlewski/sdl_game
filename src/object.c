@@ -358,6 +358,8 @@ int is_object_pull_towards(Object* object)
 
         case OBJECT__OBSTACLE:                         is = 1; break;
 
+        case OBJECT__SIGN_MOLE_WARNING:                is = 1; break;
+
         case OBJECT__MOLE:                             is = 1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            is = 1; break;
@@ -1695,6 +1697,7 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__BALL_SPIKES:                      name = "ball spikes"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
+        case OBJECT__SIGN_MOLE_WARNING:                name = "sign mole warning"; break;
 
         case OBJECT__GOLEM_UNPOWERED:                  name = "golem unpowered"; break;
         case OBJECT__GOLEM_HALF_POWERED:               name = "golem half powered"; break;
@@ -1938,6 +1941,8 @@ char* get_in_game_name_from_object_type(int object_type)
 
         case OBJECT__THRONE:                           name = "throne"; break;
 
+        case OBJECT__SIGN_MOLE_WARNING:                name = "sign"; break;
+
         case OBJECT__GOLEM_UNPOWERED:                  name = "golem"; break;
         case OBJECT__GOLEM_HALF_POWERED:               name = "golem"; break;
         case OBJECT__GOLEM_POWERED:                    name = "golem"; break;
@@ -2179,6 +2184,8 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
+        case OBJECT__SIGN_MOLE_WARNING:                texture = textures->object.sign_mole_warning; break;
+
         case OBJECT__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered; break;
         case OBJECT__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered; break;
         case OBJECT__GOLEM_POWERED:                    texture = textures->object.golem_powered_1; break;
@@ -2411,6 +2418,8 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
+
+        case OBJECT__SIGN_MOLE_WARNING:                texture = textures->object.sign_mole_warning; break;
 
         case OBJECT__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered; break;
         case OBJECT__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered; break;
@@ -2645,6 +2654,8 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
+        case OBJECT__SIGN_MOLE_WARNING:                texture = textures->object.sign_mole_warning_outline; break;
+
         case OBJECT__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered_outline; break;
         case OBJECT__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered_outline; break;
         case OBJECT__GOLEM_POWERED:                    texture = textures->object.golem_powered_outline_1; break;
@@ -2878,6 +2889,8 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
+        case OBJECT__SIGN_MOLE_WARNING:                texture = textures->object.sign_mole_warning_outline; break;
+
         case OBJECT__GOLEM_UNPOWERED:                  texture = textures->object.golem_unpowered_outline; break;
         case OBJECT__GOLEM_HALF_POWERED:               texture = textures->object.golem_half_powered_outline; break;
         case OBJECT__GOLEM_POWERED:                    texture = textures->object.golem_powered_outline_2; break;
@@ -3018,13 +3031,13 @@ Texture* get_hud_texture_from_object(Object* object, Textures* textures)
         case OBJECT__MINIBOT_ENEMY_DYNAMITE:           texture = textures->hud.minibot_enemy; break;
         case OBJECT__MINIBOT_ENEMY_GEMSTONE:           texture = textures->hud.minibot_enemy; break;
 
-        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   texture = textures->hud.environment; break;
-        case OBJECT__ENVIRONMENT_EMERGE_WATER:         texture = textures->hud.environment; break;
-        case OBJECT__ENVIRONMENT_EMERGE_PIT:           texture = textures->hud.environment; break;
-        case OBJECT__ENVIRONMENT_EMERGE_BURROW:        texture = textures->hud.environment; break;
-        case OBJECT__ENVIRONMENT_EMERGE_PIPE:          texture = textures->hud.environment; break;
-        case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      texture = textures->hud.environment; break;
-        case OBJECT__ENVIRONMENT_CONV_BELT:            texture = textures->hud.environment; break;
+        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   texture = textures->hud.environment_falling_stalactite; break;
+        case OBJECT__ENVIRONMENT_EMERGE_WATER:         texture = textures->hud.environment_emerge_water; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIT:           texture = textures->hud.environment_emerge_pit; break;
+        case OBJECT__ENVIRONMENT_EMERGE_BURROW:        texture = textures->hud.environment_emerge_burrow; break;
+        case OBJECT__ENVIRONMENT_EMERGE_PIPE:          texture = textures->hud.environment_emerge_pipe; break;
+        case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      texture = textures->hud.environment_collapse_burrow; break;
+        case OBJECT__ENVIRONMENT_CONV_BELT:            texture = textures->hud.environment_conv_belt; break;
 
         default: break;
     }

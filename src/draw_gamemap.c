@@ -621,15 +621,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
             if(state->gamestate == GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK)
             {
-                draw_texture_at_world_pos(
-                    renderer,
-                    get_texture_order_number(textures, enemy->order_number),
-                    colors->yellow,
-                    1.0f,
-                    selected_world_iso_pos,
-                    state->camera_world_pos,
-                    state->camera_zoom
-                );
+                if(state->curr_enemy != NULL && is_tilemap_in_bounds(state->curr_enemy->object->tilemap_pos))
+                {
+                    draw_texture_at_world_pos(
+                        renderer,
+                        get_texture_order_number(textures, enemy->order_number),
+                        colors->yellow,
+                        1.0f,
+                        selected_world_iso_pos,
+                        state->camera_world_pos,
+                        state->camera_zoom
+                    );
+                }
             }
         }
     }

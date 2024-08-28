@@ -3822,14 +3822,43 @@ void skill_get_actions_and_draw(
                 }
             }
 
-            // actions
-            add_action_to_end_action_sequence(
-                action_sequence,
-                new_action_add_object(
-                    new_object(OBJECT__STALACTITE_FALLEN),
-                    target_2_tilemap_pos
-                )
-            );
+            if(target_2_floor == FLOOR__WATER)
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_change_floor(
+                        FLOOR__WATER_STALACTITE_FALLEN,
+                        target_2_tilemap_pos
+                    )
+                );
+            }
+            else if(target_2_floor == FLOOR__LAVA)
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_change_floor(
+                        FLOOR__LAVA_STALACTITE_FALLEN,
+                        target_2_tilemap_pos
+                    )
+                );
+            }
+            else if(target_2_floor == FLOOR__PIT)
+            {
+                //
+            }
+            else
+            {
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_add_object(
+                        new_object(OBJECT__STALACTITE_FALLEN),
+                        target_2_tilemap_pos
+                    )
+                );
+            }
 
             // draw below
             add_new_list_element_to_list_end(

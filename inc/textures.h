@@ -337,6 +337,9 @@ typedef struct
     Texture* throne;
     Texture* throne_outline;
 
+    Texture* sign_mole_warning;
+    Texture* sign_mole_warning_outline;
+
     Texture* golem_unpowered;
     Texture* golem_unpowered_outline;
 
@@ -1026,12 +1029,20 @@ typedef struct
     Texture* minibot_ally;
     Texture* minibot_enemy;
     Texture* environment;
+    Texture* environment_falling_stalactite;
+    Texture* environment_emerge_water;
+    Texture* environment_emerge_pit;
+    Texture* environment_emerge_burrow;
+    Texture* environment_emerge_pipe;
+    Texture* environment_collapse_burrow;
+    Texture* environment_conv_belt;
 
     Texture* cell;
     Texture* dynamite;
     Texture* gemstone;
 
     Texture* end_turn;
+    Texture* show_attack_order;
     Texture* start_again;
     Texture* start_game;
     Texture* bar_part;
