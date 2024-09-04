@@ -1054,6 +1054,7 @@ void destroy_textures_hud(Textures_Hud* hud);
 
 typedef struct
 {
+    Texture* tutorial;
     Texture* shadow;
     Texture* background_rock;
     Texture* background_stone;

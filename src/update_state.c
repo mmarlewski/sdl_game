@@ -11,6 +11,18 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
+            change_gamestate(state, GAMESTATE__GAME_TUTORIAL);
+        }
+    }
+
+    if(state->gamestate == GAMESTATE__GAME_TUTORIAL)
+    {
+        if(input->was_mouse_left && !input->is_mouse_left &&
+           state->mouse_screen_pos.x >= 1150 - 10 &&
+           state->mouse_screen_pos.x <= 1150 - 10 + 128 &&
+           state->mouse_screen_pos.y >= 20 + 10 &&
+           state->mouse_screen_pos.y <= 20 + 10 + 64)
+        {
             init_state(
                 state,
                 textures,
@@ -212,6 +224,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     switch(state->gamestate)
     {
         case GAMESTATE__NONE:
+        case GAMESTATE__GAME_START:
+        case GAMESTATE__GAME_TUTORIAL:
         case GAMESTATE__GAME_OVER:
         case GAMESTATE__GAME_WON:
         {

@@ -14,6 +14,11 @@ typedef struct
     Vec3i blue;
     Vec3i purple;
     Vec3i pink;
+    
+    Vec3i blue_light;
+    Vec3i brown_light;
+    Vec3i green_light;
+    Vec3i pink_light;
 
     Vec3i ally_background;
     Vec3i enemy_background;

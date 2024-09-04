@@ -5094,11 +5094,6 @@ void create_level(State* state, Textures* textures)
     room_change_floor_at(
         room_3_0,
         FLOOR__COINS,
-        vec2i(7, 8)
-    );
-    room_change_floor_at(
-        room_3_0,
-        FLOOR__COINS,
         vec2i(8, 6)
     );
     room_change_floor_at(
@@ -8211,7 +8206,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_5_1,
-        new_object(OBJECT__VENDING_CELL),
+        new_object(OBJECT__DISPLAY),
         vec2i(3, 3)
     );
 

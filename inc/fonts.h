@@ -6,6 +6,7 @@
 
 typedef struct
 {
+    Font* bit_operator_20;
     Font* bit_operator_30;
     Font* bit_operator_50;
     Font* stepalange_100;

@@ -151,7 +151,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
 
     // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
@@ -501,7 +501,8 @@ char* get_gamestate_debug_name(int gamestate)
         case GAMESTATE__ENEMY_PAUSE_BEFORE_MOVE:    name = "enemy pause before move";   break;
         case GAMESTATE__ENEMY_MOVING:               name = "enemy moving";              break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "enemy pause before target"; break;
-        case GAMESTATE__GAME_START:                 name = "game start";                 break;
+        case GAMESTATE__GAME_START:                 name = "game start";                break;
+        case GAMESTATE__GAME_TUTORIAL:              name = "game tutorial";             break;
         case GAMESTATE__GAME_OVER:                  name = "game over";                 break;
         case GAMESTATE__GAME_WON:                   name = "game won";                  break;
         default: break;

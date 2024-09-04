@@ -973,6 +973,8 @@ int is_object_meltable(Object* object)
         case OBJECT__BALL:                             is = 1; break;
         case OBJECT__BALL_SPIKES:                      is = 1; break;
 
+        case OBJECT__SIGN_MOLE_WARNING:                is = 1; break;
+
         case OBJECT__HERO:                             is = 1; break;
         case OBJECT__HERO_FLOATING:                    is = 1; break;
         case OBJECT__HERO_FLYING:                      is = 1; break;

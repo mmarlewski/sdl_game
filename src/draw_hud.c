@@ -36,6 +36,38 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
     }
 
+    // game tutorial
+
+    if(state->gamestate == GAMESTATE__GAME_TUTORIAL)
+    {
+        SDL_SetRenderDrawColor(
+            renderer,
+            colors->game_start_background.x,
+            colors->game_start_background.y,
+            colors->game_start_background.z,
+            255
+        );
+        SDL_RenderClear(renderer);
+
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->tutorial,
+            colors->none,
+            1.0f,
+            vec2i(0, 0),
+            1.0f
+        );
+
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.start_game,
+            colors->none,
+            1.0f,
+            vec2i(1150 - 10, 20 + 10),
+            2.0f
+        );
+    }
+
     // game over
 
     if(state->gamestate == GAMESTATE__GAME_OVER)
@@ -439,6 +471,52 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
     }
 
+    // skill description
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        draw_font_at_screen_pos(
+            get_description_from_skill(state->curr_ally_skill, 1),
+            renderer,
+            fonts->bit_operator_20,
+            colors->white,
+            1.0f,
+            vec2i(10 + 128 + 128 + 10 + 10, 600 + 50),
+            1
+        );
+        
+        draw_font_at_screen_pos(
+            get_description_from_skill(state->curr_ally_skill, 2),
+            renderer,
+            fonts->bit_operator_20,
+            colors->white,
+            1.0f,
+            vec2i(10 + 128 + 128 + 10 + 10, 600 + 50 + 30),
+            1
+        );
+        
+        draw_font_at_screen_pos(
+            get_description_from_skill(state->curr_ally_skill, 3),
+            renderer,
+            fonts->bit_operator_20,
+            colors->white,
+            1.0f,
+            vec2i(10 + 128 + 128 + 10 + 10, 600 + 50 + 30 + 30),
+            1
+        );
+        
+        draw_font_at_screen_pos(
+            get_description_from_skill(state->curr_ally_skill, 4),
+            renderer,
+            fonts->bit_operator_20,
+            colors->white,
+            1.0f,
+            vec2i(10 + 128 + 128 + 10 + 10, 600 + 50 + 30 + 30 + 30),
+            1
+        );
+    }
+
     // object
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
@@ -622,6 +700,30 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
             if(floor != FLOOR__NONE)
             {
+                if(object == NULL)
+                {
+                    Vec3i color = colors->white;
+                
+                    if(is_floor_manipulatable(floor))
+                    {
+                        color = colors->green_light;
+                    }
+                    if(is_floor_exit(floor))
+                    {
+                        color = colors->pink_light;
+                    }
+
+                    draw_font_at_screen_pos(
+                        get_in_game_name_from_floor(floor),
+                        renderer,
+                        fonts->bit_operator_30,
+                        color,
+                        1.0f,
+                        vec2i(900 + 100, 550 + 50),
+                        1
+                    );
+                }
+
                 Texture* texture = get_texture_1_from_floor_type(floor, textures);
 
                 draw_texture_at_screen_pos(
@@ -636,11 +738,30 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
             if(object != NULL)
             {
+                Vec3i color = colors->white;
+                
+                if(is_object_meltable(object))
+                {
+                    color = colors->blue_light;
+                }
+                if(is_object_breakable(object))
+                {
+                    color = colors->brown_light;
+                }
+                if(is_object_manipulatable(object))
+                {
+                    color = colors->green_light;
+                }
+                if(is_object_exit(object) || is_object_station(object) || object->type == OBJECT__THRONE)
+                {
+                    color = colors->pink_light;
+                }
+
                 draw_font_at_screen_pos(
                     get_in_game_name_from_object_type(object->type),
                     renderer,
                     fonts->bit_operator_30,
-                    colors->white,
+                    color,
                     1.0f,
                     vec2i(900 + 100, 550 + 50),
                     1

@@ -1575,6 +1575,50 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
             );
         }
         break;
+        case OBJECT__EXIT_METAL_BLOCKED_UP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_METAL_UP,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_METAL_RIGHT,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__EXIT_METAL_BLOCKED_DOWN:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_METAL_DOWN,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__EXIT_METAL_BLOCKED_LEFT:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_object(
+                    OBJECT__EXIT_METAL_LEFT,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
         case OBJECT__BARREL:
         {
             add_action_to_end_action_sequence(

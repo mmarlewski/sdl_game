@@ -82,6 +82,7 @@ int is_skill_two_target(int skill);
 int get_skill_action_points(int skill);
 char* get_in_game_skill_name(int skill);
 char* get_debug_skill_name(int skill);
+char* get_description_from_skill(int skill, int i);
 Texture* get_skill_hud_texture(int skill, Textures* textures);
 
 #endif

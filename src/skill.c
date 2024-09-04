@@ -240,7 +240,6 @@ char* get_in_game_skill_name(int skill)
     return name;
 }
 
-
 char* get_debug_skill_name(int skill)
 {
     char* name = "???";
@@ -319,6 +318,590 @@ char* get_debug_skill_name(int skill)
     }
 
     return name;
+}
+
+char* get_description_from_skill(int skill, int i)
+{
+    char* description = "";
+
+    switch(skill)
+    {
+        case SKILL__NONE:
+        {
+            switch(i)
+            {
+                case 1: description = "(no skill)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ATTACK_DIR:
+        {
+            switch(i)
+            {
+                case 1: description = "(no attack)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__NO_ATTACK:
+        {
+            switch(i)
+            {
+                case 1: description = "(no attack)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__USE:
+        {
+            switch(i)
+            {
+                case 1: description = "use exits to travel between rooms"; break;
+                case 2: description = "or stations to add augmentations"; break;
+                case 3: description = "(objects with pink names)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__MANIPULATION:
+        {
+            switch(i)
+            {
+                case 1: description = "remotely manipulate certain metal"; break;
+                case 2: description = "objects or floors (with green name)"; break;
+                case 3: description = "and turn on or off thier special"; break;
+                case 4: description = "hidden state"; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__TELEPORTATION:
+        {
+            switch(i)
+            {
+                case 1: description = "teleport in any suitable place on map"; break;
+                case 2: description = "and bypass impenetrable obstacles"; break;
+                case 3: description = "or quickly escape from enemies"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__MOVE:
+        {
+            switch(i)
+            {
+                case 1: description = "move through suitable tiles on map"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__MOVE_FLOATING:
+        {
+            switch(i)
+            {
+                case 1: description = "move through suitable tiles on map"; break;
+                case 2: description = "(can move through water and lava tiles)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__MOVE_FLYING:
+        {
+            switch(i)
+            {
+                case 1: description = "move through suitable tiles on map"; break;
+                case 2: description = "(can move through pit tiles)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PICK_ITEM_CLOSE:
+        {
+            switch(i)
+            {
+                case 1: description = "pick items from objects"; break;
+                case 2: description = "(can only pick from nearby objects)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PICK_ITEM_FAR:
+        {
+            switch(i)
+            {
+                case 1: description = "pick items from objects"; break;
+                case 2: description = "(can pick from far away objects)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUT_ITEM_CELL_CLOSE:
+        {
+            switch(i)
+            {
+                case 1: description = "put a cell item into an object"; break;
+                case 2: description = "(can power certain stone objects)"; break;
+                case 3: description = "(can only put into nearby objects)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUT_ITEM_CELL_FAR:
+        {
+            switch(i)
+            {
+                case 1: description = "put a cell item into an object"; break;
+                case 2: description = "(can power certain stone objects)"; break;
+                case 3: description = "(can put into far away objects)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
+        {
+            switch(i)
+            {
+                case 1: description = "put a dynamite item into an object"; break;
+                case 2: description = "(no uses for it right now lol)"; break;
+                case 3: description = "(can only put into nearby objects)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:
+        {
+            switch(i)
+            {
+                case 1: description = "put a dynamite item into an object"; break;
+                case 2: description = "(no uses for it right now lol)"; break;
+                case 3: description = "(can put into far away objects)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
+        {
+            switch(i)
+            {
+                case 1: description = "put a gemstone item into an object"; break;
+                case 2: description = "(can buy items in vending machines)"; break;
+                case 3: description = "(can only put into nearby objects)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:
+        {
+            switch(i)
+            {
+                case 1: description = "put a gemstone item into an object"; break;
+                case 2: description = "(can buy items in vending machines)"; break;
+                case 3: description = "(can put into far away objects)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__THROW_ITEM_CELL:
+        {
+            switch(i)
+            {
+                case 1: description = "throw a cell item above other object"; break;
+                case 2: description = "(can melt metal (blue name) objects and floors)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__THROW_ITEM_DYNAMITE:
+        {
+            switch(i)
+            {
+                case 1: description = "throw a dynamite item over other objects"; break;
+                case 2: description = "(can break stone (brown name) objectsand floors)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__THROW_ITEM_GEMSTONE:
+        {
+            switch(i)
+            {
+                case 1: description = "throw a gemstone item over other objects"; break;
+                case 2: description = "(can shake fragile objects and floors)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__SHOOT_PROJECTILE_FLY:
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:
+        {
+            switch(i)
+            {
+                case 1: description = "shoot a projectile in straight line"; break;
+                case 2: description = "(can shake fragile objects)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PUSH:
+        {
+            switch(i)
+            {
+                case 1: description = "push a movable object to a free tile"; break;
+                case 2: description = "or bump it into another object"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__THROW:
+        {
+            switch(i)
+            {
+                case 1: description = "throw a movable object into a free tile"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__PULL_HOOK:
+        case SKILL__PULL_SPIDERWEB:
+        case SKILL__PULL_TENTACLE:
+        case SKILL__PULL_TONGUE:
+        {
+            switch(i)
+            {
+                case 1: description = "pull yourself towards a stable object"; break;
+                case 2: description = "or bump yourself into it"; break;
+                case 3: description = "(can travel above water and pit tiles)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__DRAG_HOOK:
+        case SKILL__DRAG_SPIDERWEB:
+        case SKILL__DRAG_TENTACLE:
+        {
+            switch(i)
+            {
+                case 1: description = "drag a movable object towards you"; break;
+                case 2: description = "or bump it into you"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__JUMP:
+        {
+            switch(i)
+            {
+                case 1: description = "jump over other objects into a free tile"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__CHARGE:
+        {
+            switch(i)
+            {
+                case 1: description = "charge in a straight line into a free tile"; break;
+                case 2: description = "or bump yourself into another object"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__STOMP:
+        {
+            switch(i)
+            {
+                case 1: description = "damage certain floors"; break;
+                case 2: description = "or kill small enemies"; break;
+                case 3: description = "while shaking nearby objects"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__DRAG_AND_THROW_HOOK:
+        case SKILL__DRAG_AND_THROW_TONGUE:
+        {
+            switch(i)
+            {
+                case 1: description = "drag a movable object towards you"; break;
+                case 2: description = "then throw it behind you"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__CHARGE_AND_PUSH:
+        {
+            switch(i)
+            {
+                case 1: description = "charge in a straight line"; break;
+                case 2: description = "then push another object"; break;
+                case 3: description = "(greater push distance)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__CHARGE_AND_THROW:
+        {
+            switch(i)
+            {
+                case 1: description = "charge in a straight line"; break;
+                case 2: description = "then throw another object"; break;
+                case 3: description = "(greater throw distance)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__CHARGE_AND_JUMP:
+        {
+            switch(i)
+            {
+                case 1: description = "charge in a straight line"; break;
+                case 2: description = "then jump"; break;
+                case 3: description = "(greater jump distance)"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__JUMP_AND_CARRY:
+        {
+            switch(i)
+            {
+                case 1: description = "jump over other objects into a free tile"; break;
+                case 2: description = "while carrying another nearby object"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__JUMP_AND_STOMP:
+        {
+            switch(i)
+            {
+                case 1: description = "jump over other objects into a free tile"; break;
+                case 2: description = "then stomp nearby objects or floors"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__LAUNCH_MINIBOT:
+        {
+            switch(i)
+            {
+                case 1: description = "launch an ally minibot into a free tile"; break;
+                case 2: description = "(click on it to switch from hero)"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            switch(i)
+            {
+                case 1: description = "merge an ally minibot into hero"; break;
+                case 2: description = "so it can be launched again"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__TURRET_LASER:
+        {
+            switch(i)
+            {
+                case 1: description = "shoot a laser in a straight line"; break;
+                case 2: description = "that melts all metal objects"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__TURRET_BOMB:
+        {
+            switch(i)
+            {
+                case 1: description = "throw a bomb over another objects"; break;
+                case 2: description = "then shake nearby objects"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__TURRET_PROJECTILE:
+        {
+            switch(i)
+            {
+                case 1: description = "shoot a projectile in a straight line"; break;
+                case 2: description = "that can shake fragile objects"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__KILL_AROUND:
+        {
+            switch(i)
+            {
+                case 1: description = "kill all nearby objects"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_FALLING_STALACTITE:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment falling stalactite)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_WATER:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment emerge water)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_PIT:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment emerge pit)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_BURROW:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment emerge burrow)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_EMERGE_PIPE:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment emerge pipe)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment collapse burrow)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__ENVIRONMENT_CONV_BELT:
+        {
+            switch(i)
+            {
+                case 1: description = "(environment conv belt)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        default:
+        break;
+    }
+
+    return description;
 }
 
 Texture* get_skill_hud_texture(int skill, Textures* textures)
