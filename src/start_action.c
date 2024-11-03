@@ -43,6 +43,19 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION__MOVE_FLOATING:
         case ACTION__MOVE_FLYING:
         {
+            if(action->type == ACTION__MOVE)
+            {
+                play_sound(sounds->move);
+            }
+            else if(action->type == ACTION__MOVE_FLOATING)
+            {
+                play_sound(sounds->move_floating);
+            }
+            else if(action->type == ACTION__MOVE_FLYING)
+            {
+                play_sound(sounds->move_flying);
+            }
+
             action->move.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(action->move.object == NULL ||
@@ -83,15 +96,15 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
                 if(action->type == ACTION__MOVE)
                 {
-                    floor_on_move_start(state, sequence, action, floor);
+                    floor_on_move_start(state, sounds, sequence, action, floor);
                 }
                 else if(action->type == ACTION__MOVE_FLOATING)
                 {
-                    floor_on_move_floating_start(state, sequence, action, floor);
+                    floor_on_move_floating_start(state, sounds, sequence, action, floor);
                 }
                 else if(action->type == ACTION__MOVE_FLYING)
                 {
-                    floor_on_move_flying_start(state, sequence, action, floor);
+                    floor_on_move_flying_start(state, sounds, sequence, action, floor);
                 }
 
                 action->move.object->is_visible = FALSE;
@@ -100,6 +113,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__CRASH:
         {
+            play_sound(sounds->crash);
+
             action->crash.object_crushing = room_get_object_at(state->curr_room, action->tilemap_pos);
             action->crash.object_crushed = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->tilemap_pos, action->crash.dir4, 1));
 
@@ -143,6 +158,21 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__FALL:
         {
+            int fall_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
+
+            if(fall_floor == FLOOR__WATER)
+            {
+                play_sound(sounds->fall_water);
+            }
+            else if(fall_floor == FLOOR__LAVA || fall_floor == FLOOR__METAL_HATCH_OPEN)
+            {
+                play_sound(sounds->fall_lava);
+            }
+            else if(fall_floor == FLOOR__PIT)
+            {
+                play_sound(sounds->fall_pit);
+            }
+
             if(action->fall.object == NULL)
             {
                 action->is_finished = TRUE;
@@ -179,6 +209,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             if(is_object_enemy(action->death.object) ||
                is_object_ally(action->death.object))
             {
+                play_sound(sounds->death);
+
                 // add_animation_to_animation_list(
                 //     state,
                 //     new_animation_background_flash(
@@ -217,6 +249,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__BLOW_UP:
         {
+            play_sound(sounds->bomb);
+
             Animation* animation = new_animation_sequence_of_2(
                 new_animation_show_sprite_in_gamemap(
                     textures->animation.blow_up_1,
@@ -237,14 +271,16 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__THROW:
         {
-            Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
-            action->throw.object_thrown = room_get_object_at(state->curr_room, action->tilemap_pos);
-            action->throw.object_on_target = room_get_object_at(state->curr_room, target_tilemap_pos);
+            play_sound(sounds->throww);
 
-            if(action->throw.object_on_target != NULL ||
+            Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throww.dir4, action->throww.distance);
+            action->throww.object_thrown = room_get_object_at(state->curr_room, action->tilemap_pos);
+            action->throww.object_on_target = room_get_object_at(state->curr_room, target_tilemap_pos);
+
+            if(action->throww.object_on_target != NULL ||
                !is_tilemap_in_bounds(target_tilemap_pos))
             {
-                Action* lift = new_action_lift(action->tilemap_pos, action->throw.dir4);
+                Action* lift = new_action_lift(action->tilemap_pos, action->throww.dir4);
                 remove_all_actions_after_curr_action_action_sequence(sequence);
                 add_action_after_curr_action_action_sequence(sequence, lift);
 
@@ -253,20 +289,20 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 break;
             }
 
-            if(action->throw.object_thrown == NULL)
+            if(action->throww.object_thrown == NULL)
             {
                 action->is_finished = TRUE;
                 action->is_finished_at_start = TRUE;
                 break;
             }
 
-            action->throw.object_thrown->tilemap_pos = action->tilemap_pos;
+            action->throww.object_thrown->tilemap_pos = action->tilemap_pos;
 
             Vec2i curr_tilemap_pos = action->tilemap_pos;
-            Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, action->throw.dir4, action->throw.distance);
+            Vec2i next_tilemap_pos = vec2i_move_in_dir4_by(curr_tilemap_pos, action->throww.dir4, action->throww.distance);
 
             Animation* animation = new_animation_move_sprite_in_gamemap_in_arch(
-                get_texture_1_from_object(action->throw.object_thrown, textures),
+                get_texture_1_from_object(action->throww.object_thrown, textures),
                 tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                 tilemap_pos_to_gamemap_pos(next_tilemap_pos),
                 ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
@@ -277,11 +313,13 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
 
-            action->throw.object_thrown->is_visible = FALSE;
+            action->throww.object_thrown->is_visible = FALSE;
         }
         break;
         case ACTION__LIFT:
         {
+            play_sound(sounds->throww);
+
             action->lift.object = room_get_object_at(state->curr_room, action->tilemap_pos);
 
             if(action->lift.object == NULL)
@@ -310,6 +348,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__DROP:
         {
+            play_sound(sounds->drop);
+
             if(action->drop.object == NULL)
             {
                 action->is_finished = TRUE;
@@ -380,47 +420,58 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__MELT:
         {
+            play_sound(sounds->melt);
+
             Object* melt_object = room_get_object_at(state->curr_room, action->tilemap_pos);
             int melt_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             if(melt_object != NULL)
             {
-                object_on_melt(state, sequence, action, melt_object);
+                object_on_melt(state, sounds, sequence, action, melt_object);
             }
             else if(melt_floor != FLOOR__NONE)
             {
-                floor_on_melt(state, sequence, action, melt_floor);
+                floor_on_melt(state, sounds, sequence, action, melt_floor);
             }
         }
         break;
         case ACTION__BREAK:
         {
+            play_sound(sounds->breakk);
+
             Object* break_object = room_get_object_at(state->curr_room, action->tilemap_pos);
             int break_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             if(break_object != NULL)
             {
-                object_on_break(state, sequence, action, break_object);
+                object_on_break(state, sounds, sequence, action, break_object);
             }
             else if(break_floor != FLOOR__NONE)
             {
-                floor_on_break(state, sequence, action, break_floor);
+                floor_on_break(state, sounds, sequence, action, break_floor);
             }
         }
         break;
         case ACTION__SHAKE:
         {
+            play_sound(sounds->shake);
+
             Object* shake_object = room_get_object_at(state->curr_room, action->tilemap_pos);
             int shake_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
             if(shake_object != NULL)
             {
-                object_on_shake(state, sequence, action, shake_object);
+                object_on_shake(state, sounds, sequence, action, shake_object);
             }
             else if(shake_floor != FLOOR__NONE)
             {
-                floor_on_shake(state, sequence, action, shake_floor);
+                floor_on_shake(state, sounds, sequence, action, shake_floor);
             }
+        }
+        break;
+        case ACTION__PLAY_SOUND:
+        {
+            play_sound(action->play_sound.sound);
         }
         break;
         default:

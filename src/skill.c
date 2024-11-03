@@ -129,13 +129,13 @@ int get_skill_action_points(int skill)
         case SKILL__CHARGE:                     ap = 1; break;
         case SKILL__STOMP:                      ap = 1; break;
 
-        case SKILL__DRAG_AND_THROW_HOOK:        ap = 2; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      ap = 2; break;
-        case SKILL__CHARGE_AND_PUSH:            ap = 2; break;
-        case SKILL__CHARGE_AND_THROW:           ap = 2; break;
-        case SKILL__CHARGE_AND_JUMP:            ap = 2; break;
-        case SKILL__JUMP_AND_CARRY:             ap = 2; break;
-        case SKILL__JUMP_AND_STOMP:             ap = 2; break;
+        case SKILL__DRAG_AND_THROW_HOOK:        ap = 1; break;
+        case SKILL__DRAG_AND_THROW_TONGUE:      ap = 1; break;
+        case SKILL__CHARGE_AND_PUSH:            ap = 1; break;
+        case SKILL__CHARGE_AND_THROW:           ap = 1; break;
+        case SKILL__CHARGE_AND_JUMP:            ap = 1; break;
+        case SKILL__JUMP_AND_CARRY:             ap = 1; break;
+        case SKILL__JUMP_AND_STOMP:             ap = 1; break;
 
         case SKILL__LAUNCH_MINIBOT:             ap = 1; break;
         case SKILL__MINIBOT_MERGE:              ap = 1; break;
@@ -936,7 +936,7 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__SHOOT_PROJECTILE_SQUIRREL:  texture = textures->hud.shoot_projectile; break;
 
         case SKILL__PUSH:                       texture = textures->hud.push; break;
-        case SKILL__THROW:                      texture = textures->hud.throw; break;
+        case SKILL__THROW:                      texture = textures->hud.throww; break;
         case SKILL__PULL_HOOK:                  texture = textures->hud.pull; break;
         case SKILL__PULL_SPIDERWEB:             texture = textures->hud.pull; break;
         case SKILL__PULL_TENTACLE:              texture = textures->hud.pull; break;

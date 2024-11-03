@@ -13,7 +13,8 @@ void skill_get_actions_and_draw(
     List* draw_above_tilemap_pos_list,
     List* draw_effect_texture_list,
     List* draw_effect_tilemap_pos_list,
-    Textures* textures
+    Textures* textures,
+    Sounds* sounds
 )
 {
     if(!is_tilemap_in_bounds(target_1_tilemap_pos) ||
@@ -130,6 +131,7 @@ void skill_get_actions_and_draw(
                 // actions
                 object_on_manipulate(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_object,
                     target_2_tilemap_pos
@@ -151,6 +153,7 @@ void skill_get_actions_and_draw(
                 // actions
                 floor_on_manipulation(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_floor,
                     target_2_tilemap_pos
@@ -345,6 +348,7 @@ void skill_get_actions_and_draw(
                 // actions
                 object_on_pick_item(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_object,
                     target_2_tilemap_pos
@@ -372,6 +376,7 @@ void skill_get_actions_and_draw(
                 // actions
                 floor_on_pick_item(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_floor,
                     target_2_tilemap_pos
@@ -425,6 +430,7 @@ void skill_get_actions_and_draw(
                 // actions
                 object_on_put_item(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_object,
                     target_2_tilemap_pos,
@@ -446,6 +452,7 @@ void skill_get_actions_and_draw(
                 // actions
                 floor_on_put_item(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_floor,
                     target_2_tilemap_pos,
@@ -508,8 +515,16 @@ void skill_get_actions_and_draw(
             // actions
             add_action_to_end_action_sequence(
                 action_sequence,
-                new_action_melt(target_2_tilemap_pos)
+                new_action_play_sound(target_2_tilemap_pos, sounds->cell)
             );
+            if(target_2_object != NULL &&
+                is_object_meltable(target_2_object))
+            {
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_melt(target_2_tilemap_pos)
+                );
+            }
 
             // draw effect
             add_new_list_element_to_list_end(
@@ -579,8 +594,16 @@ void skill_get_actions_and_draw(
             // actions
             add_action_to_end_action_sequence(
                 action_sequence,
-                new_action_break(target_2_tilemap_pos)
+                new_action_play_sound(target_2_tilemap_pos, sounds->bomb)
             );
+            if(target_2_object != NULL &&
+               is_object_breakable(target_2_object))
+            {
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_break(target_2_tilemap_pos)
+                );
+            }
 
             // draw effect
             add_new_list_element_to_list_end(
@@ -648,6 +671,10 @@ void skill_get_actions_and_draw(
             }
 
             // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_play_sound(target_2_tilemap_pos, sounds->shake)
+            );
             add_action_to_end_action_sequence(
                 action_sequence,
                 new_action_shake(target_2_tilemap_pos)
@@ -1642,6 +1669,7 @@ void skill_get_actions_and_draw(
                 // actions
                 object_on_stomp(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_object,
                     target_2_tilemap_pos
@@ -1652,6 +1680,7 @@ void skill_get_actions_and_draw(
                 // actions
                 floor_on_stomp(
                     state,
+                    sounds,
                     action_sequence,
                     target_2_floor,
                     target_2_tilemap_pos
@@ -3300,6 +3329,7 @@ void skill_get_actions_and_draw(
                                 // actions
                                 object_on_stomp(
                                     state,
+                                    sounds,
                                     action_sequence,
                                     object,
                                     tilemap_pos
@@ -3310,6 +3340,7 @@ void skill_get_actions_and_draw(
                                 // actions
                                 floor_on_stomp(
                                     state,
+                                    sounds,
                                     action_sequence,
                                     floor,
                                     tilemap_pos
@@ -3573,10 +3604,14 @@ void skill_get_actions_and_draw(
             }
 
             // actions
-            add_action_to_end_action_sequence(
-                action_sequence,
-                new_action_break(target_2_tilemap_pos)
-            );
+            if(target_2_object != NULL && 
+                is_object_breakable(target_2_object))
+            {
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_break(target_2_tilemap_pos)
+                );
+            }
 
             // draw below
             // add_new_list_element_to_list_end(
@@ -3588,7 +3623,8 @@ void skill_get_actions_and_draw(
             //     new_vec2i_from_vec2i(target_2_tilemap_pos)
             //     );
 
-            if(target_2_object != NULL && is_object_breakable(target_2_object))
+            if(target_2_object != NULL && 
+                is_object_breakable(target_2_object))
             {
                 // draw effect
                 add_new_list_element_to_list_end(

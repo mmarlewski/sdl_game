@@ -1,6 +1,6 @@
 #include "../inc/state.h"
 
-void floor_on_move_start(State* state, Action* sequence, Action* action, int floor)
+void floor_on_move_start(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -40,7 +40,7 @@ void floor_on_move_start(State* state, Action* sequence, Action* action, int flo
     }
 }
 
-void floor_on_move_floating_start(State* state, Action* sequence, Action* action, int floor)
+void floor_on_move_floating_start(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -80,7 +80,7 @@ void floor_on_move_floating_start(State* state, Action* sequence, Action* action
     }
 }
 
-void floor_on_move_flying_start(State* state, Action* sequence, Action* action, int floor)
+void floor_on_move_flying_start(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -89,7 +89,7 @@ void floor_on_move_flying_start(State* state, Action* sequence, Action* action, 
     }
 }
 
-void floor_on_move_end(State* state, Action* sequence, Action* action, int floor)
+void floor_on_move_end(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -286,7 +286,7 @@ void floor_on_move_end(State* state, Action* sequence, Action* action, int floor
     }
 }
 
-void floor_on_move_floating_end(State* state, Action* sequence, Action* action, int floor)
+void floor_on_move_floating_end(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -347,7 +347,7 @@ void floor_on_move_floating_end(State* state, Action* sequence, Action* action, 
     }
 }
 
-void floor_on_move_flying_end(State* state, Action* sequence, Action* action, int floor)
+void floor_on_move_flying_end(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -356,7 +356,7 @@ void floor_on_move_flying_end(State* state, Action* sequence, Action* action, in
     }
 }
 
-void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
+void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -579,7 +579,7 @@ void floor_on_drop(State* state, Action* sequence, Action* action, int floor)
     }
 }
 
-void floor_on_drop_floating(State* state, Action* sequence, Action* action, int floor)
+void floor_on_drop_floating(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -698,7 +698,7 @@ void floor_on_drop_floating(State* state, Action* sequence, Action* action, int 
     }
 }
 
-void floor_on_drop_flying(State* state, Action* sequence, Action* action, int floor)
+void floor_on_drop_flying(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -707,12 +707,14 @@ void floor_on_drop_flying(State* state, Action* sequence, Action* action, int fl
     }
 }
 
-void floor_on_melt(State* state, Action* sequence, Action* action, int floor)
+void floor_on_melt(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
         case FLOOR__STONE_TRAP:
         {
+            play_sound(sounds->melt);
+
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_floor(
@@ -727,7 +729,7 @@ void floor_on_melt(State* state, Action* sequence, Action* action, int floor)
     }
 }
 
-void floor_on_break(State* state, Action* sequence, Action* action, int floor)
+void floor_on_break(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -769,7 +771,7 @@ void floor_on_break(State* state, Action* sequence, Action* action, int floor)
     }
 }
 
-void floor_on_shake(State* state, Action* sequence, Action* action, int floor)
+void floor_on_shake(State* state, Sounds* sounds, Action* sequence, Action* action, int floor)
 {
     switch(floor)
     {
@@ -811,7 +813,7 @@ void floor_on_shake(State* state, Action* sequence, Action* action, int floor)
     }
 }
 
-void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
+void floor_on_stomp(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos)
 {
     switch(floor)
     {
@@ -908,7 +910,7 @@ void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos
     }
 }
 
-void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
+void floor_on_manipulation(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos)
 {
     switch(floor)
     {
@@ -1335,7 +1337,7 @@ Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i ti
     return animation;
 }
 
-void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos)
+void floor_on_pick_item(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos)
 {
     switch(floor)
     {
@@ -1355,7 +1357,7 @@ void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap
     }
 }
 
-void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos, int item_type)
+void floor_on_put_item(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos, int item_type)
 {
     switch(floor)
     {
@@ -1386,12 +1388,16 @@ void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_
     }
 }
 
-void object_on_crashing(State* state, Action* sequence, Action* action, Object* object)
+void object_on_crashing(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
         case OBJECT__DISPLAY:
         {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(
@@ -1453,7 +1459,7 @@ void object_on_crashing(State* state, Action* sequence, Action* action, Object* 
     }
 }
 
-void object_on_crashed(State* state, Action* sequence, Action* action, Object* object)
+void object_on_crashed(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -1568,6 +1574,10 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         {
             add_action_to_end_action_sequence(
                 sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
                 new_action_change_object(
                     OBJECT__DISPLAY_DAMAGED_ITEM,
                     object->tilemap_pos
@@ -1577,6 +1587,10 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         break;
         case OBJECT__EXIT_METAL_BLOCKED_UP:
         {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(
@@ -1590,6 +1604,10 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         {
             add_action_to_end_action_sequence(
                 sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
                 new_action_change_object(
                     OBJECT__EXIT_METAL_RIGHT,
                     object->tilemap_pos
@@ -1601,6 +1619,10 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         {
             add_action_to_end_action_sequence(
                 sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
                 new_action_change_object(
                     OBJECT__EXIT_METAL_DOWN,
                     object->tilemap_pos
@@ -1610,6 +1632,10 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
         break;
         case OBJECT__EXIT_METAL_BLOCKED_LEFT:
         {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(
@@ -1654,7 +1680,7 @@ void object_on_crashed(State* state, Action* sequence, Action* action, Object* o
     }
 }
 
-void object_on_death(State* state, Action* sequence, Action* action, Object* object)
+void object_on_death(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -1696,12 +1722,16 @@ void object_on_death(State* state, Action* sequence, Action* action, Object* obj
     }
 }
 
-void object_on_drop(State* state, Action* sequence, Action* action, Object* object)
+void object_on_drop(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
         case OBJECT__DISPLAY:
         {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
@@ -1831,7 +1861,7 @@ void object_on_drop(State* state, Action* sequence, Action* action, Object* obje
     }
 }
 
-void object_on_melt(State* state, Action* sequence, Action* action, Object* object)
+void object_on_melt(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -1945,7 +1975,7 @@ void object_on_melt(State* state, Action* sequence, Action* action, Object* obje
     }
 }
 
-void object_on_break(State* state, Action* sequence, Action* action, Object* object)
+void object_on_break(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
@@ -2015,23 +2045,16 @@ void object_on_break(State* state, Action* sequence, Action* action, Object* obj
     }
 }
 
-void object_on_shake(State* state, Action* sequence, Action* action, Object* object)
+void object_on_shake(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object)
 {
     switch(object->type)
     {
-        case OBJECT__EXIT_ROCK_BLOCKED_LEFT:
+        case OBJECT__EXIT_METAL_BLOCKED_UP:
         {
             add_action_to_end_action_sequence(
                 sequence,
-                new_action_change_object(
-                    OBJECT__EXIT_ROCK_LEFT,
-                    object->tilemap_pos
-                )
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
             );
-        }
-        break;
-        case OBJECT__EXIT_METAL_BLOCKED_UP:
-        {
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(
@@ -2045,6 +2068,10 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
         {
             add_action_to_end_action_sequence(
                 sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
                 new_action_change_object(
                     OBJECT__EXIT_METAL_RIGHT,
                     object->tilemap_pos
@@ -2054,6 +2081,10 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
         break;
         case OBJECT__EXIT_METAL_BLOCKED_DOWN:
         {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(
@@ -2067,6 +2098,10 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
         {
             add_action_to_end_action_sequence(
                 sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
                 new_action_change_object(
                     OBJECT__EXIT_METAL_LEFT,
                     object->tilemap_pos
@@ -2076,6 +2111,10 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
         break;
         case OBJECT__DISPLAY:
         {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
@@ -2186,7 +2225,7 @@ void object_on_shake(State* state, Action* sequence, Action* action, Object* obj
     }
 }
 
-void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilemap_pos)
+void object_on_stomp(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos)
 {
     switch(object->type)
     {
@@ -2213,7 +2252,7 @@ void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilem
     }
 }
 
-void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i tilemap_pos)
+void object_on_manipulate(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos)
 {
     switch(object->type)
     {
@@ -2992,7 +3031,7 @@ Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2
     return animation;
 }
 
-void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos)
+void object_on_pick_item(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos)
 {
     switch(object->type)
     {
@@ -3306,7 +3345,7 @@ void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i t
     }
 }
 
-void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type)
+void object_on_put_item(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type)
 {
     switch(object->type)
     {

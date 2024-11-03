@@ -41,6 +41,8 @@ enum ACTION_TYPE
     ACTION__BREAK,
     ACTION__SHAKE,
 
+    ACTION__PLAY_SOUND,
+
     ACTION__COUNT
 };
 
@@ -168,6 +170,11 @@ typedef struct
 
 } Action_Shake;
 
+typedef struct
+{
+    Sound* sound;
+} Action_PlaySound;
+
 struct _Action
 {
     Animation* animation;
@@ -190,7 +197,7 @@ struct _Action
         Action_Death death;
         Action_BlowUP blow_up;
 
-        Action_Throw throw;
+        Action_Throw throww;
         Action_Lift lift;
         Action_Drop drop;
 
@@ -205,6 +212,8 @@ struct _Action
         Action_Melt melt;
         Action_Break breakk;
         Action_Shake shake;
+
+        Action_PlaySound play_sound;
     };
 
 };
@@ -249,6 +258,8 @@ Action* new_action_change_object_tilemap_pos(Object* object, Vec2i new_tilemap_p
 Action* new_action_melt(Vec2i tilemap_pos);
 Action* new_action_break(Vec2i tilemap_pos);
 Action* new_action_shake(Vec2i tilemap_pos);
+
+Action* new_action_play_sound(Vec2i tilemap_pos, Sound* sound);
 
 void destroy_action(Action* action);
 

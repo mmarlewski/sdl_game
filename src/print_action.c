@@ -105,13 +105,13 @@ void print_action(Action* action, int depth)
             for(int i = 0; i < depth; i++) printf("  ");
             printf("( \n");
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_thrown:  %p \n", action->throw.object_thrown);
+            printf("object_thrown:  %p \n", action->throww.object_thrown);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("object_on_t.:   %p \n", action->throw.object_on_target);
+            printf("object_on_t.:   %p \n", action->throww.object_on_target);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("dir4:           %i \n", action->throw.dir4);
+            printf("dir4:           %i \n", action->throww.dir4);
             for(int i = 0; i < depth + 1; i++) printf("  ");
-            printf("distance:       %i \n", action->throw.distance);
+            printf("distance:       %i \n", action->throww.distance);
             for(int i = 0; i < depth; i++) printf("  ");
             printf(") \n");
         }

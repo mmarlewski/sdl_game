@@ -148,6 +148,11 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = TRUE;
         }
         break;
+        case ACTION__PLAY_SOUND:
+        {
+            action->is_finished = TRUE;
+        }
+        break;
         default:
         break;
     }

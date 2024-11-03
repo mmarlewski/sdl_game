@@ -230,10 +230,10 @@ Action* new_action_throw(Vec2i tilemap_pos, int dir4, int distance)
     action->is_finished_at_start = FALSE;
     action->type = ACTION__THROW;
 
-    action->throw.dir4 = dir4;
-    action->throw.distance = distance;
-    action->throw.object_thrown = NULL;
-    action->throw.object_on_target = NULL;
+    action->throww.dir4 = dir4;
+    action->throww.distance = distance;
+    action->throww.object_thrown = NULL;
+    action->throww.object_on_target = NULL;
 
     return action;
 }
@@ -385,6 +385,21 @@ Action* new_action_shake(Vec2i tilemap_pos)
     return action;
 }
 
+Action* new_action_play_sound(Vec2i tilemap_pos, Sound* sound)
+{
+    Action* action = malloc(sizeof(*action));
+
+    action->animation = NULL;
+    action->tilemap_pos = tilemap_pos;
+    action->is_finished = FALSE;
+    action->is_finished_at_start = FALSE;
+    action->type = ACTION__PLAY_SOUND;
+
+    action->play_sound.sound = sound;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     if(action->type == ACTION__SEQUENCE)
@@ -427,6 +442,7 @@ char* get_action_name_from_type(int action_type)
         case ACTION__MELT:             name = "melt";          break;
         case ACTION__BREAK:            name = "break";         break;
         case ACTION__SHAKE:            name = "shake";         break;
+        case ACTION__PLAY_SOUND:       name = "play sound";    break;
         case ACTION__COUNT:            name = "count";         break;
         default: break;
     }

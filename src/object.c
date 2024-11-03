@@ -1174,6 +1174,303 @@ int is_object_breakable(Object* object)
     return is;
 }
 
+int is_object_fragile(Object *object)
+{
+    int is = 0;
+
+    if(object == NULL) return is;
+
+    switch(object->type)
+    {
+        case OBJECT__EXIT_METAL_BLOCKED_UP:
+        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
+        case OBJECT__EXIT_METAL_BLOCKED_DOWN:
+        case OBJECT__EXIT_METAL_BLOCKED_LEFT:
+
+        case OBJECT__COVER_GLASS:
+        case OBJECT__DISPLAY:
+        case OBJECT__STALACTITE:
+        case OBJECT__BARREL:
+        is = 1;
+        break;
+        default:
+        break;
+    }
+
+    return is;
+}
+
+int is_object_stone(Object *object)
+{
+    int is = 0;
+
+    if(object == NULL) return is;
+
+    switch(object->type)
+    {
+        case OBJECT__WALL_ROCK:
+        case OBJECT__WALL_STONE:
+        case OBJECT__WALL_MARBLE:
+        case OBJECT__WALL_OBSIDIAN:
+
+        case OBJECT__EXIT_ROCK_UP:
+        case OBJECT__EXIT_ROCK_RIGHT:
+        case OBJECT__EXIT_ROCK_DOWN:
+        case OBJECT__EXIT_ROCK_LEFT:
+        case OBJECT__EXIT_ROCK_BLOCKED_UP:
+        case OBJECT__EXIT_ROCK_BLOCKED_RIGHT:
+        case OBJECT__EXIT_ROCK_BLOCKED_DOWN:
+        case OBJECT__EXIT_ROCK_BLOCKED_LEFT:
+
+        case OBJECT__EXIT_STONE_UP:
+        case OBJECT__EXIT_STONE_RIGHT:
+        case OBJECT__EXIT_STONE_DOWN:
+        case OBJECT__EXIT_STONE_LEFT:
+        case OBJECT__EXIT_STONE_BLOCKED_UP:
+        case OBJECT__EXIT_STONE_BLOCKED_RIGHT:
+        case OBJECT__EXIT_STONE_BLOCKED_DOWN:
+        case OBJECT__EXIT_STONE_BLOCKED_LEFT:
+        case OBJECT__EXIT_STONE_POWERED_UP:
+        case OBJECT__EXIT_STONE_POWERED_RIGHT:
+        case OBJECT__EXIT_STONE_POWERED_DOWN:
+        case OBJECT__EXIT_STONE_POWERED_LEFT:
+        case OBJECT__EXIT_STONE_UNPOWERED_UP:
+        case OBJECT__EXIT_STONE_UNPOWERED_RIGHT:
+        case OBJECT__EXIT_STONE_UNPOWERED_DOWN:
+        case OBJECT__EXIT_STONE_UNPOWERED_LEFT:
+
+        case OBJECT__EXIT_MARBLE_UP:
+        case OBJECT__EXIT_MARBLE_RIGHT:
+        case OBJECT__EXIT_MARBLE_DOWN:
+        case OBJECT__EXIT_MARBLE_LEFT:
+
+        case OBJECT__EXIT_OBSIDIAN_UP:
+        case OBJECT__EXIT_OBSIDIAN_RIGHT:
+        case OBJECT__EXIT_OBSIDIAN_DOWN:
+        case OBJECT__EXIT_OBSIDIAN_LEFT:
+
+        case OBJECT__PILLAR:
+        case OBJECT__SARCOPHAGUS:
+
+        case OBJECT__STALACTITE:
+        case OBJECT__STALACTITE_FALLEN:
+        case OBJECT__STALACTITE_FALLEN_ITEM:
+
+        case OBJECT__STALAGMITE:
+
+        case OBJECT__STALAGNATE:
+
+        case OBJECT__COVER_ROCK:
+
+        case OBJECT__ROCK:
+        case OBJECT__ROCK_DAMAGED:
+        case OBJECT__ROCK_DAMAGED_ITEM:
+
+        case OBJECT__COLUMN:
+
+        case OBJECT__GOLEM_UNPOWERED:
+        case OBJECT__GOLEM_HALF_POWERED:
+        case OBJECT__GOLEM_POWERED:
+        is = 1;
+        break;
+        default:
+        break;
+    }
+
+    return is;
+}
+
+int is_object_metal(Object *object)
+{
+    int is = 0;
+
+    if(object == NULL) return is;
+
+    switch(object->type)
+    {
+        case OBJECT__WALL_ROCK:
+        case OBJECT__WALL_STONE:
+        case OBJECT__WALL_METAL:
+        case OBJECT__WALL_GOLD:
+        case OBJECT__WALL_MARBLE:
+        case OBJECT__WALL_OBSIDIAN:
+
+        case OBJECT__EXIT_METAL_UP:
+        case OBJECT__EXIT_METAL_RIGHT:
+        case OBJECT__EXIT_METAL_DOWN:
+        case OBJECT__EXIT_METAL_LEFT:
+        case OBJECT__EXIT_METAL_BLOCKED_UP:
+        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
+        case OBJECT__EXIT_METAL_BLOCKED_DOWN:
+        case OBJECT__EXIT_METAL_BLOCKED_LEFT:
+        case OBJECT__EXIT_METAL_ON_UP:
+        case OBJECT__EXIT_METAL_ON_RIGHT:
+        case OBJECT__EXIT_METAL_ON_DOWN:
+        case OBJECT__EXIT_METAL_ON_LEFT:
+        case OBJECT__EXIT_METAL_OFF_UP:
+        case OBJECT__EXIT_METAL_OFF_RIGHT:
+        case OBJECT__EXIT_METAL_OFF_DOWN:
+        case OBJECT__EXIT_METAL_OFF_LEFT:
+
+        case OBJECT__EXIT_GOLD_LOCKED_UP:
+        case OBJECT__EXIT_GOLD_LOCKED_RIGHT:
+        case OBJECT__EXIT_GOLD_LOCKED_DOWN:
+        case OBJECT__EXIT_GOLD_LOCKED_LEFT:
+        case OBJECT__EXIT_GOLD_UNLOCKED_UP:
+        case OBJECT__EXIT_GOLD_UNLOCKED_RIGHT:
+        case OBJECT__EXIT_GOLD_UNLOCKED_DOWN:
+        case OBJECT__EXIT_GOLD_UNLOCKED_LEFT:
+
+        case OBJECT__PIPE:
+        case OBJECT__COVER_METAL:
+
+        case OBJECT__CRATE_GEMSTONE:
+        case OBJECT__CRATE_GEMSTONE_ITEM:
+
+        case OBJECT__CRATE_CELL:
+        case OBJECT__CRATE_CELL_ITEM:
+
+        case OBJECT__CRATE_DYNAMITE:
+        case OBJECT__CRATE_DYNAMITE_ITEM:
+
+        case OBJECT__SAFE:
+        case OBJECT__SAFE_DAMAGED:
+        case OBJECT__SAFE_DAMAGED_ITEM:
+        case OBJECT__DISPLAY_DAMAGED:
+        case OBJECT__DISPLAY_DAMAGED_ITEM:
+
+        case OBJECT__VENDING_CELL:
+        case OBJECT__VENDING_CELL_ITEM:
+        case OBJECT__VENDING_CELL_DAMAGED:
+        case OBJECT__VENDING_CELL_DAMAGED_ITEM:
+
+        case OBJECT__VENDING_DYNAMITE:
+        case OBJECT__VENDING_DYNAMITE_ITEM:
+        case OBJECT__VENDING_DYNAMITE_DAMAGED:
+        case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM:
+
+        case OBJECT__BARREL:
+
+        case OBJECT__PISTON:
+        case OBJECT__PISTON_CELL:
+        case OBJECT__PISTON_DYNAMITE:
+        case OBJECT__PISTON_BARREL:
+
+        case OBJECT__OBSTACLE:
+
+        case OBJECT__BALL:
+        case OBJECT__BALL_SPIKES:
+
+        case OBJECT__THRONE:
+
+        case OBJECT__SIGN_MOLE_WARNING:
+
+        case OBJECT__HERO:
+        case OBJECT__HERO_FLOATING:
+        case OBJECT__HERO_FLYING:
+
+        case OBJECT__MINIBOT_ALLY:
+        case OBJECT__MINIBOT_ALLY_CELL:
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:
+
+        case OBJECT__GOAT:
+        case OBJECT__SPIDER:
+        case OBJECT__BULL:
+        case OBJECT__FLY:
+        case OBJECT__CHAMELEON:
+        case OBJECT__SQUID:
+        case OBJECT__MOLE:
+        case OBJECT__MIMIC:
+        case OBJECT__SHARK:
+        case OBJECT__SHARK_FIN:
+
+        case OBJECT__MINIBOT_ENEMY:
+        case OBJECT__MINIBOT_ENEMY_CELL:
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:
+
+        case OBJECT__TURRET_LASER_GROUNDED:
+        case OBJECT__TURRET_LASER_STANDING:
+        case OBJECT__TURRET_LASER_UNDEPLOYED:
+        case OBJECT__TURRET_LASER_DEPLOYED:
+
+        case OBJECT__TURRET_BOMB_GROUNDED:
+        case OBJECT__TURRET_BOMB_STANDING:
+        case OBJECT__TURRET_BOMB_UNDEPLOYED:
+        case OBJECT__TURRET_BOMB_DEPLOYED:
+
+        case OBJECT__TURRET_PROJECTILE_GROUNDED:
+        case OBJECT__TURRET_PROJECTILE_STANDING:
+        case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:
+        case OBJECT__TURRET_PROJECTILE_DEPLOYED:
+
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+
+        case OBJECT__STATION_FIST_HAND:
+        case OBJECT__STATION_HOOK_HAND:
+        case OBJECT__STATION_CHAIN_HAND:
+        case OBJECT__STATION_SCISSOR_HAND:
+        case OBJECT__STATION_SPRING_LEG:
+        case OBJECT__STATION_STRIDER_LEG:
+        case OBJECT__STATION_TRACK_LEG:
+        case OBJECT__STATION_BOOT_LEG:
+        case OBJECT__STATION_MINIBOT_TORSO:
+        case OBJECT__STATION_WINGS_TORSO:
+        case OBJECT__STATION_MANIPULATION_HEAD:
+        case OBJECT__STATION_TELEPORTATION_HEAD:
+        case OBJECT__STATION_TAKEN:
+
+        case OBJECT__LEVER_METAL_OFF:
+        case OBJECT__LEVER_METAL_ON:
+        case OBJECT__LEVER_STONE_UNPOWERED:
+        case OBJECT__LEVER_STONE_POWERED:
+
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:
+        case OBJECT__EXT_WALL_PART_VERTICAL:
+
+        case OBJECT__HARPOON_GUN_UP:
+        case OBJECT__HARPOON_GUN_RIGHT:
+        case OBJECT__HARPOON_GUN_DOWN:
+        case OBJECT__HARPOON_GUN_LEFT:
+        is = 1;
+        break;
+        default:
+        break;
+    }
+
+    return is;
+}
+
+int is_object_glass(Object *object)
+{
+    int is = 0;
+
+    if(object == NULL) return is;
+
+    switch(object->type)
+    {
+        case OBJECT__EXIT_METAL_BLOCKED_UP:
+        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
+        case OBJECT__EXIT_METAL_BLOCKED_DOWN:
+        case OBJECT__EXIT_METAL_BLOCKED_LEFT:
+
+        case OBJECT__COVER_GLASS:
+
+        case OBJECT__DISPLAY:
+        is = 1;
+        break;
+        default:
+        break;
+    }
+
+    return is;
+}
+
 int get_object_item_type(Object* object)
 {
     int item_type = ITEM__NONE;

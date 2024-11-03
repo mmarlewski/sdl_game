@@ -26,6 +26,7 @@ void end_animation(State* state, Animation* animation, Textures* textures, Sound
         {
             remove_sprite_from_gamemap_sprites(state, animation->move_sprite_in_gamemap_in_line.sprite);
         }
+        break;
         case ANIMATION__MOVE_SPRITE_IN_GAMEMAP_IN_ARCH:
         {
             remove_sprite_from_gamemap_sprites(state, animation->move_sprite_in_gamemap_in_arch.sprite);

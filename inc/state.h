@@ -43,7 +43,6 @@ enum GAMESTATE
     GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET,
 
     GAMESTATE__GAME_START,
-    GAMESTATE__GAME_TUTORIAL,
     GAMESTATE__GAME_OVER,
     GAMESTATE__GAME_WON,
 
@@ -125,8 +124,9 @@ typedef struct
 
 void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
-
 void create_level(State* state, Textures* textures);
+void save_state(State* state);
+void load_state(State* state);
 
 void add_room(State* state, Room* room);
 Room* get_room(State* state, char* name);
@@ -157,42 +157,42 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 void update_action(State* state, Action* sequence, Action* action, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void end_action(State* state, Action* sequence, Action* action, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
-void floor_on_move_start(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_floating_start(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_flying_start(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_end(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_floating_end(State* state, Action* sequence, Action* action, int floor);
-void floor_on_move_flying_end(State* state, Action* sequence, Action* action, int floor);
-void floor_on_drop(State* state, Action* sequence, Action* action, int floor);
-void floor_on_drop_floating(State* state, Action* sequence, Action* action, int floor);
-void floor_on_drop_flying(State* state, Action* sequence, Action* action, int floor);
-void floor_on_melt(State* state, Action* sequence, Action* action, int floor);
-void floor_on_break(State* state, Action* sequence, Action* action, int floor);
-void floor_on_shake(State* state, Action* sequence, Action* action, int floor);
-void floor_on_stomp(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
-void floor_on_manipulation(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
+void floor_on_move_start(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_move_floating_start(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_move_flying_start(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_move_end(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_move_floating_end(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_move_flying_end(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_drop_floating(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_drop_flying(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_melt(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_break(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_shake(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
+void floor_on_stomp(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos);
+void floor_on_manipulation(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos);
 Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
-void floor_on_pick_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos);
-void floor_on_put_item(State* state, Action* sequence, int floor, Vec2i tilemap_pos, int item_type);
+void floor_on_pick_item(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos);
+void floor_on_put_item(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos, int item_type);
 
-void object_on_crashing(State* state, Action* sequence, Action* action, Object* object);
-void object_on_crashed(State* state, Action* sequence, Action* action, Object* object);
-void object_on_death(State* state, Action* sequence, Action* action, Object* object);
-void object_on_drop(State* state, Action* sequence, Action* action, Object* object);
-void object_on_melt(State* state, Action* sequence, Action* action, Object* object);
-void object_on_break(State* state, Action* sequence, Action* action, Object* object);
-void object_on_shake(State* state, Action* sequence, Action* action, Object* object);
-void object_on_stomp(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
-void object_on_manipulate(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
+void object_on_crashing(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_crashed(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_death(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_drop(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_melt(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_break(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_shake(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_stomp(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos);
+void object_on_manipulate(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos);
 Animation* object_on_manipulate_get_animation(State* state, Object* object, Vec2i tilemap_pos, Textures* textures);
-void object_on_pick_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos);
-void object_on_put_item(State* state, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
+void object_on_pick_item(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos);
+void object_on_put_item(State* state, Sounds* sounds, Action* sequence, Object* object, Vec2i tilemap_pos, int item_type);
 
 void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void skill_get_possible_target_1_pos(State* state, int skill, Vec2i source_tilemap_pos, List* target_1_pos_list);
 void skill_get_possible_target_2_pos(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, List* target_2_pos_list);
 Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
-void skill_get_actions_and_draw(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Action* action_sequence, List* draw_below_texture_list, List* draw_below_tilemap_pos_list, List* draw_above_texture_list, List* draw_above_tilemap_pos_list, List* draw_effect_texture_list, List* draw_effect_tilemap_pos_list, Textures* textures);
+void skill_get_actions_and_draw(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Action* action_sequence, List* draw_below_texture_list, List* draw_below_tilemap_pos_list, List* draw_above_texture_list, List* draw_above_tilemap_pos_list, List* draw_effect_texture_list, List* draw_effect_tilemap_pos_list, Textures* textures, Sounds* sounds);
 
 void object_enemy_prepare_move(State* state, Enemy* enemy);
 void update_enemy_attack_dir4(State* state, Enemy* enemy);
@@ -213,13 +213,13 @@ void find_path(State* state, Vec2i start_tilemap_pos, Vec2i end_tilemap_pos, Lis
 void update_enemy_list(State* state);
 void update_all_enemy_order(State* state);
 void clear_enemy_attack_actions_and_draw(State* state, Enemy* enemy);
-void get_enemy_attack_actions_and_draw(State* state, Enemy* enemy, Textures* textures);
+void get_enemy_attack_actions_and_draw(State* state, Enemy* enemy, Textures* textures, Sounds* sounds);
 
 void update_ally_list(State* state);
 void update_ally_skill_list(State* state, Ally* ally);
 void restore_ally_action_points(State* state, Ally* ally);
 void clear_curr_ally_attack_actions_and_draw(State* state);
-void get_curr_ally_attack_actions_and_draw(State* state, Textures* textures);
+void get_curr_ally_attack_actions_and_draw(State* state, Textures* textures, Sounds* sounds);
 
 void remove_all_object_to_be_removed(State* state);
 

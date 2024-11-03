@@ -301,6 +301,10 @@ int is_object_manipulatable(Object* object);
 int is_object_movable(Object* object);
 int is_object_meltable(Object* object);
 int is_object_breakable(Object* object);
+int is_object_fragile(Object* object);
+int is_object_stone(Object* object);
+int is_object_metal(Object* object);
+int is_object_glass(Object* object);
 
 int get_object_item_type(Object* object);
 int get_object_item_count(Object* object);

@@ -36,38 +36,6 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
     }
 
-    // game tutorial
-
-    if(state->gamestate == GAMESTATE__GAME_TUTORIAL)
-    {
-        SDL_SetRenderDrawColor(
-            renderer,
-            colors->game_start_background.x,
-            colors->game_start_background.y,
-            colors->game_start_background.z,
-            255
-        );
-        SDL_RenderClear(renderer);
-
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->tutorial,
-            colors->none,
-            1.0f,
-            vec2i(0, 0),
-            1.0f
-        );
-
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->hud.start_game,
-            colors->none,
-            1.0f,
-            vec2i(1150 - 10, 20 + 10),
-            2.0f
-        );
-    }
-
     // game over
 
     if(state->gamestate == GAMESTATE__GAME_OVER)
@@ -702,6 +670,54 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             {
                 if(object == NULL)
                 {
+                    if(!is_floor_traversable_for_object(floor, state->curr_ally->object))
+                    {
+                        draw_texture_at_screen_pos(
+                            renderer,
+                            textures->hud.status_floor_not_traversable,
+                            colors->none,
+                            1.0f,
+                            vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
+                            1
+                        );
+                    }
+
+                    if(is_floor_deadly_on_move_for_object(floor, state->curr_ally->object))
+                    {
+                        draw_texture_at_screen_pos(
+                            renderer,
+                            textures->hud.status_floor_deadly,
+                            colors->none,
+                            1.0f,
+                            vec2i(900 + 100 + 40 * 2, 550 + 50 - 30),
+                            1
+                        );
+                    }
+
+                    if(is_floor_deadly_on_drop_for_object(floor, state->curr_ally->object))
+                    {
+                        draw_texture_at_screen_pos(
+                            renderer,
+                            textures->hud.status_floor_warning,
+                            colors->none,
+                            1.0f,
+                            vec2i(900 + 100 + 40 * 4, 550 + 50 - 30),
+                            1
+                        );
+                    }
+
+                    if(is_floor_manipulatable(floor))
+                    {
+                        draw_texture_at_screen_pos(
+                            renderer,
+                            textures->hud.status_floor_manipulatable,
+                            colors->none,
+                            1.0f,
+                            vec2i(900 + 100 + 40 * 6, 550 + 50 - 30),
+                            1
+                        );
+                    }
+
                     Vec3i color = colors->white;
                 
                     if(is_floor_manipulatable(floor))
@@ -738,6 +754,145 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
             if(object != NULL)
             {
+                if(is_object_stone(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_stone,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
+                        1
+                    );
+                }
+                else if(is_object_metal(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_metal,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
+                        1
+                    );
+                }
+                else if(is_object_glass(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_glass,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
+                        1
+                    );
+                }
+
+                if(is_object_fragile(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_fragile,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 1, 550 + 50 - 30),
+                        1
+                    );
+                }
+                
+                if(!is_object_movable(object) && is_object_pull_towards(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_stable,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 2, 550 + 50 - 30),
+                        1
+                    );
+                }
+
+                if(!is_object_throw_over(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_high,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 3, 550 + 50 - 30),
+                        1
+                    );
+                }
+                
+                if(is_object_flying(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_flying,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 4, 550 + 50 - 30),
+                        1
+                    );
+                }
+                else if(is_object_floating(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_floating,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 4, 550 + 50 - 30),
+                        1
+                    );
+                }
+                
+                if(is_object_exit(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_exit,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 5, 550 + 50 - 30),
+                        1
+                    );
+                }
+                else if(is_object_wall(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_wall,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 5, 550 + 50 - 30),
+                        1
+                    );
+                }
+                
+                if(is_object_manipulatable(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_manipulatable,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 6, 550 + 50 - 30),
+                        1
+                    );
+                }
+                else if(is_object_station(object))
+                {
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        textures->hud.status_station,
+                        colors->none,
+                        1.0f,
+                        vec2i(900 + 100 + 40 * 6, 550 + 50 - 30),
+                        1
+                    );
+                }
+
                 Vec3i color = colors->white;
                 
                 if(is_object_meltable(object))

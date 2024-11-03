@@ -11,18 +11,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
-            change_gamestate(state, GAMESTATE__GAME_TUTORIAL);
-        }
-    }
-
-    if(state->gamestate == GAMESTATE__GAME_TUTORIAL)
-    {
-        if(input->was_mouse_left && !input->is_mouse_left &&
-           state->mouse_screen_pos.x >= 1150 - 10 &&
-           state->mouse_screen_pos.x <= 1150 - 10 + 128 &&
-           state->mouse_screen_pos.y >= 20 + 10 &&
-           state->mouse_screen_pos.y <= 20 + 10 + 64)
-        {
             init_state(
                 state,
                 textures,
@@ -225,7 +213,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     {
         case GAMESTATE__NONE:
         case GAMESTATE__GAME_START:
-        case GAMESTATE__GAME_TUTORIAL:
         case GAMESTATE__GAME_OVER:
         case GAMESTATE__GAME_WON:
         {
@@ -337,13 +324,19 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 }
             }
 
+            // // save state
+            // if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER])
+            // {
+            //     save_state(state);
+            //     load_state(state);
+            // }
+
             // end ally turn
-            if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||
-               (input->was_mouse_left && !input->is_mouse_left &&
+            if(input->was_mouse_left && !input->is_mouse_left &&
                 state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
                 state->mouse_screen_pos.x <= 1200 - 64 - 10 + 64 + 100 &&
                 state->mouse_screen_pos.y >= 10 &&
-                state->mouse_screen_pos.y <= 10 + 64))
+                state->mouse_screen_pos.y <= 10 + 64)
             {
                 // restore all ally action points
                 for(ListElem* curr_elem = state->ally_list->head;
@@ -482,7 +475,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     // new actions and draw
                     if(is_mouse_pos_in_possible_target_2_pos)
                     {
-                        get_curr_ally_attack_actions_and_draw(state, textures);
+                        get_curr_ally_attack_actions_and_draw(state, textures, sounds);
                     }
 
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
@@ -604,7 +597,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
                     state->curr_ally_target_2_tilemap_pos = state->selected_tilemap_pos;
 
-                    get_curr_ally_attack_actions_and_draw(state, textures);
+                    get_curr_ally_attack_actions_and_draw(state, textures, sounds);
                 }
                 else
                 {
@@ -720,7 +713,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     update_enemy_attack_targets(state, curr_enemy);
                     clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                    get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
+                    get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
                 }
 
                 // all allies
@@ -801,6 +794,18 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     colors
                 );
 
+                skill_on_use(
+                    state,
+                    state->curr_enemy->skill,
+                    state->curr_enemy->object->tilemap_pos,
+                    state->curr_enemy->target_1_tilemap_pos,
+                    state->curr_enemy->target_2_tilemap_pos,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+
                 state->curr_skill_animation = animation;
 
                 change_gamestate(state, GAMESTATE__ENEMY_EXECUTING_ANIMATION);
@@ -856,7 +861,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     {
                         update_enemy_attack_targets(state, curr_enemy);
                         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
                     }
                 }
 
@@ -976,7 +981,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     {
                         update_enemy_attack_targets(state, curr_enemy);
                         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
                     }
                 }
 
@@ -1012,7 +1017,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     update_enemy_attack_dir4(state, state->curr_enemy);
                     update_enemy_attack_targets(state, state->curr_enemy);
                     clear_enemy_attack_actions_and_draw(state, state->curr_enemy);
-                    get_enemy_attack_actions_and_draw(state, state->curr_enemy, textures);
+                    get_enemy_attack_actions_and_draw(state, state->curr_enemy, textures, sounds);
                     state->curr_enemy->performed_attack = FALSE;
                 }
 
@@ -1068,7 +1073,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
                         update_enemy_attack_targets(state, curr_enemy);
                         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
                     }
 
                     // all allies

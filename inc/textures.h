@@ -991,7 +991,7 @@ typedef struct
     Texture* throw_item_gemstone;
     Texture* shoot_projectile;
     Texture* push;
-    Texture* throw;
+    Texture* throww;
     Texture* pull;
     Texture* drag;
     Texture* jump;
@@ -1036,6 +1036,23 @@ typedef struct
     Texture* environment_emerge_pipe;
     Texture* environment_collapse_burrow;
     Texture* environment_conv_belt;
+
+    Texture* status_fragile;
+    Texture* status_high;
+    Texture* status_floating;
+    Texture* status_flying;
+    Texture* status_wall;
+    Texture* status_exit;
+    Texture* status_stable;
+    Texture* status_manipulatable;
+    Texture* status_station;
+    Texture* status_stone;
+    Texture* status_metal;
+    Texture* status_glass;
+    Texture* status_floor_manipulatable;
+    Texture* status_floor_not_traversable;
+    Texture* status_floor_warning;
+    Texture* status_floor_deadly;
 
     Texture* cell;
     Texture* dynamite;

@@ -99,14 +99,14 @@ void draw_action(Renderer* renderer, State* state, Action* action, Vec3i color, 
         break;
         case ACTION__THROW:
         {
-            Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throw.dir4, action->throw.distance);
+            Vec2i target_tilemap_pos = vec2i_move_in_dir4_by(action->tilemap_pos, action->throww.dir4, action->throww.distance);
             Vec2f target_gamemap_pos = tilemap_pos_to_gamemap_pos(target_tilemap_pos);
             Vec2f target_world_cart_pos = gamemap_pos_to_world_pos(target_gamemap_pos);
             Vec2f target_world_iso_pos = cart_pos_to_iso_pos(target_world_cart_pos);
 
             draw_texture_at_world_pos(
                 renderer,
-                get_texture_throw(textures, action->throw.dir4),
+                get_texture_throw(textures, action->throww.dir4),
                 color,
                 1.0f,
                 world_iso_pos,

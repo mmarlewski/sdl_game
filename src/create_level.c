@@ -11195,7 +11195,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_7_2,
-        new_object(OBJECT__STALAGMITE),
+        new_object(OBJECT__STALAGNATE),
         vec2i(7, 7)
     );
 

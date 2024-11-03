@@ -153,7 +153,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     update_enemy_list(state);
@@ -165,7 +165,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
         update_enemy_attack_dir4(state, curr_enemy);
         update_enemy_attack_targets(state, curr_enemy);
         clear_enemy_attack_actions_and_draw(state, curr_enemy);
-        get_enemy_attack_actions_and_draw(state, curr_enemy, textures);
+        get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
     }
 
     update_ally_list(state);
@@ -502,7 +502,6 @@ char* get_gamestate_debug_name(int gamestate)
         case GAMESTATE__ENEMY_MOVING:               name = "enemy moving";              break;
         case GAMESTATE__ENEMY_PAUSE_BEFORE_TARGET:  name = "enemy pause before target"; break;
         case GAMESTATE__GAME_START:                 name = "game start";                break;
-        case GAMESTATE__GAME_TUTORIAL:              name = "game tutorial";             break;
         case GAMESTATE__GAME_OVER:                  name = "game over";                 break;
         case GAMESTATE__GAME_WON:                   name = "game won";                  break;
         default: break;
@@ -932,7 +931,8 @@ void clear_enemy_attack_actions_and_draw(
 void get_enemy_attack_actions_and_draw(
     State* state,
     Enemy* enemy,
-    Textures* textures
+    Textures* textures,
+    Sounds* sounds
 )
 {
     if(enemy != NULL)
@@ -950,7 +950,8 @@ void get_enemy_attack_actions_and_draw(
             enemy->draw_above_tilemap_pos_list,
             enemy->draw_effect_texture_list,
             enemy->draw_effect_tilemap_pos_list,
-            textures
+            textures,
+            sounds
         );
     }
 }
@@ -1038,7 +1039,8 @@ void clear_curr_ally_attack_actions_and_draw(
 
 void get_curr_ally_attack_actions_and_draw(
     State* state,
-    Textures* textures
+    Textures* textures,
+    Sounds* sounds
 )
 {
     if(state->curr_ally != NULL)
@@ -1056,7 +1058,8 @@ void get_curr_ally_attack_actions_and_draw(
             state->curr_ally_draw_above_tilemap_pos_list,
             state->curr_ally_draw_effect_texture_list,
             state->curr_ally_draw_effect_tilemap_pos_list,
-            textures
+            textures,
+            sounds
         );
     }
 }

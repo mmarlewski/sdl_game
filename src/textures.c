@@ -1008,7 +1008,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->throw_item_gemstone = load_texture_from_filepath(renderer, "./res/hud/throw_item_gemstone.png");
     hud->shoot_projectile = load_texture_from_filepath(renderer, "./res/hud/shoot_projectile.png");
     hud->push = load_texture_from_filepath(renderer, "./res/hud/push.png");
-    hud->throw = load_texture_from_filepath(renderer, "./res/hud/throw.png");
+    hud->throww = load_texture_from_filepath(renderer, "./res/hud/throw.png");
     hud->pull = load_texture_from_filepath(renderer, "./res/hud/pull.png");
     hud->drag = load_texture_from_filepath(renderer, "./res/hud/drag.png");
     hud->jump = load_texture_from_filepath(renderer, "./res/hud/jump.png");
@@ -1052,6 +1052,23 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->environment_emerge_pipe = load_texture_from_filepath(renderer, "./res/hud/environment_emerge_pipe.png");
     hud->environment_collapse_burrow = load_texture_from_filepath(renderer, "./res/hud/environment_collapse_burrow.png");
     hud->environment_conv_belt = load_texture_from_filepath(renderer, "./res/hud/environment_conv_belt.png");
+
+    hud->status_fragile = load_texture_from_filepath(renderer, "./res/hud/status_fragile.png");
+    hud->status_high = load_texture_from_filepath(renderer, "./res/hud/status_high.png");
+    hud->status_floating = load_texture_from_filepath(renderer, "./res/hud/status_floating.png");
+    hud->status_flying = load_texture_from_filepath(renderer, "./res/hud/status_flying.png");
+    hud->status_wall = load_texture_from_filepath(renderer, "./res/hud/status_wall.png");
+    hud->status_exit = load_texture_from_filepath(renderer, "./res/hud/status_exit.png");
+    hud->status_stable = load_texture_from_filepath(renderer, "./res/hud/status_stable.png");
+    hud->status_manipulatable = load_texture_from_filepath(renderer, "./res/hud/status_manipulatable.png");
+    hud->status_station = load_texture_from_filepath(renderer, "./res/hud/status_station.png");
+    hud->status_stone = load_texture_from_filepath(renderer, "./res/hud/status_stone.png");
+    hud->status_metal = load_texture_from_filepath(renderer, "./res/hud/status_metal.png");
+    hud->status_glass = load_texture_from_filepath(renderer, "./res/hud/status_glass.png");
+    hud->status_floor_manipulatable = load_texture_from_filepath(renderer, "./res/hud/status_floor_manipulatable.png");
+    hud->status_floor_not_traversable = load_texture_from_filepath(renderer, "./res/hud/status_floor_not_traversable.png");
+    hud->status_floor_warning = load_texture_from_filepath(renderer, "./res/hud/status_floor_warning.png");
+    hud->status_floor_deadly = load_texture_from_filepath(renderer, "./res/hud/status_floor_deadly.png");
 
     hud->cell = load_texture_from_filepath(renderer, "./res/hud/cell.png");
     hud->dynamite = load_texture_from_filepath(renderer, "./res/hud/dynamite.png");
