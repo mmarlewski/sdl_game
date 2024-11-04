@@ -23,7 +23,7 @@ Mechanism* new_mechanism(
     int out_type
 )
 {
-    Mechanism* mechanism = malloc(sizeof(*mechanism));
+    Mechanism* mechanism = calloc(sizeof(*mechanism), 1);
 
     mechanism->is_in_1 = is_in_1;
     mechanism->in_1_room_name = in_1_room_name;
