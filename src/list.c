@@ -2,7 +2,7 @@
 
 List* new_list(void(*destroy)(void* data))
 {
-    List* list = malloc(sizeof(*list));
+    List* list = calloc(sizeof(*list), 1);
 
     list->size = 0;
     list->head = NULL;
@@ -20,7 +20,7 @@ void destroy_list(List* list)
 // if element is 0: add after list head
 void add_new_list_element_after_element(List* list, ListElem* element, void* data)
 {
-    ListElem* new_element = malloc(sizeof(*new_element));
+    ListElem* new_element = calloc(sizeof(*new_element), 1);
     new_element->data = data;
 
     if(list->size == 0)
@@ -58,7 +58,7 @@ void add_new_list_element_after_element(List* list, ListElem* element, void* dat
 // if element is 0: add before list tail
 void add_new_list_element_before_element(List* list, ListElem* element, void* data)
 {
-    ListElem* new_element = malloc(sizeof(*new_element));
+    ListElem* new_element = calloc(sizeof(*new_element), 1);
     new_element->data = data;
 
     if(list->size == 0)

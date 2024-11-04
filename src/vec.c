@@ -15,7 +15,7 @@ Vec2i vec2i(int x, int y)
 }
 Vec2i* new_vec2i(int x, int y)
 {
-    Vec2i* vec = malloc(sizeof(*vec));
+    Vec2i* vec = calloc(sizeof(*vec), 1);
 
     vec->x = x;
     vec->y = y;
@@ -78,7 +78,7 @@ Vec2f vec2f(float x, float y)
 }
 Vec2f* new_vec2f(float x, float y)
 {
-    Vec2f* vec = malloc(sizeof(*vec));
+    Vec2f* vec = calloc(sizeof(*vec), 1);
 
     vec->x = x;
     vec->y = y;
@@ -142,7 +142,7 @@ Vec3i vec3i(int x, int y, int z)
 }
 Vec3i* new_vec3i(int x, int y, int z)
 {
-    Vec3i* vec = malloc(sizeof(*vec));
+    Vec3i* vec = calloc(sizeof(*vec), 1);
 
     vec->x = x;
     vec->y = y;
@@ -211,7 +211,7 @@ Vec3f vec3f(float x, float y, float z)
 }
 Vec3f* new_vec3f(float x, float y, float z)
 {
-    Vec3f* vec = malloc(sizeof(*vec));
+    Vec3f* vec = calloc(sizeof(*vec), 1);
 
     vec->x = x;
     vec->y = y;
@@ -281,7 +281,7 @@ Vec4i vec4i(int x, int y, int z, int w)
 }
 Vec4i* new_vec4i(int x, int y, int z, int w)
 {
-    Vec4i* vec = malloc(sizeof(*vec));
+    Vec4i* vec = calloc(sizeof(*vec), 1);
 
     vec->x = x;
     vec->y = y;
@@ -356,7 +356,7 @@ Vec4f vec4f(float x, float y, float z, float w)
 }
 Vec4f* new_vec4f(float x, float y, float z, float w)
 {
-    Vec4f* vec = malloc(sizeof(*vec));
+    Vec4f* vec = calloc(sizeof(*vec), 1);
 
     vec->x = x;
     vec->y = y;

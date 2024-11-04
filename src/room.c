@@ -4,7 +4,7 @@
 
 Room* new_empty_room(char* name, Texture* background_texture)
 {
-    Room* room = malloc(sizeof(*room));
+    Room* room = calloc(sizeof(*room), 1);
 
     room->name = name;
     for(int i = 0; i < TILEMAP_LENGTH; i++)
@@ -91,7 +91,7 @@ void room_remove_object_at(Room* room, Vec2i tilemap_pos, int destroy_data)
 
 Passage* new_passage(char* from_room_name, char* to_room_name, Vec2i from_tilemap_pos, Vec2i to_tilemap_pos)
 {
-    Passage* passage = malloc(sizeof(*passage));
+    Passage* passage = calloc(sizeof(*passage), 1);
 
     passage->from_room_name = from_room_name;
     passage->to_room_name = to_room_name;

@@ -8,7 +8,7 @@
 
 Object* new_object(int type)
 {
-    Object* object = malloc(sizeof(*object));
+    Object* object = calloc(sizeof(*object), 1);
 
     object->is_visible = TRUE;
     object->is_to_be_removed = FALSE;
@@ -27,7 +27,7 @@ void destroy_object(Object* object)
 
 Enemy* new_enemy(Object* object)
 {
-    Enemy* enemy = malloc(sizeof(*enemy));
+    Enemy* enemy = calloc(sizeof(*enemy), 1);
 
     enemy->object = object;
     enemy->action_sequence = new_action_sequence();
@@ -55,7 +55,7 @@ void destroy_enemy(Enemy* enemy)
 
 Ally* new_ally(Object* object)
 {
-    Ally* ally = malloc(sizeof(*ally));
+    Ally* ally = calloc(sizeof(*ally), 1);
 
     ally->object = object;
     ally->skill_list = new_list((void (*)(void*))0);

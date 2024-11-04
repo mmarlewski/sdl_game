@@ -13,7 +13,7 @@ struct _Node
 
 Node* new_node(Vec2i tilemap_pos)
 {
-    Node* node = malloc(sizeof(*node));
+    Node* node = calloc(sizeof(*node), 1);
 
     node->parent = NULL;
     node->tilemap_pos = tilemap_pos;
