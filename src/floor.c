@@ -85,6 +85,36 @@ int is_floor_burrow(int floor)
     return is;
 }
 
+int is_floor_meltable(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR__STONE_TRAP:         is = 1; break;
+        case FLOOR__METAL_SPIKES_ON:    is = 1; break;
+        case FLOOR__METAL_SPIKES_OFF:   is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
+int is_floor_breakable(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR__ROCK_CRACK_WATER:   is = 1; break;
+        case FLOOR__ROCK_CRACK_LAVA:    is = 1; break;
+        case FLOOR__ROCK_CRACK_PIT:     is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
 int is_floor_traversable(int floor)
 {
     int is = 0;

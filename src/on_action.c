@@ -724,6 +724,32 @@ void floor_on_melt(State* state, Sounds* sounds, Action* sequence, Action* actio
             );
         }
         break;
+        case FLOOR__METAL_SPIKES_ON:
+        {
+            play_sound(sounds->melt);
+
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__METAL,
+                    action->tilemap_pos
+                )
+            );
+        }
+        break;
+        case FLOOR__METAL_SPIKES_OFF:
+        {
+            play_sound(sounds->melt);
+
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__METAL,
+                    action->tilemap_pos
+                )
+            );
+        }
+        break;
         default:
         break;
     }

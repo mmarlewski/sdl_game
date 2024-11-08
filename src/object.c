@@ -415,6 +415,8 @@ int is_object_throw_over(Object* object)
 
         case OBJECT__OBSTACLE:
 
+        case OBJECT__COLUMN:
+
         case OBJECT__WALL_ROCK:
         case OBJECT__WALL_STONE:
         case OBJECT__WALL_METAL:

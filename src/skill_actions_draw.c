@@ -517,8 +517,8 @@ void skill_get_actions_and_draw(
                 action_sequence,
                 new_action_play_sound(target_2_tilemap_pos, sounds->cell)
             );
-            if(target_2_object != NULL &&
-                is_object_meltable(target_2_object))
+            if((target_2_object != NULL && is_object_meltable(target_2_object)) ||
+                (target_2_floor != FLOOR__NONE && is_floor_meltable(target_2_floor)))
             {
                 add_action_to_end_action_sequence(
                     action_sequence,
@@ -596,8 +596,8 @@ void skill_get_actions_and_draw(
                 action_sequence,
                 new_action_play_sound(target_2_tilemap_pos, sounds->bomb)
             );
-            if(target_2_object != NULL &&
-               is_object_breakable(target_2_object))
+            if(target_2_object != NULL && is_object_breakable(target_2_object) ||
+                (target_2_floor != FLOOR__NONE && is_floor_breakable(target_2_floor)))
             {
                 add_action_to_end_action_sequence(
                     action_sequence,

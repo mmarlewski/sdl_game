@@ -9820,11 +9820,6 @@ void create_level(State* state, Textures* textures)
     room_add_object_at(
         room_6_2,
         new_object(OBJECT__MOLE),
-        vec2i(3, 1)
-    );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__MOLE),
         vec2i(3, 7)
     );
     room_add_object_at(

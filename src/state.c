@@ -153,8 +153,15 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+
+    // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
