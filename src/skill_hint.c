@@ -92,7 +92,31 @@ void skill_get_possible_hint_pos(
         case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
         case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
-            //
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i, j);
+
+                    int floor = room_get_floor_at(
+                        state->curr_room, 
+                        tilemap_pos
+                    );
+
+                    Object* object = room_get_object_at(
+                        state->curr_room,
+                        tilemap_pos
+                    );
+
+                    if(object != NULL && is_object_put_item(object))
+                    {
+                        add_new_list_element_to_list_end(
+                            hint_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
         }
         break;
         case SKILL__THROW_ITEM_CELL:

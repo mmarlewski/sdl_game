@@ -195,6 +195,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                                         if(is_object_movable(neighbor_object)) score += 1 * mul;
 
                                         if(is_object_ally(neighbor_object)) score += 1 * mul;
+
+                                        if(enemy->object->type == OBJECT__FLY && is_object_fragile(neighbor_object)) score += 2 * mul;
                                     }
                                 }
                             }

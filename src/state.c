@@ -86,6 +86,9 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->reset_turn_uses = 3;
     state->game_over_uses = 3;
 
+    state->was_minibot_launched = FALSE;
+    state->was_throne_used = FALSE;
+
     state->camera_zoom = 2.0f;
     Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(
         gamemap_pos_to_world_pos(
@@ -172,7 +175,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
     // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
-    hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
     // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 

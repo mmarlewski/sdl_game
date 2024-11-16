@@ -1658,7 +1658,7 @@ int get_object_item_count(Object* object)
 
         case OBJECT__SAFE:                             count = 0; break;
         case OBJECT__SAFE_DAMAGED:                     count = 0; break;
-        case OBJECT__SAFE_DAMAGED_ITEM:                count = 1; break;
+        case OBJECT__SAFE_DAMAGED_ITEM:                count = 3; break;
 
         case OBJECT__DISPLAY:                          count = 0; break;
         case OBJECT__DISPLAY_DAMAGED:                  count = 0; break;

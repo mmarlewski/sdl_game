@@ -5,7 +5,7 @@ void load_sounds(Sounds* sounds)
     sounds->none = get_sound_from_filepath("./res/sound/none.mp3");
 
     sounds->use_exit = get_sound_from_filepath("./res/sound/human-impact-on-ground-6982-louder.mp3");
-    sounds->use_station = get_sound_from_filepath("./res/sound/083525_drill-37769.mp3");
+    sounds->use_station = get_sound_from_filepath("./res/sound/083525_drill-37769-quieter.mp3");
 
     sounds->move = get_sound_from_filepath("./res/sound/slash-21834-quieter.mp3");
     sounds->move_floating = get_sound_from_filepath("./res/sound/menu-change-89197-quieter.mp3");
@@ -28,7 +28,7 @@ void load_sounds(Sounds* sounds)
     sounds->bomb = get_sound_from_filepath("./res/sound/explosion-sound-effect-1-241821.mp3");
 
     sounds->laser = get_sound_from_filepath("./res/sound/laser-gun-81720-quieter.mp3");
-    sounds->kill_around = get_sound_from_filepath("./res/sound/collision-83248.mp3");
+    sounds->kill_around = get_sound_from_filepath("./res/sound/collision-83248-quieter.mp3");
 
     sounds->manipulation = get_sound_from_filepath("./res/sound/ui-beep-menu-positive-228336.mp3");
     sounds->teleportation = get_sound_from_filepath("./res/sound/game-teleport-90735-quieter.mp3");
