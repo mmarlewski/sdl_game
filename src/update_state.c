@@ -16,21 +16,28 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
-            // start_state(
-            //     state,
-            //     textures,
-            //     sounds,
-            //     musics,
-            //     colors
-            // );
-
-            load_state(
-                state,
-                textures,
-                sounds,
-                musics,
-                colors
-            );
+            SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
+            
+            if(file == NULL)
+            {
+                start_state(
+                    state,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+            }
+            else
+            {
+                load_state(
+                    state,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+            }
 
             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }

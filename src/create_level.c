@@ -11336,7 +11336,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_7_3,
-        new_object(OBJECT__THRONE),
+        new_object(OBJECT__ROCK_DAMAGED_ITEM),
         vec2i(2, 2)
     );
 
