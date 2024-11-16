@@ -94,7 +94,6 @@ typedef struct
     List* ally_list;
     ListElem* curr_ally_list_elem;
     Ally* curr_ally;
-    Object* curr_ally_object;
     int curr_ally_skill;
     int ally_move_distance;
     Vec2i curr_ally_target_1_tilemap_pos;
@@ -102,7 +101,6 @@ typedef struct
     Animation* curr_skill_animation;
 
     Object* hero_object;
-    int hero_ap;
     int hero_item_number[ITEM__COUNT];
     int hero_body_part_augmentation[BODY_PART__COUNT];
     int hero_curr_item;
@@ -110,6 +108,9 @@ typedef struct
     Object* minibot_object;
     int was_minibot_launched;
     int was_throne_used;
+
+    int reset_turn_uses;
+    int game_over_uses;
 
     List* curr_ally_draw_below_texture_list;
     List* curr_ally_draw_below_tilemap_pos_list;
@@ -123,10 +124,12 @@ typedef struct
 } State;
 
 void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void start_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void create_level(State* state, Textures* textures);
-void save_state(State* state);
-void load_state(State* state);
+void create_mechanisms(State* state);
+void save_state(State* state, Textures* textures);
+void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
 void add_room(State* state, Room* room);
 Room* get_room(State* state, char* name);

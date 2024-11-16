@@ -163,11 +163,10 @@ void skill_on_use(
                                 if(curr_ally != NULL)
                                 {
                                     if(curr_ally->object != NULL &&
-                                       curr_ally->object == state->curr_ally_object)
+                                       curr_ally->object == state->curr_ally->object)
                                     {
                                         state->curr_ally_list_elem = curr_elem;
                                         state->curr_ally = curr_ally;
-                                        state->curr_ally_object = curr_ally->object;
                                         was_prev_ally_chosen = TRUE;
                                     }
                                 }
@@ -176,7 +175,6 @@ void skill_on_use(
                             {
                                 state->curr_ally_list_elem = state->ally_list->head;
                                 state->curr_ally = state->curr_ally_list_elem->data;
-                                state->curr_ally_object = state->curr_ally->object;
                             }
                         }
                     }
@@ -262,11 +260,10 @@ void skill_on_use(
                                     if(curr_ally != NULL)
                                     {
                                         if(curr_ally->object != NULL &&
-                                           curr_ally->object == state->curr_ally_object)
+                                           curr_ally->object == state->curr_ally->object)
                                         {
                                             state->curr_ally_list_elem = curr_elem;
                                             state->curr_ally = curr_ally;
-                                            state->curr_ally_object = curr_ally->object;
                                             was_prev_ally_chosen = TRUE;
                                         }
                                     }
@@ -275,7 +272,6 @@ void skill_on_use(
                                 {
                                     state->curr_ally_list_elem = state->ally_list->head;
                                     state->curr_ally = state->curr_ally_list_elem->data;
-                                    state->curr_ally_object = state->curr_ally->object;
                                 }
                             }
                         }

@@ -78,6 +78,12 @@ void skill_get_actions_and_draw(
                 draw_above_tilemap_pos_list,
                 new_vec2i_from_vec2i(source_tilemap_pos)
             );
+            
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_none()
+            );
         }
         break;
         case SKILL__NO_ATTACK:
@@ -90,6 +96,12 @@ void skill_get_actions_and_draw(
             add_new_list_element_to_list_end(
                 draw_effect_tilemap_pos_list,
                 new_vec2i_from_vec2i(source_tilemap_pos)
+            );
+            
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_none()
             );
         }
         break;
@@ -185,6 +197,12 @@ void skill_get_actions_and_draw(
                     new_vec2i_from_vec2i(target_2_tilemap_pos)
                 );
             }
+            
+            // actions
+            add_action_to_end_action_sequence(
+                action_sequence,
+                new_action_none()
+            );
         }
         break;
         case SKILL__MOVE:

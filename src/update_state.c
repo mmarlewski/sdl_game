@@ -3,6 +3,11 @@
 
 void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
+    if(state->hero_object != NULL)
+    {
+        // printf("state->hero_object->tilemap_pos: (%i, %i) \n", state->hero_object->tilemap_pos.x, state->hero_object->tilemap_pos.y);
+    }
+
     if(state->gamestate == GAMESTATE__GAME_START)
     {
         if(input->was_mouse_left && !input->is_mouse_left &&
@@ -11,13 +16,23 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
-            init_state(
+            // start_state(
+            //     state,
+            //     textures,
+            //     sounds,
+            //     musics,
+            //     colors
+            // );
+
+            load_state(
                 state,
                 textures,
                 sounds,
                 musics,
                 colors
             );
+
+            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }
     }
 
@@ -29,13 +44,39 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
-            init_state(
-                state,
-                textures,
-                sounds,
-                musics,
-                colors
-            );
+            if(state->game_over_uses > 0)
+            {
+                load_state(
+                    state,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+
+                state->game_over_uses--;
+
+                save_state(state, textures);
+                load_state(
+                    state,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+            }
+            else
+            {
+                start_state(
+                    state,
+                    textures,
+                    sounds,
+                    musics,
+                    colors
+                );
+            }
+
+            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }
     }
 
@@ -47,13 +88,17 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
-            init_state(
+            state->was_throne_used = FALSE;
+            
+            start_state(
                 state,
                 textures,
                 sounds,
                 musics,
                 colors
             );
+
+            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }
     }
 
@@ -68,7 +113,16 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
     state->time += delta_time;
 
+    // mechanisms
+
     execute_all_mechanisms(state);
+
+    // reset turn uses
+
+    if(state->enemy_list->size <= 0)
+    {
+        state->reset_turn_uses = 3;
+    }
 
     // camera
 
@@ -123,8 +177,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
     if(state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
         state->mouse_screen_pos.x <= 1200 - 64 - 10 + 100 + 64 &&
-        state->mouse_screen_pos.y >= 64 + 10 + 10 &&
-        state->mouse_screen_pos.y <= 64 + 10 + 10 + 64)
+        state->mouse_screen_pos.y >= 10 &&
+        state->mouse_screen_pos.y <= 10 + 64)
     {
         state->show_all_order_numbers = TRUE;
     }
@@ -185,6 +239,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     // gamestate
 
     if(state->gamestate != GAMESTATE__GAME_OVER &&
+       state->gamestate != GAMESTATE__GAME_START &&
        state->hero_object->is_to_be_removed)
     {
         // game over
@@ -194,7 +249,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     if(state->gamestate != GAMESTATE__GAME_WON &&
        state->was_throne_used)
     {
-        // game over
+        // game won
         change_gamestate(state, GAMESTATE__GAME_WON);
     }
 
@@ -235,7 +290,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = prev_elem;
                             state->curr_ally = prev_ally;
-                            state->curr_ally_object = prev_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -249,7 +303,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = tail_elem;
                             state->curr_ally = tail_ally;
-                            state->curr_ally_object = tail_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -272,7 +325,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = next_elem;
                             state->curr_ally = next_ally;
-                            state->curr_ally_object = next_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -286,7 +338,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = head_elem;
                             state->curr_ally = head_ally;
-                            state->curr_ally_object = head_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -315,7 +366,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = new_ally_elem;
                             state->curr_ally = potential_new_ally;
-                            state->curr_ally_object = potential_new_ally_object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -324,19 +374,44 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 }
             }
 
-            // // save state
-            // if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER])
-            // {
-            //     save_state(state);
-            //     load_state(state);
-            // }
-
-            // end ally turn
-            if(input->was_mouse_left && !input->is_mouse_left &&
-                state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
-                state->mouse_screen_pos.x <= 1200 - 64 - 10 + 64 + 100 &&
+            // reset turn
+            if(state->reset_turn_uses > 0 && 
+                input->was_mouse_left && !input->is_mouse_left &&
+                state->mouse_screen_pos.x >= 300 &&
+                state->mouse_screen_pos.x <= 300 + 64 &&
                 state->mouse_screen_pos.y >= 10 &&
                 state->mouse_screen_pos.y <= 10 + 64)
+            {
+                load_state(
+                    state,
+                    textures, 
+                    sounds, 
+                    musics,
+                    colors
+                );
+
+                state->reset_turn_uses--;
+
+                save_state(
+                    state,
+                    textures
+                );
+                load_state(
+                    state,
+                    textures, 
+                    sounds, 
+                    musics,
+                    colors
+                );
+            }
+
+            // end ally turn
+            if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||
+                (input->was_mouse_left && !input->is_mouse_left &&
+                state->mouse_screen_pos.x >= 1200 - 300 &&
+                state->mouse_screen_pos.x <= 1200 - 300 + 64 &&
+                state->mouse_screen_pos.y >= 10 &&
+                state->mouse_screen_pos.y <= 10 + 64))
             {
                 // restore all ally action points
                 for(ListElem* curr_elem = state->ally_list->head;
@@ -704,7 +779,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 // objects to be removed
                 remove_all_object_to_be_removed(state);
 
-                // all enemy
+                // all enemies
                 update_enemy_list(state);
                 update_all_enemy_order(state);
                 for(ListElem* curr_elem = state->enemy_list->head;
@@ -735,11 +810,10 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     if(curr_ally != NULL)
                     {
                         if(curr_ally->object != NULL &&
-                           curr_ally->object == state->curr_ally_object)
+                           curr_ally->object == state->curr_ally->object)
                         {
                             state->curr_ally_list_elem = curr_elem;
                             state->curr_ally = curr_ally;
-                            state->curr_ally_object = curr_ally->object;
                             was_prev_ally_chosen = TRUE;
                         }
                     }
@@ -748,7 +822,12 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     state->curr_ally_list_elem = state->ally_list->head;
                     state->curr_ally = state->curr_ally_list_elem->data;
-                    state->curr_ally_object = state->curr_ally->object;
+                }
+
+                // save state if in free movement (without enemies)
+                if(state->enemy_list->size == 0)
+                {
+                    save_state(state, textures);
                 }
 
                 change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
@@ -1061,6 +1140,9 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 // end enemy turn
                 else
                 {
+                    // save state before ending turn
+                    save_state(state, textures);
+
                     // objects to be removed
                     remove_all_object_to_be_removed(state);
 
@@ -1095,11 +1177,10 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         if(curr_ally != NULL)
                         {
                             if(curr_ally->object != NULL &&
-                               curr_ally->object == state->curr_ally_object)
+                               curr_ally->object == state->curr_ally->object)
                             {
                                 state->curr_ally_list_elem = curr_elem;
                                 state->curr_ally = curr_ally;
-                                state->curr_ally_object = curr_ally->object;
                                 was_prev_ally_chosen = TRUE;
                             }
                         }
@@ -1108,7 +1189,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     {
                         state->curr_ally_list_elem = state->ally_list->head;
                         state->curr_ally = state->curr_ally_list_elem->data;
-                        state->curr_ally_object = state->curr_ally->object;
                     }
 
                     add_animation_to_animation_list(

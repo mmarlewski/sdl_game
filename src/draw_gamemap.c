@@ -3,6 +3,9 @@
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
+    // i know...
+    if(state->gamestate == GAMESTATE__NONE || state->gamestate == GAMESTATE__GAME_START) return;
+
     // shadow
 
     draw_texture_at_world_pos(
@@ -680,18 +683,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         Texture* texture_outline = NULL;
         if(sin(state->time * 3) > 0)
         {
-            texture_outline = get_texture_1_outline_from_object(state->curr_ally_object, textures);
+            texture_outline = get_texture_1_outline_from_object(state->curr_ally->object, textures);
         }
         else
         {
-            texture_outline = get_texture_2_outline_from_object(state->curr_ally_object, textures);
+            texture_outline = get_texture_2_outline_from_object(state->curr_ally->object, textures);
         }
         draw_texture_at_tilemap_pos(
             renderer,
             texture_outline,
             colors->green,
             1.0f,
-            state->curr_ally_object->tilemap_pos,
+            state->curr_ally->object->tilemap_pos,
             state->camera_world_pos,
             state->camera_zoom
         );

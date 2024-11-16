@@ -1,4 +1,7 @@
 
+# save
+*.save
+
 # build
 *.o
 *.d

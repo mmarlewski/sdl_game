@@ -8,8 +8,8 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->delta_time = 0.0f;
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
-    state->background_color = colors->ally_background;
-    state->background_texture = textures->background_rock;
+    state->background_color = colors->none;
+    state->background_texture = NULL;
 
     state->camera_world_pos = vec2f(0, 0);
     state->camera_zoom = 2.0f;
@@ -46,15 +46,15 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->ally_list = new_list((void (*)(void*)) & destroy_ally);
     state->curr_ally_list_elem = NULL;
     state->curr_ally = NULL;
-    state->curr_ally_object = NULL;
     state->curr_ally_skill = SKILL__NONE;
     state->ally_move_distance = 0;
     state->curr_ally_target_1_tilemap_pos = vec2i(0, 0);
     state->curr_ally_target_2_tilemap_pos = vec2i(0, 0);
     state->curr_skill_animation = NULL;
 
-    state->hero_object = new_object(OBJECT__HERO);
-    state->hero_ap = ALLY_MAX_ACTION_POINTS;
+    state->hero_object = NULL;
+    state->minibot_object = NULL;
+
     for(int i = 0; i < ITEM__COUNT; i++)
     {
         state->hero_item_number[i] = 0;
@@ -65,9 +65,10 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     }
     state->hero_curr_item = ITEM__NONE;
 
-    state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
     state->was_minibot_launched = FALSE;
     state->was_throne_used = FALSE;
+
+    state->reset_turn_uses = 0;
 
     state->curr_ally_draw_below_texture_list = new_list((void (*)(void*)) 0);
     state->curr_ally_draw_below_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -77,8 +78,12 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->curr_ally_draw_effect_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
 
     state->mechanism_list = new_list((void (*)(void*)) & destroy_mechanism);
+}
 
-    //
+void start_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
+{
+    state->reset_turn_uses = 3;
+    state->game_over_uses = 3;
 
     state->camera_zoom = 2.0f;
     Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(
@@ -91,11 +96,17 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->camera_world_pos = middle_world_iso_pos;
 
     remove_all_list_elements(state->room_list, 1);
+    remove_all_list_elements(state->visited_room_list, 0);
+    remove_all_list_elements(state->passage_list, 1);
+    remove_all_list_elements(state->mechanism_list, 1);
 
     create_level(state, textures);
+    create_mechanisms(state);
+
+    state->hero_object = new_object(OBJECT__HERO);
+    state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
     Room* room = get_room(state, "7_2");
-
     room_add_object_at(
         room,
         state->hero_object,
@@ -105,6 +116,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
         state,
         room
     );
+    state->background_color = colors->ally_background;
     state->background_texture = state->curr_room->background_texture;
     add_new_list_element_to_list_end(
         state->visited_room_list,
@@ -140,21 +152,21 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    // state->hero_item_number[ITEM__CELL] = 5;
-    // state->hero_item_number[ITEM__DYNAMITE] = 5;
-    // state->hero_item_number[ITEM__GEMSTONE] = 5;
+    state->hero_item_number[ITEM__CELL] = 5;
+    state->hero_item_number[ITEM__DYNAMITE] = 5;
+    state->hero_item_number[ITEM__GEMSTONE] = 5;
 
     for(int body_part = 1; body_part < BODY_PART__COUNT; body_part++)
     {
         state->hero_body_part_augmentation[body_part] = AUGMENTATION__NONE;
     }
 
-    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
@@ -186,9 +198,6 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
 
     state->curr_ally_list_elem = state->ally_list->head;
     state->curr_ally = state->curr_ally_list_elem->data;
-    state->curr_ally_object = state->curr_ally->object;
-
-    change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
 }
 
 void change_gamestate(State* state, int new_gamestate)
@@ -214,7 +223,7 @@ void change_gamestate(State* state, int new_gamestate)
     // printf("----------------------------------------\n");
     // printf("curr room : %s \n", state->curr_room->name);
     // printf("----------------------------------------\n");
-    // printf("curr ally : %s \n", get_debug_name_from_object_type(state->curr_ally_object->type));
+    // printf("curr ally : %s \n", get_debug_name_from_object_type(state->curr_ally->object->type));
     // printf("----------------------------------------\n");
 
     // if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
@@ -823,7 +832,7 @@ void update_enemy_list(State* state)
         {
             Object* curr_object = (Object*) curr_elem->data;
 
-            if(curr_object != NULL && is_object_enemy(curr_object))
+            if(curr_object != NULL && is_object_enemy(curr_object) && !curr_object->is_to_be_removed)
             {
                 add_new_list_element_to_list_end(
                     state->enemy_list,

@@ -40,30 +40,59 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__GAME_OVER)
     {
-        SDL_SetRenderDrawColor(
-            renderer,
-            colors->game_over_background.x,
-            colors->game_over_background.y,
-            colors->game_over_background.z,
-            255
-        );
-        SDL_RenderClear(renderer);
+        if(state->game_over_uses > 0)
+        {
+            draw_font_at_screen_pos(
+                "You Died",
+                renderer,
+                fonts->stepalange_100,
+                colors->white,
+                1.0f,
+                vec2i(500, 100),
+                1
+            );
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.load_save,
+                colors->none,
+                1.0f,
+                vec2i(600, 300),
+                2.0f
+            );
+        }
+        else
+        {
+            draw_font_at_screen_pos(
+                "Game Over",
+                renderer,
+                fonts->stepalange_100,
+                colors->white,
+                1.0f,
+                vec2i(460, 100),
+                1
+            );
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_game,
+                colors->none,
+                1.0f,
+                vec2i(600, 300),
+                2.0f
+            );
+        }
 
-        draw_font_at_screen_pos(
-            "Game Over",
-            renderer,
-            fonts->stepalange_100,
-            colors->white,
-            1.0f,
-            vec2i(450, 100),
-            1
-        );
+        Texture* game_over_texture = NULL;
+
+        if(state->game_over_uses == 3) game_over_texture = textures->hud.reset_turn_3x;
+        else if(state->game_over_uses == 2) game_over_texture = textures->hud.reset_turn_2x;
+        else if(state->game_over_uses == 1) game_over_texture = textures->hud.reset_turn_1x;
+
         draw_texture_at_screen_pos(
             renderer,
-            textures->hud.start_again,
+            game_over_texture,
             colors->none,
             1.0f,
-            vec2i(600, 300),
+            vec2i(600 + 32, 300 + 64 + 10),
             2.0f
         );
     }
@@ -72,15 +101,6 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__GAME_WON)
     {
-        SDL_SetRenderDrawColor(
-            renderer,
-            colors->game_won_background.x,
-            colors->game_won_background.y,
-            colors->game_won_background.z,
-            255
-        );
-        SDL_RenderClear(renderer);
-
         draw_font_at_screen_pos(
             "You Won!",
             renderer,
@@ -92,7 +112,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
         draw_texture_at_screen_pos(
             renderer,
-            textures->hud.start_again,
+            textures->hud.restart_game,
             colors->none,
             1.0f,
             vec2i(600, 300),
@@ -310,7 +330,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             scale
         );
 
-        int is_mouse_on_texture = FALSE;
+        int is_mouse_on_augmentation = FALSE;
         int mouse_augmentation = AUGMENTATION__NONE;
 
         if(state->mouse_screen_pos.x >= 10 &&
@@ -318,7 +338,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 42 &&
            state->mouse_screen_pos.y <= 42 + 64)
         {
-            is_mouse_on_texture = TRUE;
+            is_mouse_on_augmentation = TRUE;
             mouse_augmentation = left_hand_augmentation;
         }
         if(state->mouse_screen_pos.x >= 84 &&
@@ -326,7 +346,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 10 &&
            state->mouse_screen_pos.y <= 10 + 64)
         {
-            is_mouse_on_texture = TRUE;
+            is_mouse_on_augmentation = TRUE;
             mouse_augmentation = head_augmentation;
         }
         if(state->mouse_screen_pos.x >= 158 &&
@@ -334,7 +354,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 42 &&
            state->mouse_screen_pos.y <= 42 + 64)
         {
-            is_mouse_on_texture = TRUE;
+            is_mouse_on_augmentation = TRUE;
             mouse_augmentation = right_hand_augmentation;
         }
         if(state->mouse_screen_pos.x >= 10 &&
@@ -342,7 +362,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 116 &&
            state->mouse_screen_pos.y <= 116 + 64)
         {
-            is_mouse_on_texture = TRUE;
+            is_mouse_on_augmentation = TRUE;
             mouse_augmentation = left_leg_augmentation;
         }
         if(state->mouse_screen_pos.x >= 84 &&
@@ -350,7 +370,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 84 &&
            state->mouse_screen_pos.y <= 84 + 64)
         {
-            is_mouse_on_texture = TRUE;
+            is_mouse_on_augmentation = TRUE;
             mouse_augmentation = torso_augmentation;
         }
         if(state->mouse_screen_pos.x >= 158 &&
@@ -358,11 +378,11 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
            state->mouse_screen_pos.y >= 116 &&
            state->mouse_screen_pos.y <= 116 + 64)
         {
-            is_mouse_on_texture = TRUE;
+            is_mouse_on_augmentation = TRUE;
             mouse_augmentation = right_leg_augmentation;
         }
 
-        if(is_mouse_on_texture)
+        if(is_mouse_on_augmentation)
         {
             draw_font_at_screen_pos(
                 get_augmentation_name(mouse_augmentation),
@@ -437,6 +457,47 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(32, 268 + 100),
             2
         );
+
+        int is_mouse_on_item = FALSE;
+        int mouse_item = ITEM__NONE;
+
+        if(state->mouse_screen_pos.x >= 10 &&
+           state->mouse_screen_pos.x <= 10 + 64 &&
+           state->mouse_screen_pos.y >= 120 + 100 &&
+           state->mouse_screen_pos.y <= 120 + 100 + 64)
+        {
+            is_mouse_on_item = TRUE;
+            mouse_item = ITEM__CELL;
+        }
+        if(state->mouse_screen_pos.x >= 10 &&
+           state->mouse_screen_pos.x <= 10 + 64 &&
+           state->mouse_screen_pos.y >= 194 + 100 &&
+           state->mouse_screen_pos.y <= 194 + 100 + 64)
+        {
+            is_mouse_on_item = TRUE;
+            mouse_item = ITEM__DYNAMITE;
+        }
+        if(state->mouse_screen_pos.x >= 10 &&
+           state->mouse_screen_pos.x <= 10 + 64 &&
+           state->mouse_screen_pos.y >= 268 + 100 &&
+           state->mouse_screen_pos.y <= 268 + 100 + 64)
+        {
+            is_mouse_on_item = TRUE;
+            mouse_item = ITEM__GEMSTONE;
+        }
+
+        if(is_mouse_on_item)
+        {
+            draw_font_at_screen_pos(
+                get_name_from_item(mouse_item),
+                renderer,
+                fonts->bit_operator_30,
+                colors->white,
+                1.0f,
+                vec2i(10, 180),
+                1
+            );
+        }
     }
 
     // skill description
@@ -961,6 +1022,51 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         }
     }
 
+    // reset turn
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
+       state->enemy_list->size > 0)
+    {
+        if(state->reset_turn_uses > 0)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.reset_turn,
+                colors->none,
+                1.0f,
+                vec2i(300, 10),
+                2
+            );
+        }
+        else
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.reset_turn_inactive,
+                colors->none,
+                1.0f,
+                vec2i(300, 10),
+                2
+            );
+        }
+
+        Texture* reset_turn_texture = NULL;
+
+        if(state->reset_turn_uses == 3) reset_turn_texture = textures->hud.reset_turn_3x;
+        else if(state->reset_turn_uses == 2) reset_turn_texture = textures->hud.reset_turn_2x;
+        else if(state->reset_turn_uses == 1) reset_turn_texture = textures->hud.reset_turn_1x;
+        else reset_turn_texture = textures->hud.reset_turn_used;
+
+        draw_texture_at_screen_pos(
+            renderer,
+            reset_turn_texture,
+            colors->none,
+            1.0f,
+            vec2i(300, 10 + 64 + 10),
+            2
+        );
+    }
+
     // end turn
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
@@ -971,7 +1077,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.end_turn,
             colors->none,
             1.0f,
-            vec2i(1200 - 64 - 10 + 100, 10),
+            vec2i(1200 - 300, 10),
             2
         );
     }
@@ -986,7 +1092,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             textures->hud.show_attack_order,
             colors->none,
             1.0f,
-            vec2i(1200 - 64 - 10 + 100, 10 + 64 + 10),
+            vec2i(1200 - 64 - 10 + 100, 10),
             2
         );
     }
@@ -1033,7 +1139,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     1.0f,
                     vec2i(
                         1200 - 10 - 64 - 10 - 64 - 16 + 100,
-                        10 + 64 + 10 * i + 64 * (i - 1) + 64 + 10
+                        10 + 64 + 10 * i + 64 * (i - 1)
                     ),
                     2
                 );
@@ -1045,7 +1151,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     1.0f,
                     vec2i(
                         1200 - 10 - 64 + 100,
-                        10 + 64 + 10 * i + 64 * (i - 1) + 64 + 10
+                        10 + 64 + 10 * i + 64 * (i - 1)
                     ),
                     2
                 );

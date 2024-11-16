@@ -1075,9 +1075,17 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->gemstone = load_texture_from_filepath(renderer, "./res/hud/gemstone.png");
 
     hud->end_turn = load_texture_from_filepath(renderer, "./res/hud/end_turn.png");
+    hud->reset_turn = load_texture_from_filepath(renderer, "./res/hud/reset_turn.png");
+    hud->reset_turn_inactive = load_texture_from_filepath(renderer, "./res/hud/reset_turn_inactive.png");
+    hud->reset_turn_used = load_texture_from_filepath(renderer, "./res/hud/reset_turn_used.png");
+    hud->reset_turn_3x = load_texture_from_filepath(renderer, "./res/hud/reset_turn_3x.png");
+    hud->reset_turn_2x = load_texture_from_filepath(renderer, "./res/hud/reset_turn_2x.png");
+    hud->reset_turn_1x = load_texture_from_filepath(renderer, "./res/hud/reset_turn_1x.png");
     hud->show_attack_order = load_texture_from_filepath(renderer, "./res/hud/show_attack_order.png");
     hud->start_again = load_texture_from_filepath(renderer, "./res/hud/start_again.png");
     hud->start_game = load_texture_from_filepath(renderer, "./res/hud/start_game.png");
+    hud->restart_game = load_texture_from_filepath(renderer, "./res/hud/restart_game.png");
+    hud->load_save = load_texture_from_filepath(renderer, "./res/hud/load_save.png");
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");
 }
 void destroy_textures_hud(Textures_Hud* hud)

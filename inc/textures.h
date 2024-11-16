@@ -1059,9 +1059,17 @@ typedef struct
     Texture* gemstone;
 
     Texture* end_turn;
+    Texture* reset_turn;
+    Texture* reset_turn_inactive;
+    Texture* reset_turn_used;
+    Texture* reset_turn_3x;
+    Texture* reset_turn_2x;
+    Texture* reset_turn_1x;
     Texture* show_attack_order;
     Texture* start_again;
     Texture* start_game;
+    Texture* restart_game;
+    Texture* load_save;
     Texture* bar_part;
 
 } Textures_Hud;

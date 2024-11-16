@@ -11336,7 +11336,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_7_3,
-        new_object(OBJECT__ROCK_DAMAGED_ITEM),
+        new_object(OBJECT__THRONE),
         vec2i(2, 2)
     );
 
@@ -11381,16 +11381,6 @@ void create_level(State* state, Textures* textures)
     Room* room_7_4 = new_empty_room("7_4", textures->background_rock);
     add_room(
         state,
-        room_7_4
-    );
-    room_add_object_at(
-        room_7_4,
-        state->hero_object,
-        vec2i(4, 1)
-    );
-    set_curr_room(state, room_7_4);
-    add_new_list_element_to_list_end(
-        state->visited_room_list,
         room_7_4
     );
 
@@ -12032,11 +12022,10 @@ void create_level(State* state, Textures* textures)
         vec2i(0, 4),
         vec2i(8, 4)
     ));
+}
 
-    /////////////
-    // mechanisms
-    /////////////
-
+void create_mechanisms(State* state)
+{
     // 0_0 lever obstacle
     add_mechanism(state, new_mechanism(
         1,
