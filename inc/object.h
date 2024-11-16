@@ -302,6 +302,7 @@ int is_object_movable(Object* object);
 int is_object_meltable(Object* object);
 int is_object_breakable(Object* object);
 int is_object_fragile(Object* object);
+int is_object_stomp(Object* object);
 int is_object_stone(Object* object);
 int is_object_metal(Object* object);
 int is_object_glass(Object* object);

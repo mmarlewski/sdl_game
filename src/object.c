@@ -1202,6 +1202,31 @@ int is_object_fragile(Object *object)
     return is;
 }
 
+int is_object_stomp(Object *object)
+{
+    int is = 0;
+
+    if(object == NULL) return is;
+
+    switch(object->type)
+    {
+        case OBJECT__MINIBOT_ALLY:
+        case OBJECT__MINIBOT_ALLY_CELL:
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:
+        case OBJECT__MINIBOT_ENEMY:
+        case OBJECT__MINIBOT_ENEMY_CELL:
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:
+        is = 1;
+        break;
+        default:
+        break;
+    }
+
+    return is;
+}
+
 int is_object_stone(Object *object)
 {
     int is = 0;

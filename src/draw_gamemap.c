@@ -102,6 +102,28 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
+    // possible hint floor
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    {
+        for(ListElem* curr_elem = state->possible_hint_tilemap_pos_list->head;
+            curr_elem != NULL; curr_elem = curr_elem->next)
+        {
+            Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+            draw_texture_at_tilemap_pos(
+                renderer,
+                textures->floor.highlight,
+                colors->white,
+                (1.0f - fabs(sin(state->time * 1.0f))),
+                *tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+            );
+        }
+    }
+
     // selected floor
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
@@ -419,25 +441,17 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1)
     {
-        for(ListElem* curr_object_elem = state->curr_room->object_list->head;
-            curr_object_elem != NULL; curr_object_elem = curr_object_elem->next)
+        for(ListElem* curr_pos_elem = state->possible_target_1_tilemap_pos_list->head;
+        curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
         {
-            Object* curr_object = curr_object_elem->data;
+            Vec2i curr_pos = *(Vec2i*)(curr_pos_elem->data);
 
-            int is_object_on_possible_target_1_pos = FALSE;
+            Object* curr_object = room_get_object_at(
+                state->curr_room, 
+                curr_pos
+            );
 
-            for(ListElem* curr_pos_elem = state->possible_target_1_tilemap_pos_list->head;
-                curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
-            {
-                Vec2i* curr_pos = curr_pos_elem->data;
-
-                if(vec2i_equals(curr_object->tilemap_pos, *curr_pos))
-                {
-                    is_object_on_possible_target_1_pos = TRUE;
-                }
-            }
-
-            if(is_object_on_possible_target_1_pos)
+            if(curr_object != NULL)
             {
                 Texture* texture_outline = NULL;
                 if(sin(state->time * 3) > 0)
@@ -467,53 +481,17 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
     {
-        // Object* target_1_object = room_get_object_at(
-        //     state->curr_room,
-        //     state->curr_ally_target_1_tilemap_pos
-        //     );
-        // if(target_1_object != NULL && is_skill_two_target(state->curr_ally_skill))
-        // {
-        //     Texture* texture_outline = NULL;
-        //         if(sin(state->time * 3) > 0)
-        //         {
-        //             texture_outline = get_texture_1_outline_from_object(
-        //                 target_1_object, textures);
-        //         }
-        //         else
-        //         {
-        //             texture_outline = get_texture_2_outline_from_object(
-        //                 target_1_object, textures);
-        //         }
-        //         draw_texture_at_tilemap_pos(
-        //             renderer,
-        //             texture_outline,
-        //             colors->orange,
-        //             1.0f,
-        //             target_1_object->tilemap_pos,
-        //             state->camera_world_pos,
-        //             state->camera_zoom
-        //         );
-        // }
-
-        for(ListElem* curr_object_elem = state->curr_room->object_list->head;
-            curr_object_elem != NULL; curr_object_elem = curr_object_elem->next)
+        for(ListElem* curr_pos_elem = state->possible_target_2_tilemap_pos_list->head;
+        curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
         {
-            Object* curr_object = curr_object_elem->data;
+            Vec2i curr_pos = *(Vec2i*)(curr_pos_elem->data);
 
-            int is_object_on_possible_target_2_pos = FALSE;
+            Object* curr_object = room_get_object_at(
+                state->curr_room, 
+                curr_pos
+            );
 
-            for(ListElem* curr_pos_elem = state->possible_target_2_tilemap_pos_list->head;
-                curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
-            {
-                Vec2i* curr_pos = curr_pos_elem->data;
-
-                if(vec2i_equals(curr_object->tilemap_pos, *curr_pos))
-                {
-                    is_object_on_possible_target_2_pos = TRUE;
-                }
-            }
-
-            if(is_object_on_possible_target_2_pos)
+            if(curr_object != NULL)
             {
                 Texture* texture_outline = NULL;
                 if(sin(state->time * 3) > 0)
@@ -531,6 +509,47 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     texture_outline,
                     colors->pink,
                     1.0f,
+                    curr_object->tilemap_pos,
+                    state->camera_world_pos,
+                    state->camera_zoom
+                );
+            }
+        }
+    }
+
+    // white outline
+
+    if((state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 && is_skill_two_target(state->curr_ally_skill)) ||
+    (state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 && !is_skill_two_target(state->curr_ally_skill)))
+    {
+        for(ListElem* curr_pos_elem = state->possible_hint_tilemap_pos_list->head;
+        curr_pos_elem != NULL; curr_pos_elem = curr_pos_elem->next)
+        {
+            Vec2i curr_pos = *(Vec2i*)(curr_pos_elem->data);
+
+            Object* curr_object = room_get_object_at(
+                state->curr_room, 
+                curr_pos
+            );
+
+            if(curr_object != NULL)
+            {
+                Texture* texture_outline = NULL;
+                if(sin(state->time * 3) > 0)
+                {
+                    texture_outline = get_texture_1_outline_from_object(
+                        curr_object, textures);
+                }
+                else
+                {
+                    texture_outline = get_texture_2_outline_from_object(
+                        curr_object, textures);
+                }
+                draw_texture_at_tilemap_pos(
+                    renderer,
+                    texture_outline,
+                    colors->white,
+                    (1.0f - fabs(sin(state->time * 1.0f))),
                     curr_object->tilemap_pos,
                     state->camera_world_pos,
                     state->camera_zoom
@@ -708,7 +727,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         {
             draw_texture_at_tilemap_pos(
                 renderer,
-                textures->skill.no_positions,
+                textures->skill.no_targets,
                 colors->none,
                 1.0f,
                 state->curr_ally->object->tilemap_pos,
@@ -724,7 +743,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         {
             draw_texture_at_tilemap_pos(
                 renderer,
-                textures->skill.no_positions,
+                textures->skill.no_targets,
                 colors->none,
                 1.0f,
                 state->curr_ally->object->tilemap_pos,

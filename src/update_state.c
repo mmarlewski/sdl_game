@@ -17,7 +17,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y <= 300 + 64)
         {
             SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
-            
+
             if(file == NULL)
             {
                 start_state(
@@ -512,6 +512,15 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     state->selected_tilemap_pos = vec2i(-1, -1);
 
+                    // possible hint positions
+                    remove_all_list_elements(state->possible_hint_tilemap_pos_list, 1);
+                    skill_get_possible_hint_pos(
+                        state,
+                        skill,
+                        state->possible_hint_tilemap_pos_list
+                    );
+
+                    // possible target 1 positions
                     remove_all_list_elements(state->possible_target_1_tilemap_pos_list, 1);
                     skill_get_possible_target_1_pos(
                         state,
@@ -527,6 +536,14 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 else
                 {
                     state->selected_tilemap_pos = vec2i(-1, -1);
+
+                    // possible hint positions
+                    remove_all_list_elements(state->possible_hint_tilemap_pos_list, 1);
+                    skill_get_possible_hint_pos(
+                        state,
+                        skill,
+                        state->possible_hint_tilemap_pos_list
+                    );
 
                     // possible target 2 positions
                     remove_all_list_elements(state->possible_target_2_tilemap_pos_list, 1);

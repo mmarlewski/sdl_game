@@ -773,6 +773,7 @@ void load_textures_skill(Renderer* renderer, Textures_Skill* skill)
     skill->teleportation_effect = load_texture_from_filepath(renderer, "./res/skill/teleportation_effect.png");
 
     skill->no_positions = load_texture_from_filepath(renderer, "./res/skill/no_positions.png");
+    skill->no_targets = load_texture_from_filepath(renderer, "./res/skill/no_targets.png");
     skill->no_attack = load_texture_from_filepath(renderer, "./res/skill/no_attack.png");
 
     skill->plus_1_cell = load_texture_from_filepath(renderer, "./res/skill/plus_1_cell.png");

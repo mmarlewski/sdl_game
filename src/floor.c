@@ -85,6 +85,31 @@ int is_floor_burrow(int floor)
     return is;
 }
 
+int is_floor_stomp(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR__STONE_STAIRS_BELOW_BLOCKED:
+        case FLOOR__WATER_LILY_POD:
+        case FLOOR__STONE_TRAP:
+        case FLOOR__ICE:
+        case FLOOR__ICE_CRACK_WATER:
+        case FLOOR__ROCK_CRACK_WATER:
+        case FLOOR__ROCK_CRACK_LAVA:
+        case FLOOR__ROCK_CRACK_PIT:
+        {
+            is = 1;
+        }
+        break;
+        default:
+        break;
+    }
+
+    return is;
+}
+
 int is_floor_meltable(int floor)
 {
     int is = 0;
@@ -101,6 +126,21 @@ int is_floor_meltable(int floor)
 }
 
 int is_floor_breakable(int floor)
+{
+    int is = 0;
+
+    switch(floor)
+    {
+        case FLOOR__ROCK_CRACK_WATER:   is = 1; break;
+        case FLOOR__ROCK_CRACK_LAVA:    is = 1; break;
+        case FLOOR__ROCK_CRACK_PIT:     is = 1; break;
+        default: break;
+    }
+
+    return is;
+}
+
+int is_floor_fragile(int floor)
 {
     int is = 0;
 

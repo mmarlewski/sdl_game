@@ -758,6 +758,7 @@ typedef struct
     Texture* teleportation_effect;
 
     Texture* no_positions;
+    Texture* no_targets;
     Texture* no_attack;
 
     Texture* plus_1_cell;

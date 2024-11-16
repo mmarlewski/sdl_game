@@ -34,6 +34,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->animation_list = new_list((void (*)(void*)) & destroy_animation);
     state->sprite_list = new_list((void (*)(void*)) & destroy_sprite);
 
+    state->possible_hint_tilemap_pos_list = new_list((void(*)(void*)) & destroy_vec2i);
     state->possible_target_1_tilemap_pos_list = new_list((void(*)(void*)) & destroy_vec2i);
     state->possible_target_2_tilemap_pos_list = new_list((void(*)(void*)) & destroy_vec2i);
     state->show_all_order_numbers = FALSE;
@@ -152,26 +153,26 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    // state->hero_item_number[ITEM__CELL] = 5;
-    // state->hero_item_number[ITEM__DYNAMITE] = 5;
-    // state->hero_item_number[ITEM__GEMSTONE] = 5;
+    state->hero_item_number[ITEM__CELL] = 5;
+    state->hero_item_number[ITEM__DYNAMITE] = 5;
+    state->hero_item_number[ITEM__GEMSTONE] = 5;
 
     for(int body_part = 1; body_part < BODY_PART__COUNT; body_part++)
     {
         state->hero_body_part_augmentation[body_part] = AUGMENTATION__NONE;
     }
 
-    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
+    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
     // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
+    hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
     // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
 
