@@ -13,7 +13,7 @@ void load_sounds(Sounds* sounds)
     sounds->crash = get_sound_from_filepath("./res/sound/punchy-taps-ui-1-183897-lower.mp3");
 
     sounds->fall_water = get_sound_from_filepath("./res/sound/water-splash-199583-shorter.mp3");
-    sounds->fall_lava = get_sound_from_filepath("./res/sound/8-bit-sizzle-102668.mp3");
+    sounds->fall_lava = get_sound_from_filepath("./res/sound/8-bit-sizzle-102668-quieter.mp3");
     sounds->fall_pit = get_sound_from_filepath("./res/sound/cartoon-slide-whistle-down-2-176648-lower.mp3");
     sounds->death = get_sound_from_filepath("./res/sound/pixel-death-66829.mp3");
 
@@ -45,9 +45,9 @@ void load_sounds(Sounds* sounds)
     sounds->falling_stalactite = get_sound_from_filepath("./res/sound/hamer-90566-quieter.mp3");
     sounds->emerge_water = get_sound_from_filepath("./res/sound/water-splash-199583-shorter.mp3");
     sounds->emerge_pit = get_sound_from_filepath("./res/sound/wings-of-insects-45540.mp3");
-    sounds->emerge_burrow = get_sound_from_filepath("./res/sound/dig-wet-sand-04-102880-louder.mp3");
+    sounds->emerge_burrow = get_sound_from_filepath("./res/sound/dig-wet-sand-04-102880.mp3");
     sounds->emerge_pipe = get_sound_from_filepath("./res/sound/infographic-pop-2-197871.mp3");
-    sounds->collapse_burrow = get_sound_from_filepath("./res/sound/rocks-and-gravel-slide-1-204994.mp3");
+    sounds->collapse_burrow = get_sound_from_filepath("./res/sound/rocks-and-gravel-slide-1-204994-quieter.mp3");
     sounds->conv_belt = get_sound_from_filepath("./res/sound/servomotor-104111.mp3");
 
     sounds->vending = get_sound_from_filepath("./res/sound/vending-machine-104483-shorter.mp3");
