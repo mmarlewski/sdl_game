@@ -146,6 +146,13 @@ int is_object_wall(Object* object)
         case OBJECT__OBSTACLE:
 
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:
+        case OBJECT__EXT_WALL_PART_HORIZONTAL:
+        case OBJECT__EXT_WALL_PART_VERTICAL:
         {
             is = 1;
         }
@@ -360,6 +367,11 @@ int is_object_pull_towards(Object* object)
 
         case OBJECT__SIGN_MOLE_WARNING:                is = 1; break;
 
+        case OBJECT__HARPOON_GUN_UP:                   is = 1; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                is = 1; break;
+        case OBJECT__HARPOON_GUN_DOWN:                 is = 1; break;
+        case OBJECT__HARPOON_GUN_LEFT:                 is = 1; break;
+
         case OBJECT__MOLE:                             is = 1; break;
 
         case OBJECT__TURRET_LASER_GROUNDED:            is = 1; break;
@@ -390,13 +402,6 @@ int is_object_pull_towards(Object* object)
         case OBJECT__LEVER_METAL_ON:                   is = 1; break;
         case OBJECT__LEVER_STONE_UNPOWERED:            is = 1; break;
         case OBJECT__LEVER_STONE_POWERED:              is = 1; break;
-
-        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:     is = 1; break;
-        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:    is = 1; break;
-        case OBJECT__EXT_WALL_PART_HORIZONTAL:          is = 1; break;
-        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:       is = 1; break;
-        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:      is = 1; break;
-        case OBJECT__EXT_WALL_PART_VERTICAL:            is = 1; break;
 
         default:                                        is = 0; break;
     }
@@ -484,15 +489,7 @@ int is_object_throw_over(Object* object)
         case OBJECT__EXIT_OBSIDIAN_UP:
         case OBJECT__EXIT_OBSIDIAN_RIGHT:
         case OBJECT__EXIT_OBSIDIAN_DOWN:
-        case OBJECT__EXIT_OBSIDIAN_LEFT:
-
-        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:
-        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:
-        case OBJECT__EXT_WALL_PART_HORIZONTAL:
-        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:
-        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:
-        case OBJECT__EXT_WALL_PART_VERTICAL:
-        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:           is = 0; break;
+        case OBJECT__EXIT_OBSIDIAN_LEFT:                    is = 0; break;
 
         default:                                            is = 1; break;
     }
