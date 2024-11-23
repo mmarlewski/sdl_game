@@ -156,21 +156,21 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_item_number[ITEM__DYNAMITE] = 0;
     state->hero_item_number[ITEM__GEMSTONE] = 0;
 
-    state->hero_item_number[ITEM__CELL] = 5;
-    state->hero_item_number[ITEM__DYNAMITE] = 5;
-    state->hero_item_number[ITEM__GEMSTONE] = 5;
+    // state->hero_item_number[ITEM__CELL] = 5;
+    // state->hero_item_number[ITEM__DYNAMITE] = 5;
+    // state->hero_item_number[ITEM__GEMSTONE] = 5;
 
     for(int body_part = 1; body_part < BODY_PART__COUNT; body_part++)
     {
         state->hero_body_part_augmentation[body_part] = AUGMENTATION__NONE;
     }
 
-    hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
-    hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
-    hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
-    hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
+    // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
@@ -563,24 +563,57 @@ void get_object_skills(State* state, Object* object, List* skill_list)
     {
         case OBJECT__GOLEM_POWERED:
         {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__STOMP);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__STOMP);
+        }
+        break;
+        case OBJECT__MINIBOT_ALLY:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
+
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
+        }
+        break;
+        case OBJECT__MINIBOT_ALLY_CELL:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
+
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
+        }
+        break;
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
+
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
+        }
+        break;
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:
+        {
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
+
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
         }
         break;
         case OBJECT__HERO:
         case OBJECT__HERO_FLOATING:
         case OBJECT__HERO_FLYING:
         {
+            // use
+
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
-            if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MANIPULATION);
-            }
-            if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEPORTATION);
-            }
 
             // move
 
@@ -599,6 +632,14 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 
             // augmentation
 
+            if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__MANIPULATION);
+            }
+            if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEPORTATION);
+            }
             if(hero_has_augmentation(state, AUGMENTATION__FIST_HAND))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
@@ -716,45 +757,6 @@ void get_object_skills(State* state, Object* object, List* skill_list)
                 }
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
             }
-        }
-        break;
-        case OBJECT__MINIBOT_ALLY:
-        {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
-        }
-        break;
-        case OBJECT__MINIBOT_ALLY_CELL:
-        {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_CLOSE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
-        }
-        break;
-        case OBJECT__MINIBOT_ALLY_DYNAMITE:
-        {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_CLOSE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
-        }
-        break;
-        case OBJECT__MINIBOT_ALLY_GEMSTONE:
-        {
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
         }
         break;
         default:

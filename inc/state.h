@@ -196,7 +196,7 @@ void skill_on_use(State* state, int skill, Vec2i source_tilemap_pos, Vec2i targe
 void skill_get_possible_hint_pos(State* state, int skill, List* hint_pos_list);
 void skill_get_possible_target_1_pos(State* state, int skill, Vec2i source_tilemap_pos, List* target_1_pos_list);
 void skill_get_possible_target_2_pos(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, List* target_2_pos_list);
-Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors);
+Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors, Sounds* sounds);
 void skill_get_actions_and_draw(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Action* action_sequence, List* draw_below_texture_list, List* draw_below_tilemap_pos_list, List* draw_above_texture_list, List* draw_above_tilemap_pos_list, List* draw_effect_texture_list, List* draw_effect_tilemap_pos_list, Textures* textures, Sounds* sounds);
 
 void object_enemy_prepare_move(State* state, Enemy* enemy);

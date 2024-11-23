@@ -121,12 +121,14 @@ void floor_on_move_end(State* state, Sounds* sounds, Action* sequence, Action* a
         case FLOOR__ICE:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
@@ -317,12 +319,14 @@ void floor_on_move_floating_end(State* state, Sounds* sounds, Action* sequence, 
         case FLOOR__ICE:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(sequence, new_action_move(vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1), action->move.dir4));
         }
         break;
@@ -455,6 +459,7 @@ void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* actio
         break;
         case FLOOR__ICE:
         {
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_move(
@@ -662,6 +667,7 @@ void floor_on_drop_floating(State* state, Sounds* sounds, Action* sequence, Acti
         break;
         case FLOOR__ICE:
         {
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_move(
@@ -673,6 +679,7 @@ void floor_on_drop_floating(State* state, Sounds* sounds, Action* sequence, Acti
         break;
         case FLOOR__ICE_CRACK_WATER:
         {
+            add_action_to_end_action_sequence(sequence, new_action_play_sound(action->tilemap_pos, sounds->move_ice));
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_move(

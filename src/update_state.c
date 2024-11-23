@@ -89,11 +89,13 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
     if(state->gamestate == GAMESTATE__GAME_WON)
     {
+        // restart with no aug
+
         if(input->was_mouse_left && !input->is_mouse_left &&
-           state->mouse_screen_pos.x >= 600 &&
-           state->mouse_screen_pos.x <= 600 + 128 &&
-           state->mouse_screen_pos.y >= 300 &&
-           state->mouse_screen_pos.y <= 300 + 64)
+           state->mouse_screen_pos.x >= 570 &&
+           state->mouse_screen_pos.x <= 570 + 192 &&
+           state->mouse_screen_pos.y >= 700 &&
+           state->mouse_screen_pos.y <= 700 + 64)
         {
             state->was_throne_used = FALSE;
             
@@ -104,6 +106,92 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 musics,
                 colors
             );
+
+            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+        }
+
+        // restart with...
+
+        int left_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_HAND];
+        int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
+        int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
+        int right_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_LEG];
+        int head_augmentation = state->hero_body_part_augmentation[BODY_PART__HEAD];
+        int torso_augmentation = state->hero_body_part_augmentation[BODY_PART__TORSO];
+        int is_mouse_on_augmentation_button = FALSE;
+        int mouse_augmentation_button = AUGMENTATION__NONE;
+
+        if(left_hand_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 10 &&
+           state->mouse_screen_pos.x <= 550 + 10 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 74 + 42 &&
+           state->mouse_screen_pos.y <= 250 + 74 + 42 + 32)
+        {
+            is_mouse_on_augmentation_button = TRUE;
+            mouse_augmentation_button = left_hand_augmentation;
+        }
+        if(head_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 84 &&
+           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 74 + 10 &&
+           state->mouse_screen_pos.y <= 250 + 74 + 10 + 32)
+        {
+            is_mouse_on_augmentation_button = TRUE;
+            mouse_augmentation_button = head_augmentation;
+        }
+        if(right_hand_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 158 &&
+           state->mouse_screen_pos.x <= 550 + 158 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 74 + 42 &&
+           state->mouse_screen_pos.y <= 250 + 74 + 42 + 32)
+        {
+            is_mouse_on_augmentation_button = TRUE;
+            mouse_augmentation_button = right_hand_augmentation;
+        }
+        if(left_leg_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 10 &&
+           state->mouse_screen_pos.x <= 550 + 10 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 74 + 52 + 116 &&
+           state->mouse_screen_pos.y <= 250 + 74 + 52 + 116 + 32)
+        {
+            is_mouse_on_augmentation_button = TRUE;
+            mouse_augmentation_button = left_leg_augmentation;
+        }
+        if(torso_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 84 &&
+           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 74 + 52 + 84 &&
+           state->mouse_screen_pos.y <= 250 + 74 + 52 + 84 + 32)
+        {
+            is_mouse_on_augmentation_button = TRUE;
+            mouse_augmentation_button = torso_augmentation;
+        }
+        if(right_leg_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 158 &&
+           state->mouse_screen_pos.x <= 550 + 158 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 74 + 52 + 116 &&
+           state->mouse_screen_pos.y <= 250 + 74 + 52 + 116 + 32)
+        {
+            is_mouse_on_augmentation_button = TRUE;
+            mouse_augmentation_button = right_leg_augmentation;
+        }
+
+        if(input->was_mouse_left && !input->is_mouse_left &&
+        is_mouse_on_augmentation_button)
+        {
+            state->was_throne_used = FALSE;
+            
+            start_state(
+                state,
+                textures,
+                sounds,
+                musics,
+                colors
+            );
+
+            hero_add_augmentation(state, mouse_augmentation_button);
+
+            update_ally_skill_list(state, state->curr_ally);
 
             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }
@@ -500,6 +588,68 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 }
             }
 
+            // skill from keyboard
+
+            if(input->was_key[KEY__1] && !input->is_key[KEY__1])
+            {
+                if(
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE ||
+                state->curr_ally->object->type == OBJECT__HERO ||
+                state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+                state->curr_ally->object->type == OBJECT__HERO_FLYING
+                )
+                {
+                    skill = SKILL__USE;
+                }
+            }
+            if(input->was_key[KEY__2] && !input->is_key[KEY__2])
+            {
+                if(
+                state->curr_ally->object->type == OBJECT__GOLEM_POWERED ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE ||
+                state->curr_ally->object->type == OBJECT__HERO
+                )
+                {
+                    skill = SKILL__MOVE;
+                }
+                else if(
+                state->curr_ally->object->type == OBJECT__HERO_FLOATING
+                )
+                {
+                    skill = SKILL__MOVE_FLOATING;
+                }
+                else if(
+                state->curr_ally->object->type == OBJECT__HERO_FLYING
+                )
+                {
+                    skill = SKILL__MOVE_FLYING;
+                }
+            }
+            if(input->was_key[KEY__3] && !input->is_key[KEY__3])
+            {
+                if(
+                state->curr_ally->object->type == OBJECT__HERO ||
+                state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+                state->curr_ally->object->type == OBJECT__HERO_FLYING
+                )
+                {
+                    if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
+                    {
+                        skill = SKILL__MANIPULATION;
+                    }
+                    else if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
+                    {
+                        skill = SKILL__TELEPORTATION;
+                    }
+                }
+            }
+
             state->curr_ally_skill = skill;
 
             // if curr ally has enough action points
@@ -718,7 +868,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         state->curr_ally_target_1_tilemap_pos,
                         state->curr_ally_target_2_tilemap_pos,
                         textures,
-                        colors
+                        colors,
+                        sounds
                     );
 
                     add_animation_to_animation_list(
@@ -885,7 +1036,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     state->curr_enemy->target_1_tilemap_pos,
                     state->curr_enemy->target_2_tilemap_pos,
                     textures,
-                    colors
+                    colors,
+                    sounds
                 );
 
                 add_animation_to_animation_list(

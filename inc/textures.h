@@ -984,9 +984,13 @@ typedef struct
     Texture* teleportation;
     Texture* move;
     Texture* pick_item;
+    Texture* pick_item_far;
     Texture* put_item_cell;
+    Texture* put_item_cell_far;
     Texture* put_item_dynamite;
+    Texture* put_item_dynamite_far;
     Texture* put_item_gemstone;
+    Texture* put_item_gemstone_far;
     Texture* throw_item_cell;
     Texture* throw_item_dynamite;
     Texture* throw_item_gemstone;
@@ -1070,6 +1074,8 @@ typedef struct
     Texture* start_again;
     Texture* start_game;
     Texture* restart_game;
+    Texture* restart_with;
+    Texture* restart_with_no_aug;
     Texture* load_save;
     Texture* bar_part;
 

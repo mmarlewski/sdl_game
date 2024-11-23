@@ -6,11 +6,13 @@ void load_sounds(Sounds* sounds)
 
     sounds->use_exit = get_sound_from_filepath("./res/sound/human-impact-on-ground-6982-louder.mp3");
     sounds->use_station = get_sound_from_filepath("./res/sound/083525_drill-37769-quieter.mp3");
+    sounds->use_throne = get_sound_from_filepath("./res/sound/tadaa-47995-shorter.mp3");
 
     sounds->move = get_sound_from_filepath("./res/sound/slash-21834-quieter.mp3");
     sounds->move_floating = get_sound_from_filepath("./res/sound/menu-change-89197-quieter.mp3");
     sounds->move_flying = get_sound_from_filepath("./res/sound/swoosh-sound-effect-for-fight-scenes-or-transitions-3-149888-quieter.mp3");
     sounds->crash = get_sound_from_filepath("./res/sound/punchy-taps-ui-1-183897-lower.mp3");
+    sounds->move_ice = get_sound_from_filepath("./res/sound/cartoon-yoink-2-183916-shorter.mp3");
 
     sounds->fall_water = get_sound_from_filepath("./res/sound/water-splash-199583-shorter.mp3");
     sounds->fall_lava = get_sound_from_filepath("./res/sound/8-bit-sizzle-102668-quieter.mp3");
@@ -33,7 +35,7 @@ void load_sounds(Sounds* sounds)
     sounds->manipulation = get_sound_from_filepath("./res/sound/ui-beep-menu-positive-228336.mp3");
     sounds->teleportation = get_sound_from_filepath("./res/sound/game-teleport-90735-quieter.mp3");
 
-    sounds->put_item = get_sound_from_filepath("./res/sound/thump-105302-louder.mp3");
+    sounds->put_item = get_sound_from_filepath("./res/sound/handgun-clip-in-89711.mp3");
     sounds->pick_up_close = get_sound_from_filepath("./res/sound/item-equip-6904-louder.mp3");
     sounds->pick_up_far = get_sound_from_filepath("./res/sound/lightclunk1-107615.mp3");
 

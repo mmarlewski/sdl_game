@@ -10,11 +10,13 @@ typedef struct
 
     Sound* use_exit;
     Sound* use_station;
+    Sound* use_throne;
 
     Sound* move;
     Sound* move_floating;
     Sound* move_flying;
     Sound* crash;
+    Sound* move_ice;
 
     Sound* fall_water;
     Sound* fall_lava;

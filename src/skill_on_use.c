@@ -28,16 +28,12 @@ void skill_on_use(
                 }
                 else if(is_object_station(target_2_object))
                 {
-                    play_sound(sounds->use_station);
-
                     int augmentation =
                         get_station_augmentation(target_2_object);
                     hero_add_augmentation(state, augmentation);
                 }
                 else if(is_object_exit(target_2_object))
                 {
-                    play_sound(sounds->use_exit);
-
                     Passage* passage = get_passage(
                         state,
                         state->curr_room->name,
@@ -176,6 +172,9 @@ void skill_on_use(
                                 state->curr_ally_list_elem = state->ally_list->head;
                                 state->curr_ally = state->curr_ally_list_elem->data;
                             }
+
+                            // save state
+                            save_state(state, textures);
                         }
                     }
                 }
@@ -282,13 +281,11 @@ void skill_on_use(
         break;
         case SKILL__MANIPULATION:
         {
-            play_sound(sounds->manipulation);
+            //
         }
         break;
         case SKILL__TELEPORTATION:
         {
-            play_sound(sounds->teleportation);
-
             if(target_2_object == NULL)
             {
                 source_object->tilemap_pos = target_2_tilemap_pos;
@@ -298,15 +295,6 @@ void skill_on_use(
         case SKILL__PICK_ITEM_CLOSE:
         case SKILL__PICK_ITEM_FAR:
         {
-            if(skill == SKILL__PICK_ITEM_CLOSE)
-            {
-                play_sound(sounds->pick_up_close);
-            }
-            else if(skill == SKILL__PICK_ITEM_FAR)
-            {
-                play_sound(sounds->pick_up_far);
-            }
-
             int item_type = 0;
             int item_count = 0;
 
@@ -343,15 +331,6 @@ void skill_on_use(
         case SKILL__PUT_ITEM_CELL_CLOSE:
         case SKILL__PUT_ITEM_CELL_FAR:
         {
-            if(skill == SKILL__PUT_ITEM_CELL_CLOSE)
-            {
-                play_sound(sounds->put_item);
-            }
-            else if(skill == SKILL__PUT_ITEM_CELL_FAR)
-            {
-                play_sound(sounds->pick_up_far);
-            }
-
             if(source_object->type == OBJECT__HERO ||
                source_object->type == OBJECT__HERO_FLOATING ||
                source_object->type == OBJECT__HERO_FLYING)
@@ -372,15 +351,6 @@ void skill_on_use(
         case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
         case SKILL__PUT_ITEM_DYNAMITE_FAR:
         {
-            if(skill == SKILL__PUT_ITEM_DYNAMITE_CLOSE)
-            {
-                play_sound(sounds->put_item);
-            }
-            else if(skill == SKILL__PUT_ITEM_DYNAMITE_FAR)
-            {
-                play_sound(sounds->pick_up_far);
-            }
-
             if(source_object->type == OBJECT__HERO ||
                source_object->type == OBJECT__HERO_FLOATING ||
                source_object->type == OBJECT__HERO_FLYING)
@@ -401,21 +371,6 @@ void skill_on_use(
         case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
         case SKILL__PUT_ITEM_GEMSTONE_FAR:
         {
-            if(target_2_object != NULL &&
-                (target_2_object->type == OBJECT__VENDING_CELL ||
-                target_2_object->type == OBJECT__VENDING_DYNAMITE))
-            {
-                play_sound(sounds->vending);
-            }
-            else if(skill == SKILL__PUT_ITEM_GEMSTONE_CLOSE)
-            {
-                play_sound(sounds->put_item);
-            }
-            else if(skill == SKILL__PUT_ITEM_GEMSTONE_FAR)
-            {
-                play_sound(sounds->pick_up_far);
-            }
-
             if(source_object->type == OBJECT__HERO ||
                source_object->type == OBJECT__HERO_FLOATING ||
                source_object->type == OBJECT__HERO_FLYING)
@@ -435,8 +390,6 @@ void skill_on_use(
         break;
         case SKILL__THROW_ITEM_CELL:
         {
-            play_sound(sounds->throww);
-
             if(source_object->type == OBJECT__HERO ||
                source_object->type == OBJECT__HERO_FLOATING ||
                source_object->type == OBJECT__HERO_FLYING)
@@ -456,8 +409,6 @@ void skill_on_use(
         break;
         case SKILL__THROW_ITEM_DYNAMITE:
         {
-            play_sound(sounds->throww);
-
             if(source_object->type == OBJECT__HERO ||
                source_object->type == OBJECT__HERO_FLOATING ||
                source_object->type == OBJECT__HERO_FLYING)
@@ -477,8 +428,6 @@ void skill_on_use(
         break;
         case SKILL__THROW_ITEM_GEMSTONE:
         {
-            play_sound(sounds->throww);
-
             if(source_object->type == OBJECT__HERO ||
                source_object->type == OBJECT__HERO_FLOATING ||
                source_object->type == OBJECT__HERO_FLYING)
@@ -498,7 +447,6 @@ void skill_on_use(
         break;
         case SKILL__LAUNCH_MINIBOT:
         {
-            play_sound(sounds->minibot_launch);
 
             state->was_minibot_launched = TRUE;
             state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
@@ -506,8 +454,6 @@ void skill_on_use(
         break;
         case SKILL__MINIBOT_MERGE:
         {
-            play_sound(sounds->minibot_merge);
-
             if(target_2_object != NULL &&
                (target_2_object->type == OBJECT__HERO ||
                 target_2_object->type == OBJECT__HERO_FLOATING ||

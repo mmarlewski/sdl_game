@@ -447,6 +447,10 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                                 enemy->target_2_tilemap_pos = enemy_object->tilemap_pos;
                                 go_on = FALSE;
                             }
+                            else
+                            {
+                                go_on = FALSE;
+                            }
                         }
                     }
                     else

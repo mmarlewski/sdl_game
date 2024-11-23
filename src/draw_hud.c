@@ -112,12 +112,232 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
         draw_texture_at_screen_pos(
             renderer,
-            textures->hud.restart_game,
+            textures->hud.restart_with_no_aug,
             colors->none,
             1.0f,
-            vec2i(600, 300),
+            vec2i(570, 700),
             2.0f
         );
+
+        int left_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_HAND];
+        int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
+        int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
+        int right_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_LEG];
+        int head_augmentation = state->hero_body_part_augmentation[BODY_PART__HEAD];
+        int torso_augmentation = state->hero_body_part_augmentation[BODY_PART__TORSO];
+
+        Texture* left_hand_texture = textures->hud.no_augmentation;
+        Texture* right_hand_texture = textures->hud.no_augmentation;
+        Texture* left_leg_texture = textures->hud.no_augmentation;
+        Texture* right_leg_texture = textures->hud.no_augmentation;
+        Texture* head_texture = textures->hud.no_augmentation;
+        Texture* torso_texture = textures->hud.no_augmentation;
+
+        if(left_hand_augmentation == AUGMENTATION__FIST_HAND) left_hand_texture = textures->hud.fist_hand;
+        if(left_hand_augmentation == AUGMENTATION__HOOK_HAND) left_hand_texture = textures->hud.hook_hand;
+        if(right_hand_augmentation == AUGMENTATION__CHAIN_HAND) right_hand_texture = textures->hud.chain_hand;
+        if(right_hand_augmentation == AUGMENTATION__SCISSOR_HAND) right_hand_texture = textures->hud.scissor_hand;
+        if(left_leg_augmentation == AUGMENTATION__SPRING_LEG) left_leg_texture = textures->hud.spring_leg;
+        if(left_leg_augmentation == AUGMENTATION__STRIDER_LEG) left_leg_texture = textures->hud.strider_leg;
+        if(right_leg_augmentation == AUGMENTATION__TRACK_LEG) right_leg_texture = textures->hud.track_leg;
+        if(right_leg_augmentation == AUGMENTATION__BOOT_LEG) right_leg_texture = textures->hud.boot_leg;
+        if(torso_augmentation == AUGMENTATION__MINIBOT_TORSO) torso_texture = textures->hud.minibot_torso;
+        if(torso_augmentation == AUGMENTATION__WINGS_TORSO) torso_texture = textures->hud.wings_torso;
+        if(head_augmentation == AUGMENTATION__MANIPULATION_HEAD) head_texture = textures->hud.manipulation_head;
+        if(head_augmentation == AUGMENTATION__TELEPORTATION_HEAD) head_texture = textures->hud.teleportation_head;
+
+        int scale = 2;
+
+        draw_texture_at_screen_pos(
+            renderer,
+            left_hand_texture,
+            colors->none,
+            1.0f,
+            vec2i(550 + 10, 250 + 42),
+            scale
+        );
+        if(left_hand_augmentation != AUGMENTATION__NONE)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 10, 250 + 116),
+                scale
+            );
+        }
+
+        draw_texture_at_screen_pos(
+            renderer,
+            head_texture,
+            colors->none,
+            1.0f,
+            vec2i(550 + 84, 250 + 10),
+            scale
+        );
+        if(head_augmentation != AUGMENTATION__NONE)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 84, 250 + 84),
+                scale
+            );
+        }
+
+        draw_texture_at_screen_pos(
+            renderer,
+            right_hand_texture,
+            colors->none,
+            1.0f,
+            vec2i(550 + 158, 250 + 42),
+            scale
+        );
+        if(right_hand_augmentation != AUGMENTATION__NONE)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 158, 250 + 116),
+                scale
+            );
+        }
+        
+        draw_texture_at_screen_pos(
+            renderer,
+            left_leg_texture,
+            colors->none,
+            1.0f,
+            vec2i(550 + 10, 250 + 52 + 116),
+            scale
+        );
+        if(left_leg_augmentation != AUGMENTATION__NONE)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 10, 250 + 52 + 190),
+                scale
+            );
+        }
+
+        draw_texture_at_screen_pos(
+            renderer,
+            torso_texture,
+            colors->none,
+            1.0f,
+            vec2i(550 + 84, 250 + 52 + 84),
+            scale
+        );
+        if(torso_augmentation != AUGMENTATION__NONE)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 84, 250 + 52 + 158),
+                scale
+            );
+        }
+
+        draw_texture_at_screen_pos(
+            renderer,
+            right_leg_texture,
+            colors->none,
+            1.0f,
+            vec2i(550 + 158, 250 + 52 + 116),
+            scale
+        );
+        if(right_leg_augmentation != AUGMENTATION__NONE)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 158, 250 + 52 + 190),
+                scale
+            );
+        }
+
+        int is_mouse_on_augmentation_texture = FALSE;
+        int mouse_augmentation_texture = AUGMENTATION__NONE;
+
+        if(left_hand_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 10 &&
+           state->mouse_screen_pos.x <= 550 + 10 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 42 &&
+           state->mouse_screen_pos.y <= 250 + 42 + 64)
+        {
+            is_mouse_on_augmentation_texture = TRUE;
+            mouse_augmentation_texture = left_hand_augmentation;
+        }
+        if(head_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 84 &&
+           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 10 &&
+           state->mouse_screen_pos.y <= 250 + 10 + 64)
+        {
+            is_mouse_on_augmentation_texture = TRUE;
+            mouse_augmentation_texture = head_augmentation;
+        }
+        if(right_hand_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 158 &&
+           state->mouse_screen_pos.x <= 550 + 158 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 42 &&
+           state->mouse_screen_pos.y <= 250 + 42 + 64)
+        {
+            is_mouse_on_augmentation_texture = TRUE;
+            mouse_augmentation_texture = right_hand_augmentation;
+        }
+        if(left_leg_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 10 &&
+           state->mouse_screen_pos.x <= 550 + 10 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 52 + 116 &&
+           state->mouse_screen_pos.y <= 250 + 52 + 116 + 64)
+        {
+            is_mouse_on_augmentation_texture = TRUE;
+            mouse_augmentation_texture = left_leg_augmentation;
+        }
+        if(torso_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 84 &&
+           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 52 + 84 &&
+           state->mouse_screen_pos.y <= 250 + 52 + 84 + 64)
+        {
+            is_mouse_on_augmentation_texture = TRUE;
+            mouse_augmentation_texture = torso_augmentation;
+        }
+        if(right_leg_augmentation != AUGMENTATION__NONE &&
+           state->mouse_screen_pos.x >= 550 + 158 &&
+           state->mouse_screen_pos.x <= 550 + 158 + 64 &&
+           state->mouse_screen_pos.y >= 250 + 52 + 116 &&
+           state->mouse_screen_pos.y <= 250 + 52 + 116 + 64)
+        {
+            is_mouse_on_augmentation_texture = TRUE;
+            mouse_augmentation_texture = right_leg_augmentation;
+        }
+
+        if(is_mouse_on_augmentation_texture)
+        {
+            draw_font_at_screen_pos(
+                get_augmentation_name(mouse_augmentation_texture),
+                renderer,
+                fonts->bit_operator_30,
+                colors->white,
+                1.0f,
+                vec2i(560, 530),
+                1
+            );
+        }
     }
 
     // fps
@@ -593,15 +813,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     {
         if(state->curr_ally->object->action_points > 0)
         {
-            draw_font_at_screen_pos(
-                get_in_game_name_from_object_type(state->curr_ally->object->type),
-                renderer,
-                fonts->bit_operator_30,
-                colors->white,
-                1.0f,
-                vec2i(10, 550 + 50),
-                1
-            );
+            int mouse_hover_skill = SKILL__NONE;
 
             for(int i = 0; i < 10; i++)
             {
@@ -642,10 +854,55 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                                 ),
                                 2
                             );
+
+                            if(state->mouse_screen_pos.x >= 138 + 10 * (i + 1) + 64 * i &&
+                            state->mouse_screen_pos.x <= 138 + 10 * (i + 1) + 64 * i + 64 &&
+                            state->mouse_screen_pos.y >= 600 + 50 + 10 * j + 64 * j &&
+                            state->mouse_screen_pos.y <= 600 + 50 + 10 * j + 64 * j + 64)
+                            {
+                                mouse_hover_skill = skill;
+                            }
                         }
                     }
                 }
             }
+
+            if(mouse_hover_skill == SKILL__NONE)
+            {
+                draw_font_at_screen_pos(
+                    get_in_game_name_from_object_type(state->curr_ally->object->type),
+                    renderer,
+                    fonts->bit_operator_30,
+                    colors->white,
+                    1.0f,
+                    vec2i(10, 550 + 50),
+                    1
+                );
+            }
+            else
+            {
+                draw_font_at_screen_pos(
+                    get_in_game_skill_name(mouse_hover_skill),
+                    renderer,
+                    fonts->bit_operator_30,
+                    colors->white,
+                    1.0f,
+                    vec2i(10, 550 + 50),
+                    1
+                );
+            }
+        }
+        else
+        {
+            draw_font_at_screen_pos(
+                get_in_game_name_from_object_type(state->curr_ally->object->type),
+                renderer,
+                fonts->bit_operator_30,
+                colors->white,
+                1.0f,
+                vec2i(10, 550 + 50),
+                1
+            );
         }
     }
     else if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||

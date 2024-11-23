@@ -7,7 +7,8 @@ Animation* skill_get_animation(
     Vec2i target_1_tilemap_pos,
     Vec2i target_2_tilemap_pos,
     Textures* textures,
-    Colors* colors
+    Colors* colors,
+    Sounds* sounds
 )
 {
     Object* source_object = room_get_object_at(
@@ -39,6 +40,22 @@ Animation* skill_get_animation(
 
     switch(skill)
     {
+        case SKILL__USE:
+        {
+            if(target_2_object->type == OBJECT__THRONE)
+            {
+                skill_animation = new_animation_play_sound(sounds->use_throne);
+            }
+            else if(is_object_station(target_2_object))
+            {
+                skill_animation = new_animation_play_sound(sounds->use_station);
+            }
+            else if(is_object_exit(target_2_object))
+            {
+                skill_animation = new_animation_play_sound(sounds->use_exit);
+            }
+        }
+        break;
         case SKILL__MANIPULATION:
         {
             Object* object = target_2_object;
@@ -46,22 +63,71 @@ Animation* skill_get_animation(
 
             if(object != NULL && is_object_manipulatable(object))
             {
-                skill_animation = object_on_manipulate_get_animation(
-                    state,
-                    object,
-                    target_2_tilemap_pos,
-                    textures
+                skill_animation = new_animation_sequence_of_2(
+                    new_animation_play_sound(sounds->manipulation),
+                    object_on_manipulate_get_animation(
+                        state,
+                        object,
+                        target_2_tilemap_pos,
+                        textures
+                    )
                 );
             }
             else if(floor != FLOOR__NONE && is_floor_manipulatable(floor))
             {
-                skill_animation = floor_on_manipulation_get_animation(
-                    state,
-                    floor,
-                    target_2_tilemap_pos,
-                    textures
+                skill_animation = new_animation_sequence_of_2(
+                    new_animation_play_sound(sounds->manipulation),
+                    floor_on_manipulation_get_animation(
+                        state,
+                        floor,
+                        target_2_tilemap_pos,
+                        textures
+                    )
                 );
             }
+        }
+        break;
+        case SKILL__TELEPORTATION:
+        {
+            skill_animation = new_animation_play_sound(sounds->teleportation);
+        }
+        break;
+        case SKILL__PICK_ITEM_CLOSE:
+        case SKILL__PUT_ITEM_CELL_CLOSE:
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
+        {
+            Animation* animation_sequence = new_animation_sequence();
+
+            if(skill == SKILL__PICK_ITEM_CLOSE)
+            {
+                add_animation_to_end_animation_sequence(
+                    animation_sequence,
+                    new_animation_play_sound(sounds->pick_up_close)
+                );
+            }
+            else
+            {
+                if(skill == SKILL__PUT_ITEM_GEMSTONE_CLOSE &&
+                target_2_object != NULL &&
+                (target_2_object->type == OBJECT__VENDING_CELL ||
+                target_2_object->type == OBJECT__VENDING_DYNAMITE))
+                {
+                    add_animation_to_end_animation_sequence(
+                        animation_sequence,
+                        new_animation_play_sound(sounds->vending)
+                    );
+                }
+                else
+                {
+                    add_animation_to_end_animation_sequence(
+                        animation_sequence,
+                        new_animation_play_sound(sounds->put_item)
+                    );
+                }
+            }
+
+            skill_animation = animation_sequence;
         }
         break;
         case SKILL__PICK_ITEM_FAR:
@@ -73,6 +139,11 @@ Animation* skill_get_animation(
                 get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_2_tilemap_pos);
 
             Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_play_sound(sounds->pick_up_far)
+            );
 
             for(int i = 0; i < distance_info.abs_diff + 1; i++)
             {
@@ -125,12 +196,45 @@ Animation* skill_get_animation(
                 );
             }
 
+            if(skill == SKILL__PICK_ITEM_FAR)
+            {
+                add_animation_to_end_animation_sequence(
+                    animation_sequence,
+                    new_animation_play_sound(sounds->pick_up_close)
+                );
+            }
+            else
+            {
+                if(skill == SKILL__PUT_ITEM_GEMSTONE_FAR &&
+                target_2_object != NULL &&
+                (target_2_object->type == OBJECT__VENDING_CELL ||
+                target_2_object->type == OBJECT__VENDING_DYNAMITE))
+                {
+                    add_animation_to_end_animation_sequence(
+                        animation_sequence,
+                        new_animation_play_sound(sounds->vending)
+                    );
+                }
+                else
+                {
+                    add_animation_to_end_animation_sequence(
+                        animation_sequence,
+                        new_animation_play_sound(sounds->put_item)
+                    );
+                }
+            }
+
             skill_animation = animation_sequence;
         }
         break;
         case SKILL__THROW_ITEM_CELL:
         {
             Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_play_sound(sounds->throww)
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -158,6 +262,11 @@ Animation* skill_get_animation(
         case SKILL__THROW_ITEM_DYNAMITE:
         {
             Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_play_sound(sounds->throww)
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -194,6 +303,11 @@ Animation* skill_get_animation(
         case SKILL__THROW_ITEM_GEMSTONE:
         {
             Animation* animation_sequence = new_animation_sequence();
+
+            add_animation_to_end_animation_sequence(
+                animation_sequence,
+                new_animation_play_sound(sounds->throww)
+            );
 
             add_animation_to_end_animation_sequence(
                 animation_sequence,
@@ -383,13 +497,21 @@ Animation* skill_get_animation(
         break;
         case SKILL__LAUNCH_MINIBOT:
         {
-            skill_animation = new_animation_move_sprite_in_gamemap_in_arch(
-                textures->animation.minibot,
-                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
-                1.0f
+            skill_animation = new_animation_sequence_of_2(
+                new_animation_play_sound(sounds->minibot_launch),
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    textures->animation.minibot,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    1.0f
+                )
             );
+        }
+        break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            skill_animation = new_animation_play_sound(sounds->minibot_merge);
         }
         break;
         case SKILL__TURRET_LASER:

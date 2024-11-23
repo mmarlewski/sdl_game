@@ -180,14 +180,14 @@ char* get_in_game_skill_name(int skill)
         case SKILL__MOVE_FLYING:                name = "move"; break;
 
         case SKILL__PICK_ITEM_CLOSE:            name = "pick item"; break;
-        case SKILL__PICK_ITEM_FAR:              name = "pick item"; break;
+        case SKILL__PICK_ITEM_FAR:              name = "pick item (far)"; break;
 
         case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put item cell"; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell"; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell (far)"; break;
         case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put item dynamite"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite (far)"; break;
         case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put item gemstone"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone (far)"; break;
 
         case SKILL__THROW_ITEM_CELL:            name = "throw item cell"; break;
         case SKILL__THROW_ITEM_DYNAMITE:        name = "throw item dynamite"; break;
@@ -919,14 +919,14 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__MOVE_FLYING:                texture = textures->hud.move; break;
 
         case SKILL__PICK_ITEM_CLOSE:            texture = textures->hud.pick_item; break;
-        case SKILL__PICK_ITEM_FAR:              texture = textures->hud.pick_item; break;
+        case SKILL__PICK_ITEM_FAR:              texture = textures->hud.pick_item_far; break;
 
         case SKILL__PUT_ITEM_CELL_CLOSE:        texture = textures->hud.put_item_cell; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          texture = textures->hud.put_item_cell; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          texture = textures->hud.put_item_cell_far; break;
         case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    texture = textures->hud.put_item_dynamite; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      texture = textures->hud.put_item_dynamite; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      texture = textures->hud.put_item_dynamite_far; break;
         case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    texture = textures->hud.put_item_gemstone; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      texture = textures->hud.put_item_gemstone; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      texture = textures->hud.put_item_gemstone_far; break;
 
         case SKILL__THROW_ITEM_CELL:            texture = textures->hud.throw_item_cell; break;
         case SKILL__THROW_ITEM_DYNAMITE:        texture = textures->hud.throw_item_dynamite; break;

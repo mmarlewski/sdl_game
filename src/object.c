@@ -403,7 +403,7 @@ int is_object_pull_towards(Object* object)
         case OBJECT__LEVER_STONE_UNPOWERED:            is = 1; break;
         case OBJECT__LEVER_STONE_POWERED:              is = 1; break;
 
-        default:                                        is = 0; break;
+        default:                                       is = 0; break;
     }
 
     return is;
@@ -855,11 +855,6 @@ int is_object_movable(Object* object)
         case OBJECT__STAIRS_ABOVE_ROCK:                is = 0; break;
         case OBJECT__STAIRS_ABOVE_METAL_ON:            is = 0; break;
         case OBJECT__STAIRS_ABOVE_METAL:               is = 0; break;
-
-        case OBJECT__HARPOON_GUN_UP:                    is = 1; break;
-        case OBJECT__HARPOON_GUN_RIGHT:                 is = 1; break;
-        case OBJECT__HARPOON_GUN_DOWN:                  is = 1; break;
-        case OBJECT__HARPOON_GUN_LEFT:                  is = 1; break;
 
         default: break;
     }
