@@ -174,7 +174,10 @@ void skill_on_use(
                             }
 
                             // save state
+
+                            state->curr_ally->object->action_points--;
                             save_state(state, textures);
+                            state->curr_ally->object->action_points++;
                         }
                     }
                 }

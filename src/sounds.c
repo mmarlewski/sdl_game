@@ -47,7 +47,7 @@ void load_sounds(Sounds* sounds)
     sounds->falling_stalactite = get_sound_from_filepath("./res/sound/hamer-90566-quieter.mp3");
     sounds->emerge_water = get_sound_from_filepath("./res/sound/water-splash-199583-shorter.mp3");
     sounds->emerge_pit = get_sound_from_filepath("./res/sound/wings-of-insects-45540.mp3");
-    sounds->emerge_burrow = get_sound_from_filepath("./res/sound/dig-wet-sand-04-102880.mp3");
+    sounds->emerge_burrow = get_sound_from_filepath("./res/sound/dig-wet-sand-04-102880-louder.mp3");
     sounds->emerge_pipe = get_sound_from_filepath("./res/sound/infographic-pop-2-197871.mp3");
     sounds->collapse_burrow = get_sound_from_filepath("./res/sound/rocks-and-gravel-slide-1-204994-quieter.mp3");
     sounds->conv_belt = get_sound_from_filepath("./res/sound/servomotor-104111.mp3");

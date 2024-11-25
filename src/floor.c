@@ -94,6 +94,7 @@ int is_floor_stomp(int floor)
         case FLOOR__STONE_STAIRS_BELOW_BLOCKED:
         case FLOOR__WATER_LILY_POD:
         case FLOOR__STONE_TRAP:
+        case FLOOR__GOLD_TRAP:
         case FLOOR__ICE:
         case FLOOR__ICE_CRACK_WATER:
         case FLOOR__ROCK_CRACK_WATER:
@@ -117,6 +118,7 @@ int is_floor_meltable(int floor)
     switch(floor)
     {
         case FLOOR__STONE_TRAP:         is = 1; break;
+        case FLOOR__GOLD_TRAP:         is = 1; break;
         case FLOOR__METAL_SPIKES_ON:    is = 1; break;
         case FLOOR__METAL_SPIKES_OFF:   is = 1; break;
         default: break;
@@ -183,6 +185,7 @@ int is_floor_traversable(int floor)
         case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 1; break;
         case FLOOR__GOLD:                      is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 0; break;
         case FLOOR__MARBLE:                    is = 1; break;
         case FLOOR__OBSIDIAN:                  is = 1; break;
         case FLOOR__GRASS:                     is = 1; break;
@@ -253,6 +256,7 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 1; break;
         case FLOOR__GOLD:                      is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 0; break;
         case FLOOR__MARBLE:                    is = 1; break;
         case FLOOR__OBSIDIAN:                  is = 1; break;
         case FLOOR__GRASS:                     is = 1; break;
@@ -323,6 +327,7 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR__METAL_PISTON_MIMIC:        is = 1; break;
         case FLOOR__METAL_NO_PISTON:           is = 1; break;
         case FLOOR__GOLD:                      is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 1; break;
         case FLOOR__MARBLE:                    is = 1; break;
         case FLOOR__OBSIDIAN:                  is = 1; break;
         case FLOOR__GRASS:                     is = 1; break;
@@ -377,6 +382,7 @@ int is_floor_deadly_on_move(int floor)
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
         case FLOOR__STONE_TRAP:                is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 1; break;
         case FLOOR__METAL_SPIKES_ON:           is = 1; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 0; break;
         case FLOOR__METAL:                     is = 0; break;
@@ -431,6 +437,7 @@ int is_floor_deadly_on_move_for_floating(int floor)
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
         case FLOOR__STONE_TRAP:                is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 1; break;
         case FLOOR__METAL_SPIKES_ON:           is = 1; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 0; break;
         case FLOOR__METAL:                     is = 0; break;
@@ -485,6 +492,7 @@ int is_floor_deadly_on_move_for_flying(int floor)
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
         case FLOOR__STONE_TRAP:                is = 0; break;
+        case FLOOR__GOLD_TRAP:                 is = 0; break;
         case FLOOR__METAL_SPIKES_ON:           is = 0; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 0; break;
         case FLOOR__METAL:                     is = 0; break;
@@ -540,6 +548,7 @@ int is_floor_deadly_on_drop(int floor)
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
         case FLOOR__STONE:                     is = 0; break;
         case FLOOR__STONE_TRAP:                is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 1; break;
         case FLOOR__METAL_SPIKES_ON:           is = 1; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 0; break;
         case FLOOR__METAL:                     is = 0; break;
@@ -595,6 +604,7 @@ int is_floor_deadly_on_drop_for_floating(int floor)
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
         case FLOOR__STONE:                     is = 0; break;
         case FLOOR__STONE_TRAP:                is = 1; break;
+        case FLOOR__GOLD_TRAP:                 is = 1; break;
         case FLOOR__METAL_SPIKES_ON:           is = 1; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 0; break;
         case FLOOR__METAL:                     is = 0; break;
@@ -650,6 +660,7 @@ int is_floor_deadly_on_drop_for_flying(int floor)
         case FLOOR__ROCK_CRACK_PIT:            is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
         case FLOOR__STONE_TRAP:                is = 0; break;
+        case FLOOR__GOLD_TRAP:                 is = 0; break;
         case FLOOR__METAL_SPIKES_ON:           is = 0; break;
         case FLOOR__METAL_SPIKES_OFF:          is = 0; break;
         case FLOOR__METAL:                     is = 0; break;
@@ -837,6 +848,7 @@ char* get_in_game_name_from_floor(int floor)
         case FLOOR__ROCK_CRACK_PIT:                     name = "crack"; break;
         case FLOOR__STONE:                              name = "stone"; break;
         case FLOOR__STONE_TRAP:                         name = "trap"; break;
+        case FLOOR__GOLD_TRAP:                          name = "trap"; break;
         case FLOOR__METAL_SPIKES_ON:                    name = "spikes"; break;
         case FLOOR__METAL_SPIKES_OFF:                   name = "metal"; break;
         case FLOOR__METAL:                              name = "metal"; break;
@@ -908,6 +920,7 @@ char* get_debug_name_from_floor(int floor)
         case FLOOR__ROCK_CRACK_PIT:                     name = "rock crack pit"; break;
         case FLOOR__STONE:                              name = "stone"; break;
         case FLOOR__STONE_TRAP:                         name = "stone trap"; break;
+        case FLOOR__GOLD_TRAP:                          name = "gold trap"; break;
         case FLOOR__METAL_SPIKES_ON:                    name = "metal spikes on"; break;
         case FLOOR__METAL_SPIKES_OFF:                   name = "metal spikes off"; break;
         case FLOOR__METAL:                              name = "metal"; break;
@@ -978,6 +991,7 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR__ROCK_CRACK_PIT:            texture = textures->floor.rock_crack_pit; break;
         case FLOOR__STONE:                     texture = textures->floor.stone; break;
         case FLOOR__STONE_TRAP:                texture = textures->floor.stone_trap; break;
+        case FLOOR__GOLD_TRAP:                 texture = textures->floor.gold_trap; break;
         case FLOOR__METAL_SPIKES_ON:           texture = textures->floor.metal_spikes_on; break;
         case FLOOR__METAL_SPIKES_OFF:          texture = textures->floor.metal_spikes_off; break;
         case FLOOR__METAL:                     texture = textures->floor.metal; break;
@@ -1048,6 +1062,7 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR__ROCK_CRACK_PIT:            texture = textures->floor.rock_crack_pit; break;
         case FLOOR__STONE:                     texture = textures->floor.stone; break;
         case FLOOR__STONE_TRAP:                texture = textures->floor.stone_trap; break;
+        case FLOOR__GOLD_TRAP:                 texture = textures->floor.gold_trap; break;
         case FLOOR__METAL_SPIKES_ON:           texture = textures->floor.metal_spikes_on; break;
         case FLOOR__METAL_SPIKES_OFF:          texture = textures->floor.metal_spikes_off; break;
         case FLOOR__METAL:                     texture = textures->floor.metal; break;

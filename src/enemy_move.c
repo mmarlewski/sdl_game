@@ -1,7 +1,7 @@
 #include "../inc/state.h"
 #include <math.h>
 
-void object_enemy_prepare_move(State* state, Enemy* enemy)
+void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 {
     Object* enemy_object = enemy->object;
     int enemy_move_skill = SKILL__MOVE;
@@ -54,6 +54,10 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
                 );
                 Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
+                add_action_to_end_action_sequence(
+                    enemy->action_sequence,
+                    new_action_play_sound(random_tilemap_pos, sounds->emerge_burrow)
+                );
                 add_action_to_end_action_sequence(
                     enemy->action_sequence,
                     new_action_change_object_tilemap_pos(
@@ -264,6 +268,10 @@ void object_enemy_prepare_move(State* state, Enemy* enemy)
 
                 if(enemy->object->type == OBJECT__SQUID)
                 {
+                    add_action_to_end_action_sequence(
+                        enemy->action_sequence,
+                        new_action_play_sound(random_tilemap_pos, sounds->emerge_water)
+                    );
                     add_action_to_end_action_sequence(
                         enemy->action_sequence,
                         new_action_change_object_tilemap_pos(

@@ -639,6 +639,30 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 state->curr_ally->object->type == OBJECT__HERO_FLYING
                 )
                 {
+                    if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
+                    {
+                        skill = SKILL__PICK_ITEM_FAR;
+                    }
+                    else
+                    {
+                        skill = SKILL__PICK_ITEM_CLOSE;
+                    }
+                }
+                else if(
+                state->curr_ally->object->type == OBJECT__MINIBOT_ALLY
+                )
+                {
+                    skill = SKILL__PICK_ITEM_CLOSE;
+                }
+            }
+            if(input->was_key[KEY__4] && !input->is_key[KEY__4])
+            {
+                if(
+                state->curr_ally->object->type == OBJECT__HERO ||
+                state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+                state->curr_ally->object->type == OBJECT__HERO_FLYING
+                )
+                {
                     if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
                     {
                         skill = SKILL__MANIPULATION;
@@ -1199,7 +1223,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             {
                 state->timer = 0.0f;
 
-                object_enemy_prepare_move(state, state->curr_enemy);
+                object_enemy_prepare_move(state, state->curr_enemy, sounds);
 
                 execute_action_sequence(state, state->enemy_action_sequence, textures, sounds, musics, colors);
 

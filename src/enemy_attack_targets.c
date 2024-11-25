@@ -505,7 +505,9 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
 
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i < 10; i++)
+                int go_on = TRUE;
+
+                for(int i = 1; i < OBJECT_TURRET_RANGE + 1 && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         enemy_object->tilemap_pos,
@@ -518,12 +520,19 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object != NULL && is_object_meltable(object))
+                    if(object != NULL)
                     {
-                        if(i < min_diff)
+                        if(is_object_meltable(object))
                         {
-                            min_diff = i;
-                            chosen_dir4 = dir4;
+                            if(i < min_diff)
+                            {
+                                min_diff = i;
+                                chosen_dir4 = dir4;
+                            }
+                        }
+                        else
+                        {
+                            go_on = FALSE;
                         }
                     }
                 }

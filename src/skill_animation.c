@@ -81,7 +81,8 @@ Animation* skill_get_animation(
                         state,
                         floor,
                         target_2_tilemap_pos,
-                        textures
+                        textures,
+                        sounds
                     )
                 );
             }

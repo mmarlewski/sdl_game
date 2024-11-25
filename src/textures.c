@@ -12,6 +12,7 @@ void load_textures_floor(Renderer* renderer, Textures_Floor* floor)
 
     floor->stone = load_texture_from_filepath(renderer, "./res/floor/stone.png");
     floor->stone_trap = load_texture_from_filepath(renderer, "./res/floor/stone_trap.png");
+    floor->gold_trap = load_texture_from_filepath(renderer, "./res/floor/gold_trap.png");
 
     floor->metal = load_texture_from_filepath(renderer, "./res/floor/metal.png");
     floor->metal_spikes_on = load_texture_from_filepath(renderer, "./res/floor/metal_spikes_on.png");

@@ -118,6 +118,13 @@ void floor_on_move_end(State* state, Sounds* sounds, Action* sequence, Action* a
             add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR__STONE, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
         }
         break;
+        case FLOOR__GOLD_TRAP:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+            add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR__GOLD, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+        }
+        break;
         case FLOOR__ICE:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -316,6 +323,13 @@ void floor_on_move_floating_end(State* state, Sounds* sounds, Action* sequence, 
             add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR__STONE, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
         }
         break;
+        case FLOOR__GOLD_TRAP:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(sequence, new_action_death(action->move.object, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+            add_action_after_curr_action_action_sequence(sequence, new_action_change_floor(FLOOR__GOLD, vec2i_move_in_dir4_by(action->tilemap_pos, action->move.dir4, 1)));
+        }
+        break;
         case FLOOR__ICE:
         {
             remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -401,6 +415,25 @@ void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* actio
                 sequence,
                 new_action_change_floor(
                     FLOOR__STONE,
+                    action->tilemap_pos
+                )
+            );
+        }
+        break;
+        case FLOOR__GOLD_TRAP:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_death(
+                    action->move.object,
+                    action->tilemap_pos
+                )
+            );
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__GOLD,
                     action->tilemap_pos
                 )
             );
@@ -518,6 +551,7 @@ void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* actio
         }
         break;
         case FLOOR__LAVA:
+        case FLOOR__METAL_HATCH_OPEN:
         {
             if(action->drop.object->type == OBJECT__COLUMN)
             {
@@ -630,6 +664,25 @@ void floor_on_drop_floating(State* state, Sounds* sounds, Action* sequence, Acti
             );
         }
         break;
+        case FLOOR__GOLD_TRAP:
+        {
+            remove_all_actions_after_curr_action_action_sequence(sequence);
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_death(
+                    action->move.object,
+                    action->tilemap_pos
+                )
+            );
+            add_action_after_curr_action_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__GOLD,
+                    action->tilemap_pos
+                )
+            );
+        }
+        break;
         case FLOOR__ROCK_CRACK_WATER:
         {
             room_change_floor_at(
@@ -726,6 +779,19 @@ void floor_on_melt(State* state, Sounds* sounds, Action* sequence, Action* actio
                 sequence,
                 new_action_change_floor(
                     FLOOR__STONE,
+                    action->tilemap_pos
+                )
+            );
+        }
+        break;
+        case FLOOR__GOLD_TRAP:
+        {
+            play_sound(sounds->melt);
+
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__GOLD,
                     action->tilemap_pos
                 )
             );
@@ -878,6 +944,17 @@ void floor_on_stomp(State* state, Sounds* sounds, Action* sequence, int floor, V
                 sequence,
                 new_action_change_floor(
                     FLOOR__STONE,
+                    tilemap_pos
+                )
+            );
+        }
+        break;
+        case FLOOR__GOLD_TRAP:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(
+                    FLOOR__GOLD,
                     tilemap_pos
                 )
             );
@@ -1327,40 +1404,15 @@ void floor_on_manipulation(State* state, Sounds* sounds, Action* sequence, int f
     }
 }
 
-Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures)
+Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures, Sounds* sounds)
 {
     Animation* animation = new_animation_none();
 
     switch(floor)
     {
-        case FLOOR__METAL_PISTON:
+        case FLOOR__METAL_PISTON_MIMIC:
         {
-            //
-        }
-        break;
-        case FLOOR__METAL_SPIKES_OFF:
-        {
-            //
-        }
-        break;
-        case FLOOR__METAL_SPIKES_ON:
-        {
-            //
-        }
-        break;
-        case FLOOR__METAL_HATCH_CLOSED:
-        {
-            //
-        }
-        break;
-        case FLOOR__METAL_HATCH_OPEN:
-        {
-            //
-        }
-        break;
-        case FLOOR__METAL_STAIRS_ABOVE_OFF:
-        {
-            //
+            animation = new_animation_play_sound(sounds->use_station);
         }
         break;
         default:

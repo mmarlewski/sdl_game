@@ -35,6 +35,7 @@ typedef struct
     Texture* metal_no_piston;
 
     Texture* gold;
+    Texture* gold_trap;
 
     Texture* marble;
 

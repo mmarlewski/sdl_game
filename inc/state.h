@@ -175,7 +175,7 @@ void floor_on_break(State* state, Sounds* sounds, Action* sequence, Action* acti
 void floor_on_shake(State* state, Sounds* sounds, Action* sequence, Action* action, int floor);
 void floor_on_stomp(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos);
 void floor_on_manipulation(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos);
-Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures);
+Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i tilemap_pos, Textures* textures, Sounds* sounds);
 void floor_on_pick_item(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos);
 void floor_on_put_item(State* state, Sounds* sounds, Action* sequence, int floor, Vec2i tilemap_pos, int item_type);
 
@@ -199,7 +199,7 @@ void skill_get_possible_target_2_pos(State* state, int skill, Vec2i source_tilem
 Animation* skill_get_animation(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Textures* textures, Colors* colors, Sounds* sounds);
 void skill_get_actions_and_draw(State* state, int skill, Vec2i source_tilemap_pos, Vec2i target_1_tilemap_pos, Vec2i target_2_tilemap_pos, Action* action_sequence, List* draw_below_texture_list, List* draw_below_tilemap_pos_list, List* draw_above_texture_list, List* draw_above_tilemap_pos_list, List* draw_effect_texture_list, List* draw_effect_tilemap_pos_list, Textures* textures, Sounds* sounds);
 
-void object_enemy_prepare_move(State* state, Enemy* enemy);
+void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds);
 void update_enemy_attack_dir4(State* state, Enemy* enemy);
 void update_enemy_attack_targets(State* state, Enemy* enemy);
 

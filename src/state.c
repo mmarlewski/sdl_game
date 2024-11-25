@@ -114,7 +114,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(7, 2)
+        vec2i(7,2)
     );
     set_curr_room(
         state,
@@ -126,17 +126,6 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
         state->visited_room_list,
         room
     );
-
-    Animation* animation_fade_in = new_animation_fade_in_sprite_in_gamemap(
-                    textures->object.station_outline,
-                    vec2f(1,8),
-                    0.5f
-                    );
-    Animation* animation_fade_out = new_animation_fade_out_sprite_in_gamemap(
-                    textures->object.station_outline,
-                    vec2f(1,8),
-                    0.5f
-                    );
 
     add_animation_to_animation_list(
         state,
@@ -572,9 +561,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
         {
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
-            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
+            add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
         }
         break;
         case OBJECT__MINIBOT_ALLY_CELL:
@@ -582,7 +570,6 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_CELL_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_CELL);
         }
@@ -592,7 +579,6 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_DYNAMITE_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_DYNAMITE);
         }
@@ -602,7 +588,6 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__USE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__MINIBOT_MERGE);
-
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUT_ITEM_GEMSTONE_CLOSE);
             add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_ITEM_GEMSTONE);
         }
@@ -628,6 +613,17 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             if(object->type == OBJECT__HERO_FLYING)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__MOVE_FLYING);
+            }
+
+            // pick item
+
+            if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_FAR);
+            }
+            else
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
             }
 
             // augmentation
@@ -711,16 +707,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_CARRY);
             }
 
-            // item
+            // put item and throw item
 
-            if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_FAR);
-            }
-            else
-            {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PICK_ITEM_CLOSE);
-            }
             if(state->hero_item_number[ITEM__CELL] > 0)
             {
                 if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
