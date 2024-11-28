@@ -47,6 +47,7 @@ typedef struct
     Sound* minibot_merge;
 
     Sound* stomp;
+    Sound* mimic;
 
     Sound* falling_stalactite;
     Sound* emerge_water;

@@ -635,14 +635,37 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(10, 120 + 100),
             4
         );
-        draw_texture_at_screen_pos(
-            renderer,
-            get_texture_order_number(textures, state->hero_item_number[ITEM__CELL]),
-            colors->none,
-            1.0f,
-            vec2i(32, 120 + 100),
-            2
-        );
+        if(state->hero_item_number[ITEM__CELL] > 9)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__CELL] / 10),
+                colors->none,
+                1.0f,
+                vec2i(32, 120 + 100),
+                2
+            );
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__CELL] % 10),
+                colors->none,
+                1.0f,
+                vec2i(64, 120 + 100),
+                2
+            );
+        }
+        else
+        {
+
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__CELL]),
+                colors->none,
+                1.0f,
+                vec2i(32, 120 + 100),
+                2
+            );
+        }
 
         draw_texture_at_screen_pos(
             renderer,
@@ -652,14 +675,37 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(10, 194 + 100),
             4
         );
-        draw_texture_at_screen_pos(
-            renderer,
-            get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE]),
-            colors->none,
-            1.0f,
-            vec2i(32, 194 + 100),
-            2
-        );
+        if(state->hero_item_number[ITEM__DYNAMITE] > 9)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE] / 10),
+                colors->none,
+                1.0f,
+                vec2i(32, 194 + 100),
+                2
+            );
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE] % 10),
+                colors->none,
+                1.0f,
+                vec2i(64, 194 + 100),
+                2
+            );
+        }
+        else
+        {
+
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE]),
+                colors->none,
+                1.0f,
+                vec2i(32, 194 + 100),
+                2
+            );
+        }
 
         draw_texture_at_screen_pos(
             renderer,
@@ -669,14 +715,37 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(10, 268 + 100),
             4
         );
-        draw_texture_at_screen_pos(
-            renderer,
-            get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE]),
-            colors->none,
-            1.0f,
-            vec2i(32, 268 + 100),
-            2
-        );
+        if(state->hero_item_number[ITEM__GEMSTONE] > 9)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE] / 10),
+                colors->none,
+                1.0f,
+                vec2i(32, 268 + 100),
+                2
+            );
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE] % 10),
+                colors->none,
+                1.0f,
+                vec2i(64, 268 + 100),
+                2
+            );
+        }
+        else
+        {
+
+            draw_texture_at_screen_pos(
+                renderer,
+                get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE]),
+                colors->none,
+                1.0f,
+                vec2i(32, 268 + 100),
+                2
+            );
+        }
 
         int is_mouse_on_item = FALSE;
         int mouse_item = ITEM__NONE;

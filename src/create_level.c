@@ -1656,6 +1656,12 @@ void create_level(State* state, Textures* textures)
         vec2i(2, 9)
     );
 
+    room_add_object_at(
+        room_0_5,
+        new_object(OBJECT__MINIBOT_ENEMY_CELL),
+        vec2i(6,2)
+    );
+
     // passages
 
     add_passage(state, new_passage(

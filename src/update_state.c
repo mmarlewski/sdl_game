@@ -372,7 +372,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
         case GAMESTATE__ALLY_CHOOSING_SKILL:
         {
             // change curr ally left
-            if(input->was_key[KEY__LEFT] && !input->is_key[KEY__LEFT])
+            if((input->was_key[KEY__LEFT] && !input->is_key[KEY__LEFT]) ||
+            (input->was_key[KEY__A] && !input->is_key[KEY__A]))
             {
                 ListElem* curr_elem = state->curr_ally_list_elem;
                 if(curr_elem != NULL)
@@ -385,6 +386,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = prev_elem;
                             state->curr_ally = prev_ally;
+                            state->curr_ally_object = prev_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -398,6 +400,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = tail_elem;
                             state->curr_ally = tail_ally;
+                            state->curr_ally_object = tail_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -407,7 +410,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             }
 
             // change curr ally right
-            if(input->was_key[KEY__RIGHT] && !input->is_key[KEY__RIGHT])
+            if((input->was_key[KEY__RIGHT] && !input->is_key[KEY__RIGHT]) ||
+            (input->was_key[KEY__D] && !input->is_key[KEY__D]))
             {
                 ListElem* curr_elem = state->curr_ally_list_elem;
                 if(curr_elem != NULL)
@@ -420,6 +424,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = next_elem;
                             state->curr_ally = next_ally;
+                            state->curr_ally_object = next_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -433,6 +438,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = head_elem;
                             state->curr_ally = head_ally;
+                            state->curr_ally_object = head_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -461,6 +467,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         {
                             state->curr_ally_list_elem = new_ally_elem;
                             state->curr_ally = potential_new_ally;
+                            state->curr_ally_object = potential_new_ally->object;
 
                             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                             break;
@@ -1009,10 +1016,11 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     if(curr_ally != NULL)
                     {
                         if(curr_ally->object != NULL &&
-                           curr_ally->object == state->curr_ally->object)
+                           curr_ally->object == state->curr_ally_object)
                         {
                             state->curr_ally_list_elem = curr_elem;
                             state->curr_ally = curr_ally;
+                            state->curr_ally_object = curr_ally->object;
                             was_prev_ally_chosen = TRUE;
                         }
                     }
@@ -1377,10 +1385,11 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         if(curr_ally != NULL)
                         {
                             if(curr_ally->object != NULL &&
-                               curr_ally->object == state->curr_ally->object)
+                               curr_ally->object == state->curr_ally_object)
                             {
                                 state->curr_ally_list_elem = curr_elem;
                                 state->curr_ally = curr_ally;
+                                state->curr_ally_object = curr_ally->object;
                                 was_prev_ally_chosen = TRUE;
                             }
                         }

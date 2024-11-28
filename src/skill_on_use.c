@@ -28,8 +28,7 @@ void skill_on_use(
                 }
                 else if(is_object_station(target_2_object))
                 {
-                    int augmentation =
-                        get_station_augmentation(target_2_object);
+                    int augmentation = get_station_augmentation(target_2_object);
                     hero_add_augmentation(state, augmentation);
                 }
                 else if(is_object_exit(target_2_object))

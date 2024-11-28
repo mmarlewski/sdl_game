@@ -46,8 +46,11 @@ void skill_get_possible_target_2_pos(
 
                     if(object != NULL &&
                        (object->type == OBJECT__THRONE ||
-                        is_object_station(object) ||
-                        is_object_exit(object)))
+                        is_object_exit(object) ||
+                        ((source_object->type == OBJECT__HERO || 
+                        source_object->type == OBJECT__HERO_FLOATING || 
+                        source_object->type == OBJECT__HERO_FLYING) && 
+                        is_object_station(object))))
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -203,7 +206,7 @@ void skill_get_possible_target_2_pos(
                             );
                         }
 
-                        if(object != NULL)
+                        if(object != NULL && (!is_object_throw_over(object) || is_object_wall(object)))
                         {
                             go_on = FALSE;
                         }

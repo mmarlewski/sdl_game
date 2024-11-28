@@ -1412,7 +1412,7 @@ Animation* floor_on_manipulation_get_animation(State* state, int floor, Vec2i ti
     {
         case FLOOR__METAL_PISTON_MIMIC:
         {
-            animation = new_animation_play_sound(sounds->use_station);
+            animation = new_animation_play_sound(sounds->mimic);
         }
         break;
         default:
@@ -1856,21 +1856,25 @@ void object_on_drop(State* state, Sounds* sounds, Action* sequence, Action* acti
         case OBJECT__BALL:
         case OBJECT__BALL_SPIKES:
         {
-            if(action->drop.dir4 != DIR4__NONE)
+            int floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
+            if(!is_floor_deadly_on_drop_for_object(floor, object))
             {
-                for(int i = 0; i < 5; i++)
+                if(action->drop.dir4 != DIR4__NONE)
                 {
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_move(
-                            vec2i_move_in_dir4_by(
-                                action->tilemap_pos,
-                                action->drop.dir4,
-                                i
-                            ),
-                            action->drop.dir4
-                        )
-                    );
+                    for(int i = 0; i < 5; i++)
+                    {
+                        add_action_to_end_action_sequence(
+                            sequence,
+                            new_action_move(
+                                vec2i_move_in_dir4_by(
+                                    action->tilemap_pos,
+                                    action->drop.dir4,
+                                    i
+                                ),
+                                action->drop.dir4
+                            )
+                        );
+                    }
                 }
             }
         }
@@ -2043,6 +2047,21 @@ void object_on_melt(State* state, Sounds* sounds, Action* sequence, Action* acti
                     OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM,
                     object->tilemap_pos
                 )
+            );
+        }
+        break;
+        case OBJECT__PISTON:
+        case OBJECT__PISTON_CELL:
+        case OBJECT__PISTON_DYNAMITE:
+        case OBJECT__PISTON_BARREL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(object, object->tilemap_pos)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_change_floor(FLOOR__METAL_NO_PISTON, object->tilemap_pos)
             );
         }
         break;

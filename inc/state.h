@@ -95,6 +95,7 @@ typedef struct
     List* ally_list;
     ListElem* curr_ally_list_elem;
     Ally* curr_ally;
+    Object* curr_ally_object;
     int curr_ally_skill;
     int ally_move_distance;
     Vec2i curr_ally_target_1_tilemap_pos;

@@ -47,6 +47,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->ally_list = new_list((void (*)(void*)) & destroy_ally);
     state->curr_ally_list_elem = NULL;
     state->curr_ally = NULL;
+    state->curr_ally_object = NULL;
     state->curr_ally_skill = SKILL__NONE;
     state->ally_move_distance = 0;
     state->curr_ally_target_1_tilemap_pos = vec2i(0, 0);

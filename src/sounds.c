@@ -43,6 +43,7 @@ void load_sounds(Sounds* sounds)
     sounds->minibot_merge = get_sound_from_filepath("./res/sound/metal-whoosh-hit-3-201902-quieter.mp3");
 
     sounds->stomp = get_sound_from_filepath("./res/sound/lettuce-48162.mp3");
+    sounds->mimic = get_sound_from_filepath("./res/sound/surprise-sound-effect-99300-edited.mp3");
 
     sounds->falling_stalactite = get_sound_from_filepath("./res/sound/hamer-90566-quieter.mp3");
     sounds->emerge_water = get_sound_from_filepath("./res/sound/water-splash-199583-shorter.mp3");

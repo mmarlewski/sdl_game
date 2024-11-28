@@ -170,10 +170,28 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
 
                     if(object == NULL)
                     {
-                        add_new_list_element_to_list_end(
-                            possible_emerge_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
+                        int is_exit_around = FALSE;
+                        for(int dir4 = DIR4__NONE + 1; dir4 < DIR4__COUNT; dir4++)
+                        {
+                            Vec2i tilemap_pos_around = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
+                            if(is_tilemap_in_bounds(tilemap_pos_around))
+                            {
+                                Object* object_around = room_get_object_at(state->curr_room,tilemap_pos_around);
+                                if(object_around != NULL && is_object_exit(object_around))
+                                {
+                                    is_exit_around = TRUE;
+                                }
+                            }
+                        }
+
+                        if(!is_exit_around)
+                        {
+                            add_new_list_element_to_list_end(
+                                possible_emerge_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+
                     }
                 }
             }
@@ -203,6 +221,27 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:
         {
+            int num_of_squid_objects = 0;
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i, j);
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+                    if(object != NULL && object->type == OBJECT__SQUID)
+                    {
+                        num_of_squid_objects++;
+                    }
+                }
+            }
+
+            if(num_of_squid_objects >= SPAWN_LIMIT)
+            {
+                enemy->object->attack_dir4 = -1;
+                break;
+            }
+
             List* possible_emerge_tilemap_pos_list =
                 new_list((void (*)(void*)) & destroy_vec2i);
 
@@ -255,6 +294,27 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         break;
         case OBJECT__ENVIRONMENT_EMERGE_PIT:
         {
+            int num_of_squid_objects = 0;
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i, j);
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+                    if(object != NULL && object->type == OBJECT__FLY)
+                    {
+                        num_of_squid_objects++;
+                    }
+                }
+            }
+
+            if(num_of_squid_objects >= SPAWN_LIMIT)
+            {
+                enemy->object->attack_dir4 = -1;
+                break;
+            }
+
             List* possible_emerge_tilemap_pos_list =
                 new_list((void (*)(void*)) & destroy_vec2i);
 
@@ -307,6 +367,27 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         break;
         case OBJECT__ENVIRONMENT_EMERGE_BURROW:
         {
+            int num_of_squid_objects = 0;
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i, j);
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+                    if(object != NULL && object->type == OBJECT__MOLE)
+                    {
+                        num_of_squid_objects++;
+                    }
+                }
+            }
+
+            if(num_of_squid_objects >= SPAWN_LIMIT)
+            {
+                enemy->object->attack_dir4 = -1;
+                break;
+            }
+
             List* possible_emerge_tilemap_pos_list =
                 new_list((void (*)(void*)) & destroy_vec2i);
 
@@ -359,6 +440,27 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         break;
         case OBJECT__ENVIRONMENT_EMERGE_PIPE:
         {
+            int num_of_squid_objects = 0;
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i, j);
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+                    if(object != NULL && object->type == OBJECT__MINIBOT_ENEMY)
+                    {
+                        num_of_squid_objects++;
+                    }
+                }
+            }
+
+            if(num_of_squid_objects >= SPAWN_LIMIT)
+            {
+                enemy->object->attack_dir4 = -1;
+                break;
+            }
+
             List* possible_emerge_tilemap_pos_list =
                 new_list((void (*)(void*)) & destroy_vec2i);
 

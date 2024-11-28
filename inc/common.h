@@ -61,6 +61,8 @@ typedef TTF_Font Font;
 
 #define OBJECT_TURRET_RANGE 3
 
+#define SPAWN_LIMIT 4
+
 #define SKILL_PICK_AND_PUT_ITEM_FAR_RANGE 10
 #define SKILL_THROW_ITEM_RANGE 5
 #define SKILL_PUSH_RANGE 2

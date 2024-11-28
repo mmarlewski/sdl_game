@@ -65,6 +65,7 @@ Ally* new_ally(Object* object)
 
 void destroy_ally(Ally* ally)
 {
+    destroy_list(ally->skill_list);
     free(ally);
 }
 
