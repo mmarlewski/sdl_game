@@ -226,6 +226,8 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
         break;
         case OBJECT__FLY:
         {
+            if(enemy->object->attack_dir4 == DIR4__NONE) break;
+            
             int go_on = TRUE;
             for(int i = 1; i < 10 && go_on; i++)
             {

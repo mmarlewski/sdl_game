@@ -745,6 +745,7 @@ int is_object_movable(Object* object)
     {
         case OBJECT__PILLAR:                           is = 0; break;
         case OBJECT__SARCOPHAGUS:                      is = 1; break;
+        case OBJECT__MENHIR:                           is = 1; break;
 
         case OBJECT__PIPE:                             is = 0; break;
 
@@ -804,6 +805,7 @@ int is_object_movable(Object* object)
 
         case OBJECT__BALL:                             is = 1; break;
         case OBJECT__BALL_SPIKES:                      is = 1; break;
+        case OBJECT__GLASS_BALL:                       is = 1; break;
 
         case OBJECT__THRONE:                           is = 1; break;
 
@@ -1090,6 +1092,7 @@ int is_object_breakable(Object* object)
 
         case OBJECT__PILLAR:                           is = 1; break;
         case OBJECT__SARCOPHAGUS:                      is = 1; break;
+        case OBJECT__MENHIR:                           is = 1; break;
 
         case OBJECT__PIPE:                             is = 0; break;
 
@@ -1186,6 +1189,7 @@ int is_object_fragile(Object *object)
         case OBJECT__DISPLAY:
         case OBJECT__STALACTITE:
         case OBJECT__BARREL:
+        case OBJECT__GLASS_BALL:
         is = 1;
         break;
         default:
@@ -1271,6 +1275,7 @@ int is_object_stone(Object *object)
 
         case OBJECT__PILLAR:
         case OBJECT__SARCOPHAGUS:
+        case OBJECT__MENHIR:
 
         case OBJECT__STALACTITE:
         case OBJECT__STALACTITE_FALLEN:
@@ -1955,6 +1960,7 @@ char* get_debug_name_from_object_type(int object_type)
 
         case OBJECT__PILLAR:                           name = "pillar"; break;
         case OBJECT__SARCOPHAGUS:                      name = "sarcophagus"; break;
+        case OBJECT__MENHIR:                           name = "menhir"; break;
 
         case OBJECT__PIPE:                             name = "pipe"; break;
 
@@ -2014,6 +2020,7 @@ char* get_debug_name_from_object_type(int object_type)
 
         case OBJECT__BALL:                             name = "ball"; break;
         case OBJECT__BALL_SPIKES:                      name = "ball spikes"; break;
+        case OBJECT__GLASS_BALL:                       name = "glass ball"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
         case OBJECT__SIGN_MOLE_WARNING:                name = "sign mole warning"; break;
@@ -2198,6 +2205,7 @@ char* get_in_game_name_from_object_type(int object_type)
 
         case OBJECT__PILLAR:                           name = "pillar"; break;
         case OBJECT__SARCOPHAGUS:                      name = "sarcophagus"; break;
+        case OBJECT__MENHIR:                           name = "menhir"; break;
 
         case OBJECT__PIPE:                             name = "pipe"; break;
 
@@ -2257,6 +2265,7 @@ char* get_in_game_name_from_object_type(int object_type)
 
         case OBJECT__BALL:                             name = "ball"; break;
         case OBJECT__BALL_SPIKES:                      name = "ball"; break;
+        case OBJECT__GLASS_BALL:                       name = "glass"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
 
@@ -2441,6 +2450,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT__PILLAR:                           texture = textures->object.pillar; break;
         case OBJECT__SARCOPHAGUS:                      texture = textures->object.sarcophagus; break;
+        case OBJECT__MENHIR:                           texture = textures->object.menhir; break;
 
         case OBJECT__PIPE:                             texture = textures->object.pipe; break;
 
@@ -2500,6 +2510,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
 
         case OBJECT__BALL:                             texture = textures->object.ball; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
+        case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -2676,6 +2687,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
         case OBJECT__PILLAR:                           texture = textures->object.pillar; break;
         case OBJECT__SARCOPHAGUS:                      texture = textures->object.sarcophagus; break;
+        case OBJECT__MENHIR:                           texture = textures->object.menhir; break;
 
         case OBJECT__PIPE:                             texture = textures->object.pipe; break;
 
@@ -2735,6 +2747,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
 
         case OBJECT__BALL:                             texture = textures->object.ball; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
+        case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -2919,6 +2932,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__PILLAR:                           texture = textures->object.pillar_outline; break;
         case OBJECT__SARCOPHAGUS:                      texture = textures->object.sarcophagus_outline; break;
+        case OBJECT__MENHIR:                           texture = textures->object.menhir_outline; break;
 
         case OBJECT__PIPE:                             texture = textures->object.pipe_outline; break;
 
@@ -2970,6 +2984,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
+        case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
@@ -3154,6 +3169,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__PILLAR:                           texture = textures->object.pillar_outline; break;
         case OBJECT__SARCOPHAGUS:                      texture = textures->object.sarcophagus_outline; break;
+        case OBJECT__MENHIR:                           texture = textures->object.menhir_outline; break;
 
         case OBJECT__PIPE:                             texture = textures->object.pipe_outline; break;
 
@@ -3205,6 +3221,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
 
         case OBJECT__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
+        case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 

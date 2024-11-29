@@ -899,12 +899,12 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_0_2,
-        new_object(OBJECT__COLUMN),
+        new_object(OBJECT__MENHIR),
         vec2i(2, 7)
     );
     room_add_object_at(
         room_0_2,
-        new_object(OBJECT__COLUMN),
+        new_object(OBJECT__MENHIR),
         vec2i(7, 7)
     );
 
@@ -4840,6 +4840,22 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_2_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(3, 4)
+    );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(1, 6)
+    );
+    room_add_object_at(
+        room_2_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(4, 8)
+    );
+
+    room_add_object_at(
+        room_2_5,
         new_object(OBJECT__STALACTITE),
         vec2i(7, 2)
     );
@@ -6944,7 +6960,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_4_3,
-        new_object(OBJECT__GOLEM_UNPOWERED),
+        new_object(OBJECT__MENHIR),
         vec2i(5,5)
     );
 
@@ -7243,6 +7259,22 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_4_4,
+        new_object(OBJECT__MENHIR),
+        vec2i(3,5)
+    );
+    room_add_object_at(
+        room_4_4,
+        new_object(OBJECT__MENHIR),
+        vec2i(5,3)
+    );
+    room_add_object_at(
+        room_4_4,
+        new_object(OBJECT__MENHIR),
+        vec2i(6,7)
+    );
+
+    room_add_object_at(
+        room_4_4,
         new_object(OBJECT__EXIT_STONE_DOWN),
         vec2i(4, 0)
     );
@@ -7272,12 +7304,12 @@ void create_level(State* state, Textures* textures)
     room_add_object_at(
         room_4_4,
         new_object(OBJECT__SQUID),
-        vec2i(5, 2)
+        vec2i(7, 5)
     );
     room_add_object_at(
         room_4_4,
         new_object(OBJECT__SQUID),
-        vec2i(6, 5)
+        vec2i(6, 2)
     );
 
     // passages
@@ -9534,61 +9566,56 @@ void create_level(State* state, Textures* textures)
     room_add_object_at(
         room_6_2,
         new_object(OBJECT__SIGN_MOLE_WARNING),
-        vec2i(2,2)
+        vec2i(2,4)
     );
 
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(3, 2)
     );
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(3, 6)
     );
 
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(4, 1)
     );
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(4, 5)
     );
 
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
-        vec2i(5, 4)
-    );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(5, 8)
     );
 
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
-        vec2i(6, 3)
+        new_object(OBJECT__PIPE),
+        vec2i(5, 3)
     );
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(6, 7)
     );
 
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(7, 2)
     );
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__BALL),
+        new_object(OBJECT__PIPE),
         vec2i(7, 4)
     );
 
@@ -10252,6 +10279,37 @@ void create_level(State* state, Textures* textures)
     destroy_list(room_6_5_wall_exclude_pos_list);
 
     // objects
+
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(1,3)
+    );
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(1,6)
+    );
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(2,1)
+    );
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(6,6)
+    );
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(8,5)
+    );
+    room_add_object_at(
+        room_6_5,
+        new_object(OBJECT__GLASS_BALL),
+        vec2i(8,8)
+    );
 
     room_add_object_at(
         room_6_5,

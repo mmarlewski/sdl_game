@@ -200,6 +200,9 @@ typedef struct
     Texture* sarcophagus;
     Texture* sarcophagus_outline;
 
+    Texture* menhir;
+    Texture* menhir_outline;
+
     Texture* pipe;
     Texture* pipe_outline;
 
@@ -334,6 +337,9 @@ typedef struct
 
     Texture* ball_spikes;
     Texture* ball_spikes_outline;
+
+    Texture* glass_ball;
+    Texture* glass_ball_outline;
 
     Texture* throne;
     Texture* throne_outline;

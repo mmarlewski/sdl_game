@@ -1492,6 +1492,21 @@ void object_on_crashing(State* state, Sounds* sounds, Action* sequence, Action* 
             );
         }
         break;
+        case OBJECT__GLASS_BALL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(
+                    object,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
         case OBJECT__BALL_SPIKES:
         {
             if(action->crash.object_crushed->type != OBJECT__BARREL &&
@@ -1670,6 +1685,21 @@ void object_on_crashed(State* state, Sounds* sounds, Action* sequence, Action* a
             );
         }
         break;
+        case OBJECT__GLASS_BALL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(
+                    object,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
         case OBJECT__EXIT_METAL_BLOCKED_UP:
         {
             add_action_to_end_action_sequence(
@@ -1820,6 +1850,18 @@ void object_on_drop(State* state, Sounds* sounds, Action* sequence, Action* acti
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
+            );
+        }
+        break;
+        case OBJECT__GLASS_BALL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(object, object->tilemap_pos)
             );
         }
         break;
@@ -2222,6 +2264,18 @@ void object_on_shake(State* state, Sounds* sounds, Action* sequence, Action* act
             add_action_to_end_action_sequence(
                 sequence,
                 new_action_change_object(OBJECT__DISPLAY_DAMAGED_ITEM, object->tilemap_pos)
+            );
+        }
+        break;
+        case OBJECT__GLASS_BALL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+            );
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_death(object, object->tilemap_pos)
             );
         }
         break;

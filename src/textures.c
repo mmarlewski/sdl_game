@@ -229,6 +229,9 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->sarcophagus = load_texture_from_filepath(renderer, "./res/object/sarcophagus.png");
     object->sarcophagus_outline = load_texture_from_filepath(renderer, "./res/object/sarcophagus_outline.png");
 
+    object->menhir = load_texture_from_filepath(renderer, "./res/object/menhir.png");
+    object->menhir_outline = load_texture_from_filepath(renderer, "./res/object/menhir_outline.png");
+
     object->pipe = load_texture_from_filepath(renderer, "./res/object/pipe.png");
     object->pipe_outline = load_texture_from_filepath(renderer, "./res/object/pipe_outline.png");
 
@@ -348,6 +351,9 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
 
     object->ball_spikes = load_texture_from_filepath(renderer, "./res/object/ball_spikes.png");
     object->ball_spikes_outline = load_texture_from_filepath(renderer, "./res/object/ball_spikes_outline.png");
+
+    object->glass_ball = load_texture_from_filepath(renderer, "./res/object/glass_ball.png");
+    object->glass_ball_outline = load_texture_from_filepath(renderer, "./res/object/glass_ball_outline.png");
 
     object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
     object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
