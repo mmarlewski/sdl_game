@@ -40,6 +40,9 @@ typedef TTF_Font Font;
 #define FALSE 0
 #define TRUE 1
 
+#define MAX_RESET_TURN_USES 1
+#define MAX_GAME_OVER_USES 3
+
 #define SCREEN_WIDTH 1300
 #define SCREEN_HEIGHT 800
 

@@ -63,6 +63,12 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
                 state->game_over_uses--;
 
+                // in case player is stuck dying without any action points
+                if(state->curr_ally->object->action_points <= 0)
+                {
+                    state->curr_ally->object->action_points = 1;
+                }
+
                 save_state(state, textures);
                 load_state(
                     state,
@@ -216,7 +222,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
     if(state->enemy_list->size <= 0)
     {
-        state->reset_turn_uses = 3;
+        state->reset_turn_uses = MAX_RESET_TURN_USES;
     }
 
     // camera

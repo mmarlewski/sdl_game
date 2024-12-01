@@ -2129,79 +2129,79 @@ char* get_in_game_name_from_object_type(int object_type)
 
     switch(object_type)
     {
-        case OBJECT__WALL_ROCK:                        name = "wall rock"; break;
+        case OBJECT__WALL_ROCK:                        name = "wall"; break;
 
-        case OBJECT__WALL_STONE:                       name = "wall stone"; break;
+        case OBJECT__WALL_STONE:                       name = "wall"; break;
 
-        case OBJECT__WALL_METAL:                       name = "wall metal"; break;
+        case OBJECT__WALL_METAL:                       name = "wall"; break;
 
-        case OBJECT__WALL_GOLD:                        name = "wall gold"; break;
+        case OBJECT__WALL_GOLD:                        name = "wall"; break;
 
-        case OBJECT__WALL_MARBLE:                      name = "wall marble"; break;
+        case OBJECT__WALL_MARBLE:                      name = "wall"; break;
 
-        case OBJECT__WALL_OBSIDIAN:                    name = "wall obsidian"; break;
+        case OBJECT__WALL_OBSIDIAN:                    name = "wall"; break;
 
-        case OBJECT__EXIT_ROCK_UP:                     name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_RIGHT:                  name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_DOWN:                   name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_LEFT:                   name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_UP:             name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_RIGHT:          name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_DOWN:           name = "exit rock"; break;
-        case OBJECT__EXIT_ROCK_BLOCKED_LEFT:           name = "exit rock"; break;
+        case OBJECT__EXIT_ROCK_UP:                     name = "exit"; break;
+        case OBJECT__EXIT_ROCK_RIGHT:                  name = "exit"; break;
+        case OBJECT__EXIT_ROCK_DOWN:                   name = "exit"; break;
+        case OBJECT__EXIT_ROCK_LEFT:                   name = "exit"; break;
+        case OBJECT__EXIT_ROCK_BLOCKED_UP:             name = "exit (blocked)"; break;
+        case OBJECT__EXIT_ROCK_BLOCKED_RIGHT:          name = "exit (blocked)"; break;
+        case OBJECT__EXIT_ROCK_BLOCKED_DOWN:           name = "exit (blocked)"; break;
+        case OBJECT__EXIT_ROCK_BLOCKED_LEFT:           name = "exit (blocked)"; break;
 
-        case OBJECT__EXIT_STONE_UP:                    name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_RIGHT:                 name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_DOWN:                  name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_LEFT:                  name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_BLOCKED_UP:            name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_BLOCKED_RIGHT:         name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_BLOCKED_DOWN:          name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_BLOCKED_LEFT:          name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_POWERED_UP:            name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_POWERED_RIGHT:         name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_POWERED_DOWN:          name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_POWERED_LEFT:          name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_UP:          name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_RIGHT:       name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_DOWN:        name = "exit stone"; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_LEFT:        name = "exit stone"; break;
+        case OBJECT__EXIT_STONE_UP:                    name = "exit"; break;
+        case OBJECT__EXIT_STONE_RIGHT:                 name = "exit"; break;
+        case OBJECT__EXIT_STONE_DOWN:                  name = "exit"; break;
+        case OBJECT__EXIT_STONE_LEFT:                  name = "exit"; break;
+        case OBJECT__EXIT_STONE_BLOCKED_UP:            name = "exit (blocked)"; break;
+        case OBJECT__EXIT_STONE_BLOCKED_RIGHT:         name = "exit (blocked)"; break;
+        case OBJECT__EXIT_STONE_BLOCKED_DOWN:          name = "exit (blocked)"; break;
+        case OBJECT__EXIT_STONE_BLOCKED_LEFT:          name = "exit (blocked)"; break;
+        case OBJECT__EXIT_STONE_POWERED_UP:            name = "exit (powered)"; break;
+        case OBJECT__EXIT_STONE_POWERED_RIGHT:         name = "exit (powered)"; break;
+        case OBJECT__EXIT_STONE_POWERED_DOWN:          name = "exit (powered)"; break;
+        case OBJECT__EXIT_STONE_POWERED_LEFT:          name = "exit (powered)"; break;
+        case OBJECT__EXIT_STONE_UNPOWERED_UP:          name = "exit (unpowered)"; break;
+        case OBJECT__EXIT_STONE_UNPOWERED_RIGHT:       name = "exit (unpowered)"; break;
+        case OBJECT__EXIT_STONE_UNPOWERED_DOWN:        name = "exit (unpowered)"; break;
+        case OBJECT__EXIT_STONE_UNPOWERED_LEFT:        name = "exit (unpowered)"; break;
 
-        case OBJECT__EXIT_METAL_UP:                    name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_RIGHT:                 name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_DOWN:                  name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_LEFT:                  name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_ON_UP:                 name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_ON_RIGHT:              name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_ON_DOWN:               name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_ON_LEFT:               name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_OFF_UP:                name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_OFF_RIGHT:             name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_OFF_DOWN:              name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_OFF_LEFT:              name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_BLOCKED_UP:            name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:         name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_BLOCKED_DOWN:          name = "exit metal"; break;
-        case OBJECT__EXIT_METAL_BLOCKED_LEFT:          name = "exit metal"; break;
+        case OBJECT__EXIT_METAL_UP:                    name = "exit"; break;
+        case OBJECT__EXIT_METAL_RIGHT:                 name = "exit"; break;
+        case OBJECT__EXIT_METAL_DOWN:                  name = "exit"; break;
+        case OBJECT__EXIT_METAL_LEFT:                  name = "exit"; break;
+        case OBJECT__EXIT_METAL_ON_UP:                 name = "exit (on)"; break;
+        case OBJECT__EXIT_METAL_ON_RIGHT:              name = "exit (on)"; break;
+        case OBJECT__EXIT_METAL_ON_DOWN:               name = "exit (on)"; break;
+        case OBJECT__EXIT_METAL_ON_LEFT:               name = "exit (on)"; break;
+        case OBJECT__EXIT_METAL_OFF_UP:                name = "exit (off)"; break;
+        case OBJECT__EXIT_METAL_OFF_RIGHT:             name = "exit (off)"; break;
+        case OBJECT__EXIT_METAL_OFF_DOWN:              name = "exit (off)"; break;
+        case OBJECT__EXIT_METAL_OFF_LEFT:              name = "exit (off)"; break;
+        case OBJECT__EXIT_METAL_BLOCKED_UP:            name = "exit (blocked)"; break;
+        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:         name = "exit (blocked)"; break;
+        case OBJECT__EXIT_METAL_BLOCKED_DOWN:          name = "exit (blocked)"; break;
+        case OBJECT__EXIT_METAL_BLOCKED_LEFT:          name = "exit (blocked)"; break;
 
-        case OBJECT__EXIT_GOLD_LOCKED_UP:              name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_LOCKED_RIGHT:           name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_LOCKED_DOWN:            name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_LOCKED_LEFT:            name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_UNLOCKED_UP:            name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_UNLOCKED_RIGHT:         name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_UNLOCKED_DOWN:          name = "exit gold"; break;
-        case OBJECT__EXIT_GOLD_UNLOCKED_LEFT:          name = "exit gold"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_UP:              name = "exit (pay up)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_RIGHT:           name = "exit (pay up)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_DOWN:            name = "exit (pay up)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_LEFT:            name = "exit (pay up)"; break;
+        case OBJECT__EXIT_GOLD_UNLOCKED_UP:            name = "exit"; break;
+        case OBJECT__EXIT_GOLD_UNLOCKED_RIGHT:         name = "exit"; break;
+        case OBJECT__EXIT_GOLD_UNLOCKED_DOWN:          name = "exit"; break;
+        case OBJECT__EXIT_GOLD_UNLOCKED_LEFT:          name = "exit"; break;
 
-        case OBJECT__EXIT_MARBLE_UP:                   name = "exit marble"; break;
-        case OBJECT__EXIT_MARBLE_RIGHT:                name = "exit marble"; break;
-        case OBJECT__EXIT_MARBLE_DOWN:                 name = "exit marble"; break;
-        case OBJECT__EXIT_MARBLE_LEFT:                 name = "exit marble"; break;
+        case OBJECT__EXIT_MARBLE_UP:                   name = "exit"; break;
+        case OBJECT__EXIT_MARBLE_RIGHT:                name = "exit"; break;
+        case OBJECT__EXIT_MARBLE_DOWN:                 name = "exit"; break;
+        case OBJECT__EXIT_MARBLE_LEFT:                 name = "exit"; break;
 
-        case OBJECT__EXIT_OBSIDIAN_UP:                 name = "exit obsidian"; break;
-        case OBJECT__EXIT_OBSIDIAN_RIGHT:              name = "exit obsidian"; break;
-        case OBJECT__EXIT_OBSIDIAN_DOWN:               name = "exit obsidian"; break;
-        case OBJECT__EXIT_OBSIDIAN_LEFT:               name = "exit obsidian"; break;
+        case OBJECT__EXIT_OBSIDIAN_UP:                 name = "exit"; break;
+        case OBJECT__EXIT_OBSIDIAN_RIGHT:              name = "exit"; break;
+        case OBJECT__EXIT_OBSIDIAN_DOWN:               name = "exit"; break;
+        case OBJECT__EXIT_OBSIDIAN_LEFT:               name = "exit"; break;
 
         case OBJECT__PILLAR:                           name = "pillar"; break;
         case OBJECT__SARCOPHAGUS:                      name = "sarcophagus"; break;
@@ -2210,8 +2210,8 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__PIPE:                             name = "pipe"; break;
 
         case OBJECT__STALACTITE:                       name = "stalactite"; break;
-        case OBJECT__STALACTITE_FALLEN:                name = "fallen stalactite"; break;
-        case OBJECT__STALACTITE_FALLEN_ITEM:           name = "fallen stalactite"; break;
+        case OBJECT__STALACTITE_FALLEN:                name = "stalactite"; break;
+        case OBJECT__STALACTITE_FALLEN_ITEM:           name = "stalactite"; break;
 
         case OBJECT__STALAGMITE:                       name = "stalagmite"; break;
 
@@ -2258,22 +2258,22 @@ char* get_in_game_name_from_object_type(int object_type)
 
         case OBJECT__COLUMN:                           name = "column"; break;
 
-        case OBJECT__PISTON:                           name = "piston"; break;
-        case OBJECT__PISTON_CELL:                      name = "piston"; break;
-        case OBJECT__PISTON_DYNAMITE:                  name = "piston"; break;
-        case OBJECT__PISTON_BARREL:                    name = "piston"; break;
+        case OBJECT__PISTON:                           name = "piston (on)"; break;
+        case OBJECT__PISTON_CELL:                      name = "piston (on)"; break;
+        case OBJECT__PISTON_DYNAMITE:                  name = "piston (on)"; break;
+        case OBJECT__PISTON_BARREL:                    name = "piston (on)"; break;
 
-        case OBJECT__BALL:                             name = "ball"; break;
-        case OBJECT__BALL_SPIKES:                      name = "ball"; break;
+        case OBJECT__BALL:                             name = "ball (off)"; break;
+        case OBJECT__BALL_SPIKES:                      name = "ball (on)"; break;
         case OBJECT__GLASS_BALL:                       name = "glass"; break;
 
-        case OBJECT__THRONE:                           name = "throne"; break;
+        case OBJECT__THRONE:                           name = "throne (use me)"; break;
 
         case OBJECT__SIGN_MOLE_WARNING:                name = "sign"; break;
 
-        case OBJECT__GOLEM_UNPOWERED:                  name = "golem"; break;
-        case OBJECT__GOLEM_HALF_POWERED:               name = "golem"; break;
-        case OBJECT__GOLEM_POWERED:                    name = "golem"; break;
+        case OBJECT__GOLEM_UNPOWERED:                  name = "golem (unpowered)"; break;
+        case OBJECT__GOLEM_HALF_POWERED:               name = "golem (half-pow.)"; break;
+        case OBJECT__GOLEM_POWERED:                    name = "golem (powered)"; break;
 
         case OBJECT__HERO:                             name = "hero"; break;
         case OBJECT__HERO_FLOATING:                    name = "hero"; break;
@@ -2321,16 +2321,16 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__STAIRS_ABOVE_METAL_ON:            name = "stairs metal"; break;
         case OBJECT__STAIRS_ABOVE_METAL:               name = "stairs metal"; break;
 
-        case OBJECT__LEVER_METAL_OFF:                  name = "lever metal"; break;
-        case OBJECT__LEVER_METAL_ON:                   name = "lever metal"; break;
-        case OBJECT__LEVER_STONE_UNPOWERED:            name = "lever stone"; break;
-        case OBJECT__LEVER_STONE_POWERED:              name = "lever stone"; break;
+        case OBJECT__LEVER_METAL_OFF:                  name = "lever (off)"; break;
+        case OBJECT__LEVER_METAL_ON:                   name = "lever (off)"; break;
+        case OBJECT__LEVER_STONE_UNPOWERED:            name = "lever (unpowered)"; break;
+        case OBJECT__LEVER_STONE_POWERED:              name = "lever (powered)"; break;
 
-        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    name = "ext wall"; break;
-        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   name = "ext wall"; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_HORIZONTAL:    name = "ext wall (on)"; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_HORIZONTAL:   name = "ext wall (off)"; break;
         case OBJECT__EXT_WALL_PART_HORIZONTAL:         name = "ext wall"; break;
-        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      name = "ext wall"; break;
-        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     name = "ext wall"; break;
+        case OBJECT__EXT_WALL_SOURCE_ON_VERTICAL:      name = "ext wall (on)"; break;
+        case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     name = "ext wall (off)"; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           name = "ext wall"; break;
 
         case OBJECT__HARPOON_GUN_UP:                    name = "harpoon gun"; break;

@@ -172,8 +172,10 @@ void skill_on_use(
                                 state->curr_ally = state->curr_ally_list_elem->data;
                             }
 
-                            // save state
+                            // restore reset_turn_uses
+                            state->reset_turn_uses = MAX_RESET_TURN_USES;
 
+                            // save state
                             state->curr_ally->object->action_points--;
                             save_state(state, textures);
                             state->curr_ally->object->action_points++;

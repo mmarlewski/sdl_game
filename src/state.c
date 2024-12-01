@@ -84,8 +84,8 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
 
 void start_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
-    state->reset_turn_uses = 3;
-    state->game_over_uses = 3;
+    state->reset_turn_uses = MAX_RESET_TURN_USES;
+    state->game_over_uses = MAX_GAME_OVER_USES;
 
     state->was_minibot_launched = FALSE;
     state->was_throne_used = FALSE;
@@ -157,14 +157,14 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
 
     // hero_add_augmentation(state, AUGMENTATION__HOOK_HAND);
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
     // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
-    // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
     // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
