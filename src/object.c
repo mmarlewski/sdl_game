@@ -2333,10 +2333,10 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__EXT_WALL_SOURCE_OFF_VERTICAL:     name = "ext wall (off)"; break;
         case OBJECT__EXT_WALL_PART_VERTICAL:           name = "ext wall"; break;
 
-        case OBJECT__HARPOON_GUN_UP:                    name = "harpoon gun"; break;
-        case OBJECT__HARPOON_GUN_RIGHT:                 name = "harpoon gun"; break;
-        case OBJECT__HARPOON_GUN_DOWN:                  name = "harpoon gun"; break;
-        case OBJECT__HARPOON_GUN_LEFT:                  name = "harpoon gun"; break;
+        case OBJECT__HARPOON_GUN_UP:                    name = "harpoon (off)"; break;
+        case OBJECT__HARPOON_GUN_RIGHT:                 name = "harpoon (off)"; break;
+        case OBJECT__HARPOON_GUN_DOWN:                  name = "harpoon (off)"; break;
+        case OBJECT__HARPOON_GUN_LEFT:                  name = "harpoon (off)"; break;
 
         case OBJECT__STATION_FIST_HAND:                name = "station"; break;
         case OBJECT__STATION_HOOK_HAND:                name = "station"; break;

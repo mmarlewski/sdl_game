@@ -8378,7 +8378,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_5_3,
-        new_object(OBJECT__DISPLAY),
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
         vec2i(1, 1)
     );
     room_add_object_at(
@@ -8393,7 +8393,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_5_3,
-        new_object(OBJECT__DISPLAY),
+        new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
         vec2i(8, 2)
     );
 
