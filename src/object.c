@@ -1502,15 +1502,6 @@ int get_object_item_type(Object* object)
 
     switch(object->type)
     {
-        case OBJECT__EXIT_STONE_POWERED_UP:            item_type = ITEM__CELL; break;
-        case OBJECT__EXIT_STONE_POWERED_RIGHT:         item_type = ITEM__CELL; break;
-        case OBJECT__EXIT_STONE_POWERED_DOWN:          item_type = ITEM__CELL; break;
-        case OBJECT__EXIT_STONE_POWERED_LEFT:          item_type = ITEM__CELL; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_UP:          item_type = ITEM__NONE; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_RIGHT:       item_type = ITEM__NONE; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_DOWN:        item_type = ITEM__NONE; break;
-        case OBJECT__EXIT_STONE_UNPOWERED_LEFT:        item_type = ITEM__NONE; break;
-
         case OBJECT__WALL_ROCK:                        item_type = ITEM__NONE; break;
 
         case OBJECT__WALL_STONE:                       item_type = ITEM__NONE; break;
@@ -2184,10 +2175,10 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__EXIT_METAL_BLOCKED_DOWN:          name = "exit (blocked)"; break;
         case OBJECT__EXIT_METAL_BLOCKED_LEFT:          name = "exit (blocked)"; break;
 
-        case OBJECT__EXIT_GOLD_LOCKED_UP:              name = "exit (pay up)"; break;
-        case OBJECT__EXIT_GOLD_LOCKED_RIGHT:           name = "exit (pay up)"; break;
-        case OBJECT__EXIT_GOLD_LOCKED_DOWN:            name = "exit (pay up)"; break;
-        case OBJECT__EXIT_GOLD_LOCKED_LEFT:            name = "exit (pay up)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_UP:              name = "exit (unpaid)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_RIGHT:           name = "exit (unpaid)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_DOWN:            name = "exit (unpaid)"; break;
+        case OBJECT__EXIT_GOLD_LOCKED_LEFT:            name = "exit (unpaid)"; break;
         case OBJECT__EXIT_GOLD_UNLOCKED_UP:            name = "exit"; break;
         case OBJECT__EXIT_GOLD_UNLOCKED_RIGHT:         name = "exit"; break;
         case OBJECT__EXIT_GOLD_UNLOCKED_DOWN:          name = "exit"; break;

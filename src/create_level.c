@@ -1604,6 +1604,12 @@ void create_level(State* state, Textures* textures)
         vec2i(8, 8)
     );
 
+    room_change_floor_at(
+        room_0_5,
+        FLOOR__ROCK,
+        vec2i(2,9)
+    );
+
     // walls
 
     List* room_0_5_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -1664,7 +1670,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_0_5,
-        new_object(OBJECT__EXIT_MARBLE_UP),
+        new_object(OBJECT__EXIT_ROCK_BLOCKED_UP),
         vec2i(2, 9)
     );
 
@@ -3398,6 +3404,12 @@ void create_level(State* state, Textures* textures)
         vec2i(6, 8)
     );
 
+    room_change_floor_at(
+        room_1_5,
+        FLOOR__ROCK,
+        vec2i(2,0)
+    );
+
     // walls
 
     List* room_1_5_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -3472,23 +3484,23 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_1_5,
-        new_object(OBJECT__DISPLAY),
+        new_object(OBJECT__CRATE_DYNAMITE_ITEM),
         vec2i(1, 8)
     );
     room_add_object_at(
         room_1_5,
-        new_object(OBJECT__DISPLAY),
+        new_object(OBJECT__CRATE_GEMSTONE_ITEM),
         vec2i(4, 5)
     );
     room_add_object_at(
         room_1_5,
-        new_object(OBJECT__DISPLAY),
+        new_object(OBJECT__CRATE_DYNAMITE_ITEM),
         vec2i(4, 8)
     );
 
     room_add_object_at(
         room_1_5,
-        new_object(OBJECT__EXIT_MARBLE_DOWN),
+        new_object(OBJECT__EXIT_ROCK_BLOCKED_DOWN),
         vec2i(2, 0)
     );
     room_add_object_at(
@@ -3540,6 +3552,12 @@ void create_level(State* state, Textures* textures)
         room_2_0,
         FLOOR__OBSTACLE,
         vec2i(8, 2)
+    );
+
+    room_change_floor_at(
+        room_2_0,
+        FLOOR__METAL,
+        vec2i(7,9)
     );
 
     // walls
@@ -3698,7 +3716,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_2_0,
-        new_object(OBJECT__EXIT_OBSIDIAN_UP),
+        new_object(OBJECT__EXIT_METAL_OFF_UP),
         vec2i(7, 9)
     );
 
@@ -4206,7 +4224,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_2_2,
-        new_object(OBJECT__EXIT_METAL_LEFT),
+        new_object(OBJECT__EXIT_METAL_BLOCKED_LEFT),
         vec2i(9, 4)
     );
 
@@ -4364,6 +4382,12 @@ void create_level(State* state, Textures* textures)
         vec2i(5, 2)
     );
 
+    room_change_floor_at(
+        room_2_3,
+        FLOOR__METAL,
+        vec2i(0,4)
+    );
+
     // walls
 
     List* room_2_3_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -4408,18 +4432,18 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_2_3,
-        new_object(OBJECT__CRATE_CELL_ITEM),
+        new_object(OBJECT__CRATE_CELL),
         vec2i(3, 7)
     );
     room_add_object_at(
         room_2_3,
-        new_object(OBJECT__CRATE_CELL_ITEM),
+        new_object(OBJECT__CRATE_CELL),
         vec2i(2, 6)
     );
 
     room_add_object_at(
         room_2_3,
-        new_object(OBJECT__EXIT_STONE_RIGHT),
+        new_object(OBJECT__EXIT_METAL_BLOCKED_RIGHT),
         vec2i(0, 4)
     );
     room_add_object_at(
@@ -4429,7 +4453,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_2_3,
-        new_object(OBJECT__EXIT_STONE_LEFT),
+        new_object(OBJECT__EXIT_STONE_UNPOWERED_LEFT),
         vec2i(9, 5)
     );
 
@@ -4576,6 +4600,12 @@ void create_level(State* state, Textures* textures)
         vec2i(8,3)
     );
 
+    room_change_floor_at(
+        room_2_4,
+        FLOOR__ROCK,
+        vec2i(5,9)
+    );
+
     // walls
 
     List* room_2_4_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -4671,12 +4701,12 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_2_4,
-        new_object(OBJECT__EXIT_STONE_RIGHT),
+        new_object(OBJECT__EXIT_STONE_UNPOWERED_RIGHT),
         vec2i(0, 5)
     );
     room_add_object_at(
         room_2_4,
-        new_object(OBJECT__EXIT_STONE_UP),
+        new_object(OBJECT__EXIT_ROCK_BLOCKED_UP),
         vec2i(5, 9)
     );
     room_add_object_at(
@@ -5002,6 +5032,12 @@ void create_level(State* state, Textures* textures)
         vec2i(5, 3)
     );
 
+    room_change_floor_at(
+        room_3_0,
+        FLOOR__METAL,
+        vec2i(7,0)
+    );
+
     // walls
 
     List* room_3_0_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -5169,7 +5205,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_3_0,
-        new_object(OBJECT__EXIT_OBSIDIAN_DOWN),
+        new_object(OBJECT__EXIT_METAL_OFF_DOWN),
         vec2i(7, 0)
     );
     room_add_object_at(
@@ -5913,6 +5949,12 @@ void create_level(State* state, Textures* textures)
         vec2i(8, 2)
     );
 
+    room_change_floor_at(
+        room_3_4,
+        FLOOR__ROCK,
+        vec2i(5,0)
+    );
+
     // walls
 
     List* room_3_4_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -6113,7 +6155,7 @@ void create_level(State* state, Textures* textures)
 
     room_add_object_at(
         room_3_4,
-        new_object(OBJECT__EXIT_STONE_DOWN),
+        new_object(OBJECT__EXIT_ROCK_BLOCKED_DOWN),
         vec2i(5, 0)
     );
     room_add_object_at(
@@ -6991,7 +7033,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_4_3,
-        new_object(OBJECT__EXIT_STONE_BLOCKED_UP),
+        new_object(OBJECT__EXIT_STONE_UNPOWERED_UP),
         vec2i(4, 9)
     );
     room_add_object_at(
@@ -8404,7 +8446,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_5_3,
-        new_object(OBJECT__EXIT_STONE_BLOCKED_DOWN),
+        new_object(OBJECT__EXIT_STONE_UNPOWERED_DOWN),
         vec2i(4, 0)
     );
     room_add_object_at(
@@ -8844,6 +8886,12 @@ void create_level(State* state, Textures* textures)
         vec2i(8, 1)
     );
 
+    room_change_floor_at(
+        room_5_5,
+        FLOOR__ROCK,
+        vec2i(8, 9)
+    );
+
     // walls
 
     List* room_5_5_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -8964,7 +9012,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_5_5,
-        new_object(OBJECT__EXIT_MARBLE_UP),
+        new_object(OBJECT__EXIT_ROCK_BLOCKED_UP),
         vec2i(8, 9)
     );
 
@@ -9562,6 +9610,12 @@ void create_level(State* state, Textures* textures)
         vec2i(1, 0)
     );
 
+    room_change_floor_at(
+        room_6_2,
+        FLOOR__STONE,
+        vec2i(9,5)
+    );
+
     // walls
 
     List* room_6_2_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -9799,6 +9853,12 @@ void create_level(State* state, Textures* textures)
         room_6_3,
         FLOOR__ICE,
         vec2i(3, 6)
+    );
+
+    room_change_floor_at(
+        room_6_3,
+        FLOOR__STONE,
+        vec2i(0,5)
     );
 
     // walls
@@ -10271,6 +10331,12 @@ void create_level(State* state, Textures* textures)
         vec2i(7, 1)
     );
 
+    room_change_floor_at(
+        room_6_5,
+        FLOOR__ROCK,
+        vec2i(8,0)
+    );
+
     // walls
 
     List* room_6_5_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
@@ -10338,7 +10404,7 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_6_5,
-        new_object(OBJECT__EXIT_MARBLE_DOWN),
+        new_object(OBJECT__EXIT_ROCK_BLOCKED_DOWN),
         vec2i(8, 0)
     );
     room_add_object_at(
@@ -12218,7 +12284,7 @@ void create_mechanisms(State* state)
         "5_3",
         vec2i(4, 0),
         1,
-        OBJECT__EXIT_STONE_DOWN,
+        OBJECT__EXIT_STONE_POWERED_DOWN,
         0,
         "",
         vec2i(0, 0),
@@ -12233,14 +12299,14 @@ void create_mechanisms(State* state)
         "4_3",
         vec2i(4, 9),
         1,
-        OBJECT__EXIT_STONE_UP
+        OBJECT__EXIT_STONE_POWERED_UP
     ));
     add_mechanism(state, new_mechanism(
         1,
         "4_3",
         vec2i(4, 9),
         1,
-        OBJECT__EXIT_STONE_UP,
+        OBJECT__EXIT_STONE_POWERED_UP,
         0,
         "",
         vec2i(0, 0),
@@ -12255,7 +12321,7 @@ void create_mechanisms(State* state)
         "5_3",
         vec2i(4, 0),
         1,
-        OBJECT__EXIT_STONE_DOWN
+        OBJECT__EXIT_STONE_POWERED_DOWN
     ));
 
     // 0_3 and 0_4 blocked exit
@@ -12716,5 +12782,281 @@ void create_mechanisms(State* state)
         vec2i(5, 8),
         1,
         OBJECT__EXIT_GOLD_UNLOCKED_LEFT
+    ));
+
+    // 6_5 and 5_5 blocked exit
+    add_mechanism(state, new_mechanism(
+        1,
+        "6_5",
+        vec2i(8,0),
+        1,
+        OBJECT__EXIT_ROCK_DOWN,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "5_5",
+        vec2i(8,9),
+        1,
+        OBJECT__EXIT_ROCK_UP
+    ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "5_5",
+        vec2i(8,9),
+        1,
+        OBJECT__EXIT_ROCK_UP,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "6_5",
+        vec2i(8,0),
+        1,
+        OBJECT__EXIT_ROCK_DOWN
+    ));
+
+    // 1_5 and 0_5 blocked exit
+    add_mechanism(state, new_mechanism(
+        1,
+        "1_5",
+        vec2i(2,0),
+        1,
+        OBJECT__EXIT_ROCK_DOWN,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "0_5",
+        vec2i(2,9),
+        1,
+        OBJECT__EXIT_ROCK_UP
+    ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "0_5",
+        vec2i(2,9),
+        1,
+        OBJECT__EXIT_ROCK_UP,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "1_5",
+        vec2i(2,0),
+        1,
+        OBJECT__EXIT_ROCK_DOWN
+    ));
+
+    // 3_0 and 2_0 blocked exit
+    add_mechanism(state, new_mechanism(
+        1,
+        "3_0",
+        vec2i(7,0),
+        1,
+        OBJECT__EXIT_METAL_ON_DOWN,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "2_0",
+        vec2i(7,9),
+        1,
+        OBJECT__EXIT_METAL_ON_UP
+    ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_0",
+        vec2i(7,9),
+        1,
+        OBJECT__EXIT_METAL_ON_UP,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "3_0",
+        vec2i(7,0),
+        1,
+        OBJECT__EXIT_METAL_ON_DOWN
+    ));
+
+    // 2_3 and 2_4 blocked exit
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_3",
+        vec2i(9,5),
+        1,
+        OBJECT__EXIT_STONE_POWERED_LEFT,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "2_4",
+        vec2i(0,5),
+        1,
+        OBJECT__EXIT_STONE_POWERED_RIGHT
+    ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_4",
+        vec2i(0,5),
+        1,
+        OBJECT__EXIT_STONE_POWERED_RIGHT,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "2_3",
+        vec2i(9,5),
+        1,
+        OBJECT__EXIT_STONE_POWERED_LEFT
+    ));
+
+    // 2_2 and 2_3 blocked exit
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_2",
+        vec2i(9,4),
+        1,
+        OBJECT__EXIT_METAL_LEFT,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "2_3",
+        vec2i(0,4),
+        1,
+        OBJECT__EXIT_METAL_RIGHT
+    ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_3",
+        vec2i(0,4),
+        1,
+        OBJECT__EXIT_METAL_RIGHT,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "2_2",
+        vec2i(9,4),
+        1,
+        OBJECT__EXIT_METAL_LEFT
+    ));
+
+    // 3_4 and 2_4 blocked exit
+    add_mechanism(state, new_mechanism(
+        1,
+        "3_4",
+        vec2i(5,0),
+        1,
+        OBJECT__EXIT_ROCK_DOWN,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "2_4",
+        vec2i(5,9),
+        1,
+        OBJECT__EXIT_ROCK_UP
+    ));
+    add_mechanism(state, new_mechanism(
+        1,
+        "2_4",
+        vec2i(5,9),
+        1,
+        OBJECT__EXIT_ROCK_UP,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        OBJECT__NONE,
+        0,
+        "",
+        vec2i(0, 0),
+        0,
+        0,
+        1,
+        "3_4",
+        vec2i(5,0),
+        1,
+        OBJECT__EXIT_ROCK_DOWN
     ));
 }
