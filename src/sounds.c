@@ -6,6 +6,7 @@ void load_sounds(Sounds* sounds)
 
     sounds->use_exit = get_sound_from_filepath("./res/sound/human-impact-on-ground-6982-edited.mp3");
     sounds->use_station = get_sound_from_filepath("./res/sound/083525_drill-37769-edited.mp3");
+    sounds->use_secret = get_sound_from_filepath("./res/sound/sound-effect-twinklesparkle-115095-edited.mp3");
     sounds->use_throne = get_sound_from_filepath("./res/sound/tadaa-47995-edited.mp3");
 
     sounds->move = get_sound_from_filepath("./res/sound/slash-21834-edited.mp3");
@@ -43,7 +44,8 @@ void load_sounds(Sounds* sounds)
     sounds->minibot_merge = get_sound_from_filepath("./res/sound/metal-whoosh-hit-3-201902-edited.mp3");
 
     sounds->stomp = get_sound_from_filepath("./res/sound/lettuce-48162.mp3");
-    sounds->mimic = get_sound_from_filepath("./res/sound/surprise-sound-effect-99300-edited.mp3");
+    // sounds->mimic = get_sound_from_filepath("./res/sound/surprise-sound-effect-99300-edited.mp3");
+    sounds->mimic = get_sound_from_filepath("./res/sound/wtf_01-96364.mp3");
 
     sounds->falling_stalactite = get_sound_from_filepath("./res/sound/hamer-90566-edited.mp3");
     sounds->emerge_water = get_sound_from_filepath("./res/sound/water-splash-199583-edited.mp3");

@@ -220,6 +220,12 @@ enum OBJECT_TYPE
     OBJECT__STATION_TELEPORTATION_HEAD,
     OBJECT__STATION_TAKEN,
 
+    OBJECT__SECRET_1,
+    OBJECT__SECRET_2,
+    OBJECT__SECRET_3,
+    OBJECT__SECRET_4,
+    OBJECT__SECRET_TAKEN,
+
     OBJECT__LEVER_METAL_OFF,
     OBJECT__LEVER_METAL_ON,
     OBJECT__LEVER_STONE_UNPOWERED,
@@ -296,6 +302,7 @@ int is_object_exit(Object* object);
 int is_object_pull_towards(Object* object);
 int is_object_throw_over(Object* object);
 int is_object_station(Object* object);
+int is_object_secret(Object* object);
 int get_station_augmentation(Object* object);
 int is_object_floating(Object* object);
 int is_object_flying(Object* object);

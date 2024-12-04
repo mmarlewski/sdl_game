@@ -111,6 +111,12 @@ typedef struct
     int was_minibot_launched;
     int was_throne_used;
 
+    int was_secret_1_taken;
+    int was_secret_2_taken;
+    int was_secret_3_taken;
+    int was_secret_4_taken;
+    int was_secret_aug_unlocked;
+
     int reset_turn_uses;
     int game_over_uses;
 

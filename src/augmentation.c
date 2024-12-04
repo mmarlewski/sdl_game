@@ -18,6 +18,7 @@ int get_augmentation_body_part(int augmentation)
         case AUGMENTATION__WINGS_TORSO:         body_part = BODY_PART__TORSO; break;
         case AUGMENTATION__MANIPULATION_HEAD:   body_part = BODY_PART__HEAD; break;
         case AUGMENTATION__TELEPORTATION_HEAD:  body_part = BODY_PART__HEAD; break;
+        case AUGMENTATION__TELEKINESIS_HEAD:    body_part = BODY_PART__HEAD; break;
         default: break;
     }
 
@@ -62,6 +63,7 @@ char* get_augmentation_name(int augmentation)
         case AUGMENTATION__WINGS_TORSO:         name = "wings torso"; break;
         case AUGMENTATION__MANIPULATION_HEAD:   name = "manipulation head"; break;
         case AUGMENTATION__TELEPORTATION_HEAD:  name = "teleportation head"; break;
+        case AUGMENTATION__TELEKINESIS_HEAD:    name = "telekinesis head"; break;
         default: break;
     }
 

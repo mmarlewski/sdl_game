@@ -598,6 +598,13 @@ typedef struct
     Texture* station_taken;
     Texture* station_outline;
 
+    Texture* secret_1;
+    Texture* secret_2;
+    Texture* secret_3;
+    Texture* secret_4;
+    Texture* secret_taken;
+    Texture* secret_outline;
+
 } Textures_Object;
 
 void load_textures_object(Renderer* renderer, Textures_Object* object);
@@ -985,10 +992,12 @@ typedef struct
     Texture* wings_torso;
     Texture* manipulation_head;
     Texture* teleportation_head;
+    Texture* telekinesis_head;
 
     Texture* use;
     Texture* manipulation;
     Texture* teleportation;
+    Texture* telekinesis;
     Texture* move;
     Texture* pick_item;
     Texture* pick_item_far;
@@ -1095,12 +1104,19 @@ typedef struct
 {
     Texture* tutorial;
     Texture* shadow;
+
     Texture* background_rock;
     Texture* background_stone;
     Texture* background_metal;
     Texture* background_marble;
     Texture* background_obsidian;
     Texture* background_gold;
+
+    Texture* secret_background;
+    Texture* secret_1;
+    Texture* secret_2;
+    Texture* secret_3;
+    Texture* secret_4;
 
     Textures_Floor floor;
     Textures_Object object;

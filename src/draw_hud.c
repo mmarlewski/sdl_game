@@ -119,6 +119,81 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             2.0f
         );
 
+        if(!state->was_secret_aug_unlocked)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->secret_background,
+                colors->none,
+                1.0f,
+                vec2i(600, 550),
+                2.0f
+            );
+            if(state->was_secret_1_taken)
+            {
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->secret_1,
+                    colors->none,
+                    1.0f,
+                    vec2i(600, 550),
+                    2.0f
+                );
+            }
+            if(state->was_secret_2_taken)
+            {
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->secret_2,
+                    colors->none,
+                    1.0f,
+                    vec2i(600, 550),
+                    2.0f
+                );
+            }
+            if(state->was_secret_3_taken)
+            {
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->secret_3,
+                    colors->none,
+                    1.0f,
+                    vec2i(600, 550),
+                    2.0f
+                );
+            }
+            if(state->was_secret_4_taken)
+            {
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->secret_4,
+                    colors->none,
+                    1.0f,
+                    vec2i(600, 550),
+                    2.0f
+                );
+            }
+        }
+        else
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.telekinesis_head,
+                colors->none,
+                1.0f,
+                vec2i(550 + 84, 575),
+                2.0f
+            );
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.restart_with,
+                colors->none,
+                1.0f,
+                vec2i(550 + 84, 575 + 64 + 10),
+                2.0f
+            );
+        }
+
         int left_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_HAND];
         int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
         int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
@@ -145,6 +220,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         if(torso_augmentation == AUGMENTATION__WINGS_TORSO) torso_texture = textures->hud.wings_torso;
         if(head_augmentation == AUGMENTATION__MANIPULATION_HEAD) head_texture = textures->hud.manipulation_head;
         if(head_augmentation == AUGMENTATION__TELEPORTATION_HEAD) head_texture = textures->hud.teleportation_head;
+        if(head_augmentation == AUGMENTATION__TELEKINESIS_HEAD) head_texture = textures->hud.telekinesis_head;
 
         int scale = 2;
 
@@ -338,6 +414,23 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 1
             );
         }
+
+        if(state->was_secret_aug_unlocked &&
+           state->mouse_screen_pos.x >= 550 + 84 &&
+           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+           state->mouse_screen_pos.y >= 575 &&
+           state->mouse_screen_pos.y <= 575 + 64)
+        {
+            draw_font_at_screen_pos(
+                get_augmentation_name(AUGMENTATION__TELEKINESIS_HEAD),
+                renderer,
+                fonts->bit_operator_30,
+                colors->white,
+                1.0f,
+                vec2i(560, 530),
+                1
+            );
+        }
     }
 
     // fps
@@ -498,6 +591,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         if(torso_augmentation == AUGMENTATION__WINGS_TORSO) torso_texture = textures->hud.wings_torso;
         if(head_augmentation == AUGMENTATION__MANIPULATION_HEAD) head_texture = textures->hud.manipulation_head;
         if(head_augmentation == AUGMENTATION__TELEPORTATION_HEAD) head_texture = textures->hud.teleportation_head;
+        if(head_augmentation == AUGMENTATION__TELEKINESIS_HEAD) head_texture = textures->hud.telekinesis_head;
 
         int scale = 2;
 
@@ -1294,7 +1388,10 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 {
                     color = colors->green_light;
                 }
-                if(is_object_exit(object) || is_object_station(object) || object->type == OBJECT__THRONE)
+                if(is_object_exit(object) || 
+                is_object_station(object)|| 
+                is_object_secret(object) || 
+                object->type == OBJECT__THRONE)
                 {
                     color = colors->pink_light;
                 }

@@ -70,6 +70,12 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->was_minibot_launched = FALSE;
     state->was_throne_used = FALSE;
 
+    state->was_secret_1_taken = FALSE;
+    state->was_secret_2_taken = FALSE;
+    state->was_secret_3_taken = FALSE;
+    state->was_secret_4_taken = FALSE;
+    state->was_secret_aug_unlocked = FALSE;
+
     state->reset_turn_uses = 0;
 
     state->curr_ally_draw_below_texture_list = new_list((void (*)(void*)) 0);
@@ -89,6 +95,16 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->was_minibot_launched = FALSE;
     state->was_throne_used = FALSE;
+
+    state->was_secret_1_taken = FALSE;
+    state->was_secret_2_taken = FALSE;
+    state->was_secret_3_taken = FALSE;
+    state->was_secret_4_taken = FALSE;
+
+    // state->was_secret_1_taken = TRUE;
+    // state->was_secret_2_taken = TRUE;
+    // state->was_secret_3_taken = TRUE;
+    // state->was_secret_4_taken = TRUE;
 
     state->camera_zoom = 2.0f;
     Vec2f middle_world_iso_pos = cart_pos_to_iso_pos(
@@ -159,15 +175,17 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     // hero_add_augmentation(state, AUGMENTATION__CHAIN_HAND);
     // hero_add_augmentation(state, AUGMENTATION__STRIDER_LEG);
     // hero_add_augmentation(state, AUGMENTATION__TRACK_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD);
 
     // hero_add_augmentation(state, AUGMENTATION__FIST_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SCISSOR_HAND);
     // hero_add_augmentation(state, AUGMENTATION__SPRING_LEG);
     // hero_add_augmentation(state, AUGMENTATION__BOOT_LEG);
-    // hero_add_augmentation(state, AUGMENTATION__WINGS_TORSO);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT_TORSO);
     // hero_add_augmentation(state, AUGMENTATION__MANIPULATION_HEAD);
+
+    // hero_add_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -636,6 +654,10 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEPORTATION);
+            }
+            if(hero_has_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEKINESIS);
             }
             if(hero_has_augmentation(state, AUGMENTATION__FIST_HAND))
             {

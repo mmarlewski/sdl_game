@@ -14,6 +14,7 @@ int is_skill_two_target(int skill)
         case SKILL__USE:                        is = 0; break;
         case SKILL__MANIPULATION:               is = 0; break;
         case SKILL__TELEPORTATION:              is = 0; break;
+        case SKILL__TELEKINESIS:                is = 1; break;
 
         case SKILL__MOVE:                       is = 0; break;
         case SKILL__MOVE_FLOATING:              is = 0; break;
@@ -94,6 +95,7 @@ int get_skill_action_points(int skill)
         case SKILL__USE:                        ap = 1; break;
         case SKILL__MANIPULATION:               ap = 1; break;
         case SKILL__TELEPORTATION:              ap = 1; break;
+        case SKILL__TELEKINESIS:                ap = 1; break;
 
         case SKILL__MOVE:                       ap = -1; break;
         case SKILL__MOVE_FLOATING:              ap = -1; break;
@@ -174,6 +176,7 @@ char* get_in_game_skill_name(int skill)
         case SKILL__USE:                        name = "use"; break;
         case SKILL__MANIPULATION:               name = "manipulation"; break;
         case SKILL__TELEPORTATION:              name = "teleportation"; break;
+        case SKILL__TELEKINESIS:                name = "telekinesis"; break;
 
         case SKILL__MOVE:                       name = "move"; break;
         case SKILL__MOVE_FLOATING:              name = "move"; break;
@@ -254,6 +257,7 @@ char* get_debug_skill_name(int skill)
         case SKILL__USE:                        name = "use"; break;
         case SKILL__MANIPULATION:               name = "manipulation"; break;
         case SKILL__TELEPORTATION:              name = "teleportation"; break;
+        case SKILL__TELEKINESIS:                name = "telekinesis"; break;
 
         case SKILL__MOVE:                       name = "move"; break;
         case SKILL__MOVE_FLOATING:              name = "move floating"; break;
@@ -393,6 +397,18 @@ char* get_description_from_skill(int skill, int i)
                 case 1: description = "teleport in any suitable place on map"; break;
                 case 2: description = "and bypass impenetrable obstacles"; break;
                 case 3: description = "or quickly escape from enemies"; break;
+                case 4: description = ""; break;
+                default: break;
+            }
+        }
+        break;
+        case SKILL__TELEKINESIS:
+        {
+            switch(i)
+            {
+                case 1: description = "xxx"; break;
+                case 2: description = "xxx"; break;
+                case 3: description = "xxx"; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -913,6 +929,7 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__USE:                        texture = textures->hud.use; break;
         case SKILL__MANIPULATION:               texture = textures->hud.manipulation; break;
         case SKILL__TELEPORTATION:              texture = textures->hud.teleportation; break;
+        case SKILL__TELEKINESIS:                texture = textures->hud.telekinesis; break;
 
         case SKILL__MOVE:                       texture = textures->hud.move; break;
         case SKILL__MOVE_FLOATING:              texture = textures->hud.move; break;

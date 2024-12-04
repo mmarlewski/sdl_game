@@ -523,6 +523,22 @@ int is_object_station(Object* object)
     return is;
 }
 
+int is_object_secret(Object* object)
+{
+    switch(object->type)
+    {
+
+        case OBJECT__SECRET_1:
+        case OBJECT__SECRET_2:
+        case OBJECT__SECRET_3:
+        case OBJECT__SECRET_4:
+        return TRUE;
+
+        default:
+        return FALSE;
+    }
+}
+
 int get_station_augmentation(Object* object)
 {
     int augmentation = AUGMENTATION__NONE;
@@ -1446,6 +1462,12 @@ int is_object_metal(Object *object)
         case OBJECT__STATION_TELEPORTATION_HEAD:
         case OBJECT__STATION_TAKEN:
 
+        case OBJECT__SECRET_1:
+        case OBJECT__SECRET_2:
+        case OBJECT__SECRET_3:
+        case OBJECT__SECRET_4:
+        case OBJECT__SECRET_TAKEN:
+
         case OBJECT__LEVER_METAL_OFF:
         case OBJECT__LEVER_METAL_ON:
         case OBJECT__LEVER_STONE_UNPOWERED:
@@ -2097,6 +2119,12 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__STATION_TELEPORTATION_HEAD:       name = "station teleportation head"; break;
         case OBJECT__STATION_TAKEN:                    name = "station taken"; break;
 
+        case OBJECT__SECRET_1:                         name = "secret 1"; break;
+        case OBJECT__SECRET_2:                         name = "secret 2"; break;
+        case OBJECT__SECRET_3:                         name = "secret 3"; break;
+        case OBJECT__SECRET_4:                         name = "secret 4"; break;
+        case OBJECT__SECRET_TAKEN:                     name = "secret taken"; break;
+
         case OBJECT__MINIBOT_ALLY:                     name = "minibot ally"; break;
         case OBJECT__MINIBOT_ALLY_CELL:                name = "minibot ally cell"; break;
         case OBJECT__MINIBOT_ALLY_DYNAMITE:            name = "minibot ally dynamite"; break;
@@ -2258,7 +2286,7 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__BALL_SPIKES:                      name = "ball (on)"; break;
         case OBJECT__GLASS_BALL:                       name = "glass"; break;
 
-        case OBJECT__THRONE:                           name = "throne (use me)"; break;
+        case OBJECT__THRONE:                           name = "throne"; break;
 
         case OBJECT__SIGN_MOLE_WARNING:                name = "sign"; break;
 
@@ -2342,6 +2370,12 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__STATION_MANIPULATION_HEAD:        name = "station"; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:       name = "station"; break;
         case OBJECT__STATION_TAKEN:                    name = "station"; break;
+
+        case OBJECT__SECRET_1:                         name = "secret"; break;
+        case OBJECT__SECRET_2:                         name = "secret"; break;
+        case OBJECT__SECRET_3:                         name = "secret"; break;
+        case OBJECT__SECRET_4:                         name = "secret"; break;
+        case OBJECT__SECRET_TAKEN:                     name = "secret"; break;
 
         case OBJECT__MINIBOT_ALLY:                     name = "minibot ally"; break;
         case OBJECT__MINIBOT_ALLY_CELL:                name = "minibot ally"; break;
@@ -2580,6 +2614,12 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_taken; break;
 
+        case OBJECT__SECRET_1:                         texture = textures->object.secret_1; break;
+        case OBJECT__SECRET_2:                         texture = textures->object.secret_2; break;
+        case OBJECT__SECRET_3:                         texture = textures->object.secret_3; break;
+        case OBJECT__SECRET_4:                         texture = textures->object.secret_4; break;
+        case OBJECT__SECRET_TAKEN:                     texture = textures->object.secret_taken; break;
+
         case OBJECT__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_1; break;
         case OBJECT__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_1; break;
         case OBJECT__MINIBOT_ALLY_DYNAMITE:            texture = textures->object.minibot_ally_dynamite_1; break;
@@ -2816,6 +2856,12 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_MANIPULATION_HEAD:        texture = textures->object.station_manipulation_head; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_taken; break;
+
+        case OBJECT__SECRET_1:                         texture = textures->object.secret_1; break;
+        case OBJECT__SECRET_2:                         texture = textures->object.secret_2; break;
+        case OBJECT__SECRET_3:                         texture = textures->object.secret_3; break;
+        case OBJECT__SECRET_4:                         texture = textures->object.secret_4; break;
+        case OBJECT__SECRET_TAKEN:                     texture = textures->object.secret_taken; break;
 
         case OBJECT__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_2; break;
         case OBJECT__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_2; break;
@@ -3054,6 +3100,12 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_outline; break;
 
+        case OBJECT__SECRET_1:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_2:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_3:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_4:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_TAKEN:                     texture = textures->object.secret_outline; break;
+
         case OBJECT__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_outline_1; break;
         case OBJECT__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_outline_1; break;
         case OBJECT__MINIBOT_ALLY_DYNAMITE:            texture = textures->object.minibot_ally_dynamite_outline_1; break;
@@ -3290,6 +3342,12 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_MANIPULATION_HEAD:        texture = textures->object.station_outline; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_outline; break;
+
+        case OBJECT__SECRET_1:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_2:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_3:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_4:                         texture = textures->object.secret_outline; break;
+        case OBJECT__SECRET_TAKEN:                     texture = textures->object.secret_outline; break;
 
         case OBJECT__MINIBOT_ALLY:                     texture = textures->object.minibot_ally_outline_2; break;
         case OBJECT__MINIBOT_ALLY_CELL:                texture = textures->object.minibot_ally_cell_outline_2; break;

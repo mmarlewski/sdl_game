@@ -33,6 +33,28 @@ void skill_get_possible_target_1_pos(
             //
         }
         break;
+        case SKILL__TELEKINESIS:
+        {
+            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            {
+                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                {
+                    Vec2i tilemap_pos = vec2i(i, j);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+
+                    if(object != NULL &&
+                    is_object_movable(object))
+                    {
+                        add_new_list_element_to_list_end(
+                            target_1_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
+        }
+        break;
         case SKILL__MOVE:
         case SKILL__MOVE_FLOATING:
         case SKILL__MOVE_FLYING:

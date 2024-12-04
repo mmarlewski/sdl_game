@@ -50,6 +50,10 @@ Animation* skill_get_animation(
             {
                 skill_animation = new_animation_play_sound(sounds->use_station);
             }
+            else if(is_object_secret(target_2_object))
+            {
+                skill_animation = new_animation_play_sound(sounds->use_secret);
+            }
             else if(is_object_exit(target_2_object))
             {
                 skill_animation = new_animation_play_sound(sounds->use_exit);

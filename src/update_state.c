@@ -201,6 +201,30 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }
+
+        if(state->was_secret_aug_unlocked &&
+        input->was_mouse_left && !input->is_mouse_left &&
+        state->mouse_screen_pos.x >= 550 + 84 &&
+        state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+        state->mouse_screen_pos.y >= 575 + 64 + 10 &&
+        state->mouse_screen_pos.y <= 575 + 64 + 10 + 32)
+        {
+            state->was_throne_used = FALSE;
+            
+            start_state(
+                state,
+                textures,
+                sounds,
+                musics,
+                colors
+            );
+
+            hero_add_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD);
+
+            update_ally_skill_list(state, state->curr_ally);
+
+            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+        }
     }
 
     // quit
@@ -683,6 +707,10 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     else if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
                     {
                         skill = SKILL__TELEPORTATION;
+                    }
+                    else if(hero_has_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD))
+                    {
+                        skill = SKILL__TELEKINESIS;
                     }
                 }
             }

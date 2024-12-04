@@ -2296,11 +2296,22 @@ void create_level(State* state, Textures* textures)
         vec2i(6, 8)
     );
 
-    room_add_object_at(
-        room_1_1,
-        new_object(OBJECT__THRONE),
-        vec2i(7, 6)
-    );
+    if(!state->was_secret_aug_unlocked)
+    {
+        room_add_object_at(
+            room_1_1,
+            new_object(OBJECT__SECRET_4),
+            vec2i(7, 6)
+        );
+    }
+    else
+    {
+        room_add_object_at(
+            room_1_1,
+            new_object(OBJECT__SECRET_TAKEN),
+            vec2i(7, 6)
+        );
+    }
 
     room_add_object_at(
         room_1_1,
@@ -5649,6 +5660,23 @@ void create_level(State* state, Textures* textures)
         vec2i(4, 7)
     );
 
+    if(!state->was_secret_aug_unlocked)
+    {
+        room_add_object_at(
+            room_3_2,
+            new_object(OBJECT__SECRET_3),
+            vec2i(3,3)
+        );
+    }
+    else
+    {
+        room_add_object_at(
+            room_3_2,
+            new_object(OBJECT__SECRET_TAKEN),
+            vec2i(3,3)
+        );
+    }
+
     room_add_object_at(
         room_3_2,
         new_object(OBJECT__EXIT_METAL_DOWN),
@@ -6301,6 +6329,23 @@ void create_level(State* state, Textures* textures)
         new_object(OBJECT__CRATE_GEMSTONE_ITEM),
         vec2i(6, 5)
     );
+
+    if(!state->was_secret_aug_unlocked)
+    {
+        room_add_object_at(
+            room_3_5,
+            new_object(OBJECT__SECRET_2),
+            vec2i(4,4)
+        );
+    }
+    else
+    {
+        room_add_object_at(
+            room_3_5,
+            new_object(OBJECT__SECRET_TAKEN),
+            vec2i(4,4)
+        );
+    }
 
     room_add_object_at(
         room_3_5,
@@ -8013,12 +8058,12 @@ void create_level(State* state, Textures* textures)
     room_change_floor_at(
         room_5_1,
         FLOOR__LAVA_COLUMN,
-        vec2i(7, 4)
+        vec2i(7, 5)
     );
     room_change_floor_at(
         room_5_1,
         FLOOR__LAVA_COLUMN,
-        vec2i(8, 4)
+        vec2i(7, 6)
     );
 
     // walls
@@ -8051,7 +8096,7 @@ void create_level(State* state, Textures* textures)
     room_add_object_at(
         room_5_1,
         new_object(OBJECT__COLUMN),
-        vec2i(6, 4)
+        vec2i(6, 5)
     );
 
     room_add_object_at(
@@ -10800,16 +10845,6 @@ void create_level(State* state, Textures* textures)
         FLOOR__ROCK,
         vec2i(7,7)
     );
-    room_change_floor_at(
-        room_7_1,
-        FLOOR__ROCK,
-        vec2i(6,7)
-    );
-    room_change_floor_at(
-        room_7_1,
-        FLOOR__ROCK,
-        vec2i(7,6)
-    );
 
     // walls
 
@@ -10879,21 +10914,22 @@ void create_level(State* state, Textures* textures)
         vec2i(4, 1)
     );
 
-    room_add_object_at(
-        room_7_1,
-        new_object(OBJECT__ROCK_DAMAGED_ITEM),
-        vec2i(7, 7)
-    );
-    room_add_object_at(
-        room_7_1,
-        new_object(OBJECT__ROCK_DAMAGED_ITEM),
-        vec2i(7, 6)
-    );
-    room_add_object_at(
-        room_7_1,
-        new_object(OBJECT__ROCK_DAMAGED_ITEM),
-        vec2i(6, 7)
-    );
+    if(!state->was_secret_aug_unlocked)
+    {
+        room_add_object_at(
+            room_7_1,
+            new_object(OBJECT__SECRET_1),
+            vec2i(7, 7)
+        );
+    }
+    else
+    {
+        room_add_object_at(
+            room_7_1,
+            new_object(OBJECT__SECRET_TAKEN),
+            vec2i(7, 7)
+        );
+    }
 
     room_add_object_at(
         room_7_1,

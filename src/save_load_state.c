@@ -165,6 +165,11 @@ void save_state(State* state, Textures* textures)
     int minibot_action_points = state->minibot_object->action_points;
     int was_minibot_launched = state->was_minibot_launched;
     int was_throne_used = state->was_throne_used;
+    int was_secret_1_taken = state->was_secret_1_taken;
+    int was_secret_2_taken = state->was_secret_2_taken;
+    int was_secret_3_taken = state->was_secret_3_taken;
+    int was_secret_4_taken = state->was_secret_4_taken;
+    int was_secret_aug_unlocked = state->was_secret_aug_unlocked;
     int reset_turn_uses = state->reset_turn_uses;
     int game_over_uses = state->game_over_uses;
 
@@ -172,6 +177,11 @@ void save_state(State* state, Textures* textures)
     SDL_RWwrite(file, &minibot_action_points, sizeof(int), 1);
     SDL_RWwrite(file, &was_minibot_launched, sizeof(int), 1);
     SDL_RWwrite(file, &was_throne_used, sizeof(int), 1);
+    SDL_RWwrite(file, &was_secret_1_taken, sizeof(int), 1);
+    SDL_RWwrite(file, &was_secret_2_taken, sizeof(int), 1);
+    SDL_RWwrite(file, &was_secret_3_taken, sizeof(int), 1);
+    SDL_RWwrite(file, &was_secret_4_taken, sizeof(int), 1);
+    SDL_RWwrite(file, &was_secret_aug_unlocked, sizeof(int), 1);
     SDL_RWwrite(file, &reset_turn_uses, sizeof(int), 1);
     SDL_RWwrite(file, &game_over_uses, sizeof(int), 1);
 
@@ -393,6 +403,11 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     int minibot_action_points = 0;
     int was_minibot_launched = 0;
     int was_throne_used = 0;
+    int was_secret_1_taken = 0;
+    int was_secret_2_taken = 0;
+    int was_secret_3_taken = 0;
+    int was_secret_4_taken = 0;
+    int was_secret_aug_unlocked = 0;
     int reset_turn_uses = 0;
     int game_over_uses = 0;
 
@@ -400,6 +415,11 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     SDL_RWread(file, &minibot_action_points, sizeof(int), 1);
     SDL_RWread(file, &was_minibot_launched, sizeof(int), 1);
     SDL_RWread(file, &was_throne_used, sizeof(int), 1);
+    SDL_RWread(file, &was_secret_1_taken, sizeof(int), 1);
+    SDL_RWread(file, &was_secret_2_taken, sizeof(int), 1);
+    SDL_RWread(file, &was_secret_3_taken, sizeof(int), 1);
+    SDL_RWread(file, &was_secret_4_taken, sizeof(int), 1);
+    SDL_RWread(file, &was_secret_aug_unlocked, sizeof(int), 1);
     SDL_RWread(file, &reset_turn_uses, sizeof(int), 1);
     SDL_RWread(file, &game_over_uses, sizeof(int), 1);
 
@@ -414,8 +434,12 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     }
     state->minibot_object->action_points = minibot_action_points;
     state->was_minibot_launched = was_minibot_launched;
-    // state->was_throne_used = was_throne_used;
-    state->was_throne_used = FALSE;
+    state->was_throne_used = was_throne_used;
+    state->was_secret_1_taken = was_secret_1_taken;
+    state->was_secret_2_taken = was_secret_2_taken;
+    state->was_secret_3_taken = was_secret_3_taken;
+    state->was_secret_4_taken = was_secret_4_taken;
+    state->was_secret_aug_unlocked = was_secret_aug_unlocked;
     state->reset_turn_uses = reset_turn_uses;
     state->game_over_uses = game_over_uses;
 

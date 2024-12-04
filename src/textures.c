@@ -570,6 +570,13 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->station_taken = load_texture_from_filepath(renderer, "./res/object/station_taken.png");
     object->station_outline = load_texture_from_filepath(renderer, "./res/object/station_outline.png");
 
+    object->secret_1 = load_texture_from_filepath(renderer, "./res/object/secret_1.png");
+    object->secret_2 = load_texture_from_filepath(renderer, "./res/object/secret_2.png");
+    object->secret_3 = load_texture_from_filepath(renderer, "./res/object/secret_3.png");
+    object->secret_4 = load_texture_from_filepath(renderer, "./res/object/secret_4.png");
+    object->secret_taken = load_texture_from_filepath(renderer, "./res/object/secret_taken.png");
+    object->secret_outline = load_texture_from_filepath(renderer, "./res/object/secret_outline.png");
+
     object->lever_metal_off = load_texture_from_filepath(renderer, "./res/object/lever_metal_off.png");
     object->lever_metal_off_outline = load_texture_from_filepath(renderer, "./res/object/lever_metal_off_outline.png");
 
@@ -1002,10 +1009,12 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->wings_torso = load_texture_from_filepath(renderer, "./res/hud/wings_torso.png");
     hud->manipulation_head = load_texture_from_filepath(renderer, "./res/hud/manipulation_head.png");
     hud->teleportation_head = load_texture_from_filepath(renderer, "./res/hud/teleportation_head.png");
+    hud->telekinesis_head = load_texture_from_filepath(renderer, "./res/hud/telekinesis_head.png");
 
     hud->use = load_texture_from_filepath(renderer, "./res/hud/use.png");
     hud->manipulation = load_texture_from_filepath(renderer, "./res/hud/manipulation.png");
     hud->teleportation = load_texture_from_filepath(renderer, "./res/hud/teleportation.png");
+    hud->telekinesis = load_texture_from_filepath(renderer, "./res/hud/telekinesis.png");
     hud->move = load_texture_from_filepath(renderer, "./res/hud/move.png");
     hud->pick_item = load_texture_from_filepath(renderer, "./res/hud/pick_item.png");
     hud->pick_item_far = load_texture_from_filepath(renderer, "./res/hud/pick_item_far.png");
@@ -1111,12 +1120,19 @@ void load_textures(Renderer* renderer, Textures* textures)
 {
     textures->tutorial = load_texture_from_filepath(renderer, "./res/tutorial.png");
     textures->shadow = load_texture_from_filepath(renderer, "./res/shadow.png");
+
     textures->background_rock = load_texture_from_filepath(renderer, "./res/background_rock.png");
     textures->background_stone = load_texture_from_filepath(renderer, "./res/background_stone.png");
     textures->background_metal = load_texture_from_filepath(renderer, "./res/background_metal.png");
     textures->background_marble = load_texture_from_filepath(renderer, "./res/background_marble.png");
     textures->background_obsidian = load_texture_from_filepath(renderer, "./res/background_obsidian.png");
     textures->background_gold = load_texture_from_filepath(renderer, "./res/background_gold.png");
+
+    textures->secret_background = load_texture_from_filepath(renderer, "./res/secret_background.png");
+    textures->secret_1 = load_texture_from_filepath(renderer, "./res/secret_1.png");
+    textures->secret_2 = load_texture_from_filepath(renderer, "./res/secret_2.png");
+    textures->secret_3 = load_texture_from_filepath(renderer, "./res/secret_3.png");
+    textures->secret_4 = load_texture_from_filepath(renderer, "./res/secret_4.png");
 
     load_textures_floor(renderer, &textures->floor);
     load_textures_object(renderer, &textures->object);

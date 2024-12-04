@@ -27,7 +27,9 @@ void skill_get_possible_hint_pos(
                     );
 
                     if(object != NULL && 
-                    (is_object_exit(object) || is_object_station(object)))
+                    (is_object_exit(object) || 
+                    is_object_station(object) ||
+                    is_object_secret(object)))
                     {
                         add_new_list_element_to_list_end(
                             hint_pos_list,

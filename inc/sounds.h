@@ -10,6 +10,7 @@ typedef struct
 
     Sound* use_exit;
     Sound* use_station;
+    Sound* use_secret;
     Sound* use_throne;
 
     Sound* move;

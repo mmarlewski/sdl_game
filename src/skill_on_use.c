@@ -25,11 +25,26 @@ void skill_on_use(
                 if(target_2_object->type == OBJECT__THRONE)
                 {
                     state->was_throne_used = TRUE;
+
+                    if(state->was_secret_1_taken && 
+                    state->was_secret_2_taken && 
+                    state->was_secret_3_taken && 
+                    state->was_secret_4_taken)
+                    {
+                        state->was_secret_aug_unlocked = TRUE;
+                    }
                 }
                 else if(is_object_station(target_2_object))
                 {
                     int augmentation = get_station_augmentation(target_2_object);
                     hero_add_augmentation(state, augmentation);
+                }
+                else if(is_object_secret(target_2_object))
+                {
+                    if(target_2_object->type == OBJECT__SECRET_1) state->was_secret_1_taken = TRUE;
+                    if(target_2_object->type == OBJECT__SECRET_2) state->was_secret_2_taken = TRUE;
+                    if(target_2_object->type == OBJECT__SECRET_3) state->was_secret_3_taken = TRUE;
+                    if(target_2_object->type == OBJECT__SECRET_4) state->was_secret_4_taken = TRUE;
                 }
                 else if(is_object_exit(target_2_object))
                 {
