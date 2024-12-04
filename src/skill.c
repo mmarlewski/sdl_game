@@ -370,9 +370,9 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "use exits to travel between rooms"; break;
-                case 2: description = "or stations to add augmentations"; break;
-                case 3: description = "(objects with pink names)"; break;
+                case 1: description = "use EXITS to travel between rooms"; break;
+                case 2: description = "or STATIONS to add augmentations"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -382,10 +382,10 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "remotely manipulate certain metal"; break;
-                case 2: description = "objects or floors (with green name)"; break;
-                case 3: description = "and turn on or off thier special"; break;
-                case 4: description = "hidden state"; break;
+                case 1: description = "remotely manipulate objects or floors,"; break;
+                case 2: description = "turn ON and OFF thier special state"; break;
+                case 3: description = ""; break;
+                case 4: description = ""; break;
                 default: break;
             }
         }
@@ -394,9 +394,9 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "teleport in any suitable place on map"; break;
-                case 2: description = "and bypass impenetrable obstacles"; break;
-                case 3: description = "or quickly escape from enemies"; break;
+                case 1: description = "teleport to any place in room"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -406,9 +406,9 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "xxx"; break;
-                case 2: description = "xxx"; break;
-                case 3: description = "xxx"; break;
+                case 1: description = "move any object in room across space"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -418,7 +418,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "move through suitable tiles on map"; break;
+                case 1: description = "move through tiles"; break;
                 case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -430,7 +430,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "move through suitable tiles on map"; break;
+                case 1: description = "move through tiles"; break;
                 case 2: description = "(can move through water and lava tiles)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -442,7 +442,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "move through suitable tiles on map"; break;
+                case 1: description = "move through tiles"; break;
                 case 2: description = "(can move through pit tiles)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -455,7 +455,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "pick items from objects"; break;
-                case 2: description = "(can only pick from nearby objects)"; break;
+                case 2: description = "(can only pick from NEARBY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -467,7 +467,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "pick items from objects"; break;
-                case 2: description = "(can pick from far away objects)"; break;
+                case 2: description = "(can pick from FAR AWAY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -479,8 +479,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a cell item into an object"; break;
-                case 2: description = "(can power certain stone objects)"; break;
-                case 3: description = "(can only put into nearby objects)"; break;
+                case 2: description = "(can only put into NEARBY objects)"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -491,8 +491,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a cell item into an object"; break;
-                case 2: description = "(can power certain stone objects)"; break;
-                case 3: description = "(can put into far away objects)"; break;
+                case 2: description = "(can put into FAR AWAY objects)"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -503,8 +503,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a dynamite item into an object"; break;
-                case 2: description = "(no uses for it right now lol)"; break;
-                case 3: description = "(can only put into nearby objects)"; break;
+                case 2: description = "(can only put into NEARBY objects)"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -515,8 +515,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a dynamite item into an object"; break;
-                case 2: description = "(no uses for it right now lol)"; break;
-                case 3: description = "(can put into far away objects)"; break;
+                case 2: description = "(can put into FAR AWAY objects)"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -527,8 +527,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a gemstone item into an object"; break;
-                case 2: description = "(can buy items in vending machines)"; break;
-                case 3: description = "(can only put into nearby objects)"; break;
+                case 2: description = "(can only put into NEARBY objects)"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -539,8 +539,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a gemstone item into an object"; break;
-                case 2: description = "(can buy items in vending machines)"; break;
-                case 3: description = "(can put into far away objects)"; break;
+                case 2: description = "(can put into FAR AWAY objects)"; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -550,8 +550,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a cell item above other object"; break;
-                case 2: description = "(can melt metal (blue name) objects and floors)"; break;
+                case 1: description = "throw a cell item on object or floor"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -562,8 +562,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a dynamite item over other objects"; break;
-                case 2: description = "(can break stone (brown name) objectsand floors)"; break;
+                case 1: description = "throw a dynamite item on object or floor"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -574,8 +574,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a gemstone item over other objects"; break;
-                case 2: description = "(can shake fragile objects and floors)"; break;
+                case 1: description = "throw a gemstone item on object or floor"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -588,7 +588,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "shoot a projectile in straight line"; break;
-                case 2: description = "(can shake fragile objects)"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -599,8 +599,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "push a movable object to a free tile"; break;
-                case 2: description = "or bump it into another object"; break;
+                case 1: description = "push an object"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -611,7 +611,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a movable object into a free tile"; break;
+                case 1: description = "throw an object"; break;
                 case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -627,8 +627,8 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "pull yourself towards a stable object"; break;
-                case 2: description = "or bump yourself into it"; break;
-                case 3: description = "(can travel above water and pit tiles)"; break;
+                case 2: description = ""; break;
+                case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
             }
@@ -640,8 +640,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "drag a movable object towards you"; break;
-                case 2: description = "or bump it into you"; break;
+                case 1: description = "drag an object towards you"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -652,7 +652,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "jump over other objects into a free tile"; break;
+                case 1: description = "jump over other objects"; break;
                 case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -664,8 +664,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "charge in a straight line into a free tile"; break;
-                case 2: description = "or bump yourself into another object"; break;
+                case 1: description = "charge in a straight line"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -689,7 +689,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "drag a movable object towards you"; break;
+                case 1: description = "drag an object towards you"; break;
                 case 2: description = "then throw it behind you"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -737,8 +737,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "jump over other objects into a free tile"; break;
-                case 2: description = "while carrying another nearby object"; break;
+                case 1: description = "jump over other objects"; break;
+                case 2: description = "while carrying another object"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -749,7 +749,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "jump over other objects into a free tile"; break;
+                case 1: description = "jump over other objects"; break;
                 case 2: description = "then stomp nearby objects or floors"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -761,8 +761,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "launch an ally minibot into a free tile"; break;
-                case 2: description = "(click on it to switch from hero)"; break;
+                case 1: description = "launch an ally minibot"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -786,7 +786,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "shoot a laser in a straight line"; break;
-                case 2: description = "that melts all metal objects"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -798,7 +798,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "throw a bomb over another objects"; break;
-                case 2: description = "then shake nearby objects"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -810,7 +810,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "shoot a projectile in a straight line"; break;
-                case 2: description = "that can shake fragile objects"; break;
+                case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
