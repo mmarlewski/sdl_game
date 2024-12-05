@@ -6,7 +6,9 @@
 
 typedef struct
 {
-    Music* ambient;
+    int music_num;
+
+    Music* music_array[11];
 
 } Musics;
 

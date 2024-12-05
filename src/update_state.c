@@ -3,6 +3,44 @@
 
 void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
+    // quit
+
+    if(input->is_quit)
+    {
+        state->is_game_running = FALSE;
+    }
+
+    // time
+
+    state->time += delta_time;
+
+    // FIXME
+    if(state->gamestate != GAMESTATE__GAME_START &&
+    state->gamestate != GAMESTATE__GAME_WON)
+    {
+        if(!Mix_PlayingMusic())
+        {
+            int new_music_index = (abs((int)(state->time + state->prev_save_time)) % musics->music_num);
+            while(new_music_index == state->prev_prev_music_index ||
+            new_music_index == state->prev_music_index ||
+            new_music_index == state->curr_music_index)
+            {
+                new_music_index = (new_music_index + 1) % musics->music_num;
+            }
+
+            Mix_PlayMusic(musics->music_array[new_music_index], 1);
+            Mix_VolumeMusic(0.20f * MIX_MAX_VOLUME);
+
+            state->prev_prev_music_index = state->prev_music_index;
+            state->prev_music_index = state->curr_music_index;
+            state->curr_music_index = new_music_index;
+        }
+    }
+    else
+    {
+        Mix_HaltMusic();
+    }
+
     if(state->hero_object != NULL)
     {
         // printf("state->hero_object->tilemap_pos: (%i, %i) \n", state->hero_object->tilemap_pos.x, state->hero_object->tilemap_pos.y);
@@ -226,17 +264,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
         }
     }
-
-    // quit
-
-    if(input->is_quit)
-    {
-        state->is_game_running = FALSE;
-    }
-
-    // time
-
-    state->time += delta_time;
 
     // mechanisms
 

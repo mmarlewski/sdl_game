@@ -172,6 +172,10 @@ void save_state(State* state, Textures* textures)
     int was_secret_aug_unlocked = state->was_secret_aug_unlocked;
     int reset_turn_uses = state->reset_turn_uses;
     int game_over_uses = state->game_over_uses;
+    int prev_prev_music_index = state->prev_prev_music_index;
+    int prev_music_index = state->prev_music_index;
+    int curr_music_index = state->curr_music_index;
+    float prev_save_time = state->time;
 
     SDL_RWwrite(file, &hero_action_points, sizeof(int), 1);
     SDL_RWwrite(file, &minibot_action_points, sizeof(int), 1);
@@ -184,6 +188,10 @@ void save_state(State* state, Textures* textures)
     SDL_RWwrite(file, &was_secret_aug_unlocked, sizeof(int), 1);
     SDL_RWwrite(file, &reset_turn_uses, sizeof(int), 1);
     SDL_RWwrite(file, &game_over_uses, sizeof(int), 1);
+    SDL_RWwrite(file, &prev_prev_music_index, sizeof(int), 1);
+    SDL_RWwrite(file, &prev_music_index, sizeof(int), 1);
+    SDL_RWwrite(file, &curr_music_index, sizeof(int), 1);
+    SDL_RWwrite(file, &prev_save_time, sizeof(float), 1);
 
     // close file
 
@@ -410,6 +418,10 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     int was_secret_aug_unlocked = 0;
     int reset_turn_uses = 0;
     int game_over_uses = 0;
+    int prev_prev_music_index = 0;
+    int prev_music_index = 0;
+    int curr_music_index = 0;
+    float prev_save_time = 0;
 
     SDL_RWread(file, &hero_action_points, sizeof(int), 1);
     SDL_RWread(file, &minibot_action_points, sizeof(int), 1);
@@ -422,6 +434,10 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     SDL_RWread(file, &was_secret_aug_unlocked, sizeof(int), 1);
     SDL_RWread(file, &reset_turn_uses, sizeof(int), 1);
     SDL_RWread(file, &game_over_uses, sizeof(int), 1);
+    SDL_RWread(file, &prev_prev_music_index, sizeof(int), 1);
+    SDL_RWread(file, &prev_music_index, sizeof(int), 1);
+    SDL_RWread(file, &curr_music_index, sizeof(int), 1);
+    SDL_RWread(file, &prev_save_time, sizeof(float), 1);
 
     if(state->hero_object == NULL)
     {
@@ -442,6 +458,10 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->was_secret_aug_unlocked = was_secret_aug_unlocked;
     state->reset_turn_uses = reset_turn_uses;
     state->game_over_uses = game_over_uses;
+    state->prev_prev_music_index = prev_prev_music_index;
+    state->prev_music_index = prev_music_index;
+    state->curr_music_index = curr_music_index;
+    state->prev_save_time = prev_save_time;
 
     // close file
 

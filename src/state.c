@@ -5,6 +5,7 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
 {
     state->is_game_running = TRUE;
     state->time = 0.0f;
+    state->prev_save_time = 0.0f;
     state->delta_time = 0.0f;
     state->gamestate = GAMESTATE__NONE;
     state->timer = 0.0f;
@@ -86,6 +87,10 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->curr_ally_draw_effect_tilemap_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
 
     state->mechanism_list = new_list((void (*)(void*)) & destroy_mechanism);
+
+    state->prev_prev_music_index = 0;
+    state->prev_music_index = 0;
+    state->curr_music_index = 0;
 }
 
 void start_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)

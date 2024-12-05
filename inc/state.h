@@ -53,6 +53,7 @@ typedef struct
 {
     int is_game_running;
     float time;
+    float prev_save_time;
     float delta_time;
     int gamestate;
     float timer;
@@ -128,6 +129,10 @@ typedef struct
     List* curr_ally_draw_effect_tilemap_pos_list;
 
     List* mechanism_list;
+
+    int prev_prev_music_index;
+    int prev_music_index;
+    int curr_music_index;
 
 } State;
 
