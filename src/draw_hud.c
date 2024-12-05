@@ -8,14 +8,6 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__GAME_START)
     {
-        SDL_SetRenderDrawColor(
-            renderer,
-            colors->game_start_background.x,
-            colors->game_start_background.y,
-            colors->game_start_background.z,
-            255
-        );
-        SDL_RenderClear(renderer);
 
         draw_font_at_screen_pos(
             "Fallen Stalactite",
@@ -26,14 +18,62 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             vec2i(200, 100),
             1
         );
+
+        SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
+        if(file == NULL)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.load_game_inactive,
+                colors->none,
+                1.0f,
+                vec2i(600, 300),
+                2.0f
+            );
+        }
+        else
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.load_game,
+                colors->none,
+                1.0f,
+                vec2i(600, 300),
+                2.0f
+            );
+        }
+
         draw_texture_at_screen_pos(
             renderer,
-            textures->hud.start_game,
+            textures->hud.new_game,
             colors->none,
             1.0f,
-            vec2i(600, 300),
+            vec2i(600, 400),
             2.0f
         );
+
+        if(state->show_tutorial)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.show_tutorial_checked,
+                colors->none,
+                1.0f,
+                vec2i(575, 500),
+                2.0f
+            );
+        }
+        else
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.show_tutorial,
+                colors->none,
+                1.0f,
+                vec2i(575, 500),
+                2.0f
+            );
+        }
     }
 
     // game over

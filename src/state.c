@@ -91,6 +91,11 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->prev_prev_music_index = 0;
     state->prev_music_index = 0;
     state->curr_music_index = 0;
+
+    state->show_tutorial = 1;
+
+    state->is_game_start_animation_started = 0;
+    state->is_game_start_animation_finished = 0;
 }
 
 void start_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
@@ -147,20 +152,6 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     add_new_list_element_to_list_end(
         state->visited_room_list,
         room
-    );
-
-    add_animation_to_animation_list(
-        state,
-        new_animation_flash_sprite_in_gamemap(
-            textures->object.exit_stone_right_outline,
-            vec2f(9,5),
-            1.5f,
-            2
-        ),
-        textures,
-        sounds,
-        musics,
-        colors
     );
 
     state->hero_item_number[ITEM__CELL] = 0;

@@ -176,6 +176,7 @@ void save_state(State* state, Textures* textures)
     int prev_music_index = state->prev_music_index;
     int curr_music_index = state->curr_music_index;
     float prev_save_time = state->time;
+    int show_tutorial = state->show_tutorial;
 
     SDL_RWwrite(file, &hero_action_points, sizeof(int), 1);
     SDL_RWwrite(file, &minibot_action_points, sizeof(int), 1);
@@ -192,6 +193,7 @@ void save_state(State* state, Textures* textures)
     SDL_RWwrite(file, &prev_music_index, sizeof(int), 1);
     SDL_RWwrite(file, &curr_music_index, sizeof(int), 1);
     SDL_RWwrite(file, &prev_save_time, sizeof(float), 1);
+    SDL_RWwrite(file, &show_tutorial, sizeof(float), 1);
 
     // close file
 
@@ -422,6 +424,7 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     int prev_music_index = 0;
     int curr_music_index = 0;
     float prev_save_time = 0;
+    int show_tutorial = 0;
 
     SDL_RWread(file, &hero_action_points, sizeof(int), 1);
     SDL_RWread(file, &minibot_action_points, sizeof(int), 1);
@@ -438,6 +441,7 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     SDL_RWread(file, &prev_music_index, sizeof(int), 1);
     SDL_RWread(file, &curr_music_index, sizeof(int), 1);
     SDL_RWread(file, &prev_save_time, sizeof(float), 1);
+    SDL_RWread(file, &show_tutorial, sizeof(int), 1);
 
     if(state->hero_object == NULL)
     {
@@ -462,6 +466,7 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->prev_music_index = prev_music_index;
     state->curr_music_index = curr_music_index;
     state->prev_save_time = prev_save_time;
+    state->show_tutorial = show_tutorial;
 
     // close file
 

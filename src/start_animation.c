@@ -89,13 +89,12 @@ void start_animation(State* state, Animation* animation, Textures* textures, Sou
         break;
         case ANIMATION__DESCEND_SPRITE_IN_GAMEMAP:
         {
-
             animation->descend_sprite_in_gamemap.time = 0.0f;
 
             Sprite* sprite = new_sprite(animation->descend_sprite_in_gamemap.texture);
             sprite->gamemap_pos.x = animation->descend_sprite_in_gamemap.gamemap_pos.x;
             sprite->gamemap_pos.y = animation->descend_sprite_in_gamemap.gamemap_pos.y;
-            sprite->gamemap_pos.z = 0.0f;
+            sprite->gamemap_pos.z = 1000.0f;
             animation->descend_sprite_in_gamemap.sprite = sprite;
             add_sprite_to_gamemap_sprites(state, sprite);
         }

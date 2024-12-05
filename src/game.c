@@ -187,6 +187,19 @@ int main(int argc, char* argv[])
 
     state.gamestate = GAMESTATE__GAME_START;
 
+    SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
+
+    if(file == NULL)
+    {
+        start_state(&state,&textures,&sounds,&musics,&colors);
+
+        state.hero_object->is_visible = FALSE;
+    }
+    else
+    {
+        load_state(&state,&textures,&sounds,&musics,&colors);
+    }
+
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(mainloop, 0, 1);
 #else

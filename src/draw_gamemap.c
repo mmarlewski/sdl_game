@@ -3,9 +3,6 @@
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
 {
-    // i know...
-    if(state->gamestate == GAMESTATE__NONE || state->gamestate == GAMESTATE__GAME_START) return;
-
     // shadow
 
     draw_texture_at_world_pos(
@@ -145,7 +142,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // enemy skill draw below
 
-    if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
+    if(state->gamestate != GAMESTATE__GAME_START &&
+       state->gamestate != GAMESTATE__GAME_OVER &&
+       state->gamestate != GAMESTATE__GAME_WON &&
+       state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
        state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
        state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
        state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
@@ -336,7 +336,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // enemy skill draw above
 
-    if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
+    if(state->gamestate != GAMESTATE__GAME_START &&
+       state->gamestate != GAMESTATE__GAME_OVER &&
+       state->gamestate != GAMESTATE__GAME_WON &&
+       state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
        state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
        state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
        state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&
@@ -755,7 +758,10 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
 
     // enemy skill draw effect
 
-    if(state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
+    if(state->gamestate != GAMESTATE__GAME_START &&
+       state->gamestate != GAMESTATE__GAME_OVER &&
+       state->gamestate != GAMESTATE__GAME_WON &&
+       state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_1 &&
        state->gamestate != GAMESTATE__ALLY_CHOOSING_TARGET_2 &&
        state->gamestate != GAMESTATE__ALLY_EXECUTING_ANIMATION &&
        state->gamestate != GAMESTATE__ENEMY_EXECUTING_ANIMATION &&

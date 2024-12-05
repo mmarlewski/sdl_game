@@ -134,6 +134,11 @@ typedef struct
     int prev_music_index;
     int curr_music_index;
 
+    int show_tutorial;
+    
+    int is_game_start_animation_started;
+    int is_game_start_animation_finished;
+
 } State;
 
 void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);

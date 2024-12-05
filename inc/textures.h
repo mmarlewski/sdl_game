@@ -1093,6 +1093,11 @@ typedef struct
     Texture* restart_with;
     Texture* restart_with_no_aug;
     Texture* load_save;
+    Texture* new_game;
+    Texture* load_game;
+    Texture* load_game_inactive;
+    Texture* show_tutorial;
+    Texture* show_tutorial_checked;
     Texture* bar_part;
 
 } Textures_Hud;

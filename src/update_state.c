@@ -4,17 +4,15 @@
 void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
 {
     // quit
-
     if(input->is_quit)
     {
         state->is_game_running = FALSE;
     }
 
     // time
-
     state->time += delta_time;
 
-    // FIXME
+    // music
     if(state->gamestate != GAMESTATE__GAME_START &&
     state->gamestate != GAMESTATE__GAME_WON)
     {
@@ -48,6 +46,24 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
     if(state->gamestate == GAMESTATE__GAME_START)
     {
+        if(state->animation_list->size >= 1 &&
+        !state->is_game_start_animation_started)
+        {
+            state->is_game_start_animation_started = TRUE;
+        }
+        else if(state->animation_list->size <= 0 &&
+        state->is_game_start_animation_started)
+        {
+            state->is_game_start_animation_finished = TRUE;
+        }
+
+        if(state->is_game_start_animation_finished)
+        {
+            state->hero_object->is_visible = TRUE;
+
+            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+        }
+
         if(input->was_mouse_left && !input->is_mouse_left &&
            state->mouse_screen_pos.x >= 600 &&
            state->mouse_screen_pos.x <= 600 + 128 &&
@@ -55,29 +71,64 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y <= 300 + 64)
         {
             SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
-
-            if(file == NULL)
+            if(file != NULL)
             {
-                start_state(
-                    state,
-                    textures,
-                    sounds,
-                    musics,
-                    colors
-                );
+                change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
             }
-            else
-            {
-                load_state(
-                    state,
-                    textures,
-                    sounds,
-                    musics,
-                    colors
-                );
-            }
+        }
 
-            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+        if(input->was_mouse_left && !input->is_mouse_left &&
+           state->mouse_screen_pos.x >= 600 &&
+           state->mouse_screen_pos.x <= 600 + 128 &&
+           state->mouse_screen_pos.y >= 400 &&
+           state->mouse_screen_pos.y <= 400 + 64)
+        {
+            start_state(state,textures,sounds,musics,colors);
+
+            state->hero_object->is_visible = FALSE;
+
+            add_animation_to_animation_list(
+                state,
+                new_animation_sequence_of_2(
+                    new_animation_sequence_of_2(
+                        new_animation_play_sound(sounds->fall_pit),
+                        new_animation_descend_sprite_in_gamemap(
+                            textures->object.hero_1,
+                            vec2i_to_vec2f(state->hero_object->tilemap_pos),
+                            5.0f,
+                            0.5f
+                        )
+                    ),
+                    new_animation_sequence_of_2(
+                        new_animation_play_sound(sounds->drop),
+                        new_animation_simultaneous_of_2(
+                            new_animation_show_sprite_in_gamemap(
+                                textures->object.hero_2,
+                                vec2i_to_vec2f(state->hero_object->tilemap_pos),
+                                0.25f
+                            ),
+                            new_animation_show_sprite_in_gamemap(
+                                textures->animation.drop_2,
+                                vec2i_to_vec2f(state->hero_object->tilemap_pos),
+                                0.25f
+                            )
+                        )
+                    )
+                ),
+                textures,
+                sounds,
+                musics,
+                colors
+            );
+        }
+
+        if(input->was_mouse_left && !input->is_mouse_left &&
+           state->mouse_screen_pos.x >= 575 &&
+           state->mouse_screen_pos.x <= 575 + 192 &&
+           state->mouse_screen_pos.y >= 500 &&
+           state->mouse_screen_pos.y <= 500 + 64)
+        {
+            state->show_tutorial = !state->show_tutorial;
         }
     }
 
@@ -327,7 +378,10 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     //     state->camera_world_pos = new_camera_world_pos;
     // }
 
-    if(state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
+    if(state->gamestate != GAMESTATE__GAME_START &&
+        state->gamestate != GAMESTATE__GAME_OVER &&
+        state->gamestate != GAMESTATE__GAME_WON &&
+        state->mouse_screen_pos.x >= 1200 - 64 - 10 + 100 &&
         state->mouse_screen_pos.x <= 1200 - 64 - 10 + 100 + 64 &&
         state->mouse_screen_pos.y >= 10 &&
         state->mouse_screen_pos.y <= 10 + 64)

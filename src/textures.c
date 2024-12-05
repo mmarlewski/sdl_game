@@ -1109,6 +1109,11 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->restart_with = load_texture_from_filepath(renderer, "./res/hud/restart_with.png");
     hud->restart_with_no_aug = load_texture_from_filepath(renderer, "./res/hud/restart_with_no_aug.png");
     hud->load_save = load_texture_from_filepath(renderer, "./res/hud/load_save.png");
+    hud->new_game = load_texture_from_filepath(renderer, "./res/hud/new_game.png");
+    hud->load_game = load_texture_from_filepath(renderer, "./res/hud/load_game.png");
+    hud->load_game_inactive = load_texture_from_filepath(renderer, "./res/hud/load_game_inactive.png");
+    hud->show_tutorial = load_texture_from_filepath(renderer, "./res/hud/show_tutorial.png");
+    hud->show_tutorial_checked = load_texture_from_filepath(renderer, "./res/hud/show_tutorial_checked.png");
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");
 }
 void destroy_textures_hud(Textures_Hud* hud)
