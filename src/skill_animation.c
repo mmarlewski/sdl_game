@@ -266,39 +266,29 @@ Animation* skill_get_animation(
         break;
         case SKILL__THROW_ITEM_DYNAMITE:
         {
-            Animation* animation_sequence = new_animation_sequence();
-
-            add_animation_to_end_animation_sequence(
-                animation_sequence,
-                new_animation_play_sound(sounds->throww)
-            );
-
-            add_animation_to_end_animation_sequence(
-                animation_sequence,
+            Animation* animation_sequence = new_animation_sequence_of_3(
+                new_animation_play_sound(sounds->throww),
                 new_animation_move_sprite_in_gamemap_in_arch(
                     textures->animation.dynamite,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
                     ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
                     1.0f
-                )
-            );
-
-            add_animation_to_end_animation_sequence(
-                animation_sequence,
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.blow_up_1,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    0.1f
-                )
-            );
-
-            add_animation_to_end_animation_sequence(
-                animation_sequence,
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.blow_up_2,
-                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                    0.1f
+                ),
+                new_animation_simultaneous_of_2(
+                    new_animation_camera_shake(1, 1.0f, 0.1f),
+                    new_animation_sequence_of_2(
+                        new_animation_show_sprite_in_gamemap(
+                            textures->animation.blow_up_1,
+                            tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                            0.1f
+                        ),
+                        new_animation_show_sprite_in_gamemap(
+                            textures->animation.blow_up_2,
+                            tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                            0.1f
+                        )
+                    )
                 )
             );
 
@@ -339,21 +329,27 @@ Animation* skill_get_animation(
         break;
         case SKILL__SHOOT_PROJECTILE_FLY:
         {
-            skill_animation = new_animation_move_sprite_in_gamemap_in_line(
-                textures->animation.fly_projectile,
-                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                0.2f
+            skill_animation = new_animation_sequence_of_2(
+                new_animation_move_sprite_in_gamemap_in_line(
+                    textures->animation.fly_projectile,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.2f
+                ),
+                new_animation_camera_shake(1, 1.0f, 0.1f)
             );
         }
         break;
         case SKILL__SHOOT_PROJECTILE_SQUIRREL:
         {
-            skill_animation = new_animation_move_sprite_in_gamemap_in_line(
-                textures->animation.squirrel_projectile,
-                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
-                tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
-                0.2f
+            skill_animation = new_animation_sequence_of_2(
+                new_animation_move_sprite_in_gamemap_in_line(
+                    textures->animation.squirrel_projectile,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    0.2f
+                ),
+                new_animation_camera_shake(1, 1.0f, 0.1f)
             );
         }
         break;
@@ -519,6 +515,11 @@ Animation* skill_get_animation(
             skill_animation = new_animation_play_sound(sounds->minibot_merge);
         }
         break;
+        case SKILL__KILL_AROUND:
+        {
+            skill_animation = new_animation_camera_shake(1, 1.0f, 0.1f);
+        }
+        break;
         case SKILL__TURRET_LASER:
         {
             DistanceInfo distance_info =
@@ -584,6 +585,11 @@ Animation* skill_get_animation(
 
                 tilemap_pos = vec2i_move_in_dir4_by(tilemap_pos, distance_info.dir4, 1);
             }
+
+            add_animation_to_end_animation_simultaneous(
+                animation_simultaneous,
+                new_animation_camera_shake(1, 1.0f, 0.1f)
+            );
 
             skill_animation = animation_simultaneous;
         }

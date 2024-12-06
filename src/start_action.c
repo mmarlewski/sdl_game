@@ -134,18 +134,21 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             next_object_gamemap_pos.x = curr_object_gamemap_pos.x + (next_object_gamemap_pos.x - curr_object_gamemap_pos.x) * 0.5f;
             next_object_gamemap_pos.y = curr_object_gamemap_pos.y + (next_object_gamemap_pos.y - curr_object_gamemap_pos.y) * 0.5f;
 
-            Animation* animation = new_animation_sequence_of_2(
-                new_animation_move_sprite_in_gamemap_in_line(
-                    object_texture,
-                    curr_object_gamemap_pos,
-                    next_object_gamemap_pos,
-                    ACTION_LENGTH_IN_SECONDS * 0.5f
-                ),
-                new_animation_move_sprite_in_gamemap_in_line(
-                    object_texture,
-                    next_object_gamemap_pos,
-                    curr_object_gamemap_pos,
-                    ACTION_LENGTH_IN_SECONDS * 0.5f
+            Animation* animation = new_animation_simultaneous_of_2(
+                new_animation_camera_shake(1,1.0f,0.1f),
+                new_animation_sequence_of_2(
+                    new_animation_move_sprite_in_gamemap_in_line(
+                        object_texture,
+                        curr_object_gamemap_pos,
+                        next_object_gamemap_pos,
+                        ACTION_LENGTH_IN_SECONDS * 0.5f
+                    ),
+                    new_animation_move_sprite_in_gamemap_in_line(
+                        object_texture,
+                        next_object_gamemap_pos,
+                        curr_object_gamemap_pos,
+                        ACTION_LENGTH_IN_SECONDS * 0.5f
+                    )
                 )
             );
 
@@ -251,16 +254,19 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             play_sound(sounds->bomb);
 
-            Animation* animation = new_animation_sequence_of_2(
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.blow_up_1,
-                    tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                ),
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.blow_up_2,
-                    tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
+            Animation* animation = new_animation_simultaneous_of_2(
+                new_animation_camera_shake(1,1.0f,0.1f),
+                new_animation_sequence_of_2(
+                    new_animation_show_sprite_in_gamemap(
+                        textures->animation.blow_up_1,
+                        tilemap_pos_to_gamemap_pos(action->tilemap_pos),
+                        ACTION_LENGTH_IN_SECONDS * 0.5
+                    ),
+                    new_animation_show_sprite_in_gamemap(
+                        textures->animation.blow_up_2,
+                        tilemap_pos_to_gamemap_pos(action->tilemap_pos),
+                        ACTION_LENGTH_IN_SECONDS * 0.5
+                    )
                 )
             );
 
@@ -359,16 +365,12 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->drop.object->tilemap_pos = action->tilemap_pos;
 
-            Animation* animation = new_animation_sequence_of_2(
+            Animation* animation = new_animation_simultaneous_of_2(
+                new_animation_camera_shake(1,1.0f,0.1f),
                 new_animation_show_sprite_in_gamemap(
                     textures->animation.drop_2,
                     tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
-                ),
-                new_animation_show_sprite_in_gamemap(
-                    textures->animation.drop_2,
-                    tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS * 0.5
+                    ACTION_LENGTH_IN_SECONDS * 1
                 )
             );
 

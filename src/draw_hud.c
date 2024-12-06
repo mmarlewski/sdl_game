@@ -8,6 +8,14 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__GAME_START)
     {
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->black_box,
+            colors->black,
+            0.2f,
+            vec2i(0, 0),
+            150.0f
+        );
 
         draw_font_at_screen_pos(
             "Fallen Stalactite",
@@ -80,6 +88,15 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__GAME_OVER)
     {
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->black_box,
+            colors->black,
+            0.2f,
+            vec2i(0, 0),
+            150.0f
+        );
+
         if(state->game_over_uses > 0)
         {
             draw_font_at_screen_pos(
@@ -141,6 +158,15 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     if(state->gamestate == GAMESTATE__GAME_WON)
     {
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->black_box,
+            colors->black,
+            0.2f,
+            vec2i(0, 0),
+            150.0f
+        );
+
         draw_font_at_screen_pos(
             "You Won!",
             renderer,
@@ -159,7 +185,11 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             2.0f
         );
 
-        if(!state->was_secret_aug_unlocked)
+        if(!state->was_secret_aug_unlocked &&
+        (state->was_secret_1_taken ||
+        state->was_secret_2_taken ||
+        state->was_secret_3_taken ||
+        state->was_secret_4_taken))
         {
             draw_texture_at_screen_pos(
                 renderer,
@@ -214,7 +244,8 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 );
             }
         }
-        else
+        
+        if(state->was_secret_aug_unlocked)
         {
             draw_texture_at_screen_pos(
                 renderer,

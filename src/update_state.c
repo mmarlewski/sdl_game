@@ -101,7 +101,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     ),
                     new_animation_sequence_of_2(
                         new_animation_play_sound(sounds->drop),
-                        new_animation_simultaneous_of_2(
+                        new_animation_simultaneous_of_3(
+                            new_animation_camera_shake(1, 1.0f, 0.1f),
                             new_animation_show_sprite_in_gamemap(
                                 textures->object.hero_2,
                                 vec2i_to_vec2f(state->hero_object->tilemap_pos),

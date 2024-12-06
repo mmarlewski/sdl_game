@@ -1125,6 +1125,7 @@ void load_textures(Renderer* renderer, Textures* textures)
 {
     textures->tutorial = load_texture_from_filepath(renderer, "./res/tutorial.png");
     textures->shadow = load_texture_from_filepath(renderer, "./res/shadow.png");
+    textures->black_box = load_texture_from_filepath(renderer, "./res/black_box.png");
 
     textures->background_rock = load_texture_from_filepath(renderer, "./res/background_rock.png");
     textures->background_stone = load_texture_from_filepath(renderer, "./res/background_stone.png");

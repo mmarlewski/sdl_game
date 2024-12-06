@@ -1109,6 +1109,7 @@ typedef struct
 {
     Texture* tutorial;
     Texture* shadow;
+    Texture* black_box;
 
     Texture* background_rock;
     Texture* background_stone;
