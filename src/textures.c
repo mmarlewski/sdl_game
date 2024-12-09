@@ -833,6 +833,10 @@ void load_textures_animation(Renderer* renderer, Textures_Animation* animation)
     animation->drop_1 = load_texture_from_filepath(renderer, "./res/animation/drop_1.png");
     animation->drop_2 = load_texture_from_filepath(renderer, "./res/animation/drop_2.png");
 
+    animation->fall_water = load_texture_from_filepath(renderer, "./res/animation/fall_water.png");
+    animation->fall_lava = load_texture_from_filepath(renderer, "./res/animation/fall_lava.png");
+    animation->fall_pit = load_texture_from_filepath(renderer, "./res/animation/fall_pit.png");
+
     animation->hook_up_start = load_texture_from_filepath(renderer, "./res/animation/hook_up_start.png");
     animation->hook_up_end = load_texture_from_filepath(renderer, "./res/animation/hook_up_end.png");
     animation->hook_up_up = load_texture_from_filepath(renderer, "./res/animation/hook_up_up.png");

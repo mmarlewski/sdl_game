@@ -163,19 +163,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         {
             int fall_floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
 
-            if(fall_floor == FLOOR__WATER)
-            {
-                play_sound(sounds->fall_water);
-            }
-            else if(fall_floor == FLOOR__LAVA || fall_floor == FLOOR__METAL_HATCH_OPEN)
-            {
-                play_sound(sounds->fall_lava);
-            }
-            else if(fall_floor == FLOOR__PIT)
-            {
-                play_sound(sounds->fall_pit);
-            }
-
             if(action->fall.object == NULL)
             {
                 action->is_finished = TRUE;
@@ -185,12 +172,59 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->fall.object->tilemap_pos = action->tilemap_pos;
 
-            Animation* animation = new_animation_fall_sprite_in_gamemap(
-                get_texture_1_from_object(action->fall.object, textures),
-                tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
-                0.2f,
-                ACTION_LENGTH_IN_SECONDS
-            );
+            Animation* animation = new_animation_none();
+
+            if(fall_floor == FLOOR__WATER)
+            {
+                animation = new_animation_sequence_of_3(
+                    new_animation_fall_sprite_in_gamemap(
+                        get_texture_1_from_object(action->fall.object, textures),
+                        tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
+                        0.2f,
+                        ACTION_LENGTH_IN_SECONDS
+                    ),
+                    new_animation_play_sound(sounds->fall_water),
+                    new_animation_show_sprite_in_gamemap(
+                        textures->animation.fall_water,
+                        tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
+                        0.2f
+                    )
+                );
+            }
+            else if(fall_floor == FLOOR__LAVA || fall_floor == FLOOR__METAL_HATCH_OPEN)
+            {
+                animation = new_animation_sequence_of_3(
+                    new_animation_fall_sprite_in_gamemap(
+                        get_texture_1_from_object(action->fall.object, textures),
+                        tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
+                        0.2f,
+                        ACTION_LENGTH_IN_SECONDS
+                    ),
+                    new_animation_play_sound(sounds->fall_lava),
+                    new_animation_show_sprite_in_gamemap(
+                        textures->animation.fall_lava,
+                        tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
+                        0.2f
+                    )
+                );
+            }
+            else if(fall_floor == FLOOR__PIT)
+            {
+                animation = new_animation_sequence_of_3(
+                    new_animation_fall_sprite_in_gamemap(
+                        get_texture_1_from_object(action->fall.object, textures),
+                        tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
+                        0.2f,
+                        ACTION_LENGTH_IN_SECONDS
+                    ),
+                    new_animation_play_sound(sounds->fall_pit),
+                    new_animation_show_sprite_in_gamemap(
+                        textures->animation.fall_pit,
+                        tilemap_pos_to_gamemap_pos(action->fall.object->tilemap_pos),
+                        0.2f
+                    )
+                );
+            }
 
             action->animation = animation;
             add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);

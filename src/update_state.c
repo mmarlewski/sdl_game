@@ -77,7 +77,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             }
         }
 
-        if(input->was_mouse_left && !input->is_mouse_left &&
+        if(!state->is_game_start_animation_started &&
+           input->was_mouse_left && !input->is_mouse_left &&
            state->mouse_screen_pos.x >= 600 &&
            state->mouse_screen_pos.x <= 600 + 128 &&
            state->mouse_screen_pos.y >= 400 &&
@@ -87,6 +88,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
             state->hero_object->is_visible = FALSE;
 
+            // animation of hero falling from the sky onto the map
             add_animation_to_animation_list(
                 state,
                 new_animation_sequence_of_2(

@@ -817,6 +817,10 @@ typedef struct
     Texture* drop_1;
     Texture* drop_2;
 
+    Texture* fall_water;
+    Texture* fall_lava;
+    Texture* fall_pit;
+
     Texture* hook_up_start;
     Texture* hook_up_end;
     Texture* hook_up_up;
