@@ -135,9 +135,20 @@ typedef struct
     int curr_music_index;
 
     int show_tutorial;
+    int was_tutorial_finished;
     
     int is_game_start_animation_started;
     int is_game_start_animation_finished;
+
+    int tutorial__go_to_exit;
+    int tutorial__use_exit;
+    int tutorial__get_goat_killed;
+    int tutorial__get_chain_aug;
+    int tutorial__go_back_for_dynamite;
+    int tutorial__get_dynamite;
+    int tutorial__unlock_rock_exit;
+    int tutorial__save_cell;
+    int tutorial__get_past_moles;
 
 } State;
 
@@ -148,6 +159,8 @@ void create_level(State* state, Textures* textures);
 void create_mechanisms(State* state);
 void save_state(State* state, Textures* textures);
 void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+
+void get_tutorial_line_and_update_tutorial(State* state, char** n, char** line_1, char** line_2, char** line_3);
 
 void add_room(State* state, Room* room);
 Room* get_room(State* state, char* name);

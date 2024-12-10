@@ -25,6 +25,7 @@ void skill_on_use(
                 if(target_2_object->type == OBJECT__THRONE)
                 {
                     state->was_throne_used = TRUE;
+                    state->show_tutorial = FALSE;
 
                     if(state->was_secret_1_taken && 
                     state->was_secret_2_taken && 

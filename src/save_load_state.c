@@ -177,6 +177,16 @@ void save_state(State* state, Textures* textures)
     int curr_music_index = state->curr_music_index;
     float prev_save_time = state->time;
     int show_tutorial = state->show_tutorial;
+    int was_tutorial_finished = state->was_tutorial_finished;
+    int tutorial__go_to_exit = state->tutorial__go_to_exit;
+    int tutorial__use_exit = state->tutorial__use_exit;
+    int tutorial__get_goat_killed = state->tutorial__get_goat_killed;
+    int tutorial__get_chain_aug = state->tutorial__get_chain_aug;
+    int tutorial__go_back_for_dynamite = state->tutorial__go_back_for_dynamite;
+    int tutorial__get_dynamite = state->tutorial__get_dynamite;
+    int tutorial__unlock_rock_exit = state->tutorial__unlock_rock_exit;
+    int tutorial__save_cell = state->tutorial__save_cell;
+    int tutorial__get_past_moles = state->tutorial__get_past_moles;
 
     SDL_RWwrite(file, &hero_action_points, sizeof(int), 1);
     SDL_RWwrite(file, &minibot_action_points, sizeof(int), 1);
@@ -193,7 +203,17 @@ void save_state(State* state, Textures* textures)
     SDL_RWwrite(file, &prev_music_index, sizeof(int), 1);
     SDL_RWwrite(file, &curr_music_index, sizeof(int), 1);
     SDL_RWwrite(file, &prev_save_time, sizeof(float), 1);
-    SDL_RWwrite(file, &show_tutorial, sizeof(float), 1);
+    SDL_RWwrite(file, &show_tutorial, sizeof(int), 1);
+    SDL_RWwrite(file, &was_tutorial_finished, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__go_to_exit, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__use_exit, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__get_goat_killed, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__get_chain_aug, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__go_back_for_dynamite, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__get_dynamite, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__unlock_rock_exit, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__save_cell, sizeof(int), 1);
+    SDL_RWwrite(file, &tutorial__get_past_moles, sizeof(int), 1);
 
     // close file
 
@@ -425,6 +445,16 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     int curr_music_index = 0;
     float prev_save_time = 0;
     int show_tutorial = 0;
+    int was_tutorial_finished = 0;
+    int tutorial__go_to_exit = 0;
+    int tutorial__use_exit = 0;
+    int tutorial__get_goat_killed = 0;
+    int tutorial__get_chain_aug = 0;
+    int tutorial__go_back_for_dynamite = 0;
+    int tutorial__get_dynamite = 0;
+    int tutorial__unlock_rock_exit = 0;
+    int tutorial__save_cell = 0;
+    int tutorial__get_past_moles = 0;
 
     SDL_RWread(file, &hero_action_points, sizeof(int), 1);
     SDL_RWread(file, &minibot_action_points, sizeof(int), 1);
@@ -442,6 +472,16 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     SDL_RWread(file, &curr_music_index, sizeof(int), 1);
     SDL_RWread(file, &prev_save_time, sizeof(float), 1);
     SDL_RWread(file, &show_tutorial, sizeof(int), 1);
+    SDL_RWread(file, &was_tutorial_finished, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__go_to_exit, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__use_exit, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__get_goat_killed, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__get_chain_aug, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__go_back_for_dynamite, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__get_dynamite, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__unlock_rock_exit, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__save_cell, sizeof(int), 1);
+    SDL_RWread(file, &tutorial__get_past_moles, sizeof(int), 1);
 
     if(state->hero_object == NULL)
     {
@@ -467,6 +507,16 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->curr_music_index = curr_music_index;
     state->prev_save_time = prev_save_time;
     state->show_tutorial = show_tutorial;
+    state->was_tutorial_finished = was_tutorial_finished;
+    state->tutorial__go_to_exit = tutorial__go_to_exit;
+    state->tutorial__use_exit = tutorial__use_exit;
+    state->tutorial__get_goat_killed = tutorial__get_goat_killed;
+    state->tutorial__get_chain_aug = tutorial__get_chain_aug;
+    state->tutorial__go_back_for_dynamite = tutorial__go_back_for_dynamite;
+    state->tutorial__get_dynamite = tutorial__get_dynamite;
+    state->tutorial__unlock_rock_exit = tutorial__unlock_rock_exit;
+    state->tutorial__save_cell = tutorial__save_cell;
+    state->tutorial__get_past_moles = tutorial__get_past_moles;
 
     // close file
 

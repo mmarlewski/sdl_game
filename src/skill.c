@@ -370,8 +370,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "use EXITS to travel between rooms"; break;
-                case 2: description = "or STATIONS to add augmentations"; break;
+                case 1: description = "use *EXITS* to travel between rooms"; break;
+                case 2: description = "or *STATIONS* to add augmentations"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -478,7 +478,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "put a cell item into an object"; break;
+                case 1: description = "put a *CELL* item into an object"; break;
                 case 2: description = "(can only put into NEARBY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -490,7 +490,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "put a cell item into an object"; break;
+                case 1: description = "put a *CELL* item into an object"; break;
                 case 2: description = "(can put into FAR AWAY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -502,7 +502,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "put a dynamite item into an object"; break;
+                case 1: description = "put a *DYNAMITE* item into an object"; break;
                 case 2: description = "(can only put into NEARBY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -514,7 +514,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "put a dynamite item into an object"; break;
+                case 1: description = "put a *DYNAMITE* item into an object"; break;
                 case 2: description = "(can put into FAR AWAY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -526,7 +526,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "put a gemstone item into an object"; break;
+                case 1: description = "put a *GEMSTONE* item into an object"; break;
                 case 2: description = "(can only put into NEARBY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -538,7 +538,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "put a gemstone item into an object"; break;
+                case 1: description = "put a *GEMSTONE* item into an object"; break;
                 case 2: description = "(can put into FAR AWAY objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -550,8 +550,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a cell item on object or floor"; break;
-                case 2: description = ""; break;
+                case 1: description = "throw a *CELL* item on object or floor"; break;
+                case 2: description = "(melt *METAL* objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -562,8 +562,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a dynamite item on object or floor"; break;
-                case 2: description = ""; break;
+                case 1: description = "throw a *DYNAMITE* item on object or floor"; break;
+                case 2: description = "(break *STONE* objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -574,8 +574,8 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "throw a gemstone item on object or floor"; break;
-                case 2: description = ""; break;
+                case 1: description = "throw a *GEMSTONE* item on object or floor"; break;
+                case 2: description = "(shake *GLASS* objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -626,7 +626,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "pull yourself towards a stable object"; break;
+                case 1: description = "pull yourself towards a *STABLE* object"; break;
                 case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -761,7 +761,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "launch an ally minibot"; break;
+                case 1: description = "launch an ally *MINIBOT*"; break;
                 case 2: description = ""; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
@@ -773,7 +773,7 @@ char* get_description_from_skill(int skill, int i)
         {
             switch(i)
             {
-                case 1: description = "merge an ally minibot into hero"; break;
+                case 1: description = "merge an ally *MINIBOT* into hero"; break;
                 case 2: description = "so it can be launched again"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;

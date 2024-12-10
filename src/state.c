@@ -93,9 +93,20 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->curr_music_index = 0;
 
     state->show_tutorial = 1;
+    state->was_tutorial_finished = 0;
 
     state->is_game_start_animation_started = 0;
     state->is_game_start_animation_finished = 0;
+
+    state->tutorial__go_to_exit = 1;
+    state->tutorial__use_exit = 0;
+    state->tutorial__get_goat_killed = 0;
+    state->tutorial__get_chain_aug = 0;
+    state->tutorial__go_back_for_dynamite = 0;
+    state->tutorial__get_dynamite = 0;
+    state->tutorial__unlock_rock_exit = 0;
+    state->tutorial__save_cell = 0;
+    state->tutorial__get_past_moles = 0;
 }
 
 void start_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
@@ -105,6 +116,17 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
 
     state->was_minibot_launched = FALSE;
     state->was_throne_used = FALSE;
+
+    state->was_tutorial_finished = FALSE;
+    state->tutorial__go_to_exit = 1;
+    state->tutorial__use_exit = 0;
+    state->tutorial__get_goat_killed = 0;
+    state->tutorial__get_chain_aug = 0;
+    state->tutorial__go_back_for_dynamite = 0;
+    state->tutorial__get_dynamite = 0;
+    state->tutorial__unlock_rock_exit = 0;
+    state->tutorial__save_cell = 0;
+    state->tutorial__get_past_moles = 0;
 
     state->was_secret_1_taken = FALSE;
     state->was_secret_2_taken = FALSE;

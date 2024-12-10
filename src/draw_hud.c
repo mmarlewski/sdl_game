@@ -625,6 +625,71 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         }
     }
 
+    // tutorial
+
+    if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2) &&
+    state->show_tutorial && !state->was_tutorial_finished)
+    {
+        char* n = 0;
+        char* line_1 = "";
+        char* line_2 = "";
+        char* line_3 = "";
+
+        get_tutorial_line_and_update_tutorial(state, &n, &line_1, &line_2, &line_3);
+
+        draw_font_at_screen_pos(
+            "TUTORIAL", 
+            renderer, 
+            fonts->bit_operator_20, 
+            colors->green_light, 
+            1.0f, 
+            vec2i(300, 150 + (0 * 22)), 
+            1
+        );
+
+        draw_font_at_screen_pos(
+            n, 
+            renderer, 
+            fonts->bit_operator_20, 
+            colors->green_light, 
+            1.0f, 
+            vec2i(300, 150 + (1 * 22)), 
+            1
+        );
+
+        draw_font_at_screen_pos(
+            line_1, 
+            renderer, 
+            fonts->bit_operator_20, 
+            colors->green_light, 
+            1.0f, 
+            vec2i(420, 150 + (0 * 22)), 
+            1
+        );
+
+        draw_font_at_screen_pos(
+            line_2, 
+            renderer, 
+            fonts->bit_operator_20, 
+            colors->green_light, 
+            1.0f, 
+            vec2i(420, 150 + (1 * 22)), 
+            1
+        );
+
+        draw_font_at_screen_pos(
+            line_3, 
+            renderer, 
+            fonts->bit_operator_20, 
+            colors->green_light, 
+            1.0f, 
+            vec2i(420, 150 + (2 * 22)), 
+            1
+        );
+    }
+
     // augmentations
 
     if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
@@ -1222,70 +1287,35 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             {
                 if(object == NULL)
                 {
-                    if(!is_floor_traversable_for_object(floor, state->curr_ally->object))
-                    {
-                        draw_texture_at_screen_pos(
-                            renderer,
-                            textures->hud.status_floor_not_traversable,
-                            colors->none,
-                            1.0f,
-                            vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
-                            1
-                        );
-                    }
-
-                    if(is_floor_deadly_on_move_for_object(floor, state->curr_ally->object))
-                    {
-                        draw_texture_at_screen_pos(
-                            renderer,
-                            textures->hud.status_floor_deadly,
-                            colors->none,
-                            1.0f,
-                            vec2i(900 + 100 + 40 * 2, 550 + 50 - 30),
-                            1
-                        );
-                    }
-
-                    if(is_floor_deadly_on_drop_for_object(floor, state->curr_ally->object))
-                    {
-                        draw_texture_at_screen_pos(
-                            renderer,
-                            textures->hud.status_floor_warning,
-                            colors->none,
-                            1.0f,
-                            vec2i(900 + 100 + 40 * 4, 550 + 50 - 30),
-                            1
-                        );
-                    }
+                    char* type_text = "";
+                    Vec3i type_color = colors->black;
 
                     if(is_floor_manipulatable(floor))
                     {
-                        draw_texture_at_screen_pos(
-                            renderer,
-                            textures->hud.status_floor_manipulatable,
-                            colors->none,
-                            1.0f,
-                            vec2i(900 + 100 + 40 * 6, 550 + 50 - 30),
-                            1
-                        );
-                    }
-
-                    Vec3i color = colors->white;
-                
-                    if(is_floor_manipulatable(floor))
-                    {
-                        color = colors->green_light;
+                        type_text = "manipulatable";
+                        type_color = colors->green_light;
                     }
                     if(is_floor_exit(floor))
                     {
-                        color = colors->pink_light;
+                        type_text = "exit";
+                        type_color = colors->pink_light;
                     }
+
+                    draw_font_at_screen_pos(
+                        type_text,
+                        renderer,
+                        fonts->bit_operator_20,
+                        type_color,
+                        1.0f,
+                        vec2i(900 + 200, 550 + 50 - 30),
+                        1
+                    );
 
                     draw_font_at_screen_pos(
                         get_in_game_name_from_floor(floor),
                         renderer,
                         fonts->bit_operator_30,
-                        color,
+                        colors->white,
                         1.0f,
                         vec2i(900 + 100, 550 + 50),
                         1
@@ -1306,172 +1336,123 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
             if(object != NULL)
             {
+                char* material_text = "";
+                Vec3i material_color = colors->black;
+
                 if(is_object_stone(object))
                 {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_stone,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
-                        1
-                    );
+                    material_text = "stone";
+                    material_color = colors->brown_light;
                 }
                 else if(is_object_metal(object))
                 {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_metal,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
-                        1
-                    );
+                    material_text = "metal";
+                    material_color = colors->blue_light;
                 }
                 else if(is_object_glass(object))
                 {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_glass,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 0, 550 + 50 - 30),
-                        1
-                    );
+                    material_text = "glass";
+                    material_color = colors->white;
                 }
 
-                if(is_object_fragile(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_fragile,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 1, 550 + 50 - 30),
-                        1
-                    );
-                }
-                
-                if(!is_object_movable(object) && is_object_pull_towards(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_stable,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 2, 550 + 50 - 30),
-                        1
-                    );
-                }
+                draw_font_at_screen_pos(
+                    material_text,
+                    renderer,
+                    fonts->bit_operator_20,
+                    material_color,
+                    1.0f,
+                    vec2i(900 + 100, 550 + 50 - 30),
+                    1
+                );
 
-                if(!is_object_throw_over(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_high,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 3, 550 + 50 - 30),
-                        1
-                    );
-                }
-                
-                if(is_object_flying(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_flying,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 4, 550 + 50 - 30),
-                        1
-                    );
-                }
-                else if(is_object_floating(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_floating,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 4, 550 + 50 - 30),
-                        1
-                    );
-                }
-                
-                if(is_object_exit(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_exit,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 5, 550 + 50 - 30),
-                        1
-                    );
-                }
-                else if(is_object_wall(object))
-                {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_wall,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 5, 550 + 50 - 30),
-                        1
-                    );
-                }
-                
+                char* type_text = "";
+                Vec3i type_color = colors->black;
+
                 if(is_object_manipulatable(object))
                 {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_manipulatable,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 6, 550 + 50 - 30),
-                        1
-                    );
+                    type_text = "manipulatable";
+                    type_color = colors->green_light;
+
+                    if(is_object_pull_towards(object) ||
+                    !is_object_throw_over(object))
+                    {
+                        type_text = "manip.";
+                    }
+                }
+                else if(is_object_exit(object))
+                {
+                    type_text = "exit";
+                    type_color = colors->pink_light;
                 }
                 else if(is_object_station(object))
                 {
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        textures->hud.status_station,
-                        colors->none,
-                        1.0f,
-                        vec2i(900 + 100 + 40 * 6, 550 + 50 - 30),
-                        1
-                    );
+                    type_text = "station";
+                    type_color = colors->pink_light;
+                }
+                else if(is_object_secret(object))
+                {
+                    type_text = "secret";
+                    type_color = colors->pink_light;
+                }
+                else if(object->type == OBJECT__THRONE)
+                {
+                    type_text = "throne";
+                    type_color = colors->pink_light;
                 }
 
-                Vec3i color = colors->white;
-                
-                if(is_object_meltable(object))
+                draw_font_at_screen_pos(
+                    type_text,
+                    renderer,
+                    fonts->bit_operator_20,
+                    type_color,
+                    1.0f,
+                    vec2i(900 + 200, 550 + 50 - 30),
+                    1
+                );
+
+                char* high_text = "";
+                Vec3i high_color = colors->black;
+
+                if(!is_object_throw_over(object) && !is_object_wall(object))
                 {
-                    color = colors->blue_light;
+                    high_text = "high";
+                    high_color = colors->white;
                 }
-                if(is_object_breakable(object))
+
+                draw_font_at_screen_pos(
+                    high_text,
+                    renderer,
+                    fonts->bit_operator_20,
+                    high_color,
+                    1.0f,
+                    vec2i(900 + 300, 550 + 50 - 50),
+                    1
+                );
+
+                char* stable_text = "";
+                Vec3i stable_color = colors->black;
+
+                if(!is_object_movable(object) && is_object_pull_towards(object))
                 {
-                    color = colors->brown_light;
+                    stable_text = "stable";
+                    stable_color = colors->white;
                 }
-                if(is_object_manipulatable(object))
-                {
-                    color = colors->green_light;
-                }
-                if(is_object_exit(object) || 
-                is_object_station(object)|| 
-                is_object_secret(object) || 
-                object->type == OBJECT__THRONE)
-                {
-                    color = colors->pink_light;
-                }
+
+                draw_font_at_screen_pos(
+                    stable_text,
+                    renderer,
+                    fonts->bit_operator_20,
+                    stable_color,
+                    1.0f,
+                    vec2i(900 + 300, 550 + 50 - 30),
+                    1
+                );
 
                 draw_font_at_screen_pos(
                     get_in_game_name_from_object_type(object->type),
                     renderer,
                     fonts->bit_operator_30,
-                    color,
+                    colors->white,
                     1.0f,
                     vec2i(900 + 100, 550 + 50),
                     1
