@@ -44,13 +44,12 @@ void load_sounds(Sounds* sounds)
     sounds->minibot_merge = get_sound_from_filepath("./res/sound/metal-whoosh-hit-3-201902-edited.mp3");
 
     sounds->stomp = get_sound_from_filepath("./res/sound/lettuce-48162.mp3");
-    // sounds->mimic = get_sound_from_filepath("./res/sound/surprise-sound-effect-99300-edited.mp3");
     sounds->mimic = get_sound_from_filepath("./res/sound/wtf_01-96364.mp3");
 
     sounds->falling_stalactite = get_sound_from_filepath("./res/sound/hamer-90566-edited.mp3");
     sounds->emerge_water = get_sound_from_filepath("./res/sound/water-splash-199583-edited.mp3");
     sounds->emerge_pit = get_sound_from_filepath("./res/sound/wings-of-insects-45540-edited.mp3");
-    sounds->emerge_burrow = get_sound_from_filepath("./res/sound/dig-wet-sand-04-102880-edited.mp3");
+    sounds->emerge_burrow = get_sound_from_filepath("./res/sound/sand_step-87182-edited.mp3");
     sounds->emerge_pipe = get_sound_from_filepath("./res/sound/infographic-pop-2-197871.mp3");
     sounds->collapse_burrow = get_sound_from_filepath("./res/sound/rocks-and-gravel-slide-1-204994-edited.mp3");
     sounds->conv_belt = get_sound_from_filepath("./res/sound/servomotor-104111.mp3");

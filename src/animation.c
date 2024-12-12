@@ -377,6 +377,22 @@ Animation* new_animation_camera_shake(int times, float distance, float seconds)
     return camera_shake;
 }
 
+Animation* new_animation_death_shake(float distance, float seconds)
+{
+    Animation* camera_shake = new_animation_sequence();
+
+    float seconds_half = seconds * 0.5f;
+    Vec2f distance_world_pos = vec2f(distance, 0.0f);
+
+    Animation* camera_move_1 = new_animation_move_camera_in_world_in_line(vec2f(0.0f, 0.0f), distance_world_pos, seconds_half, 1);
+    Animation* camera_move_2 = new_animation_move_camera_in_world_in_line(distance_world_pos, vec2f(0.0f, 0.0f), seconds_half, 1);
+
+    add_animation_to_end_animation_sequence(camera_shake, camera_move_1);
+    add_animation_to_end_animation_sequence(camera_shake, camera_move_2);
+
+    return camera_shake;
+}
+
 Animation* new_animation_background_flash(Vec3i from_color, Vec3i to_color, float seconds_in, float seconds_out)
 {
     Animation* background_flash = new_animation_sequence();

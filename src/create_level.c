@@ -4567,7 +4567,12 @@ void create_level(State* state, Textures* textures)
     room_change_floor_at(
         room_2_4,
         FLOOR__OBSTACLE,
-        vec2i(4,5)
+        vec2i(4,4)
+    );
+    room_change_floor_at(
+        room_2_4,
+        FLOOR__OBSTACLE,
+        vec2i(7,6)
     );
 
     room_change_floor_at(

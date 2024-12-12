@@ -185,16 +185,16 @@ char* get_in_game_skill_name(int skill)
         case SKILL__PICK_ITEM_CLOSE:            name = "pick item"; break;
         case SKILL__PICK_ITEM_FAR:              name = "pick item (far)"; break;
 
-        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put item cell"; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell (far)"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put item dynamite"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite (far)"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put item gemstone"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone (far)"; break;
+        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put cell"; break;
+        case SKILL__PUT_ITEM_CELL_FAR:          name = "put cell (far)"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put dynamite"; break;
+        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put dynamite (far)"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put gemstone"; break;
+        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put gemstone (far)"; break;
 
-        case SKILL__THROW_ITEM_CELL:            name = "throw item cell"; break;
-        case SKILL__THROW_ITEM_DYNAMITE:        name = "throw item dynamite"; break;
-        case SKILL__THROW_ITEM_GEMSTONE:        name = "throw item gemstone"; break;
+        case SKILL__THROW_ITEM_CELL:            name = "throw cell"; break;
+        case SKILL__THROW_ITEM_DYNAMITE:        name = "throw dynamite"; break;
+        case SKILL__THROW_ITEM_GEMSTONE:        name = "throw gemstone"; break;
 
         case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile"; break;
         case SKILL__SHOOT_PROJECTILE_SQUIRREL:  name = "shoot projectile"; break;
@@ -383,7 +383,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "remotely manipulate objects or floors,"; break;
-                case 2: description = "turn ON and OFF thier special state"; break;
+                case 2: description = "turn *ON* and *OFF* thier special effect"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -455,7 +455,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "pick items from objects"; break;
-                case 2: description = "(can only pick from NEARBY objects)"; break;
+                case 2: description = "(can only pick from nearby objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -467,7 +467,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "pick items from objects"; break;
-                case 2: description = "(can pick from FAR AWAY objects)"; break;
+                case 2: description = "(can pick from FAR away objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -479,7 +479,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a *CELL* item into an object"; break;
-                case 2: description = "(can only put into NEARBY objects)"; break;
+                case 2: description = "(can only put into nearby objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -491,7 +491,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a *CELL* item into an object"; break;
-                case 2: description = "(can put into FAR AWAY objects)"; break;
+                case 2: description = "(can put into FAR away objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -503,7 +503,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a *DYNAMITE* item into an object"; break;
-                case 2: description = "(can only put into NEARBY objects)"; break;
+                case 2: description = "(can only put into nearby objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -515,7 +515,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a *DYNAMITE* item into an object"; break;
-                case 2: description = "(can put into FAR AWAY objects)"; break;
+                case 2: description = "(can put into FAR away objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -527,7 +527,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a *GEMSTONE* item into an object"; break;
-                case 2: description = "(can only put into NEARBY objects)"; break;
+                case 2: description = "(can only put into nearby objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -539,7 +539,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "put a *GEMSTONE* item into an object"; break;
-                case 2: description = "(can put into FAR AWAY objects)"; break;
+                case 2: description = "(can put into FAR away objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -600,7 +600,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "push an object"; break;
-                case 2: description = ""; break;
+                case 2: description = "(you can't move *STABLE objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -612,7 +612,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "throw an object"; break;
-                case 2: description = ""; break;
+                case 2: description = "(you can't move *STABLE objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -641,7 +641,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "drag an object towards you"; break;
-                case 2: description = ""; break;
+                case 2: description = "(you can't move *STABLE objects)"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -691,7 +691,7 @@ char* get_description_from_skill(int skill, int i)
             {
                 case 1: description = "drag an object towards you"; break;
                 case 2: description = "then throw it behind you"; break;
-                case 3: description = ""; break;
+                case 3: description = "(you can't move *STABLE objects)"; break;
                 case 4: description = ""; break;
                 default: break;
             }

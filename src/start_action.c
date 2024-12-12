@@ -264,11 +264,14 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
                 add_animation_to_animation_list(
                     state,
+                    action->animation = new_animation_simultaneous_of_2(
+                    new_animation_death_shake(2.0f, 0.1f),
                     new_animation_ascend_sprite_in_gamemap(
                         textures->animation.death_2,
                         tilemap_pos_to_gamemap_pos(action->tilemap_pos),
                         0.1f,
                         ACTION_LENGTH_IN_SECONDS
+                        )
                     ),
                     textures,
                     sounds,

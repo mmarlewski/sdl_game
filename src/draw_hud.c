@@ -1287,6 +1287,40 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             {
                 if(object == NULL)
                 {
+                    char* material_text = "";
+                    Vec3i material_color = colors->black;
+
+                    if(is_floor_meltable(floor))
+                    {
+                        material_text = "metal";
+                        material_color = colors->blue_light;
+                    }
+                    else if(is_floor_breakable(floor))
+                    {
+                        material_text = "stone";
+                        material_color = colors->brown_light;
+                    }
+                    else if(is_floor_fragile(floor))
+                    {
+                        material_text = "glass";
+                        material_color = colors->white;
+                    }
+                    else
+                    {
+                        material_text = "";
+                        material_color = colors->black;
+                    }
+
+                    draw_font_at_screen_pos(
+                        material_text,
+                        renderer,
+                        fonts->bit_operator_20,
+                        material_color,
+                        1.0f,
+                        vec2i(900 + 100, 550 + 50 - 30),
+                        1
+                    );
+
                     char* type_text = "";
                     Vec3i type_color = colors->black;
 
