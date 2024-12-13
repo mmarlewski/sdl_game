@@ -160,7 +160,7 @@ void create_mechanisms(State* state);
 void save_state(State* state, Textures* textures);
 void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
-void get_tutorial_line_and_update_tutorial(State* state, char** n, char** line_1, char** line_2, char** line_3);
+void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, char** line_2, char** line_3);
 
 void add_room(State* state, Room* room);
 Room* get_room(State* state, char* name);

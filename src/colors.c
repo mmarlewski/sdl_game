@@ -15,6 +15,7 @@ void load_colors(Colors* colors)
     colors->brown_light = vec3i(250, 214, 165);
     colors->green_light = vec3i(152, 251, 152);
     colors->pink_light = vec3i(255, 193, 204);
+    colors->teal_light = vec3i(127, 255, 212);
 
     colors->grey = vec3i(128, 128, 128);
     colors->black = vec3i(0, 0, 0);
