@@ -632,28 +632,32 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
     state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2) &&
     state->show_tutorial && !state->was_tutorial_finished)
     {
-        char* n = 0;
+        int n = 0;
         char* line_1 = "";
         char* line_2 = "";
         char* line_3 = "";
 
         get_tutorial_line_and_update_tutorial(state, &n, &line_1, &line_2, &line_3);
 
+        Vec3i color = colors->green_light;
+        char n_str[16] = "";
+        sprintf(n_str, " -- %i -- ", n);
+
         draw_font_at_screen_pos(
             "TUTORIAL", 
             renderer, 
             fonts->bit_operator_20, 
-            colors->green_light, 
+            color, 
             1.0f, 
             vec2i(300, 150 + (0 * 22)), 
             1
         );
 
         draw_font_at_screen_pos(
-            n, 
+            n_str, 
             renderer, 
             fonts->bit_operator_20, 
-            colors->green_light, 
+            color, 
             1.0f, 
             vec2i(300, 150 + (1 * 22)), 
             1
@@ -663,7 +667,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             line_1, 
             renderer, 
             fonts->bit_operator_20, 
-            colors->green_light, 
+            color, 
             1.0f, 
             vec2i(420, 150 + (0 * 22)), 
             1
@@ -673,7 +677,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             line_2, 
             renderer, 
             fonts->bit_operator_20, 
-            colors->green_light, 
+            color, 
             1.0f, 
             vec2i(420, 150 + (1 * 22)), 
             1
@@ -683,7 +687,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             line_3, 
             renderer, 
             fonts->bit_operator_20, 
-            colors->green_light, 
+            color, 
             1.0f, 
             vec2i(420, 150 + (2 * 22)), 
             1
@@ -1287,6 +1291,40 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             {
                 if(object == NULL)
                 {
+                    char* material_text = "";
+                    Vec3i material_color = colors->black;
+
+                    if(is_floor_meltable(floor))
+                    {
+                        material_text = "metal";
+                        material_color = colors->blue_light;
+                    }
+                    else if(is_floor_breakable(floor))
+                    {
+                        material_text = "stone";
+                        material_color = colors->brown_light;
+                    }
+                    else if(is_floor_fragile(floor))
+                    {
+                        material_text = "glass";
+                        material_color = colors->white;
+                    }
+                    else
+                    {
+                        material_text = "";
+                        material_color = colors->black;
+                    }
+
+                    draw_font_at_screen_pos(
+                        material_text,
+                        renderer,
+                        fonts->bit_operator_20,
+                        material_color,
+                        1.0f,
+                        vec2i(900 + 100, 550 + 50 - 30),
+                        1
+                    );
+
                     char* type_text = "";
                     Vec3i type_color = colors->black;
 

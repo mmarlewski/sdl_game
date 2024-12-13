@@ -281,6 +281,7 @@ Animation* new_animation_play_sound(Sound* sound);
 Animation* new_animation_change_background_color(Vec3i from_color, Vec3i to_color, float seconds);
 
 Animation* new_animation_camera_shake(int times, float distance, float seconds);
+Animation* new_animation_death_shake(float distance, float seconds);
 Animation* new_animation_background_flash(Vec3i from_color, Vec3i to_color, float seconds_in, float seconds_out);
 
 void destroy_animation(Animation* animation);

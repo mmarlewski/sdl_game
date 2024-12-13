@@ -1340,10 +1340,6 @@ int is_object_metal(Object *object)
         case OBJECT__EXIT_METAL_RIGHT:
         case OBJECT__EXIT_METAL_DOWN:
         case OBJECT__EXIT_METAL_LEFT:
-        case OBJECT__EXIT_METAL_BLOCKED_UP:
-        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
-        case OBJECT__EXIT_METAL_BLOCKED_DOWN:
-        case OBJECT__EXIT_METAL_BLOCKED_LEFT:
         case OBJECT__EXIT_METAL_ON_UP:
         case OBJECT__EXIT_METAL_ON_RIGHT:
         case OBJECT__EXIT_METAL_ON_DOWN:
