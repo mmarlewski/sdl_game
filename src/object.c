@@ -2305,20 +2305,20 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__SHARK:                            name = "shark"; break;
         case OBJECT__SHARK_FIN:                        name = "shark fin"; break;
 
-        case OBJECT__TURRET_LASER_GROUNDED:            name = "turret laser"; break;
-        case OBJECT__TURRET_LASER_STANDING:            name = "turret laser"; break;
-        case OBJECT__TURRET_LASER_UNDEPLOYED:          name = "turret laser"; break;
-        case OBJECT__TURRET_LASER_DEPLOYED:            name = "turret laser"; break;
+        case OBJECT__TURRET_LASER_GROUNDED:            name = "laser turret"; break;
+        case OBJECT__TURRET_LASER_STANDING:            name = "laser turret"; break;
+        case OBJECT__TURRET_LASER_UNDEPLOYED:          name = "laser turret"; break;
+        case OBJECT__TURRET_LASER_DEPLOYED:            name = "laser turret"; break;
 
-        case OBJECT__TURRET_BOMB_GROUNDED:             name = "turret bomb"; break;
-        case OBJECT__TURRET_BOMB_STANDING:             name = "turret bomb"; break;
-        case OBJECT__TURRET_BOMB_UNDEPLOYED:           name = "turret bomb"; break;
-        case OBJECT__TURRET_BOMB_DEPLOYED:             name = "turret bomb"; break;
+        case OBJECT__TURRET_BOMB_GROUNDED:             name = "bomb turret"; break;
+        case OBJECT__TURRET_BOMB_STANDING:             name = "bomb turret"; break;
+        case OBJECT__TURRET_BOMB_UNDEPLOYED:           name = "bomb turret"; break;
+        case OBJECT__TURRET_BOMB_DEPLOYED:             name = "bomb turret"; break;
 
-        case OBJECT__TURRET_PROJECTILE_GROUNDED:       name = "turret projectile"; break;
-        case OBJECT__TURRET_PROJECTILE_STANDING:       name = "turret projectile"; break;
-        case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     name = "turret projectile"; break;
-        case OBJECT__TURRET_PROJECTILE_DEPLOYED:       name = "turret projectile"; break;
+        case OBJECT__TURRET_PROJECTILE_GROUNDED:       name = "projectile turret"; break;
+        case OBJECT__TURRET_PROJECTILE_STANDING:       name = "projectile turret"; break;
+        case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     name = "projectile turret"; break;
+        case OBJECT__TURRET_PROJECTILE_DEPLOYED:       name = "projectile turret"; break;
 
         case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      name = "squirrel"; break;
 
@@ -2330,11 +2330,11 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:      name = "environment"; break;
         case OBJECT__ENVIRONMENT_CONV_BELT:            name = "environment"; break;
 
-        case OBJECT__STAIRS_ABOVE_STONE_POWERED:       name = "stairs stone"; break;
-        case OBJECT__STAIRS_ABOVE_STONE:               name = "stairs stone"; break;
-        case OBJECT__STAIRS_ABOVE_ROCK:                name = "stairs rock"; break;
-        case OBJECT__STAIRS_ABOVE_METAL_ON:            name = "stairs metal"; break;
-        case OBJECT__STAIRS_ABOVE_METAL:               name = "stairs metal"; break;
+        case OBJECT__STAIRS_ABOVE_STONE_POWERED:       name = "stairs"; break;
+        case OBJECT__STAIRS_ABOVE_STONE:               name = "stairs"; break;
+        case OBJECT__STAIRS_ABOVE_ROCK:                name = "stairs"; break;
+        case OBJECT__STAIRS_ABOVE_METAL_ON:            name = "stairs"; break;
+        case OBJECT__STAIRS_ABOVE_METAL:               name = "stairs"; break;
 
         case OBJECT__LEVER_METAL_OFF:                  name = "lever (off)"; break;
         case OBJECT__LEVER_METAL_ON:                   name = "lever (off)"; break;
@@ -2373,15 +2373,15 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__SECRET_4:                         name = "secret"; break;
         case OBJECT__SECRET_TAKEN:                     name = "secret"; break;
 
-        case OBJECT__MINIBOT_ALLY:                     name = "minibot ally"; break;
-        case OBJECT__MINIBOT_ALLY_CELL:                name = "minibot ally"; break;
-        case OBJECT__MINIBOT_ALLY_DYNAMITE:            name = "minibot ally"; break;
-        case OBJECT__MINIBOT_ALLY_GEMSTONE:            name = "minibot ally"; break;
+        case OBJECT__MINIBOT_ALLY:                     name = "ally minibot"; break;
+        case OBJECT__MINIBOT_ALLY_CELL:                name = "ally minibot"; break;
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:            name = "ally minibot"; break;
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:            name = "ally minibot"; break;
 
-        case OBJECT__MINIBOT_ENEMY:                    name = "minibot enemy"; break;
-        case OBJECT__MINIBOT_ENEMY_CELL:               name = "minibot enemy"; break;
-        case OBJECT__MINIBOT_ENEMY_DYNAMITE:           name = "minibot enemy"; break;
-        case OBJECT__MINIBOT_ENEMY_GEMSTONE:           name = "minibot enemy"; break;
+        case OBJECT__MINIBOT_ENEMY:                    name = "enemy minibot"; break;
+        case OBJECT__MINIBOT_ENEMY_CELL:               name = "enemy minibot"; break;
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:           name = "enemy minibot"; break;
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:           name = "enemy minibot"; break;
 
         default: break;
     }

@@ -37,7 +37,7 @@ void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, 
         state->tutorial__save_cell = TRUE;
 
         *n = 8;
-        *line_1 = "You need to put *CELL* to powere stone objects.";
+        *line_1 = "You need to put *CELL* to power stone objects.";
         *line_2 = ">> Save *CRATE* with *CELL* from bull's attack or ";
         *line_3 = "buy it from a *VENDING MACHINE* with *GEMSTONE*.";
     }
@@ -80,7 +80,7 @@ void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, 
 
         *n = 4;
         *line_1 = ">> Use *STATION* to add augmentation to hero.";
-        *line_2 = "(chain hand in place of right hand)";
+        *line_2 = "";
         *line_3 = "";
     }
     else if(state->tutorial__use_exit &&

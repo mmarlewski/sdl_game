@@ -383,7 +383,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "remotely manipulate objects or floors,"; break;
-                case 2: description = "turn *ON* and *OFF* thier special effect"; break;
+                case 2: description = "turn them *ON* and *OFF*"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;
@@ -653,7 +653,7 @@ char* get_description_from_skill(int skill, int i)
             switch(i)
             {
                 case 1: description = "jump over other objects"; break;
-                case 2: description = ""; break;
+                case 2: description = "and over tiles"; break;
                 case 3: description = ""; break;
                 case 4: description = ""; break;
                 default: break;

@@ -28,8 +28,6 @@ void draw_font_at_screen_pos(char* text, Renderer* renderer, Font* font, Vec3i c
         surface
     );
 
-    SDL_FreeSurface(surface);
-
     draw_texture_at_screen_pos(
         renderer,
         texture,
@@ -38,5 +36,8 @@ void draw_font_at_screen_pos(char* text, Renderer* renderer, Font* font, Vec3i c
         screen_pos,
         scale
     );
+
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }
 
