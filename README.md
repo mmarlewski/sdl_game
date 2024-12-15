@@ -1,10 +1,9 @@
 
 # Fallen Stalactite
 
-![image](logo.png)
+<img src="./logo.png" width="400"/>
 
-![image](./doc/recording.gif)
-
+### itch.io
 https://marcin12345.itch.io/fallen-stalactite
 
 ### About
@@ -42,20 +41,36 @@ https://marcin12345.itch.io/fallen-stalactite
 ### History
 
 <p float="center">
-  <h5>23.04.2024</h5>
-  <img src="./doc/23-04-24.gif" />
-  <h5>21.03.2024</h5>
-  <img src="./doc/21-03-24.gif" />
-  <!-- <h5>28.02.2024</h5> -->
-  <!-- <img src="./doc/28-02-24.gif" /> -->
-  <h5>11.02.2024</h5>
-  <img src="./doc/11-02-24.gif" />
-  <h5>26.01.2024</h5>
-  <img src="./doc/26-01-24.gif" />
-  <!-- <h5>09.01.2024</h5> -->
-  <!-- <img src="./doc/09-01-24.gif" /> -->
-  <h5>09.11.2023</h5>
-  <img src="./doc/09-11-23.gif" />
-  <h5>19.10.2023</h5>
-  <img src="./doc/19-10-23.gif" /> 
+  <table>
+    <tr>
+      <th>
+        <h5>23.04.2024</h5>
+        <img src="./doc/23-04-24.gif" />
+      </th>
+      <th>
+        <h5>21.03.2024</h5>
+        <img src="./doc/21-03-24.gif" />
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <h5>11.02.2024</h5>
+        <img src="./doc/11-02-24.gif" />
+      </th>
+      <th>
+        <h5>26.01.2024</h5>
+        <img src="./doc/26-01-24.gif" />
+      <th>
+    </tr>
+    <tr>
+      <th>
+        <h5>09.11.2023</h5>
+        <img src="./doc/09-11-23.gif" />
+      </th>
+      <th>
+        <h5>19.10.2023</h5>
+        <img src="./doc/19-10-23.gif" /> 
+      </th>
+    </tr>
+  </table>
 </p>
