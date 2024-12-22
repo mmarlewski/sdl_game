@@ -6,6 +6,9 @@
 ### itch.io
 https://marcin12345.itch.io/fallen-stalactite
 
+### Newgrounds
+https://www.newgrounds.com/portal/view/960617
+
 ### About
 - Explore an open dungeon with 48 unique rooms.
 - Use your skills and items to interact with the environment.
