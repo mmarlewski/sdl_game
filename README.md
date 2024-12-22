@@ -26,7 +26,7 @@ https://marcin12345.itch.io/fallen-stalactite
 ##### Linux
 - tutorial video: https://www.youtube.com/watch?v=P3_xhDIP7bc&list=PLvv0ScY6vfd-p1gSnbQhY7vMe2rng0IL0&index=2
 - run: `gcc ./src/*.c  -lm -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -o sdl_game && ./sdl_game`
-- there is also Makefile available: `make && ./sdl_game`
+- there is also Makefile available: `make && ./sdl_game` (it may or may not work; if not, use command above)
 ##### Windows
 - download MinGW: https://sourceforge.net/projects/mingw-w64
 - (what to actually download: https://www.youtube.com/watch?v=1TPmiiAqmlc)
