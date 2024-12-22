@@ -40,6 +40,12 @@ void init_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
     state->possible_target_2_tilemap_pos_list = new_list((void(*)(void*)) & destroy_vec2i);
     state->show_all_order_numbers = FALSE;
     state->selected_tilemap_pos = vec2i(0, 0);
+    
+    state->is_showing_context_menu = FALSE;
+    state->context_menu_screen_position = vec2i(0,0);
+    state->context_menu_tilemap_position = vec2i(0,0);
+    state->context_menu_skill_list = new_list((void(*)(void*)) 0);
+    state->chosen_skill_from_context_menu = FALSE;
 
     state->enemy_list = new_list((void (*)(void*)) & destroy_enemy);
     state->curr_enemy_list_elem = NULL;

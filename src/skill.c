@@ -926,6 +926,8 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
 
     switch(skill)
     {
+        case SKILL__NONE:                       texture = textures->hud.skill_none; break;
+
         case SKILL__USE:                        texture = textures->hud.use; break;
         case SKILL__MANIPULATION:               texture = textures->hud.manipulation; break;
         case SKILL__TELEPORTATION:              texture = textures->hud.teleportation; break;

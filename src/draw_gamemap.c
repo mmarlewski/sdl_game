@@ -18,7 +18,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         state->camera_zoom
     );
 
-    // floors, highlights
+    // floors
 
     for(int i = 0; i < TILEMAP_LENGTH; i++)
     {
@@ -122,6 +122,22 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
     }
 
     // selected floor
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
+    {
+        if(is_tilemap_in_bounds(state->mouse_tilemap_pos))
+        {
+            draw_texture_at_tilemap_pos(
+                renderer,
+                textures->floor.highlight,
+                colors->yellow,
+                0.5f,
+                state->mouse_tilemap_pos,
+                state->camera_world_pos,
+                state->camera_zoom
+            );
+        }
+    }
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)

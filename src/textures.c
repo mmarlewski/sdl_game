@@ -1015,6 +1015,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->teleportation_head = load_texture_from_filepath(renderer, "./res/hud/teleportation_head.png");
     hud->telekinesis_head = load_texture_from_filepath(renderer, "./res/hud/telekinesis_head.png");
 
+    hud->skill_none = load_texture_from_filepath(renderer, "./res/hud/skill_none.png");
     hud->use = load_texture_from_filepath(renderer, "./res/hud/use.png");
     hud->manipulation = load_texture_from_filepath(renderer, "./res/hud/manipulation.png");
     hud->teleportation = load_texture_from_filepath(renderer, "./res/hud/teleportation.png");

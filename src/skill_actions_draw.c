@@ -2623,14 +2623,40 @@ void skill_get_actions_and_draw(
 
                                 if(!vec2i_equals(push_curr_tilemap_pos, target_2_tilemap_pos))
                                 {
-                                    // actions
-                                    add_action_to_end_action_sequence(
-                                        action_sequence,
-                                        new_action_move(
-                                            push_curr_tilemap_pos,
-                                            push_distance_info.dir4
-                                        )
-                                    );
+                                    if(!is_object_floating(target_1_object) &&
+                                    !is_object_flying(target_1_object))
+                                    {
+                                        // actions
+                                        add_action_to_end_action_sequence(
+                                            action_sequence,
+                                            new_action_move(
+                                                push_curr_tilemap_pos,
+                                                push_distance_info.dir4
+                                            )
+                                        );
+                                    }
+                                    else if(is_object_floating(target_1_object))
+                                    {
+                                        // actions
+                                        add_action_to_end_action_sequence(
+                                            action_sequence,
+                                            new_action_move_floating(
+                                                push_curr_tilemap_pos,
+                                                push_distance_info.dir4
+                                            )
+                                        );
+                                    }
+                                    else if(is_object_flying(target_1_object))
+                                    {
+                                        // actions
+                                        add_action_to_end_action_sequence(
+                                            action_sequence,
+                                            new_action_move_flying(
+                                                push_curr_tilemap_pos,
+                                                push_distance_info.dir4
+                                            )
+                                        );
+                                    }
                                 }
 
                                 // draw below

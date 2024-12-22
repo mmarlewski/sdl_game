@@ -72,7 +72,7 @@ void skill_get_possible_target_2_pos(
                     int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
                     if((object != NULL && is_object_manipulatable(object)) ||
-                       is_floor_manipulatable(floor))
+                       (object == NULL && is_floor_manipulatable(floor)))
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,

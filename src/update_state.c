@@ -62,6 +62,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             state->hero_object->is_visible = TRUE;
 
             change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+
+            save_state(state, textures);
         }
 
         if(input->was_mouse_left && !input->is_mouse_left &&
@@ -485,6 +487,84 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
         break;
         case GAMESTATE__ALLY_CHOOSING_SKILL:
         {
+            // create contect menu
+            if(input->was_mouse_right && !input->is_mouse_right &&
+            is_tilemap_in_bounds(state->mouse_tilemap_pos))
+            {
+                state->is_showing_context_menu = TRUE;
+                state->context_menu_screen_position = state->mouse_screen_pos;
+                state->context_menu_tilemap_position = state->mouse_tilemap_pos;
+
+                remove_all_list_elements(state->context_menu_skill_list, FALSE);
+
+                for(ListElem* curr_elem = state->curr_ally->skill_list->head;
+                curr_elem != NULL; curr_elem = curr_elem->next)
+                {
+                    int curr_skill = (int)curr_elem->data;
+
+                    if(is_skill_two_target(curr_skill))
+                    {
+                        List* target_1_pos_list  = new_list((void(*)(void*)) &destroy_vec2i);
+
+                        skill_get_possible_target_1_pos(
+                            state,
+                            curr_skill,
+                            state->curr_ally->object->tilemap_pos,
+                            target_1_pos_list
+                        );
+
+                        int go_on = TRUE;
+                        for(ListElem* curr_elem = target_1_pos_list->head;
+                        curr_elem != NULL && go_on; curr_elem = curr_elem->next)
+                        {
+                            Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+                            if(vec2i_equals(*tilemap_pos, state->mouse_tilemap_pos))
+                            {
+                                add_new_list_element_to_list_end(state->context_menu_skill_list, (void*)curr_skill);
+                                go_on = FALSE;
+                            }
+                        }
+
+                        remove_all_list_elements(target_1_pos_list, TRUE);
+                        destroy_list(target_1_pos_list);
+                    }
+                    else
+                    {
+                        List* target_2_pos_list  = new_list((void(*)(void*)) &destroy_vec2i);
+
+                        skill_get_possible_target_2_pos(
+                            state,
+                            curr_skill,
+                            state->curr_ally->object->tilemap_pos,
+                            state->curr_ally->object->tilemap_pos,
+                            target_2_pos_list
+                        );
+                        
+                        int go_on = TRUE;
+                        for(ListElem* curr_elem = target_2_pos_list->head;
+                        curr_elem != NULL && go_on; curr_elem = curr_elem->next)
+                        {
+                            Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+                            if(vec2i_equals(*tilemap_pos, state->mouse_tilemap_pos))
+                            {
+                                add_new_list_element_to_list_end(state->context_menu_skill_list, (void*)curr_skill);
+                                go_on = FALSE;
+                            }
+                        }
+
+                        remove_all_list_elements(target_2_pos_list, TRUE);
+                        destroy_list(target_2_pos_list);
+                    }
+                }
+
+                if(state->context_menu_skill_list->size == 0)
+                {
+                    add_new_list_element_to_list_end(state->context_menu_skill_list, (void*)SKILL__NONE);
+                }
+            }
+
             // change curr ally left
             if((input->was_key[KEY__LEFT] && !input->is_key[KEY__LEFT]) ||
             (input->was_key[KEY__A] && !input->is_key[KEY__A]))
@@ -561,30 +641,152 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 }
             }
 
-            // change curr ally mouse
             if(input->was_mouse_left && !input->is_mouse_left)
             {
-                Object* potential_new_ally_object =
-                    room_get_object_at(state->curr_room, mouse_tilemap_pos);
-
-                if(potential_new_ally_object != NULL)
+                // choose skill from context menu
+                if(state->is_showing_context_menu &&
+                state->mouse_screen_pos.x > state->context_menu_screen_position.x &&
+                state->mouse_screen_pos.x < state->context_menu_screen_position.x + state->context_menu_skill_list->size * 32 &&
+                state->mouse_screen_pos.y > state->context_menu_screen_position.y &&
+                state->mouse_screen_pos.y < state->context_menu_screen_position.y + 32)
                 {
-                    Ally* potential_new_ally =
-                        get_ally_of_object(state, potential_new_ally_object);
+                    int n = (state->mouse_screen_pos.x - state->context_menu_screen_position.x) / 32;
+                    ListElem* context_menu_skill_elem = get_nth_list_element(state->context_menu_skill_list, n);
+                    int context_menu_skill = (int)context_menu_skill_elem->data;
 
-                    if(potential_new_ally != NULL)
+                    if(state->curr_ally->object->action_points > 0 &&
+                    state->curr_ally->object->action_points >= get_skill_action_points(context_menu_skill) &&
+                    context_menu_skill != SKILL__NONE)
                     {
-                        ListElem* new_ally_elem =
-                            get_list_element_of_data(state->ally_list, potential_new_ally);
+                        state->is_showing_context_menu = FALSE;
+                        state->curr_ally_skill = context_menu_skill;
+                        state->curr_ally_target_1_tilemap_pos = state->context_menu_tilemap_position;
+                        state->chosen_skill_from_context_menu = TRUE;
 
-                        if(new_ally_elem != NULL)
+                        // go to choosing target 2
+                        if(is_skill_two_target(context_menu_skill))
                         {
-                            state->curr_ally_list_elem = new_ally_elem;
-                            state->curr_ally = potential_new_ally;
-                            state->curr_ally_object = potential_new_ally->object;
+                            state->selected_tilemap_pos = vec2i(-1, -1);
 
-                            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+                            // possible hint positions
+                            remove_all_list_elements(state->possible_hint_tilemap_pos_list, 1);
+                            skill_get_possible_hint_pos(
+                                state,
+                                context_menu_skill,
+                                state->possible_hint_tilemap_pos_list
+                            );
+
+                            // possible target 2 positions
+                            remove_all_list_elements(state->possible_target_2_tilemap_pos_list, 1);
+                            skill_get_possible_target_2_pos(
+                                state,
+                                context_menu_skill,
+                                state->curr_ally->object->tilemap_pos,
+                                state->curr_ally_target_1_tilemap_pos,
+                                state->possible_target_2_tilemap_pos_list
+                            );
+
+                            // selected position
+                            int is_mouse_pos_in_possible_target_2_pos = FALSE;
+                            for(ListElem* curr_elem = state->possible_target_2_tilemap_pos_list->head;
+                                !is_mouse_pos_in_possible_target_2_pos && curr_elem != NULL;
+                                curr_elem = curr_elem->next)
+                            {
+                                Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
+
+                                if(vec2i_equals(*tilemap_pos, mouse_tilemap_pos))
+                                {
+                                    is_mouse_pos_in_possible_target_2_pos = TRUE;
+                                }
+                            }
+
+                            clear_curr_ally_attack_actions_and_draw(state);
+
+                            // new actions and draw
+                            if(is_mouse_pos_in_possible_target_2_pos)
+                            {
+                                get_curr_ally_attack_actions_and_draw(state, textures, sounds);
+                            }
+
+                            change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_2);
                             break;
+                        }
+                        // go to executing
+                        else
+                        {
+                            state->curr_ally_target_2_tilemap_pos = state->context_menu_tilemap_position;
+                            
+                            state->selected_tilemap_pos = vec2i(-1, -1);
+
+                            get_curr_ally_attack_actions_and_draw(state, textures, sounds);
+
+                            Animation* animation = skill_get_animation(
+                                state,
+                                state->curr_ally_skill,
+                                state->curr_ally->object->tilemap_pos,
+                                state->curr_ally_target_1_tilemap_pos,
+                                state->curr_ally_target_2_tilemap_pos,
+                                textures,
+                                colors,
+                                sounds
+                            );
+
+                            add_animation_to_animation_list(
+                                state,
+                                animation,
+                                textures,
+                                sounds,
+                                musics,
+                                colors
+                            );
+
+                            skill_on_use(
+                                state,
+                                state->curr_ally_skill,
+                                state->curr_ally->object->tilemap_pos,
+                                state->curr_ally_target_1_tilemap_pos,
+                                state->curr_ally_target_2_tilemap_pos,
+                                textures,
+                                sounds,
+                                musics,
+                                colors
+                            );
+
+                            state->curr_skill_animation = animation;
+
+                            change_gamestate(state, GAMESTATE__ALLY_EXECUTING_ANIMATION);
+                            break;
+                        }
+                    }
+                }
+                // change curr ally mouse
+                else
+                {
+                    // click away from context menu
+                    state->is_showing_context_menu = FALSE;
+
+                    Object* potential_new_ally_object =
+                        room_get_object_at(state->curr_room, mouse_tilemap_pos);
+
+                    if(potential_new_ally_object != NULL)
+                    {
+                        Ally* potential_new_ally =
+                            get_ally_of_object(state, potential_new_ally_object);
+
+                        if(potential_new_ally != NULL)
+                        {
+                            ListElem* new_ally_elem =
+                                get_list_element_of_data(state->ally_list, potential_new_ally);
+
+                            if(new_ally_elem != NULL)
+                            {
+                                state->curr_ally_list_elem = new_ally_elem;
+                                state->curr_ally = potential_new_ally;
+                                state->curr_ally_object = potential_new_ally->object;
+
+                                change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+                                break;
+                            }
                         }
                     }
                 }
@@ -623,6 +825,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
             // end ally turn
             if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||
+                input->was_key[KEY__SPACE] && !input->is_key[KEY__SPACE] ||
                 (input->was_mouse_left && !input->is_mouse_left &&
                 state->mouse_screen_pos.x >= 1200 - 300 &&
                 state->mouse_screen_pos.x <= 1200 - 300 + 64 &&
@@ -678,10 +881,10 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 }
             }
 
-            // choose skill
-
+            // skill chosen by the player
             int skill = SKILL__NONE;
 
+            // skill from bottom rows
             if(input->was_mouse_left && !input->is_mouse_left)
             {
                 for(int i = 0; i < 10; i++)
@@ -695,10 +898,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                            state->mouse_screen_pos.y >= 600 + 50 + 10 * j + 64 * j &&
                            state->mouse_screen_pos.y <= 600 + 50 + 10 * j + 64 * j + 64)
                         {
-                            ListElem* skill_elem = get_nth_list_element(
-                                state->curr_ally->skill_list,
-                                index
-                            );
+                            ListElem* skill_elem = get_nth_list_element(state->curr_ally->skill_list, index);
 
                             if(skill_elem != NULL)
                             {
@@ -710,7 +910,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             }
 
             // skill from keyboard
-
             if(input->was_key[KEY__1] && !input->is_key[KEY__1])
             {
                 if(
@@ -880,6 +1079,49 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     break;
                 }
             }
+
+            
+
+            // context menu skill hover
+            if(state->is_showing_context_menu &&
+            state->mouse_screen_pos.x > state->context_menu_screen_position.x &&
+            state->mouse_screen_pos.x < state->context_menu_screen_position.x + state->context_menu_skill_list->size * 32 &&
+            state->mouse_screen_pos.y > state->context_menu_screen_position.y &&
+            state->mouse_screen_pos.y < state->context_menu_screen_position.y + 32)
+            {
+                int n = (state->mouse_screen_pos.x - state->context_menu_screen_position.x) / 32;
+                ListElem* context_menu_skill_elem = get_nth_list_element(state->context_menu_skill_list, n);
+                int context_menu_skill = (int)context_menu_skill_elem->data;
+
+                state->curr_ally_skill = context_menu_skill;
+
+                // to show state->ally_move_distance on ap bar
+                // state->ally_move_distance = 0;
+
+                // to show state->ally_move_distance on ap bar
+                if(context_menu_skill == SKILL__MOVE ||
+                context_menu_skill == SKILL__MOVE_FLOATING ||
+                context_menu_skill == SKILL__MOVE_FLYING)
+                {
+                    skill_get_actions_and_draw(
+                        state,
+                        context_menu_skill,
+                        state->curr_ally->object->tilemap_pos,
+                        state->context_menu_tilemap_position,
+                        state->context_menu_tilemap_position,
+                        state->ally_action_sequence,
+                        state->curr_ally_draw_below_texture_list,
+                        state->curr_ally_draw_below_tilemap_pos_list,
+                        state->curr_ally_draw_above_texture_list,
+                        state->curr_ally_draw_above_tilemap_pos_list,
+                        state->curr_ally_draw_effect_texture_list,
+                        state->curr_ally_draw_effect_tilemap_pos_list,
+                        textures,
+                        sounds
+                    );
+                }
+                remove_all_actions_from_action_sequence(state->ally_action_sequence);
+            }
         }
         break;
         case GAMESTATE__ALLY_CHOOSING_TARGET_1:
@@ -952,7 +1194,13 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     state->ally_action_sequence
                 );
 
-                if(is_skill_two_target(state->curr_ally_skill))
+                if(state->chosen_skill_from_context_menu)
+                {
+                    state->is_showing_context_menu = TRUE;
+                    change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+                    break;
+                }
+                else if(is_skill_two_target(state->curr_ally_skill))
                 {
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_TARGET_1);
                     break;

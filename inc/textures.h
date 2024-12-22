@@ -998,6 +998,7 @@ typedef struct
     Texture* teleportation_head;
     Texture* telekinesis_head;
 
+    Texture* skill_none;
     Texture* use;
     Texture* manipulation;
     Texture* teleportation;

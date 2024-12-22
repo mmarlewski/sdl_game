@@ -89,6 +89,12 @@ typedef struct
     int show_all_order_numbers;
     Vec2i selected_tilemap_pos;
 
+    int is_showing_context_menu;
+    Vec2i context_menu_screen_position;
+    Vec2i context_menu_tilemap_position;
+    List* context_menu_skill_list;
+    int chosen_skill_from_context_menu;
+
     List* enemy_list;
     ListElem* curr_enemy_list_elem;
     Enemy* curr_enemy;
@@ -160,7 +166,7 @@ void create_mechanisms(State* state);
 void save_state(State* state, Textures* textures);
 void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 
-void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, char** line_2, char** line_3);
+void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, char** line_2, char** line_3, char** line_4);
 
 void add_room(State* state, Room* room);
 Room* get_room(State* state, char* name);

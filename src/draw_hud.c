@@ -579,7 +579,8 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             {
                 char character = ' ';
 
-                if(state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+                if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+                   state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
                    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
                 {
                     int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
@@ -636,8 +637,9 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         char* line_1 = "";
         char* line_2 = "";
         char* line_3 = "";
+        char* line_4 = "";
 
-        get_tutorial_line_and_update_tutorial(state, &n, &line_1, &line_2, &line_3);
+        get_tutorial_line_and_update_tutorial(state, &n, &line_1, &line_2, &line_3, &line_4);
 
         Vec3i color = colors->green_light;
         char n_str[16] = "";
@@ -690,6 +692,16 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             color, 
             1.0f, 
             vec2i(420, 150 + (2 * 22)), 
+            1
+        );
+
+        draw_font_at_screen_pos(
+            line_4, 
+            renderer, 
+            fonts->bit_operator_20, 
+            color, 
+            1.0f, 
+            vec2i(420, 150 + (3 * 22)), 
             1
         );
     }
@@ -1168,6 +1180,20 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         }
                     }
                 }
+            }
+
+            // from context menu
+            if(state->is_showing_context_menu &&
+            state->mouse_screen_pos.x > state->context_menu_screen_position.x &&
+            state->mouse_screen_pos.x < state->context_menu_screen_position.x + state->context_menu_skill_list->size * 32 &&
+            state->mouse_screen_pos.y > state->context_menu_screen_position.y &&
+            state->mouse_screen_pos.y < state->context_menu_screen_position.y + 32)
+            {
+                int n = (state->mouse_screen_pos.x - state->context_menu_screen_position.x) / 32;
+                ListElem* context_menu_skill_elem = get_nth_list_element(state->context_menu_skill_list, n);
+                int context_menu_skill = (int)context_menu_skill_elem->data;
+
+                mouse_hover_skill = context_menu_skill;
             }
 
             if(mouse_hover_skill == SKILL__NONE)
@@ -1668,6 +1694,32 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                     ),
                     2
                 );
+            }
+        }
+    }
+
+    // context menu
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
+    {
+        if(state->is_showing_context_menu)
+        {
+            int i = 0;
+            for(ListElem* curr_elem = state->context_menu_skill_list->head;
+            curr_elem != NULL; curr_elem = curr_elem->next)
+            {
+                int skill = (int) curr_elem->data;
+
+                draw_texture_at_screen_pos(
+                    renderer,
+                    get_skill_hud_texture(skill, textures),
+                    colors->none,
+                    1.0f,
+                    vec2i(state->context_menu_screen_position.x + i * 32, state->context_menu_screen_position.y),
+                    1
+                );
+
+                i++;
             }
         }
     }
