@@ -1120,6 +1120,8 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->show_tutorial = load_texture_from_filepath(renderer, "./res/hud/show_tutorial.png");
     hud->show_tutorial_checked = load_texture_from_filepath(renderer, "./res/hud/show_tutorial_checked.png");
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");
+    hud->heart_full = load_texture_from_filepath(renderer, "./res/hud/heart_full.png");
+    hud->heart_empty = load_texture_from_filepath(renderer, "./res/hud/heart_empty.png");
 }
 void destroy_textures_hud(Textures_Hud* hud)
 {

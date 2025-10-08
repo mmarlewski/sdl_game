@@ -765,6 +765,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     // click away from context menu
                     state->is_showing_context_menu = FALSE;
 
+                    clear_curr_ally_attack_actions_and_draw(state);
+
                     Object* potential_new_ally_object =
                         room_get_object_at(state->curr_room, mouse_tilemap_pos);
 
@@ -1095,13 +1097,9 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
                 state->curr_ally_skill = context_menu_skill;
 
-                // to show state->ally_move_distance on ap bar
-                // state->ally_move_distance = 0;
+                clear_curr_ally_attack_actions_and_draw(state);
 
-                // to show state->ally_move_distance on ap bar
-                if(context_menu_skill == SKILL__MOVE ||
-                context_menu_skill == SKILL__MOVE_FLOATING ||
-                context_menu_skill == SKILL__MOVE_FLYING)
+                if(!is_skill_two_target(context_menu_skill))
                 {
                     skill_get_actions_and_draw(
                         state,
@@ -1402,6 +1400,56 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     save_state(state, textures);
                 }
+                // end ally turn after ally skill
+                /////////////////////////////////
+                // restore all ally action points
+                for(ListElem* curr_elem = state->ally_list->head;
+                    curr_elem != NULL; curr_elem = curr_elem->next)
+                {
+                    Ally* curr_ally = (Ally*) curr_elem->data;
+                    restore_ally_action_points(state, curr_ally);
+                }
+
+                // start enemy turn
+                if(state->enemy_list->size > 0)
+                {
+                    // enemy with order number of 1
+                    for(ListElem* curr_elem = state->enemy_list->head;
+                        curr_elem != NULL; curr_elem = curr_elem->next)
+                    {
+                        Enemy* curr_enemy = (Enemy*) curr_elem->data;
+                        if(curr_enemy->order_number == 1)
+                        {
+                            state->curr_enemy_list_elem = curr_elem;
+                            state->curr_enemy = curr_enemy;
+                            state->enemy_action_sequence = (Action*) curr_enemy->action_sequence;
+                        }
+                    }
+
+                    add_animation_to_animation_list(
+                        state,
+                        new_animation_change_background_color(
+                            colors->ally_background,
+                            colors->enemy_background,
+                            0.25f
+                        ),
+                        textures,
+                        sounds,
+                        musics,
+                        colors
+                    );
+
+                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
+                    state->timer = 0.0f;
+                    break;
+                }
+                // or start ally turn again
+                else
+                {
+                    change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+                    break;
+                }
+                /////////////////////////////////
 
                 change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                 break;

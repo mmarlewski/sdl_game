@@ -159,6 +159,9 @@ int get_skill_action_points(int skill)
         default: break;
     }
 
+    // all skills cost now 1 ap
+    ap = 1;
+
     return ap;
 }
 

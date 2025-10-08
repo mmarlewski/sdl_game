@@ -16,6 +16,7 @@ Object* new_object(int type)
     object->tilemap_pos = vec2i(-1, -1);
     object->action_points = ALLY_MAX_ACTION_POINTS;
     object->attack_dir4 = DIR4__NONE;
+    object->curr_hp = get_object_max_hp(object);
 
     return object;
 }
@@ -1512,6 +1513,64 @@ int is_object_glass(Object *object)
     }
 
     return is;
+}
+
+int get_object_max_hp(Object* object)
+{
+    int max_hp = -1;
+    
+    if(object == NULL) return max_hp;
+
+    switch(object->type)
+    {
+        case OBJECT__GOLEM_UNPOWERED:                  max_hp = 3; break;
+        case OBJECT__GOLEM_HALF_POWERED:               max_hp = 3; break;
+        case OBJECT__GOLEM_POWERED:                    max_hp = 3; break;
+
+        case OBJECT__HERO:                             max_hp = 5; break;
+        case OBJECT__HERO_FLOATING:                    max_hp = 5; break;
+        case OBJECT__HERO_FLYING:                      max_hp = 5; break;
+
+        case OBJECT__MINIBOT_ALLY:                     max_hp = 1; break;
+        case OBJECT__MINIBOT_ALLY_CELL:                max_hp = 1; break;
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:            max_hp = 1; break;
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:            max_hp = 1; break;
+
+        case OBJECT__GOAT:                             max_hp = 3; break;
+        case OBJECT__SPIDER:                           max_hp = 3; break;
+        case OBJECT__BULL:                             max_hp = 3; break;
+        case OBJECT__FLY:                              max_hp = 3; break;
+        case OBJECT__CHAMELEON:                        max_hp = 3; break;
+        case OBJECT__SQUID:                            max_hp = 3; break;
+        case OBJECT__MOLE:                             max_hp = 3; break;
+        case OBJECT__MIMIC:                            max_hp = 3; break;
+        case OBJECT__SHARK:                            max_hp = 3; break;
+        case OBJECT__SHARK_FIN:                        max_hp = 3; break;
+
+        case OBJECT__MINIBOT_ENEMY:                    max_hp = 1; break;
+        case OBJECT__MINIBOT_ENEMY_CELL:               max_hp = 1; break;
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:           max_hp = 1; break;
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:           max_hp = 1; break;
+
+        case OBJECT__TURRET_LASER_GROUNDED:            max_hp = 2; break;
+        case OBJECT__TURRET_LASER_STANDING:            max_hp = 2; break;
+        case OBJECT__TURRET_LASER_UNDEPLOYED:          max_hp = 2; break;
+        case OBJECT__TURRET_LASER_DEPLOYED:            max_hp = 2; break;
+
+        case OBJECT__TURRET_BOMB_GROUNDED:             max_hp = 2; break;
+        case OBJECT__TURRET_BOMB_STANDING:             max_hp = 2; break;
+        case OBJECT__TURRET_BOMB_UNDEPLOYED:           max_hp = 2; break;
+        case OBJECT__TURRET_BOMB_DEPLOYED:             max_hp = 2; break;
+
+        case OBJECT__TURRET_PROJECTILE_GROUNDED:       max_hp = 2; break;
+        case OBJECT__TURRET_PROJECTILE_STANDING:       max_hp = 2; break;
+        case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     max_hp = 2; break;
+        case OBJECT__TURRET_PROJECTILE_DEPLOYED:       max_hp = 2; break;
+
+        default: break;
+    }
+
+    return max_hp;
 }
 
 int get_object_item_type(Object* object)

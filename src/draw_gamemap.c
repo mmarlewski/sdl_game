@@ -1,4 +1,5 @@
 #include "../inc/game.h"
+#include <immintrin.h>
 #include <limits.h>
 
 void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
@@ -260,6 +261,36 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         );
     }
 
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL && state->is_showing_context_menu)
+    {
+        int mouse_hover_skill = SKILL__NONE;
+
+        if(state->is_showing_context_menu &&
+        state->mouse_screen_pos.x > state->context_menu_screen_position.x &&
+        state->mouse_screen_pos.x < state->context_menu_screen_position.x + state->context_menu_skill_list->size * 32 &&
+        state->mouse_screen_pos.y > state->context_menu_screen_position.y &&
+        state->mouse_screen_pos.y < state->context_menu_screen_position.y + 32)
+        {
+            int n = (state->mouse_screen_pos.x - state->context_menu_screen_position.x) / 32;
+            ListElem* context_menu_skill_elem = get_nth_list_element(state->context_menu_skill_list, n);
+            int context_menu_skill = (int)context_menu_skill_elem->data;
+
+            mouse_hover_skill = context_menu_skill;
+        }
+
+        if(mouse_hover_skill)
+        {
+            draw_texture_list(
+                renderer,
+                state,
+                state->curr_ally_draw_below_texture_list,
+                state->curr_ally_draw_below_tilemap_pos_list,
+                colors->green,
+                1.0f
+            );
+        }
+    }
+
     // objects, sprites
 
     for(int i = 0; i < TILEMAP_LENGTH; i++)
@@ -454,6 +485,36 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             colors->green,
             1.0f
         );
+    }
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL && state->is_showing_context_menu)
+    {
+        int mouse_hover_skill = SKILL__NONE;
+
+        if(state->is_showing_context_menu &&
+        state->mouse_screen_pos.x > state->context_menu_screen_position.x &&
+        state->mouse_screen_pos.x < state->context_menu_screen_position.x + state->context_menu_skill_list->size * 32 &&
+        state->mouse_screen_pos.y > state->context_menu_screen_position.y &&
+        state->mouse_screen_pos.y < state->context_menu_screen_position.y + 32)
+        {
+            int n = (state->mouse_screen_pos.x - state->context_menu_screen_position.x) / 32;
+            ListElem* context_menu_skill_elem = get_nth_list_element(state->context_menu_skill_list, n);
+            int context_menu_skill = (int)context_menu_skill_elem->data;
+
+            mouse_hover_skill = context_menu_skill;
+        }
+
+        if(mouse_hover_skill)
+        {
+            draw_texture_list(
+                renderer,
+                state,
+                state->curr_ally_draw_above_texture_list,
+                state->curr_ally_draw_above_tilemap_pos_list,
+                colors->green,
+                1.0f
+            );
+        }
     }
 
     // orange outline
@@ -772,6 +833,45 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
+    // object hp
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
+    {
+        for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
+        {
+            Object* curr_object = (Object*) curr_elem->data;
+            
+            if(get_object_max_hp(curr_object) != -1)
+            {
+                int curr_hp = curr_object->curr_hp;
+                int max_hp = get_object_max_hp(curr_object);
+
+                Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
+                Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
+                screen_pos.x += TILE_LENGTH * 0.5f + 32;
+                screen_pos.x -= max_hp * 32 * 0.5;
+
+                for(int i = 0; i < max_hp; i++)
+                {
+                    Texture* texture = textures->hud.heart_full;
+                    if(i >= curr_hp) texture = textures->hud.heart_empty;
+
+                    draw_texture_at_screen_pos(
+                        renderer,
+                        texture,
+                        colors->red,
+                        1.0f,
+                        vec2i(screen_pos.x + i * 32, screen_pos.y),
+                        1.0f
+                    );
+                }
+                
+            }
+        }
+    }
+
     // enemy skill draw effect
 
     if(state->gamestate != GAMESTATE__GAME_START &&
@@ -816,5 +916,35 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             colors->none,
             0.75f
         );
+    }
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL && state->is_showing_context_menu)
+    {
+        int mouse_hover_skill = SKILL__NONE;
+
+        if(state->is_showing_context_menu &&
+        state->mouse_screen_pos.x > state->context_menu_screen_position.x &&
+        state->mouse_screen_pos.x < state->context_menu_screen_position.x + state->context_menu_skill_list->size * 32 &&
+        state->mouse_screen_pos.y > state->context_menu_screen_position.y &&
+        state->mouse_screen_pos.y < state->context_menu_screen_position.y + 32)
+        {
+            int n = (state->mouse_screen_pos.x - state->context_menu_screen_position.x) / 32;
+            ListElem* context_menu_skill_elem = get_nth_list_element(state->context_menu_skill_list, n);
+            int context_menu_skill = (int)context_menu_skill_elem->data;
+
+            mouse_hover_skill = context_menu_skill;
+        }
+
+        if(mouse_hover_skill)
+        {
+            draw_texture_list(
+                renderer,
+                state,
+                state->curr_ally_draw_effect_texture_list,
+                state->curr_ally_draw_effect_tilemap_pos_list,
+                colors->none,
+                1.0f
+            );
+        }
     }
 }

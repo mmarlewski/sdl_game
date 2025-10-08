@@ -566,67 +566,70 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     // ap bar
 
-    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
-       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-       state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
-    {
-        if(state->enemy_list->size > 0)
-        {
-            int curr_ally_ap = state->curr_ally->object->action_points;
-            char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
-            hero_ap_bar[0] = '[';
-            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
-            {
-                char character = ' ';
+    // if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    //    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    //    state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    // {
+    //     if(state->enemy_list->size > 0)
+    //     {
+    //         int curr_ally_ap = state->curr_ally->object->action_points;
+    //         char hero_ap_bar[ALLY_MAX_ACTION_POINTS + 2];
+    //         hero_ap_bar[0] = '[';
+    //         for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
+    //         {
+    //             char character = ' ';
 
-                if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
-                   state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-                   state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
-                {
-                    int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
-                    if(state->curr_ally_skill == SKILL__MOVE ||
-                       state->curr_ally_skill == SKILL__MOVE_FLOATING ||
-                       state->curr_ally_skill == SKILL__MOVE_FLYING)
-                    {
-                        curr_skill_cost = state->ally_move_distance;
-                    }
-                    if(i < curr_ally_ap - curr_skill_cost) character = '#';
-                    else if(i < curr_ally_ap) character = '-';
-                }
-                else
-                {
-                    character = (i < curr_ally_ap) ? '#' : ' ';
-                }
+    //             if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    //                state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    //                state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2)
+    //             {
+    //                 int curr_skill_cost = get_skill_action_points(state->curr_ally_skill);
+    //                 if(state->curr_ally_skill == SKILL__MOVE ||
+    //                    state->curr_ally_skill == SKILL__MOVE_FLOATING ||
+    //                    state->curr_ally_skill == SKILL__MOVE_FLYING)
+    //                 {
+    //                     curr_skill_cost = state->ally_move_distance;
+    //                 }
+    //                 if(i < curr_ally_ap - curr_skill_cost) character = '#';
+    //                 else if(i < curr_ally_ap) character = '-';
+    //             }
+    //             else
+    //             {
+    //                 character = (i < curr_ally_ap) ? '#' : ' ';
+    //             }
 
-                hero_ap_bar[i + 1] = character;
-            }
-            hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
+    //             hero_ap_bar[i + 1] = character;
+    //         }
+    //         hero_ap_bar[ALLY_MAX_ACTION_POINTS + 1] = ']';
 
-            for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
-            {
-                Vec3i color = colors->none;
+    //         for(int i = 0; i < ALLY_MAX_ACTION_POINTS; i++)
+    //         {
+    //             Vec3i color = colors->none;
 
-                switch(hero_ap_bar[i + 1])
-                {
-                    case '#': color = colors->blue; break;
-                    case '-': color = colors->red; break;
-                    case ' ': color = colors->black; break;
-                    default: color = colors->black; break;
-                }
+    //             switch(hero_ap_bar[i + 1])
+    //             {
+    //                 case '#': color = colors->blue; break;
+    //                 case '-': color = colors->red; break;
+    //                 case ' ': color = colors->black; break;
+    //                 default: color = colors->black; break;
+    //             }
 
-                draw_texture_at_screen_pos(
-                    renderer,
-                    textures->hud.bar_part,
-                    color,
-                    1.0f,
-                    vec2i(550 + 32 * i, 100),
-                    1
-                );
-            }
-        }
-    }
+    //             draw_texture_at_screen_pos(
+    //                 renderer,
+    //                 textures->hud.bar_part,
+    //                 color,
+    //                 1.0f,
+    //                 vec2i(550 + 32 * i, 100),
+    //                 1
+    //             );
+    //         }
+    //     }
+    // }
 
     // tutorial
+
+    // no tutorial now
+    state->show_tutorial = FALSE;
 
     if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
     state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||

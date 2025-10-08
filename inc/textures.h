@@ -1104,6 +1104,8 @@ typedef struct
     Texture* show_tutorial;
     Texture* show_tutorial_checked;
     Texture* bar_part;
+    Texture* heart_full;
+    Texture* heart_empty;
 
 } Textures_Hud;
 

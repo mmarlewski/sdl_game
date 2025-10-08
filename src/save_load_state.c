@@ -96,6 +96,7 @@ void save_state(State* state, Textures* textures)
             int object_tilemap_pos_y = object->tilemap_pos.y;
             int object_attack_dir4 = object->attack_dir4;
             int object_action_points = object->action_points;
+            int object_curr_hp = object->curr_hp;
 
             SDL_RWwrite(file, &object_is_to_be_removed, sizeof(int), 1);
             SDL_RWwrite(file, &object_is_visible, sizeof(int), 1);
@@ -104,6 +105,7 @@ void save_state(State* state, Textures* textures)
             SDL_RWwrite(file, &object_tilemap_pos_y, sizeof(int), 1);
             SDL_RWwrite(file, &object_attack_dir4, sizeof(int), 1);
             SDL_RWwrite(file, &object_action_points, sizeof(int), 1);
+            SDL_RWwrite(file, &object_curr_hp, sizeof(int), 1);
 
             object->is_to_be_removed = object_is_to_be_removed;
             object->is_visible = object_is_visible;
@@ -112,6 +114,7 @@ void save_state(State* state, Textures* textures)
             object->tilemap_pos.y = object_tilemap_pos_y;
             object->attack_dir4 = object_attack_dir4;
             object->action_points = object_action_points;
+            object->curr_hp = object_curr_hp;
         }
     }
 
@@ -316,6 +319,7 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
             int object_tilemap_pos_y = 0;
             int object_attack_dir4 = 0;
             int object_action_points = 0;
+            int object_curr_hp = 0;
 
             SDL_RWread(file, &object_is_to_be_removed, sizeof(int), 1);
             SDL_RWread(file, &object_is_visible, sizeof(int), 1);
@@ -324,6 +328,7 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
             SDL_RWread(file, &object_tilemap_pos_y, sizeof(int), 1);
             SDL_RWread(file, &object_attack_dir4, sizeof(int), 1);
             SDL_RWread(file, &object_action_points, sizeof(int), 1);
+            SDL_RWread(file, &object_curr_hp, sizeof(int), 1);
 
             object->is_to_be_removed = object_is_to_be_removed;
             object->is_visible = object_is_visible;
@@ -332,6 +337,7 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
             object->tilemap_pos.y = object_tilemap_pos_y;
             object->attack_dir4 = object_attack_dir4;
             object->action_points = object_action_points;
+            object->curr_hp = object_curr_hp;
 
             // hero and minibot objects
 
