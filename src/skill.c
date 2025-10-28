@@ -7,56 +7,72 @@ int is_skill_two_target(int skill)
     switch(skill)
     {
         case SKILL__NONE:                       is = 0; break;
+        case SKILL__USE:                        is = 0; break;
+        case SKILL__MOVE:                       is = 0; break;
 
         case SKILL__ATTACK_DIR:                 is = 0; break;
         case SKILL__NO_ATTACK:                  is = 0; break;
 
-        case SKILL__USE:                        is = 0; break;
-        case SKILL__MANIPULATION:               is = 0; break;
-        case SKILL__TELEPORTATION:              is = 0; break;
-        case SKILL__TELEKINESIS:                is = 1; break;
-
-        case SKILL__MOVE:                       is = 0; break;
-        case SKILL__MOVE_FLOATING:              is = 0; break;
-        case SKILL__MOVE_FLYING:                is = 0; break;
-
-        case SKILL__PICK_ITEM_CLOSE:            is = 0; break;
-        case SKILL__PICK_ITEM_FAR:              is = 0; break;
-
-        case SKILL__PUT_ITEM_CELL_CLOSE:        is = 0; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          is = 0; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    is = 0; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      is = 0; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    is = 0; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      is = 0; break;
-
-        case SKILL__THROW_ITEM_CELL:            is = 0; break;
-        case SKILL__THROW_ITEM_DYNAMITE:        is = 0; break;
-        case SKILL__THROW_ITEM_GEMSTONE:        is = 0; break;
-
         case SKILL__SHOOT_PROJECTILE_FLY:       is = 0; break;
         case SKILL__SHOOT_PROJECTILE_SQUIRREL:  is = 0; break;
 
-        case SKILL__PUSH:                       is = 1; break;
-        case SKILL__THROW:                      is = 1; break;
-        case SKILL__PULL_HOOK:                  is = 1; break;
-        case SKILL__PULL_SPIDERWEB:             is = 1; break;
-        case SKILL__PULL_TENTACLE:              is = 1; break;
-        case SKILL__PULL_TONGUE:                is = 1; break;
-        case SKILL__DRAG_HOOK:                  is = 1; break;
-        case SKILL__DRAG_SPIDERWEB:             is = 1; break;
-        case SKILL__DRAG_TENTACLE:              is = 1; break;
-        case SKILL__JUMP:                       is = 0; break;
-        case SKILL__CHARGE:                     is = 0; break;
-        case SKILL__STOMP:                      is = 0; break;
+        case SKILL__PUSH:               is = 0; break;
+        case SKILL__PUNCH:              is = 0; break;
+        case SKILL__CHARGE_AND_PUNCH:   is = 0; break;
+        case SKILL__DRILL:              is = 0; break;
+        case SKILL__DRILL_FLOOR:        is = 0; break;
 
-        case SKILL__DRAG_AND_THROW_HOOK:        is = 1; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      is = 1; break;
-        case SKILL__CHARGE_AND_PUSH:            is = 1; break;
-        case SKILL__CHARGE_AND_THROW:           is = 1; break;
-        case SKILL__CHARGE_AND_JUMP:            is = 1; break;
-        case SKILL__JUMP_AND_CARRY:             is = 1; break;
-        case SKILL__JUMP_AND_STOMP:             is = 0; break;
+        case SKILL__BRANCHING_BOLT:     is = 0; break;
+        case SKILL__STUNNING_BOLT:      is = 0; break;
+        case SKILL__COOKING_BOLT:       is = 0; break;
+        case SKILL__ELECTRIFY_FLOOR:    is = 0; break;
+        
+        case SKILL__SCORCH_WITH_FIRE:   is = 0; break;
+        case SKILL__SPEW_TAR_BALL:      is = 0; break;
+        case SKILL__FIRE_WELD_FLOOR:    is = 0; break;
+        case SKILL__ROCKET_JUMP:        is = 0; break;
+        case SKILL__ROCKET_DASH:        is = 0; break;
+        
+        case SKILL__PENETRATING_BEAM:   is = 0; break;
+        case SKILL__BOUNCING_BEAM:      is = 1; break;
+        case SKILL__FOCUSED_BEAM:       is = 0; break;
+        case SKILL__LASER_WELD_FLOOR:   is = 0; break;
+        
+        case SKILL__ICE_BLOCK:          is = 0; break;
+        case SKILL__ICE_WALL:           is = 0; break;
+        case SKILL__ICE_PROJECTILE:     is = 0; break;
+        case SKILL__FREEZE_FLOOR:       is = 0; break;
+        case SKILL__ICE_BUNKER:         is = 0; break;
+        
+        case SKILL__LONG_SHOT:          is = 0; break;
+        case SKILL__POINT_BLANK_SHOT:   is = 0; break;
+        case SKILL__HEAD_SHOT:          is = 0; break;
+        case SKILL__STUNNING_SHOT:      is = 0; break;
+        case SKILL__HARPOON_SHOT:       is = 0; break;
+        
+        case SKILL__HIGH_PROJECTILE:    is = 0; break;
+        case SKILL__DOUBLE_JUMP:        is = 0; break;
+        case SKILL__RICOSHET:           is = 1; break;
+        case SKILL__NEST:               is = 0; break;
+        
+        case SKILL__SWING:              is = 0; break;
+        case SKILL__NAIL:               is = 0; break;
+        case SKILL__JUMP_AND_NAIL:      is = 0; break;
+        case SKILL__NAIL_FLOOR:         is = 0; break;
+        
+        case SKILL__THROW:              is = 1; break;
+        case SKILL__JUMP_AND_CARRY:     is = 1; break;
+        case SKILL__BURROW_AND_GTFO:    is = 1; break;
+
+        case SKILL__THRUST:             is = 0; break;
+        case SKILL__PENETRATING_THRUST: is = 0; break;
+        case SKILL__HEAD_SLICE:         is = 0; break;
+        case SKILL__BURROW_AND_SLICE:   is = 0; break;
+        case SKILL__CHARGE_AND_SLICE:   is = 0; break;
+
+        case SKILL__WHIP_PULL:          is = 1; break;
+        case SKILL__BURY:               is = 1; break;
+        case SKILL__WHIP_SMACK:         is = 0; break;
 
         case SKILL__LAUNCH_MINIBOT:             is = 0; break;
         case SKILL__MINIBOT_MERGE:              is = 0; break;
@@ -85,80 +101,6 @@ int get_skill_action_points(int skill)
 {
     int ap = 0;
 
-    switch(skill)
-    {
-        case SKILL__NONE:                       ap = 0; break;
-
-        case SKILL__ATTACK_DIR:                 ap = 0; break;
-        case SKILL__NO_ATTACK:                  ap = 0; break;
-
-        case SKILL__USE:                        ap = 1; break;
-        case SKILL__MANIPULATION:               ap = 1; break;
-        case SKILL__TELEPORTATION:              ap = 1; break;
-        case SKILL__TELEKINESIS:                ap = 1; break;
-
-        case SKILL__MOVE:                       ap = -1; break;
-        case SKILL__MOVE_FLOATING:              ap = -1; break;
-        case SKILL__MOVE_FLYING:                ap = -1; break;
-
-        case SKILL__PICK_ITEM_CLOSE:            ap = 1; break;
-        case SKILL__PICK_ITEM_FAR:              ap = 1; break;
-
-        case SKILL__PUT_ITEM_CELL_CLOSE:        ap = 1; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          ap = 1; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    ap = 1; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      ap = 1; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    ap = 1; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      ap = 1; break;
-
-        case SKILL__THROW_ITEM_CELL:            ap = 1; break;
-        case SKILL__THROW_ITEM_DYNAMITE:        ap = 1; break;
-        case SKILL__THROW_ITEM_GEMSTONE:        ap = 1; break;
-
-        case SKILL__SHOOT_PROJECTILE_FLY:       ap = 1; break;
-        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  ap = 1; break;
-
-        case SKILL__PUSH:                       ap = 1; break;
-        case SKILL__THROW:                      ap = 1; break;
-        case SKILL__PULL_HOOK:                  ap = 1; break;
-        case SKILL__PULL_SPIDERWEB:             ap = 1; break;
-        case SKILL__PULL_TENTACLE:              ap = 1; break;
-        case SKILL__PULL_TONGUE:                ap = 1; break;
-        case SKILL__DRAG_HOOK:                  ap = 1; break;
-        case SKILL__DRAG_SPIDERWEB:             ap = 1; break;
-        case SKILL__DRAG_TENTACLE:              ap = 1; break;
-        case SKILL__JUMP:                       ap = 1; break;
-        case SKILL__CHARGE:                     ap = 1; break;
-        case SKILL__STOMP:                      ap = 1; break;
-
-        case SKILL__DRAG_AND_THROW_HOOK:        ap = 1; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      ap = 1; break;
-        case SKILL__CHARGE_AND_PUSH:            ap = 1; break;
-        case SKILL__CHARGE_AND_THROW:           ap = 1; break;
-        case SKILL__CHARGE_AND_JUMP:            ap = 1; break;
-        case SKILL__JUMP_AND_CARRY:             ap = 1; break;
-        case SKILL__JUMP_AND_STOMP:             ap = 1; break;
-
-        case SKILL__LAUNCH_MINIBOT:             ap = 1; break;
-        case SKILL__MINIBOT_MERGE:              ap = 1; break;
-
-        case SKILL__TURRET_LASER:               ap = 1; break;
-        case SKILL__TURRET_BOMB:                ap = 1; break;
-        case SKILL__TURRET_PROJECTILE:          ap = 1; break;
-
-        case SKILL__KILL_AROUND:                ap = 1; break;
-
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE: ap = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:       ap = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:         ap = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:      ap = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:        ap = 0; break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    ap = 0; break;
-        case SKILL__ENVIRONMENT_CONV_BELT:          ap = 0; break;
-
-        default: break;
-    }
-
     // all skills cost now 1 ap
     ap = 1;
 
@@ -172,56 +114,69 @@ char* get_in_game_skill_name(int skill)
     switch(skill)
     {
         case SKILL__NONE:                       name = "--"; break;
+        case SKILL__USE:                        name = "use"; break;
+        case SKILL__MOVE:                       name = "move"; break;
 
         case SKILL__ATTACK_DIR:                 name = "---"; break;
         case SKILL__NO_ATTACK:                  name = "no attack"; break;
 
-        case SKILL__USE:                        name = "use"; break;
-        case SKILL__MANIPULATION:               name = "manipulation"; break;
-        case SKILL__TELEPORTATION:              name = "teleportation"; break;
-        case SKILL__TELEKINESIS:                name = "telekinesis"; break;
+        case SKILL__PUSH:               name = "push"; break;
+        case SKILL__PUNCH:              name = "punch"; break;
+        case SKILL__CHARGE_AND_PUNCH:   name = "charge and punch"; break;
+        case SKILL__DRILL:              name = "drill"; break;
+        case SKILL__DRILL_FLOOR:        name = "drill floor"; break;
 
-        case SKILL__MOVE:                       name = "move"; break;
-        case SKILL__MOVE_FLOATING:              name = "move"; break;
-        case SKILL__MOVE_FLYING:                name = "move"; break;
+        case SKILL__BRANCHING_BOLT:     name = "branching bolt"; break;
+        case SKILL__STUNNING_BOLT:      name = "stunning bolt"; break;
+        case SKILL__COOKING_BOLT:       name = "cooking bolt"; break;
+        case SKILL__ELECTRIFY_FLOOR:    name = "electrify floor"; break;
+        
+        case SKILL__SCORCH_WITH_FIRE:   name = "scorch with fire"; break;
+        case SKILL__SPEW_TAR_BALL:      name = "spew tar ball"; break;
+        case SKILL__FIRE_WELD_FLOOR:    name = "fire weld floor"; break;
+        case SKILL__ROCKET_JUMP:        name = "rocket jump"; break;
+        case SKILL__ROCKET_DASH:        name = "rocket dash"; break;
+        
+        case SKILL__PENETRATING_BEAM:   name = "penetrating beam"; break;
+        case SKILL__BOUNCING_BEAM:      name = "bouncing beam"; break;
+        case SKILL__FOCUSED_BEAM:       name = "focused beam"; break;
+        case SKILL__LASER_WELD_FLOOR:   name = "laser weld floor"; break;
+        
+        case SKILL__ICE_BLOCK:          name = "ice block"; break;
+        case SKILL__ICE_WALL:           name = "ice wall"; break;
+        case SKILL__ICE_PROJECTILE:     name = "ice projectile"; break;
+        case SKILL__FREEZE_FLOOR:       name = "freeze floor"; break;
+        case SKILL__ICE_BUNKER:         name = "ice bunker"; break;
+        
+        case SKILL__LONG_SHOT:          name = "long shot"; break;
+        case SKILL__POINT_BLANK_SHOT:   name = "point blank shot"; break;
+        case SKILL__HEAD_SHOT:          name = "head shot"; break;
+        case SKILL__STUNNING_SHOT:      name = "stunning shot"; break;
+        case SKILL__HARPOON_SHOT:       name = "harpoon shot"; break;
+        
+        case SKILL__HIGH_PROJECTILE:    name = "high projectile"; break;
+        case SKILL__DOUBLE_JUMP:        name = "double jump"; break;
+        case SKILL__RICOSHET:           name = "ricoshet"; break;
+        case SKILL__NEST:               name = "nest"; break;
+        
+        case SKILL__SWING:              name = "swing"; break;
+        case SKILL__NAIL:               name = "nail"; break;
+        case SKILL__JUMP_AND_NAIL:      name = "jump and nail"; break;
+        case SKILL__NAIL_FLOOR:         name = "nail floor"; break;
+        
+        case SKILL__THROW:              name = "throw"; break;
+        case SKILL__JUMP_AND_CARRY:     name = "jump and carry"; break;
+        case SKILL__BURROW_AND_GTFO:    name = "burrow and gtfo"; break;
 
-        case SKILL__PICK_ITEM_CLOSE:            name = "pick item"; break;
-        case SKILL__PICK_ITEM_FAR:              name = "pick item (far)"; break;
+        case SKILL__THRUST:             name = "thrust"; break;
+        case SKILL__PENETRATING_THRUST: name = "penetring thrust"; break;
+        case SKILL__HEAD_SLICE:         name = "head slice"; break;
+        case SKILL__BURROW_AND_SLICE:   name = "burrow and slice"; break;
+        case SKILL__CHARGE_AND_SLICE:   name = "charge and slice"; break;
 
-        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put cell"; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          name = "put cell (far)"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put dynamite"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put dynamite (far)"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put gemstone"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put gemstone (far)"; break;
-
-        case SKILL__THROW_ITEM_CELL:            name = "throw cell"; break;
-        case SKILL__THROW_ITEM_DYNAMITE:        name = "throw dynamite"; break;
-        case SKILL__THROW_ITEM_GEMSTONE:        name = "throw gemstone"; break;
-
-        case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile"; break;
-        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  name = "shoot projectile"; break;
-
-        case SKILL__PUSH:                       name = "push"; break;
-        case SKILL__THROW:                      name = "throw"; break;
-        case SKILL__PULL_HOOK:                  name = "pull"; break;
-        case SKILL__PULL_SPIDERWEB:             name = "pull"; break;
-        case SKILL__PULL_TENTACLE:              name = "pull"; break;
-        case SKILL__PULL_TONGUE:                name = "pull"; break;
-        case SKILL__DRAG_HOOK:                  name = "drag"; break;
-        case SKILL__DRAG_SPIDERWEB:             name = "drag"; break;
-        case SKILL__DRAG_TENTACLE:              name = "drag"; break;
-        case SKILL__JUMP:                       name = "jump"; break;
-        case SKILL__CHARGE:                     name = "charge"; break;
-        case SKILL__STOMP:                      name = "stomp"; break;
-
-        case SKILL__DRAG_AND_THROW_HOOK:        name = "drag and throw"; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      name = "drag and throw"; break;
-        case SKILL__CHARGE_AND_PUSH:            name = "charge and push"; break;
-        case SKILL__CHARGE_AND_THROW:           name = "charge and throw"; break;
-        case SKILL__CHARGE_AND_JUMP:            name = "charge and jump"; break;
-        case SKILL__JUMP_AND_CARRY:             name = "jump and carry"; break;
-        case SKILL__JUMP_AND_STOMP:             name = "jump and stomp"; break;
+        case SKILL__WHIP_PULL:          name = "whip pull"; break;
+        case SKILL__BURY:               name = "bury"; break;
+        case SKILL__WHIP_SMACK:         name = "whip smack"; break;
 
         case SKILL__LAUNCH_MINIBOT:             name = "launch minibot"; break;
         case SKILL__MINIBOT_MERGE:              name = "minibot merge"; break;
@@ -253,56 +208,69 @@ char* get_debug_skill_name(int skill)
     switch(skill)
     {
         case SKILL__NONE:                       name = "none"; break;
+        case SKILL__USE:                        name = "use"; break;
+        case SKILL__MOVE:                       name = "move"; break;
 
         case SKILL__ATTACK_DIR:                 name = "attack dir"; break;
         case SKILL__NO_ATTACK:                  name = "no attack"; break;
 
-        case SKILL__USE:                        name = "use"; break;
-        case SKILL__MANIPULATION:               name = "manipulation"; break;
-        case SKILL__TELEPORTATION:              name = "teleportation"; break;
-        case SKILL__TELEKINESIS:                name = "telekinesis"; break;
+        case SKILL__PUSH:               name = "push"; break;
+        case SKILL__PUNCH:              name = "punch"; break;
+        case SKILL__CHARGE_AND_PUNCH:   name = "charge and punch"; break;
+        case SKILL__DRILL:              name = "drill"; break;
+        case SKILL__DRILL_FLOOR:        name = "drill floor"; break;
 
-        case SKILL__MOVE:                       name = "move"; break;
-        case SKILL__MOVE_FLOATING:              name = "move floating"; break;
-        case SKILL__MOVE_FLYING:                name = "move flying"; break;
+        case SKILL__BRANCHING_BOLT:     name = "branching bolt"; break;
+        case SKILL__STUNNING_BOLT:      name = "stunning bolt"; break;
+        case SKILL__COOKING_BOLT:       name = "cooking bolt"; break;
+        case SKILL__ELECTRIFY_FLOOR:    name = "electrify floor"; break;
+        
+        case SKILL__SCORCH_WITH_FIRE:   name = "scorch with fire"; break;
+        case SKILL__SPEW_TAR_BALL:      name = "spew tar ball"; break;
+        case SKILL__FIRE_WELD_FLOOR:    name = "fire weld floor"; break;
+        case SKILL__ROCKET_JUMP:        name = "rocket jump"; break;
+        case SKILL__ROCKET_DASH:        name = "rocket dash"; break;
+        
+        case SKILL__PENETRATING_BEAM:   name = "penetrating beam"; break;
+        case SKILL__BOUNCING_BEAM:      name = "bouncing beam"; break;
+        case SKILL__FOCUSED_BEAM:       name = "focused beam"; break;
+        case SKILL__LASER_WELD_FLOOR:   name = "laser weld floor"; break;
+        
+        case SKILL__ICE_BLOCK:          name = "ice block"; break;
+        case SKILL__ICE_WALL:           name = "ice wall"; break;
+        case SKILL__ICE_PROJECTILE:     name = "ice projectile"; break;
+        case SKILL__FREEZE_FLOOR:       name = "freeze floor"; break;
+        case SKILL__ICE_BUNKER:         name = "ice bunker"; break;
+        
+        case SKILL__LONG_SHOT:          name = "long shot"; break;
+        case SKILL__POINT_BLANK_SHOT:   name = "point blank shot"; break;
+        case SKILL__HEAD_SHOT:          name = "head shot"; break;
+        case SKILL__STUNNING_SHOT:      name = "stunning shot"; break;
+        case SKILL__HARPOON_SHOT:       name = "harpoon shot"; break;
+        
+        case SKILL__HIGH_PROJECTILE:    name = "high projectile"; break;
+        case SKILL__DOUBLE_JUMP:        name = "double jump"; break;
+        case SKILL__RICOSHET:           name = "ricoshet"; break;
+        case SKILL__NEST:               name = "nest"; break;
+        
+        case SKILL__SWING:              name = "swing"; break;
+        case SKILL__NAIL:               name = "nail"; break;
+        case SKILL__JUMP_AND_NAIL:      name = "jump and nail"; break;
+        case SKILL__NAIL_FLOOR:         name = "nail floor"; break;
+        
+        case SKILL__THROW:              name = "throw"; break;
+        case SKILL__JUMP_AND_CARRY:     name = "jump and carry"; break;
+        case SKILL__BURROW_AND_GTFO:    name = "burrow and gtfo"; break;
 
-        case SKILL__PICK_ITEM_CLOSE:            name = "pick item close"; break;
-        case SKILL__PICK_ITEM_FAR:              name = "pick item far"; break;
+        case SKILL__THRUST:             name = "thrust"; break;
+        case SKILL__PENETRATING_THRUST: name = "penetring thrust"; break;
+        case SKILL__HEAD_SLICE:         name = "head slice"; break;
+        case SKILL__BURROW_AND_SLICE:   name = "burrow and slice"; break;
+        case SKILL__CHARGE_AND_SLICE:   name = "charge and slice"; break;
 
-        case SKILL__PUT_ITEM_CELL_CLOSE:        name = "put item cell close"; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          name = "put item cell far"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    name = "put item dynamite close"; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      name = "put item dynamite far"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    name = "put item gemstone close"; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      name = "put item gemstone far"; break;
-
-        case SKILL__THROW_ITEM_CELL:            name = "throw item cell"; break;
-        case SKILL__THROW_ITEM_DYNAMITE:        name = "throw item dynamite"; break;
-        case SKILL__THROW_ITEM_GEMSTONE:        name = "throw item gemstone"; break;
-
-        case SKILL__SHOOT_PROJECTILE_FLY:       name = "shoot projectile fly"; break;
-        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  name = "shoot projectile squirrel"; break;
-
-        case SKILL__PUSH:                       name = "push"; break;
-        case SKILL__THROW:                      name = "throw"; break;
-        case SKILL__PULL_HOOK:                  name = "pull hook"; break;
-        case SKILL__PULL_SPIDERWEB:             name = "pull spiderweb"; break;
-        case SKILL__PULL_TENTACLE:              name = "pull tentacle"; break;
-        case SKILL__PULL_TONGUE:                name = "pull tongue"; break;
-        case SKILL__DRAG_HOOK:                  name = "drag hook"; break;
-        case SKILL__DRAG_SPIDERWEB:             name = "drag spiderweb"; break;
-        case SKILL__DRAG_TENTACLE:              name = "drag tentacle"; break;
-        case SKILL__JUMP:                       name = "jump"; break;
-        case SKILL__CHARGE:                     name = "charge"; break;
-        case SKILL__STOMP:                      name = "stomp"; break;
-
-        case SKILL__DRAG_AND_THROW_HOOK:        name = "drag and throw hook"; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      name = "drag and throw tongue"; break;
-        case SKILL__CHARGE_AND_PUSH:            name = "charge and push"; break;
-        case SKILL__CHARGE_AND_THROW:           name = "charge and throw"; break;
-        case SKILL__CHARGE_AND_JUMP:            name = "charge and jump"; break;
-        case SKILL__JUMP_AND_CARRY:             name = "jump and carry"; break;
-        case SKILL__JUMP_AND_STOMP:             name = "jump and stomp"; break;
+        case SKILL__WHIP_PULL:          name = "whip pull"; break;
+        case SKILL__BURY:               name = "bury"; break;
+        case SKILL__WHIP_SMACK:         name = "whip smack"; break;
 
         case SKILL__LAUNCH_MINIBOT:             name = "launch minibot"; break;
         case SKILL__MINIBOT_MERGE:              name = "minibot merge"; break;
@@ -331,595 +299,6 @@ char* get_description_from_skill(int skill, int i)
 {
     char* description = "";
 
-    switch(skill)
-    {
-        case SKILL__NONE:
-        {
-            switch(i)
-            {
-                case 1: description = "(no skill)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ATTACK_DIR:
-        {
-            switch(i)
-            {
-                case 1: description = "(no attack)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__NO_ATTACK:
-        {
-            switch(i)
-            {
-                case 1: description = "(no attack)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__USE:
-        {
-            switch(i)
-            {
-                case 1: description = "use *EXITS* to travel between rooms"; break;
-                case 2: description = "or *STATIONS* to add augmentations"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__MANIPULATION:
-        {
-            switch(i)
-            {
-                case 1: description = "remotely manipulate objects or floors,"; break;
-                case 2: description = "turn them *ON* and *OFF*"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__TELEPORTATION:
-        {
-            switch(i)
-            {
-                case 1: description = "teleport to any place in room"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__TELEKINESIS:
-        {
-            switch(i)
-            {
-                case 1: description = "move any object in room across space"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__MOVE:
-        {
-            switch(i)
-            {
-                case 1: description = "move through tiles"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__MOVE_FLOATING:
-        {
-            switch(i)
-            {
-                case 1: description = "move through tiles"; break;
-                case 2: description = "(can move through water and lava tiles)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__MOVE_FLYING:
-        {
-            switch(i)
-            {
-                case 1: description = "move through tiles"; break;
-                case 2: description = "(can move through pit tiles)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PICK_ITEM_CLOSE:
-        {
-            switch(i)
-            {
-                case 1: description = "pick items from objects"; break;
-                case 2: description = "(can only pick from nearby objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PICK_ITEM_FAR:
-        {
-            switch(i)
-            {
-                case 1: description = "pick items from objects"; break;
-                case 2: description = "(can pick from FAR away objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_CELL_CLOSE:
-        {
-            switch(i)
-            {
-                case 1: description = "put a *CELL* item into an object"; break;
-                case 2: description = "(can only put into nearby objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_CELL_FAR:
-        {
-            switch(i)
-            {
-                case 1: description = "put a *CELL* item into an object"; break;
-                case 2: description = "(can put into FAR away objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
-        {
-            switch(i)
-            {
-                case 1: description = "put a *DYNAMITE* item into an object"; break;
-                case 2: description = "(can only put into nearby objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:
-        {
-            switch(i)
-            {
-                case 1: description = "put a *DYNAMITE* item into an object"; break;
-                case 2: description = "(can put into FAR away objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
-        {
-            switch(i)
-            {
-                case 1: description = "put a *GEMSTONE* item into an object"; break;
-                case 2: description = "(can only put into nearby objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:
-        {
-            switch(i)
-            {
-                case 1: description = "put a *GEMSTONE* item into an object"; break;
-                case 2: description = "(can put into FAR away objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__THROW_ITEM_CELL:
-        {
-            switch(i)
-            {
-                case 1: description = "throw a *CELL* item on object or floor"; break;
-                case 2: description = "(melt *METAL* objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__THROW_ITEM_DYNAMITE:
-        {
-            switch(i)
-            {
-                case 1: description = "throw a *DYNAMITE* item on object or floor"; break;
-                case 2: description = "(break *STONE* objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__THROW_ITEM_GEMSTONE:
-        {
-            switch(i)
-            {
-                case 1: description = "throw a *GEMSTONE* item on object or floor"; break;
-                case 2: description = "(shake *GLASS* objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__SHOOT_PROJECTILE_FLY:
-        case SKILL__SHOOT_PROJECTILE_SQUIRREL:
-        {
-            switch(i)
-            {
-                case 1: description = "shoot a projectile in straight line"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PUSH:
-        {
-            switch(i)
-            {
-                case 1: description = "push an object"; break;
-                case 2: description = "(you can't move *STABLE objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__THROW:
-        {
-            switch(i)
-            {
-                case 1: description = "throw an object"; break;
-                case 2: description = "(you can't move *STABLE objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__PULL_HOOK:
-        case SKILL__PULL_SPIDERWEB:
-        case SKILL__PULL_TENTACLE:
-        case SKILL__PULL_TONGUE:
-        {
-            switch(i)
-            {
-                case 1: description = "pull yourself towards a *STABLE* object"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__DRAG_HOOK:
-        case SKILL__DRAG_SPIDERWEB:
-        case SKILL__DRAG_TENTACLE:
-        {
-            switch(i)
-            {
-                case 1: description = "drag an object towards you"; break;
-                case 2: description = "(you can't move *STABLE objects)"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__JUMP:
-        {
-            switch(i)
-            {
-                case 1: description = "jump over other objects"; break;
-                case 2: description = "and over tiles"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__CHARGE:
-        {
-            switch(i)
-            {
-                case 1: description = "charge in a straight line"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__STOMP:
-        {
-            switch(i)
-            {
-                case 1: description = "damage certain floors"; break;
-                case 2: description = "or kill small enemies"; break;
-                case 3: description = "while shaking nearby objects"; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__DRAG_AND_THROW_HOOK:
-        case SKILL__DRAG_AND_THROW_TONGUE:
-        {
-            switch(i)
-            {
-                case 1: description = "drag an object towards you"; break;
-                case 2: description = "then throw it behind you"; break;
-                case 3: description = "(you can't move *STABLE objects)"; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__CHARGE_AND_PUSH:
-        {
-            switch(i)
-            {
-                case 1: description = "charge in a straight line"; break;
-                case 2: description = "then push another object"; break;
-                case 3: description = "(greater push distance)"; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__CHARGE_AND_THROW:
-        {
-            switch(i)
-            {
-                case 1: description = "charge in a straight line"; break;
-                case 2: description = "then throw another object"; break;
-                case 3: description = "(greater throw distance)"; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__CHARGE_AND_JUMP:
-        {
-            switch(i)
-            {
-                case 1: description = "charge in a straight line"; break;
-                case 2: description = "then jump"; break;
-                case 3: description = "(greater jump distance)"; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__JUMP_AND_CARRY:
-        {
-            switch(i)
-            {
-                case 1: description = "jump over other objects"; break;
-                case 2: description = "while carrying another object"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__JUMP_AND_STOMP:
-        {
-            switch(i)
-            {
-                case 1: description = "jump over other objects"; break;
-                case 2: description = "then stomp nearby objects or floors"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__LAUNCH_MINIBOT:
-        {
-            switch(i)
-            {
-                case 1: description = "launch an ally *MINIBOT*"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__MINIBOT_MERGE:
-        {
-            switch(i)
-            {
-                case 1: description = "merge an ally *MINIBOT* into hero"; break;
-                case 2: description = "so it can be launched again"; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__TURRET_LASER:
-        {
-            switch(i)
-            {
-                case 1: description = "shoot a laser in a straight line"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__TURRET_BOMB:
-        {
-            switch(i)
-            {
-                case 1: description = "throw a bomb over another objects"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__TURRET_PROJECTILE:
-        {
-            switch(i)
-            {
-                case 1: description = "shoot a projectile in a straight line"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__KILL_AROUND:
-        {
-            switch(i)
-            {
-                case 1: description = "kill all nearby objects"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment falling stalactite)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment emerge water)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment emerge pit)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment emerge burrow)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment emerge pipe)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment collapse burrow)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        case SKILL__ENVIRONMENT_CONV_BELT:
-        {
-            switch(i)
-            {
-                case 1: description = "(environment conv belt)"; break;
-                case 2: description = ""; break;
-                case 3: description = ""; break;
-                case 4: description = ""; break;
-                default: break;
-            }
-        }
-        break;
-        default:
-        break;
-    }
-
     return description;
 }
 
@@ -930,62 +309,75 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
     switch(skill)
     {
         case SKILL__NONE:                       texture = textures->hud.skill_none; break;
+        case SKILL__USE:                        texture = textures->hud.skill_use; break;
+        case SKILL__MOVE:                       texture = textures->hud.skill_move; break;
 
-        case SKILL__USE:                        texture = textures->hud.use; break;
-        case SKILL__MANIPULATION:               texture = textures->hud.manipulation; break;
-        case SKILL__TELEPORTATION:              texture = textures->hud.teleportation; break;
-        case SKILL__TELEKINESIS:                texture = textures->hud.telekinesis; break;
+        case SKILL__PUSH:               texture = textures->hud.skill_push; break;
+        case SKILL__PUNCH:              texture = textures->hud.skill_punch; break;
+        case SKILL__CHARGE_AND_PUNCH:   texture = textures->hud.skill_charge_and_punch; break;
+        case SKILL__DRILL:              texture = textures->hud.skill_drill; break;
+        case SKILL__DRILL_FLOOR:        texture = textures->hud.skill_drill_floor; break;
 
-        case SKILL__MOVE:                       texture = textures->hud.move; break;
-        case SKILL__MOVE_FLOATING:              texture = textures->hud.move; break;
-        case SKILL__MOVE_FLYING:                texture = textures->hud.move; break;
+        case SKILL__BRANCHING_BOLT:     texture = textures->hud.skill_branching_bolt; break;
+        case SKILL__STUNNING_BOLT:      texture = textures->hud.skill_stunning_bolt; break;
+        case SKILL__COOKING_BOLT:       texture = textures->hud.skill_cooking_bolt; break;
+        case SKILL__ELECTRIFY_FLOOR:    texture = textures->hud.skill_electrify_floor; break;
+        
+        case SKILL__SCORCH_WITH_FIRE:   texture = textures->hud.skill_scorch_with_fire; break;
+        case SKILL__SPEW_TAR_BALL:      texture = textures->hud.skill_spew_tar_ball; break;
+        case SKILL__FIRE_WELD_FLOOR:    texture = textures->hud.skill_fire_weld_floor; break;
+        case SKILL__ROCKET_JUMP:        texture = textures->hud.skill_rocket_jump; break;
+        case SKILL__ROCKET_DASH:        texture = textures->hud.skill_rocket_dash; break;
+        
+        case SKILL__PENETRATING_BEAM:   texture = textures->hud.skill_penetrating_beam; break;
+        case SKILL__BOUNCING_BEAM:      texture = textures->hud.skill_bouncing_beam; break;
+        case SKILL__FOCUSED_BEAM:       texture = textures->hud.skill_focused_beam; break;
+        case SKILL__LASER_WELD_FLOOR:   texture = textures->hud.skill_laser_weld_floor; break;
+        
+        case SKILL__ICE_BLOCK:          texture = textures->hud.skill_ice_block; break;
+        case SKILL__ICE_WALL:           texture = textures->hud.skill_ice_wall; break;
+        case SKILL__ICE_PROJECTILE:     texture = textures->hud.skill_ice_projectile; break;
+        case SKILL__FREEZE_FLOOR:       texture = textures->hud.skill_freeze_water; break;
+        case SKILL__ICE_BUNKER:         texture = textures->hud.skill_ice_bunker; break;
+        
+        case SKILL__LONG_SHOT:          texture = textures->hud.skill_long_shot; break;
+        case SKILL__POINT_BLANK_SHOT:   texture = textures->hud.skill_point_black_shot; break;
+        case SKILL__HEAD_SHOT:          texture = textures->hud.skill_head_shot; break;
+        case SKILL__STUNNING_SHOT:      texture = textures->hud.skill_stunning_shot; break;
+        case SKILL__HARPOON_SHOT:       texture = textures->hud.skill_harpoon_shot; break;
+        
+        case SKILL__HIGH_PROJECTILE:    texture = textures->hud.skill_high_projectile; break;
+        case SKILL__DOUBLE_JUMP:        texture = textures->hud.skill_double_jump; break;
+        case SKILL__RICOSHET:           texture = textures->hud.skill_ricoshet; break;
+        case SKILL__NEST:               texture = textures->hud.skill_launch_nest; break;
+        
+        case SKILL__SWING:              texture = textures->hud.skill_swing; break;
+        case SKILL__NAIL:               texture = textures->hud.skill_nail; break;
+        case SKILL__JUMP_AND_NAIL:      texture = textures->hud.skill_jump_and_nail; break;
+        case SKILL__NAIL_FLOOR:         texture = textures->hud.skill_nail_floor; break;
+        
+        case SKILL__THROW:              texture = textures->hud.skill_throw; break;
+        case SKILL__JUMP_AND_CARRY:     texture = textures->hud.skill_jump_and_carry; break;
+        case SKILL__BURROW_AND_GTFO:    texture = textures->hud.skill_burrow_and_gtfo; break;
 
-        case SKILL__PICK_ITEM_CLOSE:            texture = textures->hud.pick_item; break;
-        case SKILL__PICK_ITEM_FAR:              texture = textures->hud.pick_item_far; break;
+        case SKILL__THRUST:             texture = textures->hud.skill_thrust; break;
+        case SKILL__PENETRATING_THRUST: texture = textures->hud.skill_penetrating_thrust; break;
+        case SKILL__HEAD_SLICE:         texture = textures->hud.skill_head_slice; break;
+        case SKILL__BURROW_AND_SLICE:   texture = textures->hud.skill_burrow_and_slice; break;
+        case SKILL__CHARGE_AND_SLICE:   texture = textures->hud.skill_charge_and_slice; break;
 
-        case SKILL__PUT_ITEM_CELL_CLOSE:        texture = textures->hud.put_item_cell; break;
-        case SKILL__PUT_ITEM_CELL_FAR:          texture = textures->hud.put_item_cell_far; break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:    texture = textures->hud.put_item_dynamite; break;
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:      texture = textures->hud.put_item_dynamite_far; break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:    texture = textures->hud.put_item_gemstone; break;
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:      texture = textures->hud.put_item_gemstone_far; break;
+        case SKILL__WHIP_PULL:          texture = textures->hud.skill_pull; break;
+        case SKILL__BURY:               texture = textures->hud.skill_bury; break;
+        case SKILL__WHIP_SMACK:         texture = textures->hud.skill_whip_smack; break;
 
-        case SKILL__THROW_ITEM_CELL:            texture = textures->hud.throw_item_cell; break;
-        case SKILL__THROW_ITEM_DYNAMITE:        texture = textures->hud.throw_item_dynamite; break;
-        case SKILL__THROW_ITEM_GEMSTONE:        texture = textures->hud.throw_item_gemstone; break;
+        case SKILL__LAUNCH_MINIBOT:             texture = textures->hud.skill_launch_minibot; break;
+        case SKILL__MINIBOT_MERGE:              texture = textures->hud.skill_minibot_merge; break;
 
-        case SKILL__SHOOT_PROJECTILE_FLY:       texture = textures->hud.shoot_projectile; break;
-        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  texture = textures->hud.shoot_projectile; break;
+        case SKILL__TURRET_LASER:               texture = textures->hud.skill_turret_laser; break;
+        case SKILL__TURRET_BOMB:                texture = textures->hud.skill_turret_bomb; break;
+        case SKILL__TURRET_PROJECTILE:          texture = textures->hud.skill_turret_projectile; break;
 
-        case SKILL__PUSH:                       texture = textures->hud.push; break;
-        case SKILL__THROW:                      texture = textures->hud.throww; break;
-        case SKILL__PULL_HOOK:                  texture = textures->hud.pull; break;
-        case SKILL__PULL_SPIDERWEB:             texture = textures->hud.pull; break;
-        case SKILL__PULL_TENTACLE:              texture = textures->hud.pull; break;
-        case SKILL__PULL_TONGUE:                texture = textures->hud.pull; break;
-        case SKILL__DRAG_HOOK:                  texture = textures->hud.drag; break;
-        case SKILL__DRAG_SPIDERWEB:             texture = textures->hud.drag; break;
-        case SKILL__DRAG_TENTACLE:              texture = textures->hud.drag; break;
-        case SKILL__JUMP:                       texture = textures->hud.jump; break;
-        case SKILL__CHARGE:                     texture = textures->hud.charge; break;
-        case SKILL__STOMP:                      texture = textures->hud.stomp; break;
-
-        case SKILL__DRAG_AND_THROW_HOOK:        texture = textures->hud.drag_and_throw; break;
-        case SKILL__DRAG_AND_THROW_TONGUE:      texture = textures->hud.drag_and_throw; break;
-        case SKILL__CHARGE_AND_PUSH:            texture = textures->hud.charge_and_push; break;
-        case SKILL__CHARGE_AND_THROW:           texture = textures->hud.charge_and_throw; break;
-        case SKILL__CHARGE_AND_JUMP:            texture = textures->hud.charge_and_jump; break;
-        case SKILL__JUMP_AND_CARRY:             texture = textures->hud.jump_and_carry; break;
-        case SKILL__JUMP_AND_STOMP:             texture = textures->hud.jump_and_stomp; break;
-
-        case SKILL__LAUNCH_MINIBOT:             texture = textures->hud.launch_minibot; break;
-        case SKILL__MINIBOT_MERGE:              texture = textures->hud.minibot_merge; break;
-
-        case SKILL__TURRET_LASER:               texture = textures->hud.turret_laser; break;
-        case SKILL__TURRET_BOMB:                texture = textures->hud.turret_bomb; break;
-        case SKILL__TURRET_PROJECTILE:          texture = textures->hud.turret_projectile; break;
-
-        case SKILL__KILL_AROUND:                texture = textures->hud.kill_around; break;
+        case SKILL__KILL_AROUND:                texture = textures->hud.skill_kill_around; break;
 
         default: break;
     }

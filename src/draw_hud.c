@@ -156,353 +156,353 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     // game won
 
-    if(state->gamestate == GAMESTATE__GAME_WON)
-    {
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->black_box,
-            colors->black,
-            0.2f,
-            vec2i(0, 0),
-            150.0f
-        );
+    // if(state->gamestate == GAMESTATE__GAME_WON)
+    // {
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         textures->black_box,
+    //         colors->black,
+    //         0.2f,
+    //         vec2i(0, 0),
+    //         150.0f
+    //     );
 
-        draw_font_at_screen_pos(
-            "You Won!",
-            renderer,
-            fonts->stepalange_100,
-            colors->white,
-            1.0f,
-            vec2i(500, 100),
-            1
-        );
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->hud.restart_with_no_aug,
-            colors->none,
-            1.0f,
-            vec2i(570, 700),
-            2.0f
-        );
+    //     draw_font_at_screen_pos(
+    //         "You Won!",
+    //         renderer,
+    //         fonts->stepalange_100,
+    //         colors->white,
+    //         1.0f,
+    //         vec2i(500, 100),
+    //         1
+    //     );
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         textures->hud.restart_with_no_aug,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(570, 700),
+    //         2.0f
+    //     );
 
-        if(!state->was_secret_aug_unlocked &&
-        (state->was_secret_1_taken ||
-        state->was_secret_2_taken ||
-        state->was_secret_3_taken ||
-        state->was_secret_4_taken))
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->secret_background,
-                colors->none,
-                1.0f,
-                vec2i(600, 550),
-                2.0f
-            );
-            if(state->was_secret_1_taken)
-            {
-                draw_texture_at_screen_pos(
-                    renderer,
-                    textures->secret_1,
-                    colors->none,
-                    1.0f,
-                    vec2i(600, 550),
-                    2.0f
-                );
-            }
-            if(state->was_secret_2_taken)
-            {
-                draw_texture_at_screen_pos(
-                    renderer,
-                    textures->secret_2,
-                    colors->none,
-                    1.0f,
-                    vec2i(600, 550),
-                    2.0f
-                );
-            }
-            if(state->was_secret_3_taken)
-            {
-                draw_texture_at_screen_pos(
-                    renderer,
-                    textures->secret_3,
-                    colors->none,
-                    1.0f,
-                    vec2i(600, 550),
-                    2.0f
-                );
-            }
-            if(state->was_secret_4_taken)
-            {
-                draw_texture_at_screen_pos(
-                    renderer,
-                    textures->secret_4,
-                    colors->none,
-                    1.0f,
-                    vec2i(600, 550),
-                    2.0f
-                );
-            }
-        }
+    //     if(!state->was_secret_aug_unlocked &&
+    //     (state->was_secret_1_taken ||
+    //     state->was_secret_2_taken ||
+    //     state->was_secret_3_taken ||
+    //     state->was_secret_4_taken))
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->secret_background,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(600, 550),
+    //             2.0f
+    //         );
+    //         if(state->was_secret_1_taken)
+    //         {
+    //             draw_texture_at_screen_pos(
+    //                 renderer,
+    //                 textures->secret_1,
+    //                 colors->none,
+    //                 1.0f,
+    //                 vec2i(600, 550),
+    //                 2.0f
+    //             );
+    //         }
+    //         if(state->was_secret_2_taken)
+    //         {
+    //             draw_texture_at_screen_pos(
+    //                 renderer,
+    //                 textures->secret_2,
+    //                 colors->none,
+    //                 1.0f,
+    //                 vec2i(600, 550),
+    //                 2.0f
+    //             );
+    //         }
+    //         if(state->was_secret_3_taken)
+    //         {
+    //             draw_texture_at_screen_pos(
+    //                 renderer,
+    //                 textures->secret_3,
+    //                 colors->none,
+    //                 1.0f,
+    //                 vec2i(600, 550),
+    //                 2.0f
+    //             );
+    //         }
+    //         if(state->was_secret_4_taken)
+    //         {
+    //             draw_texture_at_screen_pos(
+    //                 renderer,
+    //                 textures->secret_4,
+    //                 colors->none,
+    //                 1.0f,
+    //                 vec2i(600, 550),
+    //                 2.0f
+    //             );
+    //         }
+    //     }
         
-        if(state->was_secret_aug_unlocked)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.telekinesis_head,
-                colors->none,
-                1.0f,
-                vec2i(550 + 84, 575),
-                2.0f
-            );
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 84, 575 + 64 + 10),
-                2.0f
-            );
-        }
+    //     if(state->was_secret_aug_unlocked)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.aug_telekinesis_head,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 84, 575),
+    //             2.0f
+    //         );
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 84, 575 + 64 + 10),
+    //             2.0f
+    //         );
+    //     }
 
-        int left_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_HAND];
-        int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
-        int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
-        int right_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_LEG];
-        int head_augmentation = state->hero_body_part_augmentation[BODY_PART__HEAD];
-        int torso_augmentation = state->hero_body_part_augmentation[BODY_PART__TORSO];
+    //     int left_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_HAND];
+    //     int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
+    //     int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
+    //     int right_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_LEG];
+    //     int head_augmentation = state->hero_body_part_augmentation[BODY_PART__HEAD];
+    //     int torso_augmentation = state->hero_body_part_augmentation[BODY_PART__TORSO];
 
-        Texture* left_hand_texture = textures->hud.no_augmentation;
-        Texture* right_hand_texture = textures->hud.no_augmentation;
-        Texture* left_leg_texture = textures->hud.no_augmentation;
-        Texture* right_leg_texture = textures->hud.no_augmentation;
-        Texture* head_texture = textures->hud.no_augmentation;
-        Texture* torso_texture = textures->hud.no_augmentation;
+    //     Texture* left_hand_texture = textures->hud.aug_none;
+    //     Texture* right_hand_texture = textures->hud.aug_none;
+    //     Texture* left_leg_texture = textures->hud.aug_none;
+    //     Texture* right_leg_texture = textures->hud.aug_none;
+    //     Texture* head_texture = textures->hud.aug_none;
+    //     Texture* torso_texture = textures->hud.aug_none;
 
-        if(left_hand_augmentation == AUGMENTATION__FIST_HAND) left_hand_texture = textures->hud.fist_hand;
-        if(left_hand_augmentation == AUGMENTATION__HOOK_HAND) left_hand_texture = textures->hud.hook_hand;
-        if(right_hand_augmentation == AUGMENTATION__CHAIN_HAND) right_hand_texture = textures->hud.chain_hand;
-        if(right_hand_augmentation == AUGMENTATION__SCISSOR_HAND) right_hand_texture = textures->hud.scissor_hand;
-        if(left_leg_augmentation == AUGMENTATION__SPRING_LEG) left_leg_texture = textures->hud.spring_leg;
-        if(left_leg_augmentation == AUGMENTATION__STRIDER_LEG) left_leg_texture = textures->hud.strider_leg;
-        if(right_leg_augmentation == AUGMENTATION__TRACK_LEG) right_leg_texture = textures->hud.track_leg;
-        if(right_leg_augmentation == AUGMENTATION__BOOT_LEG) right_leg_texture = textures->hud.boot_leg;
-        if(torso_augmentation == AUGMENTATION__MINIBOT_TORSO) torso_texture = textures->hud.minibot_torso;
-        if(torso_augmentation == AUGMENTATION__WINGS_TORSO) torso_texture = textures->hud.wings_torso;
-        if(head_augmentation == AUGMENTATION__MANIPULATION_HEAD) head_texture = textures->hud.manipulation_head;
-        if(head_augmentation == AUGMENTATION__TELEPORTATION_HEAD) head_texture = textures->hud.teleportation_head;
-        if(head_augmentation == AUGMENTATION__TELEKINESIS_HEAD) head_texture = textures->hud.telekinesis_head;
+    //     if(left_hand_augmentation == AUGMENTATION__FIST_HAND) left_hand_texture = textures->hud.aug_fist_hand;
+    //     if(left_hand_augmentation == AUGMENTATION__HOOK_HAND) left_hand_texture = textures->hud.aug_hook_hand;
+    //     if(right_hand_augmentation == AUGMENTATION__CHAIN_HAND) right_hand_texture = textures->hud.aug_chain_hand;
+    //     if(right_hand_augmentation == AUGMENTATION__SCISSOR_HAND) right_hand_texture = textures->hud.aug_scissor_hand;
+    //     if(left_leg_augmentation == AUGMENTATION__SPRING_LEG) left_leg_texture = textures->hud.aug_spring_leg;
+    //     if(left_leg_augmentation == AUGMENTATION__STRIDER_LEG) left_leg_texture = textures->hud.aug_strider_leg;
+    //     if(right_leg_augmentation == AUGMENTATION__TRACK_LEG) right_leg_texture = textures->hud.aug_track_leg;
+    //     if(right_leg_augmentation == AUGMENTATION__BOOT_LEG) right_leg_texture = textures->hud.aug_boot_leg;
+    //     if(torso_augmentation == AUGMENTATION__MINIBOT_TORSO) torso_texture = textures->hud.aug_minibot_torso;
+    //     if(torso_augmentation == AUGMENTATION__WINGS_TORSO) torso_texture = textures->hud.aug_wings_torso;
+    //     if(head_augmentation == AUGMENTATION__MANIPULATION_HEAD) head_texture = textures->hud.aug_manipulation_head;
+    //     if(head_augmentation == AUGMENTATION__TELEPORTATION_HEAD) head_texture = textures->hud.aug_teleportation_head;
+    //     if(head_augmentation == AUGMENTATION__TELEKINESIS_HEAD) head_texture = textures->hud.aug_telekinesis_head;
 
-        int scale = 2;
+    //     int scale = 2;
 
-        draw_texture_at_screen_pos(
-            renderer,
-            left_hand_texture,
-            colors->none,
-            1.0f,
-            vec2i(550 + 10, 250 + 42),
-            scale
-        );
-        if(left_hand_augmentation != AUGMENTATION__NONE)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 10, 250 + 116),
-                scale
-            );
-        }
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         left_hand_texture,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(550 + 10, 250 + 42),
+    //         scale
+    //     );
+    //     if(left_hand_augmentation != AUGMENTATION__NONE)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 10, 250 + 116),
+    //             scale
+    //         );
+    //     }
 
-        draw_texture_at_screen_pos(
-            renderer,
-            head_texture,
-            colors->none,
-            1.0f,
-            vec2i(550 + 84, 250 + 10),
-            scale
-        );
-        if(head_augmentation != AUGMENTATION__NONE)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 84, 250 + 84),
-                scale
-            );
-        }
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         head_texture,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(550 + 84, 250 + 10),
+    //         scale
+    //     );
+    //     if(head_augmentation != AUGMENTATION__NONE)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 84, 250 + 84),
+    //             scale
+    //         );
+    //     }
 
-        draw_texture_at_screen_pos(
-            renderer,
-            right_hand_texture,
-            colors->none,
-            1.0f,
-            vec2i(550 + 158, 250 + 42),
-            scale
-        );
-        if(right_hand_augmentation != AUGMENTATION__NONE)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 158, 250 + 116),
-                scale
-            );
-        }
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         right_hand_texture,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(550 + 158, 250 + 42),
+    //         scale
+    //     );
+    //     if(right_hand_augmentation != AUGMENTATION__NONE)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 158, 250 + 116),
+    //             scale
+    //         );
+    //     }
         
-        draw_texture_at_screen_pos(
-            renderer,
-            left_leg_texture,
-            colors->none,
-            1.0f,
-            vec2i(550 + 10, 250 + 52 + 116),
-            scale
-        );
-        if(left_leg_augmentation != AUGMENTATION__NONE)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 10, 250 + 52 + 190),
-                scale
-            );
-        }
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         left_leg_texture,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(550 + 10, 250 + 52 + 116),
+    //         scale
+    //     );
+    //     if(left_leg_augmentation != AUGMENTATION__NONE)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 10, 250 + 52 + 190),
+    //             scale
+    //         );
+    //     }
 
-        draw_texture_at_screen_pos(
-            renderer,
-            torso_texture,
-            colors->none,
-            1.0f,
-            vec2i(550 + 84, 250 + 52 + 84),
-            scale
-        );
-        if(torso_augmentation != AUGMENTATION__NONE)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 84, 250 + 52 + 158),
-                scale
-            );
-        }
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         torso_texture,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(550 + 84, 250 + 52 + 84),
+    //         scale
+    //     );
+    //     if(torso_augmentation != AUGMENTATION__NONE)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 84, 250 + 52 + 158),
+    //             scale
+    //         );
+    //     }
 
-        draw_texture_at_screen_pos(
-            renderer,
-            right_leg_texture,
-            colors->none,
-            1.0f,
-            vec2i(550 + 158, 250 + 52 + 116),
-            scale
-        );
-        if(right_leg_augmentation != AUGMENTATION__NONE)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.restart_with,
-                colors->none,
-                1.0f,
-                vec2i(550 + 158, 250 + 52 + 190),
-                scale
-            );
-        }
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         right_leg_texture,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(550 + 158, 250 + 52 + 116),
+    //         scale
+    //     );
+    //     if(right_leg_augmentation != AUGMENTATION__NONE)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             textures->hud.restart_with,
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(550 + 158, 250 + 52 + 190),
+    //             scale
+    //         );
+    //     }
 
-        int is_mouse_on_augmentation_texture = FALSE;
-        int mouse_augmentation_texture = AUGMENTATION__NONE;
+    //     int is_mouse_on_augmentation_texture = FALSE;
+    //     int mouse_augmentation_texture = AUGMENTATION__NONE;
 
-        if(left_hand_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 10 &&
-           state->mouse_screen_pos.x <= 550 + 10 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 42 &&
-           state->mouse_screen_pos.y <= 250 + 42 + 64)
-        {
-            is_mouse_on_augmentation_texture = TRUE;
-            mouse_augmentation_texture = left_hand_augmentation;
-        }
-        if(head_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 84 &&
-           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 10 &&
-           state->mouse_screen_pos.y <= 250 + 10 + 64)
-        {
-            is_mouse_on_augmentation_texture = TRUE;
-            mouse_augmentation_texture = head_augmentation;
-        }
-        if(right_hand_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 158 &&
-           state->mouse_screen_pos.x <= 550 + 158 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 42 &&
-           state->mouse_screen_pos.y <= 250 + 42 + 64)
-        {
-            is_mouse_on_augmentation_texture = TRUE;
-            mouse_augmentation_texture = right_hand_augmentation;
-        }
-        if(left_leg_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 10 &&
-           state->mouse_screen_pos.x <= 550 + 10 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 52 + 116 &&
-           state->mouse_screen_pos.y <= 250 + 52 + 116 + 64)
-        {
-            is_mouse_on_augmentation_texture = TRUE;
-            mouse_augmentation_texture = left_leg_augmentation;
-        }
-        if(torso_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 84 &&
-           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 52 + 84 &&
-           state->mouse_screen_pos.y <= 250 + 52 + 84 + 64)
-        {
-            is_mouse_on_augmentation_texture = TRUE;
-            mouse_augmentation_texture = torso_augmentation;
-        }
-        if(right_leg_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 158 &&
-           state->mouse_screen_pos.x <= 550 + 158 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 52 + 116 &&
-           state->mouse_screen_pos.y <= 250 + 52 + 116 + 64)
-        {
-            is_mouse_on_augmentation_texture = TRUE;
-            mouse_augmentation_texture = right_leg_augmentation;
-        }
+    //     if(left_hand_augmentation != AUGMENTATION__NONE &&
+    //        state->mouse_screen_pos.x >= 550 + 10 &&
+    //        state->mouse_screen_pos.x <= 550 + 10 + 64 &&
+    //        state->mouse_screen_pos.y >= 250 + 42 &&
+    //        state->mouse_screen_pos.y <= 250 + 42 + 64)
+    //     {
+    //         is_mouse_on_augmentation_texture = TRUE;
+    //         mouse_augmentation_texture = left_hand_augmentation;
+    //     }
+    //     if(head_augmentation != AUGMENTATION__NONE &&
+    //        state->mouse_screen_pos.x >= 550 + 84 &&
+    //        state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+    //        state->mouse_screen_pos.y >= 250 + 10 &&
+    //        state->mouse_screen_pos.y <= 250 + 10 + 64)
+    //     {
+    //         is_mouse_on_augmentation_texture = TRUE;
+    //         mouse_augmentation_texture = head_augmentation;
+    //     }
+    //     if(right_hand_augmentation != AUGMENTATION__NONE &&
+    //        state->mouse_screen_pos.x >= 550 + 158 &&
+    //        state->mouse_screen_pos.x <= 550 + 158 + 64 &&
+    //        state->mouse_screen_pos.y >= 250 + 42 &&
+    //        state->mouse_screen_pos.y <= 250 + 42 + 64)
+    //     {
+    //         is_mouse_on_augmentation_texture = TRUE;
+    //         mouse_augmentation_texture = right_hand_augmentation;
+    //     }
+    //     if(left_leg_augmentation != AUGMENTATION__NONE &&
+    //        state->mouse_screen_pos.x >= 550 + 10 &&
+    //        state->mouse_screen_pos.x <= 550 + 10 + 64 &&
+    //        state->mouse_screen_pos.y >= 250 + 52 + 116 &&
+    //        state->mouse_screen_pos.y <= 250 + 52 + 116 + 64)
+    //     {
+    //         is_mouse_on_augmentation_texture = TRUE;
+    //         mouse_augmentation_texture = left_leg_augmentation;
+    //     }
+    //     if(torso_augmentation != AUGMENTATION__NONE &&
+    //        state->mouse_screen_pos.x >= 550 + 84 &&
+    //        state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+    //        state->mouse_screen_pos.y >= 250 + 52 + 84 &&
+    //        state->mouse_screen_pos.y <= 250 + 52 + 84 + 64)
+    //     {
+    //         is_mouse_on_augmentation_texture = TRUE;
+    //         mouse_augmentation_texture = torso_augmentation;
+    //     }
+    //     if(right_leg_augmentation != AUGMENTATION__NONE &&
+    //        state->mouse_screen_pos.x >= 550 + 158 &&
+    //        state->mouse_screen_pos.x <= 550 + 158 + 64 &&
+    //        state->mouse_screen_pos.y >= 250 + 52 + 116 &&
+    //        state->mouse_screen_pos.y <= 250 + 52 + 116 + 64)
+    //     {
+    //         is_mouse_on_augmentation_texture = TRUE;
+    //         mouse_augmentation_texture = right_leg_augmentation;
+    //     }
 
-        if(is_mouse_on_augmentation_texture)
-        {
-            draw_font_at_screen_pos(
-                get_augmentation_name(mouse_augmentation_texture),
-                renderer,
-                fonts->bit_operator_30,
-                colors->white,
-                1.0f,
-                vec2i(560, 530),
-                1
-            );
-        }
+    //     if(is_mouse_on_augmentation_texture)
+    //     {
+    //         draw_font_at_screen_pos(
+    //             get_augmentation_name(mouse_augmentation_texture),
+    //             renderer,
+    //             fonts->bit_operator_30,
+    //             colors->white,
+    //             1.0f,
+    //             vec2i(560, 530),
+    //             1
+    //         );
+    //     }
 
-        if(state->was_secret_aug_unlocked &&
-           state->mouse_screen_pos.x >= 550 + 84 &&
-           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
-           state->mouse_screen_pos.y >= 575 &&
-           state->mouse_screen_pos.y <= 575 + 64)
-        {
-            draw_font_at_screen_pos(
-                get_augmentation_name(AUGMENTATION__TELEKINESIS_HEAD),
-                renderer,
-                fonts->bit_operator_30,
-                colors->white,
-                1.0f,
-                vec2i(560, 530),
-                1
-            );
-        }
-    }
+    //     if(state->was_secret_aug_unlocked &&
+    //        state->mouse_screen_pos.x >= 550 + 84 &&
+    //        state->mouse_screen_pos.x <= 550 + 84 + 64 &&
+    //        state->mouse_screen_pos.y >= 575 &&
+    //        state->mouse_screen_pos.y <= 575 + 64)
+    //     {
+    //         draw_font_at_screen_pos(
+    //             get_augmentation_name(AUGMENTATION__TELEKINESIS_HEAD),
+    //             renderer,
+    //             fonts->bit_operator_30,
+    //             colors->white,
+    //             1.0f,
+    //             vec2i(560, 530),
+    //             1
+    //         );
+    //     }
+    // }
 
     // fps
 
@@ -724,29 +724,33 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
         int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
         int right_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_LEG];
-        int head_augmentation = state->hero_body_part_augmentation[BODY_PART__HEAD];
+        int tail_augmentation = state->hero_body_part_augmentation[BODY_PART__TAIL];
         int torso_augmentation = state->hero_body_part_augmentation[BODY_PART__TORSO];
 
-        Texture* left_hand_texture = textures->hud.no_augmentation;
-        Texture* right_hand_texture = textures->hud.no_augmentation;
-        Texture* left_leg_texture = textures->hud.no_augmentation;
-        Texture* right_leg_texture = textures->hud.no_augmentation;
-        Texture* head_texture = textures->hud.no_augmentation;
-        Texture* torso_texture = textures->hud.no_augmentation;
+        Texture* left_hand_texture = textures->hud.aug_none;
+        Texture* right_hand_texture = textures->hud.aug_none;
+        Texture* left_leg_texture = textures->hud.aug_none;
+        Texture* right_leg_texture = textures->hud.aug_none;
+        Texture* tail_texture = textures->hud.aug_none;
+        Texture* torso_texture = textures->hud.aug_none;
 
-        if(left_hand_augmentation == AUGMENTATION__FIST_HAND) left_hand_texture = textures->hud.fist_hand;
-        if(left_hand_augmentation == AUGMENTATION__HOOK_HAND) left_hand_texture = textures->hud.hook_hand;
-        if(right_hand_augmentation == AUGMENTATION__CHAIN_HAND) right_hand_texture = textures->hud.chain_hand;
-        if(right_hand_augmentation == AUGMENTATION__SCISSOR_HAND) right_hand_texture = textures->hud.scissor_hand;
-        if(left_leg_augmentation == AUGMENTATION__SPRING_LEG) left_leg_texture = textures->hud.spring_leg;
-        if(left_leg_augmentation == AUGMENTATION__STRIDER_LEG) left_leg_texture = textures->hud.strider_leg;
-        if(right_leg_augmentation == AUGMENTATION__TRACK_LEG) right_leg_texture = textures->hud.track_leg;
-        if(right_leg_augmentation == AUGMENTATION__BOOT_LEG) right_leg_texture = textures->hud.boot_leg;
-        if(torso_augmentation == AUGMENTATION__MINIBOT_TORSO) torso_texture = textures->hud.minibot_torso;
-        if(torso_augmentation == AUGMENTATION__WINGS_TORSO) torso_texture = textures->hud.wings_torso;
-        if(head_augmentation == AUGMENTATION__MANIPULATION_HEAD) head_texture = textures->hud.manipulation_head;
-        if(head_augmentation == AUGMENTATION__TELEPORTATION_HEAD) head_texture = textures->hud.teleportation_head;
-        if(head_augmentation == AUGMENTATION__TELEKINESIS_HEAD) head_texture = textures->hud.telekinesis_head;
+        if(left_leg_augmentation == AUGMENTATION__SPRING) left_leg_texture = textures->hud.aug_spring;
+        if(right_leg_augmentation == AUGMENTATION__TRACK) right_leg_texture = textures->hud.aug_track;
+        if(tail_augmentation == AUGMENTATION__TAIL) tail_texture = textures->hud.aug_tail;
+        if(torso_augmentation == AUGMENTATION__MINIBOT) torso_texture = textures->hud.aug_minibot;
+
+        if(left_hand_augmentation == AUGMENTATION__ARM) left_hand_texture = textures->hud.weapon_arm;
+        if(left_hand_augmentation == AUGMENTATION__DRILL) left_hand_texture = textures->hud.weapon_drill;
+        if(left_hand_augmentation == AUGMENTATION__BLADE) left_hand_texture = textures->hud.weapon_blade;
+        if(left_hand_augmentation == AUGMENTATION__HAMMER) left_hand_texture = textures->hud.weapon_hammer;
+        if(left_hand_augmentation == AUGMENTATION__WHIP) left_hand_texture = textures->hud.weapon_whip;
+
+        if(right_hand_augmentation == AUGMENTATION__GUN) right_hand_texture = textures->hud.weapon_gun;
+        if(right_hand_augmentation == AUGMENTATION__CANNON) right_hand_texture = textures->hud.weapon_cannon;
+        if(right_hand_augmentation == AUGMENTATION__COIL) right_hand_texture = textures->hud.weapon_coil;
+        if(right_hand_augmentation == AUGMENTATION__FLAME) right_hand_texture = textures->hud.weapon_flame;
+        if(right_hand_augmentation == AUGMENTATION__FREEZE) right_hand_texture = textures->hud.weapon_freeze;
+        if(right_hand_augmentation == AUGMENTATION__LASER) right_hand_texture = textures->hud.weapon_laser;
 
         int scale = 2;
 
@@ -760,10 +764,10 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
         draw_texture_at_screen_pos(
             renderer,
-            head_texture,
+            torso_texture,
             colors->none,
             1.0f,
-            vec2i(84, 10),
+            vec2i(84, 42),
             scale
         );
         draw_texture_at_screen_pos(
@@ -784,10 +788,10 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         );
         draw_texture_at_screen_pos(
             renderer,
-            torso_texture,
+            tail_texture,
             colors->none,
             1.0f,
-            vec2i(84, 84),
+            vec2i(84, 116),
             scale
         );
         draw_texture_at_screen_pos(
@@ -809,14 +813,6 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         {
             is_mouse_on_augmentation = TRUE;
             mouse_augmentation = left_hand_augmentation;
-        }
-        if(state->mouse_screen_pos.x >= 84 &&
-           state->mouse_screen_pos.x <= 84 + 64 &&
-           state->mouse_screen_pos.y >= 10 &&
-           state->mouse_screen_pos.y <= 10 + 64)
-        {
-            is_mouse_on_augmentation = TRUE;
-            mouse_augmentation = head_augmentation;
         }
         if(state->mouse_screen_pos.x >= 158 &&
            state->mouse_screen_pos.x <= 158 + 64 &&
@@ -867,176 +863,176 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     // items
 
-    if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
-        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
-        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
-        state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
-        state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL) &&
-       (state->curr_ally->object->type == OBJECT__HERO ||
-        state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
-        state->curr_ally->object->type == OBJECT__HERO_FLYING))
-    {
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->hud.cell,
-            colors->none,
-            1.0f,
-            vec2i(10, 120 + 100),
-            4
-        );
-        if(state->hero_item_number[ITEM__CELL] > 9)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__CELL] / 10),
-                colors->none,
-                1.0f,
-                vec2i(32, 120 + 100),
-                2
-            );
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__CELL] % 10),
-                colors->none,
-                1.0f,
-                vec2i(64, 120 + 100),
-                2
-            );
-        }
-        else
-        {
+    // if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+    //     state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+    //     state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+    //     state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
+    //     state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL) &&
+    //    (state->curr_ally->object->type == OBJECT__HERO ||
+    //     state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+    //     state->curr_ally->object->type == OBJECT__HERO_FLYING))
+    // {
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         textures->hud.cell,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(10, 120 + 100),
+    //         4
+    //     );
+    //     if(state->hero_item_number[ITEM__CELL] > 9)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__CELL] / 10),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(32, 120 + 100),
+    //             2
+    //         );
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__CELL] % 10),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(64, 120 + 100),
+    //             2
+    //         );
+    //     }
+    //     else
+    //     {
 
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__CELL]),
-                colors->none,
-                1.0f,
-                vec2i(32, 120 + 100),
-                2
-            );
-        }
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__CELL]),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(32, 120 + 100),
+    //             2
+    //         );
+    //     }
 
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->hud.dynamite,
-            colors->none,
-            1.0f,
-            vec2i(10, 194 + 100),
-            4
-        );
-        if(state->hero_item_number[ITEM__DYNAMITE] > 9)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE] / 10),
-                colors->none,
-                1.0f,
-                vec2i(32, 194 + 100),
-                2
-            );
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE] % 10),
-                colors->none,
-                1.0f,
-                vec2i(64, 194 + 100),
-                2
-            );
-        }
-        else
-        {
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         textures->hud.dynamite,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(10, 194 + 100),
+    //         4
+    //     );
+    //     if(state->hero_item_number[ITEM__DYNAMITE] > 9)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE] / 10),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(32, 194 + 100),
+    //             2
+    //         );
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE] % 10),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(64, 194 + 100),
+    //             2
+    //         );
+    //     }
+    //     else
+    //     {
 
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE]),
-                colors->none,
-                1.0f,
-                vec2i(32, 194 + 100),
-                2
-            );
-        }
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__DYNAMITE]),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(32, 194 + 100),
+    //             2
+    //         );
+    //     }
 
-        draw_texture_at_screen_pos(
-            renderer,
-            textures->hud.gemstone,
-            colors->none,
-            1.0f,
-            vec2i(10, 268 + 100),
-            4
-        );
-        if(state->hero_item_number[ITEM__GEMSTONE] > 9)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE] / 10),
-                colors->none,
-                1.0f,
-                vec2i(32, 268 + 100),
-                2
-            );
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE] % 10),
-                colors->none,
-                1.0f,
-                vec2i(64, 268 + 100),
-                2
-            );
-        }
-        else
-        {
+    //     draw_texture_at_screen_pos(
+    //         renderer,
+    //         textures->hud.gemstone,
+    //         colors->none,
+    //         1.0f,
+    //         vec2i(10, 268 + 100),
+    //         4
+    //     );
+    //     if(state->hero_item_number[ITEM__GEMSTONE] > 9)
+    //     {
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE] / 10),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(32, 268 + 100),
+    //             2
+    //         );
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE] % 10),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(64, 268 + 100),
+    //             2
+    //         );
+    //     }
+    //     else
+    //     {
 
-            draw_texture_at_screen_pos(
-                renderer,
-                get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE]),
-                colors->none,
-                1.0f,
-                vec2i(32, 268 + 100),
-                2
-            );
-        }
+    //         draw_texture_at_screen_pos(
+    //             renderer,
+    //             get_texture_order_number(textures, state->hero_item_number[ITEM__GEMSTONE]),
+    //             colors->none,
+    //             1.0f,
+    //             vec2i(32, 268 + 100),
+    //             2
+    //         );
+    //     }
 
-        int is_mouse_on_item = FALSE;
-        int mouse_item = ITEM__NONE;
+    //     int is_mouse_on_item = FALSE;
+    //     int mouse_item = ITEM__NONE;
 
-        if(state->mouse_screen_pos.x >= 10 &&
-           state->mouse_screen_pos.x <= 10 + 64 &&
-           state->mouse_screen_pos.y >= 120 + 100 &&
-           state->mouse_screen_pos.y <= 120 + 100 + 64)
-        {
-            is_mouse_on_item = TRUE;
-            mouse_item = ITEM__CELL;
-        }
-        if(state->mouse_screen_pos.x >= 10 &&
-           state->mouse_screen_pos.x <= 10 + 64 &&
-           state->mouse_screen_pos.y >= 194 + 100 &&
-           state->mouse_screen_pos.y <= 194 + 100 + 64)
-        {
-            is_mouse_on_item = TRUE;
-            mouse_item = ITEM__DYNAMITE;
-        }
-        if(state->mouse_screen_pos.x >= 10 &&
-           state->mouse_screen_pos.x <= 10 + 64 &&
-           state->mouse_screen_pos.y >= 268 + 100 &&
-           state->mouse_screen_pos.y <= 268 + 100 + 64)
-        {
-            is_mouse_on_item = TRUE;
-            mouse_item = ITEM__GEMSTONE;
-        }
+    //     if(state->mouse_screen_pos.x >= 10 &&
+    //        state->mouse_screen_pos.x <= 10 + 64 &&
+    //        state->mouse_screen_pos.y >= 120 + 100 &&
+    //        state->mouse_screen_pos.y <= 120 + 100 + 64)
+    //     {
+    //         is_mouse_on_item = TRUE;
+    //         mouse_item = ITEM__CELL;
+    //     }
+    //     if(state->mouse_screen_pos.x >= 10 &&
+    //        state->mouse_screen_pos.x <= 10 + 64 &&
+    //        state->mouse_screen_pos.y >= 194 + 100 &&
+    //        state->mouse_screen_pos.y <= 194 + 100 + 64)
+    //     {
+    //         is_mouse_on_item = TRUE;
+    //         mouse_item = ITEM__DYNAMITE;
+    //     }
+    //     if(state->mouse_screen_pos.x >= 10 &&
+    //        state->mouse_screen_pos.x <= 10 + 64 &&
+    //        state->mouse_screen_pos.y >= 268 + 100 &&
+    //        state->mouse_screen_pos.y <= 268 + 100 + 64)
+    //     {
+    //         is_mouse_on_item = TRUE;
+    //         mouse_item = ITEM__GEMSTONE;
+    //     }
 
-        if(is_mouse_on_item)
-        {
-            draw_font_at_screen_pos(
-                get_name_from_item(mouse_item),
-                renderer,
-                fonts->bit_operator_30,
-                colors->white,
-                1.0f,
-                vec2i(10, 180),
-                1
-            );
-        }
-    }
+    //     if(is_mouse_on_item)
+    //     {
+    //         draw_font_at_screen_pos(
+    //             get_name_from_item(mouse_item),
+    //             renderer,
+    //             fonts->bit_operator_30,
+    //             colors->white,
+    //             1.0f,
+    //             vec2i(10, 180),
+    //             1
+    //         );
+    //     }
+    // }
 
     // skill description
 
@@ -1158,7 +1154,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
                             if(skill_texture == NULL)
                             {
-                                skill_texture = textures->hud.no_augmentation;
+                                skill_texture = textures->hud.aug_none;
                             }
 
                             draw_texture_at_screen_pos(

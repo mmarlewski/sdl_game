@@ -246,283 +246,282 @@ void skill_on_use(
             }
         }
         break;
-        case SKILL__MANIPULATION:
-        {
-            //
-        }
-        break;
-        case SKILL__TELEPORTATION:
-        {
-            if(target_2_object == NULL)
-            {
-                source_object->tilemap_pos = target_2_tilemap_pos;
-            }
-        }
-        break;
-        case SKILL__PICK_ITEM_CLOSE:
-        case SKILL__PICK_ITEM_FAR:
-        {
-            int item_type = 0;
-            int item_count = 0;
+        // case SKILL__MANIPULATION:
+        // {
+        //     //
+        // }
+        // break;
+        // case SKILL__TELEPORTATION:
+        // {
+        //     if(target_2_object == NULL)
+        //     {
+        //         source_object->tilemap_pos = target_2_tilemap_pos;
+        //     }
+        // }
+        // break;
+    //     case SKILL__PICK_ITEM_CLOSE:
+    //     case SKILL__PICK_ITEM_FAR:
+    //     {
+    //         int item_type = 0;
+    //         int item_count = 0;
 
-            if(target_2_object != NULL)
-            {
-                item_type = get_object_item_type(target_2_object);
-                item_count = get_object_item_count(target_2_object);
-            }
-            else
-            {
-                int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
-                item_type = get_floor_item_type(floor);
-                item_count = get_floor_item_count(floor);
-            }
+    //         if(target_2_object != NULL)
+    //         {
+    //             item_type = get_object_item_type(target_2_object);
+    //             item_count = get_object_item_count(target_2_object);
+    //         }
+    //         else
+    //         {
+    //             int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
+    //             item_type = get_floor_item_type(floor);
+    //             item_count = get_floor_item_count(floor);
+    //         }
 
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                state->hero_item_number[item_type] += item_count;
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY)
-            {
-                switch(item_type)
-                {
-                    case ITEM__CELL: source_object->type = OBJECT__MINIBOT_ALLY_CELL; break;
-                    case ITEM__DYNAMITE: source_object->type = OBJECT__MINIBOT_ALLY_DYNAMITE; break;
-                    case ITEM__GEMSTONE: source_object->type = OBJECT__MINIBOT_ALLY_GEMSTONE; break;
-                    default:break;
-                }
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_CELL_CLOSE:
-        case SKILL__PUT_ITEM_CELL_FAR:
-        {
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                if(state->hero_item_number[ITEM__CELL] >= 1)
-                {
-                    state->hero_item_number[ITEM__CELL]--;
-                }
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-            {
-                source_object->type = OBJECT__MINIBOT_ALLY;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
-        case SKILL__PUT_ITEM_DYNAMITE_FAR:
-        {
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
-                {
-                    state->hero_item_number[ITEM__DYNAMITE]--;
-                }
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-            {
-                source_object->type = OBJECT__MINIBOT_ALLY;
-            }
-        }
-        break;
-        case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
-        case SKILL__PUT_ITEM_GEMSTONE_FAR:
-        {
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
-                {
-                    state->hero_item_number[ITEM__GEMSTONE]--;
-                }
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-            {
-                source_object->type = OBJECT__MINIBOT_ALLY;
-            }
-        }
-        break;
-        case SKILL__THROW_ITEM_CELL:
-        {
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                if(state->hero_item_number[ITEM__CELL] >= 1)
-                {
-                    state->hero_item_number[ITEM__CELL]--;
-                }
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-            {
-                source_object->type = OBJECT__MINIBOT_ALLY;
-            }
-        }
-        break;
-        case SKILL__THROW_ITEM_DYNAMITE:
-        {
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
-                {
-                    state->hero_item_number[ITEM__DYNAMITE]--;
-                }
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-            {
-                source_object->type = OBJECT__MINIBOT_ALLY;
-            }
-        }
-        break;
-        case SKILL__THROW_ITEM_GEMSTONE:
-        {
-            if(source_object->type == OBJECT__HERO ||
-               source_object->type == OBJECT__HERO_FLOATING ||
-               source_object->type == OBJECT__HERO_FLYING)
-            {
-                if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
-                {
-                    state->hero_item_number[ITEM__GEMSTONE]--;
-                }
-            }
-            else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
-                    source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-            {
-                source_object->type = OBJECT__MINIBOT_ALLY;
-            }
-        }
-        break;
-        case SKILL__LAUNCH_MINIBOT:
-        {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             state->hero_item_number[item_type] += item_count;
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY)
+    //         {
+    //             switch(item_type)
+    //             {
+    //                 case ITEM__CELL: source_object->type = OBJECT__MINIBOT_ALLY_CELL; break;
+    //                 case ITEM__DYNAMITE: source_object->type = OBJECT__MINIBOT_ALLY_DYNAMITE; break;
+    //                 case ITEM__GEMSTONE: source_object->type = OBJECT__MINIBOT_ALLY_GEMSTONE; break;
+    //                 default:break;
+    //             }
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__PUT_ITEM_CELL_CLOSE:
+    //     case SKILL__PUT_ITEM_CELL_FAR:
+    //     {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             if(state->hero_item_number[ITEM__CELL] >= 1)
+    //             {
+    //                 state->hero_item_number[ITEM__CELL]--;
+    //             }
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //         {
+    //             source_object->type = OBJECT__MINIBOT_ALLY;
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__PUT_ITEM_DYNAMITE_CLOSE:
+    //     case SKILL__PUT_ITEM_DYNAMITE_FAR:
+    //     {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
+    //             {
+    //                 state->hero_item_number[ITEM__DYNAMITE]--;
+    //             }
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //         {
+    //             source_object->type = OBJECT__MINIBOT_ALLY;
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__PUT_ITEM_GEMSTONE_CLOSE:
+    //     case SKILL__PUT_ITEM_GEMSTONE_FAR:
+    //     {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
+    //             {
+    //                 state->hero_item_number[ITEM__GEMSTONE]--;
+    //             }
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //         {
+    //             source_object->type = OBJECT__MINIBOT_ALLY;
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__THROW_ITEM_CELL:
+    //     {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             if(state->hero_item_number[ITEM__CELL] >= 1)
+    //             {
+    //                 state->hero_item_number[ITEM__CELL]--;
+    //             }
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //         {
+    //             source_object->type = OBJECT__MINIBOT_ALLY;
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__THROW_ITEM_DYNAMITE:
+    //     {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             if(state->hero_item_number[ITEM__DYNAMITE] >= 1)
+    //             {
+    //                 state->hero_item_number[ITEM__DYNAMITE]--;
+    //             }
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //         {
+    //             source_object->type = OBJECT__MINIBOT_ALLY;
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__THROW_ITEM_GEMSTONE:
+    //     {
+    //         if(source_object->type == OBJECT__HERO ||
+    //            source_object->type == OBJECT__HERO_FLOATING ||
+    //            source_object->type == OBJECT__HERO_FLYING)
+    //         {
+    //             if(state->hero_item_number[ITEM__GEMSTONE] >= 1)
+    //             {
+    //                 state->hero_item_number[ITEM__GEMSTONE]--;
+    //             }
+    //         }
+    //         else if(source_object->type == OBJECT__MINIBOT_ALLY_CELL ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_DYNAMITE ||
+    //                 source_object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //         {
+    //             source_object->type = OBJECT__MINIBOT_ALLY;
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__LAUNCH_MINIBOT:
+    //     {
 
-            state->was_minibot_launched = TRUE;
-            state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
-        }
-        break;
-        case SKILL__MINIBOT_MERGE:
-        {
-            if(target_2_object != NULL &&
-               (target_2_object->type == OBJECT__HERO ||
-                target_2_object->type == OBJECT__HERO_FLOATING ||
-                target_2_object->type == OBJECT__HERO_FLYING))
-            {
-                state->was_minibot_launched = FALSE;
+    //         state->was_minibot_launched = TRUE;
+    //         state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
+    //     }
+    //     break;
+    //     case SKILL__MINIBOT_MERGE:
+    //     {
+    //         if(target_2_object != NULL &&
+    //            (target_2_object->type == OBJECT__HERO ||
+    //             target_2_object->type == OBJECT__HERO_FLOATING ||
+    //             target_2_object->type == OBJECT__HERO_FLYING))
+    //         {
+    //             state->was_minibot_launched = FALSE;
 
-                room_remove_object(
-                    state->curr_room,
-                    state->minibot_object,
-                    0
-                );
+    //             room_remove_object(
+    //                 state->curr_room,
+    //                 state->minibot_object,
+    //                 0
+    //             );
 
-                if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY)
-                {
-                    //
-                }
-                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL)
-                {
-                    state->hero_item_number[ITEM__CELL]++;
-                }
-                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE)
-                {
-                    state->hero_item_number[ITEM__DYNAMITE]++;
-                }
-                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-                {
-                    state->hero_item_number[ITEM__GEMSTONE]++;
-                }
-            }
-        }
-        break;
-        case SKILL__PULL_HOOK:
-        case SKILL__PULL_SPIDERWEB:
-        case SKILL__PULL_TENTACLE:
-        case SKILL__PULL_TONGUE:
-        case SKILL__DRAG_HOOK:
-        case SKILL__DRAG_SPIDERWEB:
-        case SKILL__DRAG_TENTACLE:
-        case SKILL__DRAG_AND_THROW_HOOK:
-        case SKILL__DRAG_AND_THROW_TONGUE:
-        {
-            play_sound(sounds->throww);
-        }
-        break;
-        case SKILL__STOMP:
-        {
-            play_sound(sounds->stomp);
-        }
-        break;
-        case SKILL__TURRET_BOMB:
-        case SKILL__TURRET_PROJECTILE:
-        {
-            play_sound(sounds->throww);
-        }
-        break;
-        case SKILL__TURRET_LASER:
-        {
-            play_sound(sounds->laser);
-        }
-        break;
-        case SKILL__KILL_AROUND:
-        {
-            play_sound(sounds->kill_around);
-        }
-        break;
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE:
-        {
-            play_sound(sounds->falling_stalactite);
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:
-        {
-            play_sound(sounds->emerge_water);
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:
-        {
-            play_sound(sounds->emerge_pit);
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:
-        {
-            play_sound(sounds->emerge_burrow);
-        }
-        break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:
-        {
-            play_sound(sounds->emerge_pipe);
-        }
-        break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:
-        {
-            play_sound(sounds->collapse_burrow);
-        }
-        break;
-        case SKILL__ENVIRONMENT_CONV_BELT:
-        {
-            play_sound(sounds->conv_belt);
-        }
-        break;
-        break;
+    //             if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY)
+    //             {
+    //                 //
+    //             }
+    //             else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL)
+    //             {
+    //                 state->hero_item_number[ITEM__CELL]++;
+    //             }
+    //             else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE)
+    //             {
+    //                 state->hero_item_number[ITEM__DYNAMITE]++;
+    //             }
+    //             else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+    //             {
+    //                 state->hero_item_number[ITEM__GEMSTONE]++;
+    //             }
+    //         }
+    //     }
+    //     break;
+    //     case SKILL__PULL_HOOK:
+    //     case SKILL__PULL_SPIDERWEB:
+    //     case SKILL__PULL_TENTACLE:
+    //     case SKILL__PULL_TONGUE:
+    //     case SKILL__DRAG_HOOK:
+    //     case SKILL__DRAG_SPIDERWEB:
+    //     case SKILL__DRAG_TENTACLE:
+    //     case SKILL__DRAG_AND_THROW_HOOK:
+    //     case SKILL__DRAG_AND_THROW_TONGUE:
+    //     {
+    //         play_sound(sounds->throww);
+    //     }
+    //     break;
+    //     case SKILL__STOMP:
+    //     {
+    //         play_sound(sounds->stomp);
+    //     }
+    //     break;
+    //     case SKILL__TURRET_BOMB:
+    //     case SKILL__TURRET_PROJECTILE:
+    //     {
+    //         play_sound(sounds->throww);
+    //     }
+    //     break;
+    //     case SKILL__TURRET_LASER:
+    //     {
+    //         play_sound(sounds->laser);
+    //     }
+    //     break;
+    //     case SKILL__KILL_AROUND:
+    //     {
+    //         play_sound(sounds->kill_around);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_FALLING_STALACTITE:
+    //     {
+    //         play_sound(sounds->falling_stalactite);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_EMERGE_WATER:
+    //     {
+    //         play_sound(sounds->emerge_water);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_EMERGE_PIT:
+    //     {
+    //         play_sound(sounds->emerge_pit);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_EMERGE_BURROW:
+    //     {
+    //         play_sound(sounds->emerge_burrow);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_EMERGE_PIPE:
+    //     {
+    //         play_sound(sounds->emerge_pipe);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_COLLAPSE_BURROW:
+    //     {
+    //         play_sound(sounds->collapse_burrow);
+    //     }
+    //     break;
+    //     case SKILL__ENVIRONMENT_CONV_BELT:
+    //     {
+    //         play_sound(sounds->conv_belt);
+    //     }
+    //     break;
         default:
         break;
     }

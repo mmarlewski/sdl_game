@@ -57,33 +57,11 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
                 object_on_crashed(state, sounds, crushed_action_sequence, action, crushed_object);
             }
 
-            if(get_object_max_hp(crushed_object) != -1)
-            {
-                crushed_object->curr_hp--;
-
-                if(crushed_object->curr_hp <= 0)
-                {
-                    remove_all_actions_from_action_sequence(crushed_action_sequence);
-                    add_action_after_curr_action_action_sequence(crushed_action_sequence, new_action_death(crushed_object, crushed_object->tilemap_pos));
-                }
-            }
-
             Action* crushing_action_sequence = new_action_sequence();
             Object* crushing_object = action->crash.object_crushing;
             if(crushing_object != NULL)
             {
                 object_on_crashing(state, sounds, crushing_action_sequence, action, crushing_object);
-            }
-
-            if(get_object_max_hp(crushing_object) != -1)
-            {
-                crushing_object->curr_hp--;
-
-                if(crushing_object->curr_hp <= 0)
-                {
-                    remove_all_actions_from_action_sequence(crushing_action_sequence);
-                    add_action_after_curr_action_action_sequence(crushing_action_sequence, new_action_death(crushing_object, crushing_object->tilemap_pos));
-                }
             }
 
             add_action_after_curr_action_action_sequence(sequence, new_action_simultaneous_of_2(crushed_action_sequence, crushing_action_sequence));
@@ -207,16 +185,6 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             else if(is_object_flying(drop_object))
             {
                 floor_on_drop_flying(state, sounds, sequence, action, floor);
-            }
-            
-            if(get_object_max_hp(drop_object) != -1)
-            {
-                drop_object->curr_hp--;
-
-                if(drop_object->curr_hp <= 0)
-                {
-                    add_action_after_curr_action_action_sequence(sequence, new_action_death(drop_object, drop_object->tilemap_pos));
-                }
             }
         }
         break;

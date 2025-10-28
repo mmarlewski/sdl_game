@@ -67,8 +67,9 @@ void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, 
         *line_3 = "";
         *line_4 = "";
     }
-    else if(state->tutorial__get_chain_aug &&
-    hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
+    else if(state->tutorial__get_chain_aug
+    // && ero_has_augmentation(state, AUGMENTATION__CHAIN_HAND)
+    )
     {
         state->tutorial__go_back_for_dynamite = TRUE;
 

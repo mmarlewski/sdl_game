@@ -5,14 +5,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 {
     Object* enemy_object = enemy->object;
     int enemy_move_skill = SKILL__MOVE;
-    if(is_object_floating(enemy_object))
-    {
-        enemy_move_skill = SKILL__MOVE_FLOATING;
-    }
-    if(is_object_flying(enemy_object))
-    {
-        enemy_move_skill = SKILL__MOVE_FLYING;
-    }
 
     switch(enemy_object->type)
     {
@@ -314,32 +306,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                         add_action_to_end_action_sequence(
                                             enemy->action_sequence,
                                             new_action_move(
-                                                *curr_tilemap_pos,
-                                                get_distance_info_from_vec2i_to_vec2i(
-                                                    *curr_tilemap_pos,
-                                                    *next_tilemap_pos
-                                                ).dir4
-                                            )
-                                        );
-                                    }
-                                    else if(enemy_move_skill == SKILL__MOVE_FLOATING)
-                                    {
-                                        add_action_to_end_action_sequence(
-                                            enemy->action_sequence,
-                                            new_action_move_floating(
-                                                *curr_tilemap_pos,
-                                                get_distance_info_from_vec2i_to_vec2i(
-                                                    *curr_tilemap_pos,
-                                                    *next_tilemap_pos
-                                                ).dir4
-                                            )
-                                        );
-                                    }
-                                    else if(enemy_move_skill == SKILL__MOVE_FLYING)
-                                    {
-                                        add_action_to_end_action_sequence(
-                                            enemy->action_sequence,
-                                            new_action_move_flying(
                                                 *curr_tilemap_pos,
                                                 get_distance_info_from_vec2i_to_vec2i(
                                                     *curr_tilemap_pos,

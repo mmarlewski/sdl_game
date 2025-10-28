@@ -546,18 +546,18 @@ int get_station_augmentation(Object* object)
 
     switch(object->type)
     {
-        case OBJECT__STATION_FIST_HAND:            augmentation = AUGMENTATION__FIST_HAND; break;
-        case OBJECT__STATION_HOOK_HAND:            augmentation = AUGMENTATION__HOOK_HAND; break;
-        case OBJECT__STATION_CHAIN_HAND:           augmentation = AUGMENTATION__CHAIN_HAND; break;
-        case OBJECT__STATION_SCISSOR_HAND:         augmentation = AUGMENTATION__SCISSOR_HAND; break;
-        case OBJECT__STATION_SPRING_LEG:           augmentation = AUGMENTATION__SPRING_LEG; break;
-        case OBJECT__STATION_STRIDER_LEG:          augmentation = AUGMENTATION__STRIDER_LEG; break;
-        case OBJECT__STATION_TRACK_LEG:            augmentation = AUGMENTATION__TRACK_LEG; break;
-        case OBJECT__STATION_BOOT_LEG:             augmentation = AUGMENTATION__BOOT_LEG; break;
-        case OBJECT__STATION_MINIBOT_TORSO:        augmentation = AUGMENTATION__MINIBOT_TORSO; break;
-        case OBJECT__STATION_WINGS_TORSO:          augmentation = AUGMENTATION__WINGS_TORSO; break;
-        case OBJECT__STATION_MANIPULATION_HEAD:    augmentation = AUGMENTATION__MANIPULATION_HEAD; break;
-        case OBJECT__STATION_TELEPORTATION_HEAD:   augmentation = AUGMENTATION__TELEPORTATION_HEAD; break;
+        case OBJECT__STATION_FIST_HAND:            augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_HOOK_HAND:            augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_CHAIN_HAND:           augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_SCISSOR_HAND:         augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_SPRING_LEG:           augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_STRIDER_LEG:          augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_TRACK_LEG:            augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_BOOT_LEG:             augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_MINIBOT_TORSO:        augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_WINGS_TORSO:          augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_MANIPULATION_HEAD:    augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_TELEPORTATION_HEAD:   augmentation = AUGMENTATION__NONE; break;
 
         default: break;
     }
@@ -3427,49 +3427,49 @@ Texture* get_hud_texture_from_object(Object* object, Textures* textures)
 
     switch(object->type)
     {
-        case OBJECT__GOLEM_POWERED:                    texture = textures->hud.golem; break;
+        case OBJECT__GOLEM_POWERED:                    texture = textures->hud.object_golem; break;
 
-        case OBJECT__HERO:                             texture = textures->hud.hero; break;
-        case OBJECT__HERO_FLOATING:                    texture = textures->hud.hero; break;
-        case OBJECT__HERO_FLYING:                      texture = textures->hud.hero; break;
+        case OBJECT__HERO:                             texture = textures->hud.object_hero; break;
+        case OBJECT__HERO_FLOATING:                    texture = textures->hud.object_hero; break;
+        case OBJECT__HERO_FLYING:                      texture = textures->hud.object_hero; break;
 
-        case OBJECT__GOAT:                             texture = textures->hud.goat; break;
-        case OBJECT__SPIDER:                           texture = textures->hud.spider; break;
-        case OBJECT__BULL:                             texture = textures->hud.bull; break;
-        case OBJECT__FLY:                              texture = textures->hud.fly; break;
-        case OBJECT__CHAMELEON:                        texture = textures->hud.chameleon; break;
-        case OBJECT__SQUID:                            texture = textures->hud.squid; break;
-        case OBJECT__MOLE:                             texture = textures->hud.mole; break;
-        case OBJECT__MIMIC:                            texture = textures->hud.mimic; break;
-        case OBJECT__SHARK:                            texture = textures->hud.shark; break;
-        case OBJECT__SHARK_FIN:                        texture = textures->hud.shark_fin; break;
+        case OBJECT__GOAT:                             texture = textures->hud.object_goat; break;
+        case OBJECT__SPIDER:                           texture = textures->hud.object_spider; break;
+        case OBJECT__BULL:                             texture = textures->hud.object_bull; break;
+        case OBJECT__FLY:                              texture = textures->hud.object_fly; break;
+        case OBJECT__CHAMELEON:                        texture = textures->hud.object_chameleon; break;
+        case OBJECT__SQUID:                            texture = textures->hud.object_squid; break;
+        case OBJECT__MOLE:                             texture = textures->hud.object_mole; break;
+        case OBJECT__MIMIC:                            texture = textures->hud.object_mimic; break;
+        case OBJECT__SHARK:                            texture = textures->hud.object_shark; break;
+        case OBJECT__SHARK_FIN:                        texture = textures->hud.object_shark_fin; break;
 
-        case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->hud.tturret_laser; break;
-        case OBJECT__TURRET_LASER_STANDING:            texture = textures->hud.tturret_laser; break;
-        case OBJECT__TURRET_LASER_UNDEPLOYED:          texture = textures->hud.tturret_laser; break;
-        case OBJECT__TURRET_LASER_DEPLOYED:            texture = textures->hud.tturret_laser; break;
+        case OBJECT__TURRET_LASER_GROUNDED:            texture = textures->hud.object_tturret_laser; break;
+        case OBJECT__TURRET_LASER_STANDING:            texture = textures->hud.object_tturret_laser; break;
+        case OBJECT__TURRET_LASER_UNDEPLOYED:          texture = textures->hud.object_tturret_laser; break;
+        case OBJECT__TURRET_LASER_DEPLOYED:            texture = textures->hud.object_tturret_laser; break;
 
-        case OBJECT__TURRET_BOMB_GROUNDED:             texture = textures->hud.tturret_bomb; break;
-        case OBJECT__TURRET_BOMB_STANDING:             texture = textures->hud.tturret_bomb; break;
-        case OBJECT__TURRET_BOMB_UNDEPLOYED:           texture = textures->hud.tturret_bomb; break;
-        case OBJECT__TURRET_BOMB_DEPLOYED:             texture = textures->hud.tturret_bomb; break;
+        case OBJECT__TURRET_BOMB_GROUNDED:             texture = textures->hud.object_tturret_bomb; break;
+        case OBJECT__TURRET_BOMB_STANDING:             texture = textures->hud.object_tturret_bomb; break;
+        case OBJECT__TURRET_BOMB_UNDEPLOYED:           texture = textures->hud.object_tturret_bomb; break;
+        case OBJECT__TURRET_BOMB_DEPLOYED:             texture = textures->hud.object_tturret_bomb; break;
 
-        case OBJECT__TURRET_PROJECTILE_GROUNDED:       texture = textures->hud.tturret_projectile; break;
-        case OBJECT__TURRET_PROJECTILE_STANDING:       texture = textures->hud.tturret_projectile; break;
-        case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->hud.tturret_projectile; break;
-        case OBJECT__TURRET_PROJECTILE_DEPLOYED:       texture = textures->hud.tturret_projectile; break;
+        case OBJECT__TURRET_PROJECTILE_GROUNDED:       texture = textures->hud.object_tturret_projectile; break;
+        case OBJECT__TURRET_PROJECTILE_STANDING:       texture = textures->hud.object_tturret_projectile; break;
+        case OBJECT__TURRET_PROJECTILE_UNDEPLOYED:     texture = textures->hud.object_tturret_projectile; break;
+        case OBJECT__TURRET_PROJECTILE_DEPLOYED:       texture = textures->hud.object_tturret_projectile; break;
 
-        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      texture = textures->hud.squirrel; break;
+        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:      texture = textures->hud.object_squirrel; break;
 
-        case OBJECT__MINIBOT_ALLY:                     texture = textures->hud.minibot_ally; break;
-        case OBJECT__MINIBOT_ALLY_CELL:                texture = textures->hud.minibot_ally; break;
-        case OBJECT__MINIBOT_ALLY_DYNAMITE:            texture = textures->hud.minibot_ally; break;
-        case OBJECT__MINIBOT_ALLY_GEMSTONE:            texture = textures->hud.minibot_ally; break;
+        case OBJECT__MINIBOT_ALLY:                     texture = textures->hud.object_minibot_ally; break;
+        case OBJECT__MINIBOT_ALLY_CELL:                texture = textures->hud.object_minibot_ally; break;
+        case OBJECT__MINIBOT_ALLY_DYNAMITE:            texture = textures->hud.object_minibot_ally; break;
+        case OBJECT__MINIBOT_ALLY_GEMSTONE:            texture = textures->hud.object_minibot_ally; break;
 
-        case OBJECT__MINIBOT_ENEMY:                    texture = textures->hud.minibot_enemy; break;
-        case OBJECT__MINIBOT_ENEMY_CELL:               texture = textures->hud.minibot_enemy; break;
-        case OBJECT__MINIBOT_ENEMY_DYNAMITE:           texture = textures->hud.minibot_enemy; break;
-        case OBJECT__MINIBOT_ENEMY_GEMSTONE:           texture = textures->hud.minibot_enemy; break;
+        case OBJECT__MINIBOT_ENEMY:                    texture = textures->hud.object_minibot_enemy; break;
+        case OBJECT__MINIBOT_ENEMY_CELL:               texture = textures->hud.object_minibot_enemy; break;
+        case OBJECT__MINIBOT_ENEMY_DYNAMITE:           texture = textures->hud.object_minibot_enemy; break;
+        case OBJECT__MINIBOT_ENEMY_GEMSTONE:           texture = textures->hud.object_minibot_enemy; break;
 
         case OBJECT__ENVIRONMENT_FALLING_STALACTITE:   texture = textures->hud.environment_falling_stalactite; break;
         case OBJECT__ENVIRONMENT_EMERGE_WATER:         texture = textures->hud.environment_emerge_water; break;

@@ -216,7 +216,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
         int right_hand_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_HAND];
         int left_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__LEFT_LEG];
         int right_leg_augmentation = state->hero_body_part_augmentation[BODY_PART__RIGHT_LEG];
-        int head_augmentation = state->hero_body_part_augmentation[BODY_PART__HEAD];
+        int tail_augmentation = state->hero_body_part_augmentation[BODY_PART__TAIL];
         int torso_augmentation = state->hero_body_part_augmentation[BODY_PART__TORSO];
         int is_mouse_on_augmentation_button = FALSE;
         int mouse_augmentation_button = AUGMENTATION__NONE;
@@ -229,15 +229,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
         {
             is_mouse_on_augmentation_button = TRUE;
             mouse_augmentation_button = left_hand_augmentation;
-        }
-        if(head_augmentation != AUGMENTATION__NONE &&
-           state->mouse_screen_pos.x >= 550 + 84 &&
-           state->mouse_screen_pos.x <= 550 + 84 + 64 &&
-           state->mouse_screen_pos.y >= 250 + 74 + 10 &&
-           state->mouse_screen_pos.y <= 250 + 74 + 10 + 32)
-        {
-            is_mouse_on_augmentation_button = TRUE;
-            mouse_augmentation_button = head_augmentation;
         }
         if(right_hand_augmentation != AUGMENTATION__NONE &&
            state->mouse_screen_pos.x >= 550 + 158 &&
@@ -313,7 +304,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 colors
             );
 
-            hero_add_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD);
+            // hero_add_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD);
 
             update_ally_skill_list(state, state->curr_ally);
 
@@ -940,18 +931,6 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     skill = SKILL__MOVE;
                 }
-                else if(
-                state->curr_ally->object->type == OBJECT__HERO_FLOATING
-                )
-                {
-                    skill = SKILL__MOVE_FLOATING;
-                }
-                else if(
-                state->curr_ally->object->type == OBJECT__HERO_FLYING
-                )
-                {
-                    skill = SKILL__MOVE_FLYING;
-                }
             }
             if(input->was_key[KEY__3] && !input->is_key[KEY__3])
             {
@@ -961,14 +940,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 state->curr_ally->object->type == OBJECT__HERO_FLYING
                 )
                 {
-                    if(hero_has_augmentation(state, AUGMENTATION__SCISSOR_HAND))
-                    {
-                        skill = SKILL__PICK_ITEM_FAR;
-                    }
-                    else
-                    {
-                        skill = SKILL__PICK_ITEM_CLOSE;
-                    }
+                    skill = SKILL__PICK_ITEM_CLOSE;
                 }
                 else if(
                 state->curr_ally->object->type == OBJECT__MINIBOT_ALLY
@@ -977,28 +949,28 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     skill = SKILL__PICK_ITEM_CLOSE;
                 }
             }
-            if(input->was_key[KEY__4] && !input->is_key[KEY__4])
-            {
-                if(
-                state->curr_ally->object->type == OBJECT__HERO ||
-                state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
-                state->curr_ally->object->type == OBJECT__HERO_FLYING
-                )
-                {
-                    if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
-                    {
-                        skill = SKILL__MANIPULATION;
-                    }
-                    else if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
-                    {
-                        skill = SKILL__TELEPORTATION;
-                    }
-                    else if(hero_has_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD))
-                    {
-                        skill = SKILL__TELEKINESIS;
-                    }
-                }
-            }
+            // if(input->was_key[KEY__4] && !input->is_key[KEY__4])
+            // {
+            //     if(
+            //     state->curr_ally->object->type == OBJECT__HERO ||
+            //     state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+            //     state->curr_ally->object->type == OBJECT__HERO_FLYING
+            //     )
+            //     {
+            //         if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
+            //         {
+            //             skill = SKILL__MANIPULATION;
+            //         }
+            //         else if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
+            //         {
+            //             skill = SKILL__TELEPORTATION;
+            //         }
+            //         else if(hero_has_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD))
+            //         {
+            //             skill = SKILL__TELEKINESIS;
+            //         }
+            //     }
+            // }
 
             state->curr_ally_skill = skill;
 
@@ -1332,9 +1304,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
 
                 if(state->enemy_list->size > 0)
                 {
-                    if(state->curr_ally_skill == SKILL__MOVE ||
-                       state->curr_ally_skill == SKILL__MOVE_FLOATING ||
-                       state->curr_ally_skill == SKILL__MOVE_FLYING)
+                    if(state->curr_ally_skill == SKILL__MOVE)
                     {
                         state->curr_ally->object->action_points -=
                             state->ally_move_distance;
