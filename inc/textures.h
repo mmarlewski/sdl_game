@@ -630,6 +630,16 @@ void destroy_textures_order_number(Textures_OrderNumber* order_number);
 
 typedef struct
 {
+    Texture* damage_0;
+    Texture* damage_1;
+    Texture* damage_2;
+    Texture* damage_3;
+    Texture* damage_4;
+    Texture* damage_5;
+
+    Texture* burrow_in;
+    Texture* burrow_out;
+
     Texture* throw_up;
     Texture* throw_right;
     Texture* throw_down;
@@ -1005,6 +1015,7 @@ typedef struct
     Texture* skill_use;
     Texture* skill_move;
 
+    Texture* skill_burrow;
     Texture* skill_whip_smack;
     Texture* skill_push;
     Texture* skill_teleportation;

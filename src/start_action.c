@@ -128,6 +128,14 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->crash.object_crushing->tilemap_pos = action->tilemap_pos;
 
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_simultaneous_of_2(
+                    new_action_damage(action->crash.object_crushing, 1),
+                    new_action_damage(action->crash.object_crushed, 1)
+                )
+            );
+
             Texture* object_texture = get_texture_1_from_object(action->crash.object_crushing, textures);
             Vec2f curr_object_gamemap_pos = tilemap_pos_to_gamemap_pos(action->crash.object_crushing->tilemap_pos);
             Vec2f next_object_gamemap_pos = vec2f_move_in_dir4_by(curr_object_gamemap_pos, action->crash.dir4, 1.0f);
@@ -511,6 +519,59 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION__PLAY_SOUND:
         {
             play_sound(action->play_sound.sound);
+        }
+        break;
+        case ACTION__DAMAGE:
+        {
+            if(is_object_ally(action->damage.object) || is_object_enemy(action->damage.object))
+            {
+                Texture* texture = NULL;
+
+                switch(action->damage.damage)
+                {
+                    case 0: texture = textures->order_number.num_0; break;
+                    case 1: texture = textures->order_number.num_1; break;
+                    case 2: texture = textures->order_number.num_2; break;
+                    case 3: texture = textures->order_number.num_3; break;
+                    case 4: texture = textures->order_number.num_4; break;
+                    case 5: texture = textures->order_number.num_5; break;
+                    case 6: texture = textures->order_number.num_6; break;
+                    case 7: texture = textures->order_number.num_7; break;
+                    case 8: texture = textures->order_number.num_8; break;
+                    case 9: texture = textures->order_number.num_9; break;
+                    default: break;
+                }
+
+                Animation* animation = new_animation_ascend_sprite_in_gamemap(
+                    texture,
+                    tilemap_pos_to_gamemap_pos(action->tilemap_pos),
+                    0.1f,
+                    ACTION_LENGTH_IN_SECONDS
+                );
+
+                action->animation = animation;
+
+                add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
+
+                action->damage.object->curr_hp -= action->damage.damage;
+
+                if(action->damage.object->curr_hp <= 0)
+                {
+                    remove_all_actions_after_curr_action_action_sequence(sequence);
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_death(action->damage.object, action->damage.object->tilemap_pos)
+                    );
+                }
+            }
+            else
+            {
+                Animation* animation = new_animation_none();
+
+                action->animation = animation;
+
+                add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
+            }
         }
         break;
         default:

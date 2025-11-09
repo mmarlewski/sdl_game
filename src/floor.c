@@ -85,6 +85,34 @@ int is_floor_burrow(int floor)
     return is;
 }
 
+int get_floor_not_burrow_into_burrow(int floor)
+{
+    int burrow_floor = FLOOR__NONE;
+
+    switch(floor)
+    {
+        case FLOOR__ROCK:       burrow_floor = FLOOR__SAND; break;
+        case FLOOR__STONE:      burrow_floor = FLOOR__SAND; break;
+        default: break;
+    }
+
+    return burrow_floor;
+}
+
+int get_floor_burrow_into_not_burrow(int floor)
+{
+    int not_burrow_floor = FLOOR__NONE;
+
+    switch(floor)
+    {
+        case FLOOR__SAND:       not_burrow_floor = FLOOR__ROCK; break;
+        case FLOOR__COINS:      not_burrow_floor = FLOOR__GOLD; break;
+        default: break;
+    }
+
+    return not_burrow_floor;
+}
+
 int is_floor_stomp(int floor)
 {
     int is = 0;

@@ -165,7 +165,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_object = new_object(OBJECT__HERO);
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
-    Room* room = get_room(state, "7_2");
+    Room* room = get_room(state, "6_2");
     room_add_object_at(
         room,
         state->hero_object,
@@ -201,7 +201,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
     hero_add_augmentation(state, AUGMENTATION__DRILL);
-    hero_add_augmentation(state, AUGMENTATION__LASER);
+    hero_add_augmentation(state, AUGMENTATION__COIL);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -626,88 +626,135 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 
             // augmentation
 
-            // if(hero_has_augmentation(state, AUGMENTATION__MANIPULATION_HEAD))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__MANIPULATION);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__TELEPORTATION_HEAD))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEPORTATION);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__TELEKINESIS_HEAD))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__TELEKINESIS);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__FIST_HAND))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL_HOOK);
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG_HOOK);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__SPRING_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__STRIDER_LEG))
-            // {
-            //     //
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__TRACK_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__BOOT_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__STOMP);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__MINIBOT_TORSO))
-            // {
-            //     if(!state->was_minibot_launched)
-            //     {
-            //         add_new_list_element_to_list_end(skill_list, (void*) SKILL__LAUNCH_MINIBOT);
-            //     }
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__WINGS_TORSO))
-            // {
-            //     //
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
-            //    hero_has_augmentation(state, AUGMENTATION__CHAIN_HAND))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG_AND_THROW_HOOK);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
-            //    hero_has_augmentation(state, AUGMENTATION__TRACK_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_THROW);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__FIST_HAND) &&
-            //    hero_has_augmentation(state, AUGMENTATION__TRACK_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_PUSH);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__SPRING_LEG) &&
-            //    hero_has_augmentation(state, AUGMENTATION__BOOT_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_STOMP);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__SPRING_LEG) &&
-            //    hero_has_augmentation(state, AUGMENTATION__TRACK_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_JUMP);
-            // }
-            // if(hero_has_augmentation(state, AUGMENTATION__HOOK_HAND) &&
-            //    hero_has_augmentation(state, AUGMENTATION__SPRING_LEG))
-            // {
-            //     add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_CARRY);
-            // }
+            if(hero_has_augmentation(state, AUGMENTATION__TRACK))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE);
+            }
+            if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP);
+            }
+            if(hero_has_augmentation(state, AUGMENTATION__TAIL))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW);
+            }
+            if(hero_has_augmentation(state, AUGMENTATION__MINIBOT) && !state->was_minibot_launched)
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__LAUNCH_MINIBOT);
+            }
+
+            // drill
+
+            if(hero_has_augmentation(state, AUGMENTATION__DRILL))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUNCH);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_PUNCH);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRILL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRILL_FLOOR);
+            }
+
+            // coil
+
+            if(hero_has_augmentation(state, AUGMENTATION__COIL))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BRANCHING_BOLT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_BOLT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__COOKING_BOLT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ELECTRIFY_FLOOR);
+            }
+
+            // flame
+
+            if(hero_has_augmentation(state, AUGMENTATION__FLAME))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__SCORCH_WITH_FIRE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__SPEW_TAR_BALL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__FIRE_WELD_FLOOR);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ROCKET_JUMP);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ROCKET_DASH);
+            }
+
+            // laser
+
+            if(hero_has_augmentation(state, AUGMENTATION__LASER))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PENETRATING_BEAM);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BOUNCING_BEAM);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__FOCUSED_BEAM);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__LASER_WELD_FLOOR);
+            }
+
+            // freeze
+
+            if(hero_has_augmentation(state, AUGMENTATION__FREEZE))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_BLOCK);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_WALL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_PROJECTILE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__FREEZE_FLOOR);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_BUNKER);
+            }
+
+            // gun
+
+            if(hero_has_augmentation(state, AUGMENTATION__GUN))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__LONG_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__POINT_BLANK_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HARPOON_SHOT);
+            }
+
+            // cannon
+
+            if(hero_has_augmentation(state, AUGMENTATION__CANNON))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HIGH_PROJECTILE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DOUBLE_JUMP);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__RICOSHET);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__NEST);
+            }
+
+            // hammer
+
+            if(hero_has_augmentation(state, AUGMENTATION__HAMMER))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__SWING);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__NAIL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_NAIL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__NAIL_FLOOR);
+            }
+
+            // arm
+
+            if(hero_has_augmentation(state, AUGMENTATION__ARM))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_CARRY);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW_AND_GTFO);
+            }
+
+            // blade
+
+            if(hero_has_augmentation(state, AUGMENTATION__BLADE))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THRUST);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PENETRATING_THRUST);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SLICE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW_AND_SLICE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_SLICE);
+            }
+
+            // whip
+
+            if(hero_has_augmentation(state, AUGMENTATION__WHIP))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_PULL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURY);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_SMACK);
+            }
         }
         break;
         default:

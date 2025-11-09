@@ -400,6 +400,22 @@ Action* new_action_play_sound(Vec2i tilemap_pos, Sound* sound)
     return action;
 }
 
+Action* new_action_damage(Object* object, int damage)
+{
+    Action* action = malloc(sizeof(*action));
+
+    action->animation = NULL;
+    action->tilemap_pos = object->tilemap_pos;
+    action->is_finished = FALSE;
+    action->is_finished_at_start = FALSE;
+    action->type = ACTION__DAMAGE;
+
+    action->damage.object = object;
+    action->damage.damage = damage;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     if(action->type == ACTION__SEQUENCE)

@@ -246,6 +246,14 @@ void skill_on_use(
             }
         }
         break;
+        case SKILL__BURROW:
+        {
+            if(target_2_object == NULL)
+            {
+                source_object->tilemap_pos = target_2_tilemap_pos;
+            }
+        }
+        break;
         // case SKILL__MANIPULATION:
         // {
         //     //
@@ -412,47 +420,61 @@ void skill_on_use(
     //         }
     //     }
     //     break;
-    //     case SKILL__LAUNCH_MINIBOT:
-    //     {
+        case SKILL__LAUNCH_MINIBOT:
+        {
 
-    //         state->was_minibot_launched = TRUE;
-    //         state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
-    //     }
-    //     break;
-    //     case SKILL__MINIBOT_MERGE:
-    //     {
-    //         if(target_2_object != NULL &&
-    //            (target_2_object->type == OBJECT__HERO ||
-    //             target_2_object->type == OBJECT__HERO_FLOATING ||
-    //             target_2_object->type == OBJECT__HERO_FLYING))
-    //         {
-    //             state->was_minibot_launched = FALSE;
+            state->was_minibot_launched = TRUE;
+            state->minibot_object->action_points = ALLY_MAX_ACTION_POINTS;
+        }
+        break;
+        case SKILL__MINIBOT_MERGE:
+        {
+            if(target_2_object != NULL &&
+               (target_2_object->type == OBJECT__HERO ||
+                target_2_object->type == OBJECT__HERO_FLOATING ||
+                target_2_object->type == OBJECT__HERO_FLYING))
+            {
+                state->was_minibot_launched = FALSE;
 
-    //             room_remove_object(
-    //                 state->curr_room,
-    //                 state->minibot_object,
-    //                 0
-    //             );
+                room_remove_object(
+                    state->curr_room,
+                    state->minibot_object,
+                    0
+                );
 
-    //             if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY)
-    //             {
-    //                 //
-    //             }
-    //             else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL)
-    //             {
-    //                 state->hero_item_number[ITEM__CELL]++;
-    //             }
-    //             else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE)
-    //             {
-    //                 state->hero_item_number[ITEM__DYNAMITE]++;
-    //             }
-    //             else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
-    //             {
-    //                 state->hero_item_number[ITEM__GEMSTONE]++;
-    //             }
-    //         }
-    //     }
-    //     break;
+                if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY)
+                {
+                    //
+                }
+                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_CELL)
+                {
+                    state->hero_item_number[ITEM__CELL]++;
+                }
+                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_DYNAMITE)
+                {
+                    state->hero_item_number[ITEM__DYNAMITE]++;
+                }
+                else if(state->curr_ally->object->type == OBJECT__MINIBOT_ALLY_GEMSTONE)
+                {
+                    state->hero_item_number[ITEM__GEMSTONE]++;
+                }
+            }
+        }
+        break;
+        case SKILL__DRILL_FLOOR:
+        {
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
+            
+            room_change_floor_at(state->curr_room, get_floor_not_burrow_into_burrow(floor), target_2_tilemap_pos);
+        }
+        break;
+        case SKILL__LASER_WELD_FLOOR:
+        {
+            int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
+            
+            room_change_floor_at(state->curr_room, get_floor_burrow_into_not_burrow(floor), target_2_tilemap_pos);
+        }
+        break;
     //     case SKILL__PULL_HOOK:
     //     case SKILL__PULL_SPIDERWEB:
     //     case SKILL__PULL_TENTACLE:

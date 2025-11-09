@@ -240,6 +240,11 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             //
         }
         break;
+        case ACTION__DAMAGE:
+        {
+            //
+        }
+        break;
         default:
         break;
     }

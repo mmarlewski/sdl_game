@@ -90,6 +90,8 @@ enum FLOOR_TYPE
 int is_floor_exit(int floor);
 int is_floor_manipulatable(int floor);
 int is_floor_burrow(int floor);
+int get_floor_not_burrow_into_burrow(int floor);
+int get_floor_burrow_into_not_burrow(int floor);
 int is_floor_stomp(int floor);
 int is_floor_meltable(int floor);
 int is_floor_breakable(int floor);

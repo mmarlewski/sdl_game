@@ -645,6 +645,16 @@ void destroy_textures_order_number(Textures_OrderNumber* order_number)
 
 void load_textures_skill(Renderer* renderer, Textures_Skill* skill)
 {
+    skill->damage_0 = load_texture_from_filepath(renderer, "./res/skill/damage_0.png");
+    skill->damage_1 = load_texture_from_filepath(renderer, "./res/skill/damage_1.png");
+    skill->damage_2 = load_texture_from_filepath(renderer, "./res/skill/damage_2.png");
+    skill->damage_3 = load_texture_from_filepath(renderer, "./res/skill/damage_3.png");
+    skill->damage_4 = load_texture_from_filepath(renderer, "./res/skill/damage_4.png");
+    skill->damage_5 = load_texture_from_filepath(renderer, "./res/skill/damage_5.png");
+
+    skill->burrow_in = load_texture_from_filepath(renderer, "./res/skill/burrow_in.png");
+    skill->burrow_out = load_texture_from_filepath(renderer, "./res/skill/burrow_out.png");
+
     skill->throw_up = load_texture_from_filepath(renderer, "./res/skill/throw_up.png");
     skill->throw_right = load_texture_from_filepath(renderer, "./res/skill/throw_right.png");
     skill->throw_down = load_texture_from_filepath(renderer, "./res/skill/throw_down.png");
@@ -1022,6 +1032,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->skill_use = load_texture_from_filepath(renderer, "./res/hud/skill_use.png");
     hud->skill_move = load_texture_from_filepath(renderer, "./res/hud/skill_move.png");
 
+    hud->skill_burrow = load_texture_from_filepath(renderer, "./res/hud/skill_burrow.png");
     hud->skill_whip_smack = load_texture_from_filepath(renderer, "./res/hud/skill_whip_smack.png");
     hud->skill_push = load_texture_from_filepath(renderer, "./res/hud/skill_push.png");
     hud->skill_teleportation = load_texture_from_filepath(renderer, "./res/hud/skill_teleportation.png");
