@@ -165,7 +165,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_object = new_object(OBJECT__HERO);
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
-    Room* room = get_room(state, "6_2");
+    Room* room = get_room(state, "7_2");
     room_add_object_at(
         room,
         state->hero_object,
@@ -201,7 +201,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
     hero_add_augmentation(state, AUGMENTATION__DRILL);
-    hero_add_augmentation(state, AUGMENTATION__COIL);
+    hero_add_augmentation(state, AUGMENTATION__FLAME);
 
     update_enemy_list(state);
     update_all_enemy_order(state);

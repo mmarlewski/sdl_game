@@ -515,6 +515,20 @@ Animation* skill_get_animation(
             );
         }
         break;
+        case SKILL__SPEW_TAR_BALL:
+        {
+            skill_animation = new_animation_sequence_of_2(
+                new_animation_play_sound(sounds->minibot_launch),
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    textures->object.tar_ball,
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    1.0f
+                )
+            );
+        }
+        break;
         case SKILL__MINIBOT_MERGE:
         {
             skill_animation = new_animation_play_sound(sounds->minibot_merge);

@@ -8,38 +8,38 @@ void skill_get_possible_hint_pos(
 {
     switch(skill)
     {
-        case SKILL__USE:
-        {
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
+        // case SKILL__USE:
+        // {
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
 
-                    int floor = room_get_floor_at(
-                        state->curr_room, 
-                        tilemap_pos
-                    );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room, 
+        //                 tilemap_pos
+        //             );
 
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-                    if(object != NULL && 
-                    (is_object_exit(object) || 
-                    is_object_station(object) ||
-                    is_object_secret(object)))
-                    {
-                        add_new_list_element_to_list_end(
-                            hint_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
-        }
-        break;
+        //             if(object != NULL && 
+        //             (is_object_exit(object) || 
+        //             is_object_station(object) ||
+        //             is_object_secret(object)))
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     hint_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
+        // }
+        // break;
     //     case SKILL__MANIPULATION:
     //     {
     //         //
@@ -217,7 +217,7 @@ void skill_get_possible_hint_pos(
     //         //
     //     }
     //     break;
-        case SKILL__PUSH:
+    //     case SKILL__PUSH:
     //     case SKILL__THROW:
     //     case SKILL__DRAG_HOOK:
     //     case SKILL__DRAG_SPIDERWEB:
@@ -227,34 +227,34 @@ void skill_get_possible_hint_pos(
     //     case SKILL__CHARGE_AND_PUSH:
     //     case SKILL__CHARGE_AND_THROW:
     //     case SKILL__JUMP_AND_CARRY:
-        {
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
+        // {
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
 
-                    int floor = room_get_floor_at(
-                        state->curr_room, 
-                        tilemap_pos
-                    );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room, 
+        //                 tilemap_pos
+        //             );
 
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-                    if(object != NULL && is_object_movable(object))
-                    {
-                        add_new_list_element_to_list_end(
-                            hint_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
-        }
-        break;
+        //             if(object != NULL && is_object_movable(object))
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     hint_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
+        // }
+        // break;
     //     case SKILL__PULL_HOOK:
     //     case SKILL__PULL_SPIDERWEB:
     //     case SKILL__PULL_TENTACLE:
@@ -287,40 +287,40 @@ void skill_get_possible_hint_pos(
     //         }
     //     }
     //     break;
-        case SKILL__JUMP:
-        {
-            //
-        }
-        break;
-        case SKILL__CHARGE:
-        {
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
+        // case SKILL__JUMP:
+        // {
+        //     //
+        // }
+        // break;
+        // case SKILL__CHARGE:
+        // {
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
 
-                    int floor = room_get_floor_at(
-                        state->curr_room, 
-                        tilemap_pos
-                    );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room, 
+        //                 tilemap_pos
+        //             );
 
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-                    if(object != NULL && is_object_fragile(object))
-                    {
-                        add_new_list_element_to_list_end(
-                            hint_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
-        }
-        break;
+        //             if(object != NULL && is_object_fragile(object))
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     hint_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
+        // }
+        // break;
     //     case SKILL__STOMP:
     //     {
     //         for(int i = 0; i < TILEMAP_LENGTH; i++)
@@ -386,43 +386,43 @@ void skill_get_possible_hint_pos(
     //         //
     //     }
     //     break;
-        case SKILL__LAUNCH_MINIBOT:
-        {
-            //
-        }
-        break;
-        case SKILL__MINIBOT_MERGE:
-        {
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
+        // case SKILL__LAUNCH_MINIBOT:
+        // {
+        //     //
+        // }
+        // break;
+        // case SKILL__MINIBOT_MERGE:
+        // {
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
 
-                    int floor = room_get_floor_at(
-                        state->curr_room, 
-                        tilemap_pos
-                    );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room, 
+        //                 tilemap_pos
+        //             );
 
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-                    if(object != NULL && 
-                    (object->type == OBJECT__HERO ||
-                    object->type == OBJECT__HERO_FLOATING ||
-                    object->type == OBJECT__HERO_FLYING))
-                    {
-                        add_new_list_element_to_list_end(
-                            hint_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
-        }
-        break;
+        //             if(object != NULL && 
+        //             (object->type == OBJECT__HERO ||
+        //             object->type == OBJECT__HERO_FLOATING ||
+        //             object->type == OBJECT__HERO_FLYING))
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     hint_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
+        // }
+        // break;
     //     case SKILL__TURRET_LASER:
     //     {
     //         //

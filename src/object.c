@@ -823,6 +823,7 @@ int is_object_movable(Object* object)
         case OBJECT__BALL:                             is = 1; break;
         case OBJECT__BALL_SPIKES:                      is = 1; break;
         case OBJECT__GLASS_BALL:                       is = 1; break;
+        case OBJECT__TAR_BALL:                         is = 1; break;
 
         case OBJECT__THRONE:                           is = 1; break;
 
@@ -1167,6 +1168,7 @@ int is_object_breakable(Object* object)
 
         case OBJECT__BALL:                             is = 0; break;
         case OBJECT__BALL_SPIKES:                      is = 0; break;
+        case OBJECT__TAR_BALL:                         is = 1; break;
 
         case OBJECT__GOLEM_UNPOWERED:                  is = 1; break;
         case OBJECT__GOLEM_HALF_POWERED:               is = 1; break;
@@ -2089,6 +2091,7 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__BALL:                             name = "ball"; break;
         case OBJECT__BALL_SPIKES:                      name = "ball spikes"; break;
         case OBJECT__GLASS_BALL:                       name = "glass ball"; break;
+        case OBJECT__TAR_BALL:                         name = "tar ball"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
         case OBJECT__SIGN_MOLE_WARNING:                name = "sign mole warning"; break;
@@ -2340,6 +2343,7 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__BALL:                             name = "ball (off)"; break;
         case OBJECT__BALL_SPIKES:                      name = "ball (on)"; break;
         case OBJECT__GLASS_BALL:                       name = "glass"; break;
+        case OBJECT__TAR_BALL:                         name = "tar ball"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
 
@@ -2591,6 +2595,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__BALL:                             texture = textures->object.ball; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball; break;
+        case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -2834,6 +2839,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__BALL:                             texture = textures->object.ball; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes; break;
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball; break;
+        case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -3077,6 +3083,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball_outline; break;
+        case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
@@ -3320,6 +3327,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__BALL:                             texture = textures->object.ball_outline; break;
         case OBJECT__BALL_SPIKES:                      texture = textures->object.ball_spikes_outline; break;
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball_outline; break;
+        case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 

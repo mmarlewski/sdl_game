@@ -1,5 +1,61 @@
 #include "../inc/dir.h"
 
+int get_opposite_dir8(int dir8)
+{
+    int opposite_dir8 = DIR8__NONE;
+
+    switch(dir8)
+    {
+        case DIR8__UP_LEFT: opposite_dir8 = DIR8__DOWN_RIGHT; break;
+        case DIR8__UP: opposite_dir8 = DIR8__DOWN; break;
+        case DIR8__UP_RIGHT: opposite_dir8 = DIR8__DOWN_LEFT; break;
+        case DIR8__RIGHT: opposite_dir8 = DIR8__LEFT; break;
+        case DIR8__DOWN_RIGHT: opposite_dir8 = DIR8__UP_LEFT; break;
+        case DIR8__DOWN: opposite_dir8 = DIR8__UP; break;
+        case DIR8__DOWN_LEFT: opposite_dir8 = DIR8__UP_RIGHT; break;
+        case DIR8__LEFT: opposite_dir8 = DIR8__RIGHT; break;
+        default: break;
+    }
+
+    return opposite_dir8;
+}
+
+Vec2i vec2i_move_in_dir8_by(Vec2i vec, int dir8, int by)
+{
+    switch(dir8)
+    {
+        case DIR8__UP_LEFT:     vec.x += -by;   vec.y += -by; break;
+        case DIR8__UP:          vec.x += 0;     vec.y += -by; break;
+        case DIR8__UP_RIGHT:    vec.x += by;    vec.y += -by; break;
+        case DIR8__RIGHT:       vec.x += by;    vec.y += 0; break;
+        case DIR8__DOWN_RIGHT:  vec.x += by;    vec.y += by; break;
+        case DIR8__DOWN:        vec.x += 0;     vec.y += by; break;
+        case DIR8__DOWN_LEFT:   vec.x += -by;   vec.y += by; break;
+        case DIR8__LEFT:        vec.x += -by;   vec.y += 0; break;
+        default: break;
+    }
+
+    return vec;
+}
+
+Vec2f vec2f_move_in_dir8_by(Vec2f vec, int dir8, float by)
+{
+    switch(dir8)
+    {
+        case DIR8__UP_LEFT:     vec.x += -by;   vec.y += -by; break;
+        case DIR8__UP:          vec.x += 0;     vec.y += -by; break;
+        case DIR8__UP_RIGHT:    vec.x += by;    vec.y += -by; break;
+        case DIR8__RIGHT:       vec.x += by;    vec.y += 0; break;
+        case DIR8__DOWN_RIGHT:  vec.x += by;    vec.y += by; break;
+        case DIR8__DOWN:        vec.x += 0;     vec.y += by; break;
+        case DIR8__DOWN_LEFT:   vec.x += -by;   vec.y += by; break;
+        case DIR8__LEFT:        vec.x += -by;   vec.y += 0; break;
+        default: break;
+    }
+
+    return vec;
+}
+
 int get_opposite_dir4(int dir4)
 {
     int opposite_dir4 = DIR4__NONE;
@@ -73,6 +129,7 @@ int get_dir4_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
 {
     int dir4 = DIR4__NONE;
+    int dir8 = DIR8__NONE;
     int diff = 0;
 
     int x_diff = get_x_diff_from_vec2i_to_vec2i(from, to);
@@ -81,22 +138,54 @@ DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
     if(x_diff > 0 && y_diff == 0)
     {
         dir4 = DIR4__RIGHT;
+        dir8 = DIR8__RIGHT;
         diff = x_diff;
     }
     if(x_diff < 0 && y_diff == 0)
     {
         dir4 = DIR4__LEFT;
+        dir8 = DIR8__LEFT;
         diff = x_diff;
     }
     if(x_diff == 0 && y_diff > 0)
     {
         dir4 = DIR4__DOWN;
+        dir8 = DIR8__DOWN;
         diff = y_diff;
     }
     if(x_diff == 0 && y_diff < 0)
     {
         dir4 = DIR4__UP;
+        dir8 = DIR8__UP;
         diff = y_diff;
+    }
+
+    if(x_diff != 0 && y_diff != 0 && abs(x_diff) == abs(y_diff))
+    {
+        if(x_diff < 0 && y_diff < 0)
+        {
+            dir4 = DIR4__NONE;
+            dir8 = DIR8__UP_LEFT;
+            diff = x_diff;
+        }
+        if(x_diff > 0 && y_diff < 0)
+        {
+            dir4 = DIR4__NONE;
+            dir8 = DIR8__UP_RIGHT;
+            diff = x_diff;
+        }
+        if(x_diff > 0 && y_diff > 0)
+        {
+            dir4 = DIR4__NONE;
+            dir8 = DIR8__DOWN_RIGHT;
+            diff = x_diff;
+        }
+        if(x_diff < 0 && y_diff > 0)
+        {
+            dir4 = DIR4__NONE;
+            dir8 = DIR8__DOWN_LEFT;
+            diff = x_diff;
+        }
     }
 
     int abs_x_diff = abs(x_diff);
@@ -106,6 +195,7 @@ DistanceInfo get_distance_info_from_vec2i_to_vec2i(Vec2i from, Vec2i to)
     DistanceInfo distance_info;
 
     distance_info.dir4 = dir4;
+    distance_info.dir8 = dir8;
     distance_info.x_diff = x_diff;
     distance_info.y_diff = y_diff;
     distance_info.diff = diff;

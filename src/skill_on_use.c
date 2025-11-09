@@ -469,6 +469,7 @@ void skill_on_use(
         }
         break;
         case SKILL__LASER_WELD_FLOOR:
+        case SKILL__FIRE_WELD_FLOOR:
         {
             int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             

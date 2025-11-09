@@ -341,6 +341,9 @@ typedef struct
     Texture* glass_ball;
     Texture* glass_ball_outline;
 
+    Texture* tar_ball;
+    Texture* tar_ball_outline;
+
     Texture* throne;
     Texture* throne_outline;
 

@@ -529,23 +529,34 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
                 switch(action->damage.damage)
                 {
-                    case 0: texture = textures->order_number.num_0; break;
-                    case 1: texture = textures->order_number.num_1; break;
-                    case 2: texture = textures->order_number.num_2; break;
-                    case 3: texture = textures->order_number.num_3; break;
-                    case 4: texture = textures->order_number.num_4; break;
-                    case 5: texture = textures->order_number.num_5; break;
-                    case 6: texture = textures->order_number.num_6; break;
-                    case 7: texture = textures->order_number.num_7; break;
-                    case 8: texture = textures->order_number.num_8; break;
-                    case 9: texture = textures->order_number.num_9; break;
+                    case 0: texture = textures->skill.damage_0; break;
+                    case 1: texture = textures->skill.damage_1; break;
+                    case 2: texture = textures->skill.damage_2; break;
+                    case 3: texture = textures->skill.damage_3; break;
+                    case 4: texture = textures->skill.damage_4; break;
+                    case 5: texture = textures->skill.damage_5; break;
                     default: break;
                 }
+
+                // switch(action->damage.damage)
+                // {
+                //     case 0: texture = textures->order_number.num_0; break;
+                //     case 1: texture = textures->order_number.num_1; break;
+                //     case 2: texture = textures->order_number.num_2; break;
+                //     case 3: texture = textures->order_number.num_3; break;
+                //     case 4: texture = textures->order_number.num_4; break;
+                //     case 5: texture = textures->order_number.num_5; break;
+                //     case 6: texture = textures->order_number.num_6; break;
+                //     case 7: texture = textures->order_number.num_7; break;
+                //     case 8: texture = textures->order_number.num_8; break;
+                //     case 9: texture = textures->order_number.num_9; break;
+                //     default: break;
+                // }
 
                 Animation* animation = new_animation_ascend_sprite_in_gamemap(
                     texture,
                     tilemap_pos_to_gamemap_pos(action->tilemap_pos),
-                    0.1f,
+                    0.2f,
                     ACTION_LENGTH_IN_SECONDS
                 );
 

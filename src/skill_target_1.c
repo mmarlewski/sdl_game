@@ -72,12 +72,12 @@ void skill_get_possible_target_1_pos(
         break;
         case SKILL__BOUNCING_BEAM:
         {
-            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
             {
                 int go_on = TRUE;
                 for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
                 {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    Vec2i tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, dir8, i);
                     Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                     int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 

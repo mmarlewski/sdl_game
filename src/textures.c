@@ -355,6 +355,9 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->glass_ball = load_texture_from_filepath(renderer, "./res/object/glass_ball.png");
     object->glass_ball_outline = load_texture_from_filepath(renderer, "./res/object/glass_ball_outline.png");
 
+    object->tar_ball = load_texture_from_filepath(renderer, "./res/object/tar_ball.png");
+    object->tar_ball_outline = load_texture_from_filepath(renderer, "./res/object/tar_ball_outline.png");
+
     object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
     object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
 

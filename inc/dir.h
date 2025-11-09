@@ -5,6 +5,27 @@
 #include "../inc/vec.h"
 #include "../inc/list.h"
 
+enum DIR8
+{
+    DIR8__NONE,
+
+    DIR8__UP_LEFT,
+    DIR8__UP,
+    DIR8__UP_RIGHT,
+    DIR8__RIGHT,
+    DIR8__DOWN_RIGHT,
+    DIR8__DOWN,
+    DIR8__DOWN_LEFT,
+    DIR8__LEFT,
+
+    DIR8__COUNT
+};
+
+int get_opposite_dir8(int dir8);
+
+Vec2i vec2i_move_in_dir8_by(Vec2i vec, int dir8, int by);
+Vec2f vec2f_move_in_dir8_by(Vec2f vec, int dir8, float by);
+
 enum DIR4
 {
     DIR4__NONE,
@@ -29,6 +50,7 @@ int get_dir4_from_vec2i_to_vec2i(Vec2i from, Vec2i to);
 typedef struct
 {
     int dir4;
+    int dir8;
 
     int x_diff;
     int y_diff;
