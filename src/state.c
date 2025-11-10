@@ -201,7 +201,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
     hero_add_augmentation(state, AUGMENTATION__DRILL);
-    hero_add_augmentation(state, AUGMENTATION__FLAME);
+    hero_add_augmentation(state, AUGMENTATION__FREEZE);
 
     update_enemy_list(state);
     update_all_enemy_order(state);

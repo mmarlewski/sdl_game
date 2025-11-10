@@ -344,6 +344,9 @@ typedef struct
     Texture* tar_ball;
     Texture* tar_ball_outline;
 
+    Texture* ice_block;
+    Texture* ice_block_outline;
+
     Texture* throne;
     Texture* throne_outline;
 

@@ -1144,6 +1144,105 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
+        case SKILL__ICE_BLOCK:
+        case SKILL__ICE_WALL:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                int go_on = TRUE;
+                for(int i = 1; i <= TILEMAP_LENGTH && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        dir4,
+                        i
+                    );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                        );
+
+                        if(object == NULL)
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                        else
+                        {
+                            go_on = FALSE;
+                        }
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__ICE_BUNKER:
+        {
+            add_new_list_element_to_list_end(
+                target_2_pos_list,
+                new_vec2i_from_vec2i(source_tilemap_pos)
+            );
+        }
+        break;
+        case SKILL__ICE_PROJECTILE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                int go_on = TRUE;
+                for(int i = 1; i <= TILEMAP_LENGTH && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        dir4,
+                        i
+                    );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                        );
+
+                        if(object != NULL)
+                        {
+                            go_on = FALSE;
+                        }
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__FREEZE_FLOOR:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    source_tilemap_pos,
+                    dir4,
+                    1
+                );
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    add_new_list_element_to_list_end(
+                        target_2_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                    );
+                }
+            }
+        }
+        break;
     //     case SKILL__STOMP:
     //     {
     //         for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
