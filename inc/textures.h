@@ -1007,7 +1007,7 @@ typedef struct
     Texture* aug_wings;
     Texture* weapon_arm;
     Texture* weapon_blade;
-    Texture* weapon_cannon;
+    Texture* weapon_crossbow;
     Texture* weapon_coil;
     Texture* weapon_drill;
     Texture* weapon_flame;

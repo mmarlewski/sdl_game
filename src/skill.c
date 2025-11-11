@@ -52,14 +52,14 @@ int is_skill_two_target(int skill)
         case SKILL__POINT_BLANK_SHOT:   is = 0; break;
         case SKILL__HEAD_SHOT:          is = 0; break;
         case SKILL__STUNNING_SHOT:      is = 0; break;
-        case SKILL__HARPOON_SHOT:       is = 0; break;
+        case SKILL__HARPOON_SHOT:       is = 1; break;
         
         case SKILL__HIGH_PROJECTILE:    is = 0; break;
-        case SKILL__DOUBLE_JUMP:        is = 0; break;
+        case SKILL__DOUBLE_JUMP:        is = 1; break;
         case SKILL__RICOSHET:           is = 1; break;
         case SKILL__NEST:               is = 0; break;
         
-        case SKILL__SWING:              is = 0; break;
+        case SKILL__SWING:              is = 1; break;
         case SKILL__NAIL:               is = 0; break;
         case SKILL__JUMP_AND_NAIL:      is = 0; break;
         case SKILL__NAIL_FLOOR:         is = 0; break;

@@ -1,4 +1,5 @@
 #include "../inc/state.h"
+#include <wchar.h>
 
 void skill_get_possible_target_2_pos(
     State* state,
@@ -624,50 +625,53 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-    //     case SKILL__THROW:
-    //     {
-    //         DistanceInfo distance_info =
-    //             get_distance_info_from_vec2i_to_vec2i(
-    //                 source_tilemap_pos,
-    //                 target_1_tilemap_pos
-    //             );
+        case SKILL__THROW:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                );
+            
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                if(dir4 != get_opposite_dir4(distance_info.dir4))
+                {
+                    int go_on = TRUE;
+                    for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
+                    {
+                        Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                            target_1_tilemap_pos,
+                            dir4,
+                            i
+                        );
 
-    //         if(distance_info.dir4 != DIR4__NONE)
-    //         {
-    //             int go_on = TRUE;
-    //             for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
-    //             {
-    //                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-    //                     target_1_tilemap_pos,
-    //                     distance_info.dir4,
-    //                     i
-    //                 );
+                        if(is_tilemap_in_bounds(tilemap_pos))
+                        {
+                            Object* object = room_get_object_at(
+                                state->curr_room,
+                                tilemap_pos
+                            );
 
-    //                 if(is_tilemap_in_bounds(tilemap_pos))
-    //                 {
-    //                     Object* object = room_get_object_at(
-    //                         state->curr_room,
-    //                         tilemap_pos
-    //                     );
+                            if(object == NULL)
+                            {
+                                add_new_list_element_to_list_end(
+                                    target_2_pos_list,
+                                    new_vec2i_from_vec2i(tilemap_pos)
+                                );
+                            }
 
-    //                     if(object == NULL)
-    //                     {
-    //                         add_new_list_element_to_list_end(
-    //                             target_2_pos_list,
-    //                             new_vec2i_from_vec2i(tilemap_pos)
-    //                         );
-    //                     }
-
-    //                     if(object != NULL &&
-    //                        !is_object_throw_over(object))
-    //                     {
-    //                         go_on = FALSE;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     break;
+                            if(object != NULL &&
+                            !is_object_throw_over(object))
+                            {
+                                go_on = FALSE;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        break;
         case SKILL__DRILL:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -697,8 +701,17 @@ void skill_get_possible_target_2_pos(
         }
         break;
         case SKILL__DRILL_FLOOR:
+        case SKILL__NAIL_FLOOR:
         {
-            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            if(get_floor_not_burrow_into_burrow(source_floor) != FLOOR__NONE)
+            {
+                add_new_list_element_to_list_end(
+                    target_2_pos_list,
+                    new_vec2i_from_vec2i(source_tilemap_pos)
+                );
+            }
+
+            for(int dir4 = 0; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                     source_tilemap_pos,
@@ -725,6 +738,14 @@ void skill_get_possible_target_2_pos(
         case SKILL__LASER_WELD_FLOOR:
         case SKILL__FIRE_WELD_FLOOR:
         {
+            if(get_floor_burrow_into_not_burrow(source_floor) != FLOOR__NONE)
+            {
+                add_new_list_element_to_list_end(
+                    target_2_pos_list,
+                    new_vec2i_from_vec2i(source_tilemap_pos)
+                );
+            }
+
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
@@ -770,6 +791,7 @@ void skill_get_possible_target_2_pos(
         }
         break;
         case SKILL__BOUNCING_BEAM:
+        case SKILL__RICOSHET:
         {
             for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
             {
@@ -928,79 +950,81 @@ void skill_get_possible_target_2_pos(
     //     case SKILL__DRAG_HOOK:
     //     case SKILL__DRAG_SPIDERWEB:
     //     case SKILL__DRAG_TENTACLE:
-    //     {
-    //         DistanceInfo distance_info =
-    //             get_distance_info_from_vec2i_to_vec2i(
-    //                 source_tilemap_pos,
-    //                 target_1_tilemap_pos
-    //             );
+        case SKILL__HARPOON_SHOT:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                );
 
-    //         if(distance_info.dir4 != DIR4__NONE)
-    //         {
-    //             int go_on = TRUE;
-    //             for(int i = 1; i <= SKILL_DRAG_RANGE && go_on; i++)
-    //             {
-    //                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-    //                     target_1_tilemap_pos,
-    //                     get_opposite_dir4(distance_info.dir4),
-    //                     i
-    //                 );
+            if(distance_info.dir4 != DIR4__NONE)
+            {
+                int go_on = TRUE;
+                for(int i = 1; i <= SKILL_DRAG_RANGE && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        target_1_tilemap_pos,
+                        get_opposite_dir4(distance_info.dir4),
+                        i
+                    );
 
-    //                 if(is_tilemap_in_bounds(tilemap_pos))
-    //                 {
-    //                     add_new_list_element_to_list_end(
-    //                         target_2_pos_list,
-    //                         new_vec2i_from_vec2i(tilemap_pos)
-    //                     );
-    //                 }
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
 
-    //                 if(vec2i_equals(tilemap_pos, source_tilemap_pos))
-    //                 {
-    //                     go_on = FALSE;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     break;
-    //     case SKILL__PULL_HOOK:
-    //     case SKILL__PULL_SPIDERWEB:
-    //     case SKILL__PULL_TENTACLE:
-    //     case SKILL__PULL_TONGUE:
-    //     {
-    //         DistanceInfo distance_info =
-    //             get_distance_info_from_vec2i_to_vec2i(
-    //                 source_tilemap_pos,
-    //                 target_1_tilemap_pos
-    //             );
+                    if(vec2i_equals(tilemap_pos, source_tilemap_pos))
+                    {
+                        go_on = FALSE;
+                    }
+                }
+            }
+        }
+        break;
+        // case SKILL__PULL_HOOK:
+        // case SKILL__PULL_SPIDERWEB:
+        // case SKILL__PULL_TENTACLE:
+        // case SKILL__PULL_TONGUE:
+        // {
+        //     DistanceInfo distance_info =
+        //         get_distance_info_from_vec2i_to_vec2i(
+        //             source_tilemap_pos,
+        //             target_1_tilemap_pos
+        //         );
 
-    //         if(distance_info.dir4 != DIR4__NONE)
-    //         {
-    //             int go_on = TRUE;
-    //             for(int i = 0; i <= SKILL_PULL_RANGE && go_on; i++)
-    //             {
-    //                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-    //                     target_1_tilemap_pos,
-    //                     get_opposite_dir4(distance_info.dir4),
-    //                     i
-    //                 );
+        //     if(distance_info.dir4 != DIR4__NONE)
+        //     {
+        //         int go_on = TRUE;
+        //         for(int i = 0; i <= SKILL_PULL_RANGE && go_on; i++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+        //                 target_1_tilemap_pos,
+        //                 get_opposite_dir4(distance_info.dir4),
+        //                 i
+        //             );
 
-    //                 if(is_tilemap_in_bounds(tilemap_pos))
-    //                 {
-    //                     add_new_list_element_to_list_end(
-    //                         target_2_pos_list,
-    //                         new_vec2i_from_vec2i(tilemap_pos)
-    //                     );
-    //                 }
+        //             if(is_tilemap_in_bounds(tilemap_pos))
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     target_2_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
 
-    //                 if(vec2i_equals(tilemap_pos, source_tilemap_pos))
-    //                 {
-    //                     go_on = FALSE;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     break;
+        //             if(vec2i_equals(tilemap_pos, source_tilemap_pos))
+        //             {
+        //                 go_on = FALSE;
+        //             }
+        //         }
+        //     }
+        // }
+        // break;
         case SKILL__JUMP:
+        case SKILL__JUMP_AND_NAIL:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
@@ -1243,6 +1267,232 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
+        case SKILL__POINT_BLANK_SHOT:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    
+                    if(object != NULL && (is_object_ally(object) || is_object_enemy(object)))
+                    {
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__LONG_SHOT:
+        case SKILL__STUNNING_SHOT:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                int go_on = TRUE;
+                for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                        int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+
+                        if(object) go_on = FALSE;
+
+                        if(!vec2i_equals(tilemap_pos, source_tilemap_pos) && 
+                        object != NULL && (is_object_ally(object) || is_object_enemy(object)))
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__HEAD_SHOT:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+                Vec2i back_tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 2);
+
+                if(is_tilemap_in_bounds(tilemap_pos) && is_tilemap_in_bounds(back_tilemap_pos))
+                {
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                    Object* back_object = room_get_object_at(state->curr_room, back_tilemap_pos);
+                    int back_floor = room_get_floor_at(state->curr_room, back_tilemap_pos);
+
+
+                    if(object != NULL && (is_object_ally(object) || is_object_enemy(object)) && back_object == NULL)
+                    {
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__HIGH_PROJECTILE:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i < TILEMAP_LENGTH; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                        int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+
+                        if(!vec2i_equals(tilemap_pos, source_tilemap_pos) && 
+                        object != NULL && (is_object_ally(object) || is_object_enemy(object)))
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__DOUBLE_JUMP:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i <= SKILL_JUMP_RANGE; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        target_1_tilemap_pos,
+                        dir4,
+                        i
+                    );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                        );
+
+                        if(object == NULL)
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__NEST:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    add_new_list_element_to_list_end(
+                        target_2_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                    );
+                }
+            }
+        }
+        break;
+        case SKILL__NAIL:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4,1);
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room,tilemap_pos);
+
+                    if(object != NULL && (is_object_ally(object) || is_object_enemy(object)))
+                    {
+                        add_new_list_element_to_list_end(
+                            target_2_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__SWING:
+        {
+            DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
+
+            int dir4_1 = DIR4__NONE;
+            int dir4_2 = DIR4__NONE;
+
+            switch(distance_info.dir8)
+            {
+                case DIR8__UP_LEFT:     dir4_1 = DIR4__UP;      dir4_2 = DIR4__LEFT;    break;
+                case DIR8__UP_RIGHT:    dir4_1 = DIR4__UP;      dir4_2 = DIR4__RIGHT;   break;
+                case DIR8__DOWN_RIGHT:  dir4_1 = DIR4__DOWN;    dir4_2 = DIR4__RIGHT;   break;
+                case DIR8__DOWN_LEFT:   dir4_1 = DIR4__DOWN;    dir4_2 = DIR4__LEFT;    break;
+                default:
+                break;
+            }
+
+            int go_on = TRUE;
+            for(int i = 1; i <= SKILL_PUSH_RANGE && go_on; i++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos,dir4_1,i);
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+                    add_new_list_element_to_list_end(
+                        target_2_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                    );
+
+                    if(object != NULL) go_on = FALSE;
+                }
+            }
+
+            go_on = TRUE;
+            for(int i = 1; i <= SKILL_PUSH_RANGE && go_on; i++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos,dir4_2,i);
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+                    add_new_list_element_to_list_end(
+                        target_2_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                    );
+
+                    if(object != NULL) go_on = FALSE;
+                }
+            }
+        }
+        break;
     //     case SKILL__STOMP:
     //     {
     //         for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
@@ -1431,54 +1681,92 @@ void skill_get_possible_target_2_pos(
     //         }
     //     }
     //     break;
-    //     case SKILL__JUMP_AND_CARRY:
-    //     {
-    //         DistanceInfo carry_distance_info =
-    //             get_distance_info_from_vec2i_to_vec2i(
-    //                 source_tilemap_pos,
-    //                 target_1_tilemap_pos
-    //             );
+        case SKILL__JUMP_AND_CARRY:
+        {
+            DistanceInfo carry_distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_1_tilemap_pos
+                );
 
-    //         for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
-    //         {
-    //             for(int i = 1; i <= SKILL_JUMP_RANGE; i++)
-    //             {
-    //                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-    //                     source_tilemap_pos,
-    //                     dir4,
-    //                     i
-    //                 );
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                for(int i = 1; i <= SKILL_JUMP_RANGE; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        source_tilemap_pos,
+                        dir4,
+                        i
+                    );
 
-    //                 Vec2i carry_tilemap_pos = vec2i_move_in_dir4_by(
-    //                     tilemap_pos,
-    //                     carry_distance_info.dir4,
-    //                     1
-    //                 );
+                    Vec2i carry_tilemap_pos = vec2i_move_in_dir4_by(
+                        tilemap_pos,
+                        carry_distance_info.dir4,
+                        1
+                    );
 
-    //                 if(is_tilemap_in_bounds(tilemap_pos))
-    //                 {
-    //                     Object* object = room_get_object_at(
-    //                         state->curr_room,
-    //                         tilemap_pos
-    //                     );
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                        );
 
-    //                     Object* carry_object = room_get_object_at(
-    //                         state->curr_room,
-    //                         carry_tilemap_pos
-    //                     );
+                        Object* carry_object = room_get_object_at(
+                            state->curr_room,
+                            carry_tilemap_pos
+                        );
 
-    //                     if(object == NULL && carry_object == NULL)
-    //                     {
-    //                         add_new_list_element_to_list_end(
-    //                             target_2_pos_list,
-    //                             new_vec2i_from_vec2i(tilemap_pos)
-    //                         );
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     break;
+                        if(object == NULL && carry_object == NULL)
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        break;
+        case SKILL__BURROW_AND_GTFO:
+        {
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+            {
+                int go_on = TRUE;
+                for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        target_1_tilemap_pos,
+                        dir4,
+                        i
+                    );
+
+                    if(is_tilemap_in_bounds(tilemap_pos))
+                    {
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                        );
+
+                        if(object == NULL)
+                        {
+                            add_new_list_element_to_list_end(
+                                target_2_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+
+                        if(object != NULL &&
+                        !is_object_throw_over(object))
+                        {
+                            go_on = FALSE;
+                        }
+                    }
+                }
+            }
+        }
+        break;
     //     case SKILL__JUMP_AND_STOMP:
     //     {
     //         for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)

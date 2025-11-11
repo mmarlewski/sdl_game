@@ -246,6 +246,11 @@ void skill_on_use(
             }
         }
         break;
+        case SKILL__BURROW_AND_GTFO:
+        {
+            source_object->tilemap_pos = target_1_tilemap_pos;
+        }
+        break;
         case SKILL__BURROW:
         {
             if(target_2_object == NULL)
@@ -462,6 +467,7 @@ void skill_on_use(
         }
         break;
         case SKILL__DRILL_FLOOR:
+        case SKILL__NAIL_FLOOR:
         {
             int floor = room_get_floor_at(state->curr_room, target_2_tilemap_pos);
             

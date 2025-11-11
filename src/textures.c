@@ -1024,7 +1024,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->aug_wings = load_texture_from_filepath(renderer, "./res/hud/aug_wings.png");
     hud->weapon_arm = load_texture_from_filepath(renderer, "./res/hud/weapon_arm.png");
     hud->weapon_blade = load_texture_from_filepath(renderer, "./res/hud/weapon_blade.png");
-    hud->weapon_cannon = load_texture_from_filepath(renderer, "./res/hud/weapon_cannon.png");
+    hud->weapon_crossbow = load_texture_from_filepath(renderer, "./res/hud/weapon_crossbow.png");
     hud->weapon_coil = load_texture_from_filepath(renderer, "./res/hud/weapon_coil.png");
     hud->weapon_drill = load_texture_from_filepath(renderer, "./res/hud/weapon_drill.png");
     hud->weapon_flame = load_texture_from_filepath(renderer, "./res/hud/weapon_flame.png");

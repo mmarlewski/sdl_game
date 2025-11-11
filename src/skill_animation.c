@@ -534,6 +534,43 @@ Animation* skill_get_animation(
             skill_animation = new_animation_play_sound(sounds->minibot_merge);
         }
         break;
+        case SKILL__ROCKET_JUMP:
+        case SKILL__ROCKET_DASH:
+        {
+            skill_animation = new_animation_flash_sprite_in_gamemap(
+                textures->animation.blow_up_2,
+                tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                0.1f,
+                1
+            );
+        }
+        break;
+        case SKILL__DOUBLE_JUMP:
+        {
+            skill_animation = new_animation_sequence_of_3(
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    get_texture_1_from_object(source_object, textures),
+                    tilemap_pos_to_gamemap_pos(source_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    2.0f
+                ),
+                new_animation_flash_sprite_in_gamemap(
+                    textures->animation.blow_up_1,
+                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
+                    0.1f,
+                    1
+                ),
+                new_animation_move_sprite_in_gamemap_in_arch(
+                    get_texture_1_from_object(source_object, textures),
+                    tilemap_pos_to_gamemap_pos(target_1_tilemap_pos),
+                    tilemap_pos_to_gamemap_pos(target_2_tilemap_pos),
+                    ACTION_LENGTH_IN_SECONDS * ACTION_THROW_LENGTH_MODIFIER,
+                    2.0f
+                )
+            );
+        }
+        break;
     //     case SKILL__KILL_AROUND:
     //     {
     //         skill_animation = new_animation_camera_shake(1, 1.0f, 0.1f);

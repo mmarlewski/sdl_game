@@ -165,12 +165,15 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_object = new_object(OBJECT__HERO);
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
-    Room* room = get_room(state, "7_2");
+    Room* room = get_room(state, "6_2");
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(7,2)
+        vec2i(2,2)
     );
+    //
+    room_add_object_at(room, new_object(OBJECT__GOAT),vec2i(4,4));
+    //
     set_curr_room(
         state,
         room
@@ -200,8 +203,8 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__MINIBOT);
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
-    hero_add_augmentation(state, AUGMENTATION__DRILL);
-    hero_add_augmentation(state, AUGMENTATION__FREEZE);
+    hero_add_augmentation(state, AUGMENTATION__ARM);
+    hero_add_augmentation(state, AUGMENTATION__FLAME);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -701,19 +704,19 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             if(hero_has_augmentation(state, AUGMENTATION__GUN))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__LONG_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_SHOT);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__POINT_BLANK_SHOT);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SHOT);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_SHOT);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HARPOON_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DOUBLE_JUMP);
             }
 
-            // cannon
+            // crossbow
 
-            if(hero_has_augmentation(state, AUGMENTATION__CANNON))
+            if(hero_has_augmentation(state, AUGMENTATION__CROSSBOW))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__HIGH_PROJECTILE);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DOUBLE_JUMP);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__RICOSHET);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HARPOON_SHOT);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__NEST);
             }
 
