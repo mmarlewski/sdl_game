@@ -382,7 +382,7 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__BURROW_AND_SLICE:   texture = textures->hud.skill_burrow_and_slice; break;
         case SKILL__CHARGE_AND_SLICE:   texture = textures->hud.skill_charge_and_slice; break;
 
-        case SKILL__WHIP_PULL:          texture = textures->hud.skill_pull; break;
+        case SKILL__WHIP_PULL:          texture = textures->hud.skill_whip_pull; break;
         case SKILL__BURY:               texture = textures->hud.skill_bury; break;
         case SKILL__WHIP_SMACK:         texture = textures->hud.skill_whip_smack; break;
 

@@ -82,5 +82,6 @@ typedef TTF_Font Font;
 #define SKILL_JUMP_AND_CARRY_RANGE 2
 #define SKILL_JUMP_AND_STOMP_RANGE 2
 #define SKILL_LAUNCH_MINIBOT_RANGE 10
+#define SKILL_WHIP_RANGE 5
 
 #endif

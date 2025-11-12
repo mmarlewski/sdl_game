@@ -100,6 +100,7 @@ void skill_get_possible_target_1_pos(
     //     case SKILL__DRAG_AND_THROW_HOOK:
     //     case SKILL__DRAG_AND_THROW_TONGUE:
         case SKILL__HARPOON_SHOT:
+        case SKILL__BURY:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
@@ -196,43 +197,43 @@ void skill_get_possible_target_1_pos(
     //     case SKILL__PULL_SPIDERWEB:
     //     case SKILL__PULL_TENTACLE:
     //     case SKILL__PULL_TONGUE:
-    //     {
-    //         for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
-    //         {
-    //             int go_on = TRUE;
-    //             for(int i = 1; i <= SKILL_PULL_RANGE && go_on; i++)
-    //             {
-    //                 Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-    //                     source_tilemap_pos,
-    //                     dir4,
-    //                     i
-    //                 );
+        // {
+        //     for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
+        //     {
+        //         int go_on = TRUE;
+        //         for(int i = 1; i <= SKILL_PULL_RANGE && go_on; i++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+        //                 source_tilemap_pos,
+        //                 dir4,
+        //                 i
+        //             );
 
-    //                 if(is_tilemap_in_bounds(tilemap_pos))
-    //                 {
-    //                     Object* object = room_get_object_at(
-    //                         state->curr_room,
-    //                         tilemap_pos
-    //                     );
+        //             if(is_tilemap_in_bounds(tilemap_pos))
+        //             {
+        //                 Object* object = room_get_object_at(
+        //                     state->curr_room,
+        //                     tilemap_pos
+        //                 );
 
-    //                     if(object != NULL &&
-    //                        is_object_pull_towards(object))
-    //                     {
-    //                         add_new_list_element_to_list_end(
-    //                             target_1_pos_list,
-    //                             new_vec2i_from_vec2i(tilemap_pos)
-    //                         );
-    //                     }
+        //                 if(object != NULL &&
+        //                    is_object_pull_towards(object))
+        //                 {
+        //                     add_new_list_element_to_list_end(
+        //                         target_1_pos_list,
+        //                         new_vec2i_from_vec2i(tilemap_pos)
+        //                     );
+        //                 }
 
-    //                     if(object != NULL)
-    //                     {
-    //                         go_on = FALSE;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     break;
+        //                 if(object != NULL)
+        //                 {
+        //                     go_on = FALSE;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // break;
         // case SKILL__CHARGE_AND_PUSH:
         // case SKILL__CHARGE_AND_THROW:
         case SKILL__CHARGE_AND_PUNCH:
@@ -362,6 +363,70 @@ void skill_get_possible_target_1_pos(
                         }
                     }
                 }
+            }
+        }
+        break;
+        case SKILL__WHIP_PULL:
+        {
+            Vec2i up_left_tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, DIR8__UP_LEFT, 1);
+            Vec2i up_right_tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, DIR8__UP_RIGHT, 1);
+            Vec2i down_right_tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, DIR8__DOWN_RIGHT, 1);
+            Vec2i down_left_tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, DIR8__DOWN_LEFT, 1);
+
+            // add_new_list_element_to_list_end(
+            //     target_1_pos_list,
+            //     new_vec2i_from_vec2i(up_left_tilemap_pos)
+            // );
+            // add_new_list_element_to_list_end(
+            //     target_1_pos_list,
+            //     new_vec2i_from_vec2i(up_right_tilemap_pos)
+            // );
+            // add_new_list_element_to_list_end(
+            //     target_1_pos_list,
+            //     new_vec2i_from_vec2i(down_right_tilemap_pos)
+            // );
+            // add_new_list_element_to_list_end(
+            //     target_1_pos_list,
+            //     new_vec2i_from_vec2i(down_left_tilemap_pos)
+            // );
+
+            for(int i = 1; i < SKILL_WHIP_RANGE; i++)
+            {
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(up_left_tilemap_pos, DIR4__UP, i))
+                );
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(up_left_tilemap_pos, DIR4__LEFT, i))
+                );
+
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(up_right_tilemap_pos, DIR4__UP, i))
+                );
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(up_right_tilemap_pos, DIR4__RIGHT, i))
+                );
+
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(down_right_tilemap_pos, DIR4__DOWN, i))
+                );
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(down_right_tilemap_pos, DIR4__RIGHT, i))
+                );
+
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(down_left_tilemap_pos, DIR4__DOWN, i))
+                );
+                add_new_list_element_to_list_end(
+                    target_1_pos_list,
+                    new_vec2i_from_vec2i(vec2i_move_in_dir4_by(down_left_tilemap_pos, DIR4__LEFT, i))
+                );
             }
         }
         break;

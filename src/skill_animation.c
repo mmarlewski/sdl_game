@@ -536,6 +536,7 @@ Animation* skill_get_animation(
         break;
         case SKILL__ROCKET_JUMP:
         case SKILL__ROCKET_DASH:
+        case SKILL__SCORCH_WITH_FIRE:
         {
             skill_animation = new_animation_flash_sprite_in_gamemap(
                 textures->animation.blow_up_2,

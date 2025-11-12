@@ -169,10 +169,10 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(2,2)
+        vec2i(7,2)
     );
     //
-    room_add_object_at(room, new_object(OBJECT__GOAT),vec2i(4,4));
+    room_add_object_at(room, new_object(OBJECT__GOLEM_POWERED),vec2i(6,6));
     //
     set_curr_room(
         state,
@@ -203,7 +203,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__MINIBOT);
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
-    hero_add_augmentation(state, AUGMENTATION__ARM);
+    hero_add_augmentation(state, AUGMENTATION__WHIP);
     hero_add_augmentation(state, AUGMENTATION__FLAME);
 
     update_enemy_list(state);

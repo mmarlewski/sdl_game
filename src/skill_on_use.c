@@ -252,11 +252,10 @@ void skill_on_use(
         }
         break;
         case SKILL__BURROW:
+        case SKILL__BURROW_AND_SLICE:
+        case SKILL__BURY:
         {
-            if(target_2_object == NULL)
-            {
-                source_object->tilemap_pos = target_2_tilemap_pos;
-            }
+            source_object->tilemap_pos = target_2_tilemap_pos;
         }
         break;
         // case SKILL__MANIPULATION:
