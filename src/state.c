@@ -165,7 +165,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_object = new_object(OBJECT__HERO);
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
-    Room* room = get_room(state, "6_2");
+    Room* room = get_room(state, "7_2");
     room_add_object_at(
         room,
         state->hero_object,
@@ -203,8 +203,8 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__MINIBOT);
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
-    hero_add_augmentation(state, AUGMENTATION__WHIP);
-    hero_add_augmentation(state, AUGMENTATION__FLAME);
+    hero_add_augmentation(state, AUGMENTATION__BLADE);
+    hero_add_augmentation(state, AUGMENTATION__GUN);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -644,6 +644,14 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             if(hero_has_augmentation(state, AUGMENTATION__MINIBOT) && !state->was_minibot_launched)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__LAUNCH_MINIBOT);
+            }
+
+            // augmentation x2
+
+            if(hero_has_augmentation(state, AUGMENTATION__TRACK) && 
+            hero_has_augmentation(state, AUGMENTATION__SPRING))
+            {
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_JUMP);
             }
 
             // drill

@@ -128,11 +128,11 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->crash.object_crushing->tilemap_pos = action->tilemap_pos;
 
-            add_action_to_end_action_sequence(
+            add_action_after_curr_action_action_sequence(
                 sequence,
                 new_action_simultaneous_of_2(
-                    new_action_damage(action->crash.object_crushing, 1),
-                    new_action_damage(action->crash.object_crushed, 1)
+                    new_action_sequence_of_1(new_action_damage(action->crash.object_crushing, 1)),
+                    new_action_sequence_of_1(new_action_damage(action->crash.object_crushed, 1))
                 )
             );
 
@@ -523,7 +523,14 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__DAMAGE:
         {
-            if(is_object_ally(action->damage.object) || is_object_enemy(action->damage.object))
+            // if(action->damage.object == NULL || action->damage.object->is_to_be_removed)
+            // {
+            //     action->is_finished = TRUE;
+            //     action->is_finished_at_start = TRUE;
+            //     break;
+            // }
+
+            if(get_object_max_hp(action->damage.object) != -1)
             {
                 Texture* texture = NULL;
 
@@ -569,7 +576,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                 if(action->damage.object->curr_hp <= 0)
                 {
                     remove_all_actions_after_curr_action_action_sequence(sequence);
-                    add_action_to_end_action_sequence(
+                    add_action_after_curr_action_action_sequence(
                         sequence,
                         new_action_death(action->damage.object, action->damage.object->tilemap_pos)
                     );

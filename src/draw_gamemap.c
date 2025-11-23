@@ -67,15 +67,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
-            draw_texture_at_tilemap_pos(
-                renderer,
-                textures->floor.highlight,
-                colors->orange,
-                0.5f,
-                *tilemap_pos,
-                state->camera_world_pos,
-                state->camera_zoom
-            );
+            if(is_tilemap_in_bounds(*tilemap_pos))
+            {
+                draw_texture_at_tilemap_pos(
+                    renderer,
+                    textures->floor.highlight,
+                    colors->orange,
+                    0.5f,
+                    *tilemap_pos,
+                    state->camera_world_pos,
+                    state->camera_zoom
+                );
+            }
         }
     }
 
@@ -88,15 +91,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
-            draw_texture_at_tilemap_pos(
-                renderer,
-                textures->floor.highlight,
-                colors->pink,
-                0.5f,
-                *tilemap_pos,
-                state->camera_world_pos,
-                state->camera_zoom
-            );
+            if(is_tilemap_in_bounds(*tilemap_pos))
+            {
+                draw_texture_at_tilemap_pos(
+                    renderer,
+                    textures->floor.highlight,
+                    colors->pink,
+                    0.5f,
+                    *tilemap_pos,
+                    state->camera_world_pos,
+                    state->camera_zoom
+                );
+            }
         }
     }
 
@@ -110,15 +116,18 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         {
             Vec2i* tilemap_pos = (Vec2i*) curr_elem->data;
 
-            draw_texture_at_tilemap_pos(
-                renderer,
-                textures->floor.highlight,
-                colors->white,
-                (1.0f - fabs(sin(state->time * 1.0f))),
-                *tilemap_pos,
-                state->camera_world_pos,
-                state->camera_zoom
-            );
+            if(is_tilemap_in_bounds(*tilemap_pos))
+            {
+                draw_texture_at_tilemap_pos(
+                    renderer,
+                    textures->floor.highlight,
+                    colors->white,
+                    (1.0f - fabs(sin(state->time * 1.0f))),
+                    *tilemap_pos,
+                    state->camera_world_pos,
+                    state->camera_zoom
+                );
+            }
         }
     }
 
@@ -843,31 +852,33 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             
             if(get_object_max_hp(curr_object) != -1)
             {
-                int curr_hp = curr_object->curr_hp;
-                int max_hp = get_object_max_hp(curr_object);
-
-                Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
-                Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
-                Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
-                Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
-                screen_pos.x += TILE_LENGTH * 0.5f + 32;
-                screen_pos.x -= max_hp * 32 * 0.5;
-
-                for(int i = 0; i < max_hp; i++)
+                if(is_object_ally(curr_object) || is_object_enemy(curr_object) || get_object_max_hp(curr_object) > 1)
                 {
-                    Texture* texture = textures->hud.heart_full;
-                    if(i >= curr_hp) texture = textures->hud.heart_empty;
+                    int curr_hp = curr_object->curr_hp;
+                    int max_hp = get_object_max_hp(curr_object);
 
-                    draw_texture_at_screen_pos(
-                        renderer,
-                        texture,
-                        colors->red,
-                        1.0f,
-                        vec2i(screen_pos.x + i * 32, screen_pos.y),
-                        1.0f
-                    );
+                    Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
+                    Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                    Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                    Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
+                    screen_pos.x += TILE_LENGTH * 0.5f + 32;
+                    screen_pos.x -= max_hp * 32 * 0.5;
+
+                    for(int i = 0; i < max_hp; i++)
+                    {
+                        Texture* texture = textures->hud.heart_full;
+                        if(i >= curr_hp) texture = textures->hud.heart_empty;
+
+                        draw_texture_at_screen_pos(
+                            renderer,
+                            texture,
+                            colors->red,
+                            1.0f,
+                            vec2i(screen_pos.x + i * 32, screen_pos.y),
+                            1.0f
+                        );
+                    }
                 }
-                
             }
         }
     }

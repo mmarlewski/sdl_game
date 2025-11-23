@@ -52,14 +52,14 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
         {
             Action* crushed_action_sequence = new_action_sequence();
             Object* crushed_object = room_get_object_at(state->curr_room, vec2i_move_in_dir4_by(action->crash.object_crushing->tilemap_pos, action->crash.dir4, 1));
-            if(crushed_object != NULL)
+            if(crushed_object != NULL && !crushed_object->is_to_be_removed)
             {
                 object_on_crashed(state, sounds, crushed_action_sequence, action, crushed_object);
             }
 
             Action* crushing_action_sequence = new_action_sequence();
             Object* crushing_object = action->crash.object_crushing;
-            if(crushing_object != NULL)
+            if(crushing_object != NULL && !crushed_object->is_to_be_removed)
             {
                 object_on_crashing(state, sounds, crushing_action_sequence, action, crushing_object);
             }

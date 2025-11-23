@@ -1477,83 +1477,83 @@ void object_on_crashing(State* state, Sounds* sounds, Action* sequence, Action* 
 {
     switch(object->type)
     {
-        case OBJECT__DISPLAY:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_object(
-                    OBJECT__DISPLAY_DAMAGED_ITEM,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__GLASS_BALL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_death(
-                    object,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__BALL_SPIKES:
-        {
-            if(action->crash.object_crushed->type != OBJECT__BARREL &&
-               action->crash.object_crushed->type != OBJECT__PISTON_BARREL &&
-               !is_object_wall(action->crash.object_crushed) &&
-               !is_object_exit(action->crash.object_crushed))
-            {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_death(
-                        action->crash.object_crushed,
-                        action->crash.object_crushed->tilemap_pos
-                    )
-                );
-            }
-        }
-        break;
-        case OBJECT__BARREL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_death(
-                    object,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__PISTON_BARREL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_death(
-                    object,
-                    object->tilemap_pos
-                )
-            );
+//         case OBJECT__DISPLAY:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_object(
+//                     OBJECT__DISPLAY_DAMAGED_ITEM,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__GLASS_BALL:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_death(
+//                     object,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__BALL_SPIKES:
+//         {
+//             if(action->crash.object_crushed->type != OBJECT__BARREL &&
+//                action->crash.object_crushed->type != OBJECT__PISTON_BARREL &&
+//                !is_object_wall(action->crash.object_crushed) &&
+//                !is_object_exit(action->crash.object_crushed))
+//             {
+//                 add_action_to_end_action_sequence(
+//                     sequence,
+//                     new_action_death(
+//                         action->crash.object_crushed,
+//                         action->crash.object_crushed->tilemap_pos
+//                     )
+//                 );
+//             }
+//         }
+//         break;
+//         case OBJECT__BARREL:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_death(
+//                     object,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__PISTON_BARREL:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_death(
+//                     object,
+//                     object->tilemap_pos
+//                 )
+//             );
 
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_floor(
-                    FLOOR__METAL_NO_PISTON,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_floor(
+//                     FLOOR__METAL_NO_PISTON,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
         default:
         break;
     }
@@ -1563,233 +1563,233 @@ void object_on_crashed(State* state, Sounds* sounds, Action* sequence, Action* a
 {
     switch(object->type)
     {
-        case OBJECT__STALACTITE:
-        {
-            int floor = room_get_floor_at(
-                state->curr_room,
-                object->tilemap_pos
-            );
+//         case OBJECT__STALACTITE:
+//         {
+//             int floor = room_get_floor_at(
+//                 state->curr_room,
+//                 object->tilemap_pos
+//             );
 
-            switch(floor)
-            {
-                case FLOOR__WATER:
-                {
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_change_floor(
-                            FLOOR__WATER_STALACTITE_FALLEN,
-                            object->tilemap_pos
-                        )
-                    );
+//             switch(floor)
+//             {
+//                 case FLOOR__WATER:
+//                 {
+//                     add_action_to_end_action_sequence(
+//                         sequence,
+//                         new_action_change_floor(
+//                             FLOOR__WATER_STALACTITE_FALLEN,
+//                             object->tilemap_pos
+//                         )
+//                     );
 
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_remove_object(
-                            object,
-                            object->tilemap_pos
-                        )
-                    );
-                }
-                break;
-                case FLOOR__LAVA:
-                {
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_change_floor(
-                            FLOOR__LAVA_STALACTITE_FALLEN,
-                            object->tilemap_pos
-                        )
-                    );
+//                     add_action_to_end_action_sequence(
+//                         sequence,
+//                         new_action_remove_object(
+//                             object,
+//                             object->tilemap_pos
+//                         )
+//                     );
+//                 }
+//                 break;
+//                 case FLOOR__LAVA:
+//                 {
+//                     add_action_to_end_action_sequence(
+//                         sequence,
+//                         new_action_change_floor(
+//                             FLOOR__LAVA_STALACTITE_FALLEN,
+//                             object->tilemap_pos
+//                         )
+//                     );
 
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_remove_object(
-                            object,
-                            object->tilemap_pos
-                        )
-                    );
-                }
-                break;
-                case FLOOR__PIT:
-                {
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_remove_object(
-                            object,
-                            object->tilemap_pos
-                        )
-                    );
-                }
-                break;
-                default:
-                {
-                    add_action_to_end_action_sequence(
-                        sequence,
-                        new_action_change_object(
-                            OBJECT__STALACTITE_FALLEN_ITEM,
-                            object->tilemap_pos
-                        )
-                    );
-                }
-                break;
-            }
-        }
-        break;
-        case OBJECT__BALL:
-        {
-            for(int i = 0; i < 5; i++)
-            {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_move(
-                        vec2i_move_in_dir4_by(
-                            object->tilemap_pos,
-                            action->crash.dir4,
-                            i
-                        ),
-                        action->crash.dir4
-                    )
-                );
-            }
-        }
-        break;
-        case OBJECT__BALL_SPIKES:
-        {
-            if(action->crash.object_crushed->type != OBJECT__BARREL &&
-               action->crash.object_crushed->type != OBJECT__BARREL &&
-               !is_object_wall(action->crash.object_crushed) &&
-               !is_object_exit(action->crash.object_crushed))
-            {
-                add_action_to_end_action_sequence(
-                    sequence,
-                    new_action_death(
-                        action->crash.object_crushing,
-                        action->crash.object_crushed->tilemap_pos
-                    )
-                );
-            }
-        }
-        break;
-        case OBJECT__DISPLAY:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_object(
-                    OBJECT__DISPLAY_DAMAGED_ITEM,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__GLASS_BALL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_death(
-                    object,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__EXIT_METAL_BLOCKED_UP:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_object(
-                    OBJECT__EXIT_METAL_UP,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_object(
-                    OBJECT__EXIT_METAL_RIGHT,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__EXIT_METAL_BLOCKED_DOWN:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_object(
-                    OBJECT__EXIT_METAL_DOWN,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__EXIT_METAL_BLOCKED_LEFT:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_play_sound(object->tilemap_pos, sounds->glass_break)
-            );
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_object(
-                    OBJECT__EXIT_METAL_LEFT,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__BARREL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_death(
-                    object,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
-        case OBJECT__PISTON_BARREL:
-        {
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_death(
-                    object,
-                    object->tilemap_pos
-                )
-            );
+//                     add_action_to_end_action_sequence(
+//                         sequence,
+//                         new_action_remove_object(
+//                             object,
+//                             object->tilemap_pos
+//                         )
+//                     );
+//                 }
+//                 break;
+//                 case FLOOR__PIT:
+//                 {
+//                     add_action_to_end_action_sequence(
+//                         sequence,
+//                         new_action_remove_object(
+//                             object,
+//                             object->tilemap_pos
+//                         )
+//                     );
+//                 }
+//                 break;
+//                 default:
+//                 {
+//                     add_action_to_end_action_sequence(
+//                         sequence,
+//                         new_action_change_object(
+//                             OBJECT__STALACTITE_FALLEN_ITEM,
+//                             object->tilemap_pos
+//                         )
+//                     );
+//                 }
+//                 break;
+//             }
+//         }
+//         break;
+//         case OBJECT__BALL:
+//         {
+//             for(int i = 0; i < 5; i++)
+//             {
+//                 add_action_to_end_action_sequence(
+//                     sequence,
+//                     new_action_move(
+//                         vec2i_move_in_dir4_by(
+//                             object->tilemap_pos,
+//                             action->crash.dir4,
+//                             i
+//                         ),
+//                         action->crash.dir4
+//                     )
+//                 );
+//             }
+//         }
+//         break;
+//         case OBJECT__BALL_SPIKES:
+//         {
+//             if(action->crash.object_crushed->type != OBJECT__BARREL &&
+//                action->crash.object_crushed->type != OBJECT__BARREL &&
+//                !is_object_wall(action->crash.object_crushed) &&
+//                !is_object_exit(action->crash.object_crushed))
+//             {
+//                 add_action_to_end_action_sequence(
+//                     sequence,
+//                     new_action_death(
+//                         action->crash.object_crushing,
+//                         action->crash.object_crushed->tilemap_pos
+//                     )
+//                 );
+//             }
+//         }
+//         break;
+//         case OBJECT__DISPLAY:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_object(
+//                     OBJECT__DISPLAY_DAMAGED_ITEM,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__GLASS_BALL:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_death(
+//                     object,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__EXIT_METAL_BLOCKED_UP:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_object(
+//                     OBJECT__EXIT_METAL_UP,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__EXIT_METAL_BLOCKED_RIGHT:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_object(
+//                     OBJECT__EXIT_METAL_RIGHT,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__EXIT_METAL_BLOCKED_DOWN:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_object(
+//                     OBJECT__EXIT_METAL_DOWN,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__EXIT_METAL_BLOCKED_LEFT:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_play_sound(object->tilemap_pos, sounds->glass_break)
+//             );
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_object(
+//                     OBJECT__EXIT_METAL_LEFT,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__BARREL:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_death(
+//                     object,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
+//         case OBJECT__PISTON_BARREL:
+//         {
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_death(
+//                     object,
+//                     object->tilemap_pos
+//                 )
+//             );
 
-            add_action_to_end_action_sequence(
-                sequence,
-                new_action_change_floor(
-                    FLOOR__METAL_NO_PISTON,
-                    object->tilemap_pos
-                )
-            );
-        }
-        break;
+//             add_action_to_end_action_sequence(
+//                 sequence,
+//                 new_action_change_floor(
+//                     FLOOR__METAL_NO_PISTON,
+//                     object->tilemap_pos
+//                 )
+//             );
+//         }
+//         break;
         default:
         break;
     }
@@ -1827,6 +1827,61 @@ void object_on_death(State* state, Sounds* sounds, Action* sequence, Action* act
                 sequence,
                 new_action_change_floor(
                     FLOOR__METAL_NO_PISTON,
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__SAFE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    new_object(OBJECT__SAFE_DAMAGED_ITEM),
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__ROCK:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    new_object(OBJECT__ROCK_DAMAGED_ITEM),
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__DISPLAY:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    new_object(OBJECT__DISPLAY_DAMAGED_ITEM),
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__VENDING_CELL:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    new_object(OBJECT__VENDING_CELL_DAMAGED_ITEM),
+                    object->tilemap_pos
+                )
+            );
+        }
+        break;
+        case OBJECT__VENDING_DYNAMITE:
+        {
+            add_action_to_end_action_sequence(
+                sequence,
+                new_action_add_object(
+                    new_object(OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM),
                     object->tilemap_pos
                 )
             );

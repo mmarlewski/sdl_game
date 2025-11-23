@@ -20,6 +20,8 @@ int is_skill_two_target(int skill)
         case SKILL__JUMP:               is = 0; break;
         case SKILL__BURROW:             is = 0; break;
 
+        case SKILL__CHARGE_AND_JUMP:    is = 1; break;
+
         case SKILL__PUSH:               is = 1; break;
         case SKILL__PUNCH:              is = 1; break;
         case SKILL__CHARGE_AND_PUNCH:   is = 1; break;
@@ -128,6 +130,8 @@ char* get_in_game_skill_name(int skill)
         case SKILL__JUMP:               name = "jump"; break;
         case SKILL__BURROW:             name = "burrow"; break;
 
+        case SKILL__CHARGE_AND_JUMP:    name = "charge and jump"; break;
+
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__PUNCH:              name = "punch"; break;
         case SKILL__CHARGE_AND_PUNCH:   name = "charge and punch"; break;
@@ -225,6 +229,8 @@ char* get_debug_skill_name(int skill)
         case SKILL__CHARGE:             name = "charge"; break;
         case SKILL__JUMP:               name = "jump"; break;
         case SKILL__BURROW:             name = "burrow"; break;
+
+        case SKILL__CHARGE_AND_JUMP:    name = "charge and jump"; break;
 
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__PUNCH:              name = "punch"; break;
@@ -327,6 +333,8 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__CHARGE:             texture = textures->hud.skill_charge; break;
         case SKILL__JUMP:               texture = textures->hud.skill_jump; break;
         case SKILL__BURROW:             texture = textures->hud.skill_burrow; break;
+
+        case SKILL__CHARGE_AND_JUMP:    texture = textures->hud.skill_charge_and_jump; break;
 
         case SKILL__PUSH:               texture = textures->hud.skill_push; break;
         case SKILL__PUNCH:              texture = textures->hud.skill_punch; break;

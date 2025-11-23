@@ -240,9 +240,9 @@ void add_action_after_curr_action_action_sequence(Action* sequence, Action* new_
 void remove_all_actions_after_curr_action_action_sequence(Action* sequence);
 
 Action* new_action_simultaneous();
-Action* new_action_simultaneous_of_1(Action* action_1);
-Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2);
-Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3);
+Action* new_action_simultaneous_of_1(Action* action_sequence_1);
+Action* new_action_simultaneous_of_2(Action* action_sequence_1, Action* action_sequence_2);
+Action* new_action_simultaneous_of_3(Action* action_sequence_1, Action* action_sequence_2, Action* action_sequence_3);
 void add_action_sequence_to_action_simultaneous(Action* simultaneous, Action* new_sequence);
 
 Action* new_action_move(Vec2i tilemap_pos, int dir4);

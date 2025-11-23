@@ -83,27 +83,27 @@ Action* new_action_simultaneous()
     return action;
 }
 
-Action* new_action_simultaneous_of_1(Action* action_1)
+Action* new_action_simultaneous_of_1(Action* action_sequence_1)
 {
     Action* simultaneous = new_action_simultaneous();
-    add_action_sequence_to_action_simultaneous(simultaneous, action_1);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_sequence_1);
     return simultaneous;
 }
 
-Action* new_action_simultaneous_of_2(Action* action_1, Action* action_2)
+Action* new_action_simultaneous_of_2(Action* action_sequence_1, Action* action_sequence_2)
 {
     Action* simultaneous = new_action_simultaneous();
-    add_action_sequence_to_action_simultaneous(simultaneous, action_1);
-    add_action_sequence_to_action_simultaneous(simultaneous, action_2);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_sequence_1);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_sequence_2);
     return simultaneous;
 }
 
-Action* new_action_simultaneous_of_3(Action* action_1, Action* action_2, Action* action_3)
+Action* new_action_simultaneous_of_3(Action* action_sequence_1, Action* action_sequence_2, Action* action_sequence_3)
 {
     Action* simultaneous = new_action_simultaneous();
-    add_action_sequence_to_action_simultaneous(simultaneous, action_1);
-    add_action_sequence_to_action_simultaneous(simultaneous, action_2);
-    add_action_sequence_to_action_simultaneous(simultaneous, action_3);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_sequence_1);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_sequence_2);
+    add_action_sequence_to_action_simultaneous(simultaneous, action_sequence_3);
     return simultaneous;
 }
 
@@ -459,6 +459,7 @@ char* get_action_name_from_type(int action_type)
         case ACTION__BREAK:            name = "break";         break;
         case ACTION__SHAKE:            name = "shake";         break;
         case ACTION__PLAY_SOUND:       name = "play sound";    break;
+        case ACTION__DAMAGE:           name = "damage";        break;
         case ACTION__COUNT:            name = "count";         break;
         default: break;
     }
