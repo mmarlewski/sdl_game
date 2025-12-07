@@ -449,6 +449,39 @@ typedef struct
     Texture* shark_fin_outline_1;
     Texture* shark_fin_outline_2;
 
+    Texture* lion;
+    Texture* lion_outline;
+
+    Texture* gorilla;
+    Texture* gorilla_outline;
+
+    Texture* dragon;
+    Texture* dragon_outline;
+
+    Texture* frog;
+    Texture* frog_outline;
+
+    Texture* rabbit;
+    Texture* rabbit_outline;
+
+    Texture* centipede;
+    Texture* centipede_outline;
+
+    Texture* grasshopper;
+    Texture* grasshopper_outline;
+
+    Texture* megaspider;
+    Texture* megaspider_outline;
+
+    Texture* porcupine;
+    Texture* porcupine_outline;
+
+    Texture* aardvark;
+    Texture* aardvark_outline;
+
+    Texture* worm;
+    Texture* worm_outline;
+
     Texture* minibot_enemy_1;
     Texture* minibot_enemy_2;
     Texture* minibot_enemy_outline_1;
@@ -1103,6 +1136,17 @@ typedef struct
     Texture* object_mimic;
     Texture* object_shark;
     Texture* object_shark_fin;
+    Texture* object_lion;
+    Texture* object_gorilla;
+    Texture* object_dragon;
+    Texture* object_frog;
+    Texture* object_rabbit;
+    Texture* object_centipede;
+    Texture* object_grasshopper;
+    Texture* object_megaspider;
+    Texture* object_porcupine;
+    Texture* object_aardvark;
+    Texture* object_worm;
     Texture* object_tturret_laser;
     Texture* object_tturret_bomb;
     Texture* object_tturret_projectile;

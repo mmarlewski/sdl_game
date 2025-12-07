@@ -463,6 +463,39 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->shark_fin_outline_1 = load_texture_from_filepath(renderer, "./res/object/shark_fin_outline_1.png");
     object->shark_fin_outline_2 = load_texture_from_filepath(renderer, "./res/object/shark_fin_outline_2.png");
 
+    object->lion = load_texture_from_filepath(renderer, "./res/object/lion.png");
+    object->lion_outline = load_texture_from_filepath(renderer, "./res/object/lion_outline.png");
+
+    object->gorilla = load_texture_from_filepath(renderer, "./res/object/gorilla.png");
+    object->gorilla_outline = load_texture_from_filepath(renderer, "./res/object/gorilla_outline.png");
+
+    object->dragon = load_texture_from_filepath(renderer, "./res/object/dragon.png");
+    object->dragon_outline = load_texture_from_filepath(renderer, "./res/object/dragon_outline.png");
+
+    object->frog = load_texture_from_filepath(renderer, "./res/object/frog.png");
+    object->frog_outline = load_texture_from_filepath(renderer, "./res/object/frog_outline.png");
+
+    object->rabbit = load_texture_from_filepath(renderer, "./res/object/rabbit.png");
+    object->rabbit_outline = load_texture_from_filepath(renderer, "./res/object/rabbit_outline.png");
+
+    object->centipede = load_texture_from_filepath(renderer, "./res/object/centipede.png");
+    object->centipede_outline = load_texture_from_filepath(renderer, "./res/object/centipede_outline.png");
+
+    object->grasshopper = load_texture_from_filepath(renderer, "./res/object/grasshopper.png");
+    object->grasshopper_outline = load_texture_from_filepath(renderer, "./res/object/grasshopper_outline.png");
+
+    object->megaspider = load_texture_from_filepath(renderer, "./res/object/megaspider.png");
+    object->megaspider_outline = load_texture_from_filepath(renderer, "./res/object/megaspider_outline.png");
+
+    object->porcupine = load_texture_from_filepath(renderer, "./res/object/porcupine.png");
+    object->porcupine_outline = load_texture_from_filepath(renderer, "./res/object/porcupine_outline.png");
+
+    object->aardvark = load_texture_from_filepath(renderer, "./res/object/aardvark.png");
+    object->aardvark_outline = load_texture_from_filepath(renderer, "./res/object/aardvark_outline.png");
+
+    object->worm = load_texture_from_filepath(renderer, "./res/object/worm.png");
+    object->worm_outline = load_texture_from_filepath(renderer, "./res/object/worm_outline.png");
+
     object->minibot_enemy_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_1.png");
     object->minibot_enemy_2 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_2.png");
     object->minibot_enemy_outline_1 = load_texture_from_filepath(renderer, "./res/object/minibot_enemy_outline_1.png");
@@ -1120,6 +1153,17 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->object_mimic = load_texture_from_filepath(renderer, "./res/hud/object_mimic.png");
     hud->object_shark = load_texture_from_filepath(renderer, "./res/hud/object_shark.png");
     hud->object_shark_fin = load_texture_from_filepath(renderer, "./res/hud/object_shark_fin.png");
+    hud->object_lion = load_texture_from_filepath(renderer, "./res/hud/object_lion.png");
+    hud->object_gorilla = load_texture_from_filepath(renderer, "./res/hud/object_gorilla.png");
+    hud->object_dragon = load_texture_from_filepath(renderer, "./res/hud/object_dragon.png");
+    hud->object_frog = load_texture_from_filepath(renderer, "./res/hud/object_frog.png");
+    hud->object_rabbit = load_texture_from_filepath(renderer, "./res/hud/object_rabbit.png");
+    hud->object_centipede = load_texture_from_filepath(renderer, "./res/hud/object_centipede.png");
+    hud->object_grasshopper = load_texture_from_filepath(renderer, "./res/hud/object_grasshopper.png");
+    hud->object_megaspider = load_texture_from_filepath(renderer, "./res/hud/object_megaspider.png");
+    hud->object_porcupine = load_texture_from_filepath(renderer, "./res/hud/object_porcupine.png");
+    hud->object_aardvark = load_texture_from_filepath(renderer, "./res/hud/object_aardvark.png");
+    hud->object_worm = load_texture_from_filepath(renderer, "./res/hud/object_worm.png");
     hud->object_tturret_laser = load_texture_from_filepath(renderer, "./res/hud/object_tturret_laser.png");
     hud->object_tturret_bomb = load_texture_from_filepath(renderer, "./res/hud/object_tturret_bomb.png");
     hud->object_tturret_projectile = load_texture_from_filepath(renderer, "./res/hud/object_tturret_projectile.png");

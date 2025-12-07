@@ -172,7 +172,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
         vec2i(7,2)
     );
     //
-    room_add_object_at(room, new_object(OBJECT__GOLEM_POWERED),vec2i(6,6));
+    room_add_object_at(room, new_object(OBJECT__DRAGON),vec2i(6,3));
     //
     set_curr_room(
         state,
