@@ -10,6 +10,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
     {
         case OBJECT__GOAT:
         case OBJECT__BULL:
+        case OBJECT__LION:
         {
             int chosen_dir4 = DIR4__DOWN;
             int max_score = 0;
@@ -78,8 +79,15 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
         }
         break;
         case OBJECT__SPIDER:
+        case OBJECT__FROG:
+        case OBJECT__RABBIT:
         case OBJECT__CHAMELEON:
         case OBJECT__FLY:
+        case OBJECT__GRASSHOPPER:
+        case OBJECT__CENTIPEDE:
+        case OBJECT__WORM:
+        case OBJECT__AARDVARK:
+        case OBJECT__MEGASPIDER:
         {
             int chosen_dir4 = DIR4__DOWN;
             int max_score = 0;
@@ -113,11 +121,11 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
 
                             score = i / 2;
 
-                            if(!is_object_wall(object)) score += 2;
+                            // if(!is_object_wall(object)) score += 2;
 
                             if(is_object_movable(object)) score += 10;
 
-                            if(is_object_pull_towards(object)) score += 10;
+                            // if(is_object_pull_towards(object)) score += 10;
 
                             if(is_object_ally(object)) score += 2;
                         }
@@ -144,21 +152,26 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             enemy->object->attack_dir4 = chosen_dir4;
         }
         break;
-        case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+        case OBJECT__GORILLA:
+        case OBJECT__DRAGON:
+        case OBJECT__MOLE:
+        case OBJECT__MINIBOT_ENEMY:
         {
-            enemy->object->attack_dir4 = DIR4__DOWN;
-        }
-        break;
-        case OBJECT__ENVIRONMENT_FALLING_STALACTITE:
-        {
-            List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
+            int chosen_dir4 = DIR4__DOWN;
+            int max_score = 0;
 
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
+            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
+                int score = 0;
+
+                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                    enemy->object->tilemap_pos,
+                    dir4,
+                    1
+                );
+
+                if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Vec2i tilemap_pos = vec2i(i, j);
                     Object* object = room_get_object_at(
                         state->curr_room,
                         tilemap_pos
@@ -168,401 +181,450 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
                         tilemap_pos
                     );
 
-                    if(object == NULL)
+                    if(object != NULL)
                     {
-                        int is_exit_around = FALSE;
-                        for(int dir4 = DIR4__NONE + 1; dir4 < DIR4__COUNT; dir4++)
-                        {
-                            Vec2i tilemap_pos_around = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
-                            if(is_tilemap_in_bounds(tilemap_pos_around))
-                            {
-                                Object* object_around = room_get_object_at(state->curr_room,tilemap_pos_around);
-                                if(object_around != NULL && is_object_exit(object_around))
-                                {
-                                    is_exit_around = TRUE;
-                                }
-                            }
-                        }
+                        score = 0;
 
-                        if(!is_exit_around)
-                        {
-                            add_new_list_element_to_list_end(
-                                possible_emerge_tilemap_pos_list,
-                                new_vec2i_from_vec2i(tilemap_pos)
-                            );
-                        }
+                        if(is_object_movable(object)) score += 10;
 
+                        if(is_object_ally(object)) score += 2;
                     }
+                }
+
+                if(score > max_score)
+                {
+                    max_score = score;
+                    chosen_dir4 = dir4;
                 }
             }
 
-            if(possible_emerge_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_emerge_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_emerge_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
-
-                enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
-            }
-            else
-            {
-                enemy->object->attack_dir4 = -1;
-            }
-
-            remove_all_list_elements(
-                possible_emerge_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_emerge_tilemap_pos_list);
+            enemy->object->attack_dir4 = chosen_dir4;
         }
         break;
-        case OBJECT__ENVIRONMENT_EMERGE_WATER:
+        case OBJECT__PORCUPINE:
         {
-            int num_of_squid_objects = 0;
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
-
-                    if(object != NULL && object->type == OBJECT__SQUID)
-                    {
-                        num_of_squid_objects++;
-                    }
-                }
-            }
-
-            if(num_of_squid_objects >= SPAWN_LIMIT)
-            {
-                enemy->object->attack_dir4 = -1;
-                break;
-            }
-
-            List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
-
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-
-                    if(floor == FLOOR__WATER && object == NULL)
-                    {
-                        add_new_list_element_to_list_end(
-                            possible_emerge_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
-
-            if(possible_emerge_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_emerge_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_emerge_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
-
-                enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
-            }
-            else
-            {
-                enemy->object->attack_dir4 = -1;
-            }
-
-            remove_all_list_elements(
-                possible_emerge_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_emerge_tilemap_pos_list);
+            enemy->object->attack_dir4 = DIR4__NONE;
         }
         break;
-        case OBJECT__ENVIRONMENT_EMERGE_PIT:
-        {
-            int num_of_squid_objects = 0;
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+        // case OBJECT__SQUIRREL_EXIT_OBSIDIAN_DOWN:
+        // {
+        //     enemy->object->attack_dir4 = DIR4__DOWN;
+        // }
+        // break;
+        // case OBJECT__ENVIRONMENT_FALLING_STALACTITE:
+        // {
+        //     List* possible_emerge_tilemap_pos_list =
+        //         new_list((void (*)(void*)) & destroy_vec2i);
 
-                    if(object != NULL && object->type == OBJECT__FLY)
-                    {
-                        num_of_squid_objects++;
-                    }
-                }
-            }
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-            if(num_of_squid_objects >= SPAWN_LIMIT)
-            {
-                enemy->object->attack_dir4 = -1;
-                break;
-            }
+        //             if(object == NULL)
+        //             {
+        //                 int is_exit_around = FALSE;
+        //                 for(int dir4 = DIR4__NONE + 1; dir4 < DIR4__COUNT; dir4++)
+        //                 {
+        //                     Vec2i tilemap_pos_around = vec2i_move_in_dir4_by(tilemap_pos, dir4, 1);
+        //                     if(is_tilemap_in_bounds(tilemap_pos_around))
+        //                     {
+        //                         Object* object_around = room_get_object_at(state->curr_room,tilemap_pos_around);
+        //                         if(object_around != NULL && is_object_exit(object_around))
+        //                         {
+        //                             is_exit_around = TRUE;
+        //                         }
+        //                     }
+        //                 }
 
-            List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
+        //                 if(!is_exit_around)
+        //                 {
+        //                     add_new_list_element_to_list_end(
+        //                         possible_emerge_tilemap_pos_list,
+        //                         new_vec2i_from_vec2i(tilemap_pos)
+        //                     );
+        //                 }
 
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             }
+        //         }
+        //     }
 
-                    if(floor == FLOOR__PIT && object == NULL)
-                    {
-                        add_new_list_element_to_list_end(
-                            possible_emerge_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
+        //     if(possible_emerge_tilemap_pos_list->size > 0)
+        //     {
+        //         int random_index = rand() % possible_emerge_tilemap_pos_list->size;
+        //         ListElem* random_list_elem = get_nth_list_element(
+        //             possible_emerge_tilemap_pos_list,
+        //             random_index
+        //         );
+        //         Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
-            if(possible_emerge_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_emerge_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_emerge_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+        //         enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
+        //     }
+        //     else
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //     }
 
-                enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
-            }
-            else
-            {
-                enemy->object->attack_dir4 = -1;
-            }
+        //     remove_all_list_elements(
+        //         possible_emerge_tilemap_pos_list,
+        //         1
+        //     );
+        //     destroy_list(possible_emerge_tilemap_pos_list);
+        // }
+        // break;
+        // case OBJECT__ENVIRONMENT_EMERGE_WATER:
+        // {
+        //     int num_of_squid_objects = 0;
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(state->curr_room,tilemap_pos);
 
-            remove_all_list_elements(
-                possible_emerge_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_emerge_tilemap_pos_list);
-        }
-        break;
-        case OBJECT__ENVIRONMENT_EMERGE_BURROW:
-        {
-            int num_of_squid_objects = 0;
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+        //             if(object != NULL && object->type == OBJECT__SQUID)
+        //             {
+        //                 num_of_squid_objects++;
+        //             }
+        //         }
+        //     }
 
-                    if(object != NULL && object->type == OBJECT__MOLE)
-                    {
-                        num_of_squid_objects++;
-                    }
-                }
-            }
+        //     if(num_of_squid_objects >= SPAWN_LIMIT)
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //         break;
+        //     }
 
-            if(num_of_squid_objects >= SPAWN_LIMIT)
-            {
-                enemy->object->attack_dir4 = -1;
-                break;
-            }
+        //     List* possible_emerge_tilemap_pos_list =
+        //         new_list((void (*)(void*)) & destroy_vec2i);
 
-            List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             if(floor == FLOOR__WATER && object == NULL)
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     possible_emerge_tilemap_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
 
-                    if(is_floor_burrow(floor) && object == NULL)
-                    {
-                        add_new_list_element_to_list_end(
-                            possible_emerge_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
+        //     if(possible_emerge_tilemap_pos_list->size > 0)
+        //     {
+        //         int random_index = rand() % possible_emerge_tilemap_pos_list->size;
+        //         ListElem* random_list_elem = get_nth_list_element(
+        //             possible_emerge_tilemap_pos_list,
+        //             random_index
+        //         );
+        //         Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
-            if(possible_emerge_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_emerge_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_emerge_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+        //         enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
+        //     }
+        //     else
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //     }
 
-                enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
-            }
-            else
-            {
-                enemy->object->attack_dir4 = -1;
-            }
+        //     remove_all_list_elements(
+        //         possible_emerge_tilemap_pos_list,
+        //         1
+        //     );
+        //     destroy_list(possible_emerge_tilemap_pos_list);
+        // }
+        // break;
+        // case OBJECT__ENVIRONMENT_EMERGE_PIT:
+        // {
+        //     int num_of_squid_objects = 0;
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(state->curr_room,tilemap_pos);
 
-            remove_all_list_elements(
-                possible_emerge_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_emerge_tilemap_pos_list);
-        }
-        break;
-        case OBJECT__ENVIRONMENT_EMERGE_PIPE:
-        {
-            int num_of_squid_objects = 0;
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+        //             if(object != NULL && object->type == OBJECT__FLY)
+        //             {
+        //                 num_of_squid_objects++;
+        //             }
+        //         }
+        //     }
 
-                    if(object != NULL && object->type == OBJECT__MINIBOT_ENEMY)
-                    {
-                        num_of_squid_objects++;
-                    }
-                }
-            }
+        //     if(num_of_squid_objects >= SPAWN_LIMIT)
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //         break;
+        //     }
 
-            if(num_of_squid_objects >= SPAWN_LIMIT)
-            {
-                enemy->object->attack_dir4 = -1;
-                break;
-            }
+        //     List* possible_emerge_tilemap_pos_list =
+        //         new_list((void (*)(void*)) & destroy_vec2i);
 
-            List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //             if(floor == FLOOR__PIT && object == NULL)
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     possible_emerge_tilemap_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
 
-                    if(object != NULL && object->type == OBJECT__PIPE)
-                    {
-                        add_new_list_element_to_list_end(
-                            possible_emerge_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
+        //     if(possible_emerge_tilemap_pos_list->size > 0)
+        //     {
+        //         int random_index = rand() % possible_emerge_tilemap_pos_list->size;
+        //         ListElem* random_list_elem = get_nth_list_element(
+        //             possible_emerge_tilemap_pos_list,
+        //             random_index
+        //         );
+        //         Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
 
-            if(possible_emerge_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_emerge_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_emerge_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+        //         enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
+        //     }
+        //     else
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //     }
 
-                enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
-            }
-            else
-            {
-                enemy->object->attack_dir4 = -1;
-            }
+        //     remove_all_list_elements(
+        //         possible_emerge_tilemap_pos_list,
+        //         1
+        //     );
+        //     destroy_list(possible_emerge_tilemap_pos_list);
+        // }
+        // break;
+        // case OBJECT__ENVIRONMENT_EMERGE_BURROW:
+        // {
+        //     int num_of_squid_objects = 0;
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(state->curr_room,tilemap_pos);
 
-            remove_all_list_elements(
-                possible_emerge_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_emerge_tilemap_pos_list);
-        }
-        break;
-        case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:
-        {
-            List* possible_emerge_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
+        //             if(object != NULL && object->type == OBJECT__MOLE)
+        //             {
+        //                 num_of_squid_objects++;
+        //             }
+        //         }
+        //     }
 
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+        //     if(num_of_squid_objects >= SPAWN_LIMIT)
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //         break;
+        //     }
 
-                    if(is_floor_burrow(floor))
-                    {
-                        add_new_list_element_to_list_end(
-                            possible_emerge_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
+        //     List* possible_emerge_tilemap_pos_list =
+        //         new_list((void (*)(void*)) & destroy_vec2i);
 
-            if(possible_emerge_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_emerge_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_emerge_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
 
-                enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
-            }
-            else
-            {
-                enemy->object->attack_dir4 = -1;
-            }
+        //             if(is_floor_burrow(floor) && object == NULL)
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     possible_emerge_tilemap_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
 
-            remove_all_list_elements(
-                possible_emerge_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_emerge_tilemap_pos_list);
-        }
-        break;
+        //     if(possible_emerge_tilemap_pos_list->size > 0)
+        //     {
+        //         int random_index = rand() % possible_emerge_tilemap_pos_list->size;
+        //         ListElem* random_list_elem = get_nth_list_element(
+        //             possible_emerge_tilemap_pos_list,
+        //             random_index
+        //         );
+        //         Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+
+        //         enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
+        //     }
+        //     else
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //     }
+
+        //     remove_all_list_elements(
+        //         possible_emerge_tilemap_pos_list,
+        //         1
+        //     );
+        //     destroy_list(possible_emerge_tilemap_pos_list);
+        // }
+        // break;
+        // case OBJECT__ENVIRONMENT_EMERGE_PIPE:
+        // {
+        //     int num_of_squid_objects = 0;
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(state->curr_room,tilemap_pos);
+
+        //             if(object != NULL && object->type == OBJECT__MINIBOT_ENEMY)
+        //             {
+        //                 num_of_squid_objects++;
+        //             }
+        //         }
+        //     }
+
+        //     if(num_of_squid_objects >= SPAWN_LIMIT)
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //         break;
+        //     }
+
+        //     List* possible_emerge_tilemap_pos_list =
+        //         new_list((void (*)(void*)) & destroy_vec2i);
+
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+
+        //             if(object != NULL && object->type == OBJECT__PIPE)
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     possible_emerge_tilemap_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
+
+        //     if(possible_emerge_tilemap_pos_list->size > 0)
+        //     {
+        //         int random_index = rand() % possible_emerge_tilemap_pos_list->size;
+        //         ListElem* random_list_elem = get_nth_list_element(
+        //             possible_emerge_tilemap_pos_list,
+        //             random_index
+        //         );
+        //         Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+
+        //         enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
+        //     }
+        //     else
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //     }
+
+        //     remove_all_list_elements(
+        //         possible_emerge_tilemap_pos_list,
+        //         1
+        //     );
+        //     destroy_list(possible_emerge_tilemap_pos_list);
+        // }
+        // break;
+        // case OBJECT__ENVIRONMENT_COLLAPSE_BURROW:
+        // {
+        //     List* possible_emerge_tilemap_pos_list =
+        //         new_list((void (*)(void*)) & destroy_vec2i);
+
+        //     for(int i = 0; i < TILEMAP_LENGTH; i++)
+        //     {
+        //         for(int j = 0; j < TILEMAP_LENGTH; j++)
+        //         {
+        //             Vec2i tilemap_pos = vec2i(i, j);
+        //             Object* object = room_get_object_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+        //             int floor = room_get_floor_at(
+        //                 state->curr_room,
+        //                 tilemap_pos
+        //             );
+
+        //             if(is_floor_burrow(floor))
+        //             {
+        //                 add_new_list_element_to_list_end(
+        //                     possible_emerge_tilemap_pos_list,
+        //                     new_vec2i_from_vec2i(tilemap_pos)
+        //                 );
+        //             }
+        //         }
+        //     }
+
+        //     if(possible_emerge_tilemap_pos_list->size > 0)
+        //     {
+        //         int random_index = rand() % possible_emerge_tilemap_pos_list->size;
+        //         ListElem* random_list_elem = get_nth_list_element(
+        //             possible_emerge_tilemap_pos_list,
+        //             random_index
+        //         );
+        //         Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
+
+        //         enemy->object->attack_dir4 = 10 * random_tilemap_pos.x + random_tilemap_pos.y;
+        //     }
+        //     else
+        //     {
+        //         enemy->object->attack_dir4 = -1;
+        //     }
+
+        //     remove_all_list_elements(
+        //         possible_emerge_tilemap_pos_list,
+        //         1
+        //     );
+        //     destroy_list(possible_emerge_tilemap_pos_list);
+        // }
+        // break;
         default:
         break;
     }

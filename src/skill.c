@@ -80,22 +80,23 @@ int is_skill_two_target(int skill)
         case SKILL__BURY:               is = 1; break;
         case SKILL__WHIP_SMACK:         is = 0; break;
 
-        case SKILL__LAUNCH_MINIBOT:             is = 0; break;
-        case SKILL__MINIBOT_MERGE:              is = 0; break;
+        case SKILL__LAUNCH_MINIBOT:     is = 0; break;
+        case SKILL__MINIBOT_MERGE:      is = 0; break;
 
-        case SKILL__TURRET_LASER:               is = 0; break;
-        case SKILL__TURRET_BOMB:                is = 0; break;
-        case SKILL__TURRET_PROJECTILE:          is = 0; break;
-
-        case SKILL__KILL_AROUND:                is = 0; break;
-
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE: is = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:       is = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:         is = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:      is = 0; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:        is = 0; break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    is = 0; break;
-        case SKILL__ENVIRONMENT_CONV_BELT:          is = 0; break;
+        case SKILL__CHARGE_AND_THROW:   is = 1; break;
+        case SKILL__DRAG:               is = 1; break;
+        case SKILL__PULL:               is = 0; break;
+        case SKILL__PUSH_DAMAGE:        is = 1; break;
+        case SKILL__THROW_DAMAGE:       is = 1; break;
+        case SKILL__DRAG_DAMAGE:        is = 1; break;
+        case SKILL__JUMP_DAMAGE_AROUND: is = 0; break;
+        case SKILL__CHARGE_AND_DAMAGE_3:is = 0; break;
+        case SKILL__DAMAGE_1:           is = 0; break;
+        case SKILL__DAMAGE_3:           is = 0; break;
+        case SKILL__PROJECTILE_LINE_1:  is = 0; break;
+        case SKILL__PROJECTILE_ARCH_1:  is = 0; break;
+        case SKILL__PROJECTILE_LINE_AROUND:     is = 0; break;
+        case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  is = 0; break;
 
         default: break;
     }
@@ -119,12 +120,12 @@ char* get_in_game_skill_name(int skill)
 
     switch(skill)
     {
-        case SKILL__NONE:                       name = "--"; break;
-        case SKILL__USE:                        name = "use"; break;
-        case SKILL__MOVE:                       name = "move"; break;
+        case SKILL__NONE:               name = "--"; break;
+        case SKILL__USE:                name = "use"; break;
+        case SKILL__MOVE:               name = "move"; break;
 
-        case SKILL__ATTACK_DIR:                 name = "---"; break;
-        case SKILL__NO_ATTACK:                  name = "no attack"; break;
+        case SKILL__ATTACK_DIR:         name = "---"; break;
+        case SKILL__NO_ATTACK:          name = "no attack"; break;
 
         case SKILL__CHARGE:             name = "charge"; break;
         case SKILL__JUMP:               name = "jump"; break;
@@ -190,22 +191,23 @@ char* get_in_game_skill_name(int skill)
         case SKILL__BURY:               name = "bury"; break;
         case SKILL__WHIP_SMACK:         name = "whip smack"; break;
 
-        case SKILL__LAUNCH_MINIBOT:             name = "launch minibot"; break;
-        case SKILL__MINIBOT_MERGE:              name = "minibot merge"; break;
+        case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
+        case SKILL__MINIBOT_MERGE:      name = "minibot merge"; break;
 
-        case SKILL__TURRET_LASER:               name = "turret laser"; break;
-        case SKILL__TURRET_BOMB:                name = "turret bomb"; break;
-        case SKILL__TURRET_PROJECTILE:          name = "turret projectile"; break;
-
-        case SKILL__KILL_AROUND:                name = "kill around"; break;
-
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "stalactite falling !"; break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "enemy emerge !"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:         name = "enemy emerge !"; break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "enemy emerge !"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "enemy emerge !"; break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "floor collapsing !"; break;
-        case SKILL__ENVIRONMENT_CONV_BELT:          name = "conveyor belt !"; break;
+        case SKILL__CHARGE_AND_THROW:   name = "charge and throw"; break;
+        case SKILL__DRAG:               name = "drag"; break;
+        case SKILL__PULL:               name = "pull"; break;
+        case SKILL__PUSH_DAMAGE:        name = "push"; break;
+        case SKILL__THROW_DAMAGE:       name = "throw"; break;
+        case SKILL__DRAG_DAMAGE:        name = "drag"; break;
+        case SKILL__JUMP_DAMAGE_AROUND: name = "jump"; break;
+        case SKILL__DAMAGE_1:           name = "damage"; break;
+        case SKILL__DAMAGE_3:           name = "damage"; break;
+        case SKILL__CHARGE_AND_DAMAGE_3:name = "charge"; break;
+        case SKILL__PROJECTILE_LINE_1:  name = "projectile line"; break;
+        case SKILL__PROJECTILE_ARCH_1:  name = "projectile arch"; break;
+        case SKILL__PROJECTILE_LINE_AROUND:     name = "projectile line around"; break;
+        case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  name = "launch minibot megaspider"; break;
 
         default: break;
     }
@@ -219,12 +221,12 @@ char* get_debug_skill_name(int skill)
 
     switch(skill)
     {
-        case SKILL__NONE:                       name = "none"; break;
-        case SKILL__USE:                        name = "use"; break;
-        case SKILL__MOVE:                       name = "move"; break;
+        case SKILL__NONE:               name = "none"; break;
+        case SKILL__USE:                name = "use"; break;
+        case SKILL__MOVE:               name = "move"; break;
 
-        case SKILL__ATTACK_DIR:                 name = "attack dir"; break;
-        case SKILL__NO_ATTACK:                  name = "no attack"; break;
+        case SKILL__ATTACK_DIR:         name = "attack dir"; break;
+        case SKILL__NO_ATTACK:          name = "no attack"; break;
 
         case SKILL__CHARGE:             name = "charge"; break;
         case SKILL__JUMP:               name = "jump"; break;
@@ -290,22 +292,23 @@ char* get_debug_skill_name(int skill)
         case SKILL__BURY:               name = "bury"; break;
         case SKILL__WHIP_SMACK:         name = "whip smack"; break;
 
-        case SKILL__LAUNCH_MINIBOT:             name = "launch minibot"; break;
-        case SKILL__MINIBOT_MERGE:              name = "minibot merge"; break;
+        case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
+        case SKILL__MINIBOT_MERGE:      name = "minibot merge"; break;
 
-        case SKILL__TURRET_LASER:               name = "turret laser"; break;
-        case SKILL__TURRET_BOMB:                name = "turret bomb"; break;
-        case SKILL__TURRET_PROJECTILE:          name = "turret projectile"; break;
-
-        case SKILL__KILL_AROUND:                name = "kill around"; break;
-
-        case SKILL__ENVIRONMENT_FALLING_STALACTITE: name = "environment falling stalactite"; break;
-        case SKILL__ENVIRONMENT_EMERGE_WATER:       name = "environment emerge water"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIT:         name = "environment emerge pit"; break;
-        case SKILL__ENVIRONMENT_EMERGE_BURROW:      name = "environment emerge burrow"; break;
-        case SKILL__ENVIRONMENT_EMERGE_PIPE:        name = "environment emerge pipe"; break;
-        case SKILL__ENVIRONMENT_COLLAPSE_BURROW:    name = "environment collapse burrow"; break;
-        case SKILL__ENVIRONMENT_CONV_BELT:          name = "environment conv belt"; break;
+        case SKILL__CHARGE_AND_THROW:   name = "charge and throw"; break;
+        case SKILL__DRAG:               name = "drag"; break;
+        case SKILL__PULL:               name = "pull"; break;
+        case SKILL__PUSH_DAMAGE:        name = "push damage"; break;
+        case SKILL__THROW_DAMAGE:       name = "throw damage"; break;
+        case SKILL__DRAG_DAMAGE:        name = "drag damage"; break;
+        case SKILL__JUMP_DAMAGE_AROUND: name = "jump damage around"; break;
+        case SKILL__DAMAGE_1:           name = "damage 1"; break;
+        case SKILL__DAMAGE_3:           name = "damage 3"; break;
+        case SKILL__CHARGE_AND_DAMAGE_3:name = "charge damage 3"; break;
+        case SKILL__PROJECTILE_LINE_1:  name = "projectile line 1"; break;
+        case SKILL__PROJECTILE_ARCH_1:  name = "projectile arch 1"; break;
+        case SKILL__PROJECTILE_LINE_AROUND:     name = "projectile line around"; break;
+        case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  name = "launch minibot megaspider"; break;
 
         default: break;
     }
@@ -326,9 +329,9 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
 
     switch(skill)
     {
-        case SKILL__NONE:                       texture = textures->hud.skill_none; break;
-        case SKILL__USE:                        texture = textures->hud.skill_use; break;
-        case SKILL__MOVE:                       texture = textures->hud.skill_move; break;
+        case SKILL__NONE:               texture = textures->hud.skill_none; break;
+        case SKILL__USE:                texture = textures->hud.skill_use; break;
+        case SKILL__MOVE:               texture = textures->hud.skill_move; break;
 
         case SKILL__CHARGE:             texture = textures->hud.skill_charge; break;
         case SKILL__JUMP:               texture = textures->hud.skill_jump; break;
@@ -394,14 +397,23 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__BURY:               texture = textures->hud.skill_bury; break;
         case SKILL__WHIP_SMACK:         texture = textures->hud.skill_whip_smack; break;
 
-        case SKILL__LAUNCH_MINIBOT:             texture = textures->hud.skill_launch_minibot; break;
-        case SKILL__MINIBOT_MERGE:              texture = textures->hud.skill_minibot_merge; break;
+        case SKILL__LAUNCH_MINIBOT:     texture = textures->hud.skill_launch_minibot; break;
+        case SKILL__MINIBOT_MERGE:      texture = textures->hud.skill_minibot_merge; break;
 
-        case SKILL__TURRET_LASER:               texture = textures->hud.skill_turret_laser; break;
-        case SKILL__TURRET_BOMB:                texture = textures->hud.skill_turret_bomb; break;
-        case SKILL__TURRET_PROJECTILE:          texture = textures->hud.skill_turret_projectile; break;
-
-        case SKILL__KILL_AROUND:                texture = textures->hud.skill_kill_around; break;
+        case SKILL__CHARGE_AND_THROW:   texture = textures->hud.skill_charge_and_throw; break;
+        case SKILL__DRAG:               texture = textures->hud.skill_drag; break;
+        case SKILL__PULL:               texture = textures->hud.skill_pull; break;
+        case SKILL__PUSH_DAMAGE:        texture = textures->hud.skill_push_damage; break;
+        case SKILL__THROW_DAMAGE:       texture = textures->hud.skill_throw_damage; break;
+        case SKILL__DRAG_DAMAGE:        texture = textures->hud.skill_drag_damage; break;
+        case SKILL__JUMP_DAMAGE_AROUND: texture = textures->hud.skill_jump_and_stomp; break;
+        case SKILL__DAMAGE_1:           texture = textures->hud.skill_damage_1; break;
+        case SKILL__DAMAGE_3:           texture = textures->hud.skill_damage_3; break;
+        case SKILL__CHARGE_AND_DAMAGE_3:texture = textures->hud.skill_charge_damage_3; break;
+        case SKILL__PROJECTILE_LINE_1:  texture = textures->hud.skill_long_shot; break;
+        case SKILL__PROJECTILE_ARCH_1:  texture = textures->hud.skill_high_projectile; break;
+        case SKILL__PROJECTILE_LINE_AROUND:     texture = textures->hud.skill_kill_around; break;
+        case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  texture = textures->hud.skill_launch_minibot; break;
 
         default: break;
     }

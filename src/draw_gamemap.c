@@ -864,6 +864,13 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     screen_pos.x += TILE_LENGTH * 0.5f + 32;
                     screen_pos.x -= max_hp * 32 * 0.5;
 
+                    Vec3i heart_color = colors->pink;
+
+                    if(is_object_ally(curr_object))
+                    {
+                        heart_color = colors->green;
+                    }
+
                     for(int i = 0; i < max_hp; i++)
                     {
                         Texture* texture = textures->hud.heart_full;
@@ -872,7 +879,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                         draw_texture_at_screen_pos(
                             renderer,
                             texture,
-                            colors->red,
+                            heart_color,
                             1.0f,
                             vec2i(screen_pos.x + i * 32, screen_pos.y),
                             1.0f

@@ -1057,6 +1057,7 @@ typedef struct
     Texture* skill_burrow;
     Texture* skill_whip_smack;
     Texture* skill_push;
+    Texture* skill_push_damage;
     Texture* skill_teleportation;
     Texture* skill_burrow_and_gtfo;
     Texture* skill_launch_nest;
@@ -1078,8 +1079,12 @@ typedef struct
     Texture* skill_stomp;
     Texture* skill_nail_floor;
     Texture* skill_charge;
+    Texture* skill_damage_1;
+    Texture* skill_damage_3;
+    Texture* skill_charge_damage_3;
     Texture* skill_point_black_shot;
     Texture* skill_drag;
+    Texture* skill_drag_damage;
     Texture* skill_scorch_with_fire;
     Texture* skill_spew_tar_ball;
     Texture* skill_penetrating_beam;
@@ -1097,6 +1102,7 @@ typedef struct
     Texture* skill_drill;
     Texture* skill_head_shot;
     Texture* skill_throw;
+    Texture* skill_throw_damage;
     Texture* skill_branching_bolt;
     Texture* skill_rocket_jump;
     Texture* skill_focused_beam;

@@ -9687,61 +9687,61 @@ void create_level(State* state, Textures* textures)
 
     // objects
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__SIGN_MOLE_WARNING),
-        vec2i(2,4)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__SIGN_MOLE_WARNING),
+    //     vec2i(2,4)
+    // );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(3, 2)
-    );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(3, 6)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(3, 2)
+    // );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(3, 6)
+    // );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(4, 1)
-    );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(4, 5)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(4, 1)
+    // );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(4, 5)
+    // );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(5, 8)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(5, 8)
+    // );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(5, 3)
-    );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(6, 7)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(5, 3)
+    // );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(6, 7)
+    // );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(7, 2)
-    );
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__PIPE),
-        vec2i(7, 4)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(7, 2)
+    // );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__PIPE),
+    //     vec2i(7, 4)
+    // );
 
     room_add_object_at(
         room_6_2,
@@ -9763,20 +9763,20 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__MOLE),
+        new_object(OBJECT__WORM),
         vec2i(7, 1)
     );
     room_add_object_at(
         room_6_2,
-        new_object(OBJECT__MOLE),
+        new_object(OBJECT__AARDVARK),
         vec2i(7, 7)
     );
 
-    room_add_object_at(
-        room_6_2,
-        new_object(OBJECT__ENVIRONMENT_EMERGE_BURROW),
-        vec2i(-1, -1)
-    );
+    // room_add_object_at(
+    //     room_6_2,
+    //     new_object(OBJECT__ENVIRONMENT_EMERGE_BURROW),
+    //     vec2i(-1, -1)
+    // );
 
     // passages
 
