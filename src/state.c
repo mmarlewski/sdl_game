@@ -172,7 +172,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
         vec2i(7,2)
     );
     //
-    room_add_object_at(room, new_object(OBJECT__MEGASPIDER),vec2i(6,3));
+    room_add_object_at(room, new_object(OBJECT__SPIDER),vec2i(6,3));
     //
     set_curr_room(
         state,
@@ -203,8 +203,8 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__MINIBOT);
     hero_add_augmentation(state, AUGMENTATION__TAIL);
 
-    hero_add_augmentation(state, AUGMENTATION__DRILL);
-    hero_add_augmentation(state, AUGMENTATION__FLAME);
+    // hero_add_augmentation(state, AUGMENTATION__DRILL);
+    hero_add_augmentation(state, AUGMENTATION__GUN);
 
     update_enemy_list(state);
     update_all_enemy_order(state);

@@ -187,7 +187,7 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
 
                         if(is_object_movable(object)) score += 10;
 
-                        if(is_object_ally(object)) score += 2;
+                        if(is_object_ally(object)) score += 10;
                     }
                 }
 

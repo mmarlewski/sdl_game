@@ -11098,8 +11098,29 @@ void create_level(State* state, Textures* textures)
 
     room_change_floor_at(
         room_7_2,
-        FLOOR__METAL_PISTON_DYNAMITE,
-        vec2i(5, 2)
+        FLOOR__SAND,
+        vec2i(1, 6)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(1, 7)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(1, 8)
+    );
+
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 5)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 6)
     );
 
     // walls
@@ -11119,11 +11140,11 @@ void create_level(State* state, Textures* textures)
 
     // objects
 
-    room_add_object_at(
-        room_7_2,
-        new_object(OBJECT__STATION_HOOK_HAND),
-        vec2i(1, 8)
-    );
+    // room_add_object_at(
+    //     room_7_2,
+    //     new_object(OBJECT__STATION_HOOK_HAND),
+    //     vec2i(1, 8)
+    // );
 
     room_add_object_at(
         room_7_2,
@@ -11132,8 +11153,8 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_7_2,
-        new_object(OBJECT__STALACTITE),
-        vec2i(1, 6)
+        new_object(OBJECT__STALAGMITE),
+        vec2i(3, 6)
     );
     room_add_object_at(
         room_7_2,
@@ -11147,26 +11168,45 @@ void create_level(State* state, Textures* textures)
     );
     room_add_object_at(
         room_7_2,
-        new_object(OBJECT__STALACTITE),
+        new_object(OBJECT__STALAGMITE),
         vec2i(6, 5)
     );
 
     room_add_object_at(
         room_7_2,
-        new_object(OBJECT__STALAGNATE),
+        new_object(OBJECT__STALAGMITE),
         vec2i(7, 7)
     );
 
     room_add_object_at(
         room_7_2,
-        new_object(OBJECT__STALAGMITE),
+        new_object(OBJECT__STALACTITE),
         vec2i(2,4)
     );
 
     room_add_object_at(
         room_7_2,
-        new_object(OBJECT__CRATE_DYNAMITE_ITEM),
-        vec2i(1, 4)
+        new_object(OBJECT__STALAGMITE),
+        vec2i(5, 2)
+    );
+
+    room_add_object_at(
+        room_7_2,
+        new_object(OBJECT__STALACTITE),
+        vec2i(4, 5)
+    );
+
+
+    room_add_object_at(
+        room_7_2,
+        new_object(OBJECT__STALAGMITE),
+        vec2i(7, 3)
+    );
+
+    room_add_object_at(
+        room_7_2,
+        new_object(OBJECT__STATION_TAIL),
+        vec2i(1, 7)
     );
 
     room_add_object_at(

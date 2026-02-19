@@ -1799,9 +1799,73 @@ void object_on_death(State* state, Sounds* sounds, Action* sequence, Action* act
 {
     switch(object->type)
     {
-        case OBJECT__PILLAR:
+        case OBJECT__STALACTITE:
         {
-            //
+            int floor = room_get_floor_at(state->curr_room, action->tilemap_pos);
+
+            switch(floor)
+            {
+                case FLOOR__WATER:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__WATER_STALACTITE_FALLEN,
+                            object->tilemap_pos
+                        )
+                    );
+
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                        )
+                    );
+                }
+                break;
+                case FLOOR__LAVA:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_change_floor(
+                            FLOOR__LAVA_STALACTITE_FALLEN,
+                            object->tilemap_pos
+                        )
+                    );
+
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                        )
+                    );
+                }
+                break;
+                case FLOOR__PIT:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_remove_object(
+                            object,
+                            object->tilemap_pos
+                        )
+                    );
+                }
+                break;
+                default:
+                {
+                    add_action_to_end_action_sequence(
+                        sequence,
+                        new_action_add_object(
+                            new_object(OBJECT__STALACTITE_FALLEN),
+                            object->tilemap_pos
+                        )
+                    );
+                }
+                break;
+            }
         }
         break;
         case OBJECT__BARREL:

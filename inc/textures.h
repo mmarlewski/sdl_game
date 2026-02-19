@@ -637,6 +637,19 @@ typedef struct
     Texture* station_taken;
     Texture* station_outline;
 
+    Texture* station_tail;
+    Texture* station_arm;
+    Texture* station_drill;
+    Texture* station_blade;
+    Texture* station_hammer;
+    Texture* station_whip;
+    Texture* station_gun;
+    Texture* station_crossbow;
+    Texture* station_coil;
+    Texture* station_flame;
+    Texture* station_freeze;
+    Texture* station_laser;
+
     Texture* secret_1;
     Texture* secret_2;
     Texture* secret_3;

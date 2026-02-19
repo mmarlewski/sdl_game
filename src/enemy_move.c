@@ -195,7 +195,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                     {
                                         go_on = FALSE;
 
-                                        if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 2 * mul;
+                                        // if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 2 * mul;
 
                                         if(!is_object_wall(neighbor_object)) score += 1 * mul;
 
@@ -203,7 +203,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                                         if(is_object_ally(neighbor_object)) score += 1 * mul;
 
-                                        if(enemy->object->type == OBJECT__FLY && is_object_fragile(neighbor_object)) score += 2 * mul;
+                                        if(is_object_enemy(neighbor_object)) score -= 1 * mul;
+
+                                        // if(enemy->object->type == OBJECT__FLY && is_object_fragile(neighbor_object)) score += 2 * mul;
                                     }
                                 }
                             }

@@ -414,6 +414,19 @@ int is_object_pull_towards(Object* object)
         case OBJECT__STATION_TELEPORTATION_HEAD:       is = 1; break;
         case OBJECT__STATION_TAKEN:                    is = 1; break;
 
+        case OBJECT__STATION_TAIL:                     is = 1; break;
+        case OBJECT__STATION_ARM:                      is = 1; break;
+        case OBJECT__STATION_DRILL:                    is = 1; break;
+        case OBJECT__STATION_BLADE:                    is = 1; break;
+        case OBJECT__STATION_HAMMER:                   is = 1; break;
+        case OBJECT__STATION_WHIP:                     is = 1; break;
+        case OBJECT__STATION_GUN:                      is = 1; break;
+        case OBJECT__STATION_CROSSBOW:                 is = 1; break;
+        case OBJECT__STATION_COIL:                     is = 1; break;
+        case OBJECT__STATION_FLAME:                    is = 1; break;
+        case OBJECT__STATION_FREEZE:                   is = 1; break;
+        case OBJECT__STATION_LASER:                    is = 1; break;
+
         case OBJECT__LEVER_METAL_OFF:                  is = 1; break;
         case OBJECT__LEVER_METAL_ON:                   is = 1; break;
         case OBJECT__LEVER_STONE_UNPOWERED:            is = 1; break;
@@ -532,6 +545,19 @@ int is_object_station(Object* object)
         case OBJECT__STATION_MANIPULATION_HEAD:        is = 1; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:       is = 1; break;
 
+        case OBJECT__STATION_TAIL:                     is = 1; break;
+        case OBJECT__STATION_ARM:                      is = 1; break;
+        case OBJECT__STATION_DRILL:                    is = 1; break;
+        case OBJECT__STATION_BLADE:                    is = 1; break;
+        case OBJECT__STATION_HAMMER:                   is = 1; break;
+        case OBJECT__STATION_WHIP:                     is = 1; break;
+        case OBJECT__STATION_GUN:                      is = 1; break;
+        case OBJECT__STATION_CROSSBOW:                 is = 1; break;
+        case OBJECT__STATION_COIL:                     is = 1; break;
+        case OBJECT__STATION_FLAME:                    is = 1; break;
+        case OBJECT__STATION_FREEZE:                   is = 1; break;
+        case OBJECT__STATION_LASER:                    is = 1; break;
+
         default: break;
     }
 
@@ -564,14 +590,27 @@ int get_station_augmentation(Object* object)
         case OBJECT__STATION_HOOK_HAND:            augmentation = AUGMENTATION__NONE; break;
         case OBJECT__STATION_CHAIN_HAND:           augmentation = AUGMENTATION__NONE; break;
         case OBJECT__STATION_SCISSOR_HAND:         augmentation = AUGMENTATION__NONE; break;
-        case OBJECT__STATION_SPRING_LEG:           augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_SPRING_LEG:           augmentation = AUGMENTATION__SPRING; break;
         case OBJECT__STATION_STRIDER_LEG:          augmentation = AUGMENTATION__NONE; break;
-        case OBJECT__STATION_TRACK_LEG:            augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_TRACK_LEG:            augmentation = AUGMENTATION__TRACK; break;
         case OBJECT__STATION_BOOT_LEG:             augmentation = AUGMENTATION__NONE; break;
-        case OBJECT__STATION_MINIBOT_TORSO:        augmentation = AUGMENTATION__NONE; break;
-        case OBJECT__STATION_WINGS_TORSO:          augmentation = AUGMENTATION__NONE; break;
+        case OBJECT__STATION_MINIBOT_TORSO:        augmentation = AUGMENTATION__MINIBOT; break;
+        case OBJECT__STATION_WINGS_TORSO:          augmentation = AUGMENTATION__WINGS; break;
         case OBJECT__STATION_MANIPULATION_HEAD:    augmentation = AUGMENTATION__NONE; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:   augmentation = AUGMENTATION__NONE; break;
+
+        case OBJECT__STATION_TAIL:                 augmentation = AUGMENTATION__TAIL; break;
+        case OBJECT__STATION_ARM:                  augmentation = AUGMENTATION__ARM; break;
+        case OBJECT__STATION_DRILL:                augmentation = AUGMENTATION__DRILL; break;
+        case OBJECT__STATION_BLADE:                augmentation = AUGMENTATION__BLADE; break;
+        case OBJECT__STATION_HAMMER:               augmentation = AUGMENTATION__HAMMER; break;
+        case OBJECT__STATION_WHIP:                 augmentation = AUGMENTATION__WHIP; break;
+        case OBJECT__STATION_GUN:                  augmentation = AUGMENTATION__GUN; break;
+        case OBJECT__STATION_CROSSBOW:             augmentation = AUGMENTATION__CROSSBOW; break;
+        case OBJECT__STATION_COIL:                 augmentation = AUGMENTATION__COIL; break;
+        case OBJECT__STATION_FLAME:                augmentation = AUGMENTATION__FLAME; break;
+        case OBJECT__STATION_FREEZE:               augmentation = AUGMENTATION__FREEZE; break;
+        case OBJECT__STATION_LASER:                augmentation = AUGMENTATION__LASER; break;
 
         default: break;
     }
@@ -1513,6 +1552,19 @@ int is_object_metal(Object *object)
         case OBJECT__STATION_TELEPORTATION_HEAD:
         case OBJECT__STATION_TAKEN:
 
+        case OBJECT__STATION_TAIL:
+        case OBJECT__STATION_ARM:
+        case OBJECT__STATION_DRILL:
+        case OBJECT__STATION_BLADE:
+        case OBJECT__STATION_HAMMER:
+        case OBJECT__STATION_WHIP:
+        case OBJECT__STATION_GUN:
+        case OBJECT__STATION_CROSSBOW:
+        case OBJECT__STATION_COIL:
+        case OBJECT__STATION_FLAME:
+        case OBJECT__STATION_FREEZE:
+        case OBJECT__STATION_LASER:
+
         case OBJECT__SECRET_1:
         case OBJECT__SECRET_2:
         case OBJECT__SECRET_3:
@@ -1674,7 +1726,7 @@ int get_object_max_hp(Object* object)
         case OBJECT__RABBIT:                        max_hp = 3; break;
         case OBJECT__CENTIPEDE:                     max_hp = 3; break;
         case OBJECT__GRASSHOPPER:                   max_hp = 3; break;
-        case OBJECT__MEGASPIDER:                    max_hp = 3; break;
+        case OBJECT__MEGASPIDER:                    max_hp = 5; break;
         case OBJECT__PORCUPINE:                     max_hp = 3; break;
         case OBJECT__AARDVARK:                      max_hp = 3; break;
         case OBJECT__WORM:                          max_hp = 3; break;
@@ -2320,6 +2372,19 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__STATION_TELEPORTATION_HEAD:       name = "station teleportation head"; break;
         case OBJECT__STATION_TAKEN:                    name = "station taken"; break;
 
+        case OBJECT__STATION_TAIL:                     name = "station "; break;
+        case OBJECT__STATION_ARM:                      name = "station "; break;
+        case OBJECT__STATION_DRILL:                    name = "station "; break;
+        case OBJECT__STATION_BLADE:                    name = "station "; break;
+        case OBJECT__STATION_HAMMER:                   name = "station "; break;
+        case OBJECT__STATION_WHIP:                     name = "station "; break;
+        case OBJECT__STATION_GUN:                      name = "station "; break;
+        case OBJECT__STATION_CROSSBOW:                 name = "station "; break;
+        case OBJECT__STATION_COIL:                     name = "station "; break;
+        case OBJECT__STATION_FLAME:                    name = "station "; break;
+        case OBJECT__STATION_FREEZE:                   name = "station "; break;
+        case OBJECT__STATION_LASER:                    name = "station "; break;
+
         case OBJECT__SECRET_1:                         name = "secret 1"; break;
         case OBJECT__SECRET_2:                         name = "secret 2"; break;
         case OBJECT__SECRET_3:                         name = "secret 3"; break;
@@ -2586,6 +2651,19 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__STATION_TELEPORTATION_HEAD:       name = "station"; break;
         case OBJECT__STATION_TAKEN:                    name = "station"; break;
 
+        case OBJECT__STATION_TAIL:                     name = "station"; break;
+        case OBJECT__STATION_ARM:                      name = "station"; break;
+        case OBJECT__STATION_DRILL:                    name = "station"; break;
+        case OBJECT__STATION_BLADE:                    name = "station"; break;
+        case OBJECT__STATION_HAMMER:                   name = "station"; break;
+        case OBJECT__STATION_WHIP:                     name = "station"; break;
+        case OBJECT__STATION_GUN:                      name = "station"; break;
+        case OBJECT__STATION_CROSSBOW:                 name = "station"; break;
+        case OBJECT__STATION_COIL:                     name = "station"; break;
+        case OBJECT__STATION_FLAME:                    name = "station"; break;
+        case OBJECT__STATION_FREEZE:                   name = "station"; break;
+        case OBJECT__STATION_LASER:                    name = "station"; break;
+
         case OBJECT__SECRET_1:                         name = "secret"; break;
         case OBJECT__SECRET_2:                         name = "secret"; break;
         case OBJECT__SECRET_3:                         name = "secret"; break;
@@ -2842,6 +2920,19 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_MANIPULATION_HEAD:        texture = textures->object.station_manipulation_head; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_taken; break;
+
+        case OBJECT__STATION_TAIL:                     texture = textures->object.station_tail; break;
+        case OBJECT__STATION_ARM:                      texture = textures->object.station_arm; break;
+        case OBJECT__STATION_DRILL:                    texture = textures->object.station_drill; break;
+        case OBJECT__STATION_BLADE:                    texture = textures->object.station_blade; break;
+        case OBJECT__STATION_HAMMER:                   texture = textures->object.station_hammer; break;
+        case OBJECT__STATION_WHIP:                     texture = textures->object.station_whip; break;
+        case OBJECT__STATION_GUN:                      texture = textures->object.station_gun; break;
+        case OBJECT__STATION_CROSSBOW:                 texture = textures->object.station_crossbow; break;
+        case OBJECT__STATION_COIL:                     texture = textures->object.station_coil; break;
+        case OBJECT__STATION_FLAME:                    texture = textures->object.station_flame; break;
+        case OBJECT__STATION_FREEZE:                   texture = textures->object.station_freeze; break;
+        case OBJECT__STATION_LASER:                    texture = textures->object.station_laser; break;
 
         case OBJECT__SECRET_1:                         texture = textures->object.secret_1; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_2; break;
@@ -3100,6 +3191,19 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_teleportation_head; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_taken; break;
 
+        case OBJECT__STATION_TAIL:                     texture = textures->object.station_tail; break;
+        case OBJECT__STATION_ARM:                      texture = textures->object.station_arm; break;
+        case OBJECT__STATION_DRILL:                    texture = textures->object.station_drill; break;
+        case OBJECT__STATION_BLADE:                    texture = textures->object.station_blade; break;
+        case OBJECT__STATION_HAMMER:                   texture = textures->object.station_hammer; break;
+        case OBJECT__STATION_WHIP:                     texture = textures->object.station_whip; break;
+        case OBJECT__STATION_GUN:                      texture = textures->object.station_gun; break;
+        case OBJECT__STATION_CROSSBOW:                 texture = textures->object.station_crossbow; break;
+        case OBJECT__STATION_COIL:                     texture = textures->object.station_coil; break;
+        case OBJECT__STATION_FLAME:                    texture = textures->object.station_flame; break;
+        case OBJECT__STATION_FREEZE:                   texture = textures->object.station_freeze; break;
+        case OBJECT__STATION_LASER:                    texture = textures->object.station_laser; break;
+
         case OBJECT__SECRET_1:                         texture = textures->object.secret_1; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_2; break;
         case OBJECT__SECRET_3:                         texture = textures->object.secret_3; break;
@@ -3357,6 +3461,19 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_outline; break;
 
+        case OBJECT__STATION_TAIL:                     texture = textures->object.station_outline; break;
+        case OBJECT__STATION_ARM:                      texture = textures->object.station_outline; break;
+        case OBJECT__STATION_DRILL:                    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_BLADE:                    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_HAMMER:                   texture = textures->object.station_outline; break;
+        case OBJECT__STATION_WHIP:                     texture = textures->object.station_outline; break;
+        case OBJECT__STATION_GUN:                      texture = textures->object.station_outline; break;
+        case OBJECT__STATION_CROSSBOW:                 texture = textures->object.station_outline; break;
+        case OBJECT__STATION_COIL:                     texture = textures->object.station_outline; break;
+        case OBJECT__STATION_FLAME:                    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_FREEZE:                   texture = textures->object.station_outline; break;
+        case OBJECT__STATION_LASER:                    texture = textures->object.station_outline; break;
+
         case OBJECT__SECRET_1:                         texture = textures->object.secret_outline; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_outline; break;
         case OBJECT__SECRET_3:                         texture = textures->object.secret_outline; break;
@@ -3613,6 +3730,19 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_MANIPULATION_HEAD:        texture = textures->object.station_outline; break;
         case OBJECT__STATION_TELEPORTATION_HEAD:       texture = textures->object.station_outline; break;
         case OBJECT__STATION_TAKEN:                    texture = textures->object.station_outline; break;
+
+        case OBJECT__STATION_TAIL:                     texture = textures->object.station_outline; break;
+        case OBJECT__STATION_ARM:                      texture = textures->object.station_outline; break;
+        case OBJECT__STATION_DRILL:                    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_BLADE:                    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_HAMMER:                   texture = textures->object.station_outline; break;
+        case OBJECT__STATION_WHIP:                     texture = textures->object.station_outline; break;
+        case OBJECT__STATION_GUN:                      texture = textures->object.station_outline; break;
+        case OBJECT__STATION_CROSSBOW:                 texture = textures->object.station_outline; break;
+        case OBJECT__STATION_COIL:                     texture = textures->object.station_outline; break;
+        case OBJECT__STATION_FLAME:                    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_FREEZE:                   texture = textures->object.station_outline; break;
+        case OBJECT__STATION_LASER:                    texture = textures->object.station_outline; break;
 
         case OBJECT__SECRET_1:                         texture = textures->object.secret_outline; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_outline; break;

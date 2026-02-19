@@ -485,32 +485,39 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
                 }
             }
 
-            if(how_many_minispiders >= 5) break;
-            
-            int go_on = TRUE;
-            for(int i = 1; i < 10 && go_on; i++)
+            if(how_many_minispiders < 5)
             {
-                Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-                    enemy->object->tilemap_pos,
-                    enemy->object->attack_dir4,
-                    i
-                );
-
-                if(is_tilemap_in_bounds(tilemap_pos))
+                int go_on = TRUE;
+                for(int i = 1; i < 10 && go_on; i++)
                 {
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
+                        enemy->object->tilemap_pos,
+                        enemy->object->attack_dir4,
+                        i
                     );
 
-                    if(object == NULL)
+                    if(is_tilemap_in_bounds(tilemap_pos))
                     {
-                        enemy->skill = SKILL__LAUNCH_MINIBOT_MEGASPIDER;
-                        enemy->target_1_tilemap_pos = vec2i(0, 0);
-                        enemy->target_2_tilemap_pos = tilemap_pos;
-                        go_on = FALSE;
+                        Object* object = room_get_object_at(
+                            state->curr_room,
+                            tilemap_pos
+                        );
+
+                        if(object == NULL)
+                        {
+                            enemy->skill = SKILL__LAUNCH_MINIBOT_MEGASPIDER;
+                            enemy->target_1_tilemap_pos = vec2i(0, 0);
+                            enemy->target_2_tilemap_pos = tilemap_pos;
+                            go_on = FALSE;
+                        }
                     }
                 }
+            }
+            else
+            {
+                enemy->skill = SKILL__DAMAGE_3;
+                enemy->target_1_tilemap_pos = vec2i(0, 0);
+                enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(enemy->object->tilemap_pos, enemy->object->attack_dir4, 1);
             }
         }
         break;

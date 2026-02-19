@@ -609,6 +609,19 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->station_taken = load_texture_from_filepath(renderer, "./res/object/station_taken.png");
     object->station_outline = load_texture_from_filepath(renderer, "./res/object/station_outline.png");
 
+    object->station_tail = load_texture_from_filepath(renderer, "./res/object/station_tail.png");
+    object->station_arm = load_texture_from_filepath(renderer, "./res/object/station_arm.png");
+    object->station_drill = load_texture_from_filepath(renderer, "./res/object/station_drill.png");
+    object->station_blade = load_texture_from_filepath(renderer, "./res/object/station_blade.png");
+    object->station_hammer = load_texture_from_filepath(renderer, "./res/object/station_hammer.png");
+    object->station_whip = load_texture_from_filepath(renderer, "./res/object/station_whip.png");
+    object->station_gun = load_texture_from_filepath(renderer, "./res/object/station_gun.png");
+    object->station_crossbow = load_texture_from_filepath(renderer, "./res/object/station_crossbow.png");
+    object->station_coil = load_texture_from_filepath(renderer, "./res/object/station_coil.png");
+    object->station_flame = load_texture_from_filepath(renderer, "./res/object/station_flame.png");
+    object->station_freeze = load_texture_from_filepath(renderer, "./res/object/station_freeze.png");
+    object->station_laser = load_texture_from_filepath(renderer, "./res/object/station_laser.png");
+
     object->secret_1 = load_texture_from_filepath(renderer, "./res/object/secret_1.png");
     object->secret_2 = load_texture_from_filepath(renderer, "./res/object/secret_2.png");
     object->secret_3 = load_texture_from_filepath(renderer, "./res/object/secret_3.png");
