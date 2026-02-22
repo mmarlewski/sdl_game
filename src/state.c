@@ -172,12 +172,24 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
         vec2i(7,2)
     );
     //
-    room_add_object_at(room, new_object(OBJECT__SPIDER),vec2i(6,3));
+
+    // OBJECT__GOAT,
+    // OBJECT__BULL,
+    // OBJECT__LION,
+    // OBJECT__GORILLA,
+    // OBJECT__DRAGON,
+    // OBJECT__FROG,
+    // OBJECT__RABBIT,
+    // OBJECT__CENTIPEDE,
+    // OBJECT__GRASSHOPPER,
+    // OBJECT__MEGASPIDER,
+    // OBJECT__PORCUPINE,
+    // OBJECT__AARDVARK,
+    // OBJECT__WORM,
+
+    room_add_object_at(room, new_object(OBJECT__MEGASPIDER),vec2i(6,3));
     //
-    set_curr_room(
-        state,
-        room
-    );
+    set_curr_room(state, room);
     state->background_color = colors->ally_background;
     state->background_texture = state->curr_room->background_texture;
     add_new_list_element_to_list_end(
@@ -198,13 +210,24 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
         state->hero_body_part_augmentation[body_part] = AUGMENTATION__NONE;
     }
 
-    hero_add_augmentation(state, AUGMENTATION__SPRING);
-    hero_add_augmentation(state, AUGMENTATION__TRACK);
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT);
-    hero_add_augmentation(state, AUGMENTATION__TAIL);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT);
 
+    // hero_add_augmentation(state, AUGMENTATION__SPRING);
+    // hero_add_augmentation(state, AUGMENTATION__TRACK);
+    // hero_add_augmentation(state, AUGMENTATION__TAIL);
+        
+    // hero_add_augmentation(state, AUGMENTATION__ARM);
     // hero_add_augmentation(state, AUGMENTATION__DRILL);
-    hero_add_augmentation(state, AUGMENTATION__GUN);
+    // hero_add_augmentation(state, AUGMENTATION__BLADE);
+    // hero_add_augmentation(state, AUGMENTATION__HAMMER);
+    // hero_add_augmentation(state, AUGMENTATION__WHIP);
+
+    // hero_add_augmentation(state, AUGMENTATION__GUN);
+    // hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
+    // hero_add_augmentation(state, AUGMENTATION__COIL);
+    hero_add_augmentation(state, AUGMENTATION__FLAME);
+    // hero_add_augmentation(state, AUGMENTATION__FREEZE);
+    // hero_add_augmentation(state, AUGMENTATION__LASER);
 
     update_enemy_list(state);
     update_all_enemy_order(state);
@@ -658,11 +681,16 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 
             if(hero_has_augmentation(state, AUGMENTATION__DRILL))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUNCH);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_PUNCH);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRILL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH_DAMAGE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRILL_FLOOR);
+
+                if(hero_has_augmentation(state, AUGMENTATION__TRACK))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_PUNCH);
+                }
             }
 
             // coil
@@ -682,8 +710,16 @@ void get_object_skills(State* state, Object* object, List* skill_list)
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__SCORCH_WITH_FIRE);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__SPEW_TAR_BALL);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__FIRE_WELD_FLOOR);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ROCKET_JUMP);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ROCKET_DASH);
+
+                if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__ROCKET_JUMP);
+                }
+
+                if(hero_has_augmentation(state, AUGMENTATION__TRACK))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__ROCKET_DASH);
+                }
             }
 
             // laser
@@ -711,20 +747,25 @@ void get_object_skills(State* state, Object* object, List* skill_list)
 
             if(hero_has_augmentation(state, AUGMENTATION__GUN))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__LONG_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__SIMPLE_SHOT);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__SNIPER_SHOT);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_SHOT);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__POINT_BLANK_SHOT);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SHOT);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__DOUBLE_JUMP);
+
+                if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SHOT);
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__DOUBLE_JUMP);
+                }
             }
 
-            // crossbow
+            // slingshot
 
-            if(hero_has_augmentation(state, AUGMENTATION__CROSSBOW))
+            if(hero_has_augmentation(state, AUGMENTATION__SLINGSHOT))
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__HIGH_PROJECTILE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HIGH_EXPLOADING_PROJECTILE);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__RICOSHET);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HARPOON_SHOT);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__NEST);
             }
 
@@ -734,17 +775,32 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__SWING);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__NAIL);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_NAIL);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__NAIL_FLOOR);
+
+                if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_NAIL);
+                }
             }
 
             // arm
 
             if(hero_has_augmentation(state, AUGMENTATION__ARM))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_CARRY);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW_AND_GTFO);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH_DAMAGE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__THROW_DAMAGE);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__ARM_TURN);
+
+                if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__JUMP_AND_CARRY);
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__ARM_YEET);
+                }
+
+                if(hero_has_augmentation(state, AUGMENTATION__TAIL))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW_AND_GTFO);
+                }
             }
 
             // blade
@@ -753,18 +809,41 @@ void get_object_skills(State* state, Object* object, List* skill_list)
             {
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__THRUST);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__PENETRATING_THRUST);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SLICE);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW_AND_SLICE);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_SLICE);
+
+                if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__HEAD_SLICE);
+                }
+
+                if(hero_has_augmentation(state, AUGMENTATION__TRACK))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__CHARGE_AND_SLICE);
+                }
+
+                if(hero_has_augmentation(state, AUGMENTATION__TAIL))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURROW_AND_SLICE);
+                }
             }
 
             // whip
 
             if(hero_has_augmentation(state, AUGMENTATION__WHIP))
             {
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_PULL);
-                add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURY);
                 add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_SMACK);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_DRAG);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_PULL);
+                add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_TURN);
+
+                if(hero_has_augmentation(state, AUGMENTATION__SPRING))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__WHIP_YEET);
+                }
+
+                if(hero_has_augmentation(state, AUGMENTATION__TAIL))
+                {
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__BURY);
+                }
             }
         }
         break;

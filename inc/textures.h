@@ -644,7 +644,7 @@ typedef struct
     Texture* station_hammer;
     Texture* station_whip;
     Texture* station_gun;
-    Texture* station_crossbow;
+    Texture* station_slingshot;
     Texture* station_coil;
     Texture* station_flame;
     Texture* station_freeze;
@@ -1053,7 +1053,7 @@ typedef struct
     Texture* aug_wings;
     Texture* weapon_arm;
     Texture* weapon_blade;
-    Texture* weapon_crossbow;
+    Texture* weapon_slingshot;
     Texture* weapon_coil;
     Texture* weapon_drill;
     Texture* weapon_flame;
@@ -1068,7 +1068,7 @@ typedef struct
     Texture* skill_move;
 
     Texture* skill_burrow;
-    Texture* skill_whip_smack;
+    Texture* skill_whip_smack_weird;
     Texture* skill_push;
     Texture* skill_push_damage;
     Texture* skill_teleportation;
@@ -1108,6 +1108,7 @@ typedef struct
     Texture* skill_swing;
     Texture* skill_penetrating_thrust;
     Texture* skill_high_projectile;
+    Texture* skill_high_exploading_projectile;
     Texture* skill_jump_and_nail;
     Texture* skill_nail;
     Texture* skill_ice_bunker;
@@ -1126,15 +1127,23 @@ typedef struct
     Texture* skill_manipulation;
     Texture* skill_ice_wall;
     Texture* skill_rocket_dash;
-    Texture* skill_whip_pull;
+    Texture* skill_whip_pull_weird;
     Texture* skill_stunning_bolt;
     Texture* skill_charge_and_push;
-    Texture* skill_long_shot;
+    Texture* skill_simple_shot;
+    Texture* skill_sniper_shot;
     Texture* skill_ricoshet;
     Texture* skill_harpoon_shot;
     Texture* skill_drill_floor;
     Texture* skill_bury;
     Texture* skill_double_jump;
+    Texture* skill_whip_smack;
+    Texture* skill_whip_drag;
+    Texture* skill_whip_pull;
+    Texture* skill_whip_turn;
+    Texture* skill_arm_turn;
+    Texture* skill_whip_yeet;
+    Texture* skill_arm_yeet;
 
     Texture* skill_launch_minibot;
     Texture* skill_minibot_merge;

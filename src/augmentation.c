@@ -18,7 +18,7 @@ int get_augmentation_body_part(int augmentation)
         case AUGMENTATION__WHIP:        body_part = BODY_PART__LEFT_HAND; break;
 
         case AUGMENTATION__GUN:         body_part = BODY_PART__RIGHT_HAND; break;
-        case AUGMENTATION__CROSSBOW:    body_part = BODY_PART__RIGHT_HAND; break;
+        case AUGMENTATION__SLINGSHOT:   body_part = BODY_PART__RIGHT_HAND; break;
         case AUGMENTATION__COIL:        body_part = BODY_PART__RIGHT_HAND; break;
         case AUGMENTATION__FLAME:       body_part = BODY_PART__RIGHT_HAND; break;
         case AUGMENTATION__FREEZE:      body_part = BODY_PART__RIGHT_HAND; break;
@@ -69,7 +69,7 @@ char* get_augmentation_name(int augmentation)
         case AUGMENTATION__WHIP:        name = "whip"; break;
 
         case AUGMENTATION__GUN:         name = "gun"; break;
-        case AUGMENTATION__CROSSBOW:    name = "crossbow"; break;
+        case AUGMENTATION__SLINGSHOT:   name = "slingshot"; break;
         case AUGMENTATION__COIL:        name = "coil"; break;
         case AUGMENTATION__FLAME:       name = "flame"; break;
         case AUGMENTATION__FREEZE:      name = "freeze"; break;

@@ -78,6 +78,9 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
             enemy->object->attack_dir4 = chosen_dir4;
         }
         break;
+        // case OBJECT__GOAT:
+        // case OBJECT__BULL:
+        // case OBJECT__LION:
         case OBJECT__SPIDER:
         case OBJECT__FROG:
         case OBJECT__RABBIT:
@@ -123,11 +126,11 @@ void update_enemy_attack_dir4(State* state, Enemy* enemy)
 
                             // if(!is_object_wall(object)) score += 2;
 
-                            if(is_object_movable(object)) score += 10;
+                            if(is_object_movable(object)) score += 5;
 
                             // if(is_object_pull_towards(object)) score += 10;
 
-                            if(is_object_ally(object)) score += 2;
+                            if(is_object_ally(object)) score += 10;
                         }
                     }
                 }

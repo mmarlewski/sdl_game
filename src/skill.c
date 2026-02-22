@@ -50,13 +50,15 @@ int is_skill_two_target(int skill)
         case SKILL__FREEZE_FLOOR:       is = 0; break;
         case SKILL__ICE_BUNKER:         is = 0; break;
         
-        case SKILL__LONG_SHOT:          is = 0; break;
+        case SKILL__SIMPLE_SHOT:        is = 0; break;
+        case SKILL__SNIPER_SHOT:        is = 0; break;
         case SKILL__POINT_BLANK_SHOT:   is = 0; break;
         case SKILL__HEAD_SHOT:          is = 0; break;
         case SKILL__STUNNING_SHOT:      is = 0; break;
         case SKILL__HARPOON_SHOT:       is = 1; break;
         
         case SKILL__HIGH_PROJECTILE:    is = 0; break;
+        case SKILL__HIGH_EXPLOADING_PROJECTILE: is = 0; break;
         case SKILL__DOUBLE_JUMP:        is = 1; break;
         case SKILL__RICOSHET:           is = 1; break;
         case SKILL__NEST:               is = 0; break;
@@ -76,16 +78,23 @@ int is_skill_two_target(int skill)
         case SKILL__BURROW_AND_SLICE:   is = 0; break;
         case SKILL__CHARGE_AND_SLICE:   is = 0; break;
 
-        case SKILL__WHIP_PULL:          is = 1; break;
-        case SKILL__BURY:               is = 1; break;
+        case SKILL__WHIP_SMACK_WEIRD:   is = 0; break;
+        case SKILL__WHIP_PULL_WEIRD:    is = 1; break;
         case SKILL__WHIP_SMACK:         is = 0; break;
+        case SKILL__WHIP_DRAG:          is = 1; break;
+        case SKILL__WHIP_PULL:          is = 1; break;
+        case SKILL__WHIP_TURN:          is = 1; break;
+        case SKILL__ARM_TURN:           is = 1; break;
+        case SKILL__WHIP_YEET:          is = 1; break;
+        case SKILL__ARM_YEET:           is = 1; break;
+        case SKILL__BURY:               is = 1; break;
 
         case SKILL__LAUNCH_MINIBOT:     is = 0; break;
         case SKILL__MINIBOT_MERGE:      is = 0; break;
 
         case SKILL__CHARGE_AND_THROW:   is = 1; break;
         case SKILL__DRAG:               is = 1; break;
-        case SKILL__PULL:               is = 0; break;
+        case SKILL__PULL:               is = 1; break;
         case SKILL__PUSH_DAMAGE:        is = 1; break;
         case SKILL__THROW_DAMAGE:       is = 1; break;
         case SKILL__DRAG_DAMAGE:        is = 1; break;
@@ -120,11 +129,11 @@ char* get_in_game_skill_name(int skill)
 
     switch(skill)
     {
-        case SKILL__NONE:               name = "--"; break;
+        case SKILL__NONE:               name = "none"; break;
         case SKILL__USE:                name = "use"; break;
         case SKILL__MOVE:               name = "move"; break;
 
-        case SKILL__ATTACK_DIR:         name = "---"; break;
+        case SKILL__ATTACK_DIR:         name = "attack dir"; break;
         case SKILL__NO_ATTACK:          name = "no attack"; break;
 
         case SKILL__CHARGE:             name = "charge"; break;
@@ -161,13 +170,15 @@ char* get_in_game_skill_name(int skill)
         case SKILL__FREEZE_FLOOR:       name = "freeze floor"; break;
         case SKILL__ICE_BUNKER:         name = "ice bunker"; break;
         
-        case SKILL__LONG_SHOT:          name = "long shot"; break;
+        case SKILL__SIMPLE_SHOT:        name = "simple shot"; break;
+        case SKILL__SNIPER_SHOT:        name = "sniper shot"; break;
         case SKILL__POINT_BLANK_SHOT:   name = "point blank shot"; break;
         case SKILL__HEAD_SHOT:          name = "head shot"; break;
         case SKILL__STUNNING_SHOT:      name = "stunning shot"; break;
         case SKILL__HARPOON_SHOT:       name = "harpoon shot"; break;
         
         case SKILL__HIGH_PROJECTILE:    name = "high projectile"; break;
+        case SKILL__HIGH_EXPLOADING_PROJECTILE: name = "high exploading projectile"; break;
         case SKILL__DOUBLE_JUMP:        name = "double jump"; break;
         case SKILL__RICOSHET:           name = "ricoshet"; break;
         case SKILL__NEST:               name = "nest"; break;
@@ -187,9 +198,16 @@ char* get_in_game_skill_name(int skill)
         case SKILL__BURROW_AND_SLICE:   name = "burrow and slice"; break;
         case SKILL__CHARGE_AND_SLICE:   name = "charge and slice"; break;
 
-        case SKILL__WHIP_PULL:          name = "whip pull"; break;
+        case SKILL__WHIP_SMACK_WEIRD:   name = "smack"; break;
+        case SKILL__WHIP_PULL_WEIRD:    name = "drag"; break;
+        case SKILL__WHIP_SMACK:         name = "smack"; break;
+        case SKILL__WHIP_DRAG:          name = "drag"; break;
+        case SKILL__WHIP_PULL:          name = "pull"; break;
+        case SKILL__WHIP_TURN:          name = "turn"; break;
+        case SKILL__ARM_TURN:           name = "turn"; break;
+        case SKILL__WHIP_YEET:          name = "yeet"; break;
+        case SKILL__ARM_YEET:           name = "yeet"; break;
         case SKILL__BURY:               name = "bury"; break;
-        case SKILL__WHIP_SMACK:         name = "whip smack"; break;
 
         case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
         case SKILL__MINIBOT_MERGE:      name = "minibot merge"; break;
@@ -262,13 +280,15 @@ char* get_debug_skill_name(int skill)
         case SKILL__FREEZE_FLOOR:       name = "freeze floor"; break;
         case SKILL__ICE_BUNKER:         name = "ice bunker"; break;
         
-        case SKILL__LONG_SHOT:          name = "long shot"; break;
+        case SKILL__SIMPLE_SHOT:        name = "simple shot"; break;
+        case SKILL__SNIPER_SHOT:        name = "sniper shot"; break;
         case SKILL__POINT_BLANK_SHOT:   name = "point blank shot"; break;
         case SKILL__HEAD_SHOT:          name = "head shot"; break;
         case SKILL__STUNNING_SHOT:      name = "stunning shot"; break;
         case SKILL__HARPOON_SHOT:       name = "harpoon shot"; break;
         
         case SKILL__HIGH_PROJECTILE:    name = "high projectile"; break;
+        case SKILL__HIGH_EXPLOADING_PROJECTILE: name = "high exploading projectile"; break;
         case SKILL__DOUBLE_JUMP:        name = "double jump"; break;
         case SKILL__RICOSHET:           name = "ricoshet"; break;
         case SKILL__NEST:               name = "nest"; break;
@@ -288,9 +308,16 @@ char* get_debug_skill_name(int skill)
         case SKILL__BURROW_AND_SLICE:   name = "burrow and slice"; break;
         case SKILL__CHARGE_AND_SLICE:   name = "charge and slice"; break;
 
-        case SKILL__WHIP_PULL:          name = "whip pull"; break;
-        case SKILL__BURY:               name = "bury"; break;
+        case SKILL__WHIP_SMACK_WEIRD:   name = "whip smack weird"; break;
+        case SKILL__WHIP_PULL_WEIRD:    name = "whip drag weird"; break;
         case SKILL__WHIP_SMACK:         name = "whip smack"; break;
+        case SKILL__WHIP_DRAG:          name = "whip drag"; break;
+        case SKILL__WHIP_PULL:          name = "whip pull"; break;
+        case SKILL__WHIP_TURN:          name = "whip turn"; break;
+        case SKILL__ARM_TURN:           name = "arm turn"; break;
+        case SKILL__WHIP_YEET:          name = "whip yeet"; break;
+        case SKILL__ARM_YEET:           name = "arm yeet"; break;
+        case SKILL__BURY:               name = "bury"; break;
 
         case SKILL__LAUNCH_MINIBOT:     name = "launch minibot"; break;
         case SKILL__MINIBOT_MERGE:      name = "minibot merge"; break;
@@ -367,13 +394,15 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__FREEZE_FLOOR:       texture = textures->hud.skill_freeze_water; break;
         case SKILL__ICE_BUNKER:         texture = textures->hud.skill_ice_bunker; break;
         
-        case SKILL__LONG_SHOT:          texture = textures->hud.skill_long_shot; break;
+        case SKILL__SIMPLE_SHOT:        texture = textures->hud.skill_simple_shot; break;
+        case SKILL__SNIPER_SHOT:        texture = textures->hud.skill_sniper_shot; break;
         case SKILL__POINT_BLANK_SHOT:   texture = textures->hud.skill_point_black_shot; break;
         case SKILL__HEAD_SHOT:          texture = textures->hud.skill_head_shot; break;
         case SKILL__STUNNING_SHOT:      texture = textures->hud.skill_stunning_shot; break;
         case SKILL__HARPOON_SHOT:       texture = textures->hud.skill_harpoon_shot; break;
         
         case SKILL__HIGH_PROJECTILE:    texture = textures->hud.skill_high_projectile; break;
+        case SKILL__HIGH_EXPLOADING_PROJECTILE: texture = textures->hud.skill_high_exploading_projectile; break;
         case SKILL__DOUBLE_JUMP:        texture = textures->hud.skill_double_jump; break;
         case SKILL__RICOSHET:           texture = textures->hud.skill_ricoshet; break;
         case SKILL__NEST:               texture = textures->hud.skill_launch_nest; break;
@@ -393,9 +422,16 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__BURROW_AND_SLICE:   texture = textures->hud.skill_burrow_and_slice; break;
         case SKILL__CHARGE_AND_SLICE:   texture = textures->hud.skill_charge_and_slice; break;
 
-        case SKILL__WHIP_PULL:          texture = textures->hud.skill_whip_pull; break;
-        case SKILL__BURY:               texture = textures->hud.skill_bury; break;
+        case SKILL__WHIP_SMACK_WEIRD:   texture = textures->hud.skill_whip_smack_weird; break;
+        case SKILL__WHIP_PULL_WEIRD:    texture = textures->hud.skill_whip_pull_weird; break;
         case SKILL__WHIP_SMACK:         texture = textures->hud.skill_whip_smack; break;
+        case SKILL__WHIP_DRAG:          texture = textures->hud.skill_whip_drag; break;
+        case SKILL__WHIP_PULL:          texture = textures->hud.skill_whip_pull; break;
+        case SKILL__WHIP_TURN:          texture = textures->hud.skill_whip_turn; break;
+        case SKILL__ARM_TURN:           texture = textures->hud.skill_arm_turn; break;
+        case SKILL__WHIP_YEET:          texture = textures->hud.skill_whip_yeet; break;
+        case SKILL__ARM_YEET:           texture = textures->hud.skill_arm_yeet; break;
+        case SKILL__BURY:               texture = textures->hud.skill_bury; break;
 
         case SKILL__LAUNCH_MINIBOT:     texture = textures->hud.skill_launch_minibot; break;
         case SKILL__MINIBOT_MERGE:      texture = textures->hud.skill_minibot_merge; break;
@@ -410,7 +446,7 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__DAMAGE_1:           texture = textures->hud.skill_damage_1; break;
         case SKILL__DAMAGE_3:           texture = textures->hud.skill_damage_3; break;
         case SKILL__CHARGE_AND_DAMAGE_3:texture = textures->hud.skill_charge_damage_3; break;
-        case SKILL__PROJECTILE_LINE_1:  texture = textures->hud.skill_long_shot; break;
+        case SKILL__PROJECTILE_LINE_1:  texture = textures->hud.skill_simple_shot; break;
         case SKILL__PROJECTILE_ARCH_1:  texture = textures->hud.skill_high_projectile; break;
         case SKILL__PROJECTILE_LINE_AROUND:     texture = textures->hud.skill_kill_around; break;
         case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  texture = textures->hud.skill_launch_minibot; break;

@@ -616,7 +616,7 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->station_hammer = load_texture_from_filepath(renderer, "./res/object/station_hammer.png");
     object->station_whip = load_texture_from_filepath(renderer, "./res/object/station_whip.png");
     object->station_gun = load_texture_from_filepath(renderer, "./res/object/station_gun.png");
-    object->station_crossbow = load_texture_from_filepath(renderer, "./res/object/station_crossbow.png");
+    object->station_slingshot = load_texture_from_filepath(renderer, "./res/object/station_slingshot.png");
     object->station_coil = load_texture_from_filepath(renderer, "./res/object/station_coil.png");
     object->station_flame = load_texture_from_filepath(renderer, "./res/object/station_flame.png");
     object->station_freeze = load_texture_from_filepath(renderer, "./res/object/station_freeze.png");
@@ -1070,7 +1070,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->aug_wings = load_texture_from_filepath(renderer, "./res/hud/aug_wings.png");
     hud->weapon_arm = load_texture_from_filepath(renderer, "./res/hud/weapon_arm.png");
     hud->weapon_blade = load_texture_from_filepath(renderer, "./res/hud/weapon_blade.png");
-    hud->weapon_crossbow = load_texture_from_filepath(renderer, "./res/hud/weapon_crossbow.png");
+    hud->weapon_slingshot = load_texture_from_filepath(renderer, "./res/hud/weapon_slingshot.png");
     hud->weapon_coil = load_texture_from_filepath(renderer, "./res/hud/weapon_coil.png");
     hud->weapon_drill = load_texture_from_filepath(renderer, "./res/hud/weapon_drill.png");
     hud->weapon_flame = load_texture_from_filepath(renderer, "./res/hud/weapon_flame.png");
@@ -1085,7 +1085,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->skill_move = load_texture_from_filepath(renderer, "./res/hud/skill_move.png");
 
     hud->skill_burrow = load_texture_from_filepath(renderer, "./res/hud/skill_burrow.png");
-    hud->skill_whip_smack = load_texture_from_filepath(renderer, "./res/hud/skill_whip_smack.png");
+    hud->skill_whip_smack_weird = load_texture_from_filepath(renderer, "./res/hud/skill_whip_smack_weird.png");
     hud->skill_push = load_texture_from_filepath(renderer, "./res/hud/skill_push.png");
     hud->skill_push_damage = load_texture_from_filepath(renderer, "./res/hud/skill_push_damage.png");
     hud->skill_teleportation = load_texture_from_filepath(renderer, "./res/hud/skill_teleportation.png");
@@ -1125,6 +1125,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->skill_swing = load_texture_from_filepath(renderer, "./res/hud/skill_swing.png");
     hud->skill_penetrating_thrust = load_texture_from_filepath(renderer, "./res/hud/skill_penetrating_thrust.png");
     hud->skill_high_projectile = load_texture_from_filepath(renderer, "./res/hud/skill_high_projectile.png");
+    hud->skill_high_exploading_projectile = load_texture_from_filepath(renderer, "./res/hud/skill_high_exploading_projectile.png");
     hud->skill_jump_and_nail = load_texture_from_filepath(renderer, "./res/hud/skill_jump_and_nail.png");
     hud->skill_nail = load_texture_from_filepath(renderer, "./res/hud/skill_nail.png");
     hud->skill_ice_bunker = load_texture_from_filepath(renderer, "./res/hud/skill_ice_bunker.png");
@@ -1143,15 +1144,23 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->skill_manipulation = load_texture_from_filepath(renderer, "./res/hud/skill_manipulation.png");
     hud->skill_ice_wall = load_texture_from_filepath(renderer, "./res/hud/skill_ice_wall.png");
     hud->skill_rocket_dash = load_texture_from_filepath(renderer, "./res/hud/skill_rocket_dash.png");
-    hud->skill_whip_pull = load_texture_from_filepath(renderer, "./res/hud/skill_whip_pull.png");
+    hud->skill_whip_pull_weird = load_texture_from_filepath(renderer, "./res/hud/skill_whip_pull_weird.png");
     hud->skill_stunning_bolt = load_texture_from_filepath(renderer, "./res/hud/skill_stunning_bolt.png");
     hud->skill_charge_and_push = load_texture_from_filepath(renderer, "./res/hud/skill_charge_and_push.png");
-    hud->skill_long_shot = load_texture_from_filepath(renderer, "./res/hud/skill_long_shot.png");
+    hud->skill_simple_shot = load_texture_from_filepath(renderer, "./res/hud/skill_simple_shot.png");
+    hud->skill_sniper_shot = load_texture_from_filepath(renderer, "./res/hud/skill_sniper_shot.png");
     hud->skill_ricoshet = load_texture_from_filepath(renderer, "./res/hud/skill_ricoshet.png");
     hud->skill_harpoon_shot = load_texture_from_filepath(renderer, "./res/hud/skill_harpoon_shot.png");
     hud->skill_drill_floor = load_texture_from_filepath(renderer, "./res/hud/skill_drill_floor.png");
     hud->skill_bury = load_texture_from_filepath(renderer, "./res/hud/skill_bury.png");
     hud->skill_double_jump = load_texture_from_filepath(renderer, "./res/hud/skill_double_jump.png");
+    hud->skill_whip_smack = load_texture_from_filepath(renderer, "./res/hud/skill_whip_smack.png");
+    hud->skill_whip_drag = load_texture_from_filepath(renderer, "./res/hud/skill_whip_drag.png");
+    hud->skill_whip_pull = load_texture_from_filepath(renderer, "./res/hud/skill_whip_pull.png");
+    hud->skill_whip_turn = load_texture_from_filepath(renderer, "./res/hud/skill_whip_turn.png");
+    hud->skill_arm_turn = load_texture_from_filepath(renderer, "./res/hud/skill_arm_turn.png");
+    hud->skill_whip_yeet = load_texture_from_filepath(renderer, "./res/hud/skill_whip_yeet.png");
+    hud->skill_arm_yeet = load_texture_from_filepath(renderer, "./res/hud/skill_arm_yeet.png");
     
     hud->skill_launch_minibot = load_texture_from_filepath(renderer, "./res/hud/skill_launch_minibot.png");
     hud->skill_minibot_merge = load_texture_from_filepath(renderer, "./res/hud/skill_minibot_merge.png");

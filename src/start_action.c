@@ -43,17 +43,20 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION__MOVE_FLOATING:
         case ACTION__MOVE_FLYING:
         {
-            if(action->type == ACTION__MOVE)
+            if(state->enemy_list->size > 0)
             {
-                play_sound(sounds->move);
-            }
-            else if(action->type == ACTION__MOVE_FLOATING)
-            {
-                play_sound(sounds->move_floating);
-            }
-            else if(action->type == ACTION__MOVE_FLYING)
-            {
-                play_sound(sounds->move_flying);
+                if(action->type == ACTION__MOVE)
+                {
+                    play_sound(sounds->move);
+                }
+                else if(action->type == ACTION__MOVE_FLOATING)
+                {
+                    play_sound(sounds->move_floating);
+                }
+                else if(action->type == ACTION__MOVE_FLYING)
+                {
+                    play_sound(sounds->move_flying);
+                }
             }
 
             action->move.object = room_get_object_at(state->curr_room, action->tilemap_pos);
@@ -83,11 +86,14 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             }
             else
             {
+                float move_length = ACTION_LENGTH_IN_SECONDS;
+                if(state->enemy_list->size == 0) move_length = ACTION_LENGTH_IN_SECONDS / 1.0;
+
                 Animation* animation = new_animation_move_sprite_in_gamemap_in_line(
                     get_texture_1_from_object(action->move.object, textures),
                     tilemap_pos_to_gamemap_pos(curr_tilemap_pos),
                     tilemap_pos_to_gamemap_pos(next_tilemap_pos),
-                    ACTION_LENGTH_IN_SECONDS
+                    move_length
                 );
                 action->animation = animation;
                 add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);

@@ -11115,12 +11115,58 @@ void create_level(State* state, Textures* textures)
     room_change_floor_at(
         room_7_2,
         FLOOR__SAND,
+        vec2i(7, 4)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(7, 5)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(7, 6)
+    );
+
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 1)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 2)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 3)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 4)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
         vec2i(8, 5)
     );
     room_change_floor_at(
         room_7_2,
         FLOOR__SAND,
         vec2i(8, 6)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 7)
+    );
+    room_change_floor_at(
+        room_7_2,
+        FLOOR__SAND,
+        vec2i(8, 8)
     );
 
     // walls

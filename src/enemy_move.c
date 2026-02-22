@@ -143,14 +143,13 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                         int distance = path_pos_list->size;
 
-                        if(distance >= 1 && distance <= 10 ||
-                           object == enemy->object)
+                        if(distance >= 1 && distance <= 5 || object == enemy->object)
                         {
                             score = distance / 2;
 
                             if(object != enemy->object) score += 10;
 
-                            if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 10;
+                            // if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 10;
 
                             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                             {
@@ -159,16 +158,13 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                 {
                                     int mul = 1;
 
-                                    if(enemy->object->type == OBJECT__GOAT ||
-                                       enemy->object->type == OBJECT__BULL)
-                                    {
-                                        mul = (5 - k);
-                                    }
-                                    else if(enemy->object->type == OBJECT__SPIDER ||
-                                            enemy->object->type == OBJECT__CHAMELEON ||
-                                            enemy->object->type == OBJECT__FLY ||
-                                            enemy->object->type == OBJECT__CENTIPEDE ||
-                                            enemy->object->type == OBJECT__MEGASPIDER)
+                                    if( enemy->object->type == OBJECT__GOAT ||
+                                        enemy->object->type == OBJECT__BULL ||
+                                        enemy->object->type == OBJECT__SPIDER ||
+                                        enemy->object->type == OBJECT__CHAMELEON ||
+                                        enemy->object->type == OBJECT__FLY ||
+                                        enemy->object->type == OBJECT__CENTIPEDE ||
+                                        enemy->object->type == OBJECT__MEGASPIDER)
                                     {
                                         mul = k;
                                     }
@@ -201,7 +197,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                                         if(is_object_movable(neighbor_object)) score += 1 * mul;
 
-                                        if(is_object_ally(neighbor_object)) score += 1 * mul;
+                                        if(is_object_ally(neighbor_object)) score += 10 * mul;
 
                                         if(is_object_enemy(neighbor_object)) score -= 1 * mul;
 
@@ -391,7 +387,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                     int mul = 1;
 
                                     if(enemy->object->type == OBJECT__FROG ||
-                                    enemy->object->type == OBJECT__RABBIT)
+                                    enemy->object->type == OBJECT__RABBIT ||
+                                    enemy->object->type == OBJECT__GRASSHOPPER)
                                     {
                                         mul = k;
                                         //

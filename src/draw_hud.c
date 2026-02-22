@@ -746,7 +746,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         if(left_hand_augmentation == AUGMENTATION__WHIP) left_hand_texture = textures->hud.weapon_whip;
 
         if(right_hand_augmentation == AUGMENTATION__GUN) right_hand_texture = textures->hud.weapon_gun;
-        if(right_hand_augmentation == AUGMENTATION__CROSSBOW) right_hand_texture = textures->hud.weapon_crossbow;
+        if(right_hand_augmentation == AUGMENTATION__SLINGSHOT) right_hand_texture = textures->hud.weapon_slingshot;
         if(right_hand_augmentation == AUGMENTATION__COIL) right_hand_texture = textures->hud.weapon_coil;
         if(right_hand_augmentation == AUGMENTATION__FLAME) right_hand_texture = textures->hud.weapon_flame;
         if(right_hand_augmentation == AUGMENTATION__FREEZE) right_hand_texture = textures->hud.weapon_freeze;
