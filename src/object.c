@@ -878,6 +878,7 @@ int is_object_movable(Object* object)
         case OBJECT__GLASS_BALL:                       is = 1; break;
         case OBJECT__TAR_BALL:                         is = 1; break;
         case OBJECT__ICE_BLOCK:                        is = 1; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                is = 1; break;
 
         case OBJECT__THRONE:                           is = 1; break;
 
@@ -1248,6 +1249,7 @@ int is_object_breakable(Object* object)
         case OBJECT__BALL_SPIKES:                      is = 0; break;
         case OBJECT__TAR_BALL:                         is = 1; break;
         case OBJECT__ICE_BLOCK:                        is = 1; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                is = 1; break;
 
         case OBJECT__GOLEM_UNPOWERED:                  is = 1; break;
         case OBJECT__GOLEM_HALF_POWERED:               is = 1; break;
@@ -1623,77 +1625,80 @@ int is_object_glass(Object *object)
 
 int get_object_max_hp(Object* object)
 {
+    // -1: no damage
+
     int max_hp = -1;
     
     if(object == NULL) return max_hp;
 
     switch(object->type)
     {
-        case OBJECT__PILLAR:                        max_hp = 1; break;
-        case OBJECT__SARCOPHAGUS:                   max_hp = 3; break;
-        case OBJECT__MENHIR:                        max_hp = 3; break;
+        // case OBJECT__PILLAR:                        max_hp = 1; break;
+        // case OBJECT__SARCOPHAGUS:                   max_hp = 3; break;
+        // case OBJECT__MENHIR:                        max_hp = 3; break;
 
-        case OBJECT__PIPE:                          max_hp = 1; break;
+        // case OBJECT__PIPE:                          max_hp = 1; break;
 
-        case OBJECT__STALACTITE:                    max_hp = 1; break;
-        case OBJECT__STALACTITE_FALLEN:             max_hp = 1; break;
-        case OBJECT__STALACTITE_FALLEN_ITEM:        max_hp = 1; break;
+        // case OBJECT__STALACTITE:                    max_hp = -1; break;
+        // case OBJECT__STALACTITE_FALLEN:             max_hp = 1; break;
+        // case OBJECT__STALACTITE_FALLEN_ITEM:        max_hp = 1; break;
 
-        case OBJECT__STALAGMITE:                    max_hp = 1; break;
+        // case OBJECT__STALAGMITE:                    max_hp = 1; break;
 
-        case OBJECT__STALAGNATE:                    max_hp = 1; break;
+        // case OBJECT__STALAGNATE:                    max_hp = 1; break;
 
-        case OBJECT__COVER_ROCK:                    max_hp = 1; break;
-        case OBJECT__COVER_METAL:                   max_hp = 1; break;
-        case OBJECT__COVER_GLASS:                   max_hp = 1; break;
+        // case OBJECT__COVER_ROCK:                    max_hp = 1; break;
+        // case OBJECT__COVER_METAL:                   max_hp = 1; break;
+        // case OBJECT__COVER_GLASS:                   max_hp = 1; break;
 
-        case OBJECT__CRATE_GEMSTONE:                max_hp = 1; break;
-        case OBJECT__CRATE_GEMSTONE_ITEM:           max_hp = 1; break;
+        // case OBJECT__CRATE_GEMSTONE:                max_hp = 1; break;
+        // case OBJECT__CRATE_GEMSTONE_ITEM:           max_hp = 1; break;
 
-        case OBJECT__CRATE_CELL:                    max_hp = 1; break;
-        case OBJECT__CRATE_CELL_ITEM:               max_hp = 1; break;
+        // case OBJECT__CRATE_CELL:                    max_hp = 1; break;
+        // case OBJECT__CRATE_CELL_ITEM:               max_hp = 1; break;
 
-        case OBJECT__CRATE_DYNAMITE:                max_hp = 1; break;
-        case OBJECT__CRATE_DYNAMITE_ITEM:           max_hp = 1; break;
+        // case OBJECT__CRATE_DYNAMITE:                max_hp = 1; break;
+        // case OBJECT__CRATE_DYNAMITE_ITEM:           max_hp = 1; break;
 
-        case OBJECT__ROCK:                          max_hp = 3; break;
-        case OBJECT__ROCK_DAMAGED:                  max_hp = 1; break;
-        case OBJECT__ROCK_DAMAGED_ITEM:             max_hp = 1; break;
+        // case OBJECT__ROCK:                          max_hp = 3; break;
+        // case OBJECT__ROCK_DAMAGED:                  max_hp = 1; break;
+        // case OBJECT__ROCK_DAMAGED_ITEM:             max_hp = 1; break;
 
-        case OBJECT__SAFE:                          max_hp = 5; break;
-        case OBJECT__SAFE_DAMAGED:                  max_hp = 1; break;
-        case OBJECT__SAFE_DAMAGED_ITEM:             max_hp = 1; break;
+        // case OBJECT__SAFE:                          max_hp = 5; break;
+        // case OBJECT__SAFE_DAMAGED:                  max_hp = 1; break;
+        // case OBJECT__SAFE_DAMAGED_ITEM:             max_hp = 1; break;
 
-        case OBJECT__DISPLAY:                       max_hp = 1; break;
-        case OBJECT__DISPLAY_DAMAGED:               max_hp = 1; break;
-        case OBJECT__DISPLAY_DAMAGED_ITEM:          max_hp = 1; break;
+        // case OBJECT__DISPLAY:                       max_hp = 1; break;
+        // case OBJECT__DISPLAY_DAMAGED:               max_hp = 1; break;
+        // case OBJECT__DISPLAY_DAMAGED_ITEM:          max_hp = 1; break;
 
-        case OBJECT__VENDING_CELL:                  max_hp = 3; break;
-        case OBJECT__VENDING_CELL_ITEM:             max_hp = 3; break;
-        case OBJECT__VENDING_CELL_DAMAGED:          max_hp = 1; break;
-        case OBJECT__VENDING_CELL_DAMAGED_ITEM:     max_hp = 1; break;
+        // case OBJECT__VENDING_CELL:                  max_hp = 3; break;
+        // case OBJECT__VENDING_CELL_ITEM:             max_hp = 3; break;
+        // case OBJECT__VENDING_CELL_DAMAGED:          max_hp = 1; break;
+        // case OBJECT__VENDING_CELL_DAMAGED_ITEM:     max_hp = 1; break;
 
-        case OBJECT__VENDING_DYNAMITE:              max_hp = 3; break;
-        case OBJECT__VENDING_DYNAMITE_ITEM:         max_hp = 3; break;
-        case OBJECT__VENDING_DYNAMITE_DAMAGED:      max_hp = 1; break;
-        case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM: max_hp = 1; break;
+        // case OBJECT__VENDING_DYNAMITE:              max_hp = 3; break;
+        // case OBJECT__VENDING_DYNAMITE_ITEM:         max_hp = 3; break;
+        // case OBJECT__VENDING_DYNAMITE_DAMAGED:      max_hp = 1; break;
+        // case OBJECT__VENDING_DYNAMITE_DAMAGED_ITEM: max_hp = 1; break;
 
-        case OBJECT__BARREL:                        max_hp = 1; break;
+        // case OBJECT__BARREL:                        max_hp = 1; break;
 
-        case OBJECT__COLUMN:                        max_hp = 3; break;
+        // case OBJECT__COLUMN:                        max_hp = 3; break;
 
-        case OBJECT__PISTON:                        max_hp = 1; break;
-        case OBJECT__PISTON_CELL:                   max_hp = 1; break;
-        case OBJECT__PISTON_DYNAMITE:               max_hp = 1; break;
-        case OBJECT__PISTON_BARREL:                 max_hp = 1; break;
+        // case OBJECT__PISTON:                        max_hp = 1; break;
+        // case OBJECT__PISTON_CELL:                   max_hp = 1; break;
+        // case OBJECT__PISTON_DYNAMITE:               max_hp = 1; break;
+        // case OBJECT__PISTON_BARREL:                 max_hp = 1; break;
 
-        case OBJECT__BALL:                          max_hp = 1; break;
-        case OBJECT__BALL_SPIKES:                   max_hp = 1; break;
-        case OBJECT__GLASS_BALL:                    max_hp = 1; break;
-        case OBJECT__TAR_BALL:                      max_hp = 1; break;
-        case OBJECT__ICE_BLOCK:                     max_hp = 1; break;
+        // case OBJECT__BALL:                          max_hp = 1; break;
+        // case OBJECT__BALL_SPIKES:                   max_hp = 1; break;
+        // case OBJECT__GLASS_BALL:                    max_hp = 1; break;
+        // case OBJECT__TAR_BALL:                      max_hp = 1; break;
+        // case OBJECT__ICE_BLOCK:                     max_hp = -1; break;
+        // case OBJECT__ICE_BLOCK_DAMAGED:             max_hp = 1; break;
 
-        case OBJECT__SIGN_MOLE_WARNING:             max_hp = 1; break;
+        // case OBJECT__SIGN_MOLE_WARNING:             max_hp = 1; break;
 
         case OBJECT__GOLEM_UNPOWERED:               max_hp = 3; break;
         case OBJECT__GOLEM_HALF_POWERED:            max_hp = 3; break;
@@ -2275,6 +2280,7 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__GLASS_BALL:                       name = "glass ball"; break;
         case OBJECT__TAR_BALL:                         name = "tar ball"; break;
         case OBJECT__ICE_BLOCK:                        name = "ice block"; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                name = "ice block damaged"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
         case OBJECT__SIGN_MOLE_WARNING:                name = "sign mole warning"; break;
@@ -2553,6 +2559,7 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__GLASS_BALL:                       name = "glass"; break;
         case OBJECT__TAR_BALL:                         name = "tar ball"; break;
         case OBJECT__ICE_BLOCK:                        name = "ice block"; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                name = "ice block damaged"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
 
@@ -2831,6 +2838,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball; break;
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -3101,6 +3109,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball; break;
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -3371,6 +3380,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball_outline; break;
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball_outline; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block_outline; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
@@ -3641,6 +3651,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__GLASS_BALL:                       texture = textures->object.glass_ball_outline; break;
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball_outline; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block_outline; break;
+        case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 

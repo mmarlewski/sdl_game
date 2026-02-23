@@ -212,21 +212,21 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
 
     // hero_add_augmentation(state, AUGMENTATION__MINIBOT);
 
-    // hero_add_augmentation(state, AUGMENTATION__SPRING);
-    // hero_add_augmentation(state, AUGMENTATION__TRACK);
-    // hero_add_augmentation(state, AUGMENTATION__TAIL);
+    hero_add_augmentation(state, AUGMENTATION__SPRING);
+    hero_add_augmentation(state, AUGMENTATION__TRACK);
+    hero_add_augmentation(state, AUGMENTATION__TAIL);
         
     // hero_add_augmentation(state, AUGMENTATION__ARM);
     // hero_add_augmentation(state, AUGMENTATION__DRILL);
     // hero_add_augmentation(state, AUGMENTATION__BLADE);
     // hero_add_augmentation(state, AUGMENTATION__HAMMER);
-    // hero_add_augmentation(state, AUGMENTATION__WHIP);
+    hero_add_augmentation(state, AUGMENTATION__WHIP);
 
     // hero_add_augmentation(state, AUGMENTATION__GUN);
     // hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
     // hero_add_augmentation(state, AUGMENTATION__COIL);
-    hero_add_augmentation(state, AUGMENTATION__FLAME);
-    // hero_add_augmentation(state, AUGMENTATION__FREEZE);
+    // hero_add_augmentation(state, AUGMENTATION__FLAME);
+    hero_add_augmentation(state, AUGMENTATION__FREEZE);
     // hero_add_augmentation(state, AUGMENTATION__LASER);
 
     update_enemy_list(state);

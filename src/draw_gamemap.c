@@ -842,6 +842,75 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
         }
     }
 
+    // object properties
+
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
+    {
+        for(ListElem* curr_elem = state->curr_room->object_list->head; curr_elem != NULL; curr_elem = curr_elem->next)
+        {
+            Object* curr_object = (Object*) curr_elem->data;
+
+            if(is_object_exit(curr_object))
+            {
+                Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
+                Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
+                screen_pos.x += TILE_LENGTH * 1.0f - 32 * 0.5f;
+                screen_pos.y += TILE_LENGTH * 1.5f - 32 * 0.5f;
+                
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->hud.status_exit,
+                    colors->none,
+                    0.5f,
+                    screen_pos,
+                    1.0f
+                );
+            }
+            
+            if(is_object_wall(curr_object)) continue;
+
+            if(!is_object_movable(curr_object))
+            {
+                Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
+                Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
+                screen_pos.x += TILE_LENGTH * 1.0f - 32 * 0.5f - 16;
+                screen_pos.y += TILE_LENGTH * 1.5f - 32 * 0.5f;
+                
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->hud.status_stable,
+                    colors->none,
+                    0.5f,
+                    screen_pos,
+                    1.0f
+                );
+            }
+
+            if(!is_object_throw_over(curr_object))
+            {
+                Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
+                Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
+                screen_pos.x += TILE_LENGTH * 1.0f - 32 * 0.5f + 16;
+                screen_pos.y += TILE_LENGTH * 1.5f - 32 * 0.5f;
+                
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->hud.status_high,
+                    colors->none,
+                    0.5f,
+                    screen_pos,
+                    1.0f
+                );
+            }
+        }
+    }
+
     // object hp
 
     if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL)
@@ -852,7 +921,7 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
             
             if(get_object_max_hp(curr_object) != -1)
             {
-                if(is_object_ally(curr_object) || is_object_enemy(curr_object) || get_object_max_hp(curr_object) > 1)
+                // if(is_object_ally(curr_object) || is_object_enemy(curr_object) || get_object_max_hp(curr_object) > 1)
                 {
                     int curr_hp = curr_object->curr_hp;
                     int max_hp = get_object_max_hp(curr_object);

@@ -8,66 +8,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
     switch(enemy_object->type)
     {
-        case OBJECT__MOLE:
-        case OBJECT__WORM:
-        case OBJECT__AARDVARK:
-        {
-            List* possible_burrow_tilemap_pos_list =
-                new_list((void (*)(void*)) & destroy_vec2i);
-
-            for(int i = 0; i < TILEMAP_LENGTH; i++)
-            {
-                for(int j = 0; j < TILEMAP_LENGTH; j++)
-                {
-                    Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-
-                    if(is_floor_burrow(floor) && object == NULL)
-                    {
-                        add_new_list_element_to_list_end(
-                            possible_burrow_tilemap_pos_list,
-                            new_vec2i_from_vec2i(tilemap_pos)
-                        );
-                    }
-                }
-            }
-
-            if(possible_burrow_tilemap_pos_list->size > 0)
-            {
-                int random_index = rand() % possible_burrow_tilemap_pos_list->size;
-                ListElem* random_list_elem = get_nth_list_element(
-                    possible_burrow_tilemap_pos_list,
-                    random_index
-                );
-                Vec2i random_tilemap_pos = *(Vec2i*) random_list_elem->data;
-
-                add_action_to_end_action_sequence(
-                    enemy->action_sequence,
-                    new_action_play_sound(random_tilemap_pos, sounds->emerge_burrow)
-                );
-                add_action_to_end_action_sequence(
-                    enemy->action_sequence,
-                    new_action_change_object_tilemap_pos(
-                        enemy->object,
-                        random_tilemap_pos
-                    )
-                );
-            }
-
-            remove_all_list_elements(
-                possible_burrow_tilemap_pos_list,
-                1
-            );
-            destroy_list(possible_burrow_tilemap_pos_list);
-        }
-        break;
         case OBJECT__SHARK:
         {
             add_action_to_end_action_sequence(
@@ -104,6 +44,10 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
         case OBJECT__PORCUPINE:
         case OBJECT__MEGASPIDER:
         case OBJECT__MINIBOT_ENEMY:
+
+        case OBJECT__MOLE:
+        case OBJECT__WORM:
+        case OBJECT__AARDVARK:
         {
             Vec2i tilemap_pos_array[TILEMAP_LENGTH * TILEMAP_LENGTH];
             int score_array[TILEMAP_LENGTH * TILEMAP_LENGTH];
@@ -115,14 +59,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                 for(int j = 0; j < TILEMAP_LENGTH; j++)
                 {
                     Vec2i tilemap_pos = vec2i(i, j);
-                    Object* object = room_get_object_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
-                    int floor = room_get_floor_at(
-                        state->curr_room,
-                        tilemap_pos
-                    );
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
                     int score = 0;
 
@@ -149,8 +87,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                             if(object != enemy->object) score += 10;
 
-                            // if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 10;
-
                             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                             {
                                 int go_on = TRUE;
@@ -164,7 +100,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                         enemy->object->type == OBJECT__CHAMELEON ||
                                         enemy->object->type == OBJECT__FLY ||
                                         enemy->object->type == OBJECT__CENTIPEDE ||
-                                        enemy->object->type == OBJECT__MEGASPIDER)
+                                        enemy->object->type == OBJECT__MEGASPIDER ||
+                                        enemy->object->type == OBJECT__WORM ||
+                                        enemy->object->type == OBJECT__AARDVARK)
                                     {
                                         mul = k;
                                     }
@@ -172,7 +110,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                             enemy->object->type == OBJECT__GORILLA ||
                                             enemy->object->type == OBJECT__DRAGON ||
                                             enemy->object->type == OBJECT__PORCUPINE ||
-                                            enemy->object->type == OBJECT__MINIBOT_ENEMY)
+                                            enemy->object->type == OBJECT__MINIBOT_ENEMY ||
+                                            enemy->object->type == OBJECT__MOLE)
                                     {
                                         if(k == 1) mul = 10;
                                     }
@@ -191,8 +130,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                     {
                                         go_on = FALSE;
 
-                                        // if(floor == FLOOR__METAL_TARGET_UNCHECKED) score += 2 * mul;
-
                                         if(!is_object_wall(neighbor_object)) score += 1 * mul;
 
                                         if(is_object_movable(neighbor_object)) score += 1 * mul;
@@ -200,8 +137,6 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                         if(is_object_ally(neighbor_object)) score += 10 * mul;
 
                                         if(is_object_enemy(neighbor_object)) score -= 1 * mul;
-
-                                        // if(enemy->object->type == OBJECT__FLY && is_object_fragile(neighbor_object)) score += 2 * mul;
                                     }
                                 }
                             }
@@ -210,6 +145,8 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                         remove_all_list_elements(path_pos_list, 1);
                         destroy_list(path_pos_list);
                     }
+
+                    if(!is_floor_burrow(floor)) score = 0;
 
                     tilemap_pos_array[i * TILEMAP_LENGTH + j] = tilemap_pos;
                     score_array[i * TILEMAP_LENGTH + j] = score;
@@ -272,6 +209,22 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                     add_action_to_end_action_sequence(
                         enemy->action_sequence,
                         new_action_play_sound(random_tilemap_pos, sounds->emerge_water)
+                    );
+                    add_action_to_end_action_sequence(
+                        enemy->action_sequence,
+                        new_action_change_object_tilemap_pos(
+                            enemy->object,
+                            random_tilemap_pos
+                        )
+                    );
+                }
+                else if(enemy->object->type == OBJECT__MOLE ||
+                        enemy->object->type == OBJECT__WORM ||
+                        enemy->object->type == OBJECT__AARDVARK)
+                {
+                    add_action_to_end_action_sequence(
+                        enemy->action_sequence,
+                        new_action_play_sound(random_tilemap_pos, sounds->emerge_burrow)
                     );
                     add_action_to_end_action_sequence(
                         enemy->action_sequence,

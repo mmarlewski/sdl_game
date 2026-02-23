@@ -121,6 +121,10 @@ void update_enemy_attack_targets(State* state, Enemy* enemy)
         break;
         case OBJECT__RABBIT:
         {
+            enemy->skill = SKILL__ATTACK_DIR;
+            enemy->target_1_tilemap_pos = enemy->object->tilemap_pos;
+            enemy->target_2_tilemap_pos = vec2i_move_in_dir4_by(enemy->object->tilemap_pos, enemy->object->attack_dir4, 1);
+
             int go_on = TRUE;
             for(int i = 1; i < 10 && go_on; i++)
             {

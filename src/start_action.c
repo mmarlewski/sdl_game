@@ -536,7 +536,17 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             //     break;
             // }
 
-            if(get_object_max_hp(action->damage.object) != -1)
+            if(get_object_max_hp(action->damage.object) == -1)
+            {
+                object_on_damage(state, sounds, sequence, action, action->damage.object);
+
+                Animation* animation = new_animation_none();
+
+                action->animation = animation;
+
+                add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
+            }
+            else
             {
                 Texture* texture = NULL;
 
@@ -587,14 +597,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                         new_action_death(action->damage.object, action->damage.object->tilemap_pos)
                     );
                 }
-            }
-            else
-            {
-                Animation* animation = new_animation_none();
-
-                action->animation = animation;
-
-                add_animation_to_animation_list(state, animation, textures, sounds, musics, colors);
             }
         }
         break;

@@ -218,6 +218,7 @@ void floor_on_put_item(State* state, Sounds* sounds, Action* sequence, int floor
 void object_on_crashing(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
 void object_on_crashed(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
 void object_on_death(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
+void object_on_damage(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
 void object_on_drop(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
 void object_on_melt(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);
 void object_on_break(State* state, Sounds* sounds, Action* sequence, Action* action, Object* object);

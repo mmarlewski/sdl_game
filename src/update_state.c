@@ -786,35 +786,35 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             }
 
             // reset turn
-            if(state->reset_turn_uses > 0 && 
-                input->was_mouse_left && !input->is_mouse_left &&
-                state->mouse_screen_pos.x >= 300 &&
-                state->mouse_screen_pos.x <= 300 + 64 &&
-                state->mouse_screen_pos.y >= 10 &&
-                state->mouse_screen_pos.y <= 10 + 64)
-            {
-                load_state(
-                    state,
-                    textures, 
-                    sounds, 
-                    musics,
-                    colors
-                );
+            // if(state->reset_turn_uses > 0 && 
+            //     input->was_mouse_left && !input->is_mouse_left &&
+            //     state->mouse_screen_pos.x >= 300 &&
+            //     state->mouse_screen_pos.x <= 300 + 64 &&
+            //     state->mouse_screen_pos.y >= 10 &&
+            //     state->mouse_screen_pos.y <= 10 + 64)
+            // {
+            //     load_state(
+            //         state,
+            //         textures, 
+            //         sounds, 
+            //         musics,
+            //         colors
+            //     );
 
-                state->reset_turn_uses--;
+            //     state->reset_turn_uses--;
 
-                save_state(
-                    state,
-                    textures
-                );
-                load_state(
-                    state,
-                    textures, 
-                    sounds, 
-                    musics,
-                    colors
-                );
-            }
+            //     save_state(
+            //         state,
+            //         textures
+            //     );
+            //     load_state(
+            //         state,
+            //         textures, 
+            //         sounds, 
+            //         musics,
+            //         colors
+            //     );
+            // }
 
             // end ally turn
             if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||

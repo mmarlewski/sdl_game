@@ -361,6 +361,9 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->ice_block = load_texture_from_filepath(renderer, "./res/object/ice_block.png");
     object->ice_block_outline = load_texture_from_filepath(renderer, "./res/object/ice_block_outline.png");
 
+    object->ice_block_damaged = load_texture_from_filepath(renderer, "./res/object/ice_block_damaged.png");
+    object->ice_block_damaged_outline = load_texture_from_filepath(renderer, "./res/object/ice_block_damaged_outline.png");
+
     object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
     object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
 

@@ -347,6 +347,9 @@ typedef struct
     Texture* ice_block;
     Texture* ice_block_outline;
 
+    Texture* ice_block_damaged;
+    Texture* ice_block_damaged_outline;
+
     Texture* throne;
     Texture* throne_outline;
 
