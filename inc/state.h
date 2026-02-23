@@ -163,8 +163,10 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
 void update_state(Input* input, State* state, float delta_time, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
 void create_level(State* state, Textures* textures);
 void create_mechanisms(State* state);
+
 void save_state(State* state, Textures* textures);
-void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors);
+void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors, int how_far_back);
+int save_file_copy(char* src, char* dst);
 
 void get_tutorial_line_and_update_tutorial(State* state, int* n, char** line_1, char** line_2, char** line_3, char** line_4);
 

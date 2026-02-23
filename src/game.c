@@ -187,7 +187,10 @@ int main(int argc, char* argv[])
 
     state.gamestate = GAMESTATE__GAME_START;
 
-    SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
+    char file_name[100];
+    sprintf(file_name, "save_0.save");
+
+    SDL_RWops* file = SDL_RWFromFile( file_name, "r");
 
     if(file == NULL)
     {
@@ -197,7 +200,7 @@ int main(int argc, char* argv[])
     }
     else
     {
-        load_state(&state,&textures,&sounds,&musics,&colors);
+        load_state(&state,&textures,&sounds,&musics,&colors,0);
     }
 
 #ifdef __EMSCRIPTEN__

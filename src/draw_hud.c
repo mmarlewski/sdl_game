@@ -27,7 +27,7 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             1
         );
 
-        SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
+        SDL_RWops* file = SDL_RWFromFile( "save_0.save", "r");
         if(file == NULL)
         {
             draw_texture_at_screen_pos(
@@ -138,20 +138,20 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             );
         }
 
-        Texture* game_over_texture = NULL;
+        // Texture* game_over_texture = NULL;
 
-        if(state->game_over_uses == 3) game_over_texture = textures->hud.reset_turn_3x;
-        else if(state->game_over_uses == 2) game_over_texture = textures->hud.reset_turn_2x;
-        else if(state->game_over_uses == 1) game_over_texture = textures->hud.reset_turn_1x;
+        // if(state->game_over_uses == 3) game_over_texture = textures->hud.reset_turn_3x;
+        // else if(state->game_over_uses == 2) game_over_texture = textures->hud.reset_turn_2x;
+        // else if(state->game_over_uses == 1) game_over_texture = textures->hud.reset_turn_1x;
 
-        draw_texture_at_screen_pos(
-            renderer,
-            game_over_texture,
-            colors->none,
-            1.0f,
-            vec2i(600 + 32, 300 + 64 + 10),
-            2.0f
-        );
+        // draw_texture_at_screen_pos(
+        //     renderer,
+        //     game_over_texture,
+        //     colors->none,
+        //     1.0f,
+        //     vec2i(600 + 32, 300 + 64 + 10),
+        //     2.0f
+        // );
     }
 
     // game won
@@ -1562,48 +1562,48 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     // reset turn
 
-    // if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
-    //    state->enemy_list->size > 0)
-    // {
-    //     if(state->reset_turn_uses > 0)
-    //     {
-    //         draw_texture_at_screen_pos(
-    //             renderer,
-    //             textures->hud.reset_turn,
-    //             colors->none,
-    //             1.0f,
-    //             vec2i(300, 10),
-    //             2
-    //         );
-    //     }
-    //     else
-    //     {
-    //         draw_texture_at_screen_pos(
-    //             renderer,
-    //             textures->hud.reset_turn_inactive,
-    //             colors->none,
-    //             1.0f,
-    //             vec2i(300, 10),
-    //             2
-    //         );
-    //     }
+    if(state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL &&
+       state->enemy_list->size > 0)
+    {
+        if(state->reset_turn_uses > 0)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.reset_turn,
+                colors->none,
+                1.0f,
+                vec2i(300, 10),
+                2
+            );
+        }
+        else
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.reset_turn_inactive,
+                colors->none,
+                1.0f,
+                vec2i(300, 10),
+                2
+            );
+        }
 
-    //     Texture* reset_turn_texture = NULL;
+        // Texture* reset_turn_texture = NULL;
 
-    //     if(state->reset_turn_uses == 3) reset_turn_texture = textures->hud.reset_turn_3x;
-    //     else if(state->reset_turn_uses == 2) reset_turn_texture = textures->hud.reset_turn_2x;
-    //     else if(state->reset_turn_uses == 1) reset_turn_texture = textures->hud.reset_turn_1x;
-    //     else reset_turn_texture = textures->hud.reset_turn_used;
+        // if(state->reset_turn_uses == 3) reset_turn_texture = textures->hud.reset_turn_3x;
+        // else if(state->reset_turn_uses == 2) reset_turn_texture = textures->hud.reset_turn_2x;
+        // else if(state->reset_turn_uses == 1) reset_turn_texture = textures->hud.reset_turn_1x;
+        // else reset_turn_texture = textures->hud.reset_turn_used;
 
-    //     draw_texture_at_screen_pos(
-    //         renderer,
-    //         reset_turn_texture,
-    //         colors->none,
-    //         1.0f,
-    //         vec2i(300, 10 + 64 + 10),
-    //         2
-    //     );
-    // }
+        // draw_texture_at_screen_pos(
+        //     renderer,
+        //     reset_turn_texture,
+        //     colors->none,
+        //     1.0f,
+        //     vec2i(300, 10 + 64 + 10),
+        //     2
+        // );
+    }
 
     // end turn
 

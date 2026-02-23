@@ -1,4 +1,5 @@
 #include "../inc/state.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 char room_background_texture_to_room_background_char(Texture* room_background_texture, Textures* textures)
@@ -23,11 +24,45 @@ Texture* room_background_char_to_room_background_texture(char room_background_ch
     else return textures->background_rock;
 }
 
+
+int save_file_copy(char* src, char* dst)
+{
+    SDL_RWops* in = SDL_RWFromFile(src, "rb");
+    if (!in)
+    {
+        return -1;
+    }
+
+    SDL_RWops* out = SDL_RWFromFile(dst, "wb");
+    if (!out)
+    {
+        SDL_RWclose(in);
+        return -1;
+    }
+
+    char buffer[4096];
+    size_t bytes;
+
+    while ((bytes = SDL_RWread(in, buffer, 1, sizeof(buffer))) > 0)
+    {
+        SDL_RWwrite(out, buffer, 1, bytes);
+    }
+
+    SDL_RWclose(in);
+    SDL_RWclose(out);
+
+    return 0;
+}
+
 void save_state(State* state, Textures* textures)
 {
+    // override previous save
+
+    save_file_copy("save_0.save", "save_1.save");
+
     // write to file
 
-    SDL_RWops* file = SDL_RWFromFile( "save.save", "w" );
+    SDL_RWops* file = SDL_RWFromFile( "save_0.save", "w" );
 
     // passages (full info)
 
@@ -223,7 +258,7 @@ void save_state(State* state, Textures* textures)
     SDL_RWclose(file);
 }
 
-void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors)
+void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics, Colors* colors, int how_far_back)
 {
     // clear state
 
@@ -234,7 +269,10 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
 
     // read from file
 
-    SDL_RWops* file = SDL_RWFromFile( "save.save", "r" );
+    char file_name[100];
+    sprintf(file_name, "save_%d.save", how_far_back);
+
+    SDL_RWops* file = SDL_RWFromFile( file_name, "r" );
 
     // passages (full info)
 

@@ -72,7 +72,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
            state->mouse_screen_pos.y >= 300 &&
            state->mouse_screen_pos.y <= 300 + 64)
         {
-            SDL_RWops* file = SDL_RWFromFile( "save.save", "r");
+            SDL_RWops* file = SDL_RWFromFile( "save_0.save", "r");
             if(file != NULL)
             {
                 change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
@@ -152,10 +152,11 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     textures,
                     sounds,
                     musics,
-                    colors
+                    colors,
+                    0
                 );
 
-                state->game_over_uses--;
+                // state->game_over_uses--;
 
                 // in case player is stuck dying without any action points
                 if(state->curr_ally->object->action_points <= 0)
@@ -163,14 +164,15 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     state->curr_ally->object->action_points = 1;
                 }
 
-                save_state(state, textures);
-                load_state(
-                    state,
-                    textures,
-                    sounds,
-                    musics,
-                    colors
-                );
+                // save_state(state, textures);
+                // load_state(
+                //     state,
+                //     textures,
+                //     sounds,
+                //     musics,
+                //     colors,
+                //     1
+                // );
             }
             else
             {
@@ -786,35 +788,29 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             }
 
             // reset turn
-            // if(state->reset_turn_uses > 0 && 
-            //     input->was_mouse_left && !input->is_mouse_left &&
-            //     state->mouse_screen_pos.x >= 300 &&
-            //     state->mouse_screen_pos.x <= 300 + 64 &&
-            //     state->mouse_screen_pos.y >= 10 &&
-            //     state->mouse_screen_pos.y <= 10 + 64)
-            // {
-            //     load_state(
-            //         state,
-            //         textures, 
-            //         sounds, 
-            //         musics,
-            //         colors
-            //     );
+            if(state->reset_turn_uses > 0 && 
+                input->was_mouse_left && !input->is_mouse_left &&
+                state->mouse_screen_pos.x >= 300 &&
+                state->mouse_screen_pos.x <= 300 + 64 &&
+                state->mouse_screen_pos.y >= 10 &&
+                state->mouse_screen_pos.y <= 10 + 64)
+            {
+                save_file_copy("save_1.save", "save_0.save");
 
-            //     state->reset_turn_uses--;
+                load_state(
+                    state,
+                    textures, 
+                    sounds, 
+                    musics,
+                    colors,
+                    0
+                );
 
-            //     save_state(
-            //         state,
-            //         textures
-            //     );
-            //     load_state(
-            //         state,
-            //         textures, 
-            //         sounds, 
-            //         musics,
-            //         colors
-            //     );
-            // }
+                save_state(
+                    state,
+                    textures
+                );
+            }
 
             // end ally turn
             if(input->was_key[KEY__ENTER] && !input->is_key[KEY__ENTER] ||
