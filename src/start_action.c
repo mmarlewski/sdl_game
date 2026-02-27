@@ -262,6 +262,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
             {
                 play_sound(sounds->death);
 
+                state->is_any_enemy_killed = TRUE;
+
                 // add_animation_to_animation_list(
                 //     state,
                 //     new_animation_background_flash(

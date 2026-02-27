@@ -128,6 +128,8 @@ enum SKILL
 };
 
 int is_skill_two_target(int skill);
+int is_skill_move_only(int skill);
+int is_skill_damage_only(int skill);
 int get_skill_action_points(int skill);
 char* get_in_game_skill_name(int skill);
 char* get_debug_skill_name(int skill);

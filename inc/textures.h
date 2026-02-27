@@ -1236,6 +1236,10 @@ typedef struct
     Texture* bar_part;
     Texture* heart_full;
     Texture* heart_empty;
+    Texture* highlight_skill;
+    Texture* bonus_turn_after_kill;
+    Texture* bonus_turn_if_move_only;
+    Texture* free_move_if_dam_only;
 
 } Textures_Hud;
 

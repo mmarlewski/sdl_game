@@ -113,6 +113,232 @@ int is_skill_two_target(int skill)
     return is;
 }
 
+int is_skill_move_only(int skill)
+{
+    int is = 0;
+
+    switch(skill)
+    {
+        case SKILL__NONE:                       is = 0; break;
+        case SKILL__USE:                        is = 0; break;
+        case SKILL__MOVE:                       is = 1; break;
+
+        case SKILL__ATTACK_DIR:                 is = 0; break;
+        case SKILL__NO_ATTACK:                  is = 0; break;
+
+        case SKILL__SHOOT_PROJECTILE_FLY:       is = 0; break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  is = 0; break;
+
+        case SKILL__CHARGE:             is = 1; break;
+        case SKILL__JUMP:               is = 1; break;
+        case SKILL__BURROW:             is = 1; break;
+
+        case SKILL__CHARGE_AND_JUMP:    is = 1; break;
+
+        case SKILL__PUSH:               is = 0; break;
+        case SKILL__PUNCH:              is = 0; break;
+        case SKILL__CHARGE_AND_PUNCH:   is = 0; break;
+        case SKILL__DRILL:              is = 0; break;
+        case SKILL__DRILL_FLOOR:        is = 0; break;
+
+        case SKILL__BRANCHING_BOLT:     is = 0; break;
+        case SKILL__STUNNING_BOLT:      is = 0; break;
+        case SKILL__COOKING_BOLT:       is = 0; break;
+        case SKILL__ELECTRIFY_FLOOR:    is = 0; break;
+        
+        case SKILL__SCORCH_WITH_FIRE:   is = 0; break;
+        case SKILL__SPEW_TAR_BALL:      is = 0; break;
+        case SKILL__FIRE_WELD_FLOOR:    is = 0; break;
+        case SKILL__ROCKET_JUMP:        is = 1; break;
+        case SKILL__ROCKET_DASH:        is = 1; break;
+        
+        case SKILL__PENETRATING_BEAM:   is = 0; break;
+        case SKILL__BOUNCING_BEAM:      is = 0; break;
+        case SKILL__FOCUSED_BEAM:       is = 0; break;
+        case SKILL__LASER_WELD_FLOOR:   is = 0; break;
+        
+        case SKILL__ICE_BLOCK:          is = 0; break;
+        case SKILL__ICE_WALL:           is = 0; break;
+        case SKILL__ICE_PROJECTILE:     is = 0; break;
+        case SKILL__FREEZE_FLOOR:       is = 0; break;
+        case SKILL__ICE_BUNKER:         is = 0; break;
+        
+        case SKILL__SIMPLE_SHOT:        is = 0; break;
+        case SKILL__SNIPER_SHOT:        is = 0; break;
+        case SKILL__POINT_BLANK_SHOT:   is = 0; break;
+        case SKILL__HEAD_SHOT:          is = 0; break;
+        case SKILL__STUNNING_SHOT:      is = 0; break;
+        case SKILL__HARPOON_SHOT:       is = 0; break;
+        
+        case SKILL__HIGH_PROJECTILE:    is = 0; break;
+        case SKILL__HIGH_EXPLOADING_PROJECTILE: is = 0; break;
+        case SKILL__DOUBLE_JUMP:        is = 0; break;
+        case SKILL__RICOSHET:           is = 0; break;
+        case SKILL__NEST:               is = 0; break;
+        
+        case SKILL__SWING:              is = 0; break;
+        case SKILL__NAIL:               is = 0; break;
+        case SKILL__JUMP_AND_NAIL:      is = 0; break;
+        case SKILL__NAIL_FLOOR:         is = 0; break;
+        
+        case SKILL__THROW:              is = 0; break;
+        case SKILL__JUMP_AND_CARRY:     is = 0; break;
+        case SKILL__BURROW_AND_GTFO:    is = 0; break;
+
+        case SKILL__THRUST:             is = 0; break;
+        case SKILL__PENETRATING_THRUST: is = 0; break;
+        case SKILL__HEAD_SLICE:         is = 0; break;
+        case SKILL__BURROW_AND_SLICE:   is = 0; break;
+        case SKILL__CHARGE_AND_SLICE:   is = 0; break;
+
+        case SKILL__WHIP_SMACK_WEIRD:   is = 0; break;
+        case SKILL__WHIP_PULL_WEIRD:    is = 0; break;
+        case SKILL__WHIP_SMACK:         is = 0; break;
+        case SKILL__WHIP_DRAG:          is = 0; break;
+        case SKILL__WHIP_PULL:          is = 1; break;
+        case SKILL__WHIP_TURN:          is = 1; break;
+        case SKILL__ARM_TURN:           is = 1; break;
+        case SKILL__WHIP_YEET:          is = 0; break;
+        case SKILL__ARM_YEET:           is = 0; break;
+        case SKILL__BURY:               is = 0; break;
+
+        case SKILL__LAUNCH_MINIBOT:     is = 0; break;
+        case SKILL__MINIBOT_MERGE:      is = 0; break;
+
+        case SKILL__CHARGE_AND_THROW:   is = 0; break;
+        case SKILL__DRAG:               is = 0; break;
+        case SKILL__PULL:               is = 1; break;
+        case SKILL__PUSH_DAMAGE:        is = 0; break;
+        case SKILL__THROW_DAMAGE:       is = 0; break;
+        case SKILL__DRAG_DAMAGE:        is = 0; break;
+        case SKILL__JUMP_DAMAGE_AROUND: is = 0; break;
+        case SKILL__CHARGE_AND_DAMAGE_3:is = 0; break;
+        case SKILL__DAMAGE_1:           is = 0; break;
+        case SKILL__DAMAGE_3:           is = 0; break;
+        case SKILL__PROJECTILE_LINE_1:  is = 0; break;
+        case SKILL__PROJECTILE_ARCH_1:  is = 0; break;
+        case SKILL__PROJECTILE_LINE_AROUND:     is = 0; break;
+        case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  is = 0; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
+int is_skill_damage_only(int skill)
+{
+    int is = 0;
+
+    switch(skill)
+    {
+        case SKILL__NONE:                       is = 0; break;
+        case SKILL__USE:                        is = 0; break;
+        case SKILL__MOVE:                       is = 0; break;
+
+        case SKILL__ATTACK_DIR:                 is = 0; break;
+        case SKILL__NO_ATTACK:                  is = 0; break;
+
+        case SKILL__SHOOT_PROJECTILE_FLY:       is = 0; break;
+        case SKILL__SHOOT_PROJECTILE_SQUIRREL:  is = 0; break;
+
+        case SKILL__CHARGE:             is = 0; break;
+        case SKILL__JUMP:               is = 0; break;
+        case SKILL__BURROW:             is = 0; break;
+
+        case SKILL__CHARGE_AND_JUMP:    is = 0; break;
+
+        case SKILL__PUSH:               is = 0; break;
+        case SKILL__PUNCH:              is = 0; break;
+        case SKILL__CHARGE_AND_PUNCH:   is = 0; break;
+        case SKILL__DRILL:              is = 1; break;
+        case SKILL__DRILL_FLOOR:        is = 0; break;
+
+        case SKILL__BRANCHING_BOLT:     is = 1; break;
+        case SKILL__STUNNING_BOLT:      is = 0; break;
+        case SKILL__COOKING_BOLT:       is = 1; break;
+        case SKILL__ELECTRIFY_FLOOR:    is = 0; break;
+        
+        case SKILL__SCORCH_WITH_FIRE:   is = 1; break;
+        case SKILL__SPEW_TAR_BALL:      is = 0; break;
+        case SKILL__FIRE_WELD_FLOOR:    is = 0; break;
+        case SKILL__ROCKET_JUMP:        is = 0; break;
+        case SKILL__ROCKET_DASH:        is = 0; break;
+        
+        case SKILL__PENETRATING_BEAM:   is = 1; break;
+        case SKILL__BOUNCING_BEAM:      is = 1; break;
+        case SKILL__FOCUSED_BEAM:       is = 0; break;
+        case SKILL__LASER_WELD_FLOOR:   is = 0; break;
+        
+        case SKILL__ICE_BLOCK:          is = 0; break;
+        case SKILL__ICE_WALL:           is = 0; break;
+        case SKILL__ICE_PROJECTILE:     is = 0; break;
+        case SKILL__FREEZE_FLOOR:       is = 0; break;
+        case SKILL__ICE_BUNKER:         is = 0; break;
+        
+        case SKILL__SIMPLE_SHOT:        is = 1; break;
+        case SKILL__SNIPER_SHOT:        is = 1; break;
+        case SKILL__POINT_BLANK_SHOT:   is = 0; break;
+        case SKILL__HEAD_SHOT:          is = 0; break;
+        case SKILL__STUNNING_SHOT:      is = 0; break;
+        case SKILL__HARPOON_SHOT:       is = 0; break;
+        
+        case SKILL__HIGH_PROJECTILE:    is = 1; break;
+        case SKILL__HIGH_EXPLOADING_PROJECTILE: is = 1; break;
+        case SKILL__DOUBLE_JUMP:        is = 0; break;
+        case SKILL__RICOSHET:           is = 1; break;
+        case SKILL__NEST:               is = 0; break;
+        
+        case SKILL__SWING:              is = 0; break;
+        case SKILL__NAIL:               is = 1; break;
+        case SKILL__JUMP_AND_NAIL:      is = 0; break;
+        case SKILL__NAIL_FLOOR:         is = 0; break;
+        
+        case SKILL__THROW:              is = 0; break;
+        case SKILL__JUMP_AND_CARRY:     is = 0; break;
+        case SKILL__BURROW_AND_GTFO:    is = 0; break;
+
+        case SKILL__THRUST:             is = 1; break;
+        case SKILL__PENETRATING_THRUST: is = 1; break;
+        case SKILL__HEAD_SLICE:         is = 0; break;
+        case SKILL__BURROW_AND_SLICE:   is = 0; break;
+        case SKILL__CHARGE_AND_SLICE:   is = 0; break;
+
+        case SKILL__WHIP_SMACK_WEIRD:   is = 1; break;
+        case SKILL__WHIP_PULL_WEIRD:    is = 0; break;
+        case SKILL__WHIP_SMACK:         is = 1; break;
+        case SKILL__WHIP_DRAG:          is = 0; break;
+        case SKILL__WHIP_PULL:          is = 0; break;
+        case SKILL__WHIP_TURN:          is = 0; break;
+        case SKILL__ARM_TURN:           is = 0; break;
+        case SKILL__WHIP_YEET:          is = 0; break;
+        case SKILL__ARM_YEET:           is = 0; break;
+        case SKILL__BURY:               is = 0; break;
+
+        case SKILL__LAUNCH_MINIBOT:     is = 0; break;
+        case SKILL__MINIBOT_MERGE:      is = 0; break;
+
+        case SKILL__CHARGE_AND_THROW:   is = 0; break;
+        case SKILL__DRAG:               is = 0; break;
+        case SKILL__PULL:               is = 0; break;
+        case SKILL__PUSH_DAMAGE:        is = 0; break;
+        case SKILL__THROW_DAMAGE:       is = 0; break;
+        case SKILL__DRAG_DAMAGE:        is = 0; break;
+        case SKILL__JUMP_DAMAGE_AROUND: is = 0; break;
+        case SKILL__CHARGE_AND_DAMAGE_3:is = 0; break;
+        case SKILL__DAMAGE_1:           is = 1; break;
+        case SKILL__DAMAGE_3:           is = 1; break;
+        case SKILL__PROJECTILE_LINE_1:  is = 1; break;
+        case SKILL__PROJECTILE_ARCH_1:  is = 1; break;
+        case SKILL__PROJECTILE_LINE_AROUND:     is = 1; break;
+        case SKILL__LAUNCH_MINIBOT_MEGASPIDER:  is = 0; break;
+
+        default: break;
+    }
+
+    return is;
+}
+
 int get_skill_action_points(int skill)
 {
     int ap = 0;

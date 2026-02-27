@@ -197,6 +197,22 @@ void save_state(State* state, Textures* textures)
         SDL_RWwrite(file, &augmentation, sizeof(int), 1);
     }
 
+    // parameters
+
+    int is_first_move_free_if_move_only = state->is_first_move_free_if_move_only;
+    int is_move_only_used = state->is_move_only_used;
+    int is_move_after_damage_only = state->is_move_after_damage_only;
+    int is_damage_only_used = state->is_damage_only_used;
+    int is_add_turn_after_kill = state->is_add_turn_after_kill;
+    int is_any_enemy_killed = state->is_any_enemy_killed;
+
+    SDL_RWwrite(file, &is_first_move_free_if_move_only, sizeof(int), 1);
+    SDL_RWwrite(file, &is_move_only_used, sizeof(int), 1);
+    SDL_RWwrite(file, &is_move_after_damage_only, sizeof(int), 1);
+    SDL_RWwrite(file, &is_damage_only_used, sizeof(int), 1);
+    SDL_RWwrite(file, &is_add_turn_after_kill, sizeof(int), 1);
+    SDL_RWwrite(file, &is_any_enemy_killed, sizeof(int), 1);
+
     // other
 
     int hero_action_points = state->hero_object->action_points;
@@ -470,6 +486,29 @@ void load_state(State* state, Textures* textures, Sounds* sounds, Musics* musics
         SDL_RWread(file, &augmentation, sizeof(int), 1);
         state->hero_body_part_augmentation[i] = augmentation;
     }
+
+    // parameters
+
+    int is_first_move_free_if_move_only = 0;
+    int is_move_only_used = 0;
+    int is_move_after_damage_only = 0;
+    int is_damage_only_used = 0;
+    int is_add_turn_after_kill = 0;
+    int is_any_enemy_killed = 0;
+
+    SDL_RWread(file, &is_first_move_free_if_move_only, sizeof(int), 1);
+    SDL_RWread(file, &is_move_only_used, sizeof(int), 1);
+    SDL_RWread(file, &is_move_after_damage_only, sizeof(int), 1);
+    SDL_RWread(file, &is_damage_only_used, sizeof(int), 1);
+    SDL_RWread(file, &is_add_turn_after_kill, sizeof(int), 1);
+    SDL_RWread(file, &is_any_enemy_killed, sizeof(int), 1);
+
+    state->is_first_move_free_if_move_only = is_first_move_free_if_move_only;
+    state->is_move_only_used = is_move_only_used;
+    state->is_move_after_damage_only = is_move_after_damage_only;
+    state->is_damage_only_used = is_damage_only_used;
+    state->is_add_turn_after_kill = is_add_turn_after_kill;
+    state->is_any_enemy_killed = is_any_enemy_killed;
 
     // other
 

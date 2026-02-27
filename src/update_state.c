@@ -1298,19 +1298,20 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     colors
                 );
 
-                if(state->enemy_list->size > 0)
-                {
-                    if(state->curr_ally_skill == SKILL__MOVE)
-                    {
-                        state->curr_ally->object->action_points -=
-                            state->ally_move_distance;
-                    }
-                    else
-                    {
-                        state->curr_ally->object->action_points -=
-                            get_skill_action_points(state->curr_ally_skill);
-                    }
-                }
+                // not anymore
+                // if(state->enemy_list->size > 0)
+                // {
+                //     if(state->curr_ally_skill == SKILL__MOVE)
+                //     {
+                //         state->curr_ally->object->action_points -=
+                //             state->ally_move_distance;
+                //     }
+                //     else
+                //     {
+                //         state->curr_ally->object->action_points -=
+                //             get_skill_action_points(state->curr_ally_skill);
+                //     }
+                // }
 
                 // objects to be removed
                 remove_all_object_to_be_removed(state);
@@ -1366,56 +1367,129 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     save_state(state, textures);
                 }
-                // end ally turn after ally skill
-                /////////////////////////////////
-                // restore all ally action points
-                for(ListElem* curr_elem = state->ally_list->head;
-                    curr_elem != NULL; curr_elem = curr_elem->next)
-                {
-                    Ally* curr_ally = (Ally*) curr_elem->data;
-                    restore_ally_action_points(state, curr_ally);
-                }
 
-                // start enemy turn
-                if(state->enemy_list->size > 0)
+                int go_to_enemy_turn = TRUE;
+
+                // printf("------ \n");
+                // // printf("state->is_first_move_free_if_move_only: %d \n", state->is_first_move_free_if_move_only);
+                // printf("state->is_move_only_used: %d \n", state->is_move_only_used);
+                // printf("------ \n");
+                // // printf("state->is_move_after_damage_only: %d \n", state->is_move_after_damage_only);
+                // printf("state->is_damage_only_used: %d \n", state->is_damage_only_used);
+                // printf("------ \n");
+                // // printf("state->is_add_turn_after_kill: %d \n", state->is_add_turn_after_kill);
+                // printf("state->is_any_enemy_killed: %d \n", state->is_any_enemy_killed);
+                // printf("------ \n");
+                // printf("go_to_enemy_turn: %d \n", go_to_enemy_turn);
+                // printf("------ \n");
+
+                if(state->is_first_move_free_if_move_only)
                 {
-                    // enemy with order number of 1
-                    for(ListElem* curr_elem = state->enemy_list->head;
-                        curr_elem != NULL; curr_elem = curr_elem->next)
+                    if(!state->is_move_only_used && is_skill_move_only(state->curr_ally_skill))
                     {
-                        Enemy* curr_enemy = (Enemy*) curr_elem->data;
-                        if(curr_enemy->order_number == 1)
-                        {
-                            state->curr_enemy_list_elem = curr_elem;
-                            state->curr_enemy = curr_enemy;
-                            state->enemy_action_sequence = (Action*) curr_enemy->action_sequence;
-                        }
+                        state->is_move_only_used = TRUE;
+
+                        go_to_enemy_turn = FALSE;
                     }
-
-                    add_animation_to_animation_list(
-                        state,
-                        new_animation_change_background_color(
-                            colors->ally_background,
-                            colors->enemy_background,
-                            0.25f
-                        ),
-                        textures,
-                        sounds,
-                        musics,
-                        colors
-                    );
-
-                    change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
-                    state->timer = 0.0f;
-                    break;
                 }
-                // or start ally turn again
-                else
+                
+                if(state->is_move_after_damage_only)
+                {
+                    if(state->is_damage_only_used)
+                    {
+                        state->is_damage_only_used = FALSE;
+                    }
+                    else if(!state->is_damage_only_used && is_skill_damage_only(state->curr_ally_skill))
+                    {
+                        state->is_damage_only_used = TRUE;
+                        state->is_move_only_used = TRUE; // also this
+                        update_ally_skill_list(state, state->curr_ally);
+
+                        go_to_enemy_turn = FALSE;
+                    }
+                }
+                
+                if(state->is_add_turn_after_kill && state->is_any_enemy_killed)
+                {
+                    state->is_any_enemy_killed = FALSE;
+
+                    go_to_enemy_turn = FALSE;
+                }
+                
+                // printf("------ \n");
+                // // printf("state->is_first_move_free_if_move_only: %d \n", state->is_first_move_free_if_move_only);
+                // printf("state->is_move_only_used: %d \n", state->is_move_only_used);
+                // printf("------ \n");
+                // // printf("state->is_move_after_damage_only: %d \n", state->is_move_after_damage_only);
+                // printf("state->is_damage_only_used: %d \n", state->is_damage_only_used);
+                // printf("------ \n");
+                // // printf("state->is_add_turn_after_kill: %d \n", state->is_add_turn_after_kill);
+                // printf("state->is_any_enemy_killed: %d \n", state->is_any_enemy_killed);
+                // printf("------ \n");
+                // printf("go_to_enemy_turn: %d \n", go_to_enemy_turn);
+                // printf("------ \n");
+                
+                if(!go_to_enemy_turn)
                 {
                     change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                     break;
                 }
-                /////////////////////////////////
+                else
+                {
+                    state->is_move_only_used = FALSE; 
+                    state->is_any_enemy_killed = FALSE;
+
+                    // end ally turn after ally skill
+                    /////////////////////////////////
+                    // restore all ally action points
+                    for(ListElem* curr_elem = state->ally_list->head;
+                        curr_elem != NULL; curr_elem = curr_elem->next)
+                    {
+                        Ally* curr_ally = (Ally*) curr_elem->data;
+                        restore_ally_action_points(state, curr_ally);
+                    }
+
+                    // start enemy turn
+                    if(state->enemy_list->size > 0)
+                    {
+                        // enemy with order number of 1
+                        for(ListElem* curr_elem = state->enemy_list->head;
+                            curr_elem != NULL; curr_elem = curr_elem->next)
+                        {
+                            Enemy* curr_enemy = (Enemy*) curr_elem->data;
+                            if(curr_enemy->order_number == 1)
+                            {
+                                state->curr_enemy_list_elem = curr_elem;
+                                state->curr_enemy = curr_enemy;
+                                state->enemy_action_sequence = (Action*) curr_enemy->action_sequence;
+                            }
+                        }
+
+                        add_animation_to_animation_list(
+                            state,
+                            new_animation_change_background_color(
+                                colors->ally_background,
+                                colors->enemy_background,
+                                0.25f
+                            ),
+                            textures,
+                            sounds,
+                            musics,
+                            colors
+                        );
+
+                        change_gamestate(state, GAMESTATE__ENEMY_PAUSE_BEFORE_ATTACK);
+                        state->timer = 0.0f;
+                        break;
+                    }
+                    // or start ally turn again
+                    else
+                    {
+                        change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
+                        break;
+                    }
+                    /////////////////////////////////
+                }
 
                 change_gamestate(state, GAMESTATE__ALLY_CHOOSING_SKILL);
                 break;

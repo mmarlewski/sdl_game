@@ -1,5 +1,6 @@
 #include "../inc/game.h"
 #include <SDL2/SDL_stdinc.h>
+#include <math.h>
 #include <string.h>
 
 void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colors, Fonts* fonts)
@@ -832,8 +833,8 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
         }
         if(state->mouse_screen_pos.x >= 84 &&
            state->mouse_screen_pos.x <= 84 + 64 &&
-           state->mouse_screen_pos.y >= 84 &&
-           state->mouse_screen_pos.y <= 84 + 64)
+           state->mouse_screen_pos.y >= 42 &&
+           state->mouse_screen_pos.y <= 42 + 64)
         {
             is_mouse_on_augmentation = TRUE;
             mouse_augmentation = torso_augmentation;
@@ -846,6 +847,14 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             is_mouse_on_augmentation = TRUE;
             mouse_augmentation = right_leg_augmentation;
         }
+        if(state->mouse_screen_pos.x >= 84 &&
+           state->mouse_screen_pos.x <= 84 + 64 &&
+           state->mouse_screen_pos.y >= 116 &&
+           state->mouse_screen_pos.y <= 116 + 64)
+        {
+            is_mouse_on_augmentation = TRUE;
+            mouse_augmentation = tail_augmentation;
+        }
 
         if(is_mouse_on_augmentation)
         {
@@ -856,6 +865,54 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                 colors->white,
                 1.0f,
                 vec2i(10, 180),
+                1
+            );
+        }
+    }
+
+    // parameters
+
+    if((state->gamestate == GAMESTATE__ALLY_CHOOSING_SKILL ||
+        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_1 ||
+        state->gamestate == GAMESTATE__ALLY_CHOOSING_TARGET_2 ||
+        state->gamestate == GAMESTATE__ALLY_EXECUTING_ANIMATION ||
+        state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL) &&
+       (state->curr_ally->object->type == OBJECT__HERO ||
+        state->curr_ally->object->type == OBJECT__HERO_FLOATING ||
+        state->curr_ally->object->type == OBJECT__HERO_FLYING))
+    {
+        if(state->is_first_move_free_if_move_only)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.bonus_turn_if_move_only,
+                colors->green,
+                1.0f,
+                vec2i(10, 250),
+                1
+            );
+        }
+
+        if(state->is_move_after_damage_only)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.free_move_if_dam_only,
+                colors->red,
+                1.0f,
+                vec2i(10, 250 + 32 + 10),
+                1
+            );
+        }
+
+        if(state->is_add_turn_after_kill)
+        {
+            draw_texture_at_screen_pos(
+                renderer,
+                textures->hud.bonus_turn_after_kill,
+                colors->white,
+                1.0f,
+                vec2i(10, 250 + 32 + 10 + 32 + 10),
                 1
             );
         }
@@ -1146,6 +1203,49 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         if(skill_list_elem != NULL)
                         {
                             int skill = (int) skill_list_elem->data;
+
+                            if(state->is_first_move_free_if_move_only && !state->is_move_only_used && is_skill_move_only(skill))
+                            {
+                                draw_texture_at_screen_pos(
+                                    renderer,
+                                    textures->hud.highlight_skill,
+                                    colors->green,
+                                    (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
+                                    vec2i(
+                                        138 + 10 * (i + 1) + 64 * i - 4,
+                                        600 + 10 * j + 64 * j + 50 - 4
+                                    ),
+                                    2
+                                );
+                            }
+                            else if(state->is_move_after_damage_only && state->is_damage_only_used && skill == SKILL__MOVE)
+                            {
+                                draw_texture_at_screen_pos(
+                                    renderer,
+                                    textures->hud.highlight_skill,
+                                    colors->red,
+                                    (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
+                                    vec2i(
+                                        138 + 10 * (i + 1) + 64 * i - 4,
+                                        600 + 10 * j + 64 * j + 50 - 4
+                                    ),
+                                    2
+                                );
+                            }
+                            else if(state->is_move_after_damage_only && !state->is_damage_only_used && is_skill_damage_only(skill))
+                            {
+                                draw_texture_at_screen_pos(
+                                    renderer,
+                                    textures->hud.highlight_skill,
+                                    colors->red,
+                                    (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
+                                    vec2i(
+                                        138 + 10 * (i + 1) + 64 * i - 4,
+                                        600 + 10 * j + 64 * j + 50 - 4
+                                    ),
+                                    2
+                                );
+                            }
 
                             Texture* skill_texture = get_skill_hud_texture(
                                 skill,

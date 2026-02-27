@@ -1252,6 +1252,10 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->bar_part = load_texture_from_filepath(renderer, "./res/hud/bar_part.png");
     hud->heart_full = load_texture_from_filepath(renderer, "./res/hud/heart_full.png");
     hud->heart_empty = load_texture_from_filepath(renderer, "./res/hud/heart_empty.png");
+    hud->highlight_skill = load_texture_from_filepath(renderer, "./res/hud/highlight_skill.png");
+    hud->bonus_turn_after_kill = load_texture_from_filepath(renderer, "./res/hud/bonus_turn_after_kill.png");
+    hud->bonus_turn_if_move_only = load_texture_from_filepath(renderer, "./res/hud/bonus_turn_if_move_only.png");
+    hud->free_move_if_dam_only = load_texture_from_filepath(renderer, "./res/hud/free_move_if_dam_only.png");
 }
 void destroy_textures_hud(Textures_Hud* hud)
 {

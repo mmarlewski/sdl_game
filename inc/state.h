@@ -127,6 +127,15 @@ typedef struct
     int reset_turn_uses;
     int game_over_uses;
 
+    int is_first_move_free_if_move_only;
+    int is_move_only_used;
+    
+    int is_move_after_damage_only;
+    int is_damage_only_used;
+
+    int is_add_turn_after_kill;
+    int is_any_enemy_killed;
+
     List* curr_ally_draw_below_texture_list;
     List* curr_ally_draw_below_tilemap_pos_list;
     List* curr_ally_draw_above_texture_list;
