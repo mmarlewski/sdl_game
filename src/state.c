@@ -198,13 +198,13 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     room_add_object_at(room, new_object(OBJECT__PORCUPINE),vec2i(6,7));
     room_add_object_at(room, new_object(OBJECT__GORILLA),vec2i(4,3));
 
-    state->is_first_move_free_if_move_only = FALSE;
+    state->is_first_move_free_if_move_only = TRUE;
     state->is_move_only_used = FALSE;
 
-    state->is_move_after_damage_only = FALSE;
+    state->is_move_after_damage_only = TRUE;
     state->is_damage_only_used = FALSE;
 
-    state->is_add_turn_after_kill = FALSE;
+    state->is_add_turn_after_kill = TRUE;
     state->is_any_enemy_killed = FALSE;
     //
     set_curr_room(state, room);
@@ -237,13 +237,13 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     // hero_add_augmentation(state, AUGMENTATION__DRILL);
     // hero_add_augmentation(state, AUGMENTATION__BLADE);
     // hero_add_augmentation(state, AUGMENTATION__HAMMER);
-    hero_add_augmentation(state, AUGMENTATION__ARM);
+    hero_add_augmentation(state, AUGMENTATION__WHIP);
 
     // hero_add_augmentation(state, AUGMENTATION__GUN);
-    // hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
+    hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
     // hero_add_augmentation(state, AUGMENTATION__COIL);
     // hero_add_augmentation(state, AUGMENTATION__FLAME);
-    hero_add_augmentation(state, AUGMENTATION__LASER);
+    // hero_add_augmentation(state, AUGMENTATION__FREEZE);
     // hero_add_augmentation(state, AUGMENTATION__LASER);
 
     update_enemy_list(state);

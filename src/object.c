@@ -17,6 +17,8 @@ Object* new_object(int type)
     object->action_points = ALLY_MAX_ACTION_POINTS;
     object->attack_dir4 = DIR4__NONE;
     object->curr_hp = get_object_max_hp(object);
+    object->is_stunned = FALSE;
+    object->is_stunned_turn_over = FALSE;
 
     return object;
 }

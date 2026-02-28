@@ -285,6 +285,8 @@ typedef struct
     int attack_dir4;
     int action_points;
     int curr_hp;
+    int is_stunned;
+    int is_stunned_turn_over;
 
 } Object;
 

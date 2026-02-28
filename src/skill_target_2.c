@@ -886,34 +886,6 @@ void skill_get_possible_target_2_pos(
             }
         }
         break;
-        case SKILL__STUNNING_BOLT:
-        {
-            for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
-            {
-                int go_on = TRUE;
-                for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
-                {
-                    Vec2i tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, dir8, i);
-
-                    if(is_tilemap_in_bounds(tilemap_pos))
-                    {
-                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
-                        int floor = room_get_floor_at(state->curr_room, tilemap_pos);
-
-                        if(object) go_on = FALSE;
-
-                        if(object != NULL && get_object_max_hp(object) != -1)
-                        {
-                            add_new_list_element_to_list_end(
-                                target_2_pos_list,
-                                new_vec2i_from_vec2i(tilemap_pos)
-                            );
-                        }
-                    }
-                }
-            }
-        }
-        break;
         case SKILL__ELECTRIFY_FLOOR:
         {
             for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
@@ -1340,6 +1312,7 @@ void skill_get_possible_target_2_pos(
         break;
         case SKILL__SIMPLE_SHOT:
         case SKILL__STUNNING_SHOT:
+        case SKILL__STUNNING_BOLT:
         {
             for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
             {
@@ -1422,6 +1395,7 @@ void skill_get_possible_target_2_pos(
         break;
         case SKILL__HIGH_PROJECTILE:
         case SKILL__HIGH_EXPLOADING_PROJECTILE:
+        case SKILL__NEST:
         {
             for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
             {
@@ -1476,22 +1450,6 @@ void skill_get_possible_target_2_pos(
                             );
                         }
                     }
-                }
-            }
-        }
-        break;
-        case SKILL__NEST:
-        {
-            for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
-            {
-                Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, 1);
-
-                if(is_tilemap_in_bounds(tilemap_pos))
-                {
-                    add_new_list_element_to_list_end(
-                        target_2_pos_list,
-                        new_vec2i_from_vec2i(tilemap_pos)
-                    );
                 }
             }
         }

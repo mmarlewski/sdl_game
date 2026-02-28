@@ -692,6 +692,8 @@ typedef struct
     Texture* damage_4;
     Texture* damage_5;
 
+    Texture* stun;
+
     Texture* burrow_in;
     Texture* burrow_out;
 
@@ -1195,6 +1197,7 @@ typedef struct
     Texture* environment_collapse_burrow;
     Texture* environment_conv_belt;
 
+    Texture* status_stunned;
     Texture* status_fragile;
     Texture* status_high;
     Texture* status_floating;

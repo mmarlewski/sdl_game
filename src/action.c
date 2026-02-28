@@ -416,6 +416,21 @@ Action* new_action_damage(Object* object, int damage)
     return action;
 }
 
+Action* new_action_stun(Object* object)
+{
+    Action* action = malloc(sizeof(*action));
+
+    action->animation = NULL;
+    action->tilemap_pos = object->tilemap_pos;
+    action->is_finished = FALSE;
+    action->is_finished_at_start = FALSE;
+    action->type = ACTION__STUN;
+
+    action->stun.object = object;
+
+    return action;
+}
+
 void destroy_action(Action* action)
 {
     if(action->type == ACTION__SEQUENCE)

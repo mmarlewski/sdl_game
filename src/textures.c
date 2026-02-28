@@ -707,6 +707,8 @@ void load_textures_skill(Renderer* renderer, Textures_Skill* skill)
     skill->damage_4 = load_texture_from_filepath(renderer, "./res/skill/damage_4.png");
     skill->damage_5 = load_texture_from_filepath(renderer, "./res/skill/damage_5.png");
 
+    skill->stun = load_texture_from_filepath(renderer, "./res/skill/stun.png");
+
     skill->burrow_in = load_texture_from_filepath(renderer, "./res/skill/burrow_in.png");
     skill->burrow_out = load_texture_from_filepath(renderer, "./res/skill/burrow_out.png");
 
@@ -1211,6 +1213,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->environment_collapse_burrow = load_texture_from_filepath(renderer, "./res/hud/environment_collapse_burrow.png");
     hud->environment_conv_belt = load_texture_from_filepath(renderer, "./res/hud/environment_conv_belt.png");
 
+    hud->status_stunned = load_texture_from_filepath(renderer, "./res/hud/status_stunned.png");
     hud->status_fragile = load_texture_from_filepath(renderer, "./res/hud/status_fragile.png");
     hud->status_high = load_texture_from_filepath(renderer, "./res/hud/status_high.png");
     hud->status_floating = load_texture_from_filepath(renderer, "./res/hud/status_floating.png");

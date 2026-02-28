@@ -44,6 +44,7 @@ enum ACTION_TYPE
     ACTION__PLAY_SOUND,
 
     ACTION__DAMAGE,
+    ACTION__STUN,
 
     ACTION__COUNT
 };
@@ -177,12 +178,16 @@ typedef struct
     Sound* sound;
 } Action_PlaySound;
 
-
 typedef struct
 {
     Object* object;
     int damage;
 } Action_Damage;
+
+typedef struct
+{
+    Object* object;
+} Action_Stun;
 
 struct _Action
 {
@@ -225,6 +230,7 @@ struct _Action
         Action_PlaySound play_sound;
 
         Action_Damage damage;
+        Action_Stun stun;
     };
 
 };
@@ -273,6 +279,7 @@ Action* new_action_shake(Vec2i tilemap_pos);
 Action* new_action_play_sound(Vec2i tilemap_pos, Sound* sound);
 
 Action* new_action_damage(Object* object, int damage);
+Action* new_action_stun(Object* object);
 
 void destroy_action(Action* action);
 

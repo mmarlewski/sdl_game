@@ -549,13 +549,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         break;
         case ACTION__DAMAGE:
         {
-            // if(action->damage.object == NULL || action->damage.object->is_to_be_removed)
-            // {
-            //     action->is_finished = TRUE;
-            //     action->is_finished_at_start = TRUE;
-            //     break;
-            // }
-
             if(get_object_max_hp(action->damage.object) == -1)
             {
                 object_on_damage(state, sounds, sequence, action, action->damage.object);
@@ -581,21 +574,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     default: break;
                 }
 
-                // switch(action->damage.damage)
-                // {
-                //     case 0: texture = textures->order_number.num_0; break;
-                //     case 1: texture = textures->order_number.num_1; break;
-                //     case 2: texture = textures->order_number.num_2; break;
-                //     case 3: texture = textures->order_number.num_3; break;
-                //     case 4: texture = textures->order_number.num_4; break;
-                //     case 5: texture = textures->order_number.num_5; break;
-                //     case 6: texture = textures->order_number.num_6; break;
-                //     case 7: texture = textures->order_number.num_7; break;
-                //     case 8: texture = textures->order_number.num_8; break;
-                //     case 9: texture = textures->order_number.num_9; break;
-                //     default: break;
-                // }
-
                 Animation* animation = new_animation_ascend_sprite_in_gamemap(
                     texture,
                     tilemap_pos_to_gamemap_pos(action->tilemap_pos),
@@ -617,6 +595,15 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                         new_action_death(action->damage.object, action->damage.object->tilemap_pos)
                     );
                 }
+            }
+        }
+        break;
+        case ACTION__STUN:
+        {
+            if(is_object_enemy(action->stun.object))
+            {
+                action->stun.object->is_stunned = TRUE;
+                action->stun.object->is_stunned_turn_over = FALSE;
             }
         }
         break;

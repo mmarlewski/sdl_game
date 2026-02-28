@@ -868,6 +868,25 @@ void draw_gamemap(Renderer* renderer, State* state, Textures* textures, Colors* 
                     1.0f
                 );
             }
+
+            if(curr_object->is_stunned)
+            {
+                Vec2f gamemap_pos = tilemap_pos_to_gamemap_pos(curr_object->tilemap_pos);
+                Vec2f world_cart_pos = gamemap_pos_to_world_pos(gamemap_pos);
+                Vec2f world_iso_pos = cart_pos_to_iso_pos(world_cart_pos);
+                Vec2i screen_pos = world_pos_to_screen_pos(world_iso_pos, state->camera_world_pos, state->camera_zoom);
+                screen_pos.x += TILE_LENGTH * 1.0f - 32 * 0.5f;
+                screen_pos.y += TILE_LENGTH * 1.5f - 32 * 1.0f;
+                
+                draw_texture_at_screen_pos(
+                    renderer,
+                    textures->hud.status_stunned,
+                    colors->none,
+                    0.5f,
+                    screen_pos,
+                    1.0f
+                );
+            }
             
             if(is_object_wall(curr_object)) continue;
 

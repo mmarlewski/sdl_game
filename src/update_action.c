@@ -158,6 +158,11 @@ void update_action(State* state, Action* sequence, Action* action, float delta_t
             action->is_finished = (action->animation->is_finished);
         }
         break;
+        case ACTION__STUN:
+        {
+            action->is_finished = TRUE;
+        }
+        break;
         default:
         break;
     }

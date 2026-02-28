@@ -843,6 +843,17 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         curr_elem != NULL; curr_elem = curr_elem->next)
                     {
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
+
+                        if(curr_enemy->object->is_stunned && !curr_enemy->object->is_stunned_turn_over)
+                        {
+                            curr_enemy->object->is_stunned_turn_over = TRUE;
+                        }
+                        else if(curr_enemy->object->is_stunned && curr_enemy->object->is_stunned_turn_over)
+                        {
+                            curr_enemy->object->is_stunned = FALSE;
+                            curr_enemy->object->is_stunned_turn_over = FALSE;
+                        }
+
                         if(curr_enemy->order_number == 1)
                         {
                             state->curr_enemy_list_elem = curr_elem;
@@ -1329,9 +1340,12 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                     curr_elem != NULL; curr_elem = curr_elem->next)
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
-                    update_enemy_attack_targets(state, curr_enemy);
-                    clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                    get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
+                    if(!curr_enemy->object->is_stunned)
+                    {
+                        update_enemy_attack_targets(state, curr_enemy);
+                        clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
+                    }
                 }
 
                 // all allies
@@ -1463,6 +1477,17 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                             curr_elem != NULL; curr_elem = curr_elem->next)
                         {
                             Enemy* curr_enemy = (Enemy*) curr_elem->data;
+
+                            if(curr_enemy->object->is_stunned && !curr_enemy->object->is_stunned_turn_over)
+                            {
+                                curr_enemy->object->is_stunned_turn_over = TRUE;
+                            }
+                            else if(curr_enemy->object->is_stunned && curr_enemy->object->is_stunned_turn_over)
+                            {
+                                curr_enemy->object->is_stunned = FALSE;
+                                curr_enemy->object->is_stunned_turn_over = FALSE;
+                            }
+
                             if(curr_enemy->order_number == 1)
                             {
                                 state->curr_enemy_list_elem = curr_elem;
@@ -1604,6 +1629,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     if(!curr_enemy->object->is_to_be_removed &&
+                       !curr_enemy->object->is_stunned &&
                        !curr_enemy->performed_attack)
                     {
                         update_enemy_attack_targets(state, curr_enemy);
@@ -1691,9 +1717,11 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
             {
                 state->timer = 0.0f;
 
-                object_enemy_prepare_move(state, state->curr_enemy, sounds);
-
-                execute_action_sequence(state, state->enemy_action_sequence, textures, sounds, musics, colors);
+                if(!state->curr_enemy->object->is_stunned)
+                {
+                    object_enemy_prepare_move(state, state->curr_enemy, sounds);
+                    execute_action_sequence(state, state->enemy_action_sequence, textures, sounds, musics, colors);
+                }
 
                 change_gamestate(state, GAMESTATE__ENEMY_MOVING);
                 break;
@@ -1724,6 +1752,7 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 {
                     Enemy* curr_enemy = (Enemy*) curr_elem->data;
                     if(!curr_enemy->object->is_to_be_removed &&
+                       !curr_enemy->object->is_stunned &&
                        !curr_enemy->performed_attack)
                     {
                         update_enemy_attack_targets(state, curr_enemy);
@@ -1759,7 +1788,8 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 state->timer = 0.0f;
 
                 // if enemy didn't die when moving
-                if(!state->curr_enemy->object->is_to_be_removed)
+                if(!state->curr_enemy->object->is_to_be_removed && 
+                   !state->curr_enemy->object->is_stunned)
                 {
                     update_enemy_attack_dir4(state, state->curr_enemy);
                     update_enemy_attack_targets(state, state->curr_enemy);
@@ -1821,9 +1851,12 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                         curr_elem != NULL; curr_elem = curr_elem->next)
                     {
                         Enemy* curr_enemy = (Enemy*) curr_elem->data;
-                        update_enemy_attack_targets(state, curr_enemy);
-                        clear_enemy_attack_actions_and_draw(state, curr_enemy);
-                        get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
+                        if(!curr_enemy->object->is_stunned)
+                        {
+                            update_enemy_attack_targets(state, curr_enemy);
+                            clear_enemy_attack_actions_and_draw(state, curr_enemy);
+                            get_enemy_attack_actions_and_draw(state, curr_enemy, textures, sounds);
+                        }
                     }
 
                     // all allies

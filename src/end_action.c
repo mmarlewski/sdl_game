@@ -245,6 +245,11 @@ void end_action(State* state, Action* sequence, Action* action, Textures* textur
             //
         }
         break;
+        case ACTION__STUN:
+        {
+            //
+        }
+        break;
         default:
         break;
     }
