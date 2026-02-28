@@ -821,6 +821,12 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
                 state->mouse_screen_pos.y >= 10 &&
                 state->mouse_screen_pos.y <= 10 + 64))
             {
+                // reset parameters
+
+                state->is_move_only_used = FALSE;
+                state->is_damage_only_used = FALSE;
+                state->is_any_enemy_killed = FALSE;
+
                 // restore all ally action points
                 for(ListElem* curr_elem = state->ally_list->head;
                     curr_elem != NULL; curr_elem = curr_elem->next)

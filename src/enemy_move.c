@@ -81,16 +81,17 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                         int distance = path_pos_list->size;
 
-                        if(distance >= 1 && distance <= 5 || object == enemy->object)
+                        if(distance >= 1 && distance <= 10 || object == enemy->object)
                         {
-                            score = distance / 2;
+                            // score = distance / 2;
+                            score = 1;
 
                             if(object != enemy->object) score += 10;
 
                             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
                             {
                                 int go_on = TRUE;
-                                for(int k = 1; k <= 5 && go_on; k++)
+                                for(int k = 1; k <= 10 && go_on; k++)
                                 {
                                     int mul = 1;
 
@@ -113,7 +114,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                                             enemy->object->type == OBJECT__MINIBOT_ENEMY ||
                                             enemy->object->type == OBJECT__MOLE)
                                     {
-                                        if(k == 1) mul = 10;
+                                        // if(k == 1) mul = 10;
+                                        // mul = 1;
+                                        mul = 15 - k;
                                     }
 
                                     Vec2i neighbor_tilemap_pos = vec2i_move_in_dir4_by(
@@ -136,7 +139,9 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                                         if(is_object_ally(neighbor_object)) score += 10 * mul;
 
-                                        if(is_object_enemy(neighbor_object)) score -= 1 * mul;
+                                        if(!is_object_enemy(neighbor_object)) score += 1 * mul;
+
+                                        // printf("k: %d, %s, score: %d \n", k, get_debug_name_from_object_type(neighbor_object->type), score);
                                     }
                                 }
                             }
@@ -146,16 +151,12 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                         destroy_list(path_pos_list);
                     }
 
-                    if(!is_floor_burrow(floor)) score = 0;
+                    // if(!is_floor_burrow(floor)) score = 0;
 
                     tilemap_pos_array[i * TILEMAP_LENGTH + j] = tilemap_pos;
                     score_array[i * TILEMAP_LENGTH + j] = score;
 
-                    // printf("x: %i, y: %i, score: %i \n",
-                    //        tilemap_pos.x,
-                    //        tilemap_pos.y,
-                    //        score
-                    // );
+                    // printf("x: %i, y: %i, score: %i \n", tilemap_pos.x, tilemap_pos.y, score);
                 }
             }
 
@@ -180,7 +181,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
             // choose
 
-            int top = 3;
+            int top = 1;
             int go_on = TRUE;
             for(int i = 0; i < top && go_on; i++)
             {

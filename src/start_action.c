@@ -257,8 +257,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
             action->death.object->tilemap_pos = action->tilemap_pos;
 
-            if(is_object_enemy(action->death.object) ||
-               is_object_ally(action->death.object))
+            if(is_object_enemy(action->death.object) || is_object_ally(action->death.object))
             {
                 play_sound(sounds->death);
 
@@ -294,6 +293,25 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     musics,
                     colors
                 );
+
+                if(state->is_add_turn_after_kill && is_object_enemy(action->death.object))
+                {
+                    add_animation_to_animation_list(
+                        state,
+                        action->animation = new_animation_simultaneous_of_1(
+                        new_animation_ascend_sprite_in_gamemap(
+                            textures->animation.add_turn,
+                            tilemap_pos_to_gamemap_pos(state->curr_ally->object->tilemap_pos),
+                            0.1f,
+                            ACTION_LENGTH_IN_SECONDS
+                            )
+                        ),
+                        textures,
+                        sounds,
+                        musics,
+                        colors
+                    );
+                }
             }
 
             Animation* animation = new_animation_none();

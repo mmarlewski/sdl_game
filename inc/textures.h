@@ -1041,6 +1041,8 @@ typedef struct
     Texture* fly_projectile;
     Texture* squirrel_projectile;
 
+    Texture* add_turn;
+
 } Textures_Animation;
 
 void load_textures_animation(Renderer* renderer, Textures_Animation* animation);

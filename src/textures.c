@@ -1056,6 +1056,8 @@ void load_textures_animation(Renderer* renderer, Textures_Animation* animation)
     animation->minibot_enemy = load_texture_from_filepath(renderer, "./res/animation/minibot_enemy.png");
     animation->fly_projectile = load_texture_from_filepath(renderer, "./res/animation/fly_projectile.png");
     animation->squirrel_projectile = load_texture_from_filepath(renderer, "./res/animation/squirrel_projectile.png");
+
+    animation->add_turn = load_texture_from_filepath(renderer, "./res/animation/add_turn.png");
 }
 
 void destroy_textures_animation(Textures_Animation* animation)
