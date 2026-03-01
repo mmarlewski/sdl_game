@@ -193,10 +193,11 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     // OBJECT__PORCUPINE,
     // OBJECT__AARDVARK,
     // OBJECT__WORM,
+    // OBJECT__MOLE,
 
     room_add_object_at(room, new_object(OBJECT__CENTIPEDE),vec2i(6,3));
-    room_add_object_at(room, new_object(OBJECT__PORCUPINE),vec2i(6,7));
-    room_add_object_at(room, new_object(OBJECT__GORILLA),vec2i(4,3));
+    room_add_object_at(room, new_object(OBJECT__MEGASPIDER),vec2i(6,7));
+    room_add_object_at(room, new_object(OBJECT__PORCUPINE),vec2i(4,3));
 
     state->is_first_move_free_if_move_only = TRUE;
     state->is_move_only_used = FALSE;
@@ -233,15 +234,15 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     hero_add_augmentation(state, AUGMENTATION__TRACK);
     hero_add_augmentation(state, AUGMENTATION__TAIL);
         
-    // hero_add_augmentation(state, AUGMENTATION__ARM);
+    hero_add_augmentation(state, AUGMENTATION__ARM);
     // hero_add_augmentation(state, AUGMENTATION__DRILL);
     // hero_add_augmentation(state, AUGMENTATION__BLADE);
     // hero_add_augmentation(state, AUGMENTATION__HAMMER);
-    hero_add_augmentation(state, AUGMENTATION__WHIP);
+    // hero_add_augmentation(state, AUGMENTATION__WHIP);
 
     // hero_add_augmentation(state, AUGMENTATION__GUN);
-    hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
-    // hero_add_augmentation(state, AUGMENTATION__COIL);
+    // hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
+    hero_add_augmentation(state, AUGMENTATION__COIL);
     // hero_add_augmentation(state, AUGMENTATION__FLAME);
     // hero_add_augmentation(state, AUGMENTATION__FREEZE);
     // hero_add_augmentation(state, AUGMENTATION__LASER);
@@ -656,7 +657,8 @@ void get_object_skills(State* state, Object* object, List* skill_list)
         case OBJECT__HERO_FLOATING:
         case OBJECT__HERO_FLYING:
         {
-            if (state->is_move_after_damage_only && state->is_damage_only_used && !(state->is_add_turn_after_kill && state->is_any_enemy_killed))
+            if (state->is_move_after_damage_only && state->is_damage_only_used && !(state->is_add_turn_after_kill && state->is_any_enemy_killed) &&
+                state->enemy_list->size > 0)
             {
                 // move
 
@@ -705,6 +707,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
                 {
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRILL);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__PUSH_DAMAGE);
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUN_AND_PUSH);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRAG);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__PULL);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__DRILL_FLOOR);
@@ -760,9 +763,9 @@ void get_object_skills(State* state, Object* object, List* skill_list)
                 {
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_BLOCK);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_WALL);
-                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_PROJECTILE);
-                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__FREEZE_FLOOR);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__ICE_BUNKER);
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUN_AROUND);
+                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__FREEZE_FLOOR);
                 }
 
                 // gun

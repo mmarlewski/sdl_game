@@ -263,20 +263,6 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
 
                 state->is_any_enemy_killed = TRUE;
 
-                // add_animation_to_animation_list(
-                //     state,
-                //     new_animation_background_flash(
-                //         state->background_color,
-                //         colors->white,
-                //         0.05f,
-                //         1.0f
-                //         ),
-                //     textures,
-                //     sounds,
-                //     musics,
-                //     colors
-                //     );
-
                 add_animation_to_animation_list(
                     state,
                     action->animation = new_animation_simultaneous_of_2(
@@ -294,7 +280,8 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
                     colors
                 );
 
-                if(state->is_add_turn_after_kill && is_object_enemy(action->death.object))
+                if(state->is_add_turn_after_kill && is_object_enemy(action->death.object) &&
+                   state->gamestate == GAMESTATE__ALLY_EXECUTING_SKILL)
                 {
                     add_animation_to_animation_list(
                         state,

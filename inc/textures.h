@@ -1083,6 +1083,7 @@ typedef struct
     Texture* skill_launch_nest;
     Texture* skill_burrow_and_slice;
     Texture* skill_charge_and_punch;
+    Texture* skill_stun_and_push;
     Texture* skill_charge_and_slice;
     Texture* skill_jump_and_stomp;
     Texture* skill_electrify_floor;
@@ -1119,6 +1120,7 @@ typedef struct
     Texture* skill_jump_and_nail;
     Texture* skill_nail;
     Texture* skill_ice_bunker;
+    Texture* skill_stun_around;
     Texture* skill_laser_weld_floor;
     Texture* skill_drill;
     Texture* skill_head_shot;

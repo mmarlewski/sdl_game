@@ -1381,6 +1381,7 @@ void skill_get_actions_and_draw(
     //     break;
         case SKILL__PUSH:
         case SKILL__PUSH_DAMAGE:
+        case SKILL__STUN_AND_PUSH:
     //     case SKILL__DRAG_HOOK:
     //     case SKILL__DRAG_SPIDERWEB:
     //     case SKILL__DRAG_TENTACLE:
@@ -1392,7 +1393,7 @@ void skill_get_actions_and_draw(
             if(target_1_object != NULL && is_object_movable(target_1_object))
             {
                 if(skill == SKILL__PUSH_DAMAGE ||
-                skill == SKILL__DRAG_DAMAGE)
+                   skill == SKILL__DRAG_DAMAGE)
                 {
                     // actions
                     add_action_to_end_action_sequence(
@@ -1404,6 +1405,24 @@ void skill_get_actions_and_draw(
                     add_new_list_element_to_list_end(
                         draw_effect_texture_list,
                         textures->skill.damage_1
+                    );
+                    add_new_list_element_to_list_end(
+                        draw_effect_tilemap_pos_list,
+                        new_vec2i_from_vec2i(target_1_tilemap_pos)
+                    );
+                }
+                else if(skill == SKILL__STUN_AND_PUSH)
+                {
+                    // actions
+                    add_action_to_end_action_sequence(
+                        action_sequence,
+                        new_action_stun(target_1_object)
+                    );
+
+                    // draw effect
+                    add_new_list_element_to_list_end(
+                        draw_effect_texture_list,
+                        textures->skill.stun
                     );
                     add_new_list_element_to_list_end(
                         draw_effect_tilemap_pos_list,
@@ -5886,83 +5905,116 @@ void skill_get_actions_and_draw(
                     target_2_tilemap_pos
                 );
 
-            List* wall_tilemap_pos_list = new_list((void(*)(void*))destroy_vec2i);
+            for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir8_by(target_2_tilemap_pos, dir8, 1);
 
-            int x = target_2_tilemap_pos.x;
-            int y = target_2_tilemap_pos.y;
-
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x - 1, y - 1));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x - 1, y + 0));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x - 1, y + 1));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x + 0, y + 1));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x + 1, y + 1));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x + 1, y + 0));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x + 1, y - 1));
-            add_new_list_element_to_list_end(wall_tilemap_pos_list, new_vec2i(x + 0, y - 1));
-
-                for(ListElem* list_elem = wall_tilemap_pos_list->head; list_elem != NULL; list_elem = list_elem->next)
+                if(is_tilemap_in_bounds(tilemap_pos))
                 {
-                    Vec2i* tilemap_pos_ptr = list_elem->data;
-                    Vec2i tilemap_pos = vec2i(tilemap_pos_ptr->x, tilemap_pos_ptr->y);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                    if(is_tilemap_in_bounds(tilemap_pos))
+                    if(object == NULL)
                     {
-                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
-                        int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                        // actions
+                        Object* new_object_ice_block = new_object(OBJECT__ICE_BLOCK);
+                        add_action_after_curr_action_action_sequence(
+                            action_sequence,
+                            new_action_add_object(
+                                new_object_ice_block,
+                                tilemap_pos
+                            )
+                        );
+                        add_action_after_curr_action_action_sequence(
+                            action_sequence,
+                            new_action_drop(
+                                new_object_ice_block,
+                                tilemap_pos,
+                                DIR4__NONE
+                            )
+                        );
 
-                        if(object == NULL)
+                        if(is_floor_deadly_on_drop_for_object(
+                            floor,
+                            new_object_ice_block)
+                            )
                         {
-                            // actions
-                            Object* new_object_ice_block = new_object(OBJECT__ICE_BLOCK);
-                            add_action_after_curr_action_action_sequence(
-                                action_sequence,
-                                new_action_add_object(
-                                    new_object_ice_block,
-                                    tilemap_pos
-                                )
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.death_effect
                             );
-                            add_action_after_curr_action_action_sequence(
-                                action_sequence,
-                                new_action_drop(
-                                    new_object_ice_block,
-                                    tilemap_pos,
-                                    DIR4__NONE
-                                )
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
                             );
-
-                            if(is_floor_deadly_on_drop_for_object(
-                                floor,
-                                new_object_ice_block)
-                                )
-                            {
-                                // draw effect
-                                add_new_list_element_to_list_end(
-                                    draw_effect_texture_list,
-                                    textures->skill.death_effect
-                                );
-                                add_new_list_element_to_list_end(
-                                    draw_effect_tilemap_pos_list,
-                                    new_vec2i_from_vec2i(tilemap_pos)
-                                );
-                            }
-                            else
-                            {
-                                // draw effect
-                                add_new_list_element_to_list_end(
-                                    draw_effect_texture_list,
-                                    textures->object.ice_block
-                                );
-                                add_new_list_element_to_list_end(
-                                    draw_effect_tilemap_pos_list,
-                                    new_vec2i_from_vec2i(tilemap_pos)
-                                );
-                            }
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->object.ice_block
+                            );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
                         }
                     }
                 }
+            }
+        }
+        break;
+        case SKILL__STUN_AROUND:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                );
 
-            remove_all_list_elements(wall_tilemap_pos_list, TRUE);
-            destroy_list(wall_tilemap_pos_list);
+            for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
+            {
+                Vec2i tilemap_pos = vec2i_move_in_dir8_by(target_2_tilemap_pos, dir8, 1);
+
+                if(is_tilemap_in_bounds(tilemap_pos))
+                {
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+
+                    if(object != NULL)
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_sequence_of_1(new_action_stun(object))
+                        );
+
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            textures->skill.stun
+                        );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                    else
+                    {
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            textures->skill.damage_0
+                        );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
         }
         break;
         case SKILL__ICE_PROJECTILE:
@@ -6117,6 +6169,78 @@ void skill_get_actions_and_draw(
         break;
         case SKILL__SIMPLE_SHOT:
         case SKILL__PROJECTILE_LINE_1:
+        {
+            DistanceInfo distance_info =
+                get_distance_info_from_vec2i_to_vec2i(
+                    source_tilemap_pos,
+                    target_2_tilemap_pos
+                );
+
+            if(distance_info.dir8 != DIR8__NONE)
+            {
+                int go_on = TRUE;
+                for(int i = 1; i < TILEMAP_LENGTH && go_on; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos, distance_info.dir8, i);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+
+                    if(object) go_on = FALSE;
+
+                    if(object != NULL && object == target_2_object)
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_sequence_of_1(new_action_damage(object, 1))
+                        );
+
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            textures->skill.damage_1
+                        );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                    else
+                    {
+                        // draw effect
+                        add_new_list_element_to_list_end(
+                            draw_effect_texture_list,
+                            textures->skill.damage_0
+                        );
+                        add_new_list_element_to_list_end(
+                            draw_effect_tilemap_pos_list,
+                            new_vec2i_from_vec2i(tilemap_pos)
+                        );
+                    }
+                }
+            }
+
+            Texture* above_texture = NULL;
+            switch(distance_info.dir4)
+            {
+                case DIR4__UP: above_texture = textures->skill.attack_dir4_up; break;
+                case DIR4__RIGHT: above_texture = textures->skill.attack_dir4_right; break;
+                case DIR4__DOWN: above_texture = textures->skill.attack_dir4_down; break;
+                case DIR4__LEFT: above_texture = textures->skill.attack_dir4_left; break;
+                default: break;
+            }
+
+            // draw above
+            add_new_list_element_to_list_end(
+                draw_above_texture_list,
+                above_texture
+            );
+            add_new_list_element_to_list_end(
+                draw_above_tilemap_pos_list,
+                new_vec2i_from_vec2i(source_tilemap_pos)
+            );
+        }
+        break;
         case SKILL__STUNNING_SHOT:
         case SKILL__STUNNING_BOLT:
         {

@@ -25,6 +25,7 @@ int is_skill_two_target(int skill)
         case SKILL__PUSH:               is = 1; break;
         case SKILL__PUNCH:              is = 1; break;
         case SKILL__CHARGE_AND_PUNCH:   is = 1; break;
+        case SKILL__STUN_AND_PUSH:      is = 1; break;
         case SKILL__DRILL:              is = 0; break;
         case SKILL__DRILL_FLOOR:        is = 0; break;
 
@@ -49,6 +50,7 @@ int is_skill_two_target(int skill)
         case SKILL__ICE_PROJECTILE:     is = 0; break;
         case SKILL__FREEZE_FLOOR:       is = 0; break;
         case SKILL__ICE_BUNKER:         is = 0; break;
+        case SKILL__STUN_AROUND:        is = 0; break;
         
         case SKILL__SIMPLE_SHOT:        is = 0; break;
         case SKILL__SNIPER_SHOT:        is = 0; break;
@@ -138,6 +140,7 @@ int is_skill_move_only(int skill)
         case SKILL__PUSH:               is = 0; break;
         case SKILL__PUNCH:              is = 0; break;
         case SKILL__CHARGE_AND_PUNCH:   is = 0; break;
+        case SKILL__STUN_AND_PUSH:      is = 0; break;
         case SKILL__DRILL:              is = 0; break;
         case SKILL__DRILL_FLOOR:        is = 0; break;
 
@@ -162,6 +165,7 @@ int is_skill_move_only(int skill)
         case SKILL__ICE_PROJECTILE:     is = 0; break;
         case SKILL__FREEZE_FLOOR:       is = 0; break;
         case SKILL__ICE_BUNKER:         is = 0; break;
+        case SKILL__STUN_AROUND:        is = 0; break;
         
         case SKILL__SIMPLE_SHOT:        is = 0; break;
         case SKILL__SNIPER_SHOT:        is = 0; break;
@@ -251,6 +255,7 @@ int is_skill_damage_only(int skill)
         case SKILL__PUSH:               is = 0; break;
         case SKILL__PUNCH:              is = 0; break;
         case SKILL__CHARGE_AND_PUNCH:   is = 0; break;
+        case SKILL__STUN_AND_PUSH:      is = 0; break;
         case SKILL__DRILL:              is = 1; break;
         case SKILL__DRILL_FLOOR:        is = 0; break;
 
@@ -275,6 +280,7 @@ int is_skill_damage_only(int skill)
         case SKILL__ICE_PROJECTILE:     is = 0; break;
         case SKILL__FREEZE_FLOOR:       is = 0; break;
         case SKILL__ICE_BUNKER:         is = 0; break;
+        case SKILL__STUN_AROUND:        is = 0; break;
         
         case SKILL__SIMPLE_SHOT:        is = 1; break;
         case SKILL__SNIPER_SHOT:        is = 1; break;
@@ -371,6 +377,7 @@ char* get_in_game_skill_name(int skill)
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__PUNCH:              name = "punch"; break;
         case SKILL__CHARGE_AND_PUNCH:   name = "charge and punch"; break;
+        case SKILL__STUN_AND_PUSH:      name = "stun and push"; break;
         case SKILL__DRILL:              name = "drill"; break;
         case SKILL__DRILL_FLOOR:        name = "drill floor"; break;
 
@@ -395,6 +402,7 @@ char* get_in_game_skill_name(int skill)
         case SKILL__ICE_PROJECTILE:     name = "ice projectile"; break;
         case SKILL__FREEZE_FLOOR:       name = "freeze floor"; break;
         case SKILL__ICE_BUNKER:         name = "ice bunker"; break;
+        case SKILL__STUN_AROUND:        name = "stun around"; break;
         
         case SKILL__SIMPLE_SHOT:        name = "simple shot"; break;
         case SKILL__SNIPER_SHOT:        name = "sniper shot"; break;
@@ -481,6 +489,7 @@ char* get_debug_skill_name(int skill)
         case SKILL__PUSH:               name = "push"; break;
         case SKILL__PUNCH:              name = "punch"; break;
         case SKILL__CHARGE_AND_PUNCH:   name = "charge and punch"; break;
+        case SKILL__STUN_AND_PUSH:      name = "stun and push"; break;
         case SKILL__DRILL:              name = "drill"; break;
         case SKILL__DRILL_FLOOR:        name = "drill floor"; break;
 
@@ -505,6 +514,7 @@ char* get_debug_skill_name(int skill)
         case SKILL__ICE_PROJECTILE:     name = "ice projectile"; break;
         case SKILL__FREEZE_FLOOR:       name = "freeze floor"; break;
         case SKILL__ICE_BUNKER:         name = "ice bunker"; break;
+        case SKILL__STUN_AROUND:        name = "stun around"; break;
         
         case SKILL__SIMPLE_SHOT:        name = "simple shot"; break;
         case SKILL__SNIPER_SHOT:        name = "sniper shot"; break;
@@ -595,6 +605,7 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__PUSH:               texture = textures->hud.skill_push; break;
         case SKILL__PUNCH:              texture = textures->hud.skill_punch; break;
         case SKILL__CHARGE_AND_PUNCH:   texture = textures->hud.skill_charge_and_punch; break;
+        case SKILL__STUN_AND_PUSH:      texture = textures->hud.skill_stun_and_push; break;
         case SKILL__DRILL:              texture = textures->hud.skill_drill; break;
         case SKILL__DRILL_FLOOR:        texture = textures->hud.skill_drill_floor; break;
 
@@ -619,6 +630,7 @@ Texture* get_skill_hud_texture(int skill, Textures* textures)
         case SKILL__ICE_PROJECTILE:     texture = textures->hud.skill_ice_projectile; break;
         case SKILL__FREEZE_FLOOR:       texture = textures->hud.skill_freeze_water; break;
         case SKILL__ICE_BUNKER:         texture = textures->hud.skill_ice_bunker; break;
+        case SKILL__STUN_AROUND:        texture = textures->hud.skill_stun_around; break;
         
         case SKILL__SIMPLE_SHOT:        texture = textures->hud.skill_simple_shot; break;
         case SKILL__SNIPER_SHOT:        texture = textures->hud.skill_sniper_shot; break;

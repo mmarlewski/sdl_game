@@ -1204,33 +1204,36 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
                         {
                             int skill = (int) skill_list_elem->data;
 
-                            if(state->is_first_move_free_if_move_only && !state->is_move_only_used && is_skill_move_only(skill))
+                            if(state->enemy_list->size > 0)
                             {
-                                draw_texture_at_screen_pos(
-                                    renderer,
-                                    textures->hud.highlight_skill,
-                                    colors->green,
-                                    (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
-                                    vec2i(
-                                        138 + 10 * (i + 1) + 64 * i - 4,
-                                        600 + 10 * j + 64 * j + 50 - 4
-                                    ),
-                                    2
-                                );
-                            }
-                            else if(state->is_move_after_damage_only && !state->is_damage_only_used && is_skill_damage_only(skill))
-                            {
-                                draw_texture_at_screen_pos(
-                                    renderer,
-                                    textures->hud.highlight_skill,
-                                    colors->red,
-                                    (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
-                                    vec2i(
-                                        138 + 10 * (i + 1) + 64 * i - 4,
-                                        600 + 10 * j + 64 * j + 50 - 4
-                                    ),
-                                    2
-                                );
+                                if(state->is_first_move_free_if_move_only && !state->is_move_only_used && is_skill_move_only(skill))
+                                {
+                                    draw_texture_at_screen_pos(
+                                        renderer,
+                                        textures->hud.highlight_skill,
+                                        colors->green,
+                                        (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
+                                        vec2i(
+                                            138 + 10 * (i + 1) + 64 * i - 4,
+                                            600 + 10 * j + 64 * j + 50 - 4
+                                        ),
+                                        2
+                                    );
+                                }
+                                else if(state->is_move_after_damage_only && !state->is_damage_only_used && is_skill_damage_only(skill))
+                                {
+                                    draw_texture_at_screen_pos(
+                                        renderer,
+                                        textures->hud.highlight_skill,
+                                        colors->red,
+                                        (sinf(state->time * 2.0f) + 1.0f) / 2.0f,
+                                        vec2i(
+                                            138 + 10 * (i + 1) + 64 * i - 4,
+                                            600 + 10 * j + 64 * j + 50 - 4
+                                        ),
+                                        2
+                                    );
+                                }
                             }
 
                             Texture* skill_texture = get_skill_hud_texture(

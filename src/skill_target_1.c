@@ -43,6 +43,7 @@ void skill_get_possible_target_1_pos(
         case SKILL__PUSH:
         case SKILL__PUSH_DAMAGE:
         case SKILL__PUNCH:
+        case SKILL__STUN_AND_PUSH:
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {

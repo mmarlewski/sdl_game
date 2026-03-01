@@ -1100,6 +1100,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->skill_launch_nest = load_texture_from_filepath(renderer, "./res/hud/skill_launch_nest.png");
     hud->skill_burrow_and_slice = load_texture_from_filepath(renderer, "./res/hud/skill_burrow_and_slice.png");
     hud->skill_charge_and_punch = load_texture_from_filepath(renderer, "./res/hud/skill_charge_and_punch.png");
+    hud->skill_stun_and_push = load_texture_from_filepath(renderer, "./res/hud/skill_stun_and_push.png");
     hud->skill_charge_and_slice = load_texture_from_filepath(renderer, "./res/hud/skill_charge_and_slice.png");
     hud->skill_jump_and_stomp = load_texture_from_filepath(renderer, "./res/hud/skill_jump_and_stomp.png");
     hud->skill_electrify_floor = load_texture_from_filepath(renderer, "./res/hud/skill_electrify_floor.png");
@@ -1136,6 +1137,7 @@ void load_textures_hud(Renderer* renderer, Textures_Hud* hud)
     hud->skill_jump_and_nail = load_texture_from_filepath(renderer, "./res/hud/skill_jump_and_nail.png");
     hud->skill_nail = load_texture_from_filepath(renderer, "./res/hud/skill_nail.png");
     hud->skill_ice_bunker = load_texture_from_filepath(renderer, "./res/hud/skill_ice_bunker.png");
+    hud->skill_stun_around = load_texture_from_filepath(renderer, "./res/hud/skill_stun_around.png");
     hud->skill_laser_weld_floor = load_texture_from_filepath(renderer, "./res/hud/skill_laser_weld_floor.png");
     hud->skill_drill = load_texture_from_filepath(renderer, "./res/hud/skill_drill.png");
     hud->skill_head_shot = load_texture_from_filepath(renderer, "./res/hud/skill_head_shot.png");

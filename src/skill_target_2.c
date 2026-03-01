@@ -588,6 +588,7 @@ void skill_get_possible_target_2_pos(
         case SKILL__PUSH:
         case SKILL__PUSH_DAMAGE:
         case SKILL__PUNCH:
+        case SKILL__STUN_AND_PUSH:
         {
             DistanceInfo distance_info =
                 get_distance_info_from_vec2i_to_vec2i(
@@ -1223,6 +1224,7 @@ void skill_get_possible_target_2_pos(
         }
         break;
         case SKILL__ICE_BUNKER:
+        case SKILL__STUN_AROUND:
         {
             add_new_list_element_to_list_end(
                 target_2_pos_list,
@@ -1517,69 +1519,6 @@ void skill_get_possible_target_2_pos(
                     }
                 }
             }
-
-            // DistanceInfo distance_info = get_distance_info_from_vec2i_to_vec2i(source_tilemap_pos, target_1_tilemap_pos);
-
-            // int dir4_1 = DIR4__NONE;
-            // int dir4_2 = DIR4__NONE;
-
-            // switch(distance_info.dir8)
-            // {
-            //     case DIR8__UP:          dir4_1 = DIR8__UP;    break;
-            //     case DIR8__RIGHT:       dir4_1 = DIR8__RIGHT; break;
-            //     case DIR8__DOWN:        dir4_1 = DIR8__DOWN;  break;
-            //     case DIR8__LEFT:        dir4_1 = DIR8__LEFT;  break;
-
-            //     case DIR8__UP_LEFT:     dir4_1 = DIR4__UP;      dir4_2 = DIR4__LEFT;    break;
-            //     case DIR8__UP_RIGHT:    dir4_1 = DIR4__UP;      dir4_2 = DIR4__RIGHT;   break;
-            //     case DIR8__DOWN_RIGHT:  dir4_1 = DIR4__DOWN;    dir4_2 = DIR4__RIGHT;   break;
-            //     case DIR8__DOWN_LEFT:   dir4_1 = DIR4__DOWN;    dir4_2 = DIR4__LEFT;    break;
-            //     default:
-            //     break;
-            // }
-
-            // if(dir4_1 != DIR4__NONE)
-            // {
-            //     int go_on = TRUE;
-            //     for(int i = 1; i <= SKILL_PUSH_RANGE && go_on; i++)
-            //     {
-            //         Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos,dir4_1,i);
-
-            //         if(is_tilemap_in_bounds(tilemap_pos))
-            //         {
-            //             Object* object = room_get_object_at(state->curr_room,tilemap_pos);
-
-            //             add_new_list_element_to_list_end(
-            //                 target_2_pos_list,
-            //                 new_vec2i_from_vec2i(tilemap_pos)
-            //             );
-
-            //             if(object != NULL) go_on = FALSE;
-            //         }
-            //     }
-            // }
-
-
-            // if(dir4_2 != DIR4__NONE)
-            // {
-            //     int go_on = TRUE;
-            //     for(int i = 1; i <= SKILL_PUSH_RANGE && go_on; i++)
-            //     {
-            //         Vec2i tilemap_pos = vec2i_move_in_dir4_by(target_1_tilemap_pos,dir4_2,i);
-
-            //         if(is_tilemap_in_bounds(tilemap_pos))
-            //         {
-            //             Object* object = room_get_object_at(state->curr_room,tilemap_pos);
-
-            //             add_new_list_element_to_list_end(
-            //                 target_2_pos_list,
-            //                 new_vec2i_from_vec2i(tilemap_pos)
-            //             );
-
-            //             if(object != NULL) go_on = FALSE;
-            //         }
-            //     }
-            // }
         }
         break;
     //     case SKILL__STOMP:
@@ -1823,7 +1762,7 @@ void skill_get_possible_target_2_pos(
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
                 int go_on = TRUE;
-                for(int i = 1; i <= SKILL_THROW_RANGE && go_on; i++)
+                for(int i = 1; i <= 10 && go_on; i++)
                 {
                     Vec2i tilemap_pos = vec2i_move_in_dir4_by(
                         target_1_tilemap_pos,

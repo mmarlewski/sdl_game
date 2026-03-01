@@ -151,7 +151,12 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
                         destroy_list(path_pos_list);
                     }
 
-                    // if(!is_floor_burrow(floor)) score = 0;
+                    if(enemy_object->type == OBJECT__MOLE ||
+                       enemy_object->type == OBJECT__WORM ||
+                       enemy_object->type == OBJECT__AARDVARK)
+                    {
+                        if(!is_floor_burrow(floor)) score = 0;
+                    }
 
                     tilemap_pos_array[i * TILEMAP_LENGTH + j] = tilemap_pos;
                     score_array[i * TILEMAP_LENGTH + j] = score;
