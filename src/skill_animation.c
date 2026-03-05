@@ -517,8 +517,7 @@ Animation* skill_get_animation(
         break;
         case SKILL__SPEW_TAR_BALL:
         {
-            skill_animation = new_animation_sequence_of_2(
-                new_animation_play_sound(sounds->minibot_launch),
+            skill_animation = new_animation_sequence_of_1(
                 new_animation_move_sprite_in_gamemap_in_arch(
                     textures->object.tar_ball,
                     tilemap_pos_to_gamemap_pos(source_tilemap_pos),

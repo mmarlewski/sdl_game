@@ -167,6 +167,32 @@ void floor_on_move_end(State* state, Sounds* sounds, Action* sequence, Action* a
                     )
                 );
             }
+            else if(action->move.object->type == OBJECT__TAR_BALL)
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                        )
+                    )
+                );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__WATER_TAR_BALL,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                        )
+                    )
+                );
+            }
             else
             {
                 remove_all_actions_after_curr_action_action_sequence(sequence);
@@ -204,6 +230,32 @@ void floor_on_move_end(State* state, Sounds* sounds, Action* sequence, Action* a
                     sequence,
                     new_action_change_floor(
                         FLOOR__LAVA_COLUMN,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                        )
+                    )
+                );
+            }
+            else if(action->move.object->type == OBJECT__TAR_BALL)
+            {
+                remove_all_actions_after_curr_action_action_sequence(sequence);
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->move.object,
+                        vec2i_move_in_dir4_by(
+                            action->tilemap_pos,
+                            action->move.dir4,
+                            1
+                        )
+                    )
+                );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__LAVA_TAR_BALL,
                         vec2i_move_in_dir4_by(
                             action->tilemap_pos,
                             action->move.dir4,
@@ -538,6 +590,23 @@ void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* actio
                     )
                 );
             }
+            else if(action->drop.object->type == OBJECT__TAR_BALL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->drop.object,
+                        action->tilemap_pos
+                    )
+                );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__WATER_TAR_BALL,
+                        action->tilemap_pos
+                    )
+                );
+            }
             else
             {
                 add_action_to_end_action_sequence(
@@ -566,6 +635,23 @@ void floor_on_drop(State* state, Sounds* sounds, Action* sequence, Action* actio
                     sequence,
                     new_action_change_floor(
                         FLOOR__LAVA_COLUMN,
+                        action->tilemap_pos
+                    )
+                );
+            }
+            else if(action->drop.object->type == OBJECT__TAR_BALL)
+            {
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_remove_object(
+                        action->drop.object,
+                        action->tilemap_pos
+                    )
+                );
+                add_action_to_end_action_sequence(
+                    sequence,
+                    new_action_change_floor(
+                        FLOOR__LAVA_TAR_BALL,
                         action->tilemap_pos
                     )
                 );

@@ -10,6 +10,8 @@ typedef struct
     Texture* highlight;
 
     Texture* rock;
+    Texture* rock_puddle_1;
+    Texture* rock_puddle_2;
     Texture* rock_crack_water;
     Texture* rock_crack_lava;
     Texture* rock_crack_pit;
@@ -58,6 +60,8 @@ typedef struct
     Texture* water_stalactite_fallen_2;
     Texture* water_column_1;
     Texture* water_column_2;
+    Texture* water_tar_ball_1;
+    Texture* water_tar_ball_2;
 
     Texture* lava_1;
     Texture* lava_2;
@@ -65,6 +69,8 @@ typedef struct
     Texture* lava_stalactite_fallen_2;
     Texture* lava_column_1;
     Texture* lava_column_2;
+    Texture* lava_tar_ball_1;
+    Texture* lava_tar_ball_2;
 
     Texture* ice;
     Texture* ice_crack_water;

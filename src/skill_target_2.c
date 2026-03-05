@@ -898,7 +898,7 @@ void skill_get_possible_target_2_pos(
                     Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                     int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                    if(object == NULL && floor == FLOOR__WATER)
+                    if((floor == FLOOR__WATER || floor == FLOOR__ROCK_PUDDLE))
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,

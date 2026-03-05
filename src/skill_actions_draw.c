@@ -5367,6 +5367,8 @@ void skill_get_actions_and_draw(
 
             queue[rear++] = target_2_tilemap_pos.y * TILEMAP_LENGTH + target_2_tilemap_pos.x;
 
+            Action* action_simultaneous = new_action_simultaneous();
+
             while (front < rear)
             {
                 int curr = queue[front++];
@@ -5374,13 +5376,13 @@ void skill_get_actions_and_draw(
                 Object* curr_object = room_get_object_at(state->curr_room, curr_tilemap_pos);
                 int curr_floor = room_get_floor_at(state->curr_room, curr_tilemap_pos);
 
-                if(curr_floor == FLOOR__WATER)
+                if(curr_floor == FLOOR__WATER || curr_floor == FLOOR__ROCK_PUDDLE)
                 {
                     if(curr_object != NULL && get_object_max_hp(curr_object) != -1)
                     {
                         // actions
-                        add_action_to_end_action_sequence(
-                            action_sequence,
+                        add_action_sequence_to_action_simultaneous(
+                            action_simultaneous,
                             new_action_sequence_of_1(new_action_damage(curr_object, 1))
                         );
                         
@@ -5416,7 +5418,7 @@ void skill_get_actions_and_draw(
 
                     if(is_tilemap_in_bounds(tilemap_pos) && 
                     visited[tilemap_pos.y * TILEMAP_LENGTH + tilemap_pos.x] == 0 &&
-                    floor == FLOOR__WATER)
+                    (floor == FLOOR__WATER || floor == FLOOR__ROCK_PUDDLE))
                     {
                         int neighbor = tilemap_pos.y * TILEMAP_LENGTH + tilemap_pos.x;
                         visited[tilemap_pos.y * TILEMAP_LENGTH + tilemap_pos.x] = 1;
@@ -5424,6 +5426,13 @@ void skill_get_actions_and_draw(
                     }
                 }
             }
+
+            // action
+
+            add_action_to_end_action_sequence(
+                action_sequence, 
+                action_simultaneous
+            );
         }
         break;
         case SKILL__SCORCH_WITH_FIRE:

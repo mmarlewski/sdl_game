@@ -6,6 +6,8 @@ void load_textures_floor(Renderer* renderer, Textures_Floor* floor)
     floor->highlight = load_texture_from_filepath(renderer, "./res/floor/highlight.png");
 
     floor->rock = load_texture_from_filepath(renderer, "./res/floor/rock.png");
+    floor->rock_puddle_1 = load_texture_from_filepath(renderer, "./res/floor/rock_puddle_1.png");
+    floor->rock_puddle_2 = load_texture_from_filepath(renderer, "./res/floor/rock_puddle_2.png");
     floor->rock_crack_water = load_texture_from_filepath(renderer, "./res/floor/rock_crack_water.png");
     floor->rock_crack_lava = load_texture_from_filepath(renderer, "./res/floor/rock_crack_lava.png");
     floor->rock_crack_pit = load_texture_from_filepath(renderer, "./res/floor/rock_crack_pit.png");
@@ -54,6 +56,8 @@ void load_textures_floor(Renderer* renderer, Textures_Floor* floor)
     floor->water_stalactite_fallen_2 = load_texture_from_filepath(renderer, "./res/floor/water_stalactite_fallen_2.png");
     floor->water_column_1 = load_texture_from_filepath(renderer, "./res/floor/water_column_1.png");
     floor->water_column_2 = load_texture_from_filepath(renderer, "./res/floor/water_column_2.png");
+    floor->water_tar_ball_1 = load_texture_from_filepath(renderer, "./res/floor/water_tar_ball_1.png");
+    floor->water_tar_ball_2 = load_texture_from_filepath(renderer, "./res/floor/water_tar_ball_2.png");
 
     floor->lava_1 = load_texture_from_filepath(renderer, "./res/floor/lava_1.png");
     floor->lava_2 = load_texture_from_filepath(renderer, "./res/floor/lava_2.png");
@@ -61,6 +65,8 @@ void load_textures_floor(Renderer* renderer, Textures_Floor* floor)
     floor->lava_stalactite_fallen_2 = load_texture_from_filepath(renderer, "./res/floor/lava_stalactite_fallen_2.png");
     floor->lava_column_1 = load_texture_from_filepath(renderer, "./res/floor/lava_column_1.png");
     floor->lava_column_2 = load_texture_from_filepath(renderer, "./res/floor/lava_column_2.png");
+    floor->lava_tar_ball_1 = load_texture_from_filepath(renderer, "./res/floor/lava_tar_ball_1.png");
+    floor->lava_tar_ball_2 = load_texture_from_filepath(renderer, "./res/floor/lava_tar_ball_2.png");
 
     floor->ice = load_texture_from_filepath(renderer, "./res/floor/ice.png");
     floor->ice_crack_water = load_texture_from_filepath(renderer, "./res/floor/ice_crack_water.png");

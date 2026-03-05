@@ -193,6 +193,7 @@ int is_floor_traversable(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 1; break;
+        case FLOOR__ROCK_PUDDLE:               is = 1; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 1; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 1; break;
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
@@ -225,9 +226,11 @@ int is_floor_traversable(int floor)
         case FLOOR__WATER_LILY_POD:            is = 1; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 1; break;
         case FLOOR__WATER_COLUMN:              is = 1; break;
+        case FLOOR__WATER_TAR_BALL:            is = 1; break;
         case FLOOR__LAVA:                      is = 0; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 1; break;
         case FLOOR__LAVA_COLUMN:               is = 1; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 1; break;
         case FLOOR__ICE:                       is = 1; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
         case FLOOR__OBSTACLE:                  is = 1; break;
@@ -264,6 +267,7 @@ int is_floor_traversable_for_floating(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 1; break;
+        case FLOOR__ROCK_PUDDLE:               is = 1; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 1; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 1; break;
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
@@ -296,9 +300,11 @@ int is_floor_traversable_for_floating(int floor)
         case FLOOR__WATER_LILY_POD:            is = 1; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 1; break;
         case FLOOR__WATER_COLUMN:              is = 1; break;
+        case FLOOR__WATER_TAR_BALL:            is = 1; break;
         case FLOOR__LAVA:                      is = 1; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 1; break;
         case FLOOR__LAVA_COLUMN:               is = 1; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 1; break;
         case FLOOR__ICE:                       is = 1; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
         case FLOOR__OBSTACLE:                  is = 1; break;
@@ -335,6 +341,7 @@ int is_floor_traversable_for_flying(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 1; break;
+        case FLOOR__ROCK_PUDDLE:               is = 1; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 1; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 1; break;
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
@@ -367,9 +374,11 @@ int is_floor_traversable_for_flying(int floor)
         case FLOOR__WATER_LILY_POD:            is = 1; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 1; break;
         case FLOOR__WATER_COLUMN:              is = 1; break;
+        case FLOOR__WATER_TAR_BALL:            is = 1; break;
         case FLOOR__LAVA:                      is = 1; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 1; break;
         case FLOOR__LAVA_COLUMN:               is = 1; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 1; break;
         case FLOOR__ICE:                       is = 1; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
         case FLOOR__OBSTACLE:                  is = 1; break;
@@ -406,6 +415,7 @@ int is_floor_deadly_on_move(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 0; break;
+        case FLOOR__ROCK_PUDDLE:               is = 0; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 0; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
@@ -429,9 +439,11 @@ int is_floor_deadly_on_move(int floor)
         case FLOOR__WATER:                     is = 1; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 0; break;
         case FLOOR__WATER_COLUMN:              is = 0; break;
+        case FLOOR__WATER_TAR_BALL:            is = 0; break;
         case FLOOR__LAVA:                      is = 1; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 0; break;
         case FLOOR__LAVA_COLUMN:               is = 0; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
         case FLOOR__OBSTACLE:                  is = 0; break;
@@ -461,6 +473,7 @@ int is_floor_deadly_on_move_for_floating(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 0; break;
+        case FLOOR__ROCK_PUDDLE:               is = 0; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 0; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
@@ -484,9 +497,11 @@ int is_floor_deadly_on_move_for_floating(int floor)
         case FLOOR__WATER:                     is = 0; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 0; break;
         case FLOOR__WATER_COLUMN:              is = 0; break;
+        case FLOOR__WATER_TAR_BALL:            is = 0; break;
         case FLOOR__LAVA:                      is = 0; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 0; break;
         case FLOOR__LAVA_COLUMN:               is = 0; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
         case FLOOR__OBSTACLE:                  is = 0; break;
@@ -516,6 +531,7 @@ int is_floor_deadly_on_move_for_flying(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 0; break;
+        case FLOOR__ROCK_PUDDLE:               is = 0; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 0; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__STONE:                     is = 0; break;
@@ -539,9 +555,11 @@ int is_floor_deadly_on_move_for_flying(int floor)
         case FLOOR__WATER:                     is = 0; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 0; break;
         case FLOOR__WATER_COLUMN:              is = 0; break;
+        case FLOOR__WATER_TAR_BALL:            is = 0; break;
         case FLOOR__LAVA:                      is = 0; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 0; break;
         case FLOOR__LAVA_COLUMN:               is = 0; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
         case FLOOR__OBSTACLE:                  is = 0; break;
@@ -571,6 +589,7 @@ int is_floor_deadly_on_drop(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 0; break;
+        case FLOOR__ROCK_PUDDLE:               is = 0; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 1; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 1; break;
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
@@ -595,9 +614,11 @@ int is_floor_deadly_on_drop(int floor)
         case FLOOR__WATER:                     is = 1; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 0; break;
         case FLOOR__WATER_COLUMN:              is = 0; break;
+        case FLOOR__WATER_TAR_BALL:            is = 0; break;
         case FLOOR__LAVA:                      is = 1; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 0; break;
         case FLOOR__LAVA_COLUMN:               is = 0; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 1; break;
         case FLOOR__OBSTACLE:                  is = 0; break;
@@ -627,6 +648,7 @@ int is_floor_deadly_on_drop_for_floating(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 0; break;
+        case FLOOR__ROCK_PUDDLE:               is = 0; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 0; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__ROCK_CRACK_PIT:            is = 1; break;
@@ -651,9 +673,11 @@ int is_floor_deadly_on_drop_for_floating(int floor)
         case FLOOR__WATER:                     is = 0; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 0; break;
         case FLOOR__WATER_COLUMN:              is = 0; break;
+        case FLOOR__WATER_TAR_BALL:            is = 0; break;
         case FLOOR__LAVA:                      is = 0; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 0; break;
         case FLOOR__LAVA_COLUMN:               is = 0; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
         case FLOOR__OBSTACLE:                  is = 0; break;
@@ -683,6 +707,7 @@ int is_floor_deadly_on_drop_for_flying(int floor)
     {
         case FLOOR__NONE:                      is = 0; break;
         case FLOOR__ROCK:                      is = 0; break;
+        case FLOOR__ROCK_PUDDLE:               is = 0; break;
         case FLOOR__ROCK_CRACK_WATER:          is = 0; break;
         case FLOOR__ROCK_CRACK_LAVA:           is = 0; break;
         case FLOOR__ROCK_CRACK_PIT:            is = 0; break;
@@ -707,9 +732,11 @@ int is_floor_deadly_on_drop_for_flying(int floor)
         case FLOOR__WATER:                     is = 0; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   is = 0; break;
         case FLOOR__WATER_COLUMN:              is = 0; break;
+        case FLOOR__WATER_TAR_BALL:            is = 0; break;
         case FLOOR__LAVA:                      is = 0; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    is = 0; break;
         case FLOOR__LAVA_COLUMN:               is = 0; break;
+        case FLOOR__LAVA_TAR_BALL:             is = 0; break;
         case FLOOR__ICE:                       is = 0; break;
         case FLOOR__ICE_CRACK_WATER:           is = 0; break;
         case FLOOR__OBSTACLE:                  is = 0; break;
@@ -871,6 +898,7 @@ char* get_in_game_name_from_floor(int floor)
     {
         case FLOOR__NONE:                               name = "none"; break;
         case FLOOR__ROCK:                               name = "rock"; break;
+        case FLOOR__ROCK_PUDDLE:                        name = "rock"; break;
         case FLOOR__ROCK_CRACK_WATER:                   name = "crack"; break;
         case FLOOR__ROCK_CRACK_LAVA:                    name = "crack"; break;
         case FLOOR__ROCK_CRACK_PIT:                     name = "crack"; break;
@@ -903,9 +931,11 @@ char* get_in_game_name_from_floor(int floor)
         case FLOOR__WATER_LILY_POD:                     name = "lily pod"; break;
         case FLOOR__WATER_STALACTITE_FALLEN:            name = "stalactite"; break;
         case FLOOR__WATER_COLUMN:                       name = "column"; break;
+        case FLOOR__WATER_TAR_BALL:                     name = "tar ball"; break;
         case FLOOR__LAVA:                               name = "lava"; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:             name = "stalactite"; break;
         case FLOOR__LAVA_COLUMN:                        name = "column"; break;
+        case FLOOR__LAVA_TAR_BALL:                      name = "tar ball"; break;
         case FLOOR__ICE:                                name = "ice"; break;
         case FLOOR__ICE_CRACK_WATER:                    name = "crack"; break;
         case FLOOR__OBSTACLE:                           name = "obstacle"; break;
@@ -943,6 +973,7 @@ char* get_debug_name_from_floor(int floor)
     {
         case FLOOR__NONE:                               name = "none"; break;
         case FLOOR__ROCK:                               name = "rock"; break;
+        case FLOOR__ROCK_PUDDLE:                        name = "rock puddle"; break;
         case FLOOR__ROCK_CRACK_WATER:                   name = "rock crack water"; break;
         case FLOOR__ROCK_CRACK_LAVA:                    name = "rock crack lava"; break;
         case FLOOR__ROCK_CRACK_PIT:                     name = "rock crack pit"; break;
@@ -975,9 +1006,11 @@ char* get_debug_name_from_floor(int floor)
         case FLOOR__WATER_LILY_POD:                     name = "water lily pod"; break;
         case FLOOR__WATER_STALACTITE_FALLEN:            name = "water stalactite fallen"; break;
         case FLOOR__WATER_COLUMN:                       name = "water column"; break;
+        case FLOOR__WATER_TAR_BALL:                     name = "water tar ball"; break;
         case FLOOR__LAVA:                               name = "lava"; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:             name = "lava stalactite fallen"; break;
         case FLOOR__LAVA_COLUMN:                        name = "lava column"; break;
+        case FLOOR__LAVA_TAR_BALL:                      name = "lava tar ball"; break;
         case FLOOR__ICE:                                name = "ice"; break;
         case FLOOR__ICE_CRACK_WATER:                    name = "ice crack water"; break;
         case FLOOR__OBSTACLE:                           name = "obstacle"; break;
@@ -1014,6 +1047,7 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
     {
         case FLOOR__NONE:                      texture = NULL; break;
         case FLOOR__ROCK:                      texture = textures->floor.rock; break;
+        case FLOOR__ROCK_PUDDLE:               texture = textures->floor.rock_puddle_1; break;
         case FLOOR__ROCK_CRACK_WATER:          texture = textures->floor.rock_crack_water; break;
         case FLOOR__ROCK_CRACK_LAVA:           texture = textures->floor.rock_crack_lava; break;
         case FLOOR__ROCK_CRACK_PIT:            texture = textures->floor.rock_crack_pit; break;
@@ -1046,9 +1080,11 @@ Texture* get_texture_1_from_floor_type(int type, Textures* textures)
         case FLOOR__WATER_LILY_POD:            texture = textures->floor.water_lily_pod_1; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   texture = textures->floor.water_stalactite_fallen_1; break;
         case FLOOR__WATER_COLUMN:              texture = textures->floor.water_column_1; break;
+        case FLOOR__WATER_TAR_BALL:            texture = textures->floor.water_tar_ball_1; break;
         case FLOOR__LAVA:                      texture = textures->floor.lava_1; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    texture = textures->floor.lava_stalactite_fallen_1; break;
         case FLOOR__LAVA_COLUMN:               texture = textures->floor.lava_column_1; break;
+        case FLOOR__LAVA_TAR_BALL:             texture = textures->floor.lava_tar_ball_1; break;
         case FLOOR__ICE:                       texture = textures->floor.ice; break;
         case FLOOR__ICE_CRACK_WATER:           texture = textures->floor.ice_crack_water; break;
         case FLOOR__OBSTACLE:                  texture = textures->floor.obstacle; break;
@@ -1085,6 +1121,7 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
     {
         case FLOOR__NONE:                      texture = NULL; break;
         case FLOOR__ROCK:                      texture = textures->floor.rock; break;
+        case FLOOR__ROCK_PUDDLE:               texture = textures->floor.rock_puddle_2; break;
         case FLOOR__ROCK_CRACK_WATER:          texture = textures->floor.rock_crack_water; break;
         case FLOOR__ROCK_CRACK_LAVA:           texture = textures->floor.rock_crack_lava; break;
         case FLOOR__ROCK_CRACK_PIT:            texture = textures->floor.rock_crack_pit; break;
@@ -1117,9 +1154,11 @@ Texture* get_texture_2_from_floor_type(int type, Textures* textures)
         case FLOOR__WATER_LILY_POD:            texture = textures->floor.water_lily_pod_2; break;
         case FLOOR__WATER_STALACTITE_FALLEN:   texture = textures->floor.water_stalactite_fallen_2; break;
         case FLOOR__WATER_COLUMN:              texture = textures->floor.water_column_2; break;
+        case FLOOR__WATER_TAR_BALL:            texture = textures->floor.water_tar_ball_2; break;
         case FLOOR__LAVA:                      texture = textures->floor.lava_2; break;
         case FLOOR__LAVA_STALACTITE_FALLEN:    texture = textures->floor.lava_stalactite_fallen_2; break;
         case FLOOR__LAVA_COLUMN:               texture = textures->floor.lava_column_2; break;
+        case FLOOR__LAVA_TAR_BALL:             texture = textures->floor.lava_tar_ball_2; break;
         case FLOOR__ICE:                       texture = textures->floor.ice; break;
         case FLOOR__ICE_CRACK_WATER:           texture = textures->floor.ice_crack_water; break;
         case FLOOR__OBSTACLE:                  texture = textures->floor.obstacle; break;

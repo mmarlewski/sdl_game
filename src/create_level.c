@@ -11286,53 +11286,85 @@ void create_level(State* state, Textures* textures)
 
     room_change_floor_at(
         room_7_3,
-        FLOOR__PIT,
+        FLOOR__ROCK_PUDDLE,
         vec2i(3, 4)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__PIT,
+        FLOOR__ROCK_PUDDLE,
         vec2i(3, 5)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__PIT,
+        FLOOR__ROCK_PUDDLE,
         vec2i(3, 6)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__PIT,
+        FLOOR__ROCK_PUDDLE,
         vec2i(3, 7)
+    );
+    
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(4, 4)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__PIT,
-        vec2i(3, 8)
+        FLOOR__ROCK_PUDDLE,
+        vec2i(4, 5)
+    );
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(4, 6)
+    );
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(4, 7)
+    );
+    
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(5, 4)
+    );
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(5, 5)
+    );
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(5, 6)
+    );
+    room_change_floor_at(
+        room_7_3,
+        FLOOR__ROCK_PUDDLE,
+        vec2i(5, 7)
     );
 
     room_change_floor_at(
         room_7_3,
-        FLOOR__STONE_TRAP,
-        vec2i(6, 3)
-    );
-    room_change_floor_at(
-        room_7_3,
-        FLOOR__STONE_TRAP,
+        FLOOR__ROCK_PUDDLE,
         vec2i(6, 4)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__STONE_TRAP,
+        FLOOR__ROCK_PUDDLE,
         vec2i(6, 5)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__STONE_TRAP,
+        FLOOR__ROCK_PUDDLE,
         vec2i(6, 6)
     );
     room_change_floor_at(
         room_7_3,
-        FLOOR__STONE_TRAP,
+        FLOOR__ROCK_PUDDLE,
         vec2i(6, 7)
     );
 
@@ -11398,11 +11430,11 @@ void create_level(State* state, Textures* textures)
 
     // enemies
 
-    room_add_object_at(
-        room_7_3,
-        new_object(OBJECT__GOAT),
-        vec2i(5, 2)
-    );
+    // room_add_object_at(
+    //     room_7_3,
+    //     new_object(OBJECT__GOAT),
+    //     vec2i(5, 2)
+    // );
 
     // passages
 

@@ -172,11 +172,11 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_object = new_object(OBJECT__HERO);
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
-    Room* room = get_room(state, "7_2");
+    Room* room = get_room(state, "7_3");
     room_add_object_at(
         room,
         state->hero_object,
-        vec2i(7,2)
+        vec2i(4,4)
     );
     //
 
