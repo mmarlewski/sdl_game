@@ -442,18 +442,15 @@ void skill_get_actions_and_draw(
                     new_action_sequence_of_1(new_action_damage(target_2_object, 1))
                 );
 
-                if(get_object_max_hp(target_2_object) == -1)
-                {
-                    // draw effect
-                    add_new_list_element_to_list_end(draw_effect_texture_list, textures->skill.damage_0);
-                    add_new_list_element_to_list_end(draw_effect_tilemap_pos_list, new_vec2i_from_vec2i(target_2_tilemap_pos));
-                }
-                else
-                {
-                    // draw effect
-                    add_new_list_element_to_list_end(draw_effect_texture_list, textures->skill.damage_1);
-                    add_new_list_element_to_list_end(draw_effect_tilemap_pos_list, new_vec2i_from_vec2i(target_2_tilemap_pos));
-                }
+                // draw effect
+                add_new_list_element_to_list_end(draw_effect_texture_list, textures->skill.damage_0);
+                add_new_list_element_to_list_end(draw_effect_tilemap_pos_list, new_vec2i_from_vec2i(target_2_tilemap_pos));
+            }
+            else
+            {
+                // draw effect
+                add_new_list_element_to_list_end(draw_effect_texture_list, textures->skill.damage_1);
+                add_new_list_element_to_list_end(draw_effect_tilemap_pos_list, new_vec2i_from_vec2i(target_2_tilemap_pos));
             }
         }
         break;
@@ -5065,7 +5062,7 @@ void skill_get_actions_and_draw(
                         Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                         int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                        if(object != NULL && get_object_max_hp(object) != -1)
+                        if(object != NULL)
                         {
                             // actions
                             add_action_sequence_to_action_simultaneous(
@@ -5128,38 +5125,94 @@ void skill_get_actions_and_draw(
 
             // target_1 to target_2
 
-            distance_info = get_distance_info_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
-            tilemap_pos = target_1_tilemap_pos;
-            while(!vec2i_equals(tilemap_pos, target_2_tilemap_pos))
+            if(target_1_object->type == OBJECT__CRYSTAL)
             {
-                tilemap_pos = vec2i_move_in_dir8_by(tilemap_pos, distance_info.dir8, 1);
+                Action* action_simultaneous = new_action_simultaneous();
+
+                for(int dir8 = 1; dir8 < DIR8__COUNT; dir8++)
+                {
+                    int go_on = TRUE;
+                    for(int i = 1; i < 10 && go_on; i++)
+                    {
+                        Vec2i tilemap_pos = vec2i_move_in_dir8_by(target_1_tilemap_pos, dir8, i);
+                        Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+
+                        if(object != NULL && object != state->hero_object)
+                        {
+                            go_on = FALSE;
+
+                            // actions
+                            add_action_sequence_to_action_simultaneous(
+                                action_simultaneous,
+                                new_action_sequence_of_1(new_action_damage(object, 1))
+                            );
+
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.damage_1
+                            );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                        else
+                        {
+                            // draw effect
+                            add_new_list_element_to_list_end(
+                                draw_effect_texture_list,
+                                textures->skill.damage_0
+                            );
+                            add_new_list_element_to_list_end(
+                                draw_effect_tilemap_pos_list,
+                                new_vec2i_from_vec2i(tilemap_pos)
+                            );
+                        }
+                    }
+                }
+
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    action_simultaneous
+                );
+            }
+            else
+            {
+                distance_info = get_distance_info_from_vec2i_to_vec2i(target_1_tilemap_pos, target_2_tilemap_pos);
+                tilemap_pos = target_1_tilemap_pos;
+                while(!vec2i_equals(tilemap_pos, target_2_tilemap_pos))
+                {
+                    tilemap_pos = vec2i_move_in_dir8_by(tilemap_pos, distance_info.dir8, 1);
+
+                    // draw effect
+                    add_new_list_element_to_list_end(
+                        draw_effect_texture_list,
+                        textures->skill.damage_0
+                    );
+                    add_new_list_element_to_list_end(
+                        draw_effect_tilemap_pos_list,
+                        new_vec2i_from_vec2i(tilemap_pos)
+                    );
+                }
+
+                // actions
+                add_action_to_end_action_sequence(
+                    action_sequence,
+                    new_action_sequence_of_1(new_action_damage(target_2_object, 1))
+                );
 
                 // draw effect
                 add_new_list_element_to_list_end(
                     draw_effect_texture_list,
-                    textures->skill.damage_0
+                    textures->skill.damage_1
                 );
                 add_new_list_element_to_list_end(
                     draw_effect_tilemap_pos_list,
-                    new_vec2i_from_vec2i(tilemap_pos)
+                    new_vec2i_from_vec2i(target_2_tilemap_pos)
                 );
             }
-
-            // actions
-            add_action_to_end_action_sequence(
-                action_sequence,
-                new_action_sequence_of_1(new_action_damage(target_2_object, 1))
-            );
-
-            // draw effect
-            add_new_list_element_to_list_end(
-                draw_effect_texture_list,
-                textures->skill.damage_1
-            );
-            add_new_list_element_to_list_end(
-                draw_effect_tilemap_pos_list,
-                new_vec2i_from_vec2i(target_2_tilemap_pos)
-            );
         }
         break;
         case SKILL__RICOSHET:
@@ -5378,7 +5431,7 @@ void skill_get_actions_and_draw(
 
                 if(curr_floor == FLOOR__WATER || curr_floor == FLOOR__ROCK_PUDDLE)
                 {
-                    if(curr_object != NULL && get_object_max_hp(curr_object) != -1)
+                    if(curr_object != NULL)
                     {
                         // actions
                         add_action_sequence_to_action_simultaneous(
@@ -6089,25 +6142,28 @@ void skill_get_actions_and_draw(
 
             if(distance_info.dir8 != DIR8__NONE)
             {
-                Vec2i tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos,distance_info.dir8,1);
-                Object* object = room_get_object_at(state->curr_room, tilemap_pos);
-                int floor = room_get_floor_at(state->curr_room, tilemap_pos);
+                for(int i = 1; i < 10; i++)
+                {
+                    Vec2i tilemap_pos = vec2i_move_in_dir8_by(source_tilemap_pos,distance_info.dir8,i);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
+                    int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                if(floor == FLOOR__WATER)
-                {
-                    // actions
-                    add_action_to_end_action_sequence(
-                        action_sequence,
-                        new_action_change_floor(FLOOR__ICE, tilemap_pos)
-                    );
-                }
-                else if(floor == FLOOR__LAVA)
-                {
-                    // actions
-                    add_action_to_end_action_sequence(
-                        action_sequence,
-                        new_action_change_floor(FLOOR__ROCK_CRACK_LAVA, tilemap_pos)
-                    );
+                    if(floor == FLOOR__WATER)
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_change_floor(FLOOR__ICE, tilemap_pos)
+                        );
+                    }
+                    else if(floor == FLOOR__LAVA)
+                    {
+                        // actions
+                        add_action_to_end_action_sequence(
+                            action_sequence,
+                            new_action_change_floor(FLOOR__ROCK_CRACK_LAVA, tilemap_pos)
+                        );
+                    }
                 }
             }
         }
@@ -6450,7 +6506,7 @@ void skill_get_actions_and_draw(
                         new_action_throw(source_tilemap_pos, distance_info.dir4, 2)
                     );
 
-                    if(object != NULL && get_object_max_hp(object) != -1)
+                    if(object != NULL)
                     {
                         // actions
                         add_action_to_end_action_sequence(
@@ -7059,7 +7115,7 @@ void skill_get_actions_and_draw(
                     Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                     int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                    if(object != NULL && get_object_max_hp(object) != -1 && object != state->hero_object)
+                    if(object != NULL && object != state->hero_object)
                     {
                         // actions
                         add_action_sequence_to_action_simultaneous(
@@ -7477,7 +7533,7 @@ void skill_get_actions_and_draw(
                 Object* object_1 = room_get_object_at(state->curr_room, tilemap_pos_1);
                 Object* object_2 = room_get_object_at(state->curr_room, tilemap_pos_2);
 
-                if(object_1 != NULL && get_object_max_hp(object_1) != -1)
+                if(object_1 != NULL)
                 {
                     // actions
                     add_action_to_end_action_sequence(
@@ -7508,7 +7564,7 @@ void skill_get_actions_and_draw(
                     );
                 }
 
-                if(object_2 != NULL && get_object_max_hp(object_2) != -1)
+                if(object_2 != NULL)
                 {
                     // actions
                     add_action_to_end_action_sequence(
@@ -7556,7 +7612,7 @@ void skill_get_actions_and_draw(
                 Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                 Object* back_object = room_get_object_at(state->curr_room, back_tilemap_pos);
 
-                if(object != NULL && get_object_max_hp(object) != -1 && back_object == NULL)
+                if(object != NULL && back_object == NULL)
                 {
                     // actions
                     add_action_to_end_action_sequence(
@@ -7883,7 +7939,7 @@ void skill_get_actions_and_draw(
                     Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                     int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                    if(object != NULL && get_object_max_hp(object) != -1)
+                    if(object != NULL)
                     {
                         // actions
                         add_action_sequence_to_action_simultaneous(
@@ -7931,7 +7987,7 @@ void skill_get_actions_and_draw(
             Vec2i tilemap_pos = target_2_tilemap_pos;
             Object* object = room_get_object_at(state->curr_room, tilemap_pos);
 
-            if(object != NULL && get_object_max_hp(object) != -1)
+            if(object != NULL)
             {
                 // actions
                 add_action_to_end_action_sequence(

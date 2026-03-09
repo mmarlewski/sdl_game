@@ -172,12 +172,8 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     state->hero_object = new_object(OBJECT__HERO);
     state->minibot_object = new_object(OBJECT__MINIBOT_ALLY);
 
-    Room* room = get_room(state, "7_3");
-    room_add_object_at(
-        room,
-        state->hero_object,
-        vec2i(4,4)
-    );
+    Room* room = get_room(state, "1");
+    room_add_object_at(room, state->hero_object, vec2i(8,4));
     //
 
     // OBJECT__GOAT,
@@ -195,18 +191,21 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
     // OBJECT__WORM,
     // OBJECT__MOLE,
 
-    room_add_object_at(room, new_object(OBJECT__CENTIPEDE),vec2i(6,3));
-    room_add_object_at(room, new_object(OBJECT__MEGASPIDER),vec2i(6,7));
-    room_add_object_at(room, new_object(OBJECT__PORCUPINE),vec2i(4,3));
+    // room_add_object_at(room, new_object(OBJECT__CENTIPEDE),vec2i(6,3));
+    // room_add_object_at(room, new_object(OBJECT__MEGASPIDER),vec2i(6,7));
+    // room_add_object_at(room, new_object(OBJECT__PORCUPINE),vec2i(4,3));
 
-    state->is_first_move_free_if_move_only = TRUE;
-    state->is_move_only_used = FALSE;
+    state->is_first_move_free_if_move_only = FALSE;
+    // state->is_first_move_free_if_move_only = TRUE;
+    // state->is_move_only_used = FALSE;
 
-    state->is_move_after_damage_only = TRUE;
-    state->is_damage_only_used = FALSE;
+    state->is_move_after_damage_only = FALSE;
+    // state->is_move_after_damage_only = TRUE;
+    // state->is_damage_only_used = FALSE;
 
-    state->is_add_turn_after_kill = TRUE;
-    state->is_any_enemy_killed = FALSE;
+    state->is_add_turn_after_kill = FALSE;
+    // state->is_add_turn_after_kill = TRUE;
+    // state->is_any_enemy_killed = FALSE;
     //
     set_curr_room(state, room);
     state->background_color = colors->ally_background;
@@ -229,12 +228,12 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
         state->hero_body_part_augmentation[body_part] = AUGMENTATION__NONE;
     }
 
-    hero_add_augmentation(state, AUGMENTATION__MINIBOT);
-    hero_add_augmentation(state, AUGMENTATION__SPRING);
-    hero_add_augmentation(state, AUGMENTATION__TRACK);
-    hero_add_augmentation(state, AUGMENTATION__TAIL);
+    // hero_add_augmentation(state, AUGMENTATION__MINIBOT);
+    // hero_add_augmentation(state, AUGMENTATION__SPRING);
+    // hero_add_augmentation(state, AUGMENTATION__TRACK);
+    // hero_add_augmentation(state, AUGMENTATION__TAIL);
         
-    hero_add_augmentation(state, AUGMENTATION__ARM);
+    // hero_add_augmentation(state, AUGMENTATION__ARM);
     // hero_add_augmentation(state, AUGMENTATION__DRILL);
     // hero_add_augmentation(state, AUGMENTATION__BLADE);
     // hero_add_augmentation(state, AUGMENTATION__HAMMER);
@@ -242,7 +241,7 @@ void start_state(State* state, Textures* textures, Sounds* sounds, Musics* music
 
     // hero_add_augmentation(state, AUGMENTATION__GUN);
     // hero_add_augmentation(state, AUGMENTATION__SLINGSHOT);
-    hero_add_augmentation(state, AUGMENTATION__COIL);
+    // hero_add_augmentation(state, AUGMENTATION__COIL);
     // hero_add_augmentation(state, AUGMENTATION__FLAME);
     // hero_add_augmentation(state, AUGMENTATION__FREEZE);
     // hero_add_augmentation(state, AUGMENTATION__LASER);
@@ -774,7 +773,7 @@ void get_object_skills(State* state, Object* object, List* skill_list)
                 {
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__SIMPLE_SHOT);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__SNIPER_SHOT);
-                    add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_SHOT);
+                    // add_new_list_element_to_list_end(skill_list, (void*) SKILL__STUNNING_SHOT);
                     add_new_list_element_to_list_end(skill_list, (void*) SKILL__POINT_BLANK_SHOT);
 
                     if(hero_has_augmentation(state, AUGMENTATION__SPRING))

@@ -43,7 +43,7 @@ void start_action(State* state, Action* sequence, Action* action, Textures* text
         case ACTION__MOVE_FLOATING:
         case ACTION__MOVE_FLYING:
         {
-            if(state->enemy_list->size > 0)
+            // if(state->enemy_list->size > 0)
             {
                 if(action->type == ACTION__MOVE)
                 {

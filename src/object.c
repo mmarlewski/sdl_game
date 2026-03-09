@@ -428,6 +428,10 @@ int is_object_pull_towards(Object* object)
         case OBJECT__STATION_FLAME:                    is = 1; break;
         case OBJECT__STATION_FREEZE:                   is = 1; break;
         case OBJECT__STATION_LASER:                    is = 1; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    is = 1; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  is = 1; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    is = 1; break;
 
         case OBJECT__LEVER_METAL_OFF:                  is = 1; break;
         case OBJECT__LEVER_METAL_ON:                   is = 1; break;
@@ -559,6 +563,10 @@ int is_object_station(Object* object)
         case OBJECT__STATION_FLAME:                    is = 1; break;
         case OBJECT__STATION_FREEZE:                   is = 1; break;
         case OBJECT__STATION_LASER:                    is = 1; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    is = 1; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  is = 1; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    is = 1; break;
 
         default: break;
     }
@@ -881,6 +889,7 @@ int is_object_movable(Object* object)
         case OBJECT__TAR_BALL:                         is = 1; break;
         case OBJECT__ICE_BLOCK:                        is = 1; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                is = 1; break;
+        case OBJECT__CRYSTAL:                          is = 0; break;
 
         case OBJECT__THRONE:                           is = 1; break;
 
@@ -1252,6 +1261,7 @@ int is_object_breakable(Object* object)
         case OBJECT__TAR_BALL:                         is = 1; break;
         case OBJECT__ICE_BLOCK:                        is = 1; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                is = 1; break;
+        case OBJECT__CRYSTAL:                          is = 1; break;
 
         case OBJECT__GOLEM_UNPOWERED:                  is = 1; break;
         case OBJECT__GOLEM_HALF_POWERED:               is = 1; break;
@@ -1568,6 +1578,10 @@ int is_object_metal(Object *object)
         case OBJECT__STATION_FLAME:
         case OBJECT__STATION_FREEZE:
         case OBJECT__STATION_LASER:
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:
 
         case OBJECT__SECRET_1:
         case OBJECT__SECRET_2:
@@ -2283,6 +2297,7 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__TAR_BALL:                         name = "tar ball"; break;
         case OBJECT__ICE_BLOCK:                        name = "ice block"; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                name = "ice block damaged"; break;
+        case OBJECT__CRYSTAL:                          name = "crystal"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
         case OBJECT__SIGN_MOLE_WARNING:                name = "sign mole warning"; break;
@@ -2392,6 +2407,10 @@ char* get_debug_name_from_object_type(int object_type)
         case OBJECT__STATION_FLAME:                    name = "station flame"; break;
         case OBJECT__STATION_FREEZE:                   name = "station freeze"; break;
         case OBJECT__STATION_LASER:                    name = "station laser"; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    name = "station bonus turn after kill"; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  name = "station bonus turn if move only"; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    name = "station free move if dam only"; break;
 
         case OBJECT__SECRET_1:                         name = "secret 1"; break;
         case OBJECT__SECRET_2:                         name = "secret 2"; break;
@@ -2562,6 +2581,7 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__TAR_BALL:                         name = "tar ball"; break;
         case OBJECT__ICE_BLOCK:                        name = "ice block"; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                name = "ice block damaged"; break;
+        case OBJECT__CRYSTAL:                          name = "crystal"; break;
 
         case OBJECT__THRONE:                           name = "throne"; break;
 
@@ -2672,6 +2692,10 @@ char* get_in_game_name_from_object_type(int object_type)
         case OBJECT__STATION_FLAME:                    name = "station"; break;
         case OBJECT__STATION_FREEZE:                   name = "station"; break;
         case OBJECT__STATION_LASER:                    name = "station"; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    name = "station"; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  name = "station"; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    name = "station"; break;
 
         case OBJECT__SECRET_1:                         name = "secret"; break;
         case OBJECT__SECRET_2:                         name = "secret"; break;
@@ -2841,6 +2865,7 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged; break;
+        case OBJECT__CRYSTAL:                          texture = textures->object.crystal; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -2943,6 +2968,10 @@ Texture* get_texture_1_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_FLAME:                    texture = textures->object.station_flame; break;
         case OBJECT__STATION_FREEZE:                   texture = textures->object.station_freeze; break;
         case OBJECT__STATION_LASER:                    texture = textures->object.station_laser; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    texture = textures->object.station_bonus_turn_after_kill; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  texture = textures->object.station_bonus_turn_if_move_only; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    texture = textures->object.station_free_move_if_dam_only; break;
 
         case OBJECT__SECRET_1:                         texture = textures->object.secret_1; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_2; break;
@@ -3112,6 +3141,7 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged; break;
+        case OBJECT__CRYSTAL:                          texture = textures->object.crystal; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne; break;
 
@@ -3214,6 +3244,10 @@ Texture* get_texture_2_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_FLAME:                    texture = textures->object.station_flame; break;
         case OBJECT__STATION_FREEZE:                   texture = textures->object.station_freeze; break;
         case OBJECT__STATION_LASER:                    texture = textures->object.station_laser; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    texture = textures->object.station_bonus_turn_after_kill; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  texture = textures->object.station_bonus_turn_if_move_only; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    texture = textures->object.station_free_move_if_dam_only; break;
 
         case OBJECT__SECRET_1:                         texture = textures->object.secret_1; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_2; break;
@@ -3383,6 +3417,7 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball_outline; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block_outline; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged_outline; break;
+        case OBJECT__CRYSTAL:                          texture = textures->object.crystal_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
@@ -3485,6 +3520,10 @@ Texture* get_texture_1_outline_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_FLAME:                    texture = textures->object.station_outline; break;
         case OBJECT__STATION_FREEZE:                   texture = textures->object.station_outline; break;
         case OBJECT__STATION_LASER:                    texture = textures->object.station_outline; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  texture = textures->object.station_outline; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    texture = textures->object.station_outline; break;
 
         case OBJECT__SECRET_1:                         texture = textures->object.secret_outline; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_outline; break;
@@ -3654,6 +3693,7 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__TAR_BALL:                         texture = textures->object.tar_ball_outline; break;
         case OBJECT__ICE_BLOCK:                        texture = textures->object.ice_block_outline; break;
         case OBJECT__ICE_BLOCK_DAMAGED:                texture = textures->object.ice_block_damaged_outline; break;
+        case OBJECT__CRYSTAL:                          texture = textures->object.crystal_outline; break;
 
         case OBJECT__THRONE:                           texture = textures->object.throne_outline; break;
 
@@ -3756,6 +3796,10 @@ Texture* get_texture_2_outline_from_object(Object* object, Textures* textures)
         case OBJECT__STATION_FLAME:                    texture = textures->object.station_outline; break;
         case OBJECT__STATION_FREEZE:                   texture = textures->object.station_outline; break;
         case OBJECT__STATION_LASER:                    texture = textures->object.station_outline; break;
+    
+        case OBJECT__STATION_BONUS_TURN_AFTER_KILL:    texture = textures->object.station_outline; break;
+        case OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY:  texture = textures->object.station_outline; break;
+        case OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY:    texture = textures->object.station_outline; break;
 
         case OBJECT__SECRET_1:                         texture = textures->object.secret_outline; break;
         case OBJECT__SECRET_2:                         texture = textures->object.secret_outline; break;

@@ -696,7 +696,7 @@ void skill_get_possible_target_2_pos(
                         tilemap_pos
                     );
 
-                    if(object != NULL && get_object_max_hp(object) != -1)
+                    if(object != NULL)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -810,7 +810,7 @@ void skill_get_possible_target_2_pos(
                     int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
                     if(!vec2i_equals(tilemap_pos, source_tilemap_pos) && 
-                    object != NULL && get_object_max_hp(object) != -1)
+                    object != NULL)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -1384,7 +1384,7 @@ void skill_get_possible_target_2_pos(
                     Object* back_object = room_get_object_at(state->curr_room, back_tilemap_pos);
                     int back_floor = room_get_floor_at(state->curr_room, back_tilemap_pos);
 
-                    if(back_object == NULL)
+                    if(!(object != NULL && !is_object_throw_over(object)) && back_object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -1467,7 +1467,7 @@ void skill_get_possible_target_2_pos(
                     Object* object = room_get_object_at(state->curr_room,tilemap_pos);
                     int floor = room_get_floor_at(state->curr_room,tilemap_pos);
 
-                    if(object != NULL && get_object_max_hp(object) != -1)
+                    if(object != NULL)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -1812,7 +1812,7 @@ void skill_get_possible_target_2_pos(
                         tilemap_pos
                     );
 
-                    if(object != NULL && get_object_max_hp(object) != -1)
+                    if(object != NULL)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -1858,7 +1858,7 @@ void skill_get_possible_target_2_pos(
                     int back_floor = room_get_floor_at(state->curr_room, back_tilemap_pos);
 
 
-                    if(object != NULL && get_object_max_hp(object) != -1 && back_object == NULL)
+                    if(object != NULL && back_object == NULL)
                     {
                         add_new_list_element_to_list_end(
                             target_2_pos_list,
@@ -1883,7 +1883,7 @@ void skill_get_possible_target_2_pos(
                         Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                         int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                        if(object != NULL && get_object_max_hp(object) != -1 && is_floor_burrow(floor) && object != state->hero_object)
+                        if(object != NULL && is_floor_burrow(floor) && object != state->hero_object)
                         {
                             add_new_list_element_to_list_end(
                                 target_2_pos_list,

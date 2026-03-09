@@ -28,6 +28,26 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             1
         );
 
+        draw_font_at_screen_pos(
+            "with weapons and health points",
+            renderer,
+            fonts->stepalange_50,
+            colors->white,
+            1.0f,
+            vec2i(200, 220),
+            1
+        );
+
+        draw_font_at_screen_pos(
+            "prototype",
+            renderer,
+            fonts->stepalange_50,
+            colors->white,
+            1.0f,
+            vec2i(950, 220),
+            1
+        );
+
         SDL_RWops* file = SDL_RWFromFile( "save_0.save", "r");
         if(file == NULL)
         {
@@ -61,28 +81,28 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             2.0f
         );
 
-        if(state->show_tutorial)
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.show_tutorial_checked,
-                colors->none,
-                1.0f,
-                vec2i(575, 500),
-                2.0f
-            );
-        }
-        else
-        {
-            draw_texture_at_screen_pos(
-                renderer,
-                textures->hud.show_tutorial,
-                colors->none,
-                1.0f,
-                vec2i(575, 500),
-                2.0f
-            );
-        }
+        // if(state->show_tutorial)
+        // {
+        //     draw_texture_at_screen_pos(
+        //         renderer,
+        //         textures->hud.show_tutorial_checked,
+        //         colors->none,
+        //         1.0f,
+        //         vec2i(575, 500),
+        //         2.0f
+        //     );
+        // }
+        // else
+        // {
+        //     draw_texture_at_screen_pos(
+        //         renderer,
+        //         textures->hud.show_tutorial,
+        //         colors->none,
+        //         1.0f,
+        //         vec2i(575, 500),
+        //         2.0f
+        //     );
+        // }
     }
 
     // game over
@@ -157,34 +177,35 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
     // game won
 
-    // if(state->gamestate == GAMESTATE__GAME_WON)
-    // {
-    //     draw_texture_at_screen_pos(
-    //         renderer,
-    //         textures->black_box,
-    //         colors->black,
-    //         0.2f,
-    //         vec2i(0, 0),
-    //         150.0f
-    //     );
+    if(state->gamestate == GAMESTATE__GAME_WON)
+    {
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->black_box,
+            colors->black,
+            0.2f,
+            vec2i(0, 0),
+            150.0f
+        );
 
-    //     draw_font_at_screen_pos(
-    //         "You Won!",
-    //         renderer,
-    //         fonts->stepalange_100,
-    //         colors->white,
-    //         1.0f,
-    //         vec2i(500, 100),
-    //         1
-    //     );
-    //     draw_texture_at_screen_pos(
-    //         renderer,
-    //         textures->hud.restart_with_no_aug,
-    //         colors->none,
-    //         1.0f,
-    //         vec2i(570, 700),
-    //         2.0f
-    //     );
+        draw_font_at_screen_pos(
+            "You Won!",
+            renderer,
+            fonts->stepalange_100,
+            colors->white,
+            1.0f,
+            vec2i(500, 100),
+            1
+        );
+        draw_texture_at_screen_pos(
+            renderer,
+            textures->hud.restart_with_no_aug,
+            colors->none,
+            1.0f,
+            vec2i(570, 700),
+            2.0f
+        );
+    }
 
     //     if(!state->was_secret_aug_unlocked &&
     //     (state->was_secret_1_taken ||
@@ -1405,39 +1426,39 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
             {
                 if(object == NULL)
                 {
-                    char* material_text = "";
-                    Vec3i material_color = colors->black;
+                    // char* material_text = "";
+                    // Vec3i material_color = colors->black;
 
-                    if(is_floor_meltable(floor))
-                    {
-                        material_text = "metal";
-                        material_color = colors->blue_light;
-                    }
-                    else if(is_floor_breakable(floor))
-                    {
-                        material_text = "stone";
-                        material_color = colors->brown_light;
-                    }
-                    else if(is_floor_fragile(floor))
-                    {
-                        material_text = "glass";
-                        material_color = colors->white;
-                    }
-                    else
-                    {
-                        material_text = "";
-                        material_color = colors->black;
-                    }
+                    // if(is_floor_meltable(floor))
+                    // {
+                    //     material_text = "metal";
+                    //     material_color = colors->blue_light;
+                    // }
+                    // else if(is_floor_breakable(floor))
+                    // {
+                    //     material_text = "stone";
+                    //     material_color = colors->brown_light;
+                    // }
+                    // else if(is_floor_fragile(floor))
+                    // {
+                    //     material_text = "glass";
+                    //     material_color = colors->white;
+                    // }
+                    // else
+                    // {
+                    //     material_text = "";
+                    //     material_color = colors->black;
+                    // }
 
-                    draw_font_at_screen_pos(
-                        material_text,
-                        renderer,
-                        fonts->bit_operator_20,
-                        material_color,
-                        1.0f,
-                        vec2i(900 + 100, 550 + 50 - 30),
-                        1
-                    );
+                    // draw_font_at_screen_pos(
+                    //     material_text,
+                    //     renderer,
+                    //     fonts->bit_operator_20,
+                    //     material_color,
+                    //     1.0f,
+                    //     vec2i(900 + 100, 550 + 50 - 30),
+                    //     1
+                    // );
 
                     char* type_text = "";
                     Vec3i type_color = colors->black;
@@ -1488,34 +1509,34 @@ void draw_hud(Renderer* renderer, State* state, Textures* textures, Colors* colo
 
             if(object != NULL)
             {
-                char* material_text = "";
-                Vec3i material_color = colors->black;
+                // char* material_text = "";
+                // Vec3i material_color = colors->black;
 
-                if(is_object_stone(object))
-                {
-                    material_text = "stone";
-                    material_color = colors->brown_light;
-                }
-                else if(is_object_metal(object))
-                {
-                    material_text = "metal";
-                    material_color = colors->blue_light;
-                }
-                else if(is_object_glass(object))
-                {
-                    material_text = "glass";
-                    material_color = colors->white;
-                }
+                // if(is_object_stone(object))
+                // {
+                //     material_text = "stone";
+                //     material_color = colors->brown_light;
+                // }
+                // else if(is_object_metal(object))
+                // {
+                //     material_text = "metal";
+                //     material_color = colors->blue_light;
+                // }
+                // else if(is_object_glass(object))
+                // {
+                //     material_text = "glass";
+                //     material_color = colors->white;
+                // }
 
-                draw_font_at_screen_pos(
-                    material_text,
-                    renderer,
-                    fonts->bit_operator_20,
-                    material_color,
-                    1.0f,
-                    vec2i(900 + 100, 550 + 50 - 30),
-                    1
-                );
+                // draw_font_at_screen_pos(
+                //     material_text,
+                //     renderer,
+                //     fonts->bit_operator_20,
+                //     material_color,
+                //     1.0f,
+                //     vec2i(900 + 100, 550 + 50 - 30),
+                //     1
+                // );
 
                 char* type_text = "";
                 Vec3i type_color = colors->black;

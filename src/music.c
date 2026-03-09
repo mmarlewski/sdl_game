@@ -19,7 +19,7 @@ void destroy_music(Music* music)
 
 void play_new_music(Music* new_music)
 {
-    Mix_PlayMusic(new_music, -1);
+    // Mix_PlayMusic(new_music, -1);
 }
 
 int get_is_music_paused()
@@ -30,13 +30,13 @@ int get_is_music_paused()
 void pause_music()
 {
     is_music_paused = TRUE;
-    Mix_PauseMusic();
+    // Mix_PauseMusic();
 }
 
 void resume_music()
 {
     is_music_paused = FALSE;
-    Mix_ResumeMusic();
+    // Mix_ResumeMusic();
 }
 
 float get_music_volume()

@@ -13,31 +13,31 @@ void update_state(Input* input, State* state, float delta_time, Textures* textur
     state->time += delta_time;
 
     // music
-    if(state->gamestate != GAMESTATE__GAME_START &&
-    state->gamestate != GAMESTATE__GAME_WON)
-    {
-        if(!Mix_PlayingMusic())
-        {
-            int new_music_index = (abs((int)(state->time + state->prev_save_time)) % musics->music_num);
-            while(new_music_index == state->prev_prev_music_index ||
-            new_music_index == state->prev_music_index ||
-            new_music_index == state->curr_music_index)
-            {
-                new_music_index = (new_music_index + 1) % musics->music_num;
-            }
+    // if(state->gamestate != GAMESTATE__GAME_START &&
+    // state->gamestate != GAMESTATE__GAME_WON)
+    // {
+    //     if(!Mix_PlayingMusic())
+    //     {
+    //         int new_music_index = (abs((int)(state->time + state->prev_save_time)) % musics->music_num);
+    //         while(new_music_index == state->prev_prev_music_index ||
+    //         new_music_index == state->prev_music_index ||
+    //         new_music_index == state->curr_music_index)
+    //         {
+    //             new_music_index = (new_music_index + 1) % musics->music_num;
+    //         }
 
-            Mix_PlayMusic(musics->music_array[new_music_index], 1);
-            Mix_VolumeMusic(0.20f * MIX_MAX_VOLUME);
+    //         Mix_PlayMusic(musics->music_array[new_music_index], 1);
+    //         Mix_VolumeMusic(0.20f * MIX_MAX_VOLUME);
 
-            state->prev_prev_music_index = state->prev_music_index;
-            state->prev_music_index = state->curr_music_index;
-            state->curr_music_index = new_music_index;
-        }
-    }
-    else
-    {
-        Mix_HaltMusic();
-    }
+    //         state->prev_prev_music_index = state->prev_music_index;
+    //         state->prev_music_index = state->curr_music_index;
+    //         state->curr_music_index = new_music_index;
+    //     }
+    // }
+    // else
+    // {
+    //     Mix_HaltMusic();
+    // }
 
     if(state->hero_object != NULL)
     {

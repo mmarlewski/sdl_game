@@ -122,7 +122,7 @@ int is_skill_move_only(int skill)
     switch(skill)
     {
         case SKILL__NONE:                       is = 0; break;
-        case SKILL__USE:                        is = 0; break;
+        case SKILL__USE:                        is = 1; break;
         case SKILL__MOVE:                       is = 1; break;
 
         case SKILL__ATTACK_DIR:                 is = 0; break;

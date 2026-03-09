@@ -173,28 +173,19 @@ void skill_get_possible_target_1_pos(
         {
             for(int dir4 = 1; dir4 < DIR4__COUNT; dir4++)
             {
-                for(int i = 1; i <= SKILL_JUMP_RANGE; i++)
+                int go_on = TRUE;
+                for(int i = 1; i <= SKILL_JUMP_RANGE && go_on; i++)
                 {
-                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(
-                        source_tilemap_pos,
-                        dir4,
-                        i
-                    );
+                    Vec2i tilemap_pos = vec2i_move_in_dir4_by(source_tilemap_pos, dir4, i);
+                    Object* object = room_get_object_at(state->curr_room, tilemap_pos);
 
-                    if(is_tilemap_in_bounds(tilemap_pos))
+                    if(is_tilemap_in_bounds(tilemap_pos) && !(object != NULL && !is_object_throw_over(object)))
                     {
-                        Object* object = room_get_object_at(
-                            state->curr_room,
-                            tilemap_pos
-                        );
-
-                        if(TRUE)
-                        {
-                            add_new_list_element_to_list_end(
-                                target_1_pos_list,
-                                new_vec2i_from_vec2i(tilemap_pos)
-                            );
-                        }
+                        add_new_list_element_to_list_end(target_1_pos_list, new_vec2i_from_vec2i(tilemap_pos));
+                    }
+                    else
+                    {
+                        go_on = FALSE;
                     }
                 }
             }
@@ -213,7 +204,7 @@ void skill_get_possible_target_1_pos(
                         Object* object = room_get_object_at(state->curr_room,tilemap_pos);
                         int floor = room_get_floor_at(state->curr_room,tilemap_pos);
 
-                        if(object != NULL && get_object_max_hp(object) != -1 && is_object_movable(object))
+                        if(object != NULL && is_object_movable(object))
                         {
                             add_new_list_element_to_list_end(
                                 target_1_pos_list,
@@ -388,7 +379,7 @@ void skill_get_possible_target_1_pos(
                         Object* object = room_get_object_at(state->curr_room, tilemap_pos);
                         int floor = room_get_floor_at(state->curr_room, tilemap_pos);
 
-                        if(object != NULL && get_object_max_hp(object) != -1 && is_object_movable(object) && is_floor_burrow(floor))
+                        if(object != NULL && is_object_movable(object) && is_floor_burrow(floor))
                         {
                             add_new_list_element_to_list_end(
                                 target_1_pos_list,

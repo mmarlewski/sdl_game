@@ -35,6 +35,21 @@ void skill_on_use(
                         state->was_secret_aug_unlocked = TRUE;
                     }
                 }
+                else if(target_2_object->type == OBJECT__STATION_BONUS_TURN_AFTER_KILL)
+                {
+                    state->is_add_turn_after_kill = TRUE;
+                    state->is_any_enemy_killed = FALSE;
+                }
+                else if(target_2_object->type == OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY)
+                {
+                    state->is_first_move_free_if_move_only = TRUE;
+                    state->is_move_only_used = FALSE;
+                }
+                else if(target_2_object->type == OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY)
+                {
+                    state->is_move_after_damage_only = TRUE;
+                    state->is_damage_only_used = FALSE;
+                }
                 else if(is_object_station(target_2_object))
                 {
                     int augmentation = get_station_augmentation(target_2_object);

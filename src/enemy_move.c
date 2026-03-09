@@ -81,7 +81,7 @@ void object_enemy_prepare_move(State* state, Enemy* enemy, Sounds* sounds)
 
                         int distance = path_pos_list->size;
 
-                        if(distance >= 1 && distance <= 10 || object == enemy->object)
+                        if(distance >= 1 && distance <= 5 || object == enemy->object)
                         {
                             // score = distance / 2;
                             score = 1;

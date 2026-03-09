@@ -356,6 +356,9 @@ typedef struct
     Texture* ice_block_damaged;
     Texture* ice_block_damaged_outline;
 
+    Texture* crystal;
+    Texture* crystal_outline;
+
     Texture* throne;
     Texture* throne_outline;
 
@@ -658,6 +661,10 @@ typedef struct
     Texture* station_flame;
     Texture* station_freeze;
     Texture* station_laser;
+    
+    Texture* station_bonus_turn_after_kill;
+    Texture* station_bonus_turn_if_move_only;
+    Texture* station_free_move_if_dam_only;
 
     Texture* secret_1;
     Texture* secret_2;

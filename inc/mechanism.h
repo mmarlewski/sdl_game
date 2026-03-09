@@ -54,6 +54,7 @@ Mechanism* new_mechanism(
     int out_is_object,
     int out_type
 );
+
 void destroy_mechanism(Mechanism* mechanism);
 
 #endif

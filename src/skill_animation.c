@@ -40,26 +40,26 @@ Animation* skill_get_animation(
 
     switch(skill)
     {
-    //     case SKILL__USE:
-    //     {
-    //         if(target_2_object->type == OBJECT__THRONE)
-    //         {
-    //             skill_animation = new_animation_play_sound(sounds->use_throne);
-    //         }
-    //         else if(is_object_station(target_2_object))
-    //         {
-    //             skill_animation = new_animation_play_sound(sounds->use_station);
-    //         }
-    //         else if(is_object_secret(target_2_object))
-    //         {
-    //             skill_animation = new_animation_play_sound(sounds->use_secret);
-    //         }
-    //         else if(is_object_exit(target_2_object))
-    //         {
-    //             skill_animation = new_animation_play_sound(sounds->use_exit);
-    //         }
-    //     }
-    //     break;
+        case SKILL__USE:
+        {
+            if(target_2_object->type == OBJECT__THRONE)
+            {
+                skill_animation = new_animation_play_sound(sounds->use_throne);
+            }
+            else if(is_object_station(target_2_object))
+            {
+                skill_animation = new_animation_play_sound(sounds->use_station);
+            }
+            else if(is_object_secret(target_2_object))
+            {
+                skill_animation = new_animation_play_sound(sounds->use_secret);
+            }
+            else if(is_object_exit(target_2_object))
+            {
+                skill_animation = new_animation_play_sound(sounds->use_exit);
+            }
+        }
+        break;
     //     case SKILL__MANIPULATION:
     //     {
     //         Object* object = target_2_object;

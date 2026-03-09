@@ -18,7 +18,7 @@ void destroy_sound(Sound* sound)
 
 void play_sound(Sound* sound)
 {
-    Mix_PlayChannel(0, sound, 0);
+    // Mix_PlayChannel(0, sound, 0);
 }
 
 float get_sound_volume()

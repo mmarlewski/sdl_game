@@ -370,6 +370,9 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->ice_block_damaged = load_texture_from_filepath(renderer, "./res/object/ice_block_damaged.png");
     object->ice_block_damaged_outline = load_texture_from_filepath(renderer, "./res/object/ice_block_damaged_outline.png");
 
+    object->crystal = load_texture_from_filepath(renderer, "./res/object/crystal.png");
+    object->crystal_outline = load_texture_from_filepath(renderer, "./res/object/crystal_outline.png");
+
     object->throne = load_texture_from_filepath(renderer, "./res/object/throne.png");
     object->throne_outline = load_texture_from_filepath(renderer, "./res/object/throne_outline.png");
 
@@ -630,6 +633,10 @@ void load_textures_object(Renderer* renderer, Textures_Object* object)
     object->station_flame = load_texture_from_filepath(renderer, "./res/object/station_flame.png");
     object->station_freeze = load_texture_from_filepath(renderer, "./res/object/station_freeze.png");
     object->station_laser = load_texture_from_filepath(renderer, "./res/object/station_laser.png");
+
+    object->station_bonus_turn_after_kill = load_texture_from_filepath(renderer, "./res/object/station_bonus_turn_after_kill.png");
+    object->station_bonus_turn_if_move_only = load_texture_from_filepath(renderer, "./res/object/station_bonus_turn_if_move_only.png");
+    object->station_free_move_if_dam_only = load_texture_from_filepath(renderer, "./res/object/station_free_move_if_dam_only.png");
 
     object->secret_1 = load_texture_from_filepath(renderer, "./res/object/secret_1.png");
     object->secret_2 = load_texture_from_filepath(renderer, "./res/object/secret_2.png");

@@ -70,299 +70,1287 @@ void add_walls_around_room(Room* room, int wall_type, List* exclude_tilemap_pos_
 
 void create_level(State* state, Textures* textures)
 {
-    ///////////
-    // room_0_0
-    ///////////
+    {
+        ///////////
+        // room_1
+        ///////////
 
-    Room* room_0_0 = new_empty_room("0_0", textures->background_obsidian);
-    add_room(
-        state,
-        room_0_0
-    );
+        Room* room_1 = new_empty_room("1", textures->background_rock);
+        add_room(state, room_1);
 
-    // floors
+        // floors
 
-    add_floor_at_every_room_position(room_0_0, FLOOR__OBSIDIAN);
+        add_floor_at_every_room_position(room_1, FLOOR__ROCK);
 
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__METAL_SPIKES_ON,
-        vec2i(8, 5)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__METAL_SPIKES_ON,
-        vec2i(8, 6)
-    );
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 1));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 2));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 3));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 4));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 5));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 6));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 7));
+        room_change_floor_at(room_1, FLOOR__ROCK_CRACK_WATER, vec2i(3, 8));
 
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(1, 3)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(2, 3)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(3, 3)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(4, 3)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(5, 3)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(6, 3)
-    );
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 1));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 2));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 3));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 4));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 5));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 6));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 7));
+        room_change_floor_at(room_1, FLOOR__ROCK_PUDDLE, vec2i(5, 8));
 
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(1, 4)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(2, 4)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(3, 4)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(4, 4)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(5, 4)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(6, 4)
-    );
+        // walls
 
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(1, 5)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(2, 5)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(3, 5)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(4, 5)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(5, 5)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(6, 5)
-    );
+        List* room_1_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
 
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(1, 6)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(2, 6)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(3, 6)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(4, 6)
-    );
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__SAND,
-        vec2i(5, 6)
-    );
+        add_new_list_element_to_list_end(room_1_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_1,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
 
-    room_change_floor_at(
-        room_0_0,
-        FLOOR__OBSTACLE,
-        vec2i(8, 3)
-    );
+        add_walls_around_room(room_1, OBJECT__WALL_ROCK, room_1_wall_exclude_pos_list);
+        remove_all_list_elements(room_1_wall_exclude_pos_list, 1);
+        destroy_list(room_1_wall_exclude_pos_list);
 
-    // walls
+        // objects
 
-    List* room_0_0_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
-    add_new_list_element_to_list_end(
-        room_0_0_wall_exclude_pos_list,
-        new_vec2i(9, 2)
-    );
-    add_new_list_element_to_list_end(
-        room_0_0_wall_exclude_pos_list,
-        new_vec2i(5, 9)
-    );
-    add_new_list_element_to_list_end(
-        room_0_0_wall_exclude_pos_list,
-        new_vec2i(7, 9)
-    );
-    add_walls_around_room(
-        room_0_0,
-        OBJECT__WALL_OBSIDIAN,
-        room_0_0_wall_exclude_pos_list
-    );
-    remove_all_list_elements(room_0_0_wall_exclude_pos_list, 1);
-    destroy_list(room_0_0_wall_exclude_pos_list);
+        // room_add_object_at( room_1, new_object(OBJECT__STALAGMITE), vec2i(2, 2));
 
-    // objects
+        // passages
 
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(2, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(3, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(4, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(5, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(6, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(7, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(7, 3)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(7, 4)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(7, 5)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(7, 6)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(6, 6)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(6, 7)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__WALL_OBSIDIAN),
-        vec2i(6, 8)
-    );
+        add_passage(state, new_passage("1", "2",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("2", "1",  vec2i(9, 4), vec2i(1, 4)));
 
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__ENVIRONMENT_COLLAPSE_BURROW),
-        vec2i(-1, -1)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__LEVER_STONE_UNPOWERED),
-        vec2i(7, 7)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__OBSTACLE),
-        vec2i(8, 3)
-    );
+    }
+    {
+        ///////////
+        // room_2
+        ///////////
 
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__EXIT_OBSIDIAN_LEFT),
-        vec2i(9, 2)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__EXIT_OBSIDIAN_UP),
-        vec2i(5, 9)
-    );
-    room_add_object_at(
-        room_0_0,
-        new_object(OBJECT__EXIT_OBSIDIAN_UP),
-        vec2i(7, 9)
-    );
+        Room* room_2 = new_empty_room("2", textures->background_rock);
+        add_room(state, room_2);
 
-    // passages
+        // floors
 
-    add_passage(state, new_passage(
-        "0_0",
-        "0_1",
-        vec2i(9, 2),
-        vec2i(1, 2)
-    ));
-    add_passage(state, new_passage(
-        "0_0",
-        "1_0",
-        vec2i(5, 9),
-        vec2i(5, 1)
-    ));
-    add_passage(state, new_passage(
-        "0_0",
-        "1_0",
-        vec2i(7, 9),
-        vec2i(7, 1)
-    ));
+        add_floor_at_every_room_position(room_2, FLOOR__ROCK);
+
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_2, FLOOR__WATER, vec2i(3, 8));
+
+        // walls
+
+        List* room_2_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_2_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_2,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_2_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_2,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_2, OBJECT__WALL_ROCK, room_2_wall_exclude_pos_list);
+        remove_all_list_elements(room_2_wall_exclude_pos_list, 1);
+        destroy_list(room_2_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_2, new_object(OBJECT__STATION_SPRING_LEG), vec2i(6, 3));
+
+        // passages
+
+        add_passage(state, new_passage("2", "4",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("4", "2",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_3
+        ///////////
+
+        Room* room_3 = new_empty_room("3", textures->background_rock);
+        add_room(state, room_3);
+
+        // floors
+
+        add_floor_at_every_room_position(room_3, FLOOR__ROCK);
+
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_3, FLOOR__WATER, vec2i(4, 8));
+
+        // walls
+
+        List* room_3_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_3_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_3,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_3_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_3,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_3, OBJECT__WALL_ROCK, room_3_wall_exclude_pos_list);
+        remove_all_list_elements(room_3_wall_exclude_pos_list, 1);
+        destroy_list(room_3_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_3, new_object(OBJECT__STATION_TRACK_LEG), vec2i(6, 3));
+
+        // passages
+
+        add_passage(state, new_passage("3", "4",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("4", "3",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_4
+        ///////////
+
+        Room* room_4 = new_empty_room("4", textures->background_rock);
+        add_room(state, room_4);
+
+        // floors
+
+        add_floor_at_every_room_position(room_4, FLOOR__ROCK);
+
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(4, 8));
+
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 3));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 5));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 6));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 7));
+        room_change_floor_at(room_4, FLOOR__WATER, vec2i(5, 8));
+
+        // walls
+
+        List* room_4_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_4_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_4,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_4_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_4,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_4, OBJECT__WALL_ROCK, room_4_wall_exclude_pos_list);
+        remove_all_list_elements(room_4_wall_exclude_pos_list, 1);
+        destroy_list(room_4_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_4, new_object(OBJECT__STATION_SLINGSHOT), vec2i(6, 3));
+        
+        room_add_object_at( room_4, new_object(OBJECT__STALACTITE), vec2i(4, 4));
+
+        // passages
+
+        add_passage(state, new_passage("4", "5",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("5", "4",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_5
+        ///////////
+
+        Room* room_5 = new_empty_room("5", textures->background_rock);
+        add_room(state, room_5);
+
+        // floors
+
+        add_floor_at_every_room_position(room_5, FLOOR__ROCK);
+
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_5, FLOOR__WATER, vec2i(4, 8));
+
+        // walls
+
+        List* room_5_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_5_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_5,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_5_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_5,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_5, OBJECT__WALL_ROCK, room_5_wall_exclude_pos_list);
+        remove_all_list_elements(room_5_wall_exclude_pos_list, 1);
+        destroy_list(room_5_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_5, new_object(OBJECT__TAR_BALL), vec2i(2, 4));
+
+        // passages
+
+        add_passage(state, new_passage("5", "6",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("6", "5",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_6
+        ///////////
+
+        Room* room_6 = new_empty_room("6", textures->background_rock);
+        add_room(state, room_6);
+
+        // floors
+
+        add_floor_at_every_room_position(room_6, FLOOR__ROCK);
+
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(4, 8));
+
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 3));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 5));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 6));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 7));
+        room_change_floor_at(room_6, FLOOR__WATER, vec2i(5, 8));
+
+        // walls
+
+        List* room_6_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_6_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_6,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_6_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_6,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_6, OBJECT__WALL_ROCK, room_6_wall_exclude_pos_list);
+        remove_all_list_elements(room_6_wall_exclude_pos_list, 1);
+        destroy_list(room_6_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_6, new_object(OBJECT__STATION_GUN), vec2i(6, 3));
+
+        room_add_object_at( room_6, new_object(OBJECT__STALAGMITE), vec2i(4, 4));
+
+        // passages
+
+        add_passage(state, new_passage("6", "7",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("7", "6",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_7
+        ///////////
+
+        Room* room_7 = new_empty_room("7", textures->background_rock);
+        add_room(state, room_7);
+
+        // floors
+
+        add_floor_at_every_room_position(room_7, FLOOR__ROCK);
+
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 1));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 2));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 3));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 4));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 5));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 6));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(2, 7));
+
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(3, 7));
+
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(4, 7));
+
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(5, 3));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_7, FLOOR__WATER, vec2i(5, 5));
+
+        // walls
+
+        List* room_7_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_7_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_7,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_7_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_7,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_7, OBJECT__WALL_ROCK, room_7_wall_exclude_pos_list);
+        remove_all_list_elements(room_7_wall_exclude_pos_list, 1);
+        destroy_list(room_7_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_7, new_object(OBJECT__STATION_ARM), vec2i(6, 3));
+
+        room_add_object_at( room_7, new_object(OBJECT__STALAGNATE), vec2i(6, 5));
+        room_add_object_at( room_7, new_object(OBJECT__STALAGNATE), vec2i(6, 6));
+        room_add_object_at( room_7, new_object(OBJECT__STALAGNATE), vec2i(6, 7));
+        room_add_object_at( room_7, new_object(OBJECT__STALAGNATE), vec2i(6, 8));
+
+        // passages
+
+        add_passage(state, new_passage("7", "8",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("8", "7",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_8
+        ///////////
+
+        Room* room_8 = new_empty_room("8", textures->background_rock);
+        add_room(state, room_8);
+
+        // floors
+
+        add_floor_at_every_room_position(room_8, FLOOR__ROCK);
+
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 1));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 2));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 3));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 4));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 5));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 6));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 7));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(2, 8));
+
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(4, 8));
+
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 3));
+        // room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 5));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 6));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 7));
+        room_change_floor_at(room_8, FLOOR__WATER, vec2i(5, 8));
+
+        // walls
+
+        List* room_8_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_8_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_8,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_8_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_8,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_8, OBJECT__WALL_ROCK, room_8_wall_exclude_pos_list);
+        remove_all_list_elements(room_8_wall_exclude_pos_list, 1);
+        destroy_list(room_8_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_8, new_object(OBJECT__TAR_BALL), vec2i(5, 4));
+        room_add_object_at( room_8, new_object(OBJECT__TAR_BALL), vec2i(6, 4));
+
+        // passages
+
+        add_passage(state, new_passage("8", "9",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("9", "8",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_9
+        ///////////
+
+        Room* room_9 = new_empty_room("9", textures->background_rock);
+        add_room(state, room_9);
+
+        // floors
+
+        add_floor_at_every_room_position(room_9, FLOOR__ROCK);
+
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 1));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 2));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 3));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 4));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 5));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 6));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 7));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(2, 8));
+
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(4, 8));
+
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 3));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 5));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 6));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 7));
+        room_change_floor_at(room_9, FLOOR__WATER, vec2i(5, 8));
+
+        // walls
+
+        List* room_9_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_9_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_9,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_9_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_9,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_9, OBJECT__WALL_ROCK, room_9_wall_exclude_pos_list);
+        remove_all_list_elements(room_9_wall_exclude_pos_list, 1);
+        destroy_list(room_9_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_9, new_object(OBJECT__STATION_WHIP), vec2i(6, 3));
+
+        room_add_object_at( room_9, new_object(OBJECT__STALAGMITE), vec2i(2, 4));
+
+        // passages
+
+        add_passage(state, new_passage("9", "10",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("10", "9",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_
+        ///////////
+
+        Room* room_10 = new_empty_room("10", textures->background_rock);
+        add_room(state, room_10);
+
+        // floors
+
+        add_floor_at_every_room_position(room_10, FLOOR__ROCK);
+
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(4, 8));
+
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 3));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 5));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 6));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 7));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(5, 8));
+
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 1));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 2));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 3));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 4));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 5));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 6));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 7));
+        room_change_floor_at(room_10, FLOOR__WATER, vec2i(6, 8));
+
+        // walls
+
+        List* room_10_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_10_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_10,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_10_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_10,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_10, OBJECT__WALL_ROCK, room_10_wall_exclude_pos_list);
+        remove_all_list_elements(room_10_wall_exclude_pos_list, 1);
+        destroy_list(room_10_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_10, new_object(OBJECT__STALAGMITE), vec2i(1, 3));
+        room_add_object_at( room_10, new_object(OBJECT__STALAGMITE), vec2i(8, 3));
+
+        room_add_object_at( room_10, new_object(OBJECT__STALAGMITE), vec2i(2, 7));
+        room_add_object_at( room_10, new_object(OBJECT__STALAGMITE), vec2i(7, 7));
+
+        // passages
+
+        add_passage(state, new_passage("10", "11",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("11", "10",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_11
+        ///////////
+
+        Room* room_11 = new_empty_room("11", textures->background_rock);
+        add_room(state, room_11);
+
+        // floors
+
+        add_floor_at_every_room_position(room_11, FLOOR__ROCK);
+
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 1));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 2));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 3));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 4));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 5));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 6));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 7));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(3, 8));
+
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 1));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 2));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 3));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 4));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 5));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 6));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 7));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(4, 8));
+
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 1));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 2));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 3));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 4));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 5));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 6));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 7));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(5, 8));
+
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 1));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 2));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 3));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 4));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 5));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 6));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 7));
+        room_change_floor_at(room_11, FLOOR__WATER, vec2i(6, 8));
+
+        // walls
+
+        List* room_11_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_11_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_11,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_11_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_11,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_11, OBJECT__WALL_ROCK, room_11_wall_exclude_pos_list);
+        remove_all_list_elements(room_11_wall_exclude_pos_list, 1);
+        destroy_list(room_11_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_11, new_object(OBJECT__STATION_FREEZE), vec2i(7, 3));
+
+        // passages
+
+        add_passage(state, new_passage("11", "12",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("12", "11",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_12
+        ///////////
+
+        Room* room_12 = new_empty_room("12", textures->background_rock);
+        add_room(state, room_12);
+
+        // floors
+
+        add_floor_at_every_room_position(room_12, FLOOR__ROCK);
+
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 1));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 2));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 3));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 4));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 5));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 6));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 7));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(2, 8));
+
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 1));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 2));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 3));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 4));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 5));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 6));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 7));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(3, 8));
+
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 1));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 2));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 3));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 4));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 5));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 6));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 7));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(4, 8));
+
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 1));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 2));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 3));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 4));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 5));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 6));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 7));
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(5, 8));
+
+        room_change_floor_at(room_12, FLOOR__SAND, vec2i(6, 4));
+
+        // walls
+
+        List* room__wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room__wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_12,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room__wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_12,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_12, OBJECT__WALL_ROCK, room__wall_exclude_pos_list);
+        remove_all_list_elements(room__wall_exclude_pos_list, 1);
+        destroy_list(room__wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_12, new_object(OBJECT__STATION_TAIL), vec2i(6, 3));
+
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 1));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 2));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 3));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 4));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 5));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 6));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 7));
+        room_add_object_at( room_12, new_object(OBJECT__STALAGNATE), vec2i(4, 8));
+
+        // passages
+
+        add_passage(state, new_passage("12", "13",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("13", "12",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_13
+        ///////////
+
+        Room* room_13 = new_empty_room("13", textures->background_rock);
+        add_room(state, room_13);
+
+        // floors
+
+        add_floor_at_every_room_position(room_13, FLOOR__ROCK);
+
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 1));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 2));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 3));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 4));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 5));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 6));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 7));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(2, 8));
+
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 1));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 2));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 3));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 4));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 5));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 6));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 7));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(3, 8));
+
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 1));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 2));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 3));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 4));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 5));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 6));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 7));
+        room_change_floor_at(room_13, FLOOR__SAND, vec2i(4, 8));
+
+        // walls
+
+        List* room_13_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_13_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_13,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_13_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_13,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_13, OBJECT__WALL_ROCK, room_13_wall_exclude_pos_list);
+        remove_all_list_elements(room_13_wall_exclude_pos_list, 1);
+        destroy_list(room_13_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_13, new_object(OBJECT__STATION_DRILL), vec2i(6, 3));
+
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 1));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 2));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 3));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 4));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 5));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 6));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 7));
+        room_add_object_at( room_13, new_object(OBJECT__STALAGNATE), vec2i(4, 8));
+
+        // passages
+
+        add_passage(state, new_passage("13", "14",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("14", "13",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_14
+        ///////////
+
+        Room* room_14 = new_empty_room("14", textures->background_rock);
+        add_room(state, room_14);
+
+        // floors
+
+        add_floor_at_every_room_position(room_14, FLOOR__ROCK);
+
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(5, 1));
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(5, 2));
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(5, 3));
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(5, 4));
+
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(3, 5));
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(3, 6));
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(3, 7));
+        room_change_floor_at(room_14, FLOOR__LAVA, vec2i(3, 8));
+
+        // walls
+
+        List* room_14_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_14_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_14,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_14_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_14,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_14, OBJECT__WALL_ROCK, room_14_wall_exclude_pos_list);
+        remove_all_list_elements(room_14_wall_exclude_pos_list, 1);
+        destroy_list(room_14_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_14, new_object(OBJECT__GORILLA), vec2i(6, 3));
+
+        // passages
+
+        add_passage(state, new_passage("14", "15",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("15", "14",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_15
+        ///////////
+
+        Room* room_15 = new_empty_room("15", textures->background_rock);
+        add_room(state, room_15);
+
+        // floors
+
+        add_floor_at_every_room_position(room_15, FLOOR__ROCK);
+
+        // room_change_floor_at(room_15, FLOOR__ROCK_PUDDLE, vec2i(8, 5));
+
+        // walls
+
+        List* room_15_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_15_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_15,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_15_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_15,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_15, OBJECT__WALL_ROCK, room_15_wall_exclude_pos_list);
+        remove_all_list_elements(room_15_wall_exclude_pos_list, 1);
+        destroy_list(room_15_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_15, new_object(OBJECT__PORCUPINE), vec2i(5, 3));
+        
+        room_add_object_at( room_15, new_object(OBJECT__STATION_TRACK_LEG), vec2i(8, 3));
+        room_add_object_at( room_15, new_object(OBJECT__STATION_BONUS_TURN_IF_MOVE_ONLY), vec2i(1, 3));
+
+        // passages
+
+        add_passage(state, new_passage("15", "16",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("16", "15",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_16
+        ///////////
+
+        Room* room_16 = new_empty_room("16", textures->background_rock);
+        add_room(state, room_16);
+
+        // floors
+
+        add_floor_at_every_room_position(room_16, FLOOR__ROCK);
+
+        // room_change_floor_at(room_16, FLOOR__ROCK_PUDDLE, vec2i(8, 5));
+
+        // walls
+
+        List* room__wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room__wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_16,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room__wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_16,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_16, OBJECT__WALL_ROCK, room__wall_exclude_pos_list);
+        remove_all_list_elements(room__wall_exclude_pos_list, 1);
+        destroy_list(room__wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_16, new_object(OBJECT__STATION_BLADE), vec2i(8, 3));
+
+        room_add_object_at( room_16, new_object(OBJECT__ROCK), vec2i(2, 4));
+        room_add_object_at( room_16, new_object(OBJECT__ROCK), vec2i(6, 4));
+
+        room_add_object_at( room_16, new_object(OBJECT__ROCK), vec2i(4, 2));
+        room_add_object_at( room_16, new_object(OBJECT__ROCK), vec2i(4, 6));
+
+        room_add_object_at( room_16, new_object(OBJECT__CENTIPEDE), vec2i(5, 3));
+        room_add_object_at( room_16, new_object(OBJECT__LION), vec2i(5, 6));
+
+        // passages
+
+        add_passage(state, new_passage("16", "17",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("17", "16",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_17
+        ///////////
+
+        Room* room_17 = new_empty_room("17", textures->background_rock);
+        add_room(state, room_17);
+
+        // floors
+
+        add_floor_at_every_room_position(room_17, FLOOR__SAND);
+
+        room_change_floor_at(room_17, FLOOR__ROCK, vec2i(0, 4));
+        room_change_floor_at(room_17, FLOOR__ROCK, vec2i(9, 4));
+
+        // walls
+
+        List* room_17_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_17_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_17,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_17_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_17,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_17, OBJECT__WALL_ROCK, room_17_wall_exclude_pos_list);
+        remove_all_list_elements(room_17_wall_exclude_pos_list, 1);
+        destroy_list(room_17_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_17, new_object(OBJECT__MOLE), vec2i(4, 2));
+        room_add_object_at( room_17, new_object(OBJECT__WORM), vec2i(4, 4));
+        room_add_object_at( room_17, new_object(OBJECT__AARDVARK), vec2i(4, 6));
+
+        // passages
+
+        add_passage(state, new_passage("17", "18",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("18", "17",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_18
+        ///////////
+
+        Room* room_18 = new_empty_room("18", textures->background_rock);
+        add_room(state, room_18);
+
+        // floors
+
+        add_floor_at_every_room_position(room_18, FLOOR__ROCK);
+
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(2, 2));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(2, 3));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(2, 4));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(2, 5));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(2, 6));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(2, 7));
+
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(3, 2));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(3, 3));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(3, 4));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(3, 5));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(3, 6));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(3, 7));
+
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(4, 2));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(4, 3));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(4, 4));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(4, 5));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(4, 6));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(4, 7));
+
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(5, 2));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(5, 3));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(5, 4));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(5, 5));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(5, 6));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(5, 7));
+
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(6, 2));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(6, 3));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(6, 4));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(6, 5));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(6, 6));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(6, 7));
+
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(7, 2));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(7, 3));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(7, 4));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(7, 5));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(7, 6));
+        room_change_floor_at(room_18, FLOOR__ROCK_PUDDLE, vec2i(7, 7));
+
+        // walls
+
+        List* room__wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room__wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_18,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room__wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_18,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_18, OBJECT__WALL_ROCK, room__wall_exclude_pos_list);
+        remove_all_list_elements(room__wall_exclude_pos_list, 1);
+        destroy_list(room__wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_18, new_object(OBJECT__STATION_COIL), vec2i(8, 3));
+        room_add_object_at( room_18, new_object(OBJECT__STATION_BONUS_TURN_AFTER_KILL), vec2i(1, 3));
+
+        room_add_object_at( room_18, new_object(OBJECT__ROCK_DAMAGED), vec2i(4, 6));
+        room_add_object_at( room_18, new_object(OBJECT__ROCK_DAMAGED), vec2i(6, 4));
+
+        room_add_object_at( room_18, new_object(OBJECT__GRASSHOPPER), vec2i(4, 2));
+        room_add_object_at( room_18, new_object(OBJECT__MEGASPIDER), vec2i(4, 4));
+        room_add_object_at( room_18, new_object(OBJECT__RABBIT), vec2i(2, 4));
+
+        // passages
+
+        add_passage(state, new_passage("18", "19",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("19", "18",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_19
+        ///////////
+
+        Room* room_19 = new_empty_room("19", textures->background_rock);
+        add_room(state, room_19);
+
+        // floors
+
+        add_floor_at_every_room_position(room_19, FLOOR__ROCK);
+
+        // room_change_floor_at(room_19, FLOOR__ROCK_PUDDLE, vec2i(8, 5));
+
+        // walls
+
+        List* room_19_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_19_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_19,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_19_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_19,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_19, OBJECT__WALL_ROCK, room_19_wall_exclude_pos_list);
+        remove_all_list_elements(room_19_wall_exclude_pos_list, 1);
+        destroy_list(room_19_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_19, new_object(OBJECT__STATION_LASER), vec2i(8, 3));
+
+        room_add_object_at( room_19, new_object(OBJECT__STATION_FREE_MOVE_IF_DAM_ONLY), vec2i(1, 3));
+
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(2, 2));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(3, 3));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(4, 4));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(5, 5));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(6, 6));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(7, 7));
+
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(7, 2));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(6, 3));
+        // room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(5, 4));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(4, 5));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(3, 6));
+        room_add_object_at( room_19, new_object(OBJECT__MINIBOT_ENEMY), vec2i(2, 7));
+
+        room_add_object_at( room_19, new_object(OBJECT__STALACTITE), vec2i(4, 2));
+        room_add_object_at( room_19, new_object(OBJECT__STALACTITE), vec2i(5, 2));
+
+        room_add_object_at( room_19, new_object(OBJECT__CRYSTAL), vec2i(5, 4));
+
+        // passages
+
+        add_passage(state, new_passage("19", "20",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("20", "19",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_20
+        ///////////
+
+        Room* room_20 = new_empty_room("20", textures->background_rock);
+        add_room(state, room_20);
+
+        // floors
+
+        add_floor_at_every_room_position(room_20, FLOOR__ROCK);
+
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 1));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 2));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 3));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 4));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 5));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 6));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 7));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(5, 8));
+
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 1));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 2));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 3));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 4));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 5));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 6));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 7));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(6, 8));
+
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 1));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 2));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 3));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 4));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 5));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 6));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 7));
+        room_change_floor_at(room_20, FLOOR__LAVA, vec2i(7, 8));
+
+        // walls
+
+        List* room_20_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        add_new_list_element_to_list_end(room_20_wall_exclude_pos_list, new_vec2i(0, 4));
+        room_add_object_at(room_20,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_20_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_20,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_20, OBJECT__WALL_ROCK, room_20_wall_exclude_pos_list);
+        remove_all_list_elements(room_20_wall_exclude_pos_list, 1);
+        destroy_list(room_20_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_20, new_object(OBJECT__STATION_FLAME), vec2i(8, 3));
+
+        room_add_object_at( room_20, new_object(OBJECT__DRAGON), vec2i(2, 4));
+
+        // passages
+
+        add_passage(state, new_passage("20", "21",  vec2i(0, 4), vec2i(8, 4)));
+        add_passage(state, new_passage("21", "20",  vec2i(9, 4), vec2i(1, 4)));
+    }
+    {
+        ///////////
+        // room_21
+        ///////////
+
+        Room* room_21 = new_empty_room("21", textures->background_rock);
+        add_room(state, room_21);
+
+        // floors
+
+        add_floor_at_every_room_position(room_21, FLOOR__GOLD);
+
+        room_change_floor_at(room_21, FLOOR__ROCK, vec2i(9, 4));
+
+        // walls
+
+        List* room_21_wall_exclude_pos_list = new_list((void (*)(void*)) & destroy_vec2i);
+
+        // add_new_list_element_to_list_end(room_21_wall_exclude_pos_list, new_vec2i(0, 4));
+        // room_add_object_at(room_21,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(0, 4));
+        
+        add_new_list_element_to_list_end(room_21_wall_exclude_pos_list, new_vec2i(9, 4));
+        room_add_object_at(room_21,  new_object(OBJECT__EXIT_ROCK_LEFT), vec2i(9, 4));
+
+        add_walls_around_room(room_21, OBJECT__WALL_GOLD, room_21_wall_exclude_pos_list);
+        remove_all_list_elements(room_21_wall_exclude_pos_list, 1);
+        destroy_list(room_21_wall_exclude_pos_list);
+
+        // objects
+
+        room_add_object_at( room_21, new_object(OBJECT__THRONE), vec2i(4, 4));
+
+        // passages
+
+        // add_passage(state, new_passage("21", "22",  vec2i(0, 4), vec2i(8, 4)));
+        // add_passage(state, new_passage("22", "21",  vec2i(9, 4), vec2i(1, 4)));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     ///////////
     // room_0_1
